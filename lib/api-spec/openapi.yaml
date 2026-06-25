@@ -1,22 +1,40 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: FaisalOrakzai Digital OS API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: projects
+    description: Projects
+  - name: articles
+    description: Learning & knowledge articles
+  - name: research
+    description: Research lab papers and whitepapers
+  - name: news
+    description: Press room news
+  - name: companies
+    description: Ecosystem companies
+  - name: media
+    description: Media center
+  - name: timeline
+    description: Founder timeline
+  - name: contact
+    description: Contact & networking
+  - name: ai
+    description: AI assistant
+  - name: dashboard
+    description: Dashboard summary
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +42,687 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      tags: [dashboard]
+      summary: Get homepage dashboard summary stats
+      responses:
+        "200":
+          description: Summary stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [projects]
+      summary: List all projects
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+    post:
+      operationId: createProject
+      tags: [projects]
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "201":
+          description: Created project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /projects/{id}:
+    get:
+      operationId: getProject
+      tags: [projects]
+      summary: Get a project by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /articles:
+    get:
+      operationId: listArticles
+      tags: [articles]
+      summary: List all learning articles
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+    post:
+      operationId: createArticle
+      tags: [articles]
+      summary: Create an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleInput"
+      responses:
+        "201":
+          description: Created article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+
+  /articles/{id}:
+    get:
+      operationId: getArticle
+      tags: [articles]
+      summary: Get article by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+
+  /research:
+    get:
+      operationId: listResearch
+      tags: [research]
+      summary: List all research papers
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Research papers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ResearchPaper"
+    post:
+      operationId: createResearch
+      tags: [research]
+      summary: Create a research paper
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResearchPaperInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResearchPaper"
+
+  /news:
+    get:
+      operationId: listNews
+      tags: [news]
+      summary: List all press room news
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        "200":
+          description: News items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewsItem"
+    post:
+      operationId: createNews
+      tags: [news]
+      summary: Create a news item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsItemInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsItem"
+
+  /companies:
+    get:
+      operationId: listCompanies
+      tags: [companies]
+      summary: List ecosystem companies
+      responses:
+        "200":
+          description: Companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Company"
+
+  /media:
+    get:
+      operationId: listMedia
+      tags: [media]
+      summary: List media items
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Media items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MediaItem"
+
+  /timeline:
+    get:
+      operationId: listTimeline
+      tags: [timeline]
+      summary: Get founder timeline events
+      responses:
+        "200":
+          description: Timeline events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimelineEvent"
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a contact/partnership request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "201":
+          description: Submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSubmission"
+
+  /ai/chat:
+    post:
+      operationId: aiChat
+      tags: [ai]
+      summary: Send message to AI AdamX assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiChatInput"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatReply"
+
+  /search:
+    get:
+      operationId: globalSearch
+      tags: [dashboard]
+      summary: Global search across all content
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResults"
+
 components:
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
         status:
           type: string
-      required:
-        - status
 
+    DashboardSummary:
+      type: object
+      required: [totalProjects, totalArticles, totalResearch, totalNews, totalCompanies, recentActivity, featuredProjects, featuredArticles]
+      properties:
+        totalProjects:
+          type: integer
+        totalArticles:
+          type: integer
+        totalResearch:
+          type: integer
+        totalNews:
+          type: integer
+        totalCompanies:
+          type: integer
+        recentActivity:
+          type: array
+          items:
+            $ref: "#/components/schemas/ActivityItem"
+        featuredProjects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+        featuredArticles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Article"
+
+    ActivityItem:
+      type: object
+      required: [id, type, title, description, createdAt]
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+
+    Project:
+      type: object
+      required: [id, title, category, description, status, year]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        year:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        technologies:
+          type: array
+          items:
+            type: string
+        vision:
+          type: ["string", "null"]
+        roadmap:
+          type: ["string", "null"]
+
+    ProjectInput:
+      type: object
+      required: [title, category, description, status, year]
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        year:
+          type: integer
+        imageUrl:
+          type: string
+        technologies:
+          type: array
+          items:
+            type: string
+        vision:
+          type: string
+        roadmap:
+          type: string
+
+    Article:
+      type: object
+      required: [id, title, category, excerpt, content, readTime, publishedAt]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        readTime:
+          type: integer
+        publishedAt:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+
+    ArticleInput:
+      type: object
+      required: [title, category, excerpt, content, readTime]
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        readTime:
+          type: integer
+        imageUrl:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    ResearchPaper:
+      type: object
+      required: [id, title, type, abstract, publishedAt, authors]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+        abstract:
+          type: string
+        publishedAt:
+          type: string
+        authors:
+          type: array
+          items:
+            type: string
+        downloadUrl:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+
+    ResearchPaperInput:
+      type: object
+      required: [title, type, abstract, authors]
+      properties:
+        title:
+          type: string
+        type:
+          type: string
+        abstract:
+          type: string
+        authors:
+          type: array
+          items:
+            type: string
+        downloadUrl:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    NewsItem:
+      type: object
+      required: [id, title, category, excerpt, publishedAt, source]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: ["string", "null"]
+        publishedAt:
+          type: string
+        source:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+
+    NewsItemInput:
+      type: object
+      required: [title, category, excerpt, source]
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        source:
+          type: string
+        imageUrl:
+          type: string
+
+    Company:
+      type: object
+      required: [id, name, sector, description, founded, status]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sector:
+          type: string
+        description:
+          type: string
+        founded:
+          type: integer
+        status:
+          type: string
+        website:
+          type: ["string", "null"]
+        logoUrl:
+          type: ["string", "null"]
+        connections:
+          type: array
+          items:
+            type: integer
+
+    MediaItem:
+      type: object
+      required: [id, title, type, description, publishedAt]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        publishedAt:
+          type: string
+        thumbnailUrl:
+          type: ["string", "null"]
+        videoUrl:
+          type: ["string", "null"]
+        duration:
+          type: ["string", "null"]
+
+    TimelineEvent:
+      type: object
+      required: [id, year, title, description, type]
+      properties:
+        id:
+          type: integer
+        year:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        isVision:
+          type: boolean
+
+    ContactInput:
+      type: object
+      required: [name, email, type, message]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+        organization:
+          type: string
+
+    ContactSubmission:
+      type: object
+      required: [id, name, email, type, message, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+        organization:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+
+    AiChatInput:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+        conversationId:
+          type: ["string", "null"]
+
+    ChatReply:
+      type: object
+      required: [reply, conversationId]
+      properties:
+        reply:
+          type: string
+        conversationId:
+          type: string
+
+    SearchResults:
+      type: object
+      required: [query, results]
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchResult"
+
+    SearchResult:
+      type: object
+      required: [id, type, title, excerpt, url]
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+        url:
+          type: string

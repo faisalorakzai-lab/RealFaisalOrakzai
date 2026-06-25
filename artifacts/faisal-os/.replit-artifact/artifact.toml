@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "FaisalOrakzai Digital OS"
+version = "1.0.0"
+id = "artifacts/faisal-os"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20355
+
+[services.development]
+run = "pnpm --filter @workspace/faisal-os run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/faisal-os", "run", "build" ]
+publicDir = "artifacts/faisal-os/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20355"
+BASE_PATH = "/"
