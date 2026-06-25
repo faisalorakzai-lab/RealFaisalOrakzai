@@ -1,17 +1,16 @@
 import { Link, useLocation } from "wouter";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Search, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 
 const links = [
-  { href: "/", label: "HQ" },
-  { href: "/founder", label: "FOUNDER" },
-  { href: "/ecosystem", label: "ECOSYSTEM" },
-  { href: "/projects", label: "PROJECTS" },
-  { href: "/research", label: "RESEARCH" },
-  { href: "/press", label: "PRESS" },
-  { href: "/contact", label: "CONTACT" },
+  { href: "/", label: "Home" },
+  { href: "/founder", label: "About" },
+  { href: "/ecosystem", label: "Ventures" },
+  { href: "/projects", label: "Projects" },
+  { href: "/research", label: "Research" },
+  { href: "/press", label: "Press" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -20,36 +19,41 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/80 backdrop-blur-md border-b border-border/50" : "bg-transparent"}`}>
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-xl border-b border-[#F3BA2F]/10" : "bg-transparent"}`}>
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
         <Link href="/">
-          <div className="flex items-center cursor-pointer group">
-            <span className="text-xl font-bold font-mono tracking-tighter text-primary group-hover:text-primary/80 transition-colors">FO</span>
-            <span className="ml-2 text-xs text-muted-foreground uppercase tracking-widest hidden sm:inline-block">OS.01</span>
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <div className="w-8 h-8 border border-[#F3BA2F]/60 flex items-center justify-center group-hover:border-[#F3BA2F] transition-all glow-gold-sm">
+              <span className="text-[#F3BA2F] font-mono font-bold text-sm">FO</span>
+            </div>
+            <div className="hidden sm:block">
+              <div className="text-white font-semibold text-sm tracking-wide leading-none">Faisal Orakzai</div>
+              <div className="text-[#F3BA2F]/60 font-mono text-[10px] tracking-widest">FOUNDER & CHAIRMAN</div>
+            </div>
           </div>
         </Link>
 
-        <div className="hidden md:flex items-center space-x-1">
+        {/* Desktop links */}
+        <div className="hidden lg:flex items-center gap-1">
           {links.map((link) => {
             const isActive = location === link.href;
             return (
               <Link key={link.href} href={link.href}>
-                <div className={`relative px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}>
+                <div className={`relative px-4 py-2 text-sm transition-all cursor-pointer font-medium ${isActive ? "text-[#F3BA2F]" : "text-white/60 hover:text-white"}`}>
                   {link.label}
                   {isActive && (
                     <motion.div
-                      layoutId="nav-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-gold"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-2 right-2 h-px bg-[#F3BA2F]"
+                      style={{ boxShadow: "0 0 8px rgba(243,186,47,0.8)" }}
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
                 </div>
@@ -58,30 +62,37 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary transition-colors" onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}>
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }))}
+            className="hidden lg:flex items-center gap-2 px-3 py-1.5 border border-white/10 text-white/40 text-xs font-mono hover:border-[#F3BA2F]/30 hover:text-white/60 transition-all"
+          >
+            <Search className="h-3 w-3" /> Search
+            <span className="ml-1 opacity-50">⌘K</span>
+          </button>
+          <a href="/contact" className="hidden lg:block px-4 py-1.5 bg-[#F3BA2F] text-black text-xs font-bold tracking-wider hover:bg-[#ffd666] transition-colors">
+            CONNECT
+          </a>
+          <button className="lg:hidden text-white/60 hover:text-white" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b border-border overflow-hidden"
+            className="lg:hidden bg-black/98 border-b border-[#F3BA2F]/10 overflow-hidden"
           >
-            <div className="flex flex-col p-4 space-y-2">
+            <div className="px-6 py-4 space-y-1">
               {links.map((link) => (
                 <Link key={link.href} href={link.href}>
-                  <div 
-                    className={`px-4 py-3 rounded-md text-sm font-medium ${location === link.href ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                  <div
+                    className={`px-4 py-3 text-sm font-medium transition-colors ${location === link.href ? "text-[#F3BA2F]" : "text-white/60"}`}
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.label}

@@ -15,6 +15,7 @@ import Media from "@/pages/Media";
 import Investment from "@/pages/Investment";
 import Contact from "@/pages/Contact";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import AiAssistant from "@/components/shared/AiAssistant";
 import GlobalSearch from "@/components/shared/GlobalSearch";
 
@@ -22,9 +23,9 @@ const queryClient = new QueryClient();
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black">
       <Navbar />
-      <main className="flex-1 mt-16">
+      <main className="flex-1">
         <AnimatePresence mode="wait">
           <Switch>
             <Route path="/" component={Home} />
@@ -41,6 +42,7 @@ function Router() {
           </Switch>
         </AnimatePresence>
       </main>
+      <Footer />
       <AiAssistant />
       <GlobalSearch />
     </div>

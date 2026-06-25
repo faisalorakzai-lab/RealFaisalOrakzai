@@ -1,0 +1,1 @@
+- [Replit No WebGL](replit-no-webgl.md) — Replit sandbox has no GPU; Three.js WebGLRenderer always fails. Use Canvas 2D instead.
