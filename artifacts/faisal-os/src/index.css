@@ -36,15 +36,14 @@
 }
 
 :root, .dark {
-  /* Pure black background — Binance style */
   --background: 0 0% 0%;
   --foreground: 0 0% 95%;
 
-  --card: 220 13% 7%;
+  --card: 0 0% 0%;
   --card-foreground: 0 0% 95%;
-  --card-border: 220 13% 14%;
+  --card-border: 220 13% 10%;
 
-  --popover: 0 0% 0%;
+  --popover: 0 0% 3%;
   --popover-foreground: 0 0% 95%;
   --popover-border: 220 13% 14%;
 
@@ -55,8 +54,8 @@
   --secondary: 220 13% 14%;
   --secondary-foreground: 0 0% 95%;
 
-  --muted: 220 13% 10%;
-  --muted-foreground: 0 0% 55%;
+  --muted: 220 13% 8%;
+  --muted-foreground: 0 0% 50%;
 
   --accent: 43 89% 57%;
   --accent-foreground: 0 0% 0%;
@@ -64,8 +63,8 @@
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 220 13% 12%;
-  --input: 220 13% 12%;
+  --border: 220 13% 10%;
+  --input: 220 13% 10%;
   --ring: 43 89% 57%;
 
   --radius: 0.25rem;
@@ -75,26 +74,27 @@
 }
 
 @layer base {
-  * { @apply border-border; }
+  * { @apply border-border; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased;
     background-color: #000000;
+    color: #f2f2f2;
   }
 }
 
-/* Binance Gold glow */
+/* ── Gold glow ── */
 .glow-gold {
-  box-shadow: 0 0 20px rgba(243, 186, 47, 0.4), 0 0 60px rgba(243, 186, 47, 0.15);
+  box-shadow: 0 0 20px rgba(243, 186, 47, 0.4), 0 0 60px rgba(243, 186, 47, 0.12);
 }
 .glow-gold-sm {
-  box-shadow: 0 0 10px rgba(243, 186, 47, 0.3);
+  box-shadow: 0 0 10px rgba(243, 186, 47, 0.25);
 }
 .text-glow {
   text-shadow: 0 0 30px rgba(243, 186, 47, 0.5);
 }
 
-/* Cyberpunk grid */
+/* ── Cyberpunk grid ── */
 .bg-grid {
   background-image:
     linear-gradient(rgba(243,186,47,0.03) 1px, transparent 1px),
@@ -102,23 +102,7 @@
   background-size: 60px 60px;
 }
 
-/* Scan line effect */
-.scanlines::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.05) 2px,
-    rgba(0,0,0,0.05) 4px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Gold gradient text */
+/* ── Gold gradient text ── */
 .gold-gradient {
   background: linear-gradient(135deg, #F3BA2F 0%, #ffd666 50%, #F3BA2F 100%);
   -webkit-background-clip: text;
@@ -126,55 +110,60 @@
   background-clip: text;
 }
 
-/* Glitch animation */
-@keyframes glitch {
-  0%, 100% { clip-path: inset(0 0 98% 0); transform: translate(-2px, 0); }
-  20% { clip-path: inset(20% 0 60% 0); transform: translate(2px, 0); }
-  40% { clip-path: inset(50% 0 30% 0); transform: translate(-1px, 0); }
-  60% { clip-path: inset(80% 0 5% 0); transform: translate(1px, 0); }
-  80% { clip-path: inset(10% 0 85% 0); transform: translate(0, 0); }
+/* ────────────────────────────────────────────
+   SCAN-DROP — gold line falls from top on hover
+   Usage: add class "scan-hover" to any card
+──────────────────────────────────────────── */
+@keyframes scan-drop {
+  0%   { transform: translateY(0);    opacity: 0.55; }
+  60%  { opacity: 0.35; }
+  100% { transform: translateY(var(--card-h, 200px)); opacity: 0; }
 }
 
+.scan-hover {
+  position: relative;
+  overflow: hidden;
+}
+/* The falling gold line */
+.scan-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(243,186,47,0.5) 20%, rgba(243,186,47,0.3) 80%, transparent 100%);
+  box-shadow: 0 0 6px rgba(243,186,47,0.25);
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(0);
+}
+/* Trigger animation on hover — use JS to set --card-h, or just use a large value */
+.scan-hover:hover::before {
+  animation: scan-drop 0.75s cubic-bezier(0.4, 0, 0.8, 1) forwards;
+}
+/* Re-trigger on every hover by resetting state */
+.scan-hover:not(:hover)::before {
+  opacity: 0;
+  transform: translateY(0);
+  animation: none;
+}
+
+/* ── Animations ── */
 @keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 0.6; }
+  0%   { transform: scale(1);   opacity: 0.6; }
   100% { transform: scale(1.8); opacity: 0; }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50%       { transform: translateY(-12px); }
 }
 
-@keyframes scan {
-  0% { top: -10%; }
-  100% { top: 110%; }
-}
-
-.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float      { animation: float 4s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-/* Cyberpunk border */
-.cyber-border {
-  position: relative;
-}
-.cyber-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(243,186,47,0.2);
-  pointer-events: none;
-}
-.cyber-border::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 10%;
-  width: 30%;
-  height: 2px;
-  background: #F3BA2F;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb { background: #F3BA2F; border-radius: 2px; }

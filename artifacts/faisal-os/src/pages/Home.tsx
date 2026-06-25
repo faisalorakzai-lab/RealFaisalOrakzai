@@ -168,8 +168,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.15, duration: 0.6 }}
                 viewport={{ once: true }}
-                whileHover={{ backgroundColor: "rgba(243,186,47,0.04)" }}
-                className="bg-black p-10 group cursor-default transition-colors"
+                className="bg-black p-10 group cursor-default scan-hover"
               >
                 <div className="text-[#F3BA2F] text-3xl mb-6 font-mono">{d.icon}</div>
                 <h3 className="text-xl font-bold mb-4 group-hover:text-[#F3BA2F] transition-colors">{d.title}</h3>

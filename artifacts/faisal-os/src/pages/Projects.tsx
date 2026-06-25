@@ -55,7 +55,7 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
                 onClick={() => setSelectedId(project.id)}
-                className="bg-black p-8 cursor-pointer hover:bg-[#F3BA2F]/3 transition-colors group"
+                className="bg-black p-8 cursor-pointer group scan-hover"
               >
                 <div className="flex items-start justify-between mb-6">
                   <span className="font-mono text-xs text-[#F3BA2F]/60 border border-[#F3BA2F]/20 px-2 py-1">{project.category.toUpperCase()}</span>

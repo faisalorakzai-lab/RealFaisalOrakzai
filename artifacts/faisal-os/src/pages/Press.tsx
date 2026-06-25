@@ -50,7 +50,7 @@ export default function Press() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-[#F3BA2F]/5">
             {/* Lead story */}
             {news && news.length > 0 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="lg:col-span-2 bg-black p-10 group cursor-pointer hover:bg-[#F3BA2F]/3 transition-colors">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="lg:col-span-2 bg-black p-10 group cursor-pointer scan-hover">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="font-mono text-xs text-[#F3BA2F]/60 border border-[#F3BA2F]/20 px-2 py-1">{news[0].category.toUpperCase()}</span>
                   <span className="text-xs text-white/20 font-mono">LEAD STORY</span>
@@ -73,7 +73,7 @@ export default function Press() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className="p-6 border-b border-white/5 group cursor-pointer hover:bg-[#F3BA2F]/3 transition-colors"
+                  className="p-6 border-b border-white/5 group cursor-pointer scan-hover"
                 >
                   <span className="font-mono text-[10px] text-[#F3BA2F]/50 tracking-widest block mb-3">{item.category.toUpperCase()}</span>
                   <h3 className="font-bold text-sm mb-2 group-hover:text-[#F3BA2F] transition-colors leading-snug">{item.title}</h3>
@@ -97,7 +97,7 @@ export default function Press() {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.05 }}
-                      className="bg-black p-6 group cursor-pointer hover:bg-[#F3BA2F]/3 transition-colors"
+                      className="bg-black p-6 group cursor-pointer scan-hover"
                     >
                       <span className="font-mono text-[10px] text-[#F3BA2F]/40 tracking-widest block mb-3">{item.category.toUpperCase()}</span>
                       <h3 className="font-bold text-sm mb-2 group-hover:text-[#F3BA2F] transition-colors">{item.title}</h3>

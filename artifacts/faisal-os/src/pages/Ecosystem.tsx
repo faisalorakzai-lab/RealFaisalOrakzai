@@ -68,7 +68,7 @@ export default function Ecosystem() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.07 }}
                   onClick={() => setSelected(company.id)}
-                  className="flex items-center justify-between bg-black px-8 py-7 cursor-pointer group hover:bg-[#F3BA2F]/3 transition-colors border-b border-white/5"
+                  className="flex items-center justify-between bg-black px-8 py-7 cursor-pointer group transition-colors border-b border-white/5 scan-hover"
                 >
                   <div className="flex items-center gap-8">
                     <div className="text-[#F3BA2F] font-mono text-xs w-6 opacity-50">0{i + 1}</div>

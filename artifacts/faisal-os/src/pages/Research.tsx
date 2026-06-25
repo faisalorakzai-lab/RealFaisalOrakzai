@@ -50,7 +50,7 @@ export default function Research() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07 }}
-                className="bg-black p-8 hover:bg-[#F3BA2F]/3 transition-colors group"
+                className="bg-black p-8 group scan-hover"
               >
                 <div className="flex items-start gap-8">
                   <div className="flex-shrink-0 w-12 h-12 border border-[#F3BA2F]/20 flex items-center justify-center text-[#F3BA2F] group-hover:border-[#F3BA2F]/50 transition-colors">
