@@ -68,6 +68,28 @@ export default function Home() {
   const [activeVideo, setActiveVideo] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // Hero photo → video transition
+  const [showHeroVideo, setShowHeroVideo] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [glitchActive, setGlitchActive] = useState(false);
+
+  useEffect(() => {
+    // Glitch effect at 2.5s before transition
+    const glitchTimer = setTimeout(() => setGlitchActive(true), 2500);
+    // Switch to video at 3s
+    const switchTimer = setTimeout(() => {
+      setShowHeroVideo(true);
+      if (heroVideoRef.current) {
+        heroVideoRef.current.currentTime = 0;
+        heroVideoRef.current.play().catch(() => {});
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(glitchTimer);
+      clearTimeout(switchTimer);
+    };
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveVideo((v) => (v + 1) % VIDEOS.length);
@@ -88,54 +110,150 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Full-screen video background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+
+        {/* === PHOTO LAYER (first 3 seconds) === */}
+        <AnimatePresence>
+          {!showHeroVideo && (
+            <motion.div
+              key="hero-photo"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, filter: "brightness(2) blur(4px)" }}
+              transition={{ duration: 0.5, ease: "easeIn" }}
+              className="absolute inset-0 z-0"
+            >
+              {/* Photo — full screen cover */}
+              <img
+                src="/faisal-hero.png"
+                alt="Faisal Orakzai"
+                className="absolute inset-0 w-full h-full object-cover object-top"
+                style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1) hue-rotate(5deg)" : "brightness(1)" }}
+              />
+
+              {/* Cinematic dark overlay on photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(ellipse 60% 80% at 50% 50%, transparent 20%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.95) 100%)",
+                }}
+              />
+
+              {/* Scanlines over photo */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px)",
+                }}
+              />
+
+              {/* Glitch horizontal slice effect */}
+              {glitchActive && (
+                <>
+                  <motion.div
+                    className="absolute left-0 right-0 pointer-events-none"
+                    style={{ top: "30%", height: "3px", background: "rgba(243,186,47,0.7)", mixBlendMode: "screen" }}
+                    animate={{ scaleX: [1, 0.3, 1, 0.7, 1], x: [0, 10, -5, 8, 0], opacity: [1, 0.5, 1, 0.8, 0] }}
+                    transition={{ duration: 0.5, repeat: 1 }}
+                  />
+                  <motion.div
+                    className="absolute left-0 right-0 pointer-events-none"
+                    style={{ top: "60%", height: "2px", background: "rgba(0,200,255,0.5)", mixBlendMode: "screen" }}
+                    animate={{ scaleX: [1, 0.6, 1, 0.4, 1], x: [0, -8, 12, -4, 0], opacity: [1, 0.6, 1, 0.7, 0] }}
+                    transition={{ duration: 0.4, repeat: 1, delay: 0.1 }}
+                  />
+                </>
+              )}
+
+              {/* Gold edge lines */}
+              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/50 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/25 to-transparent pointer-events-none" />
+
+              {/* HUD label — LIVE SIGNAL */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="absolute top-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 border border-[#F3BA2F]/40"
+                style={{ zIndex: 10 }}
+              >
+                <motion.span
+                  className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]"
+                  animate={{ opacity: [1, 0.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 0.8 }}
+                />
+                <span className="text-[#F3BA2F] font-mono text-xs tracking-[0.25em]">LIVE · FAISAL ORAKZAI</span>
+              </motion.div>
+
+              {/* Corner HUD brackets */}
+              <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/50 pointer-events-none" />
+              <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/50 pointer-events-none" />
+              <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/50 pointer-events-none" />
+              <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/50 pointer-events-none" />
+
+              {/* Countdown scan bar */}
+              <motion.div
+                className="absolute bottom-0 left-0 h-[3px] bg-[#F3BA2F]"
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* === VIDEO LAYER (after 3 seconds) === */}
+        <motion.video
+          ref={heroVideoRef}
+          key="hero-video"
           src="/hero-bg.mp4"
-          autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showHeroVideo ? 1 : 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         />
 
-        {/* Dark cinematic base overlay — keep it very dark */}
-        <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+        {/* Dark cinematic base overlay */}
+        <div className="absolute inset-0 bg-black/70 pointer-events-none z-[1]" />
 
         {/* Cyberpunk scanline texture */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
             background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px)",
           }}
         />
 
         {/* Grid bg on top */}
-        <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
+        <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none z-[1]" />
 
         {/* Gold chromatic vignette */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
             background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.9) 100%)",
           }}
         />
 
         {/* Gold ambient glow centre */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#F3BA2F]/6 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#F3BA2F]/6 rounded-full blur-[120px] pointer-events-none z-[1]" />
 
         {/* Top gold edge line */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/40 to-transparent pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/40 to-transparent pointer-events-none z-[2]" />
         {/* Bottom gold edge line */}
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/20 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/20 to-transparent pointer-events-none z-[2]" />
 
         {/* Corner HUD brackets */}
-        <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none" />
-        <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none" />
-        <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none" />
-        <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none" />
+        <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none z-[2]" />
+        <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none z-[2]" />
+        <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none z-[2]" />
+        <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none z-[2]" />
 
-        {/* Orb — subtle on top of video */}
-        <motion.div style={{ y: y1 }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Orb */}
+        <motion.div style={{ y: y1 }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[2]">
           <div className="w-[600px] h-[600px] opacity-35">
             <Suspense fallback={<div className="w-full h-full" />}>
               <BlockchainOrb />
@@ -145,7 +263,7 @@ export default function Home() {
 
         {/* Animated gold scan sweep */}
         <motion.div
-          className="absolute inset-x-0 h-[2px] pointer-events-none"
+          className="absolute inset-x-0 h-[2px] pointer-events-none z-[2]"
           style={{ background: "linear-gradient(90deg, transparent, rgba(243,186,47,0.5), transparent)" }}
           animate={{ top: ["0%", "100%"] }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
@@ -193,7 +311,7 @@ export default function Home() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#F3BA2F]/40"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#F3BA2F]/40 z-10"
         >
           <ChevronDown className="h-6 w-6" />
         </motion.div>
@@ -238,7 +356,7 @@ export default function Home() {
         {/* Corner brackets */}
         <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[#F3BA2F]/40 pointer-events-none" />
         <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-[#F3BA2F]/40 pointer-events-none" />
-        <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-[#F3BA2F]/40 pointer-events-none" />
+        <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-6 border-[#F3BA2F]/40 pointer-events-none" />
         <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[#F3BA2F]/40 pointer-events-none" />
 
         {/* Content overlay */}
