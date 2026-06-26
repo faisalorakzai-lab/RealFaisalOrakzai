@@ -17,15 +17,11 @@ const QUICK = [
 ];
 
 const BOT_RESPONSES: Record<string, string> = {
-  default:
-    "Thank you for reaching out. For detailed inquiries please use the Contact page or connect via LinkedIn. I'll make sure Faisal's team gets back to you within 24–72 hours.",
-  orakzai:
-    "Orakzai Group is a multi-venture organization building at the intersection of AI, blockchain, digital assets, luxury commerce, and real-world investments. Founded by Faisal Orakzai.",
+  default: "Thank you for reaching out. For detailed inquiries please use the Contact page or connect via LinkedIn. I'll make sure Faisal's team gets back to you within 24–72 hours.",
+  orakzai: "Orakzai Group is a multi-venture organization building at the intersection of AI, blockchain, digital assets, luxury commerce, and real-world investments. Founded by Faisal Orakzai.",
   bond: "Orakzai Bond is a blockchain-focused financial ecosystem exploring real-world asset tokenization, digital finance infrastructure, and decentralized financial systems.",
-  collabo:
-    "Faisal welcomes collaborations in AI, blockchain, luxury, and investment verticals. Please submit a formal inquiry via the Contact page with details about your proposal.",
-  background:
-    "Faisal Orakzai (born 30 April 2006) is a Pakistani entrepreneur. He began at age 12 in real estate, later expanding into crypto, forex, and blockchain. In 2023 he founded Orakzai Group.",
+  collabo: "Faisal welcomes collaborations in AI, blockchain, luxury, and investment verticals. Please submit a formal inquiry via the Contact page with details about your proposal.",
+  background: "Faisal Orakzai (born 30 April 2006) is a Pakistani entrepreneur. He began at age 12 in real estate, later expanding into crypto, forex, and blockchain. In 2023 he founded Orakzai Group.",
 };
 
 function getReply(text: string): string {
@@ -70,24 +66,22 @@ export default function ChatWidget() {
     setTyping(true);
     setTimeout(() => {
       setTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        { id: Date.now() + 1, role: "assistant", text: getReply(text), time: now() },
-      ]);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", text: getReply(text), time: now() }]);
     }, 1200 + Math.random() * 800);
   };
 
   return (
     <>
-      {/* Video button */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Floating button — fixed, safe z-index, higher on mobile to avoid content overlap */}
+      <div className="fixed bottom-6 right-4 sm:right-6 z-40 flex flex-col items-end gap-2">
         <AnimatePresence>
           {!open && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
+              initial={{ opacity: 0, scale: 0.8, y: 6 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="text-[10px] font-mono text-[#F3BA2F]/70 bg-black/80 border border-[#F3BA2F]/20 px-3 py-1.5 whitespace-nowrap"
+              /* Hidden on xs screens — avoids text overlap on mobile */
+              className="hidden sm:block text-[10px] font-mono text-[#F3BA2F]/70 bg-black/80 border border-[#F3BA2F]/20 px-3 py-1.5 whitespace-nowrap"
             >
               Connect with Team
             </motion.div>
@@ -98,22 +92,12 @@ export default function ChatWidget() {
           onClick={() => setOpen((v) => !v)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#F3BA2F]/60 glow-gold-sm focus:outline-none"
+          className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-[#F3BA2F]/60 glow-gold-sm focus:outline-none"
           style={{ boxShadow: "0 0 20px rgba(243,186,47,0.3), 0 4px 20px rgba(0,0,0,0.5)" }}
           aria-label="Open chat"
         >
-          {/* Looping background video */}
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            src="/bg-video.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          {/* Gold ring pulse */}
+          <video className="absolute inset-0 w-full h-full object-cover" src="/bg-video.mp4" autoPlay loop muted playsInline />
           <div className="absolute inset-0 rounded-full border border-[#F3BA2F]/40 animate-pulse-ring" />
-          {/* Overlay icon */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
             <AnimatePresence mode="wait">
               {open ? (
@@ -121,9 +105,7 @@ export default function ChatWidget() {
                   <ChevronDown className="h-5 w-5 text-[#F3BA2F]" />
                 </motion.div>
               ) : (
-                <motion.div key="chat" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                  className="w-7 h-7 flex flex-col items-center justify-center gap-0.5"
-                >
+                <motion.div key="chat" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="w-7 h-7 flex flex-col items-center justify-center gap-0.5">
                   <div className="w-4 h-0.5 bg-[#F3BA2F] rounded" />
                   <div className="w-3 h-0.5 bg-[#F3BA2F] rounded self-start ml-0.5" />
                   <div className="w-4 h-0.5 bg-[#F3BA2F] rounded" />
@@ -142,12 +124,10 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 35 }}
-            className="fixed bottom-28 right-6 z-50 w-80 sm:w-[360px] flex flex-col"
+            className="fixed bottom-24 right-3 sm:bottom-28 sm:right-6 z-40 w-[calc(100vw-1.5rem)] max-w-[360px] flex flex-col"
             style={{ maxHeight: "520px" }}
           >
-            <div className="bg-black border border-[#F3BA2F]/20 flex flex-col overflow-hidden"
-              style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(243,186,47,0.08)" }}>
-
+            <div className="bg-black border border-[#F3BA2F]/20 flex flex-col overflow-hidden" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(243,186,47,0.08)" }}>
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-[#F3BA2F]/10 bg-black">
                 <div className="flex items-center gap-3">
@@ -175,18 +155,13 @@ export default function ChatWidget() {
                       </div>
                     )}
                     <div className={`max-w-[78%] ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-1`}>
-                      <div className={`px-4 py-2.5 text-sm leading-relaxed ${
-                        msg.role === "user"
-                          ? "bg-[#F3BA2F] text-black font-medium"
-                          : "bg-white/5 border border-white/8 text-white/80"
-                      }`}>
+                      <div className={`px-4 py-2.5 text-sm leading-relaxed ${msg.role === "user" ? "bg-[#F3BA2F] text-black font-medium" : "bg-white/5 border border-white/8 text-white/80"}`}>
                         {msg.text}
                       </div>
                       <div className="text-white/20 text-[10px] font-mono px-1">{msg.time}</div>
                     </div>
                   </div>
                 ))}
-
                 {typing && (
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-full overflow-hidden border border-[#F3BA2F]/30">
@@ -194,9 +169,7 @@ export default function ChatWidget() {
                     </div>
                     <div className="bg-white/5 border border-white/8 px-4 py-3 flex gap-1">
                       {[0, 1, 2].map((i) => (
-                        <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]/60"
-                          animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }}
-                        />
+                        <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]/60" animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }} />
                       ))}
                     </div>
                   </div>
@@ -207,8 +180,7 @@ export default function ChatWidget() {
               {/* Quick replies */}
               <div className="px-4 pb-2 flex gap-2 overflow-x-auto scrollbar-none">
                 {QUICK.map((q) => (
-                  <button key={q} onClick={() => send(q)}
-                    className="flex-shrink-0 text-[10px] font-mono text-[#F3BA2F]/60 border border-[#F3BA2F]/15 px-3 py-1.5 hover:border-[#F3BA2F]/40 hover:text-[#F3BA2F] transition-colors whitespace-nowrap">
+                  <button key={q} onClick={() => send(q)} className="flex-shrink-0 text-[10px] font-mono text-[#F3BA2F]/60 border border-[#F3BA2F]/15 px-3 py-1.5 hover:border-[#F3BA2F]/40 hover:text-[#F3BA2F] transition-colors whitespace-nowrap">
                     {q}
                   </button>
                 ))}
@@ -216,19 +188,8 @@ export default function ChatWidget() {
 
               {/* Input */}
               <div className="flex items-center gap-2 px-4 py-3 border-t border-[#F3BA2F]/10">
-                <input
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && send(input)}
-                  placeholder="Type a message..."
-                  className="flex-1 bg-transparent text-white/80 text-sm placeholder:text-white/20 outline-none font-sans"
-                />
-                <button
-                  onClick={() => send(input)}
-                  disabled={!input.trim() || typing}
-                  className="w-8 h-8 flex items-center justify-center bg-[#F3BA2F] text-black disabled:opacity-30 hover:bg-[#ffd666] transition-colors"
-                >
+                <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send(input)} placeholder="Type a message..." className="flex-1 bg-transparent text-white/80 text-sm placeholder:text-white/20 outline-none font-sans" />
+                <button onClick={() => send(input)} disabled={!input.trim() || typing} className="w-8 h-8 flex items-center justify-center bg-[#F3BA2F] text-black disabled:opacity-30 hover:bg-[#ffd666] transition-colors">
                   <Send className="h-3.5 w-3.5" />
                 </button>
               </div>
