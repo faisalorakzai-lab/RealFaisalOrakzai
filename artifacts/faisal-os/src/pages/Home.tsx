@@ -1,5 +1,5 @@
-import { useEffect, useRef, lazy, Suspense } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, lazy, Suspense, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useGetDashboardSummary } from "@workspace/api-client-react";
@@ -10,6 +10,30 @@ const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] } }),
 };
+
+const VIDEOS = [
+  {
+    src: "/video-globe.mp4",
+    label: "01 / DIGITAL EARTH",
+    title: "Global\nPresence",
+    sub: "Building ventures that transcend borders — from Karachi to the world.",
+    tag: "INTERNATIONAL",
+  },
+  {
+    src: "/video-network.mp4",
+    label: "02 / NETWORK INFRASTRUCTURE",
+    title: "Connected\nSystems",
+    sub: "Interconnected nodes of capital, intelligence, and real-world execution.",
+    tag: "ECOSYSTEM",
+  },
+  {
+    src: "/video-blockchain.mp4",
+    label: "03 / BLOCKCHAIN LEDGER",
+    title: "Immutable\nFoundations",
+    sub: "Transparent, decentralized financial systems redefining asset ownership.",
+    tag: "WEB3",
+  },
+];
 
 const domains = [
   {
@@ -41,6 +65,23 @@ export default function Home() {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 600], [0, -120]);
   const opacity1 = useTransform(scrollY, [0, 400], [1, 0]);
+  const [activeVideo, setActiveVideo] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveVideo((v) => (v + 1) % VIDEOS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    videoRefs.current.forEach((vid, i) => {
+      if (!vid) return;
+      if (i === activeVideo) { vid.currentTime = 0; vid.play().catch(() => {}); }
+      else vid.pause();
+    });
+  }, [activeVideo]);
 
   return (
     <div className="bg-black text-white overflow-hidden">
@@ -111,6 +152,137 @@ export default function Home() {
         >
           <ChevronDown className="h-6 w-6" />
         </motion.div>
+      </section>
+
+      {/* ── CINEMATIC VIDEO SHOWCASE ── */}
+      <section className="relative w-full" style={{ height: "100vh" }}>
+        {/* All 3 videos stacked, only active one visible */}
+        {VIDEOS.map((v, i) => (
+          <video
+            key={v.src}
+            ref={(el) => { videoRefs.current[i] = el; }}
+            src={v.src}
+            autoPlay={i === 0}
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+            style={{ opacity: activeVideo === i ? 1 : 0 }}
+          />
+        ))}
+
+        {/* Deep dark overlay */}
+        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+
+        {/* Cyberpunk grid overlay */}
+        <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+
+        {/* Horizontal scan line sweep */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(transparent 49%, rgba(243,186,47,0.04) 50%, transparent 51%)",
+            backgroundSize: "100% 4px",
+          }}
+        />
+
+        {/* Gold vignette edges */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ boxShadow: "inset 0 0 120px rgba(0,0,0,0.8), inset 0 0 2px rgba(243,186,47,0.15)" }} />
+
+        {/* Corner brackets */}
+        <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[#F3BA2F]/40 pointer-events-none" />
+        <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-[#F3BA2F]/40 pointer-events-none" />
+        <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-[#F3BA2F]/40 pointer-events-none" />
+        <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[#F3BA2F]/40 pointer-events-none" />
+
+        {/* Content overlay */}
+        <div className="absolute inset-0 flex flex-col justify-between p-10 md:p-16">
+          {/* Top label */}
+          <div className="flex items-center justify-between">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeVideo}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.4 }}
+                className="text-[#F3BA2F] font-mono text-xs tracking-[0.3em]"
+              >
+                {VIDEOS[activeVideo].label}
+              </motion.div>
+            </AnimatePresence>
+            <div className="text-white/20 font-mono text-xs tracking-widest">ORAKZAI GROUP · LIVE SIGNAL</div>
+          </div>
+
+          {/* Center text */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeVideo}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="max-w-3xl"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#F3BA2F]/30 mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F] animate-pulse" />
+                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.25em]">{VIDEOS[activeVideo].tag}</span>
+              </div>
+              <h2 className="text-6xl md:text-8xl font-bold leading-none mb-6 whitespace-pre-line">
+                {VIDEOS[activeVideo].title.split("\n").map((line, li) => (
+                  <span key={li} className={`block ${li === 1 ? "gold-gradient text-glow" : "text-white"}`}>{line}</span>
+                ))}
+              </h2>
+              <p className="text-white/50 text-lg max-w-lg leading-relaxed font-light">
+                {VIDEOS[activeVideo].sub}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Bottom — dots + progress bars */}
+          <div className="flex items-end justify-between">
+            {/* Dot navigation */}
+            <div className="flex items-center gap-6">
+              {VIDEOS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveVideo(i)}
+                  className="group flex flex-col items-start gap-2 focus:outline-none"
+                >
+                  <div className="text-white/30 font-mono text-[10px] tracking-widest group-hover:text-[#F3BA2F] transition-colors">
+                    0{i + 1}
+                  </div>
+                  <div className="w-16 h-px bg-white/15 relative overflow-hidden">
+                    {activeVideo === i && (
+                      <motion.div
+                        className="absolute inset-y-0 left-0 bg-[#F3BA2F]"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 6, ease: "linear" }}
+                      />
+                    )}
+                    {activeVideo !== i && (
+                      <div className={`absolute inset-y-0 left-0 bg-white/30`} style={{ width: activeVideo > i ? "100%" : "0%" }} />
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Live readout */}
+            <div className="text-right hidden md:block">
+              <div className="text-white/20 font-mono text-[10px] tracking-widest mb-1">SIGNAL FEED</div>
+              <motion.div
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="text-[#F3BA2F]/60 font-mono text-[10px] tracking-widest"
+              >
+                ████████░░ {((activeVideo + 1) / VIDEOS.length * 100).toFixed(0)}% LOADED
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ── MANIFESTO ── */}
