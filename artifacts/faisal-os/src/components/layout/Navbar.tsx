@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -5,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/founder", label: "About" },
+  { href: "/founder", label: "Story" },
   { href: "/ecosystem", label: "Ventures" },
   { href: "/projects", label: "Projects" },
   { href: "/research", label: "Research" },
@@ -27,19 +28,17 @@ export default function Navbar() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-xl border-b border-[#F3BA2F]/10" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
             <img
               src="/logo.png"
-              alt="Faisal Orakzai Logo"
+              alt="Faisal Orakzai — Founder Orakzai Group Pakistan"
               className="h-10 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 6px rgba(243,186,47,0.35))" }}
             />
           </div>
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden lg:flex items-center gap-1">
           {links.map((link) => {
             const isActive = location === link.href;
@@ -71,26 +70,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black/98 border-b border-[#F3BA2F]/10 overflow-hidden"
+            className="lg:hidden bg-black/95 border-b border-[#F3BA2F]/10"
           >
             <div className="px-6 py-4 space-y-1">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <div
-                    className={`px-4 py-3 text-sm font-medium transition-colors ${location === link.href ? "text-[#F3BA2F]" : "text-white/60"}`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </div>
-                </Link>
-              ))}
+              {links.map((link) => {
+                const isActive = location === link.href;
+                return (
+                  <Link key={link.href} href={link.href}>
+                    <div
+                      onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-sm border-b border-white/5 ${isActive ? "text-[#F3BA2F]" : "text-white/60"}`}
+                    >
+                      {link.label}
+                    </div>
+                  </Link>
+                );
+              })}
+              <a href="/contact" className="block mt-4 px-4 py-2 bg-[#F3BA2F] text-black text-xs font-bold text-center">
+                CONNECT
+              </a>
             </div>
           </motion.div>
         )}
