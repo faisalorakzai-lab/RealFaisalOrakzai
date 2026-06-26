@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const links = [
@@ -30,13 +30,12 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-8 h-8 border border-[#F3BA2F]/60 flex items-center justify-center group-hover:border-[#F3BA2F] transition-all glow-gold-sm">
-              <span className="text-[#F3BA2F] font-mono font-bold text-sm">FO</span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-white font-semibold text-sm tracking-wide leading-none">Faisal Orakzai</div>
-              <div className="text-[#F3BA2F]/60 font-mono text-[10px] tracking-widest">FOUNDER & CHAIRMAN</div>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Faisal Orakzai Logo"
+              className="h-10 w-auto object-contain"
+              style={{ filter: "drop-shadow(0 0 6px rgba(243,186,47,0.35))" }}
+            />
           </div>
         </Link>
 
@@ -63,13 +62,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }))}
-            className="hidden lg:flex items-center gap-2 px-3 py-1.5 border border-white/10 text-white/40 text-xs font-mono hover:border-[#F3BA2F]/30 hover:text-white/60 transition-all"
-          >
-            <Search className="h-3 w-3" /> Search
-            <span className="ml-1 opacity-50">⌘K</span>
-          </button>
           <a href="/contact" className="hidden lg:block px-4 py-1.5 bg-[#F3BA2F] text-black text-xs font-bold tracking-wider hover:bg-[#ffd666] transition-colors">
             CONNECT
           </a>
