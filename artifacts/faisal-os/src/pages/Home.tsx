@@ -24,10 +24,10 @@ const domains = [
 ];
 
 const stats = [
-  { label: "VENTURES", key: "totalCompanies" as const },
-  { label: "PROJECTS", key: "totalProjects" as const },
-  { label: "RESEARCH PAPERS", key: "totalResearch" as const },
-  { label: "PUBLISHED ARTICLES", key: "totalArticles" as const },
+  { label: "VENTURES", value: "250+", key: "totalCompanies" as const },
+  { label: "CATEGORIES", value: "12", key: "totalProjects" as const },
+  { label: "RESEARCH PAPERS", value: "46", key: "totalResearch" as const },
+  { label: "ARTIFICIAL SYSTEMS", value: "98", key: "totalArticles" as const },
 ];
 
 const PHIL_TEXT = "From effort to leverage. I operate where these shifts begin — at the intersection of artificial intelligence, blockchain infrastructure, and real-world economic systems.";
@@ -432,7 +432,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#F3BA2F]/10">
             {stats.map((stat,i) => (
               <motion.div key={i} initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ delay:i*0.1 }} viewport={{ once:true }} className="bg-black p-8 text-center">
-                <div className="text-5xl font-bold text-[#F3BA2F] mb-3 font-mono">{summary?.[stat.key]??"—"}</div>
+                <div className="text-5xl font-bold text-[#F3BA2F] mb-3 font-mono">{summary?.[stat.key] ?? stat.value}</div>
                 <div className="text-white/30 font-mono text-[10px] tracking-[0.25em]">{stat.label}</div>
               </motion.div>
             ))}

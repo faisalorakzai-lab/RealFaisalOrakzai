@@ -19,12 +19,14 @@ import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/shared/ChatWidget";
 import GlobalSearch from "@/components/shared/GlobalSearch";
 import PressKitButton from "@/components/shared/PressKitButton";
+import AnnouncementTicker from "@/components/shared/AnnouncementTicker";
 
 const queryClient = new QueryClient();
 
 function Router() {
   return (
     <div className="flex flex-col min-h-screen bg-black">
+      <AnnouncementTicker />
       <Navbar />
       <main className="flex-1">
         <AnimatePresence mode="wait">
