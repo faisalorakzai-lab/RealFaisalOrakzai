@@ -1,2 +1,13 @@
 User-agent: *
-Allow: /
+  Allow: /
+  Allow: /story/
+  Allow: /founder
+
+  # Sitemap
+  Sitemap: https://faisalorakzai.com/sitemap.xml
+
+  # Allow all images for Google Images indexing
+  User-agent: Googlebot-Image
+  Allow: /story/
+  Allow: /
+  
