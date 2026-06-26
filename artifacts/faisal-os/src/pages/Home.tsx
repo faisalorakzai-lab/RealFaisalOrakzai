@@ -88,23 +88,68 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Orb background */}
+        {/* Full-screen video background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          src="/hero-bg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+
+        {/* Dark cinematic base overlay — keep it very dark */}
+        <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+
+        {/* Cyberpunk scanline texture */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px)",
+          }}
+        />
+
+        {/* Grid bg on top */}
+        <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
+
+        {/* Gold chromatic vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.9) 100%)",
+          }}
+        />
+
+        {/* Gold ambient glow centre */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#F3BA2F]/6 rounded-full blur-[120px] pointer-events-none" />
+
+        {/* Top gold edge line */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/40 to-transparent pointer-events-none" />
+        {/* Bottom gold edge line */}
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/20 to-transparent pointer-events-none" />
+
+        {/* Corner HUD brackets */}
+        <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none" />
+        <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none" />
+        <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none" />
+        <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none" />
+
+        {/* Orb — subtle on top of video */}
         <motion.div style={{ y: y1 }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[700px] h-[700px] opacity-60">
+          <div className="w-[600px] h-[600px] opacity-35">
             <Suspense fallback={<div className="w-full h-full" />}>
               <BlockchainOrb />
             </Suspense>
           </div>
         </motion.div>
 
-        {/* Grid bg */}
-        <div className="absolute inset-0 bg-grid opacity-100 pointer-events-none" />
-
-        {/* Radial fade */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,black_75%)] pointer-events-none" />
-
-        {/* Gold ambient */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#F3BA2F]/5 rounded-full blur-[100px] pointer-events-none" />
+        {/* Animated gold scan sweep */}
+        <motion.div
+          className="absolute inset-x-0 h-[2px] pointer-events-none"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(243,186,47,0.5), transparent)" }}
+          animate={{ top: ["0%", "100%"] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+        />
 
         <motion.div style={{ opacity: opacity1 }} className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           {/* Status badge */}
