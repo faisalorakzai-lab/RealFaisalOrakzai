@@ -38,37 +38,26 @@
 :root, .dark {
   --background: 0 0% 0%;
   --foreground: 0 0% 95%;
-
   --card: 0 0% 0%;
   --card-foreground: 0 0% 95%;
   --card-border: 220 13% 10%;
-
   --popover: 0 0% 3%;
   --popover-foreground: 0 0% 95%;
   --popover-border: 220 13% 14%;
-
-  /* Binance Gold #F3BA2F */
   --primary: 43 89% 57%;
   --primary-foreground: 0 0% 0%;
-
   --secondary: 220 13% 14%;
   --secondary-foreground: 0 0% 95%;
-
   --muted: 220 13% 8%;
   --muted-foreground: 0 0% 50%;
-
   --accent: 43 89% 57%;
   --accent-foreground: 0 0% 0%;
-
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
-
   --border: 220 13% 10%;
   --input: 220 13% 10%;
   --ring: 43 89% 57%;
-
   --radius: 0.25rem;
-
   --app-font-sans: 'Space Grotesk', sans-serif;
   --app-font-mono: 'Space Mono', monospace;
 }
@@ -80,6 +69,12 @@
     @apply font-sans antialiased;
     background-color: #000000;
     color: #f2f2f2;
+    /* Global subtle gold node-mesh background */
+    background-image:
+      radial-gradient(circle, rgba(243,186,47,0.055) 1px, transparent 1px),
+      radial-gradient(circle, rgba(243,186,47,0.025) 1px, transparent 1px);
+    background-size: 52px 52px, 26px 26px;
+    background-position: 0 0, 13px 13px;
   }
 }
 
@@ -92,6 +87,19 @@
 }
 .text-glow {
   text-shadow: 0 0 30px rgba(243, 186, 47, 0.5);
+}
+/* Ambient behind-screen glow for key words */
+.word-glow-gold {
+  position: relative;
+}
+.word-glow-gold::after {
+  content: '';
+  position: absolute;
+  inset: -8px -16px;
+  background: radial-gradient(ellipse 80% 60% at 50% 60%, rgba(243,186,47,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 4px;
+  z-index: -1;
 }
 
 /* ── Cyberpunk grid ── */
@@ -110,45 +118,31 @@
   background-clip: text;
 }
 
+/* ── Constellation animated lines (SVG background) ── */
+.constellation-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cline x1='0' y1='75' x2='75' y2='0' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.06'/%3E%3Cline x1='75' y1='0' x2='150' y2='100' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.05'/%3E%3Cline x1='150' y1='100' x2='225' y2='30' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.06'/%3E%3Cline x1='225' y1='30' x2='300' y2='120' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.05'/%3E%3Cline x1='0' y1='200' x2='100' y2='150' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.05'/%3E%3Cline x1='100' y1='150' x2='200' y2='220' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.06'/%3E%3Cline x1='200' y1='220' x2='300' y2='170' stroke='%23F3BA2F' stroke-width='0.4' opacity='0.05'/%3E%3Ccircle cx='0' cy='75' r='1.5' fill='%23F3BA2F' opacity='0.12'/%3E%3Ccircle cx='75' cy='0' r='1.5' fill='%23F3BA2F' opacity='0.10'/%3E%3Ccircle cx='150' cy='100' r='2' fill='%23F3BA2F' opacity='0.14'/%3E%3Ccircle cx='225' cy='30' r='1.5' fill='%23F3BA2F' opacity='0.10'/%3E%3Ccircle cx='300' cy='120' r='1.5' fill='%23F3BA2F' opacity='0.12'/%3E%3Ccircle cx='100' cy='150' r='2' fill='%23F3BA2F' opacity='0.13'/%3E%3Ccircle cx='200' cy='220' r='1.5' fill='%23F3BA2F' opacity='0.10'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-repeat: repeat;
+}
+
 /* ────────────────────────────────────────────
    SCAN-DROP — gold line falls from top on hover
-   Usage: add class "scan-hover" to any card
 ──────────────────────────────────────────── */
 @keyframes scan-drop {
-  0%   { transform: translateY(0);    opacity: 0.55; }
+  0%   { transform: translateY(0); opacity: 0.55; }
   60%  { opacity: 0.35; }
   100% { transform: translateY(var(--card-h, 200px)); opacity: 0; }
 }
-
-.scan-hover {
-  position: relative;
-  overflow: hidden;
-}
-/* The falling gold line */
+.scan-hover { position: relative; overflow: hidden; }
 .scan-hover::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(243,186,47,0.5) 20%, rgba(243,186,47,0.3) 80%, transparent 100%);
   box-shadow: 0 0 6px rgba(243,186,47,0.25);
-  pointer-events: none;
-  z-index: 20;
-  opacity: 0;
-  transform: translateY(0);
+  pointer-events: none; z-index: 20; opacity: 0;
 }
-/* Trigger animation on hover — use JS to set --card-h, or just use a large value */
-.scan-hover:hover::before {
-  animation: scan-drop 0.75s cubic-bezier(0.4, 0, 0.8, 1) forwards;
-}
-/* Re-trigger on every hover by resetting state */
-.scan-hover:not(:hover)::before {
-  opacity: 0;
-  transform: translateY(0);
-  animation: none;
-}
+.scan-hover:hover::before { animation: scan-drop 0.75s cubic-bezier(0.4,0,0.8,1) forwards; }
+.scan-hover:not(:hover)::before { opacity: 0; transform: translateY(0); animation: none; }
 
 /* ── Animations ── */
 @keyframes pulse-ring {
@@ -159,9 +153,13 @@
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-12px); }
 }
-
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.06; }
+  50%       { opacity: 0.12; }
+}
 .animate-float      { animation: float 4s ease-in-out infinite; }
-.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+.animate-node-pulse { animation: node-pulse 4s ease-in-out infinite; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar       { width: 4px; }
