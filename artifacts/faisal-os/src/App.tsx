@@ -16,7 +16,7 @@ import Investment from "@/pages/Investment";
 import Contact from "@/pages/Contact";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AiAssistant from "@/components/shared/AiAssistant";
+import ChatWidget from "@/components/shared/ChatWidget";
 import GlobalSearch from "@/components/shared/GlobalSearch";
 
 const queryClient = new QueryClient();
@@ -43,7 +43,7 @@ function Router() {
         </AnimatePresence>
       </main>
       <Footer />
-      <AiAssistant />
+      <ChatWidget />
       <GlobalSearch />
     </div>
   );
