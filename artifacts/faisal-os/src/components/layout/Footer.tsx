@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 const socials = [
-  { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",            logo: "/logos/linkedin.jpg" },
-  { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                          logo: "/logos/x.png"       },
-  { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",              logo: "/logos/instagram.png" },
-  { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                   logo: "/logos/tiktok.png"  },
-  { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                  logo: "/logos/github.png"  },
-  { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",     logo: "/logos/crunchbase.png" },
-  { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",              logo: "/logos/pinterest.png" },
-  { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",               logo: "/logos/facebook.png" },
-  { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",            logo: "/logos/clubhouse.png" },
-  { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",                logo: "/logos/mastodon.png" },
+  { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",            logo: "/logos/linkedin.jpg",   filter: undefined },
+  { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                          logo: "/logos/x.png",          filter: undefined },
+  { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",              logo: "/logos/instagram.png",  filter: undefined },
+  { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                   logo: "/logos/tiktok.png",     filter: undefined },
+  { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                  logo: "/logos/github.png",     filter: "invert(1)" },
+  { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",     logo: "/logos/crunchbase.png", filter: undefined },
+  { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",              logo: "/logos/pinterest.png",  filter: undefined },
+  { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",               logo: "/logos/facebook.png",   filter: undefined },
+  { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",            logo: "/logos/clubhouse.png",  filter: undefined },
+  { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",                logo: "/logos/mastodon.png",   filter: undefined },
 ];
 
 const ecosystem = [
@@ -95,6 +95,7 @@ export default function Footer() {
                       src={s.logo}
                       alt={s.label}
                       className="w-full h-full object-cover"
+                      style={s.filter ? { filter: s.filter } : undefined}
                     />
                   </span>
                   <span className="text-white/60 text-sm group-hover:text-[#F3BA2F] transition-colors truncate">
