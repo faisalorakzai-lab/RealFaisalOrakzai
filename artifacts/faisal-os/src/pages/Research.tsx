@@ -726,12 +726,10 @@
         {/* ── Thumbnail (top, full width) ── */}
         <div style={{ position:"relative", height: isFeatured ? "clamp(260px, 40vw, 460px)" : "200px", overflow:"hidden", flexShrink:0 }}>
           {entry.thumbnail ? (
-            <motion.img
+            <img
               src={entry.thumbnail}
               alt={entry.title}
-              animate={{ scale: hov ? 1.04 : 1 }}
-              transition={{ duration:0.9, ease:"easeOut" }}
-              style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}
+              style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", transition:"transform 0.9s ease", transform: hov ? "scale(1.04)" : "scale(1)" }}
             />
           ) : (
             <AbstractBg />
@@ -777,8 +775,7 @@
             fontSize: isFeatured ? "1rem" : "0.875rem",
             color:"rgba(255,255,255,0.5)", lineHeight:1.7,
             marginBottom:"1.25rem", fontWeight:300, flex:1,
-            display:"-webkit-box", WebkitLineClamp: isFeatured ? 3 : 2,
-            WebkitBoxOrient:"vertical", overflow:"hidden",
+            display:"-webkit-box", WebkitLineClamp: isFeatured ? 3 : 2, overflow:"hidden", ...({"WebkitBoxOrient":"vertical"} as Record<string,unknown>),
           }}>
             {entry.abstract}
           </p>
