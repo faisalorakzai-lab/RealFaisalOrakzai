@@ -1,8 +1,8 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Founder from "@/pages/Founder";
@@ -22,26 +22,49 @@ import AnnouncementTicker from "@/components/shared/AnnouncementTicker";
 
 const queryClient = new QueryClient();
 
+const pageVariants = {
+  initial: { opacity: 0, x: 40, filter: "blur(4px)" },
+  animate: { opacity: 1, x: 0, filter: "blur(0px)" },
+  exit:    { opacity: 0, x: -24, filter: "blur(3px)" },
+};
+
+const pageTransition = {
+  duration: 0.35,
+  ease: [0.25, 0.46, 0.45, 0.94],
+};
+
 function Router() {
+  const [location] = useLocation();
+
   return (
     <div className="flex flex-col min-h-screen bg-black">
       <AnnouncementTicker />
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 relative overflow-hidden">
         <AnimatePresence mode="wait">
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/founder" component={Founder} />
-            <Route path="/ecosystem" component={Ecosystem} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/research" component={Research} />
-            <Route path="/press" component={Press} />
-            <Route path="/learning" component={Learning} />
-            <Route path="/media" component={Media} />
-            <Route path="/investment" component={Investment} />
-            <Route path="/contact" component={Contact} />
-            <Route component={NotFound} />
-          </Switch>
+          <motion.div
+            key={location}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={pageTransition}
+            style={{ willChange: "transform, opacity" }}
+          >
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/founder" component={Founder} />
+              <Route path="/ecosystem" component={Ecosystem} />
+              <Route path="/projects" component={Projects} />
+              <Route path="/research" component={Research} />
+              <Route path="/press" component={Press} />
+              <Route path="/learning" component={Learning} />
+              <Route path="/media" component={Media} />
+              <Route path="/investment" component={Investment} />
+              <Route path="/contact" component={Contact} />
+              <Route component={NotFound} />
+            </Switch>
+          </motion.div>
         </AnimatePresence>
       </main>
       <Footer />
