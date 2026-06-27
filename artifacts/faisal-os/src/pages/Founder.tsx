@@ -86,129 +86,87 @@ const principles = [
   { title: "Execution Over Ideas", desc: "Ideas are abundant. The rarest resource is disciplined execution." },
 ];
 
-// ─── 3D Book Flip Component ───────────────────────────────────────────────────
+// ─── 3D Single-Image Book Flip ───────────────────────────────────────────────
 function BookFlip3D() {
-  // false = showing Page I (images 1–10 on front)
-  // true  = showing Page II (images 11–20, flipped to back)
-  const [flipped, setFlipped] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pausedRef = useRef(false);
-  const touchStartX = useRef(0);
-  const touchStartY = useRef(0);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [nextIdx, setNextIdx]       = useState(1);
+  const [flipping, setFlipping]     = useState(false);  // card is mid-rotation
+  const [instant, setInstant]       = useState(false);  // suppress transition for reset
+  const autoRef    = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pausedRef  = useRef(false);
+  const touchX     = useRef(0);
+  const touchY     = useRef(0);
 
-  const doFlip = useCallback(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setFlipped(f => !f);
-    setTimeout(() => setIsAnimating(false), 850);
-  }, [isAnimating]);
+  // front face: GALLERY[currentIdx]
+  // back face:  GALLERY[nextIdx]  (pre-rotated 180° in CSS)
+  // Flip forward: card goes to rotateY(-180) → back is visible → swap → reset instantly
 
-  const startAutoplay = useCallback(() => {
+  const advanceIdx = useCallback((cur: number, dir: 1 | -1) =>
+    (cur + dir + GALLERY.length) % GALLERY.length, []);
+
+  const doFlip = useCallback((dir: 1 | -1 = 1) => {
+    if (flipping) return;
+    setFlipping(true);
+    setTimeout(() => {
+      // Animation done — silently swap faces, reset card to 0° with no transition
+      setInstant(true);
+      setCurrentIdx(prev => advanceIdx(prev, dir));
+      setNextIdx(prev => advanceIdx(prev, dir));   // next advances too
+      setFlipping(false);
+      // Allow a paint frame before re-enabling transitions
+      requestAnimationFrame(() => requestAnimationFrame(() => setInstant(false)));
+    }, 820);
+  }, [flipping, advanceIdx]);
+
+  const startAuto = useCallback(() => {
     if (autoRef.current) clearInterval(autoRef.current);
-    autoRef.current = setInterval(() => {
-      if (!pausedRef.current) doFlip();
-    }, 3000);
+    autoRef.current = setInterval(() => { if (!pausedRef.current) doFlip(1); }, 3000);
   }, [doFlip]);
 
-  useEffect(() => {
-    startAutoplay();
-    return () => { if (autoRef.current) clearInterval(autoRef.current); };
-  }, [startAutoplay]);
+  useEffect(() => { startAuto(); return () => { if (autoRef.current) clearInterval(autoRef.current); }; }, [startAuto]);
 
-  const pauseAutoplay = () => {
-    pausedRef.current = true;
-    if (autoRef.current) clearInterval(autoRef.current);
-  };
-  const resumeAutoplay = () => {
-    pausedRef.current = false;
-    startAutoplay();
-  };
+  const pause  = () => { pausedRef.current = true;  if (autoRef.current) clearInterval(autoRef.current); };
+  const resume = () => { pausedRef.current = false; startAuto(); };
 
   const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    pauseAutoplay();
+    touchX.current = e.touches[0].clientX;
+    touchY.current = e.touches[0].clientY;
+    pause();
   };
   const onTouchEnd = (e: React.TouchEvent) => {
-    const dx = e.changedTouches[0].clientX - touchStartX.current;
-    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
-    if (Math.abs(dx) > 40 && dy < 60) doFlip();
-    setTimeout(resumeAutoplay, 2000);
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    const dy = Math.abs(e.changedTouches[0].clientY - touchY.current);
+    if (Math.abs(dx) > 40 && dy < 80) doFlip(dx < 0 ? 1 : -1);
+    setTimeout(resume, 2500);
   };
 
-  const gridImages = (page: typeof PAGE_A) => (
-    <div className="grid grid-cols-2 gap-[3px] w-full h-full">
-      {page.map((photo, i) => {
-        const num = flipped ? i + 11 : i + 1;
-        return (
-          <div
-            key={i}
-            className="relative overflow-hidden"
-            style={{ background: "#0a0a0a" }}
-          >
-            <img
-              src={photo.src}
-              alt={photo.caption}
-              loading="lazy"
-              className="w-full h-full object-cover"
-              style={{
-                filter: "brightness(0.75) saturate(0.9)",
-                transition: "filter 0.3s",
-                display: "block",
-              }}
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 45%)" }}
-            />
-            <div
-              className="absolute top-2 right-2 font-mono text-[9px] text-[#F3BA2F]/60"
-              style={{ fontVariantNumeric: "tabular-nums" }}
-            >
-              {String(num).padStart(2, "0")}
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 px-2 pb-2">
-              <div className="text-white/70 text-[8px] font-mono tracking-wide leading-tight line-clamp-1">
-                {photo.caption}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+  const photo   = GALLERY[currentIdx];
+  const nPhoto  = GALLERY[nextIdx];
+  const label   = String(currentIdx + 1).padStart(2, "0") + " / " + String(GALLERY.length).padStart(2, "0");
 
   return (
     <section className="py-16 border-t border-[#F3BA2F]/10 overflow-hidden">
-      <div className="max-w-lg mx-auto px-4">
+      <div className="max-w-sm mx-auto px-4">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-6">
           <div className="flex items-center gap-3 mb-1">
             <div className="h-px w-8 bg-[#F3BA2F]" />
             <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Photo Archive</span>
             <div className="h-px flex-1 bg-[#F3BA2F]/10" />
           </div>
-          <div className="flex items-center justify-between mt-4">
-            <span className="text-white/20 font-mono text-[10px] tracking-widest uppercase">
-              Page {flipped ? "2" : "1"} of 2
-            </span>
-            <div className="flex gap-2">
-              {[0, 1].map(i => (
-                <button
+          <div className="flex items-center justify-between mt-3">
+            <span className="text-white/30 font-mono text-[10px] tracking-widest">{label}</span>
+            {/* Dot progress */}
+            <div className="flex gap-1">
+              {GALLERY.map((_, i) => (
+                <div
                   key={i}
-                  onClick={() => { pauseAutoplay(); if ((i === 1) !== flipped) doFlip(); setTimeout(resumeAutoplay, 2000); }}
-                  className="transition-all duration-300"
+                  className="rounded-full transition-all duration-300"
                   style={{
-                    width: (i === 1) === flipped ? "32px" : "12px",
-                    height: "3px",
-                    background: (i === 1) === flipped ? "#F3BA2F" : "rgba(255,255,255,0.2)",
+                    width:  i === currentIdx ? "14px" : "4px",
+                    height: "4px",
+                    background: i === currentIdx ? "#F3BA2F" : "rgba(255,255,255,0.15)",
                   }}
                 />
               ))}
@@ -216,180 +174,118 @@ function BookFlip3D() {
           </div>
         </motion.div>
 
-        {/* 3D Book Container */}
+        {/* ── 3D Card ── */}
         <div
           style={{ perspective: "1500px" }}
-          onMouseEnter={pauseAutoplay}
-          onMouseLeave={resumeAutoplay}
+          onMouseEnter={pause}
+          onMouseLeave={resume}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {/* Book card — front = Page I, back = Page II */}
           <div
             style={{
               position: "relative",
               transformStyle: "preserve-3d",
-              transform: `rotateY(${flipped ? -180 : 0}deg)`,
-              transition: "transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
+              transform: `rotateY(${flipping ? -180 : 0}deg)`,
+              transition: instant ? "none" : "transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
               willChange: "transform",
-              borderRadius: "2px",
-              /* maintain 5:6 aspect so images fill nicely on mobile */
+              aspectRatio: "3/4",
             }}
           >
-            {/* ── FRONT FACE — Page I (1–10) ── */}
+            {/* ── FRONT FACE — current photo ── */}
             <div
               style={{
+                position: "absolute", inset: 0,
                 backfaceVisibility: "hidden",
                 WebkitBackfaceVisibility: "hidden",
-                width: "100%",
+                overflow: "hidden",
               }}
             >
-              {/* Page header bar */}
-              <div className="flex items-center justify-between px-1 pb-3">
-                <span className="font-mono text-[9px] text-[#F3BA2F]/50 tracking-[0.3em]">01 – 10</span>
-                <span className="font-mono text-[9px] text-white/20 tracking-widest">PAGE I</span>
+              <img
+                src={photo.src}
+                alt={photo.caption}
+                className="w-full h-full object-cover"
+                style={{ filter: "brightness(0.82) contrast(1.05) saturate(0.95)" }}
+              />
+              {/* Scanline overlay */}
+              <div className="absolute inset-0" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px)", pointerEvents: "none" }} />
+              {/* Bottom gradient */}
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%)" }} />
+              {/* Corner brackets */}
+              <div className="absolute top-3 left-3 w-7 h-7 border-t-2 border-l-2 border-[#F3BA2F]/60" />
+              <div className="absolute top-3 right-3 w-7 h-7 border-t-2 border-r-2 border-[#F3BA2F]/60" />
+              <div className="absolute bottom-16 left-3 w-7 h-7 border-b-2 border-l-2 border-[#F3BA2F]/60" />
+              <div className="absolute bottom-16 right-3 w-7 h-7 border-b-2 border-r-2 border-[#F3BA2F]/60" />
+              {/* Number badge */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-sm border border-[#F3BA2F]/30">
+                <div className="w-1 h-1 rounded-full bg-[#F3BA2F]" />
+                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em]">{label}</span>
               </div>
-
-              {/* Gold spine on left */}
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: "2px",
-                    background: "linear-gradient(to bottom, transparent, #F3BA2F55, #F3BA2F, #F3BA2F55, transparent)",
-                    zIndex: 10,
-                  }}
-                />
-                <div className="grid grid-cols-2 gap-[3px]" style={{ marginLeft: "2px" }}>
-                  {PAGE_A.map((photo, i) => (
-                    <div
-                      key={i}
-                      className="relative overflow-hidden"
-                      style={{ aspectRatio: "3/4", background: "#0a0a0a" }}
-                    >
-                      <img
-                        src={photo.src}
-                        alt={photo.caption}
-                        loading="lazy"
-                        className="w-full h-full object-cover block"
-                        style={{ filter: "brightness(0.75) saturate(0.9)" }}
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.68) 0%, transparent 45%)" }}
-                      />
-                      <div className="absolute top-2 right-2 font-mono text-[9px] text-[#F3BA2F]/60">
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 px-2 pb-1.5">
-                        <div className="text-white/60 text-[8px] font-mono tracking-wide leading-tight line-clamp-1">
-                          {photo.caption}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              {/* Caption */}
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="text-[#F3BA2F] font-mono text-[9px] tracking-[0.3em] mb-1">{photo.year}</div>
+                <div className="text-white font-bold text-base leading-tight">{photo.caption}</div>
               </div>
+              {/* Flip hint */}
+              <div className="absolute bottom-4 right-4 text-white/20 font-mono text-[8px] tracking-widest">FLIP →</div>
             </div>
 
-            {/* ── BACK FACE — Page II (11–20) ── */}
+            {/* ── BACK FACE — next photo (pre-rotated 180°) ── */}
             <div
               style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
+                position: "absolute", inset: 0,
                 backfaceVisibility: "hidden",
                 WebkitBackfaceVisibility: "hidden",
                 transform: "rotateY(180deg)",
+                overflow: "hidden",
               }}
             >
-              {/* Page header bar */}
-              <div className="flex items-center justify-between px-1 pb-3">
-                <span className="font-mono text-[9px] text-[#F3BA2F]/50 tracking-[0.3em]">11 – 20</span>
-                <span className="font-mono text-[9px] text-white/20 tracking-widest">PAGE II</span>
+              <img
+                src={nPhoto.src}
+                alt={nPhoto.caption}
+                className="w-full h-full object-cover"
+                style={{ filter: "brightness(0.82) contrast(1.05) saturate(0.95)" }}
+              />
+              <div className="absolute inset-0" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px)", pointerEvents: "none" }} />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%)" }} />
+              <div className="absolute top-3 left-3 w-7 h-7 border-t-2 border-l-2 border-[#F3BA2F]/60" />
+              <div className="absolute top-3 right-3 w-7 h-7 border-t-2 border-r-2 border-[#F3BA2F]/60" />
+              <div className="absolute bottom-16 left-3 w-7 h-7 border-b-2 border-l-2 border-[#F3BA2F]/60" />
+              <div className="absolute bottom-16 right-3 w-7 h-7 border-b-2 border-r-2 border-[#F3BA2F]/60" />
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-sm border border-[#F3BA2F]/30">
+                <div className="w-1 h-1 rounded-full bg-[#F3BA2F]" />
+                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em]">
+                  {String(nextIdx + 1).padStart(2, "0")} / {String(GALLERY.length).padStart(2, "0")}
+                </span>
               </div>
-
-              {/* Gold spine on right for back face (mirrored) */}
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: "2px",
-                    background: "linear-gradient(to bottom, transparent, #F3BA2F55, #F3BA2F, #F3BA2F55, transparent)",
-                    zIndex: 10,
-                  }}
-                />
-                <div className="grid grid-cols-2 gap-[3px]" style={{ marginRight: "2px" }}>
-                  {PAGE_B.map((photo, i) => (
-                    <div
-                      key={i}
-                      className="relative overflow-hidden"
-                      style={{ aspectRatio: "3/4", background: "#0a0a0a" }}
-                    >
-                      <img
-                        src={photo.src}
-                        alt={photo.caption}
-                        loading="lazy"
-                        className="w-full h-full object-cover block"
-                        style={{ filter: "brightness(0.75) saturate(0.9)" }}
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.68) 0%, transparent 45%)" }}
-                      />
-                      <div className="absolute top-2 right-2 font-mono text-[9px] text-[#F3BA2F]/60">
-                        {String(i + 11).padStart(2, "0")}
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 px-2 pb-1.5">
-                        <div className="text-white/60 text-[8px] font-mono tracking-wide leading-tight line-clamp-1">
-                          {photo.caption}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="text-[#F3BA2F] font-mono text-[9px] tracking-[0.3em] mb-1">{nPhoto.year}</div>
+                <div className="text-white font-bold text-base leading-tight">{nPhoto.caption}</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Flip Controls */}
-        <div className="flex items-center justify-between mt-6">
+        {/* Controls */}
+        <div className="flex items-center justify-between mt-5">
           <button
-            onClick={() => { pauseAutoplay(); if (flipped) doFlip(); setTimeout(resumeAutoplay, 2000); }}
-            disabled={!flipped || isAnimating}
-            className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[10px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/10 disabled:opacity-20 disabled:cursor-not-allowed"
+            onClick={() => { pause(); doFlip(-1); setTimeout(resume, 2500); }}
+            disabled={flipping}
+            className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[9px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/8 disabled:opacity-20 disabled:cursor-not-allowed"
           >
-            <ChevronLeft className="w-3.5 h-3.5" />
-            Page I
+            <ChevronLeft className="w-3.5 h-3.5" /> Prev
           </button>
-          <div className="flex flex-col items-center gap-1">
-            <div className="font-mono text-[10px] text-white/20 tracking-widest">
-              {flipped ? "11–20" : "01–10"} / 20
-            </div>
-            <div className="text-[#F3BA2F]/30 font-mono text-[8px] tracking-widest">
-              {isAnimating ? "FLIPPING..." : "SWIPE TO FLIP"}
-            </div>
-          </div>
+          <span className="text-white/15 font-mono text-[8px] tracking-[0.3em] uppercase">
+            {flipping ? "flipping..." : "swipe · auto 3s"}
+          </span>
           <button
-            onClick={() => { pauseAutoplay(); if (!flipped) doFlip(); setTimeout(resumeAutoplay, 2000); }}
-            disabled={flipped || isAnimating}
-            className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[10px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/10 disabled:opacity-20 disabled:cursor-not-allowed"
+            onClick={() => { pause(); doFlip(1); setTimeout(resume, 2500); }}
+            disabled={flipping}
+            className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[9px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/8 disabled:opacity-20 disabled:cursor-not-allowed"
           >
-            Page II
-            <ChevronRight className="w-3.5 h-3.5" />
+            Next <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
-        <p className="text-center font-mono text-[9px] text-white/15 tracking-[0.3em] uppercase mt-3">
-          Auto-flips every 3s · swipe or tap buttons to flip
-        </p>
       </div>
     </section>
   );
