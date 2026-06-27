@@ -244,9 +244,9 @@ export default function Ecosystem() {
                       zIndex: 2,
                     }}>
                       <img
-                        src="/story/story-01.jpg"
+                        src="/og-logo.jpg"
                         alt="Faisal Orakzai — Founder & Chairman Orakzai Group"
-                        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+                        style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px" }}
                         onError={(e) => {
                           const t = e.target as HTMLImageElement;
                           t.src = "/logos/orakzai-group.jpg";
@@ -261,8 +261,8 @@ export default function Ecosystem() {
                     border: `1px solid rgba(243,186,47,0.25)`,
                     padding: "5px 12px",
                   }}>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: GOLD, letterSpacing: "0.25em", lineHeight: 1.5 }}>ORAKZAI</div>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: GOLD, letterSpacing: "0.25em" }}>ECOSYSTEM</div>
+                    
+                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: GOLD, letterSpacing: "0.2em", lineHeight: 1.5, textAlign: "center" }}>ORAKZAI GROUP</div>
                   </div>
                 </div>
 
@@ -381,12 +381,12 @@ export default function Ecosystem() {
                   <div style={{ position: "absolute", inset: "-7px", borderRadius: "50%", background: `conic-gradient(${GOLD}, rgba(243,186,47,0.2), ${GOLD})`, animation: "spin 8s linear infinite" }} />
                   <div style={{ position: "absolute", inset: "-3px", borderRadius: "50%", background: "#000" }} />
                   <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${GOLD}`, overflow: "hidden", boxShadow: `0 0 24px rgba(243,186,47,0.4)` }}>
-                    <img src="/story/story-01.jpg" alt="Faisal Orakzai" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+                    <img src="/og-logo.jpg" alt="Faisal Orakzai" style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px" }}
                       onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.jpg"; }} />
                   </div>
                 </div>
-                <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em", textAlign: "center" }}>ORAKZAI</div>
-                <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em", textAlign: "center" }}>ECOSYSTEM</div>
+                
+                <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em", textAlign: "center" }}>ORAKZAI GROUP</div>
               </div>
 
               {/* Live Cores — horizontal scroll row */}
