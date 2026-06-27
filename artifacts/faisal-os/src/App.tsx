@@ -19,6 +19,8 @@ import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/shared/ChatWidget";
 import GlobalSearch from "@/components/shared/GlobalSearch";
 import AnnouncementTicker from "@/components/shared/AnnouncementTicker";
+import SplashScreen from "@/components/shared/SplashScreen";
+import { useState } from "react";
 
 const queryClient = new QueryClient();
 
@@ -55,7 +57,7 @@ function Router() {
               <Route path="/" component={Home} />
               <Route path="/founder" component={Founder} />
               <Route path="/ecosystem" component={Ecosystem} />
-              <Route path="/projects" component={Projects} />
+              <Route path="/benchmarks" component={Projects} />
               <Route path="/research" component={Research} />
               <Route path="/press" component={Press} />
               <Route path="/learning" component={Learning} />
@@ -75,9 +77,12 @@ function Router() {
 }
 
 function App() {
+  const [splashDone, setSplashDone] = useState(false);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
