@@ -9,6 +9,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   import Ecosystem from "@/pages/Ecosystem";
   import Projects from "@/pages/Projects";
   import Research from "@/pages/Research";
+  import ResearchArticle from "@/pages/ResearchArticle";
   import Press from "@/pages/Press";
   import Learning from "@/pages/Learning";
   import Media from "@/pages/Media";
@@ -58,6 +59,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
                 <Route path="/founder" component={Founder} />
                 <Route path="/ecosystem" component={Ecosystem} />
                 <Route path="/benchmarks" component={Projects} />
+                <Route path="/research/:slug" component={ResearchArticle} />
                 <Route path="/research" component={Research} />
                 <Route path="/press" component={Press} />
                 <Route path="/learning" component={Learning} />
