@@ -1,137 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-          xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <urlset
+    xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="https://www.w3.org/1999/xhtml"
+    xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
 
+    <!-- HOME -->
     <url>
       <loc>https://faisalorakzai.com/</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-01.jpg</image:loc>
-        <image:title>Muhammad Faisal Orakzai — Founder Orakzai Group Pakistan</image:title>
+        <image:title>Muhammad Faisal Orakzai — Founder &amp; Chairman Orakzai Group Pakistan</image:title>
+        <image:caption>Faisal Orakzai, blockchain entrepreneur, founder of Orakzai Group and OKBOND on Polygon</image:caption>
       </image:image>
     </url>
 
+    <!-- STORY / FOUNDER PROFILE -->
     <url>
       <loc>https://faisalorakzai.com/founder</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.95</priority>
+      <priority>0.98</priority>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-01.jpg</image:loc>
-        <image:title>Muhammad Faisal Orakzai - Founder Orakzai Group, Blockchain Entrepreneur Pakistan</image:title>
+        <image:title>Muhammad Faisal Orakzai — Founder Orakzai Group, Blockchain Entrepreneur Pakistan</image:title>
+        <image:caption>Faisal Orakzai, born 30 April 2006, Orakzai Agency, Tirah, KPK. Founder of Orakzai Bond (OKBOND) on Polygon Layer-2.</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-02.jpg</image:loc>
-        <image:title>Faisal Orakzai - CEO Orakzai Group, Crypto Blockchain Innovator</image:title>
+        <image:title>Faisal Orakzai — CEO Orakzai Group, Crypto Blockchain Innovator</image:title>
+        <image:caption>Muhammad Faisal Orakzai, Pakistan youngest blockchain architect, founder OKBOND</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-03.png</image:loc>
-        <image:title>Faisal Orakzai - Orakzai Bond Founder, Polygon Blockchain Architect Pakistan</image:title>
+        <image:title>Faisal Orakzai — Orakzai Bond Founder, Polygon Blockchain Architect Pakistan</image:title>
+        <image:caption>Faisal Orakzai with OKBOND Polygon blockchain infrastructure</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-04.jpg</image:loc>
-        <image:title>Faisal Orakzai - Entrepreneur Pakistan, AI Blockchain Visionary</image:title>
+        <image:title>Faisal Orakzai — Entrepreneur Pakistan, AI Blockchain Visionary</image:title>
+        <image:caption>Muhammad Faisal Orakzai AI blockchain entrepreneur Pakistan</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-05.png</image:loc>
-        <image:title>Faisal Orakzai - GMA Silicon Valley Conference Speaker</image:title>
+        <image:title>Faisal Orakzai — GMA Silicon Valley Conference Speaker</image:title>
+        <image:caption>Faisal Orakzai speaking at GMA Silicon Valley 2025</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-06.jpg</image:loc>
-        <image:title>Muhammad Faisal Orakzai - Traditional Dress Entrepreneur Pakistan</image:title>
+        <image:title>Muhammad Faisal Orakzai — Traditional Dress, KPK Pakistan</image:title>
+        <image:caption>Faisal Orakzai in traditional Pashtun dress, Orakzai heritage</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-07.jpg</image:loc>
-        <image:title>Faisal Orakzai - Orakzai Ventures Founder Beach Pakistan</image:title>
+        <image:title>Faisal Orakzai — Orakzai Ventures Founder</image:title>
+        <image:caption>Faisal Orakzai founder Orakzai Ventures Pakistan</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-08.jpg</image:loc>
-        <image:title>Faisal Orakzai - Digital Asset Founder Rooftop Karachi Pakistan</image:title>
+        <image:title>Faisal Orakzai — Digital Asset Founder, Karachi Pakistan</image:title>
+        <image:caption>Faisal Orakzai digital asset entrepreneur Karachi Pakistan</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-09.jpg</image:loc>
-        <image:title>Faisal Orakzai - Orakzai Group Chairman Karachi Seafront</image:title>
+        <image:title>Faisal Orakzai — Orakzai Group Chairman, Karachi Seafront</image:title>
+        <image:caption>Faisal Orakzai Chairman Orakzai Group at Karachi seafront</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-10.jpg</image:loc>
-        <image:title>Faisal Orakzai - Real Estate Blockchain Pakistan, Orakzai Heritage Mountains</image:title>
+        <image:title>Faisal Orakzai — Real Estate Blockchain Pakistan, Orakzai Mountains</image:title>
+        <image:caption>Faisal Orakzai real estate blockchain Pakistan mountains heritage</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-11.jpg</image:loc>
-        <image:title>Faisal Orakzai - Orakzai Group Founder, City Karachi Background</image:title>
+        <image:title>Faisal Orakzai — Orakzai Group Founder, Karachi</image:title>
+        <image:caption>Muhammad Faisal Orakzai Orakzai Group founder Karachi city</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-12.jpg</image:loc>
-        <image:title>Faisal Orakzai - Wall Street New York, Blockchain Tokenization Global</image:title>
+        <image:title>Faisal Orakzai — Wall Street New York, Blockchain Tokenization Global</image:title>
+        <image:caption>Faisal Orakzai Wall Street New York global blockchain tokenization</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-13.jpg</image:loc>
-        <image:title>Muhammad Faisal Orakzai - Orakzai Mountains KPK Pakistan</image:title>
+        <image:title>Muhammad Faisal Orakzai — Orakzai Mountains KPK Pakistan</image:title>
+        <image:caption>Faisal Orakzai Orakzai mountains KPK Pakistan scenic heritage</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-14.jpg</image:loc>
-        <image:title>Faisal Orakzai - Young Orakzai Agency Mountains Genesis Story</image:title>
+        <image:title>Faisal Orakzai — Young Orakzai Agency Mountains Genesis</image:title>
+        <image:caption>Young Faisal Orakzai Orakzai Agency mountains early life genesis story</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-15.jpg</image:loc>
-        <image:title>Faisal Orakzai - Orakzai Vision Leading the Future Conference</image:title>
+        <image:title>Faisal Orakzai — Vision Leading the Future Conference</image:title>
+        <image:caption>Faisal Orakzai vision conference speaker leading the future</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-16.jpg</image:loc>
-        <image:title>Faisal Orakzai - Childhood Photo Orakzai Agency Pakistan Early Life</image:title>
+        <image:title>Faisal Orakzai — Childhood Photo Orakzai Agency Pakistan</image:title>
+        <image:caption>Muhammad Faisal Orakzai childhood photo Orakzai Agency KPK early life</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-17.jpg</image:loc>
-        <image:title>Faisal Orakzai - Dusseldorf Germany International Expansion</image:title>
+        <image:title>Faisal Orakzai — Dusseldorf Germany International Expansion</image:title>
+        <image:caption>Faisal Orakzai Dusseldorf Germany international business expansion</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-18.jpg</image:loc>
-        <image:title>Faisal Orakzai - Karachi Stock Exchange Pakistan Financial Innovation</image:title>
+        <image:title>Faisal Orakzai — Karachi Stock Exchange Pakistan Financial Innovation</image:title>
+        <image:caption>Faisal Orakzai Karachi Stock Exchange financial innovation Pakistan</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-19.jpg</image:loc>
-        <image:title>Faisal Orakzai - Kohat Heritage Orakzai Tribal Roots KPK</image:title>
+        <image:title>Faisal Orakzai — Kohat Heritage Orakzai Tribal Roots KPK</image:title>
+        <image:caption>Faisal Orakzai Kohat heritage Orakzai tribal roots KPK Pakistan</image:caption>
       </image:image>
       <image:image>
         <image:loc>https://faisalorakzai.com/story/story-20.jpg</image:loc>
-        <image:title>Faisal Orakzai - Early Life Karachi Entrepreneurship Journey</image:title>
+        <image:title>Faisal Orakzai — Early Life Karachi Entrepreneurship Journey</image:title>
+        <image:caption>Faisal Orakzai early life Karachi entrepreneurship journey beginning</image:caption>
       </image:image>
     </url>
 
+    <!-- ECOSYSTEM / VENTURES -->
     <url>
       <loc>https://faisalorakzai.com/ecosystem</loc>
+      <lastmod>2026-06-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.95</priority>
+      <image:image>
+        <image:loc>https://faisalorakzai.com/logos/orakzai-group.jpg</image:loc>
+        <image:title>Orakzai Group — Sovereign Ecosystem · 12 Sectors · 250 Projects</image:title>
+        <image:caption>Orakzai Group conglomerate logo — founded by Muhammad Faisal Orakzai, Pakistan</image:caption>
+      </image:image>
+      <image:image>
+        <image:loc>https://faisalorakzai.com/logos/okbond.png</image:loc>
+        <image:title>Orakzai Bond OKBOND — Polygon Layer-2 Blockchain Treasury</image:title>
+        <image:caption>OKBOND coin logo — Orakzai Bond deflationary cryptocurrency on Polygon L2</image:caption>
+      </image:image>
+      <image:image>
+        <image:loc>https://faisalorakzai.com/logos/shamim-forever.jpg</image:loc>
+        <image:title>Shamim Forever — Elite Luxury Brand with Web3 Provenance</image:title>
+        <image:caption>Shamim Forever SF logo — luxury perfumes, sapphire jewelry, cryptographic provenance</image:caption>
+      </image:image>
+      <image:image>
+        <image:loc>https://faisalorakzai.com/logos/okzbyte.png</image:loc>
+        <image:title>OkzByte Technology — AI Engineering Stack Orakzai Group</image:title>
+        <image:caption>OkzByte Technology logo — high-throughput AI and engineering infrastructure</image:caption>
+      </image:image>
+      <image:image>
+        <image:loc>https://faisalorakzai.com/logos/qorix.png</image:loc>
+        <image:title>QORIX — Autonomous Financial AI Management System</image:title>
+        <image:caption>QORIX logo — autonomous financial management AI by Orakzai Group</image:caption>
+      </image:image>
+    </url>
+
+    <!-- PROJECTS -->
+    <url>
+      <loc>https://faisalorakzai.com/projects</loc>
+      <lastmod>2026-06-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.90</priority>
+    </url>
+
+    <!-- RESEARCH -->
+    <url>
+      <loc>https://faisalorakzai.com/research</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.85</priority>
     </url>
 
+    <!-- PRESS -->
     <url>
-      <loc>https://faisalorakzai.com/projects</loc>
+      <loc>https://faisalorakzai.com/press</loc>
+      <lastmod>2026-06-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.85</priority>
+    </url>
+
+    <!-- CONTACT -->
+    <url>
+      <loc>https://faisalorakzai.com/contact</loc>
+      <lastmod>2026-06-27</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.75</priority>
+    </url>
+
+    <!-- LEARNING -->
+    <url>
+      <loc>https://faisalorakzai.com/learning</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.80</priority>
     </url>
 
+    <!-- MEDIA -->
     <url>
-      <loc>https://faisalorakzai.com/research</loc>
+      <loc>https://faisalorakzai.com/media</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.75</priority>
+      <priority>0.80</priority>
     </url>
 
-    <url>
-      <loc>https://faisalorakzai.com/press</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.75</priority>
-    </url>
-
+    <!-- INVESTMENT -->
     <url>
       <loc>https://faisalorakzai.com/investment</loc>
+      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.70</priority>
-    </url>
-
-    <url>
-      <loc>https://faisalorakzai.com/contact</loc>
-      <changefreq>yearly</changefreq>
-      <priority>0.65</priority>
+      <priority>0.85</priority>
     </url>
 
   </urlset>
