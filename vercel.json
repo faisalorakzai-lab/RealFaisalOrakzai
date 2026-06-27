@@ -1,8 +1,103 @@
 {
+  "redirects": [
+    {
+      "source": "https://www.faisalorakzai.com/(.*)",
+      "destination": "https://faisalorakzai.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/story",
+      "destination": "/founder",
+      "permanent": true
+    },
+    {
+      "source": "/ventures",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/bio",
+      "destination": "/founder",
+      "permanent": true
+    },
+    {
+      "source": "/founder-en",
+      "destination": "/founder",
+      "permanent": true
+    },
+    {
+      "source": "/bond",
+      "destination": "https://orakzaibond.com",
+      "permanent": false
+    },
+    {
+      "source": "/shamim",
+      "destination": "https://www.shamimforever.com",
+      "permanent": false
+    },
+    {
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/faisalorakzaii",
+      "permanent": false
+    },
+    {
+      "source": "/twitter",
+      "destination": "https://x.com/faisalorakzaii",
+      "permanent": false
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/faisalorakzai-lab",
+      "permanent": false
+    },
+    {
+      "source": "/wikidata",
+      "destination": "https://www.wikidata.org/wiki/Q140264666",
+      "permanent": false
+    },
+    {
+      "source": "/orcid",
+      "destination": "https://orcid.org/0009-0000-0915-7272",
+      "permanent": false
+    },
+    {
+      "source": "/crunchbase",
+      "destination": "https://www.crunchbase.com/person/faisal-orakzai",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        }
+      ]
     }
   ]
 }
