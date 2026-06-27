@@ -1,13 +1,44 @@
-User-agent: *
+# Muhammad Faisal Orakzai — faisalorakzai.com
+  # Founder & Chairman, Orakzai Group | فیصل اورکزئی
+  # Blockchain Entrepreneur, Polygon Layer-2 | Pakistan
+
+  User-agent: *
   Allow: /
-  Allow: /story/
-  Allow: /founder
 
-  # Sitemap
-  Sitemap: https://faisalorakzai.com/sitemap.xml
+  User-agent: Googlebot
+  Allow: /
+  Crawl-delay: 0
 
-  # Allow all images for Google Images indexing
   User-agent: Googlebot-Image
   Allow: /story/
+  Allow: /logos/
   Allow: /
+
+  User-agent: Bingbot
+  Allow: /
+
+  User-agent: facebookexternalhit
+  Allow: /
+
+  User-agent: Twitterbot
+  Allow: /
+
+  User-agent: LinkedInBot
+  Allow: /
+
+  Sitemap: https://faisalorakzai.com/sitemap.xml
+
+  # Key Pages — Muhammad Faisal Orakzai
+  # Home:       https://faisalorakzai.com/
+  # Founder:    https://faisalorakzai.com/founder
+  # Ecosystem:  https://faisalorakzai.com/ecosystem
+  # Projects:   https://faisalorakzai.com/projects
+  # Research:   https://faisalorakzai.com/research
+  # Press:      https://faisalorakzai.com/press
+  # Contact:    https://faisalorakzai.com/contact
+
+  # Cross-Site Network (Google Knowledge Panel)
+  # orakzaibond.com — OKBOND Polygon L2 Blockchain
+  # shamimforever.com — Luxury Web3 Brand
+  # wikidata.org/wiki/Q140264666 — Muhammad Faisal Orakzai
   
