@@ -37,6 +37,7 @@
     keywords: string;
     pdfUrl?: string;
     fullContent?: string;
+    thumbnail?: string;
     orcid?: string;
     googleScholar?: string;
     linkedin?: string;
@@ -99,6 +100,7 @@
       status: "PUBLISHED",
       authors: "Muhammad Faisal Orakzai",
       keywords: "what is blockchain, blockchain guide 2026, blockchain technology explained, how blockchain works, beginner blockchain tutorial, distributed ledger technology, smart contracts, Web3, decentralized technology, blockchain applications, future of blockchain",
+      thumbnail: "/mk/blockchain-guide.png",
       fullContent: `What is Blockchain? A Complete Beginner's Guide
 
 1: Introduction, Blockchain Basics & History
@@ -2129,6 +2131,361 @@ As the digital economy evolves, blockchain is expected to become a foundational 
     );
   }
 
+
+  // ─── Google Fonts loader ───────────────────────────────────────────────────
+  function useLuxuryFonts() {
+    useEffect(() => {
+      if (document.getElementById('luxury-fonts')) return;
+      const link = document.createElement('link');
+      link.id = 'luxury-fonts';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap';
+      document.head.appendChild(link);
+    }, []);
+  }
+
+  // ─── Article Modal ─────────────────────────────────────────────────────────
+  function ArticleModal({ entry, onClose }: { entry: Entry; onClose: () => void }) {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [progress, setProgress] = useState(0);
+    useLuxuryFonts();
+
+    useEffect(() => {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }, []);
+
+    const handleScroll = () => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+      setProgress(Math.min(100, pct));
+    };
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        style={{ position:'fixed', inset:0, zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'1rem' }}
+        onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      >
+        {/* Backdrop */}
+        <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.96)', backdropFilter:'blur(12px)' }} />
+
+        {/* Holographic glow styles */}
+        <style>{`
+          @keyframes holoSpin {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          @keyframes holoShift {
+            0%,100% { opacity: 0.6; }
+            50%      { opacity: 1; }
+          }
+          .holo-border {
+            background: linear-gradient(270deg, #F3BA2F, #00d4ff, #b44fff, #F3BA2F, #00ff88, #F3BA2F);
+            background-size: 400% 400%;
+            animation: holoSpin 6s ease infinite, holoShift 3s ease infinite;
+          }
+          .article-body h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #F3BA2F;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
+          }
+          .article-body p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 1rem;
+            font-weight: 300;
+          }
+          .article-body ul {
+            margin: 0.5rem 0 1.25rem 0;
+            padding: 0;
+            list-style: none;
+          }
+          .article-body ul li {
+            display: flex;
+            gap: 0.65rem;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.68);
+            line-height: 1.7;
+            margin-bottom: 0.4rem;
+            font-weight: 300;
+          }
+          .article-body hr {
+            border: none;
+            border-top: 1px solid rgba(243,186,47,0.12);
+            margin: 2rem 0;
+          }
+          .modal-scroll::-webkit-scrollbar { width: 4px; }
+          .modal-scroll::-webkit-scrollbar-thumb { background: rgba(243,186,47,0.2); border-radius: 2px; }
+          .modal-scroll::-webkit-scrollbar-track { background: transparent; }
+        `}</style>
+
+        {/* Modal container with holographic border */}
+        <motion.div
+          initial={{ scale:0.92, y:40 }}
+          animate={{ scale:1, y:0 }}
+          transition={{ duration:0.45, ease:[0.22,1,0.36,1] }}
+          style={{ position:'relative', width:'100%', maxWidth:'800px', maxHeight:'92vh', zIndex:10 }}
+        >
+          {/* Holographic border wrapper */}
+          <div className="holo-border" style={{ padding:'2px', borderRadius:'4px' }}>
+            <div style={{ background:'#060606', borderRadius:'3px', overflow:'hidden', display:'flex', flexDirection:'column', maxHeight:'calc(92vh - 4px)' }}>
+
+              {/* Progress bar */}
+              <div style={{ height:'2px', background:'rgba(255,255,255,0.05)', flexShrink:0 }}>
+                <div style={{ height:'100%', width:`${progress}%`, background:'linear-gradient(90deg,#F3BA2F,#00d4ff)', transition:'width 0.1s' }} />
+              </div>
+
+              {/* Hero image */}
+              {entry.thumbnail && (
+                <div style={{ position:'relative', height:'220px', flexShrink:0, overflow:'hidden' }}>
+                  <img src={entry.thumbnail} alt={entry.title} style={{ width:'100%', height:'100%', objectFit:'cover', opacity:0.7 }} />
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, #060606 0%, rgba(6,6,6,0.3) 60%, transparent 100%)' }} />
+                  {/* Holographic overlay */}
+                  <div className="holo-border" style={{ position:'absolute', inset:0, opacity:0.12, mixBlendMode:'screen' }} />
+                  {/* Grid overlay graphic */}
+                  <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(243,186,47,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(243,186,47,0.06) 1px, transparent 1px)', backgroundSize:'40px 40px', opacity:0.8 }} />
+                  <div style={{ position:'absolute', bottom:'1.5rem', left:'2rem', right:'4rem' }}>
+                    <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.3em', color:'#F3BA2F', textTransform:'uppercase', opacity:0.9 }}>
+                      MARKET KNOWLEDGE · ORAKZAI RESEARCH LAB · 2026
+                    </span>
+                    <h1 style={{ fontFamily:'"Playfair Display", Georgia, serif', fontSize:'clamp(1.4rem,3vw,2.2rem)', fontWeight:700, color:'#fff', lineHeight:1.15, marginTop:'0.4rem', textShadow:'0 2px 20px rgba(0,0,0,0.8)' }}>
+                      {entry.title}
+                    </h1>
+                  </div>
+                </div>
+              )}
+
+              {/* Modal header (no thumbnail case) */}
+              {!entry.thumbnail && (
+                <div style={{ padding:'2rem 2rem 0', flexShrink:0 }}>
+                  <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.3em', color:'#F3BA2F', textTransform:'uppercase' }}>
+                    MARKET KNOWLEDGE · ORAKZAI RESEARCH LAB
+                  </span>
+                  <h1 style={{ fontFamily:'"Playfair Display", Georgia, serif', fontSize:'clamp(1.4rem,3vw,2rem)', fontWeight:700, color:'#fff', lineHeight:1.2, marginTop:'0.5rem' }}>
+                    {entry.title}
+                  </h1>
+                </div>
+              )}
+
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                style={{ position:'absolute', top:'0.75rem', right:'0.75rem', background:'rgba(0,0,0,0.6)', border:'1px solid rgba(243,186,47,0.3)', color:'rgba(255,255,255,0.7)', width:'2rem', height:'2rem', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'14px', cursor:'pointer', borderRadius:'2px', zIndex:20, backdropFilter:'blur(4px)' }}
+                aria-label="Close article"
+              >
+                ✕
+              </button>
+
+              {/* Subtitle + meta */}
+              <div style={{ padding:'1.25rem 2rem 0', borderBottom:'1px solid rgba(243,186,47,0.1)', flexShrink:0 }}>
+                {entry.subtitle && (
+                  <p style={{ fontFamily:'"Cormorant Garamond", Georgia, serif', fontSize:'1rem', fontStyle:'italic', color:'rgba(243,186,47,0.8)', marginBottom:'0.75rem', fontWeight:300 }}>
+                    {entry.subtitle}
+                  </p>
+                )}
+                <div style={{ display:'flex', gap:'1.5rem', paddingBottom:'1rem', flexWrap:'wrap' }}>
+                  <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.2em', color:'rgba(255,255,255,0.4)', textTransform:'uppercase' }}>
+                    BY {entry.authors}
+                  </span>
+                  <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.2em', color:'rgba(255,255,255,0.4)', textTransform:'uppercase' }}>
+                    {entry.year}
+                  </span>
+                  <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.2em', color:'#F3BA2F', textTransform:'uppercase' }}>
+                    ● {entry.status}
+                  </span>
+                </div>
+              </div>
+
+              {/* Scrollable article body */}
+              <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className="modal-scroll"
+                style={{ overflowY:'auto', flex:1, padding:'1.75rem 2rem 2.5rem' }}
+              >
+                <div className="article-body">
+                  {entry.fullContent ? (
+                    <ArticleRenderer content={entry.fullContent} />
+                  ) : (
+                    <p style={{ fontFamily:'"Cormorant Garamond", Georgia, serif', fontSize:'1.1rem', color:'rgba(255,255,255,0.7)', lineHeight:1.8 }}>
+                      {entry.abstract}
+                    </p>
+                  )}
+                </div>
+
+                {/* Tags footer */}
+                {entry.tags && (
+                  <div style={{ marginTop:'2.5rem', paddingTop:'1.5rem', borderTop:'1px solid rgba(243,186,47,0.1)', display:'flex', flexWrap:'wrap', gap:'0.5rem' }}>
+                    {entry.tags.map(t => (
+                      <span key={t} style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.18em', color:'rgba(243,186,47,0.6)', textTransform:'uppercase', border:'1px solid rgba(243,186,47,0.15)', padding:'0.3rem 0.65rem' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  // ─── Article text renderer ─────────────────────────────────────────────────
+  function ArticleRenderer({ content }: { content: string }) {
+    const lines = content.split('\n');
+    const elements: React.ReactNode[] = [];
+    let listItems: string[] = [];
+    let k = 0;
+
+    const flushList = () => {
+      if (listItems.length === 0) return;
+      elements.push(
+        <ul key={k++}>
+          {listItems.map((item, idx) => (
+            <li key={idx}>
+              <span style={{ color:'#F3BA2F', flexShrink:0 }}>▸</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+      listItems = [];
+    };
+
+    for (let j = 0; j < lines.length; j++) {
+      const line = lines[j];
+      if (line.startsWith('- ')) { listItems.push(line.slice(2)); continue; }
+      flushList();
+      if (line === '---') {
+        elements.push(<hr key={k++} />);
+      } else if (line.trim() === '') {
+        // skip
+      } else {
+        const trimmed = line.trim();
+        const prevBlank = j === 0 || lines[j-1].trim() === '' || lines[j-1] === '---';
+        const nextBlank = j === lines.length-1 || lines[j+1].trim() === '' || lines[j+1] === '---' || lines[j+1].startsWith('- ');
+        const isShort = trimmed.length <= 90;
+        const isHeading = isShort && prevBlank && !trimmed.endsWith(',') && !trimmed.endsWith(';');
+        if (isHeading && nextBlank) {
+          elements.push(<h3 key={k++}>{trimmed}</h3>);
+        } else {
+          elements.push(<p key={k++}>{trimmed}</p>);
+        }
+      }
+    }
+    flushList();
+    return <>{elements}</>;
+  }
+
+  // ─── Magazine Card (MARKET KNOWLEDGE) ─────────────────────────────────────
+  function MagazineCard({ entry, i }: { entry: Entry; i: number }) {
+    const [open, setOpen] = useState(false);
+    const [hov, setHov] = useState(false);
+    const isFeatured = !!entry.thumbnail;
+    useLuxuryFonts();
+
+    // Fallback abstract blockchain grid for cards without thumbnail
+    const AbstractBg = () => (
+      <div style={{ width:'100%', height:'100%', background:'linear-gradient(135deg,#0a0a0a 0%,#0d1117 40%,#0a0800 100%)', position:'relative', overflow:'hidden' }}>
+        <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(243,186,47,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(243,186,47,0.07) 1px, transparent 1px)', backgroundSize:'28px 28px' }} />
+        <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <div style={{ width:'80px', height:'80px', border:'1px solid rgba(243,186,47,0.15)', transform:'rotate(45deg)', position:'relative' }}>
+            <div style={{ position:'absolute', inset:'20%', border:'1px solid rgba(243,186,47,0.2)' }} />
+            <div style={{ position:'absolute', inset:'40%', background:'rgba(243,186,47,0.15)' }} />
+          </div>
+        </div>
+        <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at 50% 80%, rgba(243,186,47,0.06) 0%, transparent 70%)' }} />
+      </div>
+    );
+
+    return (
+      <>
+        <motion.article
+          id={entry.id}
+          initial={{ opacity:0, y:40 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:0.7, delay: i * 0.12, ease:[0.22,1,0.36,1] }}
+          onHoverStart={() => setHov(true)}
+          onHoverEnd={() => setHov(false)}
+          onClick={() => setOpen(true)}
+          style={{
+            gridColumn: isFeatured ? '1 / -1' : 'span 1',
+            position:'relative', cursor:'pointer', overflow:'hidden',
+            border: hov ? '1px solid rgba(243,186,47,0.5)' : '1px solid rgba(243,186,47,0.12)',
+            transition:'border-color 0.35s',
+            boxShadow: hov ? '0 0 40px rgba(243,186,47,0.07)' : 'none',
+          }}
+        >
+          {/* Image */}
+          <div style={{ position:'relative', height: isFeatured ? '480px' : '280px', overflow:'hidden' }}>
+            {entry.thumbnail ? (
+              <motion.img
+                src={entry.thumbnail}
+                alt={entry.title}
+                animate={{ scale: hov ? 1.05 : 1 }}
+                transition={{ duration:0.7 }}
+                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+              />
+            ) : (
+              <AbstractBg />
+            )}
+            {/* Gradient overlay */}
+            <div style={{ position:'absolute', inset:0, background: isFeatured
+              ? 'linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.08) 100%)'
+              : 'linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.1) 100%)'
+            }} />
+            {/* Gold shimmer on hover */}
+            {hov && (
+              <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, transparent 30%, rgba(243,186,47,0.04) 50%, transparent 70%)', pointerEvents:'none' }} />
+            )}
+          </div>
+
+          {/* Card content overlay */}
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, padding: isFeatured ? '2.5rem 2rem' : '1.5rem 1.25rem' }}>
+            <span style={{ fontFamily:'monospace', fontSize:'9px', letterSpacing:'0.28em', color:'#F3BA2F', textTransform:'uppercase', display:'block', marginBottom:'0.6rem', opacity:0.9 }}>
+              {entry.category}
+            </span>
+            <h2 style={{ fontFamily:'"Playfair Display", Georgia, serif', fontSize: isFeatured ? 'clamp(1.6rem,3.5vw,2.4rem)' : 'clamp(1.1rem,2.5vw,1.45rem)', fontWeight:700, color:'#fff', lineHeight:1.18, marginBottom:'0.75rem' }}>
+              {entry.title}
+            </h2>
+            {entry.subtitle && isFeatured && (
+              <p style={{ fontFamily:'"Cormorant Garamond", Georgia, serif', fontSize:'1rem', color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:'1rem', fontStyle:'italic', fontWeight:300 }}>
+                {entry.subtitle}
+              </p>
+            )}
+            <p style={{ fontFamily:'"Cormorant Garamond", Georgia, serif', fontSize: isFeatured ? '1rem' : '0.9rem', color:'rgba(255,255,255,0.5)', lineHeight:1.65, marginBottom:'1.25rem', display:'-webkit-box', WebkitLineClamp: isFeatured ? 3 : 2, WebkitBoxOrient:'vertical', overflow:'hidden', fontWeight:300 }}>
+              {entry.abstract}
+            </p>
+            <motion.span
+              animate={{ x: hov ? 6 : 0 }}
+              transition={{ duration:0.25 }}
+              style={{ fontFamily:'monospace', fontSize:'10px', letterSpacing:'0.22em', color:'#F3BA2F', textTransform:'uppercase', display:'inline-flex', alignItems:'center', gap:'0.5rem' }}
+            >
+              READ ARTICLE <span style={{ fontSize:'13px' }}>→</span>
+            </motion.span>
+          </div>
+        </motion.article>
+
+        {/* Article modal */}
+        {open && <ArticleModal entry={entry} onClose={() => setOpen(false)} />}
+      </>
+    );
+  }
+
   function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
     const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -2139,6 +2496,7 @@ As the digital economy evolves, blockchain is expected to become a foundational 
       <motion.article
         ref={ref}
         id={entry.id}
+        style={{ gridColumn: "1 / -1" }}
         initial={{ opacity: 0, y: 28 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
@@ -2578,7 +2936,7 @@ As the digital economy evolves, blockchain is expected to become a foundational 
 
         {/* ââ ENTRIES ââ */}
         <main className="py-8 pb-24 relative z-10" role="tabpanel" aria-label={active}>
-          <div className="max-w-5xl mx-auto px-5 space-y-4">
+          <div className="max-w-5xl mx-auto px-5" style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:"1.25rem", alignItems:"start" }}>
             {filtered.length === 0 && (
               <p role="status" className="text-center py-20 font-mono text-sm tracking-[0.4em] text-white/20 uppercase">
                 No entries in this category
@@ -2587,6 +2945,7 @@ As the digital economy evolves, blockchain is expected to become a foundational 
             {filtered.map((entry, i) => {
               if (entry.category === "CRYPTOGRAPHIC WHITE PAPERS") return <WhitePaperCard key={entry.id} entry={entry} i={i} />;
               if (entry.category === "PRODUCTION CODE")             return <RepoCard       key={entry.id} entry={entry} i={i} />;
+              if (entry.category === "MARKET KNOWLEDGE")            return <MagazineCard   key={entry.id} entry={entry} i={i} />;
               return                                                        <ResearchCard   key={entry.id} entry={entry} i={i} />;
             })}
           </div>
