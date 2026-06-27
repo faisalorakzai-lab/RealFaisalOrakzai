@@ -26,6 +26,7 @@ import type {
   ChatReply,
   Company,
   ContactInput,
+  ContactStats,
   ContactSubmission,
   DashboardSummary,
   GlobalSearchParams,
@@ -1305,7 +1306,50 @@ export const useSubmitContact = <TError = ErrorType<unknown>,
       return useMutation(getSubmitContactMutationOptions(options));
     }
 
-export const getAiChatUrl = () => {
+export const getAiC
+
+  export const getGetContactStatsUrl = () => {
+    return `/api/contact/stats`;
+  }
+
+  /**
+   * @summary Get total transmitted packets count
+   */
+  export const getContactStats = async ( options?: RequestInit): Promise<ContactStats> => {
+    return customFetch<ContactStats>(getGetContactStatsUrl(), {
+      ...options,
+      method: 'GET',
+    });
+  }
+
+  export const getGetContactStatsQueryKey = () => {
+    return ['/api/contact/stats'] as const;
+  }
+
+  export const getGetContactStatsQueryOptions = <TData = Awaited<ReturnType<typeof getContactStats>>, TError = ErrorType<unknown>>(
+    options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getContactStats>>, TError, TData>, request?: SecondParameter<typeof customFetch> }
+  ) => {
+    const { query: queryOptions, request: requestOptions } = options ?? {};
+    const queryKey = queryOptions?.queryKey ?? getGetContactStatsQueryKey();
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getContactStats>>> = ({ signal }) => getContactStats({ signal, ...requestOptions });
+    return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<Awaited<ReturnType<typeof getContactStats>>, TError, TData> & { queryKey: QueryKey }
+  }
+
+  export type GetContactStatsQueryResult = NonNullable<Awaited<ReturnType<typeof getContactStats>>>
+  export type GetContactStatsQueryError = ErrorType<unknown>
+
+  /**
+   * @summary Get total transmitted packets count
+   */
+  export function useGetContactStats<TData = Awaited<ReturnType<typeof getContactStats>>, TError = ErrorType<unknown>>(
+    options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getContactStats>>, TError, TData>, request?: SecondParameter<typeof customFetch> }
+  ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+    const queryOptions = getGetContactStatsQueryOptions(options);
+    const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+    return withQueryKey(query, queryOptions.queryKey);
+  }
+
+  
 
 
 
