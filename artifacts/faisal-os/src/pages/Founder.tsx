@@ -143,12 +143,6 @@ export default function Founder() {
       }
       setTimeout(() => setBookPaused(false), 3000);
     };
-    const dy = e.changedTouches[0].clientY - touchStartY.current;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      if (dx < 0) nextBook(); else prevBook();
-    }
-    setTimeout(() => setBookPaused(false), 3000);
-  };
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -335,7 +329,7 @@ export default function Founder() {
                   {/* 7-photo grid */}
                   <div className="grid grid-cols-2 gap-[2px] p-[2px]">
                     {PAGE_RIGHT.map((photo, i) => {
-                      const globalIdx = 7 + i;
+                      const globalIdx = 10 + i;
                       const isActive = bookHighlight === globalIdx;
                       return (
                         <div
