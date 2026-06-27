@@ -1,0 +1,22 @@
+{
+  "name": "Faisal Orakzai — فیصل اورکزئی",
+  "short_name": "Faisal Orakzai",
+  "description": "Muhammad Faisal Orakzai — Founder & Chairman, Orakzai Group. Blockchain entrepreneur from Orakzai Agency KPK, Pakistan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F3BA2F",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
