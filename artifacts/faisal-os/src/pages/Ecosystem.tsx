@@ -26,8 +26,8 @@ const LIVE_CORES = [
     angle: 45,
   },
   {
-    id: "okzbyte", name: "OkzByte Dev", ticker: "OKZDEV",
-    logo: "/logos/okzbyte.png", url: null,
+    id: "okzbyte", name: "OkzByte Technology", ticker: "OKZDEV",
+    logo: "/logos/okzbyte.png", url: "https://github.com/faisalorakzai-lab",
     tag: "ENGINEERING · AI", status: "ACTIVE", statusColor: GOLD,
     desc: "High-throughput technical stack & engineering engine powering the entire Orakzai infrastructure.",
     angle: 135,
@@ -210,29 +210,60 @@ export default function Ecosystem() {
                   })}
                 </svg>
 
-                {/* Center node — Orakzai Group logo */}
-                <div style={{
-                  position: "absolute",
-                  left: "50%", top: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: "104px", height: "104px",
-                  borderRadius: "50%",
-                  border: `2px solid ${GOLD}`,
-                  boxShadow: `0 0 32px rgba(243,186,47,0.4), 0 0 80px rgba(243,186,47,0.12)`,
-                  overflow: "hidden",
-                  background: "#000",
-                  zIndex: 10,
-                }}>
-                  <img src="/logos/orakzai-group.jpg" alt="Orakzai Group"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    onError={(e) => {
-                      const t = e.target as HTMLImageElement;
-                      t.style.display = "none";
-                      const p = t.parentElement!;
-                      p.style.background = "#111";
-                      p.innerHTML = `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:22px;font-weight:800;color:#F3BA2F;">OG</span><span style="font-size:7px;color:rgba(243,186,47,0.5);letter-spacing:0.15em;margin-top:4px;">GROUP</span></div>`;
-                    }}
-                  />
+                {/* Center node — Faisal Photo + LinkedIn link */}
+                <div
+                  onClick={() => window.open("https://www.linkedin.com/company/orakzaigroup/", "_blank")}
+                  style={{
+                    position: "absolute",
+                    left: "50%", top: "50%",
+                    transform: "translate(-50%, -65%)",
+                    display: "flex", flexDirection: "column", alignItems: "center",
+                    cursor: "pointer", zIndex: 10,
+                  }}
+                >
+                  {/* Outer glow ring */}
+                  <div style={{
+                    position: "relative",
+                    width: "110px", height: "110px",
+                  }}>
+                    <div style={{
+                      position: "absolute", inset: "-8px", borderRadius: "50%",
+                      background: `conic-gradient(${GOLD}, rgba(243,186,47,0.2), ${GOLD})`,
+                      animation: "spin 8s linear infinite",
+                    }} />
+                    <div style={{
+                      position: "absolute", inset: "-4px", borderRadius: "50%",
+                      background: "#000",
+                    }} />
+                    <div style={{
+                      position: "absolute", inset: 0, borderRadius: "50%",
+                      border: `2px solid ${GOLD}`,
+                      boxShadow: `0 0 28px rgba(243,186,47,0.5), 0 0 60px rgba(243,186,47,0.15)`,
+                      overflow: "hidden",
+                      background: "#111",
+                      zIndex: 2,
+                    }}>
+                      <img
+                        src="/story/story-01.jpg"
+                        alt="Faisal Orakzai — Founder & Chairman Orakzai Group"
+                        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+                        onError={(e) => {
+                          const t = e.target as HTMLImageElement;
+                          t.src = "/logos/orakzai-group.jpg";
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {/* Label below */}
+                  <div style={{
+                    marginTop: "8px", textAlign: "center",
+                    background: "rgba(0,0,0,0.85)",
+                    border: `1px solid rgba(243,186,47,0.25)`,
+                    padding: "5px 12px",
+                  }}>
+                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: GOLD, letterSpacing: "0.25em", lineHeight: 1.5 }}>ORAKZAI</div>
+                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: GOLD, letterSpacing: "0.25em" }}>ECOSYSTEM</div>
+                  </div>
                 </div>
 
                 {/* Live Core nodes — inner orbit */}
@@ -341,17 +372,21 @@ export default function Ecosystem() {
           {/* ── Mobile: flat grid ── */}
           {isMobile && (
             <div>
-              {/* Center logo */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "32px" }}>
-                <div style={{
-                  width: "96px", height: "96px", borderRadius: "50%",
-                  border: `2px solid ${GOLD}`,
-                  boxShadow: `0 0 28px rgba(243,186,47,0.3)`,
-                  overflow: "hidden", background: "#000", marginBottom: "12px",
-                }}>
-                  <img src="/logos/orakzai-group.jpg" alt="Orakzai Group" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              {/* Center — Faisal photo + LinkedIn */}
+              <div
+                onClick={() => window.open("https://www.linkedin.com/company/orakzaigroup/", "_blank")}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "32px", cursor: "pointer" }}
+              >
+                <div style={{ position: "relative", width: "100px", height: "100px", marginBottom: "10px" }}>
+                  <div style={{ position: "absolute", inset: "-7px", borderRadius: "50%", background: `conic-gradient(${GOLD}, rgba(243,186,47,0.2), ${GOLD})`, animation: "spin 8s linear infinite" }} />
+                  <div style={{ position: "absolute", inset: "-3px", borderRadius: "50%", background: "#000" }} />
+                  <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${GOLD}`, overflow: "hidden", boxShadow: `0 0 24px rgba(243,186,47,0.4)` }}>
+                    <img src="/story/story-01.jpg" alt="Faisal Orakzai" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+                      onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.jpg"; }} />
+                  </div>
                 </div>
-                <div style={{ fontFamily: "monospace", fontSize: "10px", color: GOLD, letterSpacing: "0.25em" }}>ORAKZAI GROUP</div>
+                <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em", textAlign: "center" }}>ORAKZAI</div>
+                <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em", textAlign: "center" }}>ECOSYSTEM</div>
               </div>
 
               {/* Live Cores — horizontal scroll row */}
@@ -558,6 +593,7 @@ export default function Ecosystem() {
       <style>{`
         @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
         @keyframes ring-pulse { 0%{opacity:0.8;transform:translate(-50%,-50%) scale(1)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)} }
+        @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
       `}</style>
     </div>
   );
