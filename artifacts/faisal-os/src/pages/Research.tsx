@@ -7,7 +7,7 @@
   import { motion, useInView } from "framer-motion";
   import { useEffect, useRef, useState } from "react";
 
-  // ─── Types ────────────────────────────────────────────────────────────────────
+  // âââ Types ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   type Category =
     | "MARKET KNOWLEDGE"
     | "ARTIFACTS & BLUEPRINTS"
@@ -41,11 +41,11 @@
     hackernoon?: string;
   }
 
-  // Author profile links (global — same person all papers)
+  // Author profile links (global â same person all papers)
   const AUTHOR_LINKS = {
-    orcid:         "https://orcid.org/0009-0003-4582-1927",
+    orcid:         "https://orcid.org/0009-0000-0915-7272",
     googleScholar: "https://scholar.google.com/citations?user=faisalorakzai",
-    linkedin:      "https://www.linkedin.com/in/faisalorakzai",
+    linkedin:      "https://www.linkedin.com/in/faisalorakzaii",
     hackernoon:    "https://hackernoon.com/u/faisalorakzai",
     github:        "https://github.com/faisalorakzai-lab",
   };
@@ -54,9 +54,9 @@
   const CV_URL = "https://drive.google.com/uc?export=download&id=1X1NT-UZzeyqacmjJo2HoAkYE9mUxad-x";
   const CV_VIEW_URL = "https://drive.google.com/file/d/1X1NT-UZzeyqacmjJo2HoAkYE9mUxad-x/view";
 
-  // ─── Dataset ──────────────────────────────────────────────────────────────────
+  // âââ Dataset ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   const ENTRIES: Entry[] = [
-    // ── MARKET KNOWLEDGE ──────────────────────────────────────────────────────
+    // ââ MARKET KNOWLEDGE ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
     {
       id: "mk-01",
       category: "MARKET KNOWLEDGE",
@@ -84,7 +84,7 @@
       keywords: "real-world asset tokenization, RWA, DeFi, institutional finance, oracle systems",
     },
 
-    // ── ARTIFACTS & BLUEPRINTS ─────────────────────────────────────────────────
+    // ââ ARTIFACTS & BLUEPRINTS âââââââââââââââââââââââââââââââââââââââââââââââââ
     {
       id: "ab-01",
       category: "ARTIFACTS & BLUEPRINTS",
@@ -112,12 +112,12 @@
       keywords: "OKBOND, tokenized debt, EVM, sovereign bond, blockchain protocol, DeFi",
     },
 
-    // ── CRYPTOGRAPHIC WHITE PAPERS ─────────────────────────────────────────────
+    // ââ CRYPTOGRAPHIC WHITE PAPERS âââââââââââââââââââââââââââââââââââââââââââââ
     {
       id: "wp-01",
       category: "CRYPTOGRAPHIC WHITE PAPERS",
       year: "2024",
-      title: "Orakzai Bond — Sovereign Tokenized Debt Instrument White Paper",
+      title: "Orakzai Bond â Sovereign Tokenized Debt Instrument White Paper",
       subtitle: "OKBOND Protocol: Full Issuance, Governance & Redemption Framework",
       abstract:
         "Comprehensive white paper for the Orakzai Bond (OKBOND) sovereign tokenized debt instrument. Covers on-chain issuance mechanics, coupon distribution, redemption pathways, governance voting modules, and regulatory compliance mapping for emerging-market capital corridors. Designed for institutional-grade deployment on EVM-compatible infrastructure with full legal boundary documentation.",
@@ -135,7 +135,7 @@
       id: "wp-02",
       category: "CRYPTOGRAPHIC WHITE PAPERS",
       year: "2024",
-      title: "Orakzai Bond Technical Architecture — Protocol Layer Specification",
+      title: "Orakzai Bond Technical Architecture â Protocol Layer Specification",
       subtitle: "Smart Contract Architecture, Escrow Models & Oracle Integration",
       abstract:
         "Technical specification document for the Orakzai Bond protocol layer. Details Solidity smart contract architecture, multi-sig escrow models, oracle price-feed integration, and settlement finality guarantees. Covers security audit checkpoints, formal verification methodology, and deployment pipeline for EVM-compatible chains including Ethereum and Polygon.",
@@ -167,7 +167,7 @@
       id: "wp-04",
       category: "CRYPTOGRAPHIC WHITE PAPERS",
       year: "2024",
-      title: "Orakzai Properties — Real Estate Tokenization White Paper",
+      title: "Orakzai Properties â Real Estate Tokenization White Paper",
       subtitle: "Fractional RWA Protocol for Physical Property On-Chain Settlement",
       abstract:
         "White paper presenting the Orakzai Properties tokenization framework for fractional real estate ownership on blockchain infrastructure. Covers property title digitization, fractional token issuance mechanics, on-chain rental yield distribution, secondary market liquidity provisioning, and regulatory compliance mapping for Pakistani and cross-border real estate markets.",
@@ -218,12 +218,12 @@
       keywords: "AI trust, formal verification, inference accountability, QORIX, cryptographic audit",
     },
 
-    // ── PRODUCTION CODE ────────────────────────────────────────────────────────
+    // ââ PRODUCTION CODE ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
     {
       id: "pc-01",
       category: "PRODUCTION CODE",
       year: "2024",
-      title: "RealFaisalOrakzai — Sovereign Portfolio OS",
+      title: "RealFaisalOrakzai â Sovereign Portfolio OS",
       subtitle: "Personal Founder OS: Full-Stack React + Express + PostgreSQL",
       abstract:
         "The primary sovereign portfolio operating system for Muhammad Faisal Orakzai. Full-stack React + Vite frontend with Express 5 API backend, Drizzle ORM, PostgreSQL, and Vercel deployment. Integrates research repository, venture tracking, press archive, timeline, and global search across all Orakzai ecosystem data.",
@@ -234,8 +234,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "POSTGRES · ACTIVE",
+      deploy: "VERCEL Â· LIVE",
+      db: "POSTGRES Â· ACTIVE",
       status: "ACTIVE",
       authors: "Muhammad Faisal Orakzai",
       keywords: "Faisal Orakzai portfolio, founder OS, React, Express, PostgreSQL, Vercel",
@@ -245,7 +245,7 @@
       category: "PRODUCTION CODE",
       year: "2024",
       title: "Orakzai Bond Website",
-      subtitle: "Sovereign Bond Protocol — Public Landing & Investor Interface",
+      subtitle: "Sovereign Bond Protocol â Public Landing & Investor Interface",
       abstract:
         "Official web presence for the Orakzai Bond (OKBOND) sovereign tokenized debt protocol. Features investor-facing documentation portal, bond issuance timeline, tokenomics dashboard, and regulatory compliance documentation. Built for institutional-grade trust with full SEO and schema markup for global financial indexing.",
       tags: [],
@@ -255,8 +255,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "STATIC · CDN",
+      deploy: "VERCEL Â· LIVE",
+      db: "STATIC Â· CDN",
       status: "ACTIVE",
       authors: "Muhammad Faisal Orakzai",
       keywords: "Orakzai Bond website, OKBOND, tokenized debt portal, blockchain bond Pakistan",
@@ -265,7 +265,7 @@
       id: "pc-03",
       category: "PRODUCTION CODE",
       year: "2024",
-      title: "AdamOrakzaiX — Sovereign DeFi Execution Engine",
+      title: "AdamOrakzaiX â Sovereign DeFi Execution Engine",
       subtitle: "Cross-Chain Liquidity Protocol & Autonomous Execution Layer",
       abstract:
         "Core execution engine for the AdamX sovereign DeFi protocol. Manages on-chain state transitions, liquidity routing, and cross-chain message passing with embedded compliance rule validation and real-time settlement confirmation. Targets sub-second finality across EVM-compatible chains.",
@@ -276,8 +276,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "ON-CHAIN · ACTIVE",
+      deploy: "VERCEL Â· LIVE",
+      db: "ON-CHAIN Â· ACTIVE",
       status: "BUILDING",
       authors: "Muhammad Faisal Orakzai",
       keywords: "AdamX DeFi, cross-chain liquidity, Solidity protocol, sovereign DeFi, Orakzai",
@@ -297,8 +297,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "POSTGRES · ACTIVE",
+      deploy: "VERCEL Â· LIVE",
+      db: "POSTGRES Â· ACTIVE",
       status: "ACTIVE",
       authors: "Muhammad Faisal Orakzai",
       keywords: "Orakzai Properties, real estate tokenization platform, fractional property, RWA Pakistan",
@@ -307,7 +307,7 @@
       id: "pc-05",
       category: "PRODUCTION CODE",
       year: "2024",
-      title: "Orakzai DeFi Exchange — Decentralized Trading Protocol",
+      title: "Orakzai DeFi Exchange â Decentralized Trading Protocol",
       subtitle: "Sovereign AMM & Cross-Border Settlement Engine",
       abstract:
         "Decentralized exchange protocol for the Orakzai ecosystem. Implements automated market-making (AMM), cross-border asset settlement, and sovereign liquidity pool management. Features embedded compliance hooks for jurisdiction-specific trade restrictions and real-time oracle price feeds for RWA-backed trading pairs.",
@@ -318,8 +318,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "ON-CHAIN · ACTIVE",
+      deploy: "VERCEL Â· LIVE",
+      db: "ON-CHAIN Â· ACTIVE",
       status: "BUILDING",
       authors: "Muhammad Faisal Orakzai",
       keywords: "Orakzai DeFi exchange, decentralized trading, AMM protocol, sovereign liquidity, blockchain Pakistan",
@@ -328,7 +328,7 @@
       id: "pc-06",
       category: "PRODUCTION CODE",
       year: "2024",
-      title: "PSC StockChain — Tokenized Securities Protocol",
+      title: "PSC StockChain â Tokenized Securities Protocol",
       subtitle: "Pakistan Stock Exchange On-Chain Settlement Infrastructure",
       abstract:
         "Blockchain settlement infrastructure for Pakistan Securities Commission (PSC) compatible tokenized equity. Maps traditional equity instruments to on-chain representations with full audit trail, regulatory reporting automation, and real-time settlement finality. Designed for institutional-grade compliance with PSX trading protocols.",
@@ -339,8 +339,8 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "VERCEL · LIVE",
-      db: "POSTGRES · ACTIVE",
+      deploy: "VERCEL Â· LIVE",
+      db: "POSTGRES Â· ACTIVE",
       status: "BUILDING",
       authors: "Muhammad Faisal Orakzai",
       keywords: "PSC StockChain, Pakistan Stock Exchange, tokenized securities, blockchain equity, PSX settlement",
@@ -349,7 +349,7 @@
       id: "pc-07",
       category: "PRODUCTION CODE",
       year: "2024",
-      title: "faisalorakzai-lab — GitHub Organization Hub",
+      title: "faisalorakzai-lab â GitHub Organization Hub",
       subtitle: "Sovereign Open-Source Organization: All Public Repositories",
       abstract:
         "GitHub organization hub for the Orakzai lab ecosystem. Contains all open-source repositories across DeFi protocols, real estate tokenization, AI systems, blockchain infrastructure, and venture platform code. Public entry point for developers, researchers, and institutional partners to access Orakzai ecosystem codebases.",
@@ -360,7 +360,7 @@
       commits: "Active",
       stars: "Public",
       branch: "main",
-      deploy: "GITHUB · PUBLIC",
+      deploy: "GITHUB Â· PUBLIC",
       db: "MULTI-REPO",
       status: "ACTIVE",
       authors: "Muhammad Faisal Orakzai",
@@ -377,11 +377,11 @@
   ] as const;
   type Filter = typeof FILTERS[number];
 
-  // ─── SEO: Dublin Core + Citation per-paper + JSON-LD ──────────────────────────
+  // âââ SEO: Dublin Core + Citation per-paper + JSON-LD ââââââââââââââââââââââââââ
   function useSEO(active: Filter) {
     useEffect(() => {
       const prevTitle = document.title;
-      document.title = "Central Knowledge Repository — Muhammad Faisal Orakzai";
+      document.title = "Central Knowledge Repository â Muhammad Faisal Orakzai";
 
       // Dublin Core link (schema declaration)
       let dcLink = document.querySelector<HTMLLinkElement>("link[rel='schema.DC']");
@@ -393,11 +393,11 @@
       }
 
       const metaMap: Array<{ name?: string; property?: string; content: string }> = [
-        { name: "description",            content: "Central Knowledge Repository of Muhammad Faisal Orakzai — blockchain engineering, AI systems, cryptographic white papers, RWA tokenization, real estate tokenization, and sovereign protocol architecture. Published works indexed on Google Scholar, ORCID, and global academic repositories." },
+        { name: "description",            content: "Central Knowledge Repository of Muhammad Faisal Orakzai â blockchain engineering, AI systems, cryptographic white papers, RWA tokenization, real estate tokenization, and sovereign protocol architecture. Published works indexed on Google Scholar, ORCID, and global academic repositories." },
         { name: "keywords",               content: "Faisal Orakzai, blockchain research, RWA tokenization, cryptographic protocols, QORIX AI, OkzByte, AdamX, OrakzaiX, DeFi, zero-knowledge proofs, fintech Pakistan, Orakzai Bond, Orakzai Properties, real estate tokenization, PSC StockChain" },
         { name: "robots",                 content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" },
         { name: "author",                 content: "Muhammad Faisal Orakzai" },
-        { name: "DC.title",               content: "Central Knowledge Repository — Faisal Orakzai" },
+        { name: "DC.title",               content: "Central Knowledge Repository â Faisal Orakzai" },
         { name: "DC.creator",             content: "Orakzai, Muhammad Faisal" },
         { name: "DC.subject",             content: "Blockchain Engineering; Cryptographic Protocols; AI Systems; RWA Tokenization; DeFi Architecture; Real Estate Tokenization; Sovereign Debt Instruments" },
         { name: "DC.description",         content: "Sovereign research hub: cryptographic white papers, RWA blueprints, AI systems, and live production repositories by Muhammad Faisal Orakzai." },
@@ -409,12 +409,12 @@
         { name: "DC.language",            content: "en" },
         { name: "DC.coverage",            content: "Global" },
         { name: "DC.rights",              content: "All rights reserved. Muhammad Faisal Orakzai, Orakzai Research Lab." },
-        { property: "og:title",           content: "Central Knowledge Repository — Faisal Orakzai" },
+        { property: "og:title",           content: "Central Knowledge Repository â Faisal Orakzai" },
         { property: "og:description",     content: "Sovereign research hub: cryptographic white papers, real estate tokenization, Orakzai Bond protocol, AI systems, and live production repositories." },
         { property: "og:type",            content: "website" },
         { property: "og:url",             content: "https://faisalorakzai.com/research" },
         { name: "twitter:card",           content: "summary_large_image" },
-        { name: "twitter:title",          content: "Central Knowledge Repository — Faisal Orakzai" },
+        { name: "twitter:title",          content: "Central Knowledge Repository â Faisal Orakzai" },
       ];
 
       // Per-paper Google Scholar citation tags
@@ -471,9 +471,9 @@
           jobTitle: "Founder & Chairman",
           affiliation: { "@type": "Organization", name: "Orakzai Research Lab" },
           sameAs: [
-            "https://www.linkedin.com/in/faisalorakzai",
+            "https://www.linkedin.com/in/faisalorakzaii",
             "https://github.com/faisalorakzai-lab",
-            "https://orcid.org/0009-0003-4582-1927",
+            "https://orcid.org/0009-0000-0915-7272",
             "https://hackernoon.com/u/faisalorakzai",
           ],
           knowsAbout: ["Blockchain Engineering", "AI Systems", "Cryptographic Protocols", "RWA Tokenization", "DeFi", "Real Estate Tokenization", "Sovereign Debt Instruments"],
@@ -487,7 +487,7 @@
           description: e.abstract,
           datePublished: e.year + "-01-01",
           keywords: e.keywords,
-          author: { "@type": "Person", name: "Muhammad Faisal Orakzai", url: "https://faisalorakzai.com", sameAs: "https://orcid.org/0009-0003-4582-1927" },
+          author: { "@type": "Person", name: "Muhammad Faisal Orakzai", url: "https://faisalorakzai.com", sameAs: "https://orcid.org/0009-0000-0915-7272" },
           publisher: { "@type": "Organization", name: "Orakzai Research Lab", url: "https://faisalorakzai.com" },
           inLanguage: "en",
           isAccessibleForFree: true,
@@ -524,9 +524,9 @@
     }, [active]);
   }
 
-  // ─── LaTeX inline renderer ────────────────────────────────────────────────────
-  const SUB: Record<string, string> = {"0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉","n":"ₙ","i":"ᵢ","k":"ₖ","t":"ₜ","p":"ₚ"};
-  const SUP: Record<string, string> = {"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","n":"ⁿ","i":"ⁱ","k":"ᵏ"};
+  // âââ LaTeX inline renderer ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  const SUB: Record<string, string> = {"0":"â","1":"â","2":"â","3":"â","4":"â","5":"â","6":"â","7":"â","8":"â","9":"â","n":"â","i":"áµ¢","k":"â","t":"â","p":"â"};
+  const SUP: Record<string, string> = {"0":"â°","1":"Â¹","2":"Â²","3":"Â³","4":"â´","5":"âµ","6":"â¶","7":"â·","8":"â¸","9":"â¹","n":"â¿","i":"â±","k":"áµ"};
 
   function renderTex(s: string) {
     return s
@@ -534,13 +534,13 @@
       .replace(/\^\{([^}]+)\}/g, (_, x: string) => x.split("").map((c: string) => SUP[c] ?? c).join(""))
       .replace(/\^(\w)/g, (_, c: string) => SUP[c] ?? c)
       .replace(/_(w)/g, (_, c: string) => SUB[c] ?? c)
-      .replace(/\\times/g,"×").replace(/\\oplus/g,"⊕").replace(/\\cdot/g,"·")
-      .replace(/\\rightarrow/g,"→").replace(/\\leq/g,"≤").replace(/\\geq/g,"≥")
-      .replace(/\\sum/g,"∑").replace(/\\forall/g,"∀").replace(/\\exists/g,"∃")
-      .replace(/\\in/g,"∈").replace(/\\mid/g,"|").replace(/\\sigma/g,"σ")
-      .replace(/\\theta/g,"θ").replace(/\\lambda/g,"λ").replace(/\\delta/g,"δ")
-      .replace(/\\infty/g,"∞").replace(/\\\|/g,"‖")
-      .replace(/\\pi/g,"π").replace(/\\\{/g,"{").replace(/\\\}/g,"}");
+      .replace(/\\times/g,"Ã").replace(/\\oplus/g,"â").replace(/\\cdot/g,"Â·")
+      .replace(/\\rightarrow/g,"â").replace(/\\leq/g,"â¤").replace(/\\geq/g,"â¥")
+      .replace(/\\sum/g,"â").replace(/\\forall/g,"â").replace(/\\exists/g,"â")
+      .replace(/\\in/g,"â").replace(/\\mid/g,"|").replace(/\\sigma/g,"Ï")
+      .replace(/\\theta/g,"Î¸").replace(/\\lambda/g,"Î»").replace(/\\delta/g,"Î´")
+      .replace(/\\infty/g,"â").replace(/\\\|/g,"â")
+      .replace(/\\pi/g,"Ï").replace(/\\\{/g,"{").replace(/\\\}/g,"}");
   }
 
   function MathText({ children }: { children: string }) {
@@ -560,7 +560,7 @@
     );
   }
 
-  // ─── Commit heatmap ────────────────────────────────────────────────────────────
+  // âââ Commit heatmap ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   function heatmap(seed: string, cols = 20) {
     let v = seed.split("").reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 0);
     return Array.from({ length: cols * 5 }, () => {
@@ -569,7 +569,7 @@
     });
   }
 
-  // ─── Status badge styles ────────────────────────────────────────────────────────
+  // âââ Status badge styles ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   const S: Record<string, string> = {
     PUBLISHED:       "border-emerald-500/30 text-emerald-400/75",
     PRODUCTION:      "border-emerald-500/30 text-emerald-400/75",
@@ -579,7 +579,7 @@
     "FORMAL DRAFT":  "border-blue-400/30 text-blue-400/65",
   };
 
-  // ─── Author links strip ───────────────────────────────────────────────────────
+  // âââ Author links strip âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   function AuthorLinks() {
     const platforms = [
       { label: "ORCID", url: AUTHOR_LINKS.orcid, color: "#A6CE39" },
@@ -603,7 +603,7 @@
     );
   }
 
-  // ─── Fixed viewport frame ─────────────────────────────────────────────────────
+  // âââ Fixed viewport frame âââââââââââââââââââââââââââââââââââââââââââââââââââââ
   function Frame() {
     const pts = [{top:"14px",left:"8px"},{top:"14px",right:"8px"},{bottom:"14px",left:"8px"},{bottom:"14px",right:"8px"}] as const;
     return (
@@ -623,7 +623,7 @@
     );
   }
 
-  // ─── Platform link badges for each card ──────────────────────────────────────
+  // âââ Platform link badges for each card ââââââââââââââââââââââââââââââââââââââ
   function PlatformBadges({ entryId }: { entryId: string }) {
     const badges = [
       { label: "ORCID", url: AUTHOR_LINKS.orcid + `&sortBy=pubdate`, short: "ORCID" },
@@ -637,14 +637,14 @@
           <a key={b.label} href={b.url} target="_blank" rel="noopener noreferrer"
             aria-label={`${b.label} profile of Muhammad Faisal Orakzai`}
             className="font-mono text-[10px] tracking-[0.2em] border border-[#F3BA2F]/18 text-[#F3BA2F]/55 px-2.5 py-1 uppercase hover:border-[#F3BA2F]/50 hover:text-[#F3BA2F]/90 transition-colors duration-200">
-            ↗ {b.short}
+            â {b.short}
           </a>
         ))}
       </div>
     );
   }
 
-  // ─── Card: Market / Artifacts ─────────────────────────────────────────────────
+  // âââ Card: Market / Artifacts âââââââââââââââââââââââââââââââââââââââââââââââââ
   function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
     const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -728,7 +728,7 @@
     );
   }
 
-  // ─── Card: White Paper with LaTeX ─────────────────────────────────────────────
+  // âââ Card: White Paper with LaTeX âââââââââââââââââââââââââââââââââââââââââââââ
   function WhitePaperCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
     const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -787,7 +787,7 @@
                 {entry.pdfUrl && (
                   <a href={entry.pdfUrl} target="_blank" rel="noopener noreferrer"
                     className="font-mono text-[10px] tracking-[0.2em] border border-[#F3BA2F]/30 text-[#F3BA2F]/80 px-2.5 py-1 uppercase hover:bg-[#F3BA2F]/10 hover:border-[#F3BA2F]/60 transition-colors duration-200 flex items-center gap-1.5">
-                    ↓ PDF
+                    â PDF
                   </a>
                 )}
               </div>
@@ -826,7 +826,7 @@
     );
   }
 
-  // ─── Card: Production Repo ────────────────────────────────────────────────────
+  // âââ Card: Production Repo ââââââââââââââââââââââââââââââââââââââââââââââââââââ
   function RepoCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
     const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -869,7 +869,7 @@
                     {entry.status}
                   </span>
                   <time dateTime={entry.year} itemProp="dateCreated"
-                    className="font-mono text-[10px] text-white/20">· {entry.year}</time>
+                    className="font-mono text-[10px] text-white/20">Â· {entry.year}</time>
                 </div>
                 <h3 itemProp="name"
                   className="font-black text-white leading-tight"
@@ -881,7 +881,7 @@
               {entry.repoUrl && (
                 <a href={entry.repoUrl} target="_blank" rel="noopener noreferrer"
                   className="flex-shrink-0 font-mono text-[10px] tracking-[0.2em] border border-[#F3BA2F]/25 text-[#F3BA2F]/65 px-2.5 py-1.5 uppercase hover:border-[#F3BA2F]/55 hover:text-[#F3BA2F] transition-colors duration-200">
-                  ↗ GITHUB
+                  â GITHUB
                 </a>
               )}
             </div>
@@ -894,7 +894,7 @@
           {/* Commit heatmap */}
           <section aria-label={`Commit activity`} className="mb-5">
             <p className="font-mono text-[10px] tracking-[0.28em] text-white/22 uppercase mb-2">
-              Commit Activity · {entry.commits}
+              Commit Activity Â· {entry.commits}
             </p>
             <div className="flex gap-0.5" style={{ transform:"translateZ(0)" }} role="img" aria-label="commit heatmap">
               {Array.from({ length: 20 }, (_, col) => (
@@ -943,7 +943,7 @@
     );
   }
 
-  // ─── Page ─────────────────────────────────────────────────────────────────────
+  // âââ Page âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   export default function Research() {
     const [active, setActive] = useState<Filter>("ALL INTEL");
     useSEO(active);
@@ -970,7 +970,7 @@
         <div aria-hidden className="pointer-events-none fixed inset-0 z-0"
           style={{ background:"radial-gradient(ellipse 80% 40% at 50% 0%,rgba(243,186,47,0.035) 0%,transparent 70%)" }} />
 
-        {/* ── HERO ── */}
+        {/* ââ HERO ââ */}
         <header className="pt-28 pb-8 relative z-10">
           <div className="max-w-5xl mx-auto px-5">
             <motion.div initial="h" animate="s" variants={{ s:{transition:{staggerChildren:0.09}} }}>
@@ -982,7 +982,7 @@
                 <div className="h-px w-7 bg-[#F3BA2F] flex-shrink-0" />
                 <span className="font-mono text-[11px] tracking-[0.45em] text-[#F3BA2F] uppercase">Research Lab</span>
                 <div className="h-px flex-1 bg-[#F3BA2F]/10" />
-                <span className="font-mono text-[11px] tracking-widest text-white/20 hidden sm:block">NODE: KARACHI · PK</span>
+                <span className="font-mono text-[11px] tracking-widest text-white/20 hidden sm:block">NODE: KARACHI Â· PK</span>
               </motion.div>
 
               <motion.h1
@@ -1004,8 +1004,8 @@
                 variants={{ h:{opacity:0}, s:{opacity:1,transition:{duration:0.55,delay:0.12}} }}
                 className="font-mono text-white/30 text-[11px] tracking-[0.25em] uppercase mt-5 max-w-sm leading-relaxed"
               >
-                Market intel · Protocol blueprints ·<br />
-                Cryptographic papers · Live production nodes
+                Market intel Â· Protocol blueprints Â·<br />
+                Cryptographic papers Â· Live production nodes
               </motion.p>
             </motion.div>
 
@@ -1014,15 +1014,15 @@
               className="flex flex-wrap gap-3 mt-6">
               <a href={CV_VIEW_URL} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/35 text-[#F3BA2F]/90 hover:bg-[#F3BA2F]/10 hover:border-[#F3BA2F]/65 transition-colors duration-200 font-mono text-[11px] tracking-[0.25em] uppercase">
-                ↓ DOWNLOAD CV / RESUME
+                â DOWNLOAD CV / RESUME
               </a>
               <a href={AUTHOR_LINKS.linkedin} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 border border-white/12 text-white/45 hover:border-white/25 hover:text-white/70 transition-colors duration-200 font-mono text-[11px] tracking-[0.25em] uppercase">
-                ↗ LINKEDIN PROFILE
+                â LINKEDIN PROFILE
               </a>
             </motion.div>
 
-            {/* Authority badges — now real links */}
+            {/* Authority badges â now real links */}
             <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:0.45,duration:0.5}}
               className="mt-5" role="list" aria-label="Academic indexing status">
               <p className="font-mono text-[10px] tracking-[0.3em] text-white/20 uppercase mb-2">Academic Profiles & Indexing</p>
@@ -1031,7 +1031,7 @@
           </div>
         </header>
 
-        {/* ── FILTER RIBBON — horizontal scroll on mobile ── */}
+        {/* ââ FILTER RIBBON â horizontal scroll on mobile ââ */}
         <nav aria-label="Knowledge categories"
           className="sticky top-16 z-20 border-b border-[#F3BA2F]/10"
           style={{ background:"rgba(0,0,0,0.96)", backdropFilter:"blur(20px)", WebkitBackdropFilter:"blur(20px)" }}>
@@ -1075,7 +1075,7 @@
           </div>
         </nav>
 
-        {/* ── ENTRIES ── */}
+        {/* ââ ENTRIES ââ */}
         <main className="py-8 pb-24 relative z-10" role="tabpanel" aria-label={active}>
           <div className="max-w-5xl mx-auto px-5 space-y-4">
             {filtered.length === 0 && (
@@ -1091,17 +1091,17 @@
           </div>
         </main>
 
-        {/* ── CODA ── */}
+        {/* ââ CODA ââ */}
         <footer className="pb-16 relative z-10">
           <div className="max-w-5xl mx-auto px-5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-white/5">
               <p className="font-mono text-white/18 text-[11px] tracking-[0.25em] uppercase">
-                CITATION: MUHAMMAD FAISAL ORAKZAI · ORAKZAI RESEARCH LAB · 2024
+                CITATION: MUHAMMAD FAISAL ORAKZAI Â· ORAKZAI RESEARCH LAB Â· 2024
               </p>
               <div className="flex items-center gap-2">
                 <span aria-hidden className="w-1 h-1 rounded-full bg-[#F3BA2F] animate-pulse" />
                 <span className="font-mono text-[11px] tracking-[0.22em] text-[#F3BA2F]/45">
-                  {ENTRIES.length} ENTRIES · ACADEMIC INDEXING ACTIVE
+                  {ENTRIES.length} ENTRIES Â· ACADEMIC INDEXING ACTIVE
                 </span>
               </div>
             </div>
