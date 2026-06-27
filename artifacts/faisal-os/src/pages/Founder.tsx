@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
   import { motion, AnimatePresence } from "framer-motion";
-  import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-  import { Link } from "wouter";
+  import { ChevronLeft, ChevronRight } from "lucide-react";
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -9,36 +8,33 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
   };
 
   const GALLERY = [
-      { src: "/story/story-01.jpg", caption: "Orakzai Executive Studio",    year: "2026" },
-      { src: "/story/story-02.jpg", caption: "Global Vision — World Stage", year: "2026" },
-      { src: "/story/story-03.png", caption: "The Chairman",                year: "2026" },
-      { src: "/story/story-04.jpg", caption: "GMA Silicon Valley Summit",   year: "2026" },
-      { src: "/story/story-05.png", caption: "Building the Future",         year: "2026" },
-      { src: "/story/story-06.jpg", caption: "Orakzai Headquarters",        year: "2026" },
-      { src: "/story/story-07.jpg", caption: "Dubai — Global Expansion",    year: "2024" },
-      { src: "/story/story-08.jpg", caption: "Karachi — The Pivot",         year: "2024" },
-      { src: "/story/story-09.jpg", caption: "Roots — Identity Preserved",  year: "2023" },
-      { src: "/story/story-10.jpg", caption: "KPK — The Origin",            year: "2021" },
-      { src: "/story/story-11.jpg", caption: "Karachi Coastline",           year: "2022" },
-      { src: "/story/story-12.jpg", caption: "Vision from the Heights",     year: "2022" },
-      { src: "/story/story-13.jpg", caption: "Metropolitan Network",        year: "2023" },
-      { src: "/story/story-14.jpg", caption: "Orakzai Agency — Genesis",    year: "2020" },
-      { src: "/story/story-15.jpg", caption: "Sovereign Vision",            year: "2025" },
-      { src: "/story/story-16.jpg", caption: "The Architect",               year: "2025" },
-      { src: "/story/story-17.jpg", caption: "Heritage & Legacy",           year: "2024" },
-      { src: "/story/story-18.jpg", caption: "Rising Leader",               year: "2024" },
-      { src: "/story/story-19.jpg", caption: "Orakzai Nation",              year: "2023" },
-      { src: "/story/story-20.jpg", caption: "Genesis Point",               year: "2019" },
-    ];
+    { src: "/story/story-01.jpg", caption: "Orakzai Executive Studio",    year: "2026" },
+    { src: "/story/story-02.jpg", caption: "Global Vision — World Stage", year: "2026" },
+    { src: "/story/story-03.png", caption: "The Chairman",                year: "2026" },
+    { src: "/story/story-04.jpg", caption: "GMA Silicon Valley Summit",   year: "2026" },
+    { src: "/story/story-05.png", caption: "Building the Future",         year: "2026" },
+    { src: "/story/story-06.jpg", caption: "Orakzai Headquarters",        year: "2026" },
+    { src: "/story/story-07.jpg", caption: "Dubai — Global Expansion",    year: "2024" },
+    { src: "/story/story-08.jpg", caption: "Karachi — The Pivot",         year: "2024" },
+    { src: "/story/story-09.jpg", caption: "Roots — Identity Preserved",  year: "2023" },
+    { src: "/story/story-10.jpg", caption: "KPK — The Origin",            year: "2021" },
+    { src: "/story/story-11.jpg", caption: "Karachi Coastline",           year: "2022" },
+    { src: "/story/story-12.jpg", caption: "Vision from the Heights",     year: "2022" },
+    { src: "/story/story-13.jpg", caption: "Metropolitan Network",        year: "2023" },
+    { src: "/story/story-14.jpg", caption: "Orakzai Agency — Genesis",    year: "2020" },
+    { src: "/story/story-15.jpg", caption: "Sovereign Vision",            year: "2025" },
+    { src: "/story/story-16.jpg", caption: "The Architect",               year: "2025" },
+    { src: "/story/story-17.jpg", caption: "Heritage & Legacy",           year: "2024" },
+    { src: "/story/story-18.jpg", caption: "Rising Leader",               year: "2024" },
+    { src: "/story/story-19.jpg", caption: "Orakzai Nation",              year: "2023" },
+    { src: "/story/story-20.jpg", caption: "Genesis Point",               year: "2019" },
+  ];
 
-  const PAGE_LEFT  = GALLERY.slice(0, 10);
-  const PAGE_RIGHT = GALLERY.slice(10, 20);
+  const PAGES = [GALLERY.slice(0, 10), GALLERY.slice(10, 20)];
 
   const TIMELINE = [
     {
-      phase: "PHASE I",
-      label: "GENESIS NODE",
-      range: "2006 – 2017",
+      phase: "PHASE I", label: "GENESIS NODE", range: "2006 – 2017",
       events: [
         { year: "2006", title: "Birth Matrix", body: "Muhammad Faisal Orakzai (فیصل اورکزئی) is born on April 30, 2006, in Mamuzai, Orakzai Agency, Tirah, Khyber Pakhtunkhwa — rugged tribal terrain that forged an uncommon resilience." },
         { year: "2010", title: "The Displacement Corridor", body: "Regional conflicts intensify. The family undergoes strategic relocation to Kohat. Faisal manages rural livestock assets in the mountains — anchoring an early, visceral understanding of decentralized resource management." },
@@ -46,9 +42,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
       ],
     },
     {
-      phase: "PHASE II",
-      label: "METROPOLITAN SHIFT",
-      range: "2018 – 2023",
+      phase: "PHASE II", label: "METROPOLITAN SHIFT", range: "2018 – 2023",
       events: [
         { year: "2018", title: "The Karachi Core Deployment", body: "At just 12 years old, facing heavy family challenges, Faisal executes a high-risk transition to the economic capital, Karachi. Living in PECHS, he enters the cutthroat micro-markets of local real estate." },
         { year: "2019–2021", title: "Tri-City Real Estate Nexus", body: "Through rigorous self-study and high-level local mentorship, expands real estate brokerage and arbitrage networks across a tri-city grid: Karachi, Peshawar, and Kohat. Establishes the parent umbrella corporate identity: Orakzai Group." },
@@ -56,9 +50,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
       ],
     },
     {
-      phase: "PHASE III",
-      label: "BLOCKCHAIN ARTIFACTS",
-      range: "2024 – 2026",
+      phase: "PHASE III", label: "BLOCKCHAIN ARTIFACTS", range: "2024 – 2026",
       events: [
         { year: "2024–2025", title: "Global Network Assembly", body: "Orakzai Group evolves into a tech infrastructure lab. Engineers early database schemas for Orakzai Ventures. Expands horizons via institutional gateway networks spanning Dubai and Düsseldorf, Germany — absorbing BlackRock-level tokenization aesthetics." },
         { year: "Early 2026", title: "High-Throughput Automation Era", body: "Launches OrakzaiX and AdamX — high-throughput AI and machine-learning automation frameworks designed to eliminate human latency in corporate digital operations." },
@@ -67,10 +59,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
       ],
     },
     {
-      phase: "PHASE IV",
-      label: "SOVEREIGN PROJECTIONS",
-      range: "2027 – 2040",
-      future: true,
+      phase: "PHASE IV", label: "SOVEREIGN PROJECTIONS", range: "2027 – 2040", future: true,
       events: [
         { year: "2027–2030", title: "OreC Protocol Horizon", body: "Complete deployment of the OreC Protocol — tokenizing multi-million dollar institutional real estate nodes across Pakistan and UAE into tradeable digital fractions under OKBOND." },
         { year: "2031–2035", title: "Automated Global OTC Framework", body: "Launching the OKBOND Over-The-Counter (OTC) ecosystem application globally — integrating micro-mobility services, automated wealth distribution matrix, and high-end fractional investment layers." },
@@ -100,10 +89,8 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
     const [activeSlide, setActiveSlide] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const slideshowTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-
     const nextSlide = useCallback(() => setActiveSlide(v => (v + 1) % GALLERY.length), []);
     const prevSlide = useCallback(() => setActiveSlide(v => (v - 1 + GALLERY.length) % GALLERY.length), []);
-
     useEffect(() => {
       if (isPaused) return;
       slideshowTimer.current = setInterval(nextSlide, 3000);
@@ -111,38 +98,33 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
     }, [isPaused, nextSlide]);
 
     // ── Book Gallery ──
-    const [bookHighlight, setBookHighlight] = useState(0);
-    const [bookPaused, setBookPaused] = useState(false);
-    const bookTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-    const touchStartX = useRef<number>(0);
-    const touchStartY = useRef<number>(0);
-    const TOTAL_PHOTOS = GALLERY.length;
+    const [currentPage, setCurrentPage] = useState(0);
+    const [direction, setDirection] = useState(1);
+    const [focusIdx, setFocusIdx] = useState<number | null>(null);
+    const bookTouchX = useRef(0);
 
-    const nextHighlight = useCallback(() => setBookHighlight(v => (v + 1) % TOTAL_PHOTOS), [TOTAL_PHOTOS]);
-    const prevHighlight = useCallback(() => setBookHighlight(v => (v - 1 + TOTAL_PHOTOS) % TOTAL_PHOTOS), [TOTAL_PHOTOS]);
-
-    useEffect(() => {
-      if (bookPaused) return;
-      bookTimer.current = setInterval(nextHighlight, 2500);
-      return () => { if (bookTimer.current) clearInterval(bookTimer.current); };
-    }, [bookPaused, nextHighlight]);
-
-    const handleTouchStart = (e: React.TouchEvent) => {
-      touchStartX.current = e.touches[0].clientX;
-      touchStartY.current = e.touches[0].clientY;
-      setBookPaused(true);
+    const flipTo = (page: number) => {
+      setDirection(page > currentPage ? 1 : -1);
+      setCurrentPage(page);
+      setFocusIdx(null);
     };
-    const handleTouchEnd = (e: React.TouchEvent) => {
-      const dx = e.changedTouches[0].clientX - touchStartX.current;
-      const dy = e.changedTouches[0].clientY - touchStartY.current;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        if (dx < 0) nextHighlight(); else prevHighlight();
-      }
-      setTimeout(() => setBookPaused(false), 3000);
+    const flipNext = () => { if (currentPage < PAGES.length - 1) flipTo(currentPage + 1); };
+    const flipPrev = () => { if (currentPage > 0) flipTo(currentPage - 1); };
+
+    const onBookTouchStart = (e: React.TouchEvent) => { bookTouchX.current = e.touches[0].clientX; };
+    const onBookTouchEnd = (e: React.TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - bookTouchX.current;
+      if (Math.abs(dx) > 50) { if (dx < 0) flipNext(); else flipPrev(); }
+    };
+
+    const pageVariants = {
+      enter: (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0, scale: 0.96 }),
+      center: { x: 0, opacity: 1, scale: 1 },
+      exit: (d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0, scale: 0.96 }),
     };
 
     return (
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-black text-white min-h-screen overflow-x-hidden">
 
         {/* ── HERO ── */}
         <section className="relative pt-28 pb-16 border-b border-[#F3BA2F]/10 overflow-hidden">
@@ -174,40 +156,21 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
           onMouseLeave={() => setIsPaused(false)}
         >
           <div className="absolute inset-0 pointer-events-none z-0" style={{ background: "radial-gradient(circle at 50% 50%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
-
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activeSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
-              className="absolute inset-0 z-[1]"
-            >
-              <img
-                src={GALLERY[activeSlide].src}
-                alt={GALLERY[activeSlide].caption}
-                className="w-full h-full object-cover object-top"
-                style={{ filter: "brightness(0.88) contrast(1.05)" }}
-              />
+            <motion.div key={activeSlide} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9, ease: "easeInOut" }} className="absolute inset-0 z-[1]">
+              <img src={GALLERY[activeSlide].src} alt={GALLERY[activeSlide].caption} className="w-full h-full object-cover object-top" style={{ filter: "brightness(0.88) contrast(1.05)" }} />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.25) 100%)" }} />
               <div className="absolute inset-0" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px)" }} />
             </motion.div>
           </AnimatePresence>
-
-          {/* Corner brackets */}
           <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[#F3BA2F]/50 z-10" />
           <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-[#F3BA2F]/50 z-10" />
           <div className="absolute bottom-20 left-6 w-12 h-12 border-b-2 border-l-2 border-[#F3BA2F]/50 z-10" />
           <div className="absolute bottom-20 right-6 w-12 h-12 border-b-2 border-r-2 border-[#F3BA2F]/50 z-10" />
-
-          {/* HUD top */}
           <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-4 py-1.5 border border-[#F3BA2F]/30 bg-black/50 backdrop-blur-sm">
             <motion.span className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]" animate={{ opacity: [1, 0.2, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} />
             <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em]">GALLERY · {String(activeSlide + 1).padStart(2,"0")}/{String(GALLERY.length).padStart(2,"0")}</span>
           </div>
-
-          {/* Bottom info + nav */}
           <div className="absolute bottom-0 left-0 right-0 z-10 p-8 flex items-end justify-between">
             <AnimatePresence mode="wait">
               <motion.div key={activeSlide} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
@@ -224,8 +187,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
               </button>
             </div>
           </div>
-
-          {/* Progress dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
             {GALLERY.map((_, i) => (
               <button key={i} onClick={() => setActiveSlide(i)} className="relative h-[3px] transition-all duration-300"
@@ -235,219 +196,157 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
         </section>
 
         {/* ── BOOK GALLERY ── */}
-        <section className="py-20 border-t border-[#F3BA2F]/10">
-          <div className="max-w-5xl mx-auto px-4">
+        <section className="py-16 border-t border-[#F3BA2F]/10 overflow-hidden">
+          <div className="max-w-2xl mx-auto px-4">
 
             {/* Header */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <div className="flex items-center gap-3 mb-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8">
+              <div className="flex items-center gap-3 mb-1">
                 <div className="h-px w-8 bg-[#F3BA2F]" />
-                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Photo Archive · Book View</span>
+                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Photo Archive</span>
                 <div className="h-px flex-1 bg-[#F3BA2F]/10" />
-                <span className="text-white/30 font-mono text-[10px] tracking-widest">
-                  {String(bookHighlight + 1).padStart(2,"0")} / {String(TOTAL_PHOTOS).padStart(2,"0")}
-                </span>
+              </div>
+              {/* Page indicator */}
+              <div className="flex items-center justify-between mt-4">
+                <span className="text-white/20 font-mono text-[10px] tracking-widest uppercase">Page {currentPage + 1} of {PAGES.length}</span>
+                <div className="flex gap-2">
+                  {PAGES.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => flipTo(i)}
+                      className="transition-all duration-300"
+                      style={{
+                        width: i === currentPage ? "32px" : "12px",
+                        height: "3px",
+                        background: i === currentPage ? "#F3BA2F" : "rgba(255,255,255,0.2)",
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </motion.div>
 
-            {/* ── THE OPEN BOOK ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onMouseEnter={() => setBookPaused(true)}
-              onMouseLeave={() => setBookPaused(false)}
-              style={{
-                userSelect: "none",
-                filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.9)) drop-shadow(0 8px 20px rgba(0,0,0,0.7))",
-              }}
+            {/* Book page container */}
+            <div
+              className="relative overflow-hidden"
+              onTouchStart={onBookTouchStart}
+              onTouchEnd={onBookTouchEnd}
+              style={{ borderRadius: "2px" }}
             >
-              <div style={{ display: "flex", position: "relative" }}>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentPage}
+                  custom={direction}
+                  variants={pageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  {/* Page top bar */}
+                  <div className="flex items-center justify-between px-1 pb-3">
+                    <span className="font-mono text-[9px] text-[#F3BA2F]/50 tracking-[0.3em]">
+                      {currentPage === 0 ? "01 – 10" : "11 – 20"}
+                    </span>
+                    <span className="font-mono text-[9px] text-white/20 tracking-widest">
+                      {currentPage === 0 ? "PAGE I" : "PAGE II"}
+                    </span>
+                  </div>
 
-                {/* Left hard cover binding */}
-                <div style={{
-                  width: "18px",
-                  flexShrink: 0,
-                  background: "linear-gradient(to right, #0d0d0d 0%, #1e1e1e 60%, #2a2a2a 100%)",
-                  borderRadius: "4px 0 0 4px",
-                  borderLeft: "2px solid #0a0a0a",
-                }} />
-
-                {/* Left page */}
-                <div style={{
-                  flex: 1,
-                  background: "linear-gradient(to right, #f0ebe0 0%, #f8f4eb 60%, #f5f0e5 100%)",
-                  position: "relative",
-                  overflow: "hidden",
-                }}>
-                  {/* Spine shadow on left page right edge */}
-                  <div style={{
-                    position: "absolute", right: 0, top: 0, bottom: 0, width: "24px", zIndex: 10, pointerEvents: "none",
-                    background: "linear-gradient(to left, rgba(0,0,0,0.22) 0%, transparent 100%)",
-                  }} />
-                  {/* Page label */}
-                  <div style={{ position: "absolute", top: 6, left: 8, fontFamily: "monospace", fontSize: "9px", color: "rgba(180,150,80,0.5)", letterSpacing: "0.2em", zIndex: 20 }}>I</div>
-                  {/* 2×5 photo grid */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px", padding: "6px" }}>
-                    {PAGE_LEFT.map((photo, i) => {
-                      const isActive = bookHighlight === i;
+                  {/* 2×5 photo grid — full width, portrait photos */}
+                  <div className="grid grid-cols-2 gap-[3px]">
+                    {PAGES[currentPage].map((photo, i) => {
+                      const globalIdx = currentPage * 10 + i;
+                      const isFocused = focusIdx === globalIdx;
                       return (
-                        <div
-                          key={i}
-                          onClick={() => { setBookHighlight(i); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
-                          style={{
-                            position: "relative",
-                            aspectRatio: "3/4",
-                            overflow: "hidden",
-                            cursor: "pointer",
-                            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                            transform: isActive ? "scale(1.03)" : "scale(1)",
-                            zIndex: isActive ? 5 : 1,
-                            boxShadow: isActive ? "0 4px 20px rgba(0,0,0,0.5), 0 0 0 2px rgba(243,186,47,0.7)" : "0 2px 8px rgba(0,0,0,0.3)",
-                            background: "#111",
+                        <motion.div
+                          key={globalIdx}
+                          layout
+                          onClick={() => setFocusIdx(isFocused ? null : globalIdx)}
+                          className="relative overflow-hidden cursor-pointer"
+                          style={{ aspectRatio: "3/4", background: "#0a0a0a" }}
+                          animate={{
+                            opacity: focusIdx !== null && !isFocused ? 0.35 : 1,
+                            scale: isFocused ? 1.02 : 1,
                           }}
+                          transition={{ duration: 0.3 }}
                         >
                           <img
                             src={photo.src}
                             alt={photo.caption}
+                            className="w-full h-full object-cover block"
                             style={{
-                              width: "100%", height: "100%", objectFit: "cover",
-                              filter: isActive ? "brightness(1.08) contrast(1.05) saturate(1.1)" : "brightness(0.6) saturate(0.8)",
-                              transition: "filter 0.5s",
-                              display: "block",
+                              filter: isFocused
+                                ? "brightness(1.05) contrast(1.08) saturate(1.1)"
+                                : "brightness(0.72) saturate(0.9)",
+                              transition: "filter 0.4s",
                             }}
                           />
-                          <div style={{
-                            position: "absolute", inset: 0,
-                            background: isActive
-                              ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)"
-                              : "rgba(0,0,0,0.18)",
-                            transition: "background 0.5s",
-                          }} />
-                          {isActive && (
+                          {/* Dark overlay */}
+                          <div
+                            className="absolute inset-0 transition-all duration-400"
+                            style={{
+                              background: isFocused
+                                ? "linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 50%)"
+                                : "rgba(0,0,0,0.12)",
+                            }}
+                          />
+                          {/* Gold ring when focused */}
+                          {isFocused && (
+                            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 2px #F3BA2F" }} />
+                          )}
+                          {/* Caption when focused */}
+                          {isFocused && (
                             <motion.div
-                              initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}
-                              style={{ position: "absolute", bottom: 4, left: 4, right: 4, zIndex: 10 }}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="absolute bottom-0 left-0 right-0 p-3 z-10"
                             >
-                              <div style={{ color: "#F3BA2F", fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.2em" }}>{photo.year}</div>
-                              <div style={{ color: "#fff", fontSize: "9px", fontWeight: 600, lineHeight: 1.2 }}>{photo.caption}</div>
+                              <div className="text-[#F3BA2F] font-mono text-[8px] tracking-[0.25em] mb-0.5">{photo.year}</div>
+                              <div className="text-white text-[11px] font-semibold leading-tight">{photo.caption}</div>
                             </motion.div>
                           )}
-                          {!isActive && (
-                            <div style={{ position: "absolute", top: 3, right: 4, fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.3)", zIndex: 10 }}>{String(i+1).padStart(2,"0")}</div>
+                          {/* Photo number when not focused */}
+                          {!isFocused && (
+                            <div className="absolute top-2 right-2 font-mono text-[8px] text-white/30 z-10">
+                              {String(globalIdx + 1).padStart(2, "0")}
+                            </div>
                           )}
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
-                </div>
-
-                {/* Center spine / binding */}
-                <div style={{
-                  width: "22px",
-                  flexShrink: 0,
-                  background: "linear-gradient(to right, #111 0%, #1c1c1c 30%, #2c2c2c 50%, #1c1c1c 70%, #111 100%)",
-                  boxShadow: "inset -4px 0 10px rgba(0,0,0,0.6), inset 4px 0 10px rgba(0,0,0,0.6)",
-                  position: "relative",
-                }}>
-                  <div style={{
-                    position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%) rotate(90deg)",
-                    fontFamily: "monospace", fontSize: "6px", letterSpacing: "0.35em", color: "rgba(243,186,47,0.25)",
-                    whiteSpace: "nowrap",
-                  }}>ORAKZAI · ARCHIVE</div>
-                </div>
-
-                {/* Right page */}
-                <div style={{
-                  flex: 1,
-                  background: "linear-gradient(to left, #f0ebe0 0%, #f8f4eb 60%, #f5f0e5 100%)",
-                  position: "relative",
-                  overflow: "hidden",
-                }}>
-                  {/* Spine shadow on right page left edge */}
-                  <div style={{
-                    position: "absolute", left: 0, top: 0, bottom: 0, width: "24px", zIndex: 10, pointerEvents: "none",
-                    background: "linear-gradient(to right, rgba(0,0,0,0.22) 0%, transparent 100%)",
-                  }} />
-                  {/* Page label */}
-                  <div style={{ position: "absolute", top: 6, right: 8, fontFamily: "monospace", fontSize: "9px", color: "rgba(180,150,80,0.5)", letterSpacing: "0.2em", zIndex: 20 }}>II</div>
-                  {/* 2×5 photo grid */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px", padding: "6px" }}>
-                    {PAGE_RIGHT.map((photo, i) => {
-                      const globalIdx = 10 + i;
-                      const isActive = bookHighlight === globalIdx;
-                      return (
-                        <div
-                          key={i}
-                          onClick={() => { setBookHighlight(globalIdx); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
-                          style={{
-                            position: "relative",
-                            aspectRatio: "3/4",
-                            overflow: "hidden",
-                            cursor: "pointer",
-                            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                            transform: isActive ? "scale(1.03)" : "scale(1)",
-                            zIndex: isActive ? 5 : 1,
-                            boxShadow: isActive ? "0 4px 20px rgba(0,0,0,0.5), 0 0 0 2px rgba(243,186,47,0.7)" : "0 2px 8px rgba(0,0,0,0.3)",
-                            background: "#111",
-                          }}
-                        >
-                          <img
-                            src={photo.src}
-                            alt={photo.caption}
-                            style={{
-                              width: "100%", height: "100%", objectFit: "cover",
-                              filter: isActive ? "brightness(1.08) contrast(1.05) saturate(1.1)" : "brightness(0.6) saturate(0.8)",
-                              transition: "filter 0.5s",
-                              display: "block",
-                            }}
-                          />
-                          <div style={{
-                            position: "absolute", inset: 0,
-                            background: isActive
-                              ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)"
-                              : "rgba(0,0,0,0.18)",
-                            transition: "background 0.5s",
-                          }} />
-                          {isActive && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}
-                              style={{ position: "absolute", bottom: 4, left: 4, right: 4, zIndex: 10 }}
-                            >
-                              <div style={{ color: "#F3BA2F", fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.2em" }}>{photo.year}</div>
-                              <div style={{ color: "#fff", fontSize: "9px", fontWeight: 600, lineHeight: 1.2 }}>{photo.caption}</div>
-                            </motion.div>
-                          )}
-                          {!isActive && (
-                            <div style={{ position: "absolute", top: 3, right: 4, fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.3)", zIndex: 10 }}>{String(globalIdx+1).padStart(2,"0")}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Right hard cover binding */}
-                <div style={{
-                  width: "18px",
-                  flexShrink: 0,
-                  background: "linear-gradient(to left, #0d0d0d 0%, #1e1e1e 60%, #2a2a2a 100%)",
-                  borderRadius: "0 4px 4px 0",
-                  borderRight: "2px solid #0a0a0a",
-                }} />
-
-              </div>
-            </motion.div>
-
-            {/* Hint */}
-            <div className="text-center mt-6 font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: "rgba(255,255,255,0.18)" }}>
-              Swipe or tap photo to focus · auto-cycling highlights
+                </motion.div>
+              </AnimatePresence>
             </div>
 
+            {/* Flip navigation */}
+            <div className="flex items-center justify-between mt-6">
+              <button
+                onClick={flipPrev}
+                disabled={currentPage === 0}
+                className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[10px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/10 disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+                Prev Page
+              </button>
+              <div className="font-mono text-[10px] text-white/20 tracking-widest">
+                {String(currentPage * 10 + 1).padStart(2,"0")}–{String(currentPage * 10 + 10).padStart(2,"0")} / 20
+              </div>
+              <button
+                onClick={flipNext}
+                disabled={currentPage === PAGES.length - 1}
+                className="flex items-center gap-2 px-4 py-2.5 border border-[#F3BA2F]/20 text-[#F3BA2F] font-mono text-[10px] tracking-widest uppercase transition-all hover:bg-[#F3BA2F]/10 disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                Next Page
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <p className="text-center font-mono text-[9px] text-white/15 tracking-[0.3em] uppercase mt-3">Swipe left / right to flip page · tap photo to focus</p>
           </div>
         </section>
 
-      {/* ── SOVEREIGN TIMELINE ── */}
+        {/* ── SOVEREIGN TIMELINE ── */}
       <section className="py-28 border-t border-[#F3BA2F]/10 relative">
         <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
         <div className="max-w-5xl mx-auto px-6">
