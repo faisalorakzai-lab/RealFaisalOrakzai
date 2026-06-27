@@ -26,7 +26,8 @@ const GALLERY = [
 ];
 
 // Book spreads: 2 photos per page
-const BOOK_SPREADS = [];
+type GalleryItem = { src: string; caption: string; year: string };
+const BOOK_SPREADS: [GalleryItem, GalleryItem][] = [];
 for (let i = 0; i < GALLERY.length; i += 2) {
   BOOK_SPREADS.push([GALLERY[i], GALLERY[i + 1] || GALLERY[0]]);
 }
@@ -171,7 +172,7 @@ export default function Founder() {
       >
         <div className="absolute inset-0 pointer-events-none z-0" style={{ background: "radial-gradient(circle at 50% 50%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
 
-        <AnimatePresence mode="crossfade">
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeSlide}
             initial={{ opacity: 0 }}
@@ -250,7 +251,7 @@ export default function Founder() {
             onMouseEnter={() => setBookPaused(true)}
             onMouseLeave={() => setBookPaused(false)}
           >
-            <AnimatePresence mode="crossfade">
+            <AnimatePresence mode="wait">
               <motion.div
                 key={bookPage}
                 initial={{ opacity: 0, scale: 0.97 }}
