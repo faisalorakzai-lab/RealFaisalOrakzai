@@ -1,93 +1,48 @@
 # Muhammad Faisal Orakzai — faisalorakzai.com
-  # Founder & Chairman, Orakzai Group | فیصل اورکزئی
-  # Blockchain Entrepreneur, Polygon Layer-2 | Pakistan
+  # Founder & Chairman, Orakzai Group
 
   User-agent: *
   Allow: /
+  Disallow: /api/
 
   User-agent: Googlebot
   Allow: /
-  Crawl-delay: 0
-
-  User-agent: Googlebot-Image
-  Allow: /story/
-  Allow: /logos/
-  Allow: /
+  Crawl-delay: 1
 
   User-agent: Bingbot
   Allow: /
+  Crawl-delay: 2
 
-  User-agent: facebookexternalhit
+  User-agent: Yandex
+  Allow: /
+  Crawl-delay: 2
+
+  User-agent: Baiduspider
   Allow: /
 
-  User-agent: Twitterbot
+  User-agent: DuckDuckBot
   Allow: /
 
   User-agent: LinkedInBot
   Allow: /
 
-  # ─── ACADEMIC & SCHOLARLY CRAWLERS ──────────────────────────
-  # These bots index research papers for academic search engines
-
-  # BASE — Bielefeld Academic Search Engine (universities worldwide)
-  User-agent: BASEbot
-  Allow: /
-  Crawl-delay: 1
-
-  # CORE — Open Access Research Aggregator (universities + journals)
-  User-agent: COREbot
+  User-agent: Twitterbot
   Allow: /
 
-  # Semantic Scholar — AI Research Index (Allen Institute)
-  User-agent: SemanticScholarBot
+  User-agent: WhatsApp
   Allow: /
 
-  # Internet Archive — Preserves scholarly content permanently
+  User-agent: Applebot
+  Allow: /
+
   User-agent: ia_archiver
   Allow: /
 
-  # OpenAIRE — European Open Access Research Infrastructure
-  User-agent: OpenAIREbot
+  User-agent: AhrefsBot
   Allow: /
 
-  # Unpaywall — Open Access Discovery (university integration)
-  User-agent: Unpaywall
-  Allow: /
-
-  # OAI-PMH compliant harvesters (university library systems)
-  User-agent: OAI*
-  Allow: /
-
-  # ORCID Crawler
-  User-agent: ORCID*
-  Allow: /
-
-  # ResearchGate
-  User-agent: researchbot
-  Allow: /
-
-  # Microsoft Academic
-  User-agent: msnbot
+  User-agent: SemrushBot
   Allow: /
 
   Sitemap: https://faisalorakzai.com/sitemap.xml
-  Sitemap: https://faisalorakzai.com/research-sitemap.xml
-
-  # Key Pages — Muhammad Faisal Orakzai
-  # Home:       https://faisalorakzai.com/
-  # Founder:    https://faisalorakzai.com/founder
-  # Research:   https://faisalorakzai.com/research
-  # Press:      https://faisalorakzai.com/press
-  # Contact:    https://faisalorakzai.com/contact
-
-  # Academic Profiles
-  # ORCID:         https://orcid.org/0009-0003-4582-1927
-  # Google Scholar: https://scholar.google.com/citations?user=faisalorakzai
-  # LinkedIn:       https://www.linkedin.com/in/faisalorakzai
-  # GitHub:         https://github.com/faisalorakzai-lab
-
-  # Cross-Site Network (Google Knowledge Panel)
-  # orakzaibond.com — OKBOND Polygon L2 Blockchain
-  # shamimforever.com — Luxury Web3 Brand
-  # wikidata.org/wiki/Q140264666 — Muhammad Faisal Orakzai
   
