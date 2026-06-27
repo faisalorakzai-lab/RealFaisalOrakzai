@@ -63,6 +63,10 @@
   ],
   "rewrites": [
     {
+      "source": "/papers/:paper",
+      "destination": "/papers/:paper.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -95,6 +99,15 @@
       ]
     },
     {
+      "source": "/research-sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        }
+      ]
+    },
+    {
       "source": "/papers/(.*)",
       "headers": [
         {
@@ -106,16 +119,6 @@
           "value": "index, follow"
         }
       ]
-    },
-    {
-      "source": "/research-sitemap.xml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
-        }
-      ]
     }
-  ],
-  "cleanUrls": true
+  ]
 }
