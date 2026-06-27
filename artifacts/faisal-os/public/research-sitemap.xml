@@ -1,106 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <urlset
-    xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xhtml="https://www.w3.org/1999/xhtml">
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-    <!-- RESEARCH HUB — Muhammad Faisal Orakzai -->
     <url>
       <loc>https://faisalorakzai.com/research</loc>
       <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.95</priority>
-    </url>
-
-    <!-- WHITE PAPER: Orakzai Bond — Main Protocol -->
-    <url>
-      <loc>https://faisalorakzai.com/research#wp-01</loc>
-      <lastmod>2026-06-27</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.90</priority>
+      <priority>0.9</priority>
     </url>
 
-    <!-- WHITE PAPER: Orakzai Bond — Technical Architecture -->
-    <url>
-      <loc>https://faisalorakzai.com/research#wp-02</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.90</priority>
-    </url>
+    <url><loc>https://faisalorakzai.com/papers/wp-01</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.95</priority></url>
+    <url><loc>https://faisalorakzai.com/papers/wp-02</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.95</priority></url>
+    <url><loc>https://faisalorakzai.com/papers/wp-03</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.95</priority></url>
+    <url><loc>https://faisalorakzai.com/papers/wp-04</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.95</priority></url>
+    <url><loc>https://faisalorakzai.com/papers/mk-01</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.85</priority></url>
+    <url><loc>https://faisalorakzai.com/papers/mk-02</loc><lastmod>2026-06-27</lastmod><changefreq>yearly</changefreq><priority>0.85</priority></url>
 
-    <!-- WHITE PAPER: Orakzai Bond — Regulatory Compliance -->
-    <url>
-      <loc>https://faisalorakzai.com/research#wp-03</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.90</priority>
-    </url>
-
-    <!-- WHITE PAPER: Orakzai Properties — Real Estate Tokenization -->
-    <url>
-      <loc>https://faisalorakzai.com/research#wp-04</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.90</priority>
-    </url>
-
-    <!-- MARKET KNOWLEDGE: Macro-Liquidity Networks -->
-    <url>
-      <loc>https://faisalorakzai.com/research#mk-01</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.85</priority>
-    </url>
-
-    <!-- MARKET KNOWLEDGE: Real-World Asset Tokenization -->
-    <url>
-      <loc>https://faisalorakzai.com/research#mk-02</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.85</priority>
-    </url>
-
-    <!-- PRODUCTION CODE: GitHub Repositories -->
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-01</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-02</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-03</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-04</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-05</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-06</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
-    <url>
-      <loc>https://faisalorakzai.com/research#pc-07</loc>
-      <lastmod>2026-06-27</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-    </url>
+    <url><loc>https://faisalorakzai.com/research#pc-01</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-02</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-03</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-04</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-05</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-06</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/research#pc-07</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   </urlset>
