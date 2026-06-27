@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-  import { useSubmitContact } from "@workspace/api-client-react";
+  import { useSubmitContact, useGetContactStats, getGetContactStatsQueryKey } from "@workspace/api-client-react";
+  import { useQueryClient } from "@tanstack/react-query";
   import { useToast } from "@/hooks/use-toast";
   import { useState } from "react";
   import { ChevronRight, CheckCircle } from "lucide-react";
@@ -28,7 +29,13 @@ import { motion, AnimatePresence } from "framer-motion";
     ">> Secure message logged successfully.",
   ];
 
-  function TerminalPanel({ inquiryType }: { inquiryType: string }) {
+  function TerminalPanel({
+    inquiryType,
+    onSuccess,
+  }: {
+    inquiryType: string;
+    onSuccess: () => void;
+  }) {
     const { toast } = useToast();
     const mutation = useSubmitContact();
     const [name, setName] = useState("");
@@ -37,7 +44,11 @@ import { motion, AnimatePresence } from "framer-motion";
     const [executing, setExecuting] = useState(false);
     const [logLines, setLogLines] = useState<string[]>([]);
     const [done, setDone] = useState(false);
-    const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+    const [errors, setErrors] = useState<{
+      name?: string;
+      email?: string;
+      message?: string;
+    }>({});
 
     const validate = () => {
       const errs: typeof errors = {};
@@ -61,11 +72,18 @@ import { motion, AnimatePresence } from "framer-motion";
       mutation.mutate(
         { data: { name, email, type: inquiryType, message } },
         {
-          onSuccess: () => setDone(true),
+          onSuccess: () => {
+            setDone(true);
+            onSuccess();
+          },
           onError: () => {
             setExecuting(false);
             setLogLines([]);
-            toast({ title: "Transmission failed", description: "Please retry.", variant: "destructive" });
+            toast({
+              title: "Transmission failed",
+              description: "Please retry.",
+              variant: "destructive",
+            });
           },
         }
       );
@@ -84,7 +102,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
     return (
       <div className="border border-[#F3BA2F]/30 bg-[#000000] px-6 py-5 font-mono text-xs space-y-4">
-        {/* Terminal header */}
         <div className="flex items-center gap-2 pb-3 border-b border-[#F3BA2F]/10">
           <span className="w-2 h-2 rounded-full bg-[#F3BA2F] animate-pulse" />
           <span className="text-[#F3BA2F]/50 tracking-[0.2em] text-[10px]">
@@ -92,9 +109,10 @@ import { motion, AnimatePresence } from "framer-motion";
           </span>
         </div>
 
-        {/* Identity input */}
         <div className="flex items-start gap-2">
-          <span className="text-[#F3BA2F]/50 shrink-0 select-none leading-6">founder@core:~#</span>
+          <span className="text-[#F3BA2F]/50 shrink-0 select-none leading-6">
+            founder@core:~#
+          </span>
           <div className="flex-1 min-w-0">
             <span className="text-[#F3BA2F]/30 leading-6">enter_identity:</span>
             <div className="grid grid-cols-2 gap-3 mt-1.5">
@@ -127,9 +145,10 @@ import { motion, AnimatePresence } from "framer-motion";
           </div>
         </div>
 
-        {/* Payload input */}
         <div className="flex items-start gap-2">
-          <span className="text-[#F3BA2F]/50 shrink-0 select-none leading-6">founder@core:~#</span>
+          <span className="text-[#F3BA2F]/50 shrink-0 select-none leading-6">
+            founder@core:~#
+          </span>
           <div className="flex-1 min-w-0">
             <span className="text-[#F3BA2F]/30 leading-6">enter_payload:</span>
             <textarea
@@ -146,7 +165,6 @@ import { motion, AnimatePresence } from "framer-motion";
           </div>
         </div>
 
-        {/* Handshake log animation */}
         <AnimatePresence>
           {logLines.length > 0 && (
             <motion.div
@@ -160,7 +178,7 @@ import { motion, AnimatePresence } from "framer-motion";
                   initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-[#F3BA2F] text-[10px] tracking-wide leading-relaxed"
+                  className="text-[#F3BA2F] tracking-wide leading-relaxed"
                   style={{ fontSize: "10px" }}
                 >
                   {line}
@@ -170,11 +188,10 @@ import { motion, AnimatePresence } from "framer-motion";
           )}
         </AnimatePresence>
 
-        {/* Execute button */}
         <button
           onClick={handleExecute}
           disabled={executing}
-          className="w-full py-3 mt-1 border border-[#F3BA2F]/35 text-[#F3BA2F] text-[10px] tracking-[0.3em] hover:bg-[#F3BA2F]/5 hover:border-[#F3BA2F]/70 transition-all disabled:opacity-40 flex items-center justify-center gap-2 group"
+          className="w-full py-3 mt-1 border border-[#F3BA2F]/35 text-[#F3BA2F] text-[10px] tracking-[0.3em] hover:bg-[#F3BA2F]/5 hover:border-[#F3BA2F]/70 transition-all disabled:opacity-40 flex items-center justify-center gap-2"
         >
           {executing ? (
             <span className="animate-pulse tracking-[0.3em]">TRANSMITTING...</span>
@@ -186,15 +203,38 @@ import { motion, AnimatePresence } from "framer-motion";
     );
   }
 
+  function PacketCounter({ onMount }: { onMount?: () => void }) {
+    const { data } = useGetContactStats({
+      query: { queryKey: getGetContactStatsQueryKey(), refetchInterval: 30000 },
+    });
+    const count = data?.count ?? 0;
+
+    return (
+      <motion.span
+        key={count}
+        initial={{ opacity: 0, y: -4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-[#F3BA2F] font-mono tabular-nums"
+      >
+        {String(count).padStart(6, "0")}
+      </motion.span>
+    );
+  }
+
   export default function Contact() {
     const [activeType, setActiveType] = useState<string | null>(null);
+    const queryClient = useQueryClient();
 
     const toggle = (type: string) =>
       setActiveType((prev) => (prev === type ? null : type));
 
+    const handleSuccess = () => {
+      queryClient.invalidateQueries({ queryKey: getGetContactStatsQueryKey() });
+    };
+
     return (
       <div className="bg-black text-white min-h-screen">
-        {/* JSON-LD schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -204,15 +244,11 @@ import { motion, AnimatePresence } from "framer-motion";
               name: "Sovereign Gateway — Muhammad Faisal Orakzai",
               description:
                 "Secure institutional communication portal for Orakzai infrastructure routing.",
-              mainEntity: {
-                "@type": "Person",
-                name: "Muhammad Faisal Orakzai",
-              },
+              mainEntity: { "@type": "Person", name: "Muhammad Faisal Orakzai" },
             }),
           }}
         />
 
-        {/* Hero */}
         <section className="pt-32 pb-16 border-b border-[#F3BA2F]/10 bg-grid">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -222,9 +258,7 @@ import { motion, AnimatePresence } from "framer-motion";
                   NETWORK HUB
                 </span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
-                Connect
-              </h1>
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">Connect</h1>
               <p className="text-white/40 text-xl max-w-xl">
                 Collaboration is built on clarity and shared vision. Every serious request
                 receives a response.
@@ -233,7 +267,6 @@ import { motion, AnimatePresence } from "framer-motion";
           </div>
         </section>
 
-        {/* Main content */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
@@ -252,9 +285,7 @@ import { motion, AnimatePresence } from "framer-motion";
                           transition={{ delay: i * 0.07 }}
                           onClick={() => toggle(type)}
                           className={`flex items-center justify-between bg-black px-6 py-4 cursor-pointer group transition-colors border-b border-white/5 ${
-                            activeType === type
-                              ? "bg-[#F3BA2F]/5"
-                              : "hover:bg-[#F3BA2F]/3"
+                            activeType === type ? "bg-[#F3BA2F]/5" : "hover:bg-[#F3BA2F]/3"
                           }`}
                         >
                           <span
@@ -293,7 +324,10 @@ import { motion, AnimatePresence } from "framer-motion";
                               }}
                               style={{ overflow: "hidden" }}
                             >
-                              <TerminalPanel inquiryType={type} />
+                              <TerminalPanel
+                                inquiryType={type}
+                                onSuccess={handleSuccess}
+                              />
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -302,7 +336,6 @@ import { motion, AnimatePresence } from "framer-motion";
                   </div>
                 </div>
 
-                {/* Profiles */}
                 <div>
                   <div className="text-[#F3BA2F] font-mono text-xs tracking-[0.3em] mb-6">
                     PROFILES & NETWORKS
@@ -322,7 +355,6 @@ import { motion, AnimatePresence } from "framer-motion";
                   </div>
                 </div>
 
-                {/* Response time */}
                 <div className="border border-[#F3BA2F]/10 p-6">
                   <div className="text-[#F3BA2F] font-mono text-xs tracking-widest mb-3">
                     RESPONSE TIME
@@ -333,7 +365,7 @@ import { motion, AnimatePresence } from "framer-motion";
                 </div>
               </div>
 
-              {/* Right — System status panel */}
+              {/* Right — Gateway status + packet counter */}
               <div className="space-y-10">
                 <div className="border border-[#F3BA2F]/10 p-8 font-mono">
                   <div className="text-[#F3BA2F] text-xs tracking-[0.3em] mb-8">
@@ -341,12 +373,7 @@ import { motion, AnimatePresence } from "framer-motion";
                   </div>
                   <div className="space-y-5">
                     {[
-                      {
-                        label: "GATEWAY",
-                        value: "OPERATIONAL",
-                        gold: true,
-                        pulse: true,
-                      },
+                      { label: "GATEWAY", value: "OPERATIONAL", gold: true, pulse: true },
                       { label: "ENCRYPTION", value: "AES-256 / TLS 1.3" },
                       { label: "ROUTING", value: "FOUNDER_CORE_DIRECT" },
                       { label: "QUEUE", value: "REAL-TIME INGESTION" },
@@ -369,7 +396,14 @@ import { motion, AnimatePresence } from "framer-motion";
                         </span>
                       </div>
                     ))}
+
+                    {/* Live packet counter row */}
+                    <div className="flex items-center justify-between text-xs pt-1 border-t border-[#F3BA2F]/15 mt-2">
+                      <span className="text-white/25 tracking-[0.2em]">PACKETS TRANSMITTED</span>
+                      <PacketCounter />
+                    </div>
                   </div>
+
                   <div className="mt-8 pt-6 border-t border-[#F3BA2F]/10 text-white/20 text-[10px] leading-relaxed tracking-wide">
                     All transmissions route directly to the Founder Core inbox. Inquiries
                     are logged with timestamp and origin metadata. This gateway accepts
