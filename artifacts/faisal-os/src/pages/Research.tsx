@@ -35,6 +35,7 @@
     authors: string;
     keywords: string;
     pdfUrl?: string;
+    articleUrl?: string;
     orcid?: string;
     googleScholar?: string;
     linkedin?: string;
@@ -82,6 +83,22 @@
       status: "PUBLISHED",
       authors: "Muhammad Faisal Orakzai",
       keywords: "real-world asset tokenization, RWA, DeFi, institutional finance, oracle systems",
+    },
+
+    // ── MARKET KNOWLEDGE: Blockchain Article ─────────────────────────────
+    {
+      id: "mk-03",
+      category: "MARKET KNOWLEDGE",
+      year: "2026",
+      title: "What is Blockchain? A Complete Beginner's Guide (2026)",
+      subtitle: "How Blockchain Works | History, Components, Applications & Future",
+      abstract:
+        "Blockchain is one of the most revolutionary technologies of the 21st century. Often associated with cryptocurrencies like Bitcoin, blockchain is far more than just digital money. It is a secure, transparent, decentralized, and tamper-resistant system for storing, managing, and verifying data without relying on a central authority. Today, blockchain is transforming industries including finance, healthcare, supply chain, government, real estate, digital identity, gaming, and luxury commerce — becoming the foundation of Web3, tokenized assets (RWA), decentralized finance (DeFi), and next-generation digital infrastructure. Just as the internet transformed how people share information, blockchain is transforming how people exchange value, establish trust, and own digital assets.",
+      tags: ["Blockchain", "Web3", "DeFi", "Smart Contracts", "Bitcoin", "Ethereum", "RWA", "Distributed Ledger", "Decentralization", "Blockchain Security"],
+      status: "PUBLISHED",
+      authors: "Muhammad Faisal Orakzai",
+      keywords: "what is blockchain, blockchain guide 2026, blockchain technology explained, how blockchain works, beginner blockchain tutorial, distributed ledger technology, smart contracts, Web3, decentralized technology, blockchain applications, future of blockchain",
+      articleUrl: "/what-is-blockchain-complete-beginners-guide",
     },
 
     // ââ ARTIFACTS & BLUEPRINTS âââââââââââââââââââââââââââââââââââââââââââââââââ
@@ -719,6 +736,17 @@
                   </li>
                 ))}
               </ul>
+            )}
+
+            {entry.articleUrl && (
+              <a
+                href={entry.articleUrl}
+                className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.22em] uppercase border border-[#F3BA2F]/30 text-[#F3BA2F]/80 px-4 py-2 hover:border-[#F3BA2F]/70 hover:text-[#F3BA2F] transition-all duration-250"
+                style={{ background: 'rgba(243,186,47,0.04)' }}
+              >
+                READ FULL ARTICLE
+                <span aria-hidden>→</span>
+              </a>
             )}
 
             <PlatformBadges entryId={entry.id} />
