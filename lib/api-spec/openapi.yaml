@@ -209,7 +209,81 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResearchPaper"
 
-  /news:
+
+    /papers:
+      get:
+        operationId: listPapers
+        tags: [papers]
+        summary: List all papers and articles with citation metadata
+        parameters:
+          - in: query
+            name: type
+            schema:
+              type: string
+            description: "Filter by type: whitepaper, article, market-knowledge, etc."
+          - in: query
+            name: search
+            schema:
+              type: string
+            description: Full-text search on title, abstract, keywords
+        responses:
+          "200":
+            description: List of papers with citation metadata
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/PaperCitation"
+      post:
+        operationId: createPaper
+        tags: [papers]
+        summary: Create a new paper or article (for citation manager ingestion)
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaperCitationInput"
+        responses:
+          "201":
+            description: Created
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/PaperCitation"
+
+    /papers/{slug}:
+      get:
+        operationId: getPaper
+        tags: [papers]
+        summary: Get a single paper with full citation metadata (BibTeX, APA, JSON-LD)
+        parameters:
+          - in: path
+            name: slug
+            required: true
+            schema:
+              type: string
+            description: Paper slug (URL-friendly title) or numeric ID
+        responses:
+          "200":
+            description: Paper with full citation metadata
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/PaperCitation"
+          "404":
+            description: Paper not found
+            content:
+              application/json:
+                schema:
+                  type: object
+                  required: [error]
+                  properties:
+                    error:
+                      type: string
+
+    /news:
     get:
       operationId: listNews
       tags: [news]
@@ -355,7 +429,102 @@ paths:
 
 components:
   schemas:
-    HealthStatus:
+
+      PaperCitation:
+        type: object
+        required: [id, slug, title, type, abstract, publishedAt, authors, tags, citation]
+        properties:
+          id:
+            type: integer
+          slug:
+            type: string
+          title:
+            type: string
+          type:
+            type: string
+            description: "whitepaper | article | market-knowledge | production-code"
+          abstract:
+            type: string
+          publishedAt:
+            type: string
+            format: date-time
+          authors:
+            type: array
+            items:
+              type: string
+          keywords:
+            type: array
+            items:
+              type: string
+          downloadUrl:
+            type: string
+            nullable: true
+          tags:
+            type: array
+            items:
+              type: string
+          institution:
+            type: string
+            nullable: true
+          journalTitle:
+            type: string
+            nullable: true
+          orcid:
+            type: string
+            nullable: true
+          citation:
+            type: object
+            required: [apa, bibtex]
+            properties:
+              apa:
+                type: string
+              bibtex:
+                type: string
+              jsonld:
+                type: object
+                nullable: true
+
+      PaperCitationInput:
+        type: object
+        required: [title, type, abstract, authors]
+        properties:
+          title:
+            type: string
+          type:
+            type: string
+            description: "whitepaper | article | market-knowledge | production-code"
+          abstract:
+            type: string
+          authors:
+            type: array
+            items:
+              type: string
+          keywords:
+            type: array
+            items:
+              type: string
+          downloadUrl:
+            type: string
+            nullable: true
+          tags:
+            type: array
+            items:
+              type: string
+          institution:
+            type: string
+            nullable: true
+          journalTitle:
+            type: string
+            nullable: true
+          orcid:
+            type: string
+            nullable: true
+          publishedAt:
+            type: string
+            format: date-time
+            nullable: true
+
+      HealthStatus:
       type: object
       required: [status]
       properties:
