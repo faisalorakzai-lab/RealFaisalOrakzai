@@ -4,7 +4,7 @@ import { Router, type IRouter } from "express";
 
   const router: IRouter = Router();
 
-  // ── helpers ──────────────────────────────────────────────────────────────────
+  // ââ helpers ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
   function toSlug(title: string): string {
     return title
@@ -101,7 +101,7 @@ import { Router, type IRouter } from "express";
         name,
         url: baseUrl,
         affiliation: { "@type": "Organization", name: institution },
-        sameAs: ["https://orcid.org/0009-0003-4582-1927"],
+        sameAs: ["https://orcid.org/0009-0000-0915-7272"],
       })),
       publisher: {
         "@type": "Organization",
@@ -159,12 +159,12 @@ import { Router, type IRouter } from "express";
       tags,
       institution,
       journalTitle: "Orakzai Research Lab Working Papers",
-      orcid: "0009-0003-4582-1927",
+      orcid: "0009-0000-0915-7272",
       citation: { apa, bibtex, jsonld },
     };
   }
 
-  // ── GET /papers ───────────────────────────────────────────────────────────────
+  // ââ GET /papers âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
   router.get("/papers", async (req, res): Promise<void> => {
     const baseUrl = `https://${req.hostname === "localhost" ? "faisalorakzai.com" : req.hostname}`;
@@ -189,7 +189,7 @@ import { Router, type IRouter } from "express";
     res.json(rows.map((r) => enrichPaper(r, baseUrl)));
   });
 
-  // ── GET /papers/:slug ─────────────────────────────────────────────────────────
+  // ââ GET /papers/:slug âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
   router.get("/papers/:slug", async (req, res): Promise<void> => {
     const baseUrl = `https://${req.hostname === "localhost" ? "faisalorakzai.com" : req.hostname}`;
@@ -237,7 +237,7 @@ import { Router, type IRouter } from "express";
     res.json(enrichPaper(row, baseUrl));
   });
 
-  // ── POST /papers ──────────────────────────────────────────────────────────────
+  // ââ POST /papers ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
   router.post("/papers", async (req, res): Promise<void> => {
     const baseUrl = `https://${req.hostname === "localhost" ? "faisalorakzai.com" : req.hostname}`;
