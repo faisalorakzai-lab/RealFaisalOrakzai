@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-  import { motion, AnimatePresence } from "framer-motion";
-  import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
