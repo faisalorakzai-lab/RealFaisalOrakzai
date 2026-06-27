@@ -227,3 +227,7 @@ export type GlobalSearchParams = {
 q: string;
 };
 
+  export interface ContactStats {
+    count: number;
+  }
+  
