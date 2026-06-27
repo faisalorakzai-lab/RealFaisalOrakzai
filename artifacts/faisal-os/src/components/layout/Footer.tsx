@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 const socials = [
-  { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",            short: "LI" },
-  { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                          short: "X"  },
-  { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",              short: "IG" },
-  { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                   short: "TK" },
-  { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                  short: "GH" },
-  { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",     short: "CB" },
-  { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",              short: "PT" },
-  { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",               short: "FB" },
-  { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",            short: "CH" },
-  { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",                short: "MT" },
+  { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",            logo: "/logos/linkedin.jpg" },
+  { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                          logo: "/logos/x.png"       },
+  { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",              logo: "/logos/instagram.png" },
+  { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                   logo: "/logos/tiktok.png"  },
+  { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                  logo: "/logos/github.png"  },
+  { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",     logo: "/logos/crunchbase.png" },
+  { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",              logo: "/logos/pinterest.png" },
+  { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",               logo: "/logos/facebook.png" },
+  { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",            logo: "/logos/clubhouse.png" },
+  { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",                logo: "/logos/mastodon.png" },
 ];
 
 const ecosystem = [
@@ -90,8 +90,12 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 group"
                 >
-                  <span className="w-6 h-6 border border-white/12 flex items-center justify-center text-[9px] font-mono text-[#F3BA2F]/70 group-hover:border-[#F3BA2F]/50 group-hover:bg-[#F3BA2F]/5 transition-all shrink-0">
-                    {s.short}
+                  <span className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden rounded-sm">
+                    <img
+                      src={s.logo}
+                      alt={s.label}
+                      className="w-full h-full object-cover"
+                    />
                   </span>
                   <span className="text-white/60 text-sm group-hover:text-[#F3BA2F] transition-colors truncate">
                     {s.label}
