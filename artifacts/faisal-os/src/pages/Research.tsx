@@ -668,89 +668,140 @@
 
 
 
+  // ─── Luxury Fonts (once) ─────────────────────────────────────────────────────
+  function useMKFonts() {
+    useEffect(() => {
+      if (document.getElementById("mk-fonts")) return;
+      const l = document.createElement("link");
+      l.id = "mk-fonts"; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap";
+      document.head.appendChild(l);
+    }, []);
+  }
+
+
   // ─── Magazine Card (MARKET KNOWLEDGE) ────────────────────────────────────────
   function MagazineCard({ entry, i }: { entry: Entry; i: number }) {
     const [hov, setHov] = useState(false);
     const isFeatured = !!entry.thumbnail;
+    useMKFonts();
     const basePath = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 
     const AbstractBg = () => (
-      <div style={{ width:"100%", height:"100%", background:"linear-gradient(135deg,#0a0a0a 0%,#0d1117 40%,#0a0800 100%)", position:"relative", overflow:"hidden" }}>
-        <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(243,186,47,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(243,186,47,0.07) 1px, transparent 1px)", backgroundSize:"28px 28px" }} />
+      <div style={{ width:"100%", height:"100%", background:"linear-gradient(160deg,#0c0c0c 0%,#0d1117 50%,#0a0800 100%)", position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(243,186,47,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(243,186,47,0.06) 1px, transparent 1px)", backgroundSize:"24px 24px" }} />
         <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center" }}>
-          <div style={{ width:"72px", height:"72px", border:"1px solid rgba(243,186,47,0.18)", transform:"rotate(45deg)", position:"relative" }}>
-            <div style={{ position:"absolute", inset:"22%", border:"1px solid rgba(243,186,47,0.22)" }} />
-            <div style={{ position:"absolute", inset:"42%", background:"rgba(243,186,47,0.18)" }} />
-          </div>
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity:0.18 }}>
+            <rect x="30" y="30" width="20" height="20" stroke="#F3BA2F" strokeWidth="1"/>
+            <rect x="20" y="20" width="40" height="40" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <line x1="40" y1="0" x2="40" y2="80" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <line x1="0" y1="40" x2="80" y2="40" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <circle cx="40" cy="40" r="28" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <circle cx="40" cy="40" r="4" fill="#F3BA2F"/>
+          </svg>
         </div>
-        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse at 50% 80%, rgba(243,186,47,0.07) 0%, transparent 70%)" }} />
+        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse at center, rgba(243,186,47,0.05) 0%, transparent 65%)" }} />
       </div>
     );
 
     return (
       <motion.article
         id={entry.id}
-        initial={{ opacity:0, y:40 }}
+        initial={{ opacity:0, y:30 }}
         animate={{ opacity:1, y:0 }}
-        transition={{ duration:0.7, delay: i * 0.12, ease:[0.22,1,0.36,1] }}
+        transition={{ duration:0.65, delay: i * 0.1, ease:[0.22,1,0.36,1] }}
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         onClick={() => entry.slug && (window.location.href = basePath + "/research/" + entry.slug)}
         style={{
           gridColumn: isFeatured ? "1 / -1" : "span 1",
-          position:"relative", cursor: entry.slug ? "pointer" : "default", overflow:"hidden",
-          border: hov ? "1px solid rgba(243,186,47,0.5)" : "1px solid rgba(243,186,47,0.12)",
-          transition:"border-color 0.35s, box-shadow 0.35s",
-          boxShadow: hov ? "0 0 40px rgba(243,186,47,0.07)" : "none",
+          position:"relative", cursor: entry.slug ? "pointer" : "default",
+          overflow:"hidden", display:"flex", flexDirection:"column",
+          border: hov ? "1px solid rgba(243,186,47,0.45)" : "1px solid rgba(243,186,47,0.1)",
+          transition:"border-color 0.3s, box-shadow 0.3s",
+          boxShadow: hov ? "0 8px 48px rgba(243,186,47,0.06)" : "none",
+          background:"#080808",
         }}
       >
-        {/* Image */}
-        <div style={{ position:"relative", height: isFeatured ? "clamp(320px,45vw,480px)" : "260px", overflow:"hidden" }}>
+        {/* ── Thumbnail (top, full width) ── */}
+        <div style={{ position:"relative", height: isFeatured ? "clamp(260px, 40vw, 460px)" : "200px", overflow:"hidden", flexShrink:0 }}>
           {entry.thumbnail ? (
             <motion.img
               src={entry.thumbnail}
               alt={entry.title}
-              animate={{ scale: hov ? 1.05 : 1 }}
-              transition={{ duration:0.8 }}
+              animate={{ scale: hov ? 1.04 : 1 }}
+              transition={{ duration:0.9, ease:"easeOut" }}
               style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}
             />
           ) : (
             <AbstractBg />
           )}
-          <div style={{ position:"absolute", inset:0, background: isFeatured
-            ? "linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.08) 100%)"
-            : "linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0.15) 100%)"
-          }} />
-          {hov && <div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg, transparent 30%, rgba(243,186,47,0.04) 50%, transparent 70%)", pointerEvents:"none" }} />}
+          {/* Subtle bottom fade to match card bg */}
+          <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"40%", background:"linear-gradient(to top, #080808, transparent)" }} />
+          {/* Category pill top-left */}
+          <div style={{ position:"absolute", top:"1rem", left:"1rem" }}>
+            <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"#F3BA2F", textTransform:"uppercase", background:"rgba(0,0,0,0.75)", padding:"0.3rem 0.6rem", border:"1px solid rgba(243,186,47,0.25)", backdropFilter:"blur(4px)" }}>
+              {entry.category}
+            </span>
+          </div>
         </div>
 
-        {/* Content */}
-        <div style={{ position:"absolute", bottom:0, left:0, right:0, padding: isFeatured ? "2rem 1.75rem" : "1.25rem" }}>
-          <span style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.28em", color:"#F3BA2F", textTransform:"uppercase", display:"block", marginBottom:"0.5rem", opacity:0.85 }}>
-            {entry.category}
+        {/* ── Text content (below image) ── */}
+        <div style={{ padding: isFeatured ? "1.75rem 1.75rem 2rem" : "1.25rem 1.25rem 1.5rem", display:"flex", flexDirection:"column", flex:1 }}>
+          
+          {/* Year */}
+          <span style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.2em", color:"rgba(255,255,255,0.3)", textTransform:"uppercase", display:"block", marginBottom:"0.75rem" }}>
+            {entry.year}
           </span>
-          <h2 style={{ fontFamily:"'Playfair Display', Georgia, serif", fontSize: isFeatured ? "clamp(1.5rem,3.5vw,2.2rem)" : "clamp(1rem,2.5vw,1.3rem)", fontWeight:700, color:"#fff", lineHeight:1.18, marginBottom:"0.65rem" }}>
+
+          {/* Title */}
+          <h2 style={{
+            fontFamily:"'Playfair Display', Georgia, serif",
+            fontSize: isFeatured ? "clamp(1.35rem, 3vw, 2rem)" : "clamp(1rem, 2vw, 1.2rem)",
+            fontWeight:700, color:"#fff", lineHeight:1.2, marginBottom:"0.75rem",
+            letterSpacing:"-0.01em",
+          }}>
             {entry.title}
           </h2>
+
+          {/* Subtitle (featured only) */}
           {entry.subtitle && isFeatured && (
-            <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"0.95rem", color:"rgba(255,255,255,0.5)", lineHeight:1.6, marginBottom:"0.85rem", fontStyle:"italic", fontWeight:300 }}>
+            <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"0.95rem", color:"rgba(243,186,47,0.65)", lineHeight:1.6, marginBottom:"0.85rem", fontStyle:"italic", fontWeight:300 }}>
               {entry.subtitle}
             </p>
           )}
-          <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize: isFeatured ? "0.95rem" : "0.85rem", color:"rgba(255,255,255,0.45)", lineHeight:1.65, marginBottom:"1rem", overflow:"hidden", display:"-webkit-box", WebkitLineClamp: isFeatured ? 3 : 2, WebkitBoxOrient:"vertical", fontWeight:300 }}>
+
+          {/* Excerpt */}
+          <p style={{
+            fontFamily:"'Cormorant Garamond', Georgia, serif",
+            fontSize: isFeatured ? "1rem" : "0.875rem",
+            color:"rgba(255,255,255,0.5)", lineHeight:1.7,
+            marginBottom:"1.25rem", fontWeight:300, flex:1,
+            display:"-webkit-box", WebkitLineClamp: isFeatured ? 3 : 2,
+            WebkitBoxOrient:"vertical", overflow:"hidden",
+          }}>
             {entry.abstract}
           </p>
-          <motion.span
+
+          {/* Gold divider */}
+          <div style={{ height:"1px", background:"linear-gradient(90deg, rgba(243,186,47,0.3) 0%, transparent 100%)", marginBottom:"1.1rem" }} />
+
+          {/* Read Article CTA */}
+          <motion.div
             animate={{ x: hov ? 5 : 0 }}
-            transition={{ duration:0.25 }}
-            style={{ fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.22em", color:"#F3BA2F", textTransform:"uppercase", display:"inline-flex", alignItems:"center", gap:"0.45rem" }}
+            transition={{ duration:0.2 }}
+            style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem" }}
           >
-            READ ARTICLE <span style={{ fontSize:"13px" }}>→</span>
-          </motion.span>
+            <span style={{ fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.22em", color:"#F3BA2F", textTransform:"uppercase" }}>
+              READ ARTICLE
+            </span>
+            <span style={{ fontSize:"14px", color:"#F3BA2F" }}>→</span>
+          </motion.div>
         </div>
       </motion.article>
     );
   }
+
 
   function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
