@@ -117,7 +117,7 @@ export default function Ecosystem() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 14px", border: `1px solid ${GOLD_DIM}`, marginBottom: "20px", background: "rgba(243,186,47,0.02)" }}>
               <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: GOLD, boxShadow: `0 0 8px ${GOLD}`, animation: "dp 2s infinite", display: "inline-block" }} />
-              <span style={{ fontFamily: "monospace", fontSize: "10px", color: GOLD, letterSpacing: "0.3em" }}>ORAKZAI SOVEREIGN ECOSYSTEM</span>
+              <span style={{ fontFamily: "monospace", fontSize: "10px", color: GOLD, letterSpacing: "0.3em" }}>ORAKZAI GROUP</span>
             </div>
             <h1 style={{ fontSize: "clamp(40px, 8vw, 80px)", fontWeight: 900, letterSpacing: "-0.03em", lineHeight: 0.92, marginBottom: "20px" }}>
               <span style={{ display: "block" }}>SOVEREIGN</span>
@@ -562,33 +562,6 @@ export default function Ecosystem() {
           </motion.section>
         )}
       </AnimatePresence>
-
-      {/* ── LIVE CORES STRIP (always visible below orbital) ── */}
-      {!activeNode && !activeCore && (
-        <section style={{ padding: "40px 0 80px" }}>
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-            <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.4em", marginBottom: "20px" }}>// CLICK A LIVE CORE TO VIEW · CLICK AN OUTER NODE TO EXPLORE SECTOR</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1px", background: GOLD_DIM }}>
-              {LIVE_CORES.map((core) => (
-                <div key={core.id} style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", cursor: core.url ? "pointer" : "default" }}
-                  onClick={() => core.url && window.open(core.url, "_blank")}>
-                  <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${core.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
-                    <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: core.statusColor, letterSpacing: "0.2em", marginBottom: "4px" }}>
-                      ● {core.status} · {core.tag}
-                    </div>
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{core.name}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{core.desc.substring(0, 80)}…</div>
-                    {core.url && <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>{core.url.replace("https://", "")} ↗</div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       <style>{`
         @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
