@@ -1,11 +1,6 @@
 {
   "redirects": [
     {
-      "source": "https://www.faisalorakzai.com/(.*)",
-      "destination": "https://faisalorakzai.com/$1",
-      "permanent": true
-    },
-    {
       "source": "/story",
       "destination": "/founder",
       "permanent": true
