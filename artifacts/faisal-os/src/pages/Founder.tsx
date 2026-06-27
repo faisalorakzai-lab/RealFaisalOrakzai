@@ -25,12 +25,11 @@ const GALLERY = [
   { src: "/gallery/g12.jpg",  caption: "Orakzai Agency — Genesis",    year: "2020" },
 ];
 
-// Book spreads: 2 photos per page
-type GalleryItem = { src: string; caption: string; year: string };
-const BOOK_SPREADS: [GalleryItem, GalleryItem][] = [];
-for (let i = 0; i < GALLERY.length; i += 2) {
-  BOOK_SPREADS.push([GALLERY[i], GALLERY[i + 1] || GALLERY[0]]);
-}
+
+// Book pages: 14 photos split left 7 + right 7
+  type GalleryItem = { src: string; caption: string; year: string };
+  const PAGE_LEFT = GALLERY.slice(0, 7);
+  const PAGE_RIGHT = GALLERY.slice(7, 14);
 
 const TIMELINE = [
   {
@@ -109,28 +108,35 @@ export default function Founder() {
   }, [isPaused, nextSlide]);
 
   // ── Book Gallery ──
-  const [bookPage, setBookPage] = useState(0);
-  const [bookPaused, setBookPaused] = useState(false);
-  const bookTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const touchStartX = useRef<number>(0);
-  const touchStartY = useRef<number>(0);
+    const [bookHighlight, setBookHighlight] = useState(0);
+    const [bookPaused, setBookPaused] = useState(false);
+    const bookTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+    const touchStartX = useRef<number>(0);
+    const touchStartY = useRef<number>(0);
+    const TOTAL_PHOTOS = GALLERY.length;
 
-  const nextBook = useCallback(() => setBookPage(v => (v + 1) % BOOK_SPREADS.length), []);
-  const prevBook = useCallback(() => setBookPage(v => (v - 1 + BOOK_SPREADS.length) % BOOK_SPREADS.length), []);
+    const nextHighlight = useCallback(() => setBookHighlight(v => (v + 1) % TOTAL_PHOTOS), [TOTAL_PHOTOS]);
+    const prevHighlight = useCallback(() => setBookHighlight(v => (v - 1 + TOTAL_PHOTOS) % TOTAL_PHOTOS), [TOTAL_PHOTOS]);
 
-  useEffect(() => {
-    if (bookPaused) return;
-    bookTimer.current = setInterval(nextBook, 4000);
-    return () => { if (bookTimer.current) clearInterval(bookTimer.current); };
-  }, [bookPaused, nextBook]);
+    useEffect(() => {
+      if (bookPaused) return;
+      bookTimer.current = setInterval(nextHighlight, 2500);
+      return () => { if (bookTimer.current) clearInterval(bookTimer.current); };
+    }, [bookPaused, nextHighlight]);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    setBookPaused(true);
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const handleTouchStart = (e: React.TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+      setBookPaused(true);
+    };
+    const handleTouchEnd = (e: React.TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      const dy = e.changedTouches[0].clientY - touchStartY.current;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx < 0) nextHighlight(); else prevHighlight();
+      }
+      setTimeout(() => setBookPaused(false), 3000);
+    };
     const dy = e.changedTouches[0].clientY - touchStartY.current;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
       if (dx < 0) nextBook(); else prevBook();
@@ -231,107 +237,158 @@ export default function Founder() {
         </div>
       </section>
 
-      {/* ── BOOK GALLERY ── */}
-      <section className="py-20 border-t border-[#F3BA2F]/10">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-8 bg-[#F3BA2F]" />
-              <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Photo Archive · Book View</span>
-              <div className="h-px flex-1 bg-[#F3BA2F]/10" />
-              <span className="text-white/20 font-mono text-[10px] tracking-widest">{String(bookPage + 1).padStart(2,"0")} / {String(BOOK_SPREADS.length).padStart(2,"0")}</span>
-            </div>
-          </motion.div>
+        {/* ── BOOK GALLERY ── */}
+        <section className="py-16 border-t border-[#F3BA2F]/10">
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[#F3BA2F]" />
+                <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Photo Archive · Book View</span>
+                <div className="h-px flex-1 bg-[#F3BA2F]/10" />
+                <span className="text-white/20 font-mono text-[10px] tracking-widest">{String(bookHighlight + 1).padStart(2,"0")} / {String(TOTAL_PHOTOS).padStart(2,"0")}</span>
+              </div>
+            </motion.div>
 
-          {/* Book container */}
-          <div
-            className="relative select-none"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onMouseEnter={() => setBookPaused(true)}
-            onMouseLeave={() => setBookPaused(false)}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={bookPage}
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="grid grid-cols-2 gap-1"
-                style={{ aspectRatio: "16/9" }}
-              >
+            {/* Book container */}
+            <div
+              className="relative select-none"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseEnter={() => setBookPaused(true)}
+              onMouseLeave={() => setBookPaused(false)}
+            >
+              {/* Book spread */}
+              <div className="flex gap-0 border border-[#F3BA2F]/15" style={{ background: "#050505" }}>
+
                 {/* LEFT PAGE */}
-                <div className="relative overflow-hidden" style={{ borderRight: "3px solid rgba(0,0,0,0.8)" }}>
-                  {/* Book spine shadow */}
-                  <div className="absolute right-0 top-0 bottom-0 w-12 pointer-events-none z-10" style={{ background: "linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 100%)" }} />
-                  <img
-                    src={BOOK_SPREADS[bookPage][0].src}
-                    alt={BOOK_SPREADS[bookPage][0].caption}
-                    className="w-full h-full object-cover"
-                    style={{ filter: "brightness(0.9) contrast(1.05)" }}
-                  />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)" }} />
-                  {/* Page number */}
-                  <div className="absolute bottom-4 left-4 z-10">
-                    <div className="text-[#F3BA2F] font-mono text-[9px] tracking-widest mb-1">{BOOK_SPREADS[bookPage][0].year}</div>
-                    <div className="text-white/80 text-sm font-medium">{BOOK_SPREADS[bookPage][0].caption}</div>
+                <div className="flex-1 relative" style={{ borderRight: "4px solid #000" }}>
+                  {/* Page spine shadow */}
+                  <div className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-10" style={{ background: "linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%)" }} />
+                  {/* Page label */}
+                  <div className="absolute top-2 left-2 z-20 font-mono text-[9px] text-[#F3BA2F]/40 tracking-widest">I</div>
+                  {/* 7-photo grid */}
+                  <div className="grid grid-cols-2 gap-[2px] p-[2px]">
+                    {PAGE_LEFT.map((photo, i) => {
+                      const isActive = bookHighlight === i;
+                      return (
+                        <div
+                          key={i}
+                          onClick={() => { setBookHighlight(i); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
+                          className="relative overflow-hidden cursor-pointer"
+                          style={{
+                            aspectRatio: i === 6 ? "2/1" : "1/1",
+                            gridColumn: i === 6 ? "1 / -1" : undefined,
+                            transition: "transform 0.3s",
+                            transform: isActive ? "scale(1.02)" : "scale(1)",
+                            zIndex: isActive ? 5 : 1,
+                          }}
+                        >
+                          <img
+                            src={photo.src}
+                            alt={photo.caption}
+                            className="w-full h-full object-cover"
+                            style={{
+                              filter: isActive ? "brightness(1.1) contrast(1.1)" : "brightness(0.65) contrast(1.0)",
+                              transition: "filter 0.5s",
+                            }}
+                          />
+                          {/* Overlay */}
+                          <div className="absolute inset-0 transition-opacity duration-500"
+                            style={{ background: isActive ? "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%)" : "rgba(0,0,0,0.25)", opacity: 1 }} />
+                          {/* Caption on active */}
+                          {isActive && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="absolute bottom-2 left-2 right-2 z-10"
+                            >
+                              <div className="text-[#F3BA2F] font-mono text-[8px] tracking-widest">{photo.year}</div>
+                              <div className="text-white text-[10px] font-semibold leading-tight">{photo.caption}</div>
+                            </motion.div>
+                          )}
+                          {/* Page number */}
+                          {!isActive && (
+                            <div className="absolute top-1 right-1 font-mono text-[8px] text-white/20 z-10">{String(i + 1).padStart(2,"0")}</div>
+                          )}
+                          {/* Active gold ring */}
+                          {isActive && (
+                            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 2px rgba(243,186,47,0.7)" }} />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                  <div className="absolute top-3 left-3 font-mono text-[9px] text-white/20 z-10">{String(bookPage * 2 + 1).padStart(2,"0")}</div>
-                  {/* Left page edge lines (book texture) */}
-                  <div className="absolute top-0 left-0 right-0 h-px bg-[#F3BA2F]/15 z-10" />
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-[#F3BA2F]/15 z-10" />
                 </div>
+
+                {/* BOOK SPINE */}
+                <div style={{ width: "6px", background: "linear-gradient(to right, #1a1400, #2a1f00, #1a1400)", flexShrink: 0 }} />
 
                 {/* RIGHT PAGE */}
-                <div className="relative overflow-hidden" style={{ borderLeft: "3px solid rgba(0,0,0,0.8)" }}>
-                  {/* Book spine shadow */}
-                  <div className="absolute left-0 top-0 bottom-0 w-12 pointer-events-none z-10" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 100%)" }} />
-                  <img
-                    src={BOOK_SPREADS[bookPage][1].src}
-                    alt={BOOK_SPREADS[bookPage][1].caption}
-                    className="w-full h-full object-cover"
-                    style={{ filter: "brightness(0.9) contrast(1.05)" }}
-                  />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)" }} />
-                  <div className="absolute bottom-4 right-4 z-10 text-right">
-                    <div className="text-[#F3BA2F] font-mono text-[9px] tracking-widest mb-1">{BOOK_SPREADS[bookPage][1].year}</div>
-                    <div className="text-white/80 text-sm font-medium">{BOOK_SPREADS[bookPage][1].caption}</div>
+                <div className="flex-1 relative" style={{ borderLeft: "4px solid #000" }}>
+                  {/* Page spine shadow */}
+                  <div className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-10" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 100%)" }} />
+                  {/* Page label */}
+                  <div className="absolute top-2 right-2 z-20 font-mono text-[9px] text-[#F3BA2F]/40 tracking-widest">II</div>
+                  {/* 7-photo grid */}
+                  <div className="grid grid-cols-2 gap-[2px] p-[2px]">
+                    {PAGE_RIGHT.map((photo, i) => {
+                      const globalIdx = 7 + i;
+                      const isActive = bookHighlight === globalIdx;
+                      return (
+                        <div
+                          key={i}
+                          onClick={() => { setBookHighlight(globalIdx); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
+                          className="relative overflow-hidden cursor-pointer"
+                          style={{
+                            aspectRatio: i === 6 ? "2/1" : "1/1",
+                            gridColumn: i === 6 ? "1 / -1" : undefined,
+                            transition: "transform 0.3s",
+                            transform: isActive ? "scale(1.02)" : "scale(1)",
+                            zIndex: isActive ? 5 : 1,
+                          }}
+                        >
+                          <img
+                            src={photo.src}
+                            alt={photo.caption}
+                            className="w-full h-full object-cover"
+                            style={{
+                              filter: isActive ? "brightness(1.1) contrast(1.1)" : "brightness(0.65) contrast(1.0)",
+                              transition: "filter 0.5s",
+                            }}
+                          />
+                          <div className="absolute inset-0 transition-opacity duration-500"
+                            style={{ background: isActive ? "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%)" : "rgba(0,0,0,0.25)", opacity: 1 }} />
+                          {isActive && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="absolute bottom-2 left-2 right-2 z-10"
+                            >
+                              <div className="text-[#F3BA2F] font-mono text-[8px] tracking-widest">{photo.year}</div>
+                              <div className="text-white text-[10px] font-semibold leading-tight">{photo.caption}</div>
+                            </motion.div>
+                          )}
+                          {!isActive && (
+                            <div className="absolute top-1 right-1 font-mono text-[8px] text-white/20 z-10">{String(globalIdx + 1).padStart(2,"0")}</div>
+                          )}
+                          {isActive && (
+                            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 2px rgba(243,186,47,0.7)" }} />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                  <div className="absolute top-3 right-3 font-mono text-[9px] text-white/20 z-10">{String(bookPage * 2 + 2).padStart(2,"0")}</div>
-                  <div className="absolute top-0 left-0 right-0 h-px bg-[#F3BA2F]/15 z-10" />
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-[#F3BA2F]/15 z-10" />
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              </div>
 
-            {/* Prev/Next Arrows */}
-            <button
-              onClick={prevBook}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 border border-[#F3BA2F]/30 bg-black/70 backdrop-blur-sm flex items-center justify-center text-[#F3BA2F] hover:bg-[#F3BA2F]/10 transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextBook}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 border border-[#F3BA2F]/30 bg-black/70 backdrop-blur-sm flex items-center justify-center text-[#F3BA2F] hover:bg-[#F3BA2F]/10 transition-all"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+              {/* Navigation dots */}
+              <div className="flex items-center justify-center gap-2 mt-5">
+                {GALLERY.map((_, i) => (
+                  <button key={i} onClick={() => { setBookHighlight(i); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
+                    className="transition-all duration-300 h-[3px] rounded-full"
+                    style={{ width: i === bookHighlight ? "24px" : "6px", background: i === bookHighlight ? "#F3BA2F" : "rgba(255,255,255,0.15)" }} />
+                ))}
+              </div>
+              <p className="text-center text-white/20 font-mono text-[10px] tracking-widest mt-2">SWIPE OR TAP PHOTO TO FOCUS</p>
+            </div>
           </div>
-
-          {/* Book page dots */}
-          <div className="flex items-center justify-center gap-2 mt-6">
-            {BOOK_SPREADS.map((_, i) => (
-              <button key={i} onClick={() => setBookPage(i)}
-                className="transition-all duration-300 h-[3px]"
-                style={{ width: i === bookPage ? "28px" : "10px", background: i === bookPage ? "#F3BA2F" : "rgba(255,255,255,0.15)" }}
-              />
-            ))}
-          </div>
-          <p className="text-center text-white/20 font-mono text-[10px] tracking-widest mt-3">SWIPE OR TAP ARROWS TO TURN PAGES</p>
-        </div>
-      </section>
+        </section>
 
       {/* ── SOVEREIGN TIMELINE ── */}
       <section className="py-28 border-t border-[#F3BA2F]/10 relative">
