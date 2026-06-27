@@ -1,48 +1,359 @@
-# Muhammad Faisal Orakzai — faisalorakzai.com
-  # Founder & Chairman, Orakzai Group
+# faisalorakzai.com — Muhammad Faisal Orakzai
+  # Founder & Chairman, Orakzai Group | فیصل اورکزئی
+  # This site welcomes ALL legitimate web crawlers worldwide.
 
+  # ═══════════════════════════════════════════════════════
+  # GLOBAL DEFAULT — covers every bot not listed below
+  # ═══════════════════════════════════════════════════════
   User-agent: *
   Allow: /
   Disallow: /api/
 
+  # ═══════════════════════════════════════════════════════
+  # TIER 1 — MAJOR SEARCH ENGINES
+  # ═══════════════════════════════════════════════════════
+
+  # Google (all crawlers)
   User-agent: Googlebot
   Allow: /
-  Crawl-delay: 1
+  User-agent: Googlebot-Image
+  Allow: /
+  User-agent: Googlebot-Video
+  Allow: /
+  User-agent: Googlebot-News
+  Allow: /
+  User-agent: Googlebot-Mobile
+  Allow: /
+  User-agent: AdsBot-Google
+  Allow: /
+  User-agent: AdsBot-Google-Mobile
+  Allow: /
+  User-agent: Google-InspectionTool
+  Allow: /
+  User-agent: Google-Read-Aloud
+  Allow: /
+  User-agent: Storebot-Google
+  Allow: /
 
+  # Microsoft Bing
   User-agent: Bingbot
   Allow: /
-  Crawl-delay: 2
+  User-agent: BingPreview
+  Allow: /
+  User-agent: MicrosoftPreview
+  Allow: /
+  User-agent: msnbot
+  Allow: /
+  User-agent: msnbot-media
+  Allow: /
+  User-agent: adidxbot
+  Allow: /
 
+  # Yandex (Russia)
   User-agent: Yandex
   Allow: /
-  Crawl-delay: 2
+  User-agent: YandexBot
+  Allow: /
+  User-agent: YandexImages
+  Allow: /
+  User-agent: YandexVideo
+  Allow: /
+  User-agent: YandexMedia
+  Allow: /
+  User-agent: YandexBlogs
+  Allow: /
+  User-agent: YandexFavicons
+  Allow: /
+  User-agent: YandexWebmaster
+  Allow: /
+  User-agent: YandexMetrika
+  Allow: /
+  User-agent: YandexNews
+  Allow: /
+  User-agent: YandexCatalog
+  Allow: /
+  User-agent: YandexDirect
+  Allow: /
 
+  # Baidu (China)
   User-agent: Baiduspider
   Allow: /
+  User-agent: Baiduspider-image
+  Allow: /
+  User-agent: Baiduspider-video
+  Allow: /
+  User-agent: Baiduspider-news
+  Allow: /
+  User-agent: Baiduspider-favo
+  Allow: /
 
+  # DuckDuckGo
   User-agent: DuckDuckBot
   Allow: /
-
-  User-agent: LinkedInBot
+  User-agent: DuckDuckGo-Favicons-Bot
   Allow: /
 
-  User-agent: Twitterbot
+  # Yahoo
+  User-agent: Slurp
   Allow: /
 
-  User-agent: WhatsApp
+  # Naver (South Korea)
+  User-agent: Yeti
+  Allow: /
+  User-agent: NaverBot
   Allow: /
 
+  # Daum (South Korea)
+  User-agent: Daum
+  Allow: /
+
+  # Sogou (China)
+  User-agent: Sogou web spider
+  Allow: /
+  User-agent: Sogou inst spider
+  Allow: /
+  User-agent: Sogou News Spider
+  Allow: /
+
+  # 360Spider (China)
+  User-agent: 360Spider
+  Allow: /
+  User-agent: HaoSouSpider
+  Allow: /
+
+  # Qihoo (China)
+  User-agent: QIHOO
+  Allow: /
+
+  # Shenma (China — Alibaba/UC)
+  User-agent: ShenmaSpider
+  Allow: /
+
+  # Seznam (Czech Republic)
+  User-agent: SeznamBot
+  Allow: /
+
+  # Mail.ru (Russia)
+  User-agent: Mail.RU_Bot
+  Allow: /
+
+  # Rambler (Russia)
+  User-agent: Rambler
+  Allow: /
+
+  # Ecosia (Germany)
+  User-agent: Ecosia
+  Allow: /
+
+  # Startpage
+  User-agent: startmebot
+  Allow: /
+
+  # Swisscows
+  User-agent: SwiftBot
+  Allow: /
+
+  # ═══════════════════════════════════════════════════════
+  # TIER 2 — AI & KNOWLEDGE BOTS (LLM Training)
+  # ═══════════════════════════════════════════════════════
+
+  # OpenAI (ChatGPT)
+  User-agent: GPTBot
+  Allow: /
+  User-agent: ChatGPT-User
+  Allow: /
+  User-agent: OAI-SearchBot
+  Allow: /
+
+  # Anthropic (Claude)
+  User-agent: ClaudeBot
+  Allow: /
+  User-agent: anthropic-ai
+  Allow: /
+  User-agent: Claude-Web
+  Allow: /
+
+  # Google Gemini / Bard
+  User-agent: Google-Extended
+  Allow: /
+  User-agent: Gemini
+  Allow: /
+
+  # Meta AI (LLaMA)
+  User-agent: meta-externalagent
+  Allow: /
+  User-agent: FacebookBot
+  Allow: /
+
+  # Apple
   User-agent: Applebot
   Allow: /
+  User-agent: Applebot-Extended
+  Allow: /
 
+  # Perplexity AI
+  User-agent: PerplexityBot
+  Allow: /
+
+  # Cohere
+  User-agent: cohere-ai
+  Allow: /
+
+  # Common Crawl (feeds most AI training)
+  User-agent: CCBot
+  Allow: /
+
+  # Amazon Alexa
+  User-agent: Alexa
+  Allow: /
   User-agent: ia_archiver
   Allow: /
 
+  # ═══════════════════════════════════════════════════════
+  # TIER 3 — SOCIAL & MESSAGING PLATFORMS
+  # ═══════════════════════════════════════════════════════
+
+  User-agent: Twitterbot
+  Allow: /
+  User-agent: LinkedInBot
+  Allow: /
+  User-agent: WhatsApp
+  Allow: /
+  User-agent: facebookexternalhit
+  Allow: /
+  User-agent: Facebot
+  Allow: /
+  User-agent: PinterestBot
+  Allow: /
+  User-agent: Pinterest
+  Allow: /
+  User-agent: Discordbot
+  Allow: /
+  User-agent: TelegramBot
+  Allow: /
+  User-agent: Slackbot
+  Allow: /
+  User-agent: Slackbot-LinkExpanding
+  Allow: /
+  User-agent: SkypeUriPreview
+  Allow: /
+  User-agent: Snapchat
+  Allow: /
+  User-agent: redditbot
+  Allow: /
+  User-agent: Reddit
+  Allow: /
+  User-agent: Quora Link Preview
+  Allow: /
+  User-agent: vk_linkbot
+  Allow: /
+  User-agent: VKRobot
+  Allow: /
+  User-agent: TikTokBot
+  Allow: /
+  User-agent: WeChat
+  Allow: /
+  User-agent: Line
+  Allow: /
+
+  # ═══════════════════════════════════════════════════════
+  # TIER 4 — SEO, ANALYTICS & RESEARCH TOOLS
+  # ═══════════════════════════════════════════════════════
+
   User-agent: AhrefsBot
   Allow: /
-
   User-agent: SemrushBot
   Allow: /
+  User-agent: SemrushBot-SA
+  Allow: /
+  User-agent: SemrushBot-SI
+  Allow: /
+  User-agent: SemrushBot-BA
+  Allow: /
+  User-agent: MJ12bot
+  Allow: /
+  User-agent: DotBot
+  Allow: /
+  User-agent: rogerbot
+  Allow: /
+  User-agent: Exabot
+  Allow: /
+  User-agent: ia_archiver
+  Allow: /
+  User-agent: archive.org_bot
+  Allow: /
+  User-agent: Wayback
+  Allow: /
+  User-agent: heritrix
+  Allow: /
+  User-agent: SiteBot
+  Allow: /
+  User-agent: spbot
+  Allow: /
+  User-agent: linkdexbot
+  Allow: /
+  User-agent: Screaming Frog SEO Spider
+  Allow: /
+  User-agent: serpstatbot
+  Allow: /
+  User-agent: Sistrix Crawler
+  Allow: /
+  User-agent: Majestic-12
+  Allow: /
+  User-agent: Majestic SEO
+  Allow: /
+  User-agent: BLEXBot
+  Allow: /
+  User-agent: Seekport
+  Allow: /
+  User-agent: Lipperhey
+  Allow: /
+  User-agent: Wotbox
+  Allow: /
+  User-agent: meanpathbot
+  Allow: /
+  User-agent: RankActiveLinkBot
+  Allow: /
+  User-agent: Cliqzbot
+  Allow: /
 
+  # ═══════════════════════════════════════════════════════
+  # TIER 5 — MONITORING, PREVIEW & UTILITY BOTS
+  # ═══════════════════════════════════════════════════════
+
+  User-agent: Uptimebot
+  Allow: /
+  User-agent: StatusCake
+  Allow: /
+  User-agent: Pingdom.com_bot
+  Allow: /
+  User-agent: Site24x7
+  Allow: /
+  User-agent: GTmetrix
+  Allow: /
+  User-agent: PageSpeed
+  Allow: /
+  User-agent: W3C_Validator
+  Allow: /
+  User-agent: W3C-checklink
+  Allow: /
+  User-agent: W3C_I18n-Checker
+  Allow: /
+  User-agent: W3C_CSS_Validator_JFouffa
+  Allow: /
+  User-agent: Googleweblight
+  Allow: /
+  User-agent: Google Web Preview
+  Allow: /
+  User-agent: iframely
+  Allow: /
+  User-agent: Embedly
+  Allow: /
+  User-agent: Prerender
+  Allow: /
+
+  # ═══════════════════════════════════════════════════════
+  # SITEMAP DECLARATION
+  # ═══════════════════════════════════════════════════════
   Sitemap: https://faisalorakzai.com/sitemap.xml
   
