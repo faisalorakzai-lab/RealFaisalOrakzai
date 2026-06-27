@@ -9,27 +9,33 @@ const fadeUp = {
 };
 
 const GALLERY = [
-  { src: "/gallery/g01.png",  caption: "Orakzai Executive Studio",    year: "2026" },
-  { src: "/gallery/g02.png",  caption: "Global Vision — World Stage", year: "2026" },
-  { src: "/gallery/g14.png",  caption: "The Chairman",                year: "2026" },
-  { src: "/gallery/g13.png",  caption: "GMA Silicon Valley Summit",   year: "2026" },
-  { src: "/gallery/g03.jpg",  caption: "Building the Future",         year: "2026" },
-  { src: "/gallery/g04.jpg",  caption: "Orakzai Headquarters",        year: "2026" },
-  { src: "/gallery/g05.jpg",  caption: "Dubai — Global Expansion",    year: "2024" },
-  { src: "/gallery/g06.jpg",  caption: "Karachi — The Pivot",         year: "2024" },
-  { src: "/gallery/g07.jpg",  caption: "Roots — Identity Preserved",  year: "2023" },
-  { src: "/gallery/g08.jpg",  caption: "KPK — The Origin",            year: "2021" },
-  { src: "/gallery/g09.jpg",  caption: "Karachi Coastline",           year: "2022" },
-  { src: "/gallery/g10.jpg",  caption: "Vision from the Heights",     year: "2022" },
-  { src: "/gallery/g11.jpg",  caption: "Metropolitan Network",        year: "2023" },
-  { src: "/gallery/g12.jpg",  caption: "Orakzai Agency — Genesis",    year: "2020" },
-];
+    { src: "/story/story-01.jpg", caption: "Orakzai Executive Studio",    year: "2026" },
+    { src: "/story/story-02.jpg", caption: "Global Vision — World Stage", year: "2026" },
+    { src: "/story/story-03.jpg", caption: "The Chairman",                year: "2026" },
+    { src: "/story/story-04.jpg", caption: "GMA Silicon Valley Summit",   year: "2026" },
+    { src: "/story/story-05.jpg", caption: "Building the Future",         year: "2026" },
+    { src: "/story/story-06.jpg", caption: "Orakzai Headquarters",        year: "2026" },
+    { src: "/story/story-07.jpg", caption: "Dubai — Global Expansion",    year: "2024" },
+    { src: "/story/story-08.jpg", caption: "Karachi — The Pivot",         year: "2024" },
+    { src: "/story/story-09.jpg", caption: "Roots — Identity Preserved",  year: "2023" },
+    { src: "/story/story-10.jpg", caption: "KPK — The Origin",            year: "2021" },
+    { src: "/story/story-11.jpg", caption: "Karachi Coastline",           year: "2022" },
+    { src: "/story/story-12.jpg", caption: "Vision from the Heights",     year: "2022" },
+    { src: "/story/story-13.jpg", caption: "Metropolitan Network",        year: "2023" },
+    { src: "/story/story-14.jpg", caption: "Orakzai Agency — Genesis",    year: "2020" },
+    { src: "/story/story-15.jpg", caption: "Sovereign Vision",            year: "2025" },
+    { src: "/story/story-16.jpg", caption: "The Architect",               year: "2025" },
+    { src: "/story/story-17.jpg", caption: "Heritage & Legacy",           year: "2024" },
+    { src: "/story/story-18.jpg", caption: "Rising Leader",               year: "2024" },
+    { src: "/story/story-19.jpg", caption: "Orakzai Nation",              year: "2023" },
+    { src: "/story/story-20.jpg", caption: "Genesis Point",               year: "2019" },
+  ];
 
 
 // Book pages: 14 photos split left 7 + right 7
   type GalleryItem = { src: string; caption: string; year: string };
-  const PAGE_LEFT = GALLERY.slice(0, 7);
-  const PAGE_RIGHT = GALLERY.slice(7, 14);
+  const PAGE_LEFT = GALLERY.slice(0, 10);
+  const PAGE_RIGHT = GALLERY.slice(10, 20);
 
 const TIMELINE = [
   {
@@ -276,8 +282,7 @@ export default function Founder() {
                           onClick={() => { setBookHighlight(i); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
                           className="relative overflow-hidden cursor-pointer"
                           style={{
-                            aspectRatio: i === 6 ? "2/1" : "1/1",
-                            gridColumn: i === 6 ? "1 / -1" : undefined,
+                            aspectRatio: "3/4",
                             transition: "transform 0.3s",
                             transform: isActive ? "scale(1.02)" : "scale(1)",
                             zIndex: isActive ? 5 : 1,
@@ -338,8 +343,7 @@ export default function Founder() {
                           onClick={() => { setBookHighlight(globalIdx); setBookPaused(true); setTimeout(() => setBookPaused(false), 4000); }}
                           className="relative overflow-hidden cursor-pointer"
                           style={{
-                            aspectRatio: i === 6 ? "2/1" : "1/1",
-                            gridColumn: i === 6 ? "1 / -1" : undefined,
+                            aspectRatio: "3/4",
                             transition: "transform 0.3s",
                             transform: isActive ? "scale(1.02)" : "scale(1)",
                             zIndex: isActive ? 5 : 1,
