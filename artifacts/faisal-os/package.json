@@ -61,6 +61,7 @@
     "react": "catalog:",
     "react-day-picker": "^9.11.1",
     "react-dom": "catalog:",
+    "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.55.0",
     "react-icons": "^5.4.0",
     "react-resizable-panels": "^2.1.7",
