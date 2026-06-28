@@ -500,62 +500,76 @@ export default function Home() {
 
 
         {/* ── INVESTORS & SUPPORTERS ── */}
-        <section className="py-10 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
+        <section className="py-16 border-t border-[#F3BA2F]/15 relative overflow-hidden bg-black">
+          {/* Ambient glow behind section */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
+
           {/* Title */}
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="h-px w-10 bg-[#F3BA2F]/30" />
-            <span className="font-mono text-[9px] tracking-[0.4em] text-white/30 uppercase">Investors &amp; Supporters</span>
-            <div className="h-px w-10 bg-[#F3BA2F]/30" />
+          <div className="flex items-center justify-center gap-5 mb-10">
+            <div className="h-px flex-1 max-w-[80px]" style={{ background:"linear-gradient(to right,transparent,rgba(243,186,47,0.5))" }} />
+            <h3 className="font-mono tracking-[0.22em] uppercase text-center" style={{
+              fontSize:"clamp(1rem,3.5vw,1.45rem)",
+              fontWeight:700,
+              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 40%,#ffe27a 60%,#F3BA2F 80%,#c8900a 100%)",
+              backgroundSize:"200% auto",
+              WebkitBackgroundClip:"text",
+              WebkitTextFillColor:"transparent",
+              backgroundClip:"text",
+              animation:"goldShimmer 3s linear infinite",
+              textShadow:"none",
+              filter:"drop-shadow(0 0 18px rgba(243,186,47,0.55)) drop-shadow(0 0 40px rgba(243,186,47,0.25))",
+            }}>Investors &amp; Supporters</h3>
+            <div className="h-px flex-1 max-w-[80px]" style={{ background:"linear-gradient(to left,transparent,rgba(243,186,47,0.5))" }} />
           </div>
 
           {/* Scrolling ticker */}
-          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)" }}>
-            <div className="flex" style={{ animation:"investorScroll 22s linear infinite", willChange:"transform", width:"max-content" }}>
+          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)" }}>
+            <div className="flex items-center" style={{ animation:"investorScroll 28s linear infinite", willChange:"transform", width:"max-content" }}>
               {[
-                { src:"/logos/investors/sequoia.png",         name:"Sequoia Capital" },
-                { src:"/logos/investors/a16z.png",            name:"Andreessen Horowitz" },
-                { src:"/logos/investors/ycombinator.png",     name:"Y Combinator" },
-                { src:"/logos/investors/pantera.png",         name:"Pantera Capital" },
-                { src:"/logos/investors/paradigm.png",        name:"Paradigm" },
-                { src:"/logos/investors/dcg.png",             name:"Digital Currency Group" },
-                { src:"/logos/investors/coinbase.png",        name:"Coinbase" },
-                { src:"/logos/investors/polygon.png",         name:"Polygon" },
-                { src:"/logos/investors/mgx.png",             name:"MGX" },
-                { src:"/logos/investors/systems.png",         name:"Systems" },
-                { src:"/logos/investors/founder-institute.png", name:"Founder Institute" },
-                /* duplicate set for seamless loop */
-                { src:"/logos/investors/sequoia.png",         name:"Sequoia Capital" },
-                { src:"/logos/investors/a16z.png",            name:"Andreessen Horowitz" },
-                { src:"/logos/investors/ycombinator.png",     name:"Y Combinator" },
-                { src:"/logos/investors/pantera.png",         name:"Pantera Capital" },
-                { src:"/logos/investors/paradigm.png",        name:"Paradigm" },
-                { src:"/logos/investors/dcg.png",             name:"Digital Currency Group" },
-                { src:"/logos/investors/coinbase.png",        name:"Coinbase" },
-                { src:"/logos/investors/polygon.png",         name:"Polygon" },
-                { src:"/logos/investors/mgx.png",             name:"MGX" },
-                { src:"/logos/investors/systems.png",         name:"Systems" },
-                { src:"/logos/investors/founder-institute.png", name:"Founder Institute" },
+                { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false },
+                { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false },
+                { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false },
+                { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false },
+                { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true  },
+                { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true  },
+                { src:"/logos/investors/coinbase.png",         name:"Coinbase",                dark:false },
+                { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true  },
+                { src:"/logos/investors/mgx.png",              name:"MGX",                     dark:true  },
+                { src:"/logos/investors/systems.png",          name:"Systems",                 dark:false },
+                { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false },
+                /* duplicate for seamless loop */
+                { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false },
+                { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false },
+                { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false },
+                { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false },
+                { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true  },
+                { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true  },
+                { src:"/logos/investors/coinbase.png",         name:"Coinbase",                dark:false },
+                { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true  },
+                { src:"/logos/investors/mgx.png",             name:"MGX",                     dark:true  },
+                { src:"/logos/investors/systems.png",          name:"Systems",                 dark:false },
+                { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false },
               ].map((logo, i) => (
-                <div key={i} className="flex items-center justify-center mx-10 flex-shrink-0" style={{ height:"52px", width:"120px" }}>
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    title={logo.name}
-                    style={{ maxHeight:"40px", maxWidth:"110px", objectFit:"contain", filter:"grayscale(1) brightness(4) contrast(0.65) opacity(0.55)", transition:"filter 0.3s" }}
-                    onMouseEnter={e => (e.currentTarget.style.filter="grayscale(0) brightness(1) contrast(1) opacity(1)")}
-                    onMouseLeave={e => (e.currentTarget.style.filter="grayscale(1) brightness(4) contrast(0.65) opacity(0.55)")}
-                  />
+                <div key={i} className="flex-shrink-0 mx-8" style={{ padding:"14px 22px", border:"1px solid rgba(255,255,255,0.07)", borderRadius:"6px", background: logo.dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.92)", height:"72px", width:"148px", display:"flex", alignItems:"center", justifyContent:"center", transition:"border-color 0.3s, transform 0.3s", cursor:"default" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor="rgba(243,186,47,0.45)"; (e.currentTarget as HTMLElement).style.transform="scale(1.06)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.07)"; (e.currentTarget as HTMLElement).style.transform="scale(1)"; }}>
+                  <img src={logo.src} alt={logo.name} title={logo.name}
+                    style={{ maxHeight:"44px", maxWidth:"120px", objectFit:"contain", display:"block" }} />
                 </div>
               ))}
             </div>
           </div>
 
-          <style>{
-            `@keyframes investorScroll {
+          <style>{`
+            @keyframes goldShimmer {
+              0%   { background-position: 200% center; }
+              100% { background-position: -200% center; }
+            }
+            @keyframes investorScroll {
               0%   { transform: translateX(0); }
               100% { transform: translateX(-50%); }
-            }`
-          }</style>
+            }
+          `}</style>
         </section>
 
         {/* ── LIVE STATS — with count-up and gold glows ── */}
