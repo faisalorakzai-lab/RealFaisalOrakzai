@@ -34,7 +34,7 @@
       sm("og:type", "article", true); sm("og:url", "https://faisalorakzai.com/research/" + a.slug, true);
       if (a.thumbnail) sm("og:image", "https://faisalorakzai.com" + a.thumbnail, true);
       sm("twitter:card", "summary_large_image"); sm("twitter:title", a.title); sm("twitter:description", a.subtitle);
-      sm("citation_title", a.title); sm("citation_author", "Orakzai, Muhammad Faisal");
+      sm("citation_title", a.title); sm("citation_author", "Orakzai, Faisal");
       sm("citation_publication_date", a.year + "/06/01");
       const ld = document.createElement("script");
       ld.id = "article-ld"; ld.type = "application/ld+json";
@@ -166,7 +166,7 @@
       slug: "blockchain-basic",
       title: "What is Blockchain? A Complete Beginner's Guide",
       subtitle: "From distributed ledgers to smart contracts — the definitive primer on blockchain technology",
-      authors: "Muhammad Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
+      authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
       thumbnail: "/mk/blockchain-guide.png", readTime: "25 min read",
       tags: ["Blockchain","DLT","Web3","DeFi","Cryptography","RWA","Tokenization","Smart Contracts"],
       content: `
@@ -1832,6 +1832,7 @@ As the digital economy evolves, blockchain is expected to become a foundational 
     const [, setLocation] = useLocation();
     const [copied, setCopied] = useState(false);
     const [activeSection, setActiveSection] = useState("intro");
+    const [readProgress, setReadProgress] = useState(0);
     const article = ARTICLES[slug ?? ""];
     useArticleSEO(article);
 
@@ -1844,6 +1845,18 @@ As the digital economy evolves, blockchain is expected to become a foundational 
       document.querySelectorAll("[data-section]").forEach(h => obs.observe(h));
       return () => obs.disconnect();
     }, [article]);
+
+    // Reading progress
+    useEffect(() => {
+      const onScroll = () => {
+        const el = document.documentElement;
+        const scrolled = el.scrollTop;
+        const total = el.scrollHeight - el.clientHeight;
+        setReadProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     if (!article) return (
       <div style={{ minHeight:"100vh", background:"#000", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
@@ -1859,6 +1872,11 @@ As the digital economy evolves, blockchain is expected to become a foundational 
           @media(min-width:1100px){.toc-desktop-wrap{display:block!important}.toc-mobile-wrap{display:none!important}}
           @media(max-width:1099px){.toc-desktop-wrap{display:none!important}.toc-mobile-wrap{display:block!important}}
         `}</style>
+
+        {/* Reading progress bar */}
+        <div style={{ position:"fixed", top:0, left:0, right:0, zIndex:9999, height:"3px", background:"rgba(255,255,255,0.04)", pointerEvents:"none" }}>
+          <div style={{ height:"100%", width:`${readProgress}%`, background:"linear-gradient(to right,#c8900a,#F3BA2F,#ffe27a)", transition:"width 0.15s linear", boxShadow:"0 0 10px rgba(243,186,47,0.55)" }} />
+        </div>
 
         {/* Hero */}
         <div style={{ position:"relative", width:"100%", maxHeight:"500px", overflow:"hidden" }}>
@@ -1893,29 +1911,45 @@ As the digital economy evolves, blockchain is expected to become a foundational 
               <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontStyle:"italic", fontWeight:300, fontSize:"clamp(1.05rem,2.8vw,1.35rem)", color:"rgba(255,255,255,0.4)", lineHeight:1.65, margin:"0 0 1.6rem" }}>{article.subtitle}</p>
 
               {/* Author row */}
-              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"12px", padding:"1rem 0", borderTop:"1px solid rgba(255,255,255,0.07)", borderBottom:"1px solid rgba(255,255,255,0.07)", marginBottom:"1.25rem" }}>
-                <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
-                  <img src="/faisal-avatar.png" alt="Muhammad Faisal Orakzai"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const fb = e.currentTarget.parentElement?.querySelector(".avatar-fb") as HTMLElement; if(fb) fb.style.display="flex"; }}
-                    style={{ width:"44px", height:"44px", borderRadius:"50%", objectFit:"cover", objectPosition:"center 15%", border:"2px solid rgba(243,186,47,0.5)", flexShrink:0 }}/>
-                  <div className="avatar-fb" style={{ display:"none", width:"44px", height:"44px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", alignItems:"center", justifyContent:"center", fontWeight:800, fontSize:"16px", color:"#000", flexShrink:0 }}>F</div>
-                  <div>
-                    <div style={{ fontFamily:"monospace", fontSize:"10px", color:"rgba(255,255,255,0.72)", letterSpacing:"0.14em", textTransform:"uppercase" }}>Muhammad Faisal Orakzai</div>
-                    <div style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.22)", letterSpacing:"0.09em", marginTop:"3px" }}>
-                      Orakzai Research Lab ·{" "}
-                      <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ color:"rgba(166,206,57,0.55)", textDecoration:"none" }}>ORCID 0009-0000-0915-7272 ↗</a>
+              <div style={{ padding:"1.5rem 0", borderTop:"1px solid rgba(255,255,255,0.07)", borderBottom:"1px solid rgba(255,255,255,0.07)", marginBottom:"1.25rem" }}>
+                {/* Lead Author */}
+                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"12px", marginBottom:"1.25rem" }}>
+                  <div style={{ display:"flex", alignItems:"center", gap:"16px" }}>
+                    <img src="/faisal-avatar.png" alt="Faisal Orakzai"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const fb = e.currentTarget.parentElement?.querySelector(".avatar-fb") as HTMLElement; if(fb) fb.style.display="flex"; }}
+                      style={{ width:"64px", height:"64px", borderRadius:"50%", objectFit:"cover", objectPosition:"center 15%", border:"2px solid rgba(243,186,47,0.55)", flexShrink:0 }}/>
+                    <div className="avatar-fb" style={{ display:"none", width:"64px", height:"64px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", alignItems:"center", justifyContent:"center", fontWeight:800, fontSize:"22px", color:"#000", flexShrink:0 }}>F</div>
+                    <div>
+                      <div style={{ fontSize:"17px", fontWeight:700, color:"#fff", letterSpacing:"0.01em", marginBottom:"4px", fontFamily:"'Playfair Display', Georgia, serif" }}>Faisal Orakzai</div>
+                      <div style={{ fontSize:"12px", color:"rgba(255,255,255,0.42)", letterSpacing:"0.05em", marginBottom:"5px", fontFamily:"system-ui, sans-serif" }}>Orakzai Research Lab</div>
+                      <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ fontSize:"11px", color:"rgba(166,206,57,0.72)", textDecoration:"none", letterSpacing:"0.03em", fontFamily:"monospace" }}>ORCID 0009-0000-0915-7272 ↗</a>
                     </div>
                   </div>
+                  <button onClick={() => { navigator.clipboard.writeText(window.location.href).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }); }}
+                    style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", border:"1px solid rgba(255,255,255,0.1)", color: copied ? "#4ade80" : "rgba(255,255,255,0.35)", background:"none", padding:"7px 14px", cursor:"pointer", textTransform:"uppercase", transition:"color 0.18s" }}>
+                    {copied ? "✓ COPIED" : "SHARE ↗"}
+                  </button>
                 </div>
-                <button onClick={() => { navigator.clipboard.writeText(window.location.href).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }); }}
-                  style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", border:"1px solid rgba(255,255,255,0.1)", color: copied ? "#4ade80" : "rgba(255,255,255,0.35)", background:"none", padding:"7px 14px", cursor:"pointer", textTransform:"uppercase", transition:"color 0.18s" }}>
-                  {copied ? "✓ COPIED" : "SHARE ↗"}
-                </button>
-              </div>
-
-              {/* Tags */}
-              <div style={{ display:"flex", flexWrap:"wrap", gap:"6px", marginBottom:"2rem" }}>
-                {article.tags.map(t => (<span key={t} style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.22em", padding:"3px 9px", border:"1px solid rgba(243,186,47,0.17)", color:"rgba(243,186,47,0.48)", textTransform:"uppercase" }}>#{t}</span>))}
+                {/* Co-Authors */}
+                <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+                  <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"rgba(255,255,255,0.22)", textTransform:"uppercase", whiteSpace:"nowrap" }}>Co-Authors</span>
+                  <div style={{ flex:1, height:"1px", background:"rgba(255,255,255,0.06)" }} />
+                </div>
+                <div style={{ display:"flex", flexWrap:"wrap", gap:"20px" }}>
+                  {([
+                    { img:"/coauthor-parkes.jpg", name:"Dr. David Parkes",       role:"Harvard — CS & Economics" },
+                    { img:"/coauthor-saif.jpg",   name:"Dr. Saif Ullah Rehman",  role:"Blockchain Research" },
+                    { img:"/coauthor-shoab.jpg",  name:"Dr. Shoab A. Khan",      role:"NUST — Digital Systems" },
+                  ] as { img: string; name: string; role: string }[]).map(co => (
+                    <div key={co.name} style={{ display:"flex", alignItems:"center", gap:"10px" }}>
+                      <img src={co.img} alt={co.name} style={{ width:"40px", height:"40px", borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:"1.5px solid rgba(243,186,47,0.28)", flexShrink:0, background:"#111" }} />
+                      <div>
+                        <div style={{ fontSize:"13px", fontWeight:600, color:"rgba(255,255,255,0.88)", letterSpacing:"0.01em", fontFamily:"system-ui,sans-serif" }}>{co.name}</div>
+                        <div style={{ fontSize:"11px", color:"rgba(255,255,255,0.35)", letterSpacing:"0.03em", fontFamily:"system-ui,sans-serif", marginTop:"2px" }}>{co.role}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Mobile TOC — only here, inside article column */}
