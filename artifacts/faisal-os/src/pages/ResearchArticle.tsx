@@ -203,6 +203,7 @@
   const ARTICLES: Record<string, {
     slug: string; title: string; subtitle: string; authors: string; year: string;
     category: string; thumbnail?: string; tags: string[]; readTime: string; content: string;
+    customBody?: React.ComponentType;
   }> = {
     "blockchain-basic": {
       slug: "blockchain-basic",
@@ -211,6 +212,7 @@
       authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
       thumbnail: "/mk/blockchain-guide.png", readTime: "25 min read",
       tags: ["Blockchain","DLT","Web3","DeFi","Cryptography","RWA","Tokenization","Smart Contracts"],
+      customBody: BlockchainBasicVisual,
       content: `
 What is Blockchain? A Complete Beginner's Guide
 
@@ -2431,6 +2433,370 @@ Layer 2 Blockchain
     );
   }
 
+
+  /* ── Blockchain Basic – Custom Visual Article ───────────────────────────── */
+  function BlockchainBasicVisual() {
+    const G = "#F3BA2F";
+    const GB = "rgba(243,186,47,0.18)";
+    const GD = "rgba(243,186,47,0.06)";
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [activePrinciple, setActivePrinciple] = React.useState<number|null>(null);
+    const [activeIndustry, setActiveIndustry] = React.useState<number|null>(null);
+
+    const stats = [
+      { value: "$2.5T+", label: "Market Cap",    sub: "Combined blockchain assets 2026" },
+      { value: "1,000+", label: "Live Networks",  sub: "Active blockchain networks" },
+      { value: "12M+",   label: "Daily TXs",     sub: "Across all major chains" },
+      { value: "120+",   label: "Countries",      sub: "With blockchain legislation" },
+    ];
+
+    const principles = [
+      { icon: "⬡", title: "Decentralization", col: "#F3BA2F",  desc: "No single entity controls the network. Data is distributed across thousands of independent computers globally.", detail: "Even if 30% of nodes go offline, the network keeps operating. This is why blockchain is censorship-resistant — no government or corporation can shut it down unilaterally." },
+      { icon: "◎", title: "Transparency",     col: "#60a5fa",  desc: "Every transaction is publicly verifiable. Anyone can audit the full ledger history without special permission.", detail: "On Bitcoin you can trace every satoshi ever moved since block #0 in January 2009. This radical transparency creates accountability impossible in traditional banking." },
+      { icon: "⬒", title: "Immutability",     col: "#4ade80",  desc: "Once confirmed, data cannot be altered. Each block's hash depends on all previous blocks — altering one breaks the chain.", detail: "To rewrite blockchain history an attacker needs more computational power than the entire network combined. On Bitcoin, that costs billions of dollars — making attack economically irrational." },
+      { icon: "⬛", title: "Security",         col: "#e879f9",  desc: "Cryptography, consensus, and distributed architecture create multiple overlapping security layers protecting the network.", detail: "SHA-256 has never been broken. Elliptic curve cryptography protects private keys. Proof of Work requires real-world energy expenditure, making cheating prohibitively expensive." },
+    ];
+
+    const txSteps = [
+      { label: "Create",    icon: "✎", desc: "Alice opens her wallet and initiates a transaction — specifying Bob's address and the amount to send.", detail: "The wallet software prepares a transaction object containing sender, recipient, amount, and fee. Nothing has moved yet — this is a signed request." },
+      { label: "Sign",      icon: "⚿", desc: "Alice's private key digitally signs the transaction, proving she is the rightful owner without revealing the key.", detail: "ECDSA creates a unique cryptographic signature. Even a single character change in the transaction data completely invalidates the signature." },
+      { label: "Broadcast", icon: "↗", desc: "The signed transaction propagates to thousands of network nodes within seconds via peer-to-peer gossip protocol.", detail: "Nodes validate the signature and add the transaction to their mempool — a waiting room for unconfirmed transactions pending block inclusion." },
+      { label: "Verify",    icon: "✓", desc: "Each node independently checks: valid signature? sufficient funds? no double-spend? compliant with protocol rules?", detail: "This peer verification replaces the bank's role entirely. No single party approves — the mathematics does. Thousands of nodes reach the same conclusion independently." },
+      { label: "Mine",      icon: "⛏", desc: "Miners compete to bundle verified transactions into a block by solving a computationally intensive proof-of-work puzzle.", detail: "Bitcoin's difficulty adjustment ensures a new block is found approximately every 10 minutes globally. Miners earn newly minted BTC plus transaction fees as reward." },
+      { label: "Confirm",   icon: "⬛", desc: "The new block joins the chain. After 6 confirmations (~1 hour on Bitcoin) the transaction is considered irreversible.", detail: "Each additional block makes reversal exponentially harder. Six blocks require an attacker to outpace the honest network — statistically impossible without >51% of hash power." },
+    ];
+
+    const timeline = [
+      { year: "1976", event: "Public-Key Cryptography",    desc: "Diffie & Hellman publish the paper that makes blockchain security possible.", cur: false },
+      { year: "1991", event: "First Blockchain Concept",   desc: "Haber & Stornetta propose cryptographic timestamping for tamper-proof documents.", cur: false },
+      { year: "1998", event: "Digital Cash Concepts",      desc: "Wei Dai's b-money and Nick Szabo's Bit Gold plant the seeds of decentralized money.", cur: false },
+      { year: "2008", event: "Bitcoin Whitepaper",         desc: "Satoshi Nakamoto publishes 'Bitcoin: A Peer-to-Peer Electronic Cash System' during the global financial crisis.", cur: false },
+      { year: "2009", event: "Genesis Block Mined",        desc: "Block #0 launched with embedded message: 'Chancellor on brink of second bailout for banks.'", cur: false },
+      { year: "2015", event: "Ethereum & Smart Contracts", desc: "Programmable blockchain arrives. Developers build dApps, DeFi, NFTs, and DAOs.", cur: false },
+      { year: "2020", event: "DeFi & NFT Explosion",       desc: "Decentralized finance surpasses $13B locked. NFTs and Web3 enter mainstream consciousness.", cur: false },
+      { year: "2024", event: "Bitcoin ETF Approved",       desc: "SEC approves spot Bitcoin ETFs. Institutional capital accelerates into blockchain markets.", cur: true },
+      { year: "2026", event: "RWA Tokenization Era",       desc: "Real-world assets — real estate, bonds, commodities — migrate on-chain at scale. Orakzai leads in Pakistan.", cur: true },
+    ];
+
+    const industries = [
+      { icon: "₿", label: "Finance & DeFi",     desc: "Borderless payments, lending, and trading without banks" },
+      { icon: "⬡", label: "Real Estate",         desc: "Fractional ownership and tokenized property titles on-chain" },
+      { icon: "♡", label: "Healthcare",          desc: "Secure patient records and drug supply chain verification" },
+      { icon: "⬤", label: "Supply Chain",        desc: "End-to-end product tracking from source to shelf" },
+      { icon: "◎", label: "Digital Identity",    desc: "Self-sovereign identity without centralized databases" },
+      { icon: "♛", label: "Luxury & Art",        desc: "Cryptographic provenance for high-value items and heritage brands" },
+      { icon: "⚖", label: "Legal & Governance", desc: "Tamper-proof smart contracts and transparent on-chain voting" },
+      { icon: "◈", label: "AI Infrastructure",  desc: "Decentralized compute markets and verifiable AI model provenance" },
+    ];
+
+    const myths = [
+      { myth: "Blockchain and Bitcoin are the same thing", reality: "Bitcoin is one application. Blockchain is the underlying protocol — like saying the internet is just email. Over 1,000 other blockchain networks exist." },
+      { myth: "Blockchain transactions are completely anonymous", reality: "Most blockchains are pseudonymous — all transactions are publicly visible on-chain. True privacy requires additional layers like ZK-proofs or purpose-built chains such as Monero." },
+      { myth: "Blockchain is unhackable", reality: "The core protocol is extremely robust. However, smart contracts can have code vulnerabilities, exchanges can be compromised, and users can lose private keys. The protocol is secure; the human elements around it are not." },
+      { myth: "Blockchain wastes massive energy", reality: "Bitcoin uses roughly 0.1% of global energy. Proof of Stake (Ethereum post-merge) uses 99.95% less energy than Proof of Work. Most modern chains are energy-efficient by design." },
+    ];
+
+    const takeaways = [
+      "Blockchain is a distributed, immutable ledger maintained by a decentralized network — not owned by any company, government, or institution",
+      "The four core properties — Decentralization, Transparency, Immutability, Security — work together to eliminate the need for trusted intermediaries",
+      "Bitcoin (2009) proved the concept. Ethereum (2015) made it programmable. Now blockchain is becoming critical global infrastructure",
+      "Smart contracts automate complex agreements — executing automatically when conditions are met with no lawyers, escrow agents, or intermediaries required",
+      "Blockchain is transforming real estate, healthcare, supply chains, digital identity, luxury goods, AI, and governmental systems worldwide",
+      "Real World Asset tokenization is the next frontier — trillions in physical assets projected to migrate on-chain by 2030",
+    ];
+
+    const pSt: React.CSSProperties = { fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(1rem,2.4vw,1.15rem)", lineHeight:1.8, color:"rgba(255,255,255,0.72)", margin:"0 0 1.4rem" };
+
+    return (
+      <div style={{ paddingBottom:"4rem" }}>
+
+        {/* ── Stats bar ── */}
+        <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.6 }}
+          style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))", gap:"1px", background:GB, border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflow:"hidden", marginBottom:"3rem" }}>
+          {stats.map((s,i) => (
+            <div key={i} style={{ padding:"1.4rem 1rem", background:"#000", textAlign:"center" }}>
+              <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(1.5rem,4vw,2.1rem)", fontWeight:700, color:G, lineHeight:1 }}>{s.value}</div>
+              <div style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.3em", color:"rgba(255,255,255,0.3)", textTransform:"uppercase", margin:"7px 0 3px" }}>{s.label}</div>
+              <div style={{ fontFamily:"system-ui,sans-serif", fontSize:"11px", color:"rgba(255,255,255,0.18)" }}>{s.sub}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* ── What is Blockchain ── */}
+        <div id="intro" data-section="intro">
+          <h2 style={h2Style}>What is Blockchain?</h2>
+          <p style={pSt}>Blockchain is a <strong style={{ color:G }}>distributed digital ledger</strong> — a continuously growing list of records (blocks) cryptographically linked and maintained collectively by a decentralized network of computers worldwide. No single entity owns it. No central server stores it.</p>
+          <p style={pSt}>Just as the internet transformed how people <em>share information</em>, blockchain is transforming how people <em>exchange value, establish trust, and own digital assets</em> — without requiring banks, governments, or corporations as intermediaries.</p>
+
+          {/* Block diagram */}
+          <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}
+            style={{ margin:"2.5rem 0", padding:"2rem 1.5rem", background:GD, border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflowX:"auto" }}>
+            <div style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.35em", color:"rgba(243,186,47,0.4)", textAlign:"center", marginBottom:"1.75rem" }}>BLOCKCHAIN STRUCTURE — CRYPTOGRAPHICALLY LINKED BLOCKS</div>
+            <div style={{ display:"flex", alignItems:"stretch", gap:0, minWidth:"580px", justifyContent:"center" }}>
+              {([
+                { label:"BLOCK #8,417,293", hash:"0xa3f2...9c1e", prev:"0x00000...genesis", txs:"2,841 TXs", nonce:"39,284,710" },
+                { label:"BLOCK #8,417,294", hash:"0x7b44...2f8a", prev:"0xa3f2...9c1e",     txs:"3,112 TXs", nonce:"51,029,481" },
+                { label:"BLOCK #8,417,295", hash:"0xc91d...5e72", prev:"0x7b44...2f8a",     txs:"2,997 TXs", nonce:"44,817,223" },
+              ] as { label:string; hash:string; prev:string; txs:string; nonce:string }[]).map((block,i) => (
+                <React.Fragment key={i}>
+                  <motion.div initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3 + i*0.18 }}
+                    style={{ background:"rgba(243,186,47,0.04)", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"3px", padding:"1rem 0.9rem", minWidth:"162px", fontFamily:"monospace", flex:1 }}>
+                    <div style={{ fontSize:"7px", letterSpacing:"0.2em", color:G, marginBottom:"12px", borderBottom:"1px solid rgba(243,186,47,0.1)", paddingBottom:"8px" }}>{block.label}</div>
+                    {([
+                      ["HASH",      block.hash,  "rgba(255,255,255,0.7)"],
+                      ["PREV HASH", block.prev,  i===0 ? "rgba(255,255,255,0.2)" : "rgba(243,186,47,0.6)"],
+                      ["TXS",       block.txs,   "rgba(255,255,255,0.45)"],
+                      ["NONCE",     block.nonce, "rgba(255,255,255,0.3)"],
+                    ] as [string,string,string][]).map(([k,v,c]) => (
+                      <div key={k} style={{ marginBottom:"7px" }}>
+                        <div style={{ fontSize:"6.5px", color:"rgba(255,255,255,0.22)", letterSpacing:"0.25em", marginBottom:"2px" }}>{k}</div>
+                        <div style={{ fontSize:"9px", color:c, wordBreak:"break-all" }}>{v}</div>
+                      </div>
+                    ))}
+                  </motion.div>
+                  {i < 2 && (
+                    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0 10px", gap:"4px" }}>
+                      <div style={{ width:"1px", flex:1, background:"linear-gradient(to bottom, transparent, rgba(243,186,47,0.35), transparent)" }}/>
+                      <div style={{ color:G, opacity:0.5, fontSize:"16px" }}>▶</div>
+                      <div style={{ width:"1px", flex:1, background:"linear-gradient(to bottom, transparent, rgba(243,186,47,0.35), transparent)" }}/>
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+            <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"11px", color:"rgba(255,255,255,0.2)", textAlign:"center", margin:"1.25rem 0 0" }}>
+              Each block stores the cryptographic hash of its predecessor. Altering Block #293 changes its hash — immediately invalidating every subsequent block.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ── Centralized vs Decentralized ── */}
+        <div style={{ margin:"3rem 0", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1px", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflow:"hidden" }}>
+          <div style={{ background:"rgba(239,68,68,0.04)", padding:"1.75rem 1.5rem" }}>
+            <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(239,68,68,0.7)", marginBottom:"1.25rem" }}>✗ CENTRALIZED SYSTEM</div>
+            <div style={{ display:"flex", justifyContent:"center", marginBottom:"1.5rem" }}>
+              <svg width="110" height="88" viewBox="0 0 110 88">
+                <circle cx="55" cy="28" r="18" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.5)" strokeWidth="1.5"/>
+                <text x="55" y="32" textAnchor="middle" fill="rgba(239,68,68,0.85)" fontSize="8" fontFamily="monospace">BANK</text>
+                {([[16,78],[37,78],[73,78],[94,78]] as [number,number][]).map(([x,y],i) => (
+                  <g key={i}>
+                    <line x1="55" y1="46" x2={x} y2={y-9} stroke="rgba(239,68,68,0.25)" strokeWidth="1" strokeDasharray="3 2"/>
+                    <circle cx={x} cy={y} r="9" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.3)" strokeWidth="1"/>
+                    <text x={x} y={y+3} textAnchor="middle" fill="rgba(239,68,68,0.5)" fontSize="5.5" fontFamily="monospace">U{i+1}</text>
+                  </g>
+                ))}
+              </svg>
+            </div>
+            {["Single point of failure","Data can be secretly altered","Trust one institution blindly","High fees to intermediaries","Slow cross-border settlement","Can be censored or shut down"].map((t,i) => (
+              <div key={i} style={{ display:"flex", gap:"8px", alignItems:"flex-start", marginBottom:"7px" }}>
+                <span style={{ color:"rgba(239,68,68,0.65)", fontSize:"10px", flexShrink:0, marginTop:"3px" }}>✗</span>
+                <span style={{ fontFamily:"system-ui,sans-serif", fontSize:"12.5px", color:"rgba(255,255,255,0.4)", lineHeight:1.5 }}>{t}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ background:"rgba(74,222,128,0.03)", padding:"1.75rem 1.5rem" }}>
+            <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(74,222,128,0.7)", marginBottom:"1.25rem" }}>✓ DECENTRALIZED BLOCKCHAIN</div>
+            <div style={{ display:"flex", justifyContent:"center", marginBottom:"1.5rem" }}>
+              <svg width="110" height="88" viewBox="0 0 110 88">
+                {([[55,10],[12,42],[98,42],[28,80],[82,80]] as [number,number][]).map(([cx,cy],i) => (
+                  <g key={i}>
+                    <circle cx={cx} cy={cy} r="13" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.4)" strokeWidth="1.5"/>
+                    <text x={cx} y={cy+3} textAnchor="middle" fill="rgba(74,222,128,0.7)" fontSize="6" fontFamily="monospace">N{i}</text>
+                  </g>
+                ))}
+                {([[0,1],[0,2],[1,3],[2,4],[1,2],[3,4],[0,3],[0,4]] as [number,number][]).map(([a,b],i) => {
+                  const ns: [number,number][] = [[55,10],[12,42],[98,42],[28,80],[82,80]];
+                  return <line key={i} x1={ns[a][0]} y1={ns[a][1]} x2={ns[b][0]} y2={ns[b][1]} stroke="rgba(74,222,128,0.18)" strokeWidth="1"/>;
+                })}
+              </svg>
+            </div>
+            {["No single point of failure","Cryptographically tamper-proof","Trust math, not institutions","Lower fees — no intermediary cut","Instant 24/7 global settlement","Censorship-resistant by design"].map((t,i) => (
+              <div key={i} style={{ display:"flex", gap:"8px", alignItems:"flex-start", marginBottom:"7px" }}>
+                <span style={{ color:"rgba(74,222,128,0.75)", fontSize:"10px", flexShrink:0, marginTop:"3px" }}>✓</span>
+                <span style={{ fontFamily:"system-ui,sans-serif", fontSize:"12.5px", color:"rgba(255,255,255,0.5)", lineHeight:1.5 }}>{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── 4 Core Principles ── */}
+        <div id="components" data-section="components">
+          <h2 style={h2Style}>The 4 Core Principles</h2>
+          <p style={pSt}>Every blockchain is built on four foundational properties. Together they replace the need for centralised trust with mathematical certainty. Tap any card to expand.</p>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(230px,1fr))", gap:"1px", background:"rgba(243,186,47,0.18)", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflow:"hidden", marginBottom:"3rem" }}>
+            {principles.map((p,i) => (
+              <motion.div key={i} whileHover={{ background:"rgba(243,186,47,0.05)" }}
+                onClick={() => setActivePrinciple(activePrinciple === i ? null : i)}
+                style={{ background:"#000", padding:"1.5rem", cursor:"pointer", transition:"background 0.2s" }}>
+                <div style={{ fontSize:"26px", marginBottom:"10px", opacity:0.8 }}>{p.icon}</div>
+                <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:700, fontSize:"1.1rem", color:p.col, marginBottom:"8px" }}>{p.title}</div>
+                <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"12.5px", color:"rgba(255,255,255,0.42)", lineHeight:1.65, margin:"0 0 10px" }}>{p.desc}</p>
+                <AnimatePresence>
+                  {activePrinciple === i && (
+                    <motion.div initial={{ height:0, opacity:0 }} animate={{ height:"auto", opacity:1 }} exit={{ height:0, opacity:0 }} style={{ overflow:"hidden" }}>
+                      <div style={{ padding:"10px 12px", background:"rgba(255,255,255,0.03)", borderLeft:"2px solid " + p.col, borderRadius:"0 2px 2px 0", marginBottom:"10px" }}>
+                        <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"12px", color:"rgba(255,255,255,0.5)", lineHeight:1.65, margin:0 }}>{p.detail}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <div style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.2em", color:p.col + "55" }}>{activePrinciple===i ? "▲ COLLAPSE" : "▼ EXPAND"}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Transaction Lifecycle ── */}
+        <div id="benefits" data-section="benefits">
+          <h2 style={h2Style}>How a Transaction Works</h2>
+          <p style={pSt}>Every blockchain transaction follows a deterministic cryptographic process. Here is the complete lifecycle of a Bitcoin transfer from Alice to Bob — tap each step.</p>
+          <div style={{ marginBottom:"3rem" }}>
+            <div style={{ display:"flex", overflowX:"auto" }}>
+              {txSteps.map((step,i) => (
+                <button key={i} onClick={() => setActiveStep(i)}
+                  style={{ flex:"1 0 auto", minWidth:"72px", padding:"10px 6px", background:activeStep===i ? "rgba(243,186,47,0.1)" : "rgba(255,255,255,0.02)", border:"none", borderBottom:activeStep===i ? "2px solid #F3BA2F" : "2px solid rgba(255,255,255,0.07)", cursor:"pointer", fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.2em", color:activeStep===i ? "#F3BA2F" : "rgba(255,255,255,0.28)", textTransform:"uppercase", transition:"all 0.2s" }}>
+                  <div style={{ fontSize:"18px", marginBottom:"5px", opacity:0.8 }}>{step.icon}</div>
+                  {i+1}. {step.label}
+                </button>
+              ))}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div key={activeStep} initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }} transition={{ duration:0.18 }}
+                style={{ padding:"1.75rem 1.5rem", background:GD, border:"1px solid rgba(243,186,47,0.18)", borderTop:"none", borderRadius:"0 0 4px 4px" }}>
+                <div style={{ display:"flex", alignItems:"center", gap:"10px", marginBottom:"12px" }}>
+                  <div style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.3em", color:"rgba(243,186,47,0.5)" }}>STEP {activeStep+1} / {txSteps.length}</div>
+                  <div style={{ flex:1, height:"1px", background:"rgba(243,186,47,0.18)" }}/>
+                  <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:700, fontSize:"1rem", color:G }}>{txSteps[activeStep].label}</div>
+                </div>
+                <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"15px", color:"rgba(255,255,255,0.75)", lineHeight:1.65, margin:"0 0 10px" }}>{txSteps[activeStep].desc}</p>
+                <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"12.5px", color:"rgba(255,255,255,0.37)", lineHeight:1.6, margin:0 }}>{txSteps[activeStep].detail}</p>
+                <div style={{ display:"flex", gap:"6px", marginTop:"16px" }}>
+                  {txSteps.map((_,i) => <div key={i} style={{ width:"6px", height:"6px", borderRadius:"50%", background:i===activeStep ? G : "rgba(255,255,255,0.1)", transition:"background 0.2s" }}/>)}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* ── Smart Contracts ── */}
+        <div id="limitations" data-section="limitations">
+          <h2 style={h2Style}>Smart Contracts</h2>
+          <p style={pSt}>Smart contracts are self-executing programs stored permanently on the blockchain. They automatically enforce agreements when predefined conditions are met — no lawyers, escrow agents, or intermediaries needed.</p>
+          <div style={{ fontFamily:"monospace", fontSize:"12px", background:"rgba(243,186,47,0.03)", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", padding:"1.5rem 1.75rem", margin:"1.75rem 0", overflowX:"auto" }}>
+            <div style={{ color:"rgba(243,186,47,0.4)", marginBottom:"10px", fontSize:"7.5px", letterSpacing:"0.3em" }}>SMART CONTRACT — PSEUDOCODE EXAMPLE</div>
+            <pre style={{ color:"rgba(255,255,255,0.55)", margin:0, lineHeight:1.75, fontSize:"12px" }}>{`function propertyEscrow(buyer, seller, price) {
+  // Conditions evaluated on-chain — no human intermediary required
+  if (buyer.hasDeposited(price) && seller.hasDelivered(deed)) {
+    seller.receive(price);          // ← automatic payment release
+    buyer.receive(ownership);       // ← instant title transfer
+    emit Transfer(buyer, seller, price);
+  } else if (block.timestamp > deadline) {
+    buyer.refund(price);            // ← auto-refund if deadline expires
+  }
+}`}</pre>
+          </div>
+          <p style={pSt}>Ethereum introduced smart contracts in 2015. They now power over $100B in DeFi protocols, NFT marketplaces, DAO governance systems, tokenised real estate, and insurance. The Orakzai Bond (OKBOND) uses smart contracts for treasury-backed capital protection on Polygon L2.</p>
+        </div>
+
+        {/* ── History Timeline ── */}
+        <div id="industries" data-section="industries">
+          <h2 style={h2Style}>History of Blockchain</h2>
+          <div style={{ position:"relative", marginBottom:"3rem" }}>
+            <div style={{ position:"absolute", left:"72px", top:0, bottom:0, width:"1px", background:"linear-gradient(to bottom, transparent, rgba(243,186,47,0.3) 8%, rgba(243,186,47,0.3) 92%, transparent)" }}/>
+            {timeline.map((t,i) => (
+              <motion.div key={i} initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.06*i }}
+                style={{ display:"flex", gap:"20px", alignItems:"flex-start", marginBottom:"1.4rem" }}>
+                <div style={{ minWidth:"64px", textAlign:"right", fontFamily:"monospace", fontSize:"10.5px", color:t.cur ? G : "rgba(243,186,47,0.5)", paddingTop:"2px", letterSpacing:"0.04em", fontWeight:t.cur ? 700 : 400 }}>{t.year}</div>
+                <div style={{ width:"11px", height:"11px", borderRadius:"50%", background:t.cur ? G : "transparent", border:"1.5px solid " + (t.cur ? G : "rgba(243,186,47,0.4)"), marginTop:"2px", flexShrink:0, zIndex:1, boxShadow:t.cur ? "0 0 8px rgba(243,186,47,0.4)" : "none", transition:"all 0.2s" }}/>
+                <div>
+                  <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:t.cur ? 700 : 600, fontSize:"15px", color:t.cur ? G : "rgba(255,255,255,0.82)", marginBottom:"3px" }}>{t.event}</div>
+                  <div style={{ fontFamily:"system-ui,sans-serif", fontSize:"12.5px", color:"rgba(255,255,255,0.35)", lineHeight:1.55 }}>{t.desc}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Industries ── */}
+        <div id="trends" data-section="trends">
+          <h2 style={h2Style}>Blockchain Across Industries</h2>
+          <p style={pSt}>Blockchain has expanded far beyond cryptocurrency. These are the major sectors undergoing fundamental transformation through distributed ledger technology.</p>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(175px,1fr))", gap:"1px", background:"rgba(243,186,47,0.18)", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflow:"hidden", marginBottom:"3rem" }}>
+            {industries.map((ind,i) => (
+              <motion.div key={i} whileHover={{ background:"rgba(243,186,47,0.07)" }}
+                onClick={() => setActiveIndustry(activeIndustry===i ? null : i)}
+                style={{ background:activeIndustry===i ? "rgba(243,186,47,0.05)" : "#000", padding:"1.25rem 1rem", cursor:"pointer", transition:"background 0.2s" }}>
+                <div style={{ fontSize:"22px", marginBottom:"8px", opacity:0.75 }}>{ind.icon}</div>
+                <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:600, fontSize:"13.5px", color:activeIndustry===i ? G : "rgba(255,255,255,0.82)", marginBottom:"5px" }}>{ind.label}</div>
+                <div style={{ fontFamily:"system-ui,sans-serif", fontSize:"11px", color:"rgba(255,255,255,0.3)", lineHeight:1.55 }}>{ind.desc}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Cryptographic Hash ── */}
+        <div id="future" data-section="future">
+          <h2 style={h2Style}>Cryptographic Hashing</h2>
+          <p style={pSt}>Every block is identified by a cryptographic hash — a fixed-length fingerprint generated from the block's entire content. The tiniest change to the input produces a completely different hash, making tampering instantly detectable by the entire network.</p>
+          <div style={{ fontFamily:"monospace", background:"rgba(243,186,47,0.03)", border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", padding:"1.5rem", margin:"1.75rem 0", overflowX:"auto" }}>
+            <div style={{ color:"rgba(243,186,47,0.4)", fontSize:"7.5px", letterSpacing:"0.3em", marginBottom:"14px" }}>SHA-256 HASH DEMONSTRATION — ONE CHARACTER CHANGE, COMPLETELY DIFFERENT OUTPUT</div>
+            {([
+              { input: '"Hello, Blockchain!"',   hash: "a7f2b9c1e4d8f3a2b6c9e1f4a7d2b8c3e6f1a4d7b2c5e8f3a1d4b7c2e5f8a3b6", note: "" },
+              { input: '"Hello, Blockchain! "',  hash: "3e9d1a4f7b2c5e8a1d4b7c2e5f8a3b6c9f2e5a8d1b4c7f3a2d5b8c1e4a7f2b9c1", note: "(space added)" },
+              { input: '"Hello, Blockchain!!"',  hash: "b6c2e5f1a4d7b3c6e9f2a5d8b1c4e7a2d5f8b3c6a9e2f5d8a1b4c7e3f6a9d2e5", note: "(exclamation added)" },
+            ] as { input:string; hash:string; note:string }[]).map(({ input, hash, note }, i) => (
+              <div key={i} style={{ marginBottom:"12px" }}>
+                <div style={{ fontSize:"9px", color:"rgba(255,255,255,0.3)", marginBottom:"4px", letterSpacing:"0.15em" }}>INPUT</div>
+                <div style={{ fontSize:"11px", color:"rgba(255,255,255,0.65)", marginBottom:"5px" }}>
+                  {input} {note && <span style={{ color:"rgba(243,186,47,0.6)", fontSize:"9px" }}>{note}</span>}
+                </div>
+                <div style={{ fontSize:"9px", color:"rgba(255,255,255,0.3)", marginBottom:"4px", letterSpacing:"0.15em" }}>SHA-256 OUTPUT</div>
+                <div style={{ fontSize:"9.5px", color:i===0 ? G : "rgba(243,186,47,0.45)", wordBreak:"break-all", letterSpacing:"0.04em" }}>{hash}</div>
+                {i < 2 && <div style={{ height:"1px", background:"rgba(255,255,255,0.05)", margin:"10px 0" }}/>}
+              </div>
+            ))}
+            <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"11px", color:"rgba(255,255,255,0.2)", margin:"12px 0 0", lineHeight:1.55 }}>A single character difference produces a completely different 256-bit fingerprint — making any tampering with block data instantly obvious to every node on the network.</p>
+          </div>
+        </div>
+
+        {/* ── Myths ── */}
+        <div id="myths" data-section="myths">
+          <h2 style={h2Style}>Common Blockchain Myths</h2>
+          <div style={{ marginBottom:"2.5rem" }}>
+            {myths.map((m,i) => (
+              <div key={i} style={{ marginBottom:"10px" }}>
+                <div style={{ background:"rgba(239,68,68,0.04)", padding:"11px 16px", borderLeft:"3px solid rgba(239,68,68,0.45)" }}>
+                  <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.35em", color:"rgba(239,68,68,0.6)", display:"block", marginBottom:"5px" }}>MYTH</span>
+                  <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1.05rem", color:"rgba(255,255,255,0.72)", margin:0, lineHeight:1.55 }}>{m.myth}</p>
+                </div>
+                <div style={{ background:"rgba(74,222,128,0.03)", padding:"11px 16px", borderLeft:"3px solid rgba(74,222,128,0.45)" }}>
+                  <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.35em", color:"rgba(74,222,128,0.6)", display:"block", marginBottom:"5px" }}>REALITY</span>
+                  <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1.05rem", color:"rgba(255,255,255,0.55)", margin:0, lineHeight:1.55 }}>{m.reality}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Key Takeaways ── */}
+        <div id="takeaways" data-section="takeaways">
+          <h2 style={h2Style}>Key Takeaways</h2>
+          <div style={{ border:"1px solid rgba(243,186,47,0.18)", borderRadius:"4px", overflow:"hidden", marginBottom:"2rem" }}>
+            {takeaways.map((t,i) => (
+              <motion.div key={i} initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.07*i }}
+                style={{ display:"flex", gap:"16px", alignItems:"flex-start", padding:"14px 18px", borderBottom:i<takeaways.length-1 ? "1px solid rgba(243,186,47,0.06)" : "none", background:i%2===0 ? "rgba(243,186,47,0.02)" : "#000" }}>
+                <div style={{ minWidth:"22px", height:"22px", borderRadius:"50%", background:"rgba(243,186,47,0.1)", border:"1px solid rgba(243,186,47,0.18)", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"monospace", fontSize:"9px", color:G, flexShrink:0, marginTop:"1px" }}>{i+1}</div>
+                <p style={{ fontFamily:"system-ui,sans-serif", fontSize:"13.5px", color:"rgba(255,255,255,0.62)", lineHeight:1.65, margin:0 }}>{t}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    );
+  }
+
+
   /* ── Content Renderer ───────────────────────────────────────────────────── */
   function ArticleBody({ content, articleTitle }: { content: string; articleTitle: string }) {
     // Strip the first line if it matches the title, and any blank lines after it
@@ -2811,7 +3177,7 @@ Layer 2 Blockchain
 
             {/* Body */}
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2, duration:0.6 }} style={{ paddingBottom:"5rem" }}>
-              <ArticleBody content={article.content} articleTitle={article.title}/>
+              {article.customBody ? React.createElement(article.customBody) : <ArticleBody content={article.content} articleTitle={article.title}/>}
             </motion.div>
 
             {/* Footer */}
