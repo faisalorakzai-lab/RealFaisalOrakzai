@@ -470,145 +470,120 @@ export default function Home() {
       </section>
 
       {/* ── MASTER THE CODE — Research Thumbnail Ticker ── */}
-        <section className="py-20 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
-          <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 90% 70% at 50% 50%, rgba(243,186,47,0.035) 0%, transparent 70%)" }} />
+      <section className="py-20 border-t border-[#F3BA2F]/15 relative overflow-hidden" style={{ background:"linear-gradient(180deg,#0a0800 0%,#000 40%,#000 60%,#0a0800 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 80% 55% at 50% 50%, rgba(243,186,47,0.055) 0%, transparent 68%)" }} />
 
-          {/* Heading */}
-          <div className="text-center mb-14 px-6">
-            <h3 style={{
-              fontFamily:"'Playfair Display',Georgia,serif",
-              fontWeight:800,
-              fontSize:"clamp(1.6rem,5vw,2.6rem)",
-              letterSpacing:"-0.015em",
-              lineHeight:1.15,
-              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 30%,#ffe27a 50%,#F3BA2F 70%,#c8900a 100%)",
-              backgroundSize:"300% auto",
-              WebkitBackgroundClip:"text",
-              WebkitTextFillColor:"transparent",
-              backgroundClip:"text",
-              animation:"codeShimmer2 3s linear infinite",
-              filter:"drop-shadow(0 0 24px rgba(243,186,47,0.65)) drop-shadow(0 0 60px rgba(243,186,47,0.22))",
-              marginBottom:"6px",
-            }}>Master the Code.</h3>
-            <h3 style={{
-              fontFamily:"'Playfair Display',Georgia,serif",
-              fontWeight:800,
-              fontSize:"clamp(1.6rem,5vw,2.6rem)",
-              letterSpacing:"-0.015em",
-              lineHeight:1.15,
-              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 30%,#ffe27a 50%,#F3BA2F 70%,#c8900a 100%)",
-              backgroundSize:"300% auto",
-              WebkitBackgroundClip:"text",
-              WebkitTextFillColor:"transparent",
-              backgroundClip:"text",
-              animation:"codeShimmer2 3s linear infinite 0.4s",
-              filter:"drop-shadow(0 0 24px rgba(243,186,47,0.65)) drop-shadow(0 0 60px rgba(243,186,47,0.22))",
-            }}>Rule the World.</h3>
-          </div>
+        {/* Heading */}
+        <div className="text-center mb-14 px-6">
+          <h3 style={{
+            fontFamily:"'Playfair Display',Georgia,serif",
+            fontWeight:800,
+            fontSize:"clamp(1.8rem,5.5vw,2.8rem)",
+            letterSpacing:"-0.015em",
+            lineHeight:1.2,
+            background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 28%,#fff5c0 50%,#F3BA2F 72%,#c8900a 100%)",
+            backgroundSize:"300% auto",
+            WebkitBackgroundClip:"text",
+            WebkitTextFillColor:"transparent",
+            backgroundClip:"text",
+            animation:"codeShimmer2 3s linear infinite",
+            filter:"drop-shadow(0 0 28px rgba(243,186,47,0.75)) drop-shadow(0 0 70px rgba(243,186,47,0.3))",
+          }}>Master the Code. Rule the World.</h3>
+          <p style={{ fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.35em", color:"rgba(243,186,47,0.45)", textTransform:"uppercase", marginTop:"14px" }}>Research &amp; Education</p>
+        </div>
 
-          {/* Scrolling ticker — slow, big cards */}
-          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)" }}>
-            <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content" }}>
-              {([
-                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
-                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
-                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
-                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
-                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
-                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
-                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
-                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
-                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
-                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
-                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
-                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
-                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
-                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
-                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
-                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
-                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
-                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
-              ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
-                const el = (
-                  <div key={i} style={{ width:"300px", marginRight:"24px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="translateY(-6px) scale(1.03)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="translateY(0) scale(1)"; }}>
-                    {/* Thumbnail */}
-                    <div style={{ position:"relative", borderRadius:"10px", overflow:"hidden", aspectRatio:"16/9", boxShadow:"0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(243,186,47,0.1)" }}>
-                      <img src={card.src} alt={card.label} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
-                      {/* Overlay gradient at bottom */}
-                      <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)", pointerEvents:"none" }} />
-                      {card.href && (
-                        <div style={{ position:"absolute", inset:0, background:"rgba(243,186,47,0)", transition:"background 0.28s", display:"flex", alignItems:"center", justifyContent:"center" }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="rgba(243,186,47,0.10)"; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="rgba(243,186,47,0)"; }}>
-                          <div style={{ width:"48px", height:"48px", borderRadius:"50%", background:"rgba(243,186,47,0.92)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 4px 20px rgba(243,186,47,0.5)" }}>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2.5h5.5v5.5M13.5 2.5L6 10" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          </div>
+        {/* Scrolling ticker */}
+        <div className="relative overflow-hidden pb-6" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)" }}>
+          <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content", paddingLeft:"40px" }}>
+            {([
+              { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
+              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+              { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
+              { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
+              { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
+              { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
+              { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
+              { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
+              { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
+              { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
+              { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
+              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+              { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
+              { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
+              { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
+              { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
+              { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
+              { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
+              { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
+              { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
+            ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
+              const el = (
+                <div key={i} style={{ width:"288px", marginRight:"20px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="translateY(-8px) scale(1.03)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="translateY(0) scale(1)"; }}>
+                  {/* Thumbnail with gold glow border */}
+                  <div style={{
+                    position:"relative", borderRadius:"12px", overflow:"hidden", aspectRatio:"16/9",
+                    border:"1.5px solid rgba(243,186,47,0.55)",
+                    boxShadow:"0 0 0 1px rgba(243,186,47,0.1), 0 12px 40px rgba(0,0,0,0.9), 0 0 30px rgba(243,186,47,0.22)",
+                    background:"#111",
+                  }}>
+                    <img src={card.src} alt={card.label} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                    <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)", pointerEvents:"none" }} />
+                    {card.href && (
+                      <div style={{ position:"absolute", inset:0, background:"rgba(0,0,0,0)", transition:"background 0.28s", display:"flex", alignItems:"center", justifyContent:"center" }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="rgba(0,0,0,0.28)"; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="rgba(0,0,0,0)"; }}>
+                        <div style={{ width:"52px", height:"52px", borderRadius:"50%", background:"rgba(243,186,47,0.95)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 0 30px rgba(243,186,47,0.75), 0 4px 20px rgba(0,0,0,0.5)" }}>
+                          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4.5L13.5 9 7 13.5V4.5Z" fill="#000" stroke="#000" strokeWidth="0.5"/></svg>
                         </div>
-                      )}
-                    </div>
-                    {/* Label */}
-                    <div style={{ marginTop:"12px", paddingLeft:"4px" }}>
-                      <div style={{ fontFamily:"system-ui,sans-serif", fontSize:"13px", fontWeight:600, color:"rgba(255,255,255,0.82)", letterSpacing:"0.01em", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{card.label}</div>
-                      <div style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.22em", color:"rgba(243,186,47,0.5)", textTransform:"uppercase", marginTop:"4px" }}>Research</div>
+                      </div>
+                    )}
+                  </div>
+                  {/* Label with gold-lit background */}
+                  <div style={{
+                    marginTop:"10px",
+                    background:"rgba(243,186,47,0.07)",
+                    border:"1px solid rgba(243,186,47,0.2)",
+                    borderRadius:"8px",
+                    padding:"10px 14px",
+                    boxShadow:"0 2px 12px rgba(243,186,47,0.1)",
+                  }}>
+                    <div style={{
+                      fontFamily:"system-ui,sans-serif", fontSize:"13px", fontWeight:700,
+                      color:"#ffffff",
+                      textShadow:"0 0 14px rgba(243,186,47,0.7), 0 1px 6px rgba(0,0,0,0.9)",
+                      whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
+                      letterSpacing:"0.01em",
+                    }}>{card.label}</div>
+                    <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", color: card.href ? "rgba(243,186,47,0.8)" : "rgba(255,255,255,0.3)", textTransform:"uppercase", marginTop:"5px" }}>
+                      {card.href ? "● Live Article" : "○ Coming Soon"}
                     </div>
                   </div>
-                );
-                return card.href ? (
-                  <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration:"none" }}>{el}</a>
-                ) : (
-                  <div key={i}>{el}</div>
-                );
-              })}
-            </div>
+                </div>
+              );
+              return card.href ? (
+                <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration:"none" }}>{el}</a>
+              ) : (
+                <div key={i}>{el}</div>
+              );
+            })}
           </div>
-
-          <style>{`
-            @keyframes codeShimmer2 {
-              0%   { background-position: 300% center; }
-              100% { background-position: -300% center; }
-            }
-            @keyframes researchScroll2 {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
-        </section>
-
-              {/* ── QUOTE ── */}
-      <section className="py-36 border-t border-[#F3BA2F]/10 relative overflow-hidden">
-        {/* Deep gold atmospheric background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[100px]" style={{ background: "radial-gradient(ellipse, rgba(243,186,47,0.07) 0%, transparent 70%)" }} />
-          <div className="absolute inset-0 bg-grid opacity-15" />
         </div>
-        {/* Top + bottom gold borders */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/25 to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/25 to-transparent" />
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} viewport={{ once: true }}>
-            {/* Quote mark */}
-            <div className="text-[#F3BA2F]/15 text-[120px] font-serif leading-none select-none -mb-6">"</div>
-            <h2 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-10">
-              <span className="text-white">Ideas are common.</span><br />
-              <span className="gold-gradient text-glow">Execution is rare.</span>
-            </h2>
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <div className="h-px w-12 bg-[#F3BA2F]/30" />
-              <span className="text-white/25 font-mono text-[10px] tracking-[0.35em] uppercase">Faisal Orakzai</span>
-              <div className="h-px w-12 bg-[#F3BA2F]/30" />
-            </div>
-            <span className="text-white/15 font-mono text-[9px] tracking-[0.3em] uppercase">Founder & Chairman, Orakzai Group</span>
-          </motion.div>
-        </div>
+        <style>{`
+          @keyframes codeShimmer2 {
+            0%   { background-position: 300% center; }
+            100% { background-position: -300% center; }
+          }
+          @keyframes researchScroll2 {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </section>
 
-
-        {/* ── INVESTORS & SUPPORTERS ── */}
+            {/* ── INVESTORS & SUPPORTERS ── */}
         <section className="py-16 border-t border-[#F3BA2F]/15 relative overflow-hidden bg-black">
           {/* Ambient glow behind section */}
           <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
