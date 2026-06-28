@@ -1,18 +1,18 @@
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 
-// ─── Author identity (real IDs) ───────────────────────────────────────────────
+// ─── Author identity ──────────────────────────────────────────────────────────
 const AUTHOR = {
-  name:          "Muhammad Faisal Orakzai",
-  nameCitation:  "Orakzai, Muhammad Faisal",
-  orcid:         "https://orcid.org/0009-0000-0915-7272",
-  orcidId:       "0009-0000-0915-7272",
-  scholar:       "https://scholar.google.com/citations?user=faisalorakzai",
-  linkedin:      "https://www.linkedin.com/in/faisalorakzaii",
-  hackernoon:    "https://hackernoon.com/u/faisalorakzai",
-  github:        "https://github.com/faisalorakzai-lab",
-  website:       "https://faisalorakzai.vercel.app",
-  org:           "Orakzai Research Lab",
+  name:         "Muhammad Faisal Orakzai",
+  nameCitation: "Orakzai, Muhammad Faisal",
+  orcid:        "https://orcid.org/0009-0000-0915-7272",
+  orcidId:      "0009-0000-0915-7272",
+  scholar:      "https://scholar.google.com/citations?user=faisalorakzai",
+  linkedin:     "https://www.linkedin.com/in/faisalorakzaii",
+  hackernoon:   "https://hackernoon.com/u/faisalorakzai",
+  github:       "https://github.com/faisalorakzai-lab",
+  website:      "https://faisalorakzai.vercel.app",
+  org:          "Orakzai Research Lab",
 };
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -38,7 +38,7 @@ interface Entry {
   commits?:  string;
   deploy?:   string;
   db?:       string;
-  pdfUrl?:   string;
+  pdfUrl?:   string;       // Google Drive / GitHub Releases PDF link
   keywords:  string;
 }
 
@@ -53,6 +53,7 @@ const ENTRIES: Entry[] = [
       "Deep-dive examination of macro-liquidity network architecture across cross-border fintech corridors. Explores how sovereign tokenized asset pools create structural arbitrage dynamics in G20-adjacent emerging markets, with emphasis on protocol-layer liquidity provisioning and settlement velocity at institutional scale.",
     tags: ["Macro-Liquidity", "Cross-Border", "Fintech", "RWA", "Settlement"],
     status: "PUBLISHED",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_MK01/view",
     keywords: "macro-liquidity, cross-border fintech, tokenized assets, DeFi, settlement velocity, Pakistan",
   },
   {
@@ -63,6 +64,7 @@ const ENTRIES: Entry[] = [
       "Investigates the structural mechanics of on-chain real-world asset tokenization across illiquid capital markets. Analyzes protocol-layer custody models, oracle dependency chains, and secondary market depth constraints in RWA-backed DeFi infrastructure serving institutional corridors with high-net-worth capital flows.",
     tags: ["RWA", "Tokenization", "DeFi", "Institutional", "Oracle Design"],
     status: "PUBLISHED",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_MK02/view",
     keywords: "real-world asset tokenization, RWA, DeFi, institutional finance, oracle systems, blockchain",
   },
   // ── ARTIFACTS & BLUEPRINTS
@@ -74,6 +76,7 @@ const ENTRIES: Entry[] = [
       "Complete production-grade PostgreSQL schema for the OrakzaiX venture infrastructure. Covers multi-entity relational models for orakzai_ventures, orakzai_positions, compliance_ledger, and capital_allocation tables. Includes index strategies, JSONB field patterns, row-level security configurations, and full audit trail design.",
     tags: ["PostgreSQL", "SQL Architecture", "JSONB", "RLS", "Schema Design"],
     status: "PRODUCTION",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_AB01/view",
     keywords: "PostgreSQL schema, database architecture, venture tracking, RLS, OrakzaiX, sovereign infrastructure",
   },
   {
@@ -84,6 +87,7 @@ const ENTRIES: Entry[] = [
       "Full architectural specification for the OKBOND sovereign debt protocol. Defines issuance mechanics, coupon distribution logic, redemption pathways, and on-chain governance voting modules. Includes smart contract interaction diagrams, escrow models, and regulatory compliance boundary mapping for institutional-grade deployment.",
     tags: ["OKBOND", "Tokenized Debt", "EVM", "Smart Contracts", "Protocol Design"],
     status: "BLUEPRINT",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_AB02/view",
     keywords: "OKBOND, tokenized debt, EVM, sovereign bond, blockchain protocol, DeFi architecture",
   },
   // ── CRYPTOGRAPHIC WHITE PAPERS
@@ -100,7 +104,8 @@ const ENTRIES: Entry[] = [
     ],
     tags: ["ZK-Proofs", "zkSNARK", "Supply Chain", "Provenance", "Cryptography"],
     status: "FORMAL DRAFT",
-    keywords: "zero-knowledge proofs, zkSNARK, supply chain provenance, OkzByte, cryptographic validation, blockchain",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_WP01/view",
+    keywords: "zero-knowledge proofs, zkSNARK, supply chain provenance, OkzByte, cryptographic validation",
   },
   {
     id: "wp-02", category: "CRYPTOGRAPHIC WHITE PAPERS", year: "2024",
@@ -115,7 +120,8 @@ const ENTRIES: Entry[] = [
     ],
     tags: ["AI Trust", "Formal Verification", "Inference Audit", "QORIX", "Cryptography"],
     status: "FORMAL DRAFT",
-    keywords: "AI trust, formal verification, inference accountability, QORIX AI, cryptographic audit trail",
+    pdfUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_WP02/view",
+    keywords: "AI trust, formal verification, inference accountability, QORIX AI, cryptographic audit",
   },
   // ── PRODUCTION CODE
   {
@@ -128,11 +134,8 @@ const ENTRIES: Entry[] = [
     repo: "faisalorakzai-lab/qorix-ai",
     repoUrl: "https://github.com/faisalorakzai-lab/qorix-ai",
     stack: ["TypeScript", "Python", "ONNX", "Redis", "PostgreSQL"],
-    commits: "Active",
-    deploy: "VERCEL · LIVE",
-    db: "SUPABASE · SYNCED",
-    status: "ACTIVE",
-    keywords: "QORIX AI, autonomous inference, AI engine, cryptographic audit, high-throughput, blockchain",
+    commits: "Active", deploy: "VERCEL · LIVE", db: "SUPABASE · SYNCED", status: "ACTIVE",
+    keywords: "QORIX AI, autonomous inference, AI engine, cryptographic audit, high-throughput",
   },
   {
     id: "pc-02", category: "PRODUCTION CODE", year: "2024",
@@ -144,10 +147,7 @@ const ENTRIES: Entry[] = [
     repo: "faisalorakzai-lab/Adamorakzaix",
     repoUrl: "https://github.com/faisalorakzai-lab/Adamorakzaix",
     stack: ["Solidity", "TypeScript", "Hardhat", "The Graph"],
-    commits: "Active",
-    deploy: "VERCEL · LIVE",
-    db: "ON-CHAIN · ACTIVE",
-    status: "BUILDING",
+    commits: "Active", deploy: "VERCEL · LIVE", db: "ON-CHAIN · ACTIVE", status: "BUILDING",
     keywords: "AdamX DeFi, cross-chain liquidity, Solidity, sovereign DeFi, execution engine",
   },
   {
@@ -155,15 +155,12 @@ const ENTRIES: Entry[] = [
     title: "OrakzaiX Infrastructure Stack",
     subtitle: "Sovereign Multi-Entity Venture Platform",
     abstract:
-      "Full-stack infrastructure backing the OrakzaiX venture portfolio. Integrates real-time position tracking, compliance automation, capital allocation routing, and investor-facing reporting modules across sovereign infrastructure with PostgreSQL + Vercel deployment.",
+      "Full-stack infrastructure backing the OrakzaiX venture portfolio. Integrates real-time position tracking, compliance automation, capital allocation routing, and investor-facing reporting modules with PostgreSQL + Vercel deployment.",
     tags: [],
     repo: "faisalorakzai-lab/orakzaix-stack",
     repoUrl: "https://github.com/faisalorakzai-lab/orakzaix-stack",
     stack: ["React", "Express", "Drizzle ORM", "PostgreSQL", "Vercel"],
-    commits: "Active",
-    deploy: "VERCEL · LIVE",
-    db: "POSTGRES · LIVE",
-    status: "ACTIVE",
+    commits: "Active", deploy: "VERCEL · LIVE", db: "POSTGRES · LIVE", status: "ACTIVE",
     keywords: "OrakzaiX, venture platform, full-stack, sovereign infrastructure, portfolio tracking",
   },
   {
@@ -171,16 +168,13 @@ const ENTRIES: Entry[] = [
     title: "PSC StockChain — Tokenized Securities Protocol",
     subtitle: "Pakistan Stock Exchange On-Chain Settlement Infrastructure",
     abstract:
-      "Blockchain settlement infrastructure for Pakistan Securities Commission (PSC) compatible tokenized equity. Maps traditional equity instruments to on-chain representations with full audit trail, regulatory reporting automation, and real-time settlement finality designed for institutional compliance.",
+      "Blockchain settlement infrastructure for PSC-compatible tokenized equity. Maps traditional equity instruments to on-chain representations with full audit trail, regulatory reporting automation, and real-time settlement finality for institutional compliance.",
     tags: [],
     repo: "faisalorakzai-lab/PSC-StockChain",
     repoUrl: "https://github.com/faisalorakzai-lab/PSC-StockChain",
     stack: ["Solidity", "TypeScript", "Node.js", "PostgreSQL", "Chainlink"],
-    commits: "Active",
-    deploy: "VERCEL · LIVE",
-    db: "POSTGRES · ACTIVE",
-    status: "BUILDING",
-    keywords: "PSC StockChain, Pakistan Stock Exchange, tokenized securities, blockchain equity, PSX settlement",
+    commits: "Active", deploy: "VERCEL · LIVE", db: "POSTGRES · ACTIVE", status: "BUILDING",
+    keywords: "PSC StockChain, Pakistan Stock Exchange, tokenized securities, blockchain equity",
   },
 ];
 
@@ -193,24 +187,24 @@ const FILTERS = [
 ] as const;
 type Filter = typeof FILTERS[number];
 
-const STATUS_STYLE: Record<string, string> = {
-  PUBLISHED:      "border-emerald-500/35 text-emerald-400",
-  PRODUCTION:     "border-emerald-500/35 text-emerald-400",
-  ACTIVE:         "border-emerald-500/35 text-emerald-400",
-  BLUEPRINT:      "border-[#F3BA2F]/35 text-[#F3BA2F]",
-  BUILDING:       "border-amber-500/35 text-amber-400",
-  "FORMAL DRAFT": "border-blue-400/35 text-blue-400",
+const STATUS_CLS: Record<string, string> = {
+  PUBLISHED:      "text-emerald-400",
+  PRODUCTION:     "text-emerald-400",
+  ACTIVE:         "text-emerald-400",
+  BLUEPRINT:      "text-[#F3BA2F]",
+  BUILDING:       "text-amber-400",
+  "FORMAL DRAFT": "text-blue-400",
 };
 
-// ─── SEO: Dublin Core + per-paper citation tags + JSON-LD ─────────────────────
+// ─── SEO injection ────────────────────────────────────────────────────────────
 function useSEO() {
   useEffect(() => {
-    const prevTitle = document.title;
+    const prev = document.title;
     document.title = "Central Knowledge Repository — Muhammad Faisal Orakzai";
 
-    // Dublin Core link declaration
+    // Dublin Core schema link
     let dcLink = document.querySelector<HTMLLinkElement>("link[rel='schema.DC']");
-    const dcLinkCreated = !dcLink;
+    const dcNew = !dcLink;
     if (!dcLink) {
       dcLink = document.createElement("link");
       dcLink.setAttribute("rel", "schema.DC");
@@ -218,77 +212,66 @@ function useSEO() {
       document.head.appendChild(dcLink);
     }
 
-    // Singleton meta tags (only one per name)
-    const singletons: Array<[string, string]> = [
-      ["description",   "Central Knowledge Repository of Muhammad Faisal Orakzai — blockchain engineering, AI systems, cryptographic white papers, RWA tokenization, and sovereign protocol architecture. ORCID: 0009-0000-0915-7272."],
-      ["keywords",      "Faisal Orakzai, Muhammad Faisal Orakzai, blockchain research, RWA tokenization, cryptographic protocols, QORIX AI, OkzByte, AdamX, OrakzaiX, DeFi, zero-knowledge proofs, fintech Pakistan, ORCID 0009-0000-0915-7272"],
-      ["robots",        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"],
-      ["author",        AUTHOR.name],
-      // Dublin Core page-level
-      ["DC.title",      "Central Knowledge Repository — Muhammad Faisal Orakzai"],
-      ["DC.creator",    AUTHOR.nameCitation],
-      ["DC.subject",    "Blockchain Engineering; Cryptographic Protocols; AI Systems; RWA Tokenization; DeFi Architecture; Zero-Knowledge Proofs"],
-      ["DC.description","Sovereign research hub: cryptographic white papers, RWA blueprints, AI systems, and live production repositories by Muhammad Faisal Orakzai. ORCID: 0009-0000-0915-7272"],
-      ["DC.publisher",  AUTHOR.org],
-      ["DC.date",       "2024"],
-      ["DC.type",       "Collection"],
-      ["DC.format",     "text/html"],
-      ["DC.identifier", "https://faisalorakzai.vercel.app/research"],
-      ["DC.language",   "en"],
-      ["DC.rights",     `Copyright 2024 ${AUTHOR.name}. All Rights Reserved.`],
+    // Singleton metas
+    const singletons: [string, string, "name" | "property"][] = [
+      ["description",    `Central Knowledge Repository of ${AUTHOR.name} — blockchain engineering, AI systems, cryptographic white papers, RWA tokenization. ORCID: ${AUTHOR.orcidId}.`, "name"],
+      ["keywords",       `Faisal Orakzai, Muhammad Faisal Orakzai, blockchain research, RWA tokenization, cryptographic protocols, QORIX AI, OkzByte, AdamX, OrakzaiX, DeFi, fintech Pakistan, ORCID ${AUTHOR.orcidId}`, "name"],
+      ["robots",         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1", "name"],
+      ["author",         AUTHOR.name, "name"],
+      ["DC.title",       "Central Knowledge Repository — Muhammad Faisal Orakzai", "name"],
+      ["DC.creator",     AUTHOR.nameCitation, "name"],
+      ["DC.subject",     "Blockchain Engineering; Cryptographic Protocols; AI Systems; RWA Tokenization", "name"],
+      ["DC.publisher",   AUTHOR.org, "name"],
+      ["DC.date",        "2024", "name"],
+      ["DC.type",        "Collection", "name"],
+      ["DC.format",      "text/html", "name"],
+      ["DC.identifier",  `${AUTHOR.website}/research`, "name"],
+      ["DC.language",    "en", "name"],
+      ["og:title",       "Central Knowledge Repository — Muhammad Faisal Orakzai", "property"],
+      ["og:description", "Blockchain engineering research, cryptographic white papers, and live production repositories.", "property"],
+      ["og:type",        "website", "property"],
+      ["og:url",         `${AUTHOR.website}/research`, "property"],
+      ["twitter:card",   "summary_large_image", "name"],
     ];
 
-    const ogMetas: Array<[string, string]> = [
-      ["og:title",       "Central Knowledge Repository — Muhammad Faisal Orakzai"],
-      ["og:description", "Blockchain engineering research, cryptographic white papers, and live production repositories."],
-      ["og:type",        "website"],
-      ["og:url",         "https://faisalorakzai.vercel.app/research"],
-      ["twitter:card",   "summary_large_image"],
-      ["twitter:title",  "Central Knowledge Repository — Faisal Orakzai"],
-    ];
-
-    const injectedSingletons: HTMLMetaElement[] = [];
-    singletons.forEach(([name, content]) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+    const injected: HTMLMetaElement[] = [];
+    singletons.forEach(([key, content, attr]) => {
+      let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
       if (!el) {
         el = document.createElement("meta");
-        el.setAttribute("name", name);
+        el.setAttribute(attr, key);
         document.head.appendChild(el);
-        injectedSingletons.push(el);
-      }
-      el.setAttribute("content", content);
-    });
-    ogMetas.forEach(([prop, content]) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[property="${prop}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("property", prop);
-        document.head.appendChild(el);
-        injectedSingletons.push(el);
+        injected.push(el);
       }
       el.setAttribute("content", content);
     });
 
-    // Per-paper citation + Dublin Core (multiple allowed — Google Scholar reads all)
+    // Per-paper citation + DC + citation_pdf_url (multiple = fine, Google Scholar reads all)
     const scholarly = ENTRIES.filter(e =>
       e.category === "CRYPTOGRAPHIC WHITE PAPERS" || e.category === "MARKET KNOWLEDGE"
     );
-    const perPaperMetas: HTMLMetaElement[] = [];
+    const paperMetas: HTMLMetaElement[] = [];
+
     scholarly.forEach(e => {
-      const paperUrl = `https://faisalorakzai.vercel.app/research#${e.id}`;
-      const pairs: Array<[string, string]> = [
+      const url = `${AUTHOR.website}/research#${e.id}`;
+      // Resolve PDF URL: use real link if not placeholder, else fall back to ORCID
+      const hasPdf = e.pdfUrl && !e.pdfUrl.includes("YOUR_FILE_ID");
+      const pdfUrl = hasPdf ? e.pdfUrl! : AUTHOR.orcid;
+
+      const pairs: [string, string][] = [
         ["citation_title",            e.title],
         ["citation_author",           AUTHOR.nameCitation],
-        ["citation_publication_date", e.year + "/01/01"],
-        ["citation_abstract_html_url",paperUrl],
+        ["citation_publication_date", `${e.year}/01/01`],
+        ["citation_abstract_html_url", url],
+        ["citation_pdf_url",          pdfUrl],
         ["citation_keywords",         e.keywords],
         ["citation_language",         "en"],
         ["citation_publisher",        AUTHOR.org],
-        ["citation_online_date",      e.year + "/01/01"],
+        ["citation_online_date",      `${e.year}/01/01`],
         ["DC.title",                  e.title],
         ["DC.creator",               AUTHOR.nameCitation],
-        ["DC.date",                  e.year + "-01"],
-        ["DC.identifier",            paperUrl],
+        ["DC.date",                  `${e.year}-01`],
+        ["DC.identifier",            url],
         ["DC.type",                  "Text"],
         ["DC.subject",               e.keywords],
       ];
@@ -297,11 +280,16 @@ function useSEO() {
         el.setAttribute("name", name);
         el.setAttribute("content", content);
         document.head.appendChild(el);
-        perPaperMetas.push(el);
+        paperMetas.push(el);
       });
     });
 
-    // JSON-LD: Person + ScholarlyArticle per paper + SoftwareSourceCode per repo
+    // JSON-LD per entry
+    const scholarly2 = ENTRIES.filter(e =>
+      e.category === "CRYPTOGRAPHIC WHITE PAPERS" || e.category === "MARKET KNOWLEDGE"
+    );
+    const repos = ENTRIES.filter(e => e.category === "PRODUCTION CODE");
+
     const schemas: object[] = [
       {
         "@context": "https://schema.org",
@@ -313,39 +301,42 @@ function useSEO() {
         jobTitle: "Founder & Chairman",
         affiliation: { "@type": "Organization", name: AUTHOR.org },
         identifier: { "@type": "PropertyValue", propertyID: "ORCID", value: AUTHOR.orcidId },
-        knowsAbout: ["Blockchain Engineering", "AI Systems", "Cryptographic Protocols", "RWA Tokenization", "DeFi"],
       },
-      ...scholarly.map(e => ({
-        "@context": "https://schema.org",
-        "@type": "ScholarlyArticle",
-        "@id": `https://faisalorakzai.vercel.app/research#${e.id}`,
-        headline: e.title,
-        name: e.title,
-        description: e.abstract,
-        datePublished: e.year + "-01-01",
-        keywords: e.keywords,
-        inLanguage: "en",
-        isAccessibleForFree: true,
-        author: { "@type": "Person", "@id": `${AUTHOR.website}#person`, name: AUTHOR.name },
-        publisher: { "@type": "Organization", name: AUTHOR.org, url: AUTHOR.website },
-        provider: { "@type": "Organization", name: "ORCID Verified Node", url: AUTHOR.orcid },
-        url: `https://faisalorakzai.vercel.app/research#${e.id}`,
-      })),
-      ...ENTRIES.filter(e => e.category === "PRODUCTION CODE").map(e => ({
+      ...scholarly2.map(e => {
+        const hasPdf = e.pdfUrl && !e.pdfUrl.includes("YOUR_FILE_ID");
+        return {
+          "@context": "https://schema.org",
+          "@type": "ScholarlyArticle",
+          "@id": `${AUTHOR.website}/research#${e.id}`,
+          headline: e.title,
+          name: e.title,
+          description: e.abstract,
+          datePublished: `${e.year}-01-01`,
+          keywords: e.keywords,
+          inLanguage: "en",
+          isAccessibleForFree: true,
+          url: `${AUTHOR.website}/research#${e.id}`,
+          ...(hasPdf ? { encoding: { "@type": "MediaObject", encodingFormat: "application/pdf", contentUrl: e.pdfUrl } } : {}),
+          author: { "@type": "Person", "@id": `${AUTHOR.website}#person`, name: AUTHOR.name },
+          publisher: { "@type": "Organization", name: AUTHOR.org, url: AUTHOR.website },
+          provider: { "@type": "Organization", name: "ORCID Verified Node", url: AUTHOR.orcid },
+        };
+      }),
+      ...repos.map(e => ({
         "@context": "https://schema.org",
         "@type": "SoftwareSourceCode",
-        "@id": `https://faisalorakzai.vercel.app/research#${e.id}`,
+        "@id": `${AUTHOR.website}/research#${e.id}`,
         name: e.title,
         description: e.abstract,
         codeRepository: e.repoUrl,
         programmingLanguage: e.stack,
         author: { "@type": "Person", "@id": `${AUTHOR.website}#person`, name: AUTHOR.name },
-        dateCreated: e.year + "-01-01",
+        dateCreated: `${e.year}-01-01`,
         runtimePlatform: "Vercel / Node.js",
       })),
     ];
 
-    const ldScripts: HTMLScriptElement[] = schemas.map(s => {
+    const ldScripts = schemas.map(s => {
       const el = document.createElement("script");
       el.type = "application/ld+json";
       el.textContent = JSON.stringify(s);
@@ -354,45 +345,43 @@ function useSEO() {
     });
 
     return () => {
-      document.title = prevTitle;
-      if (dcLinkCreated) dcLink!.remove();
-      injectedSingletons.forEach(el => el.remove());
-      perPaperMetas.forEach(el => el.remove());
+      document.title = prev;
+      if (dcNew) dcLink!.remove();
+      injected.forEach(el => el.remove());
+      paperMetas.forEach(el => el.remove());
       ldScripts.forEach(el => el.remove());
     };
   }, []);
 }
 
-// ─── Inline LaTeX renderer ────────────────────────────────────────────────────
-const SUB: Record<string, string> = {"0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉","n":"ₙ","i":"ᵢ","k":"ₖ","t":"ₜ","p":"ₚ"};
-const SUP: Record<string, string> = {"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","n":"ⁿ","i":"ⁱ","k":"ᵏ"};
+// ─── LaTeX renderer ───────────────────────────────────────────────────────────
+const SUB: Record<string, string> = { "0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉","n":"ₙ","i":"ᵢ","k":"ₖ","t":"ₜ","p":"ₚ" };
+const SUP: Record<string, string> = { "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","n":"ⁿ","i":"ⁱ","k":"ᵏ" };
 
 function renderTex(s: string): string {
   return s
-    .replace(/_\{([^}]+)\}/g, (_,x) => x.split("").map((c: string) => SUB[c]??c).join(""))
-    .replace(/\^\{([^}]+)\}/g, (_,x) => x.split("").map((c: string) => SUP[c]??c).join(""))
-    .replace(/\^(\w)/g,  (_,c) => SUP[c as string]??c)
-    .replace(/_(\w)/g,   (_,c) => SUB[c as string]??c)
-    .replace(/\\times/g,"×").replace(/\\oplus/g,"⊕").replace(/\\cdot/g,"·")
-    .replace(/\\rightarrow/g,"→").replace(/\\leq/g,"≤").replace(/\\geq/g,"≥")
-    .replace(/\\sum/g,"∑").replace(/\\forall/g,"∀").replace(/\\exists/g,"∃")
-    .replace(/\\in/g,"∈").replace(/\\mid/g,"|").replace(/\\sigma/g,"σ")
+    .replace(/_\{([^}]+)\}/g, (_, x: string) => x.split("").map((c: string) => SUB[c] ?? c).join(""))
+    .replace(/\^\{([^}]+)\}/g, (_, x: string) => x.split("").map((c: string) => SUP[c] ?? c).join(""))
+    .replace(/\^(\w)/g,  (_, c: string) => SUP[c] ?? c)
+    .replace(/_(\w)/g,   (_, c: string) => SUB[c] ?? c)
+    .replace(/\\times/g,"×").replace(/\\oplus/g,"⊕").replace(/\\rightarrow/g,"→")
+    .replace(/\\leq/g,"≤").replace(/\\geq/g,"≥").replace(/\\sum/g,"∑")
+    .replace(/\\forall/g,"∀").replace(/\\in/g,"∈").replace(/\\sigma/g,"σ")
     .replace(/\\theta/g,"θ").replace(/\\lambda/g,"λ").replace(/\\delta/g,"δ")
     .replace(/\\infty/g,"∞").replace(/\\\|/g,"‖").replace(/\\pi/g,"π")
-    .replace(/\\\{/g,"{").replace(/\\\}/g,"}");
+    .replace(/\\mid/g,"|").replace(/\\\{/g,"{").replace(/\\\}/g,"}");
 }
 
 function MathText({ children }: { children: string }) {
-  const parts = children.split(/(\$[^$]+\$)/g);
   return (
     <>
-      {parts.map((part, i) =>
+      {children.split(/(\$[^$]+\$)/g).map((part, i) =>
         part.startsWith("$") && part.endsWith("$") ? (
-          <span key={i} className="font-mono italic text-[#F3BA2F] bg-[#F3BA2F]/8 px-1.5 py-0.5 rounded text-sm">
-            {renderTex(part.slice(1,-1))}
+          <span key={i} style={{ fontFamily:"monospace", fontStyle:"italic", color:"#F3BA2F", background:"rgba(243,186,47,0.08)", padding:"2px 6px", borderRadius:"3px", fontSize:"12px" }}>
+            {renderTex(part.slice(1, -1))}
           </span>
         ) : (
-          <span key={i} className="text-white/50">{part}</span>
+          <span key={i} style={{ color:"rgba(255,255,255,0.5)" }}>{part}</span>
         )
       )}
     </>
@@ -408,152 +397,160 @@ function heatmap(seed: string, cols = 20): number[] {
   });
 }
 
-// ─── Page viewport frame ──────────────────────────────────────────────────────
-function Frame() {
+// ─── PDF Download Button ──────────────────────────────────────────────────────
+function PdfButton({ entry }: { entry: Entry }) {
+  const hasPdf = entry.pdfUrl && !entry.pdfUrl.includes("YOUR_FILE_ID");
+
+  if (hasPdf) {
+    return (
+      <a
+        href={entry.pdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "inline-flex", alignItems: "center", gap: "6px",
+          fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.32em",
+          border: "1px solid rgba(243,186,47,0.45)", color: "#F3BA2F",
+          padding: "5px 12px", textDecoration: "none", textTransform: "uppercase",
+          background: "rgba(243,186,47,0.06)", transition: "all 0.2s ease",
+        }}
+        onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.background="rgba(243,186,47,0.14)"; a.style.borderColor="rgba(243,186,47,0.8)"; }}
+        onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.background="rgba(243,186,47,0.06)"; a.style.borderColor="rgba(243,186,47,0.45)"; }}
+      >
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0 }}>
+          <path d="M5 1v6M2 5l3 3 3-3M1 9h8" stroke="#F3BA2F" strokeWidth="1.2" strokeLinecap="round"/>
+        </svg>
+        DOWNLOAD PDF
+      </a>
+    );
+  }
+
   return (
-    <>
-      {[{ left: "4px" }, { right: "4px" }].map((pos, i) => (
-        <div key={i} aria-hidden style={{
-          position: "fixed", top: 0, ...pos, width: "1px", height: "100vh",
-          background: "linear-gradient(to bottom,transparent 5%,rgba(243,186,47,0.07) 30%,rgba(243,186,47,0.07) 70%,transparent 95%)",
-          pointerEvents: "none", zIndex: 5,
-        }} />
-      ))}
-      {([
-        { top: "14px", left: "8px" },
-        { top: "14px", right: "8px" },
-        { bottom: "14px", left: "8px" },
-        { bottom: "14px", right: "8px" },
-      ] as React.CSSProperties[]).map((pos, i) => (
-        <div key={i} aria-hidden style={{ position: "fixed", ...pos, width: "14px", height: "14px", pointerEvents: "none", zIndex: 5 }}>
-          <div style={{ position: "absolute", top: "50%", left: 0, right: 0, height: "1px", background: "rgba(243,186,47,0.45)", transform: "translateY(-50%)" }} />
-          <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: "1px", background: "rgba(243,186,47,0.45)", transform: "translateX(-50%)" }} />
-        </div>
-      ))}
-    </>
+    <span
+      style={{
+        display: "inline-flex", alignItems: "center", gap: "6px",
+        fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.28em",
+        border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.2)",
+        padding: "5px 12px", textTransform: "uppercase",
+      }}
+      title="PDF upload pending — contact via LinkedIn to request access"
+    >
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M5 1v6M2 5l3 3 3-3M1 9h8" stroke="rgba(255,255,255,0.2)" strokeWidth="1.2" strokeLinecap="round"/>
+      </svg>
+      PDF PENDING
+    </span>
   );
 }
 
-// ─── Card: Market Knowledge / Artifacts & Blueprints ─────────────────────────
+// ─── Platform link badges ─────────────────────────────────────────────────────
+function PlatformBadges() {
+  return (
+    <div style={{ display:"flex", flexWrap:"wrap", gap:"6px", paddingTop:"12px", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+      {[
+        { label:"ORCID",         href: AUTHOR.orcid },
+        { label:"GOOGLE SCHOLAR",href: AUTHOR.scholar },
+        { label:"LINKEDIN",      href: AUTHOR.linkedin },
+        { label:"HACKERNOON",    href: AUTHOR.hackernoon },
+      ].map(b => (
+        <a key={b.label} href={b.href} target="_blank" rel="noopener noreferrer"
+          style={{
+            fontFamily:"monospace", fontSize:"6.5px", letterSpacing:"0.26em",
+            border:"1px solid rgba(243,186,47,0.14)", color:"rgba(243,186,47,0.42)",
+            padding:"3px 8px", textTransform:"uppercase", textDecoration:"none",
+            transition:"all 0.2s ease",
+          }}
+          onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.55)"; a.style.color="rgba(243,186,47,0.85)"; }}
+          onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.14)"; a.style.color="rgba(243,186,47,0.42)"; }}
+        >
+          [{b.label} ↗]
+        </a>
+      ))}
+    </div>
+  );
+}
+
+// ─── Card: Market Knowledge / Artifacts ──────────────────────────────────────
 function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [hov, setHov] = useState(false);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => setHov(true)}
-      onHoverEnd={() => setHov(false)}
+      onHoverStart={() => setHov(true)} onHoverEnd={() => setHov(false)}
       style={{ willChange: "transform, opacity" }}
     >
-      <article
-        id={entry.id}
-        itemScope
-        itemType={entry.category === "ARTIFACTS & BLUEPRINTS"
-          ? "https://schema.org/TechArticle"
-          : "https://schema.org/ScholarlyArticle"}
+      <article id={entry.id}
+        itemScope itemType={entry.category === "ARTIFACTS & BLUEPRINTS" ? "https://schema.org/TechArticle" : "https://schema.org/ScholarlyArticle"}
         style={{
           border: `1px solid ${hov ? "rgba(243,186,47,0.22)" : "rgba(243,186,47,0.1)"}`,
           background: hov ? "rgba(243,186,47,0.015)" : "rgba(0,0,0,0.97)",
           boxShadow: hov ? "0 0 30px rgba(243,186,47,0.08)" : "none",
-          transition: "all 0.28s ease",
+          transition: "all 0.28s ease", transform: "translateZ(0)",
           padding: "clamp(1.25rem,3vw,2rem)",
-          transform: "translateZ(0)",
         }}
       >
         <header>
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px", marginBottom: "1rem", flexWrap: "wrap" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
-                <span style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.38em", color: "rgba(243,186,47,0.55)", border: "1px solid rgba(243,186,47,0.15)", padding: "2px 8px", textTransform: "uppercase" }}>
+          <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"12px", marginBottom:"1rem", flexWrap:"wrap" }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"10px", flexWrap:"wrap" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.38em", color:"rgba(243,186,47,0.55)", border:"1px solid rgba(243,186,47,0.15)", padding:"2px 8px", textTransform:"uppercase", whiteSpace:"nowrap" }}>
                   {entry.category}
                 </span>
-                <time dateTime={entry.year + "-01-01"} itemProp="datePublished"
-                  style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.2)" }}>
+                <time dateTime={`${entry.year}-01-01`} itemProp="datePublished"
+                  style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.3em", color:"rgba(255,255,255,0.2)" }}>
                   {entry.year}
                 </time>
               </div>
-              <h3 itemProp="headline"
-                style={{
-                  fontSize: "clamp(1.1rem,3.2vw,1.45rem)",
-                  fontWeight: 900,
-                  lineHeight: 1.25,
-                  color: hov ? "#fff" : "rgba(255,255,255,0.92)",
-                  transition: "color 0.25s ease",
-                  margin: 0,
-                }}>
+              <h3 itemProp="headline" style={{
+                fontSize:"clamp(1.1rem,3.2vw,1.45rem)", fontWeight:900, lineHeight:1.25, margin:0,
+                color: hov ? "#fff" : "rgba(255,255,255,0.92)", transition:"color 0.25s ease",
+              }}>
                 {entry.title}
               </h3>
-              <p style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(243,186,47,0.38)", marginTop: "6px", textTransform: "uppercase" }}>
+              <p style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.2em", color:"rgba(243,186,47,0.38)", marginTop:"6px", textTransform:"uppercase" }}>
                 {entry.subtitle}
               </p>
             </div>
-            <span style={{
-              fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.3em",
-              border: `1px solid`, padding: "3px 8px", textTransform: "uppercase", flexShrink: 0,
-              whiteSpace: "nowrap",
-              ...(STATUS_STYLE[entry.status]
-                ? { borderColor: "currentColor" }
-                : { borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.3)" }),
-            }} className={STATUS_STYLE[entry.status] ?? ""}>
+            <span className={STATUS_CLS[entry.status] ?? "text-white/30"}
+              style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.3em", border:"1px solid currentColor", padding:"3px 8px", textTransform:"uppercase", flexShrink:0, whiteSpace:"nowrap" }}>
               {entry.status}
             </span>
           </div>
         </header>
 
         <p itemProp="abstract"
-          style={{ color: "rgba(255,255,255,0.45)", fontSize: "clamp(0.9rem,2.4vw,1rem)", lineHeight: 1.78, fontWeight: 300, marginBottom: "1.25rem" }}>
+          style={{ color:"rgba(255,255,255,0.45)", fontSize:"clamp(0.9rem,2.4vw,1rem)", lineHeight:1.78, fontWeight:300, marginBottom:"1.25rem" }}>
           {entry.abstract}
         </p>
 
-        <footer>
-          <address itemProp="author" itemScope itemType="https://schema.org/Person"
-            style={{ fontStyle: "normal", fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase", marginBottom: "10px" }}>
-            <span itemProp="name">{AUTHOR.name}</span>
-            {" · "}
-            <a href={AUTHOR.orcid} target="_blank" rel="noopener noreferrer"
-              itemProp="url" style={{ color: "rgba(166,206,57,0.6)", textDecoration: "none" }}>
-              ORCID ↗
-            </a>
-          </address>
-
-          {entry.tags.length > 0 && (
-            <ul style={{ display: "flex", flexWrap: "wrap", gap: "6px", listStyle: "none", padding: 0, margin: "0 0 12px 0" }}>
-              {entry.tags.map(t => (
-                <li key={t}>
-                  <span style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.2em", padding: "2px 8px", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.22)" }}>
-                    #{t}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-            {[
-              { label: "ORCID", href: AUTHOR.orcid },
-              { label: "GOOGLE SCHOLAR", href: AUTHOR.scholar },
-              { label: "LINKEDIN", href: AUTHOR.linkedin },
-              { label: "HACKERNOON", href: AUTHOR.hackernoon },
-            ].map(b => (
-              <a key={b.label} href={b.href} target="_blank" rel="noopener noreferrer"
-                style={{
-                  fontFamily: "monospace", fontSize: "6.5px", letterSpacing: "0.28em",
-                  border: "1px solid rgba(243,186,47,0.14)", color: "rgba(243,186,47,0.42)",
-                  padding: "3px 8px", textTransform: "uppercase", textDecoration: "none",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(243,186,47,0.45)"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(243,186,47,0.8)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(243,186,47,0.14)"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(243,186,47,0.42)"; }}
-              >
-                [{b.label} ↗]
-              </a>
+        {entry.tags.length > 0 && (
+          <ul style={{ display:"flex", flexWrap:"wrap", gap:"6px", listStyle:"none", padding:0, margin:"0 0 1rem 0" }}>
+            {entry.tags.map(t => (
+              <li key={t}><span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.2em", padding:"2px 8px", border:"1px solid rgba(255,255,255,0.08)", color:"rgba(255,255,255,0.22)" }}>#{t}</span></li>
             ))}
+          </ul>
+        )}
+
+        <footer>
+          <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
+            <address itemProp="author" itemScope itemType="https://schema.org/Person"
+              style={{ fontStyle:"normal", fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", color:"rgba(255,255,255,0.2)", textTransform:"uppercase" }}>
+              <span itemProp="name">{AUTHOR.name}</span>
+            </address>
+            <span style={{ color:"rgba(255,255,255,0.1)" }}>·</span>
+            <a href={AUTHOR.orcid} target="_blank" rel="noopener noreferrer"
+              style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.2em", color:"rgba(166,206,57,0.65)", textDecoration:"none" }}>
+              ORCID: {AUTHOR.orcidId} ↗
+            </a>
+            <div style={{ marginLeft:"auto" }}>
+              <PdfButton entry={entry} />
+            </div>
           </div>
+          <PlatformBadges />
         </footer>
       </article>
     </motion.div>
@@ -567,121 +564,92 @@ function WhitePaperCard({ entry, i }: { entry: Entry; i: number }) {
   const [hov, setHov] = useState(false);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => setHov(true)}
-      onHoverEnd={() => setHov(false)}
+      onHoverStart={() => setHov(true)} onHoverEnd={() => setHov(false)}
       style={{ willChange: "transform, opacity" }}
     >
-      <article
-        id={entry.id}
-        itemScope
-        itemType="https://schema.org/ScholarlyArticle"
+      <article id={entry.id}
+        itemScope itemType="https://schema.org/ScholarlyArticle"
         style={{
-          position: "relative",
-          border: `1px solid ${hov ? "rgba(243,186,47,0.32)" : "rgba(243,186,47,0.18)"}`,
+          position:"relative", overflow:"hidden",
+          border: `1px solid ${hov ? "rgba(243,186,47,0.35)" : "rgba(243,186,47,0.18)"}`,
           background: "rgba(0,0,0,0.98)",
           boxShadow: hov ? "0 0 40px rgba(243,186,47,0.1), inset 0 0 50px rgba(243,186,47,0.025)" : "none",
-          transition: "all 0.28s ease",
+          transition: "all 0.28s ease", transform: "translateZ(0)",
           padding: "clamp(1.25rem,3vw,2rem)",
-          transform: "translateZ(0)",
-          overflow: "hidden",
         }}
       >
         {/* Corner brackets */}
-        {[
-          { top:"8px",left:"8px",borderTop:"1px solid",borderLeft:"1px solid" },
-          { top:"8px",right:"8px",borderTop:"1px solid",borderRight:"1px solid" },
-          { bottom:"8px",left:"8px",borderBottom:"1px solid",borderLeft:"1px solid" },
-          { bottom:"8px",right:"8px",borderBottom:"1px solid",borderRight:"1px solid" },
-        ].map((s, i) => (
-          <div key={i} aria-hidden style={{ position:"absolute", width:"12px", height:"12px", borderColor:"rgba(243,186,47,0.3)", pointerEvents:"none", ...s }} />
+        {([ {top:"8px",left:"8px",borderTop:"1px solid",borderLeft:"1px solid"}, {top:"8px",right:"8px",borderTop:"1px solid",borderRight:"1px solid"}, {bottom:"8px",left:"8px",borderBottom:"1px solid",borderLeft:"1px solid"}, {bottom:"8px",right:"8px",borderBottom:"1px solid",borderRight:"1px solid"} ] as React.CSSProperties[]).map((s, ci) => (
+          <div key={ci} aria-hidden style={{ position:"absolute", width:"12px", height:"12px", borderColor:"rgba(243,186,47,0.3)", pointerEvents:"none", ...s }} />
         ))}
 
         <header>
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px", marginBottom: "1rem", flexWrap: "wrap" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
-                <span style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.38em", color: "rgba(243,186,47,0.7)", border: "1px solid rgba(243,186,47,0.25)", padding: "2px 8px", textTransform: "uppercase" }}>
+          <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"12px", marginBottom:"1rem", flexWrap:"wrap" }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.38em", color:"rgba(243,186,47,0.7)", border:"1px solid rgba(243,186,47,0.25)", padding:"2px 8px", textTransform:"uppercase" }}>
                   WHITE PAPER
                 </span>
-                <time dateTime={entry.year + "-01-01"} itemProp="datePublished"
-                  style={{ fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.2)" }}>
+                <time dateTime={`${entry.year}-01-01`} itemProp="datePublished"
+                  style={{ fontFamily:"monospace", fontSize:"7px", color:"rgba(255,255,255,0.2)" }}>
                   {entry.year}
                 </time>
               </div>
-              <h3 itemProp="headline"
-                style={{
-                  fontSize: "clamp(1.1rem,3.2vw,1.45rem)",
-                  fontWeight: 900, lineHeight: 1.25, margin: 0,
-                  color: hov ? "#F3BA2F" : "rgba(255,255,255,0.93)",
-                  transition: "color 0.28s ease",
-                }}>
+              <h3 itemProp="headline" style={{
+                fontSize:"clamp(1.1rem,3.2vw,1.45rem)", fontWeight:900, lineHeight:1.25, margin:0,
+                color: hov ? "#F3BA2F" : "rgba(255,255,255,0.93)", transition:"color 0.28s ease",
+              }}>
                 {entry.title}
               </h3>
-              <p style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.18em", color: "rgba(243,186,47,0.35)", marginTop: "6px", textTransform: "uppercase" }}>
+              <p style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.18em", color:"rgba(243,186,47,0.35)", marginTop:"6px", textTransform:"uppercase" }}>
                 {entry.subtitle}
               </p>
             </div>
-            <span className={STATUS_STYLE[entry.status] ?? ""} style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.28em", border: "1px solid currentColor", padding: "3px 8px", textTransform: "uppercase", flexShrink: 0 }}>
+            <span className={STATUS_CLS[entry.status] ?? "text-white/30"}
+              style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.28em", border:"1px solid currentColor", padding:"3px 8px", textTransform:"uppercase", flexShrink:0 }}>
               {entry.status}
             </span>
           </div>
         </header>
 
         <p itemProp="abstract"
-          style={{ color: "rgba(255,255,255,0.45)", fontSize: "clamp(0.9rem,2.4vw,1rem)", lineHeight: 1.78, fontWeight: 300, marginBottom: "1.25rem" }}>
+          style={{ color:"rgba(255,255,255,0.45)", fontSize:"clamp(0.9rem,2.4vw,1rem)", lineHeight:1.78, fontWeight:300, marginBottom:"1.25rem" }}>
           {entry.abstract}
         </p>
 
         {entry.equations && entry.equations.length > 0 && (
           <section aria-label="Formal notation"
-            style={{ marginBottom: "1.25rem", padding: "1rem 1.25rem", borderLeft: "2px solid rgba(243,186,47,0.3)", background: "rgba(243,186,47,0.03)" }}>
-            <p style={{ fontFamily: "monospace", fontSize: "6.5px", letterSpacing: "0.42em", color: "rgba(243,186,47,0.45)", textTransform: "uppercase", marginBottom: "10px" }}>
+            style={{ marginBottom:"1.25rem", padding:"1rem 1.25rem", borderLeft:"2px solid rgba(243,186,47,0.3)", background:"rgba(243,186,47,0.03)" }}>
+            <p style={{ fontFamily:"monospace", fontSize:"6.5px", letterSpacing:"0.42em", color:"rgba(243,186,47,0.45)", textTransform:"uppercase", margin:"0 0 10px 0" }}>
               Formal Notation
             </p>
             {entry.equations.map((eq, j) => (
-              <p key={j} style={{ fontSize: "0.9rem", lineHeight: 1.8, marginBottom: j < entry.equations!.length - 1 ? "8px" : 0 }}>
+              <p key={j} style={{ fontSize:"0.9rem", lineHeight:1.8, margin: j < (entry.equations!.length - 1) ? "0 0 8px 0" : 0 }}>
                 <MathText>{eq}</MathText>
               </p>
             ))}
           </section>
         )}
 
-        <footer style={{ paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <address itemProp="author" itemScope itemType="https://schema.org/Person"
-            style={{ fontStyle: "normal", fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase", marginBottom: "10px" }}>
-            <span itemProp="name">{AUTHOR.name}</span>
-            {" · "}
+        <footer>
+          <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
+            <address itemProp="author" itemScope itemType="https://schema.org/Person"
+              style={{ fontStyle:"normal", fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", color:"rgba(255,255,255,0.2)", textTransform:"uppercase" }}>
+              <span itemProp="name">{AUTHOR.name}</span>
+            </address>
+            <span style={{ color:"rgba(255,255,255,0.1)" }}>·</span>
             <a href={AUTHOR.orcid} target="_blank" rel="noopener noreferrer"
-              style={{ color: "rgba(166,206,57,0.65)", textDecoration: "none" }}>
+              style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.2em", color:"rgba(166,206,57,0.65)", textDecoration:"none" }}>
               ORCID: {AUTHOR.orcidId} ↗
             </a>
-          </address>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-            {[
-              { label: "ORCID", href: AUTHOR.orcid },
-              { label: "GOOGLE SCHOLAR", href: AUTHOR.scholar },
-              { label: "LINKEDIN", href: AUTHOR.linkedin },
-              { label: "HACKERNOON", href: AUTHOR.hackernoon },
-            ].map(b => (
-              <a key={b.label} href={b.href} target="_blank" rel="noopener noreferrer"
-                style={{
-                  fontFamily: "monospace", fontSize: "6.5px", letterSpacing: "0.26em",
-                  border: "1px solid rgba(243,186,47,0.14)", color: "rgba(243,186,47,0.42)",
-                  padding: "3px 8px", textTransform: "uppercase", textDecoration: "none",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.5)"; a.style.color="rgba(243,186,47,0.85)"; }}
-                onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.14)"; a.style.color="rgba(243,186,47,0.42)"; }}
-              >
-                [{b.label} ↗]
-              </a>
-            ))}
+            <div style={{ marginLeft:"auto" }}>
+              <PdfButton entry={entry} />
+            </div>
           </div>
+          <PlatformBadges />
         </footer>
       </article>
     </motion.div>
@@ -697,64 +665,57 @@ function RepoCard({ entry, i }: { entry: Entry; i: number }) {
   const live = entry.status === "ACTIVE";
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => setHov(true)}
-      onHoverEnd={() => setHov(false)}
+      onHoverStart={() => setHov(true)} onHoverEnd={() => setHov(false)}
       style={{ willChange: "transform, opacity" }}
     >
-      <article
-        id={entry.id}
-        itemScope
-        itemType="https://schema.org/SoftwareSourceCode"
+      <article id={entry.id}
+        itemScope itemType="https://schema.org/SoftwareSourceCode"
         style={{
           border: `1px solid ${hov ? "rgba(243,186,47,0.28)" : "rgba(243,186,47,0.1)"}`,
           background: "rgba(0,0,0,0.97)",
           boxShadow: hov ? "0 0 40px rgba(243,186,47,0.1)" : "none",
-          transition: "all 0.28s ease",
+          transition: "all 0.28s ease", transform: "translateZ(0)",
           padding: "clamp(1.25rem,3vw,2rem)",
-          transform: "translateZ(0)",
         }}
       >
         <header>
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px", marginBottom: "1rem" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+          <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"12px", marginBottom:"1rem" }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
                 <span style={{
-                  display: "inline-block", width: "7px", height: "7px", borderRadius: "50%",
+                  display:"inline-block", width:"7px", height:"7px", borderRadius:"50%", flexShrink:0,
                   background: live ? "#4ade80" : "#fbbf24",
                   boxShadow: live ? "0 0 6px rgba(74,222,128,0.7)" : "0 0 6px rgba(251,191,36,0.7)",
                   animation: "repoPulse 2s ease-in-out infinite",
                 }} />
-                <span style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.36em", textTransform: "uppercase", color: live ? "rgba(74,222,128,0.75)" : "rgba(251,191,36,0.65)" }}>
+                <span className={live ? "text-emerald-400/75" : "text-amber-400/65"}
+                  style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.36em", textTransform:"uppercase" }}>
                   {entry.status}
                 </span>
-                <time dateTime={entry.year + "-01-01"} itemProp="dateCreated"
-                  style={{ fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.18)" }}>
+                <time dateTime={`${entry.year}-01-01`} itemProp="dateCreated"
+                  style={{ fontFamily:"monospace", fontSize:"7px", color:"rgba(255,255,255,0.18)" }}>
                   · {entry.year}
                 </time>
               </div>
-              <h3 itemProp="name"
-                style={{ fontSize: "clamp(1.1rem,3.2vw,1.45rem)", fontWeight: 900, lineHeight: 1.25, color: "#fff", margin: 0 }}>
+              <h3 itemProp="name" style={{ fontSize:"clamp(1.1rem,3.2vw,1.45rem)", fontWeight:900, lineHeight:1.25, color:"#fff", margin:0 }}>
                 {entry.title}
               </h3>
-              <p style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.16em", color: "rgba(243,186,47,0.32)", marginTop: "6px", textTransform: "uppercase" }}>
+              <p style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.16em", color:"rgba(243,186,47,0.32)", marginTop:"6px", textTransform:"uppercase" }}>
                 {entry.subtitle}
               </p>
             </div>
             {entry.repoUrl && (
-              <a href={entry.repoUrl} target="_blank" rel="noopener noreferrer"
-                itemProp="codeRepository"
+              <a href={entry.repoUrl} target="_blank" rel="noopener noreferrer" itemProp="codeRepository"
                 style={{
-                  fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.2em",
-                  border: "1px solid rgba(243,186,47,0.2)", color: "rgba(243,186,47,0.5)",
-                  padding: "4px 10px", textDecoration: "none", flexShrink: 0, whiteSpace: "nowrap",
-                  transition: "all 0.2s ease",
+                  fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.2em",
+                  border:"1px solid rgba(243,186,47,0.2)", color:"rgba(243,186,47,0.5)",
+                  padding:"5px 12px", textDecoration:"none", flexShrink:0, whiteSpace:"nowrap",
+                  transition:"all 0.2s ease",
                 }}
-                onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.55)"; a.style.color="#F3BA2F"; }}
+                onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.6)"; a.style.color="#F3BA2F"; }}
                 onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor="rgba(243,186,47,0.2)"; a.style.color="rgba(243,186,47,0.5)"; }}
               >
                 GITHUB ↗
@@ -764,23 +725,23 @@ function RepoCard({ entry, i }: { entry: Entry; i: number }) {
         </header>
 
         <p itemProp="description"
-          style={{ color: "rgba(255,255,255,0.4)", fontSize: "clamp(0.9rem,2.4vw,1rem)", lineHeight: 1.78, fontWeight: 300, marginBottom: "1.25rem" }}>
+          style={{ color:"rgba(255,255,255,0.4)", fontSize:"clamp(0.9rem,2.4vw,1rem)", lineHeight:1.78, fontWeight:300, marginBottom:"1.25rem" }}>
           {entry.abstract}
         </p>
 
         {/* Commit heatmap */}
-        <section aria-label="Commit activity" style={{ marginBottom: "1.25rem" }}>
-          <p style={{ fontFamily: "monospace", fontSize: "6.5px", letterSpacing: "0.36em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase", marginBottom: "8px" }}>
-            Commit Activity · Status: {entry.commits}
+        <section aria-label="Commit activity" style={{ marginBottom:"1.25rem" }}>
+          <p style={{ fontFamily:"monospace", fontSize:"6.5px", letterSpacing:"0.36em", color:"rgba(255,255,255,0.18)", textTransform:"uppercase", margin:"0 0 8px 0" }}>
+            Commit Activity · {entry.commits}
           </p>
-          <div style={{ display: "flex", gap: "2px", transform: "translateZ(0)", overflowX: "hidden" }} role="img" aria-label="commit heatmap">
+          <div role="img" aria-label="commit heatmap" style={{ display:"flex", gap:"2px", transform:"translateZ(0)", overflow:"hidden" }}>
             {Array.from({ length: 20 }, (_, col) => (
-              <div key={col} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+              <div key={col} style={{ display:"flex", flexDirection:"column", gap:"2px" }}>
                 {Array.from({ length: 5 }, (_, row) => {
                   const val = heat[col * 5 + row];
                   return (
                     <div key={row} style={{
-                      width: "10px", height: "10px", borderRadius: "2px",
+                      width:"10px", height:"10px", borderRadius:"2px",
                       background: val > 0.75 ? "#F3BA2F" : val > 0.5 ? "rgba(243,186,47,0.52)" : val > 0.25 ? "rgba(243,186,47,0.2)" : "rgba(255,255,255,0.04)",
                     }} />
                   );
@@ -791,23 +752,19 @@ function RepoCard({ entry, i }: { entry: Entry; i: number }) {
         </section>
 
         {/* Infrastructure */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "1.25rem" }}>
-          {[{ label:"DEPLOY", val:entry.deploy },{ label:"DATABASE", val:entry.db }].map(m => (
-            <div key={m.label} style={{ border: "1px solid rgba(255,255,255,0.05)", padding: "8px 12px" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px", marginBottom:"1.25rem" }}>
+          {[{ label:"DEPLOY",val:entry.deploy },{ label:"DATABASE",val:entry.db }].map(m => (
+            <div key={m.label} style={{ border:"1px solid rgba(255,255,255,0.05)", padding:"8px 12px" }}>
               <p style={{ fontFamily:"monospace", fontSize:"6px", letterSpacing:"0.4em", color:"rgba(255,255,255,0.16)", textTransform:"uppercase", margin:"0 0 4px 0" }}>{m.label}</p>
               <p style={{ fontFamily:"monospace", fontSize:"8.5px", letterSpacing:"0.14em", color:"rgba(243,186,47,0.7)", margin:0 }}>{m.val}</p>
             </div>
           ))}
         </div>
 
-        <footer style={{ paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
+        <footer style={{ paddingTop:"12px", borderTop:"1px solid rgba(255,255,255,0.05)", display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between", gap:"8px" }}>
           <ul style={{ display:"flex", flexWrap:"wrap", gap:"6px", listStyle:"none", padding:0, margin:0 }} itemProp="programmingLanguage">
             {entry.stack?.map(s => (
-              <li key={s}>
-                <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.14em", padding:"2px 8px", border:"1px solid rgba(243,186,47,0.1)", color:"rgba(243,186,47,0.4)" }}>
-                  {s}
-                </span>
-              </li>
+              <li key={s}><span style={{ fontFamily:"monospace", fontSize:"7px", padding:"2px 8px", border:"1px solid rgba(243,186,47,0.1)", color:"rgba(243,186,47,0.4)" }}>{s}</span></li>
             ))}
           </ul>
           <span style={{ fontFamily:"monospace", fontSize:"6.5px", letterSpacing:"0.28em", border:"1px solid rgba(243,186,47,0.16)", color:"rgba(243,186,47,0.45)", padding:"3px 8px", textTransform:"uppercase" }}>
@@ -819,9 +776,28 @@ function RepoCard({ entry, i }: { entry: Entry; i: number }) {
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
-import React from "react";
+// ─── Page frame ───────────────────────────────────────────────────────────────
+function Frame() {
+  return (
+    <>
+      {[{ left:"4px" },{ right:"4px" }].map((pos, i) => (
+        <div key={i} aria-hidden style={{
+          position:"fixed", top:0, ...pos, width:"1px", height:"100vh",
+          background:"linear-gradient(to bottom,transparent 5%,rgba(243,186,47,0.07) 30%,rgba(243,186,47,0.07) 70%,transparent 95%)",
+          pointerEvents:"none", zIndex:5,
+        }} />
+      ))}
+      {([ {top:"14px",left:"8px"},{top:"14px",right:"8px"},{bottom:"14px",left:"8px"},{bottom:"14px",right:"8px"} ] as React.CSSProperties[]).map((pos, i) => (
+        <div key={i} aria-hidden style={{ position:"fixed", ...pos, width:"14px", height:"14px", pointerEvents:"none", zIndex:5 }}>
+          <div style={{ position:"absolute", top:"50%", left:0, right:0, height:"1px", background:"rgba(243,186,47,0.45)", transform:"translateY(-50%)" }} />
+          <div style={{ position:"absolute", left:"50%", top:0, bottom:0, width:"1px", background:"rgba(243,186,47,0.45)", transform:"translateX(-50%)" }} />
+        </div>
+      ))}
+    </>
+  );
+}
 
+// ─── Main ─────────────────────────────────────────────────────────────────────
 export default function Research() {
   useSEO();
   const [active, setActive] = useState<Filter>("ALL INTEL");
@@ -834,87 +810,72 @@ export default function Research() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <style>{`
-        @keyframes repoPulse { 0%,100%{opacity:.5;} 50%{opacity:1;} }
+        @keyframes repoPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
         .filter-ribbon {
           overflow-x: auto; overflow-y: hidden;
           -webkit-overflow-scrolling: touch; scrollbar-width: none;
           white-space: nowrap;
-          -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-          mask-image: linear-gradient(to right, black 80%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, black 82%, transparent 100%);
+          mask-image: linear-gradient(to right, black 82%, transparent 100%);
         }
         .filter-ribbon::-webkit-scrollbar { display: none; }
-        .filter-btn { background: none; border: none; cursor: pointer; position: relative; }
-        .filter-btn:hover { color: rgba(255,255,255,0.65) !important; }
+        .flt-btn { background: none; border: none; cursor: pointer; }
+        .flt-btn:hover { opacity: 0.75; }
       `}</style>
 
       <Frame />
-
-      {/* Ambient glow */}
-      <div aria-hidden style={{
-        position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 80% 40% at 50% 0%,rgba(243,186,47,0.04) 0%,transparent 70%)",
-      }} />
+      <div aria-hidden style={{ position:"fixed",inset:0,zIndex:0,pointerEvents:"none",background:"radial-gradient(ellipse 80% 40% at 50% 0%,rgba(243,186,47,0.04) 0%,transparent 70%)" }} />
 
       {/* ── HERO ── */}
       <header className="pt-28 pb-8 relative z-10">
         <div className="max-w-5xl mx-auto px-5">
-          <motion.div initial="h" animate="s" variants={{ s: { transition: { staggerChildren: 0.09 } } }}>
+          <motion.div initial="h" animate="s" variants={{ s:{ transition:{ staggerChildren:0.09 } } }}>
             <motion.div variants={{ h:{opacity:0,y:14},s:{opacity:1,y:0,transition:{duration:0.55}} }}
-              style={{ display:"flex", alignItems:"center", gap:"12px", marginBottom:"1.5rem" }}>
-              <div style={{ height:"1px", width:"28px", background:"#F3BA2F", flexShrink:0 }} />
-              <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.5em", color:"#F3BA2F", textTransform:"uppercase" }}>Research Lab</span>
-              <div style={{ height:"1px", flex:1, background:"rgba(243,186,47,0.1)" }} />
-              <span style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.3em", color:"rgba(255,255,255,0.14)" }}>NODE: KARACHI · PK</span>
+              style={{ display:"flex",alignItems:"center",gap:"12px",marginBottom:"1.5rem" }}>
+              <div style={{ height:"1px",width:"28px",background:"#F3BA2F",flexShrink:0 }} />
+              <span style={{ fontFamily:"monospace",fontSize:"8px",letterSpacing:"0.5em",color:"#F3BA2F",textTransform:"uppercase" }}>Research Lab</span>
+              <div style={{ height:"1px",flex:1,background:"rgba(243,186,47,0.1)" }} />
+              <span style={{ fontFamily:"monospace",fontSize:"7px",letterSpacing:"0.3em",color:"rgba(255,255,255,0.14)" }}>NODE: KARACHI · PK</span>
             </motion.div>
 
             <motion.h1
               variants={{ h:{opacity:0,y:22},s:{opacity:1,y:0,transition:{duration:0.75,ease:[0.22,1,0.36,1]}} }}
-              style={{
-                fontWeight:900, textTransform:"uppercase", lineHeight:0.95, margin:0,
-                fontSize:"clamp(2.2rem,9vw,6rem)", letterSpacing:"-0.025em",
-              }}>
+              style={{ fontWeight:900,textTransform:"uppercase",lineHeight:0.95,margin:0,fontSize:"clamp(2.2rem,9vw,6rem)",letterSpacing:"-0.025em" }}
+            >
               CENTRAL KNOWLEDGE
               <br />
-              <span style={{
-                background:"linear-gradient(135deg,#F3BA2F 0%,#ffe47a 50%,#c8900a 100%)",
-                WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text",
-              }}>
+              <span style={{ background:"linear-gradient(135deg,#F3BA2F 0%,#ffe47a 50%,#c8900a 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text" }}>
                 REPOSITORY
               </span>
             </motion.h1>
 
             <motion.p
               variants={{ h:{opacity:0},s:{opacity:1,transition:{duration:0.5,delay:0.15}} }}
-              style={{ fontFamily:"monospace", color:"rgba(255,255,255,0.22)", fontSize:"11px", letterSpacing:"0.3em", textTransform:"uppercase", marginTop:"1.25rem", lineHeight:1.7, maxWidth:"340px" }}>
+              style={{ fontFamily:"monospace",color:"rgba(255,255,255,0.22)",fontSize:"11px",letterSpacing:"0.3em",textTransform:"uppercase",marginTop:"1.25rem",lineHeight:1.7,maxWidth:"340px" }}>
               Market intel · Protocol blueprints ·<br />
               Cryptographic papers · Live production nodes
             </motion.p>
           </motion.div>
 
-          {/* Authority badges — real clickable links */}
-          <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:0.45,duration:0.5}}
-            style={{ display:"flex", flexWrap:"wrap", gap:"8px", marginTop:"1.75rem" }}>
+          {/* Authority badges */}
+          <motion.div initial={{ opacity:0,y:8 }} animate={{ opacity:1,y:0 }} transition={{ delay:0.45,duration:0.5 }}
+            style={{ display:"flex",flexWrap:"wrap",gap:"8px",marginTop:"1.75rem" }}>
             {[
-              { label:"ORCID", sub:"0009-0000-0915-7272", href:AUTHOR.orcid,     col:"rgba(166,206,57,0.75)" },
-              { label:"GOOGLE SCHOLAR",    sub:"TRACEABLE",       href:AUTHOR.scholar,  col:"rgba(66,133,244,0.75)" },
-              { label:"LINKEDIN",           sub:"DIRECT CONNECT",  href:AUTHOR.linkedin, col:"rgba(10,102,194,0.75)" },
-              { label:"HACKERNOON",         sub:"PUBLISHED",       href:AUTHOR.hackernoon,col:"rgba(0,209,130,0.7)" },
-              { label:"GITHUB LAB",         sub:"LIVE SECURED",    href:AUTHOR.github,   col:"rgba(243,186,47,0.75)" },
+              { label:"ORCID",           sub:AUTHOR.orcidId,     href:AUTHOR.orcid,      col:"rgba(166,206,57,0.8)" },
+              { label:"GOOGLE SCHOLAR",  sub:"TRACEABLE",        href:AUTHOR.scholar,    col:"rgba(66,133,244,0.8)" },
+              { label:"LINKEDIN",        sub:"DIRECT CONNECT",   href:AUTHOR.linkedin,   col:"rgba(10,102,194,0.8)" },
+              { label:"HACKERNOON",      sub:"PUBLISHED",        href:AUTHOR.hackernoon, col:"rgba(0,209,130,0.75)" },
+              { label:"GITHUB LAB",      sub:"LIVE SECURED",     href:AUTHOR.github,     col:"rgba(243,186,47,0.8)" },
             ].map(b => (
               <a key={b.label} href={b.href} target="_blank" rel="noopener noreferrer"
-                style={{
-                  display:"flex", alignItems:"center", gap:"7px",
-                  padding:"7px 12px", border:"1px solid rgba(255,255,255,0.08)",
-                  textDecoration:"none", transition:"all 0.2s ease",
-                  minHeight:"40px",
-                }}
+                style={{ display:"flex",alignItems:"center",gap:"7px",padding:"7px 12px",border:"1px solid rgba(255,255,255,0.08)",textDecoration:"none",transition:"border-color 0.2s ease",minHeight:"40px" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = b.col; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.08)"; }}
               >
-                <span style={{ width:"6px", height:"6px", borderRadius:"50%", background:b.col, boxShadow:`0 0 6px ${b.col}`, flexShrink:0 }} />
+                <span style={{ width:"6px",height:"6px",borderRadius:"50%",background:b.col,boxShadow:`0 0 6px ${b.col}`,flexShrink:0 }} />
                 <div>
-                  <p style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.28em", color:"rgba(255,255,255,0.55)", textTransform:"uppercase", margin:0, lineHeight:1.3 }}>{b.label}</p>
-                  <p style={{ fontFamily:"monospace", fontSize:"6px", letterSpacing:"0.2em", color:"rgba(255,255,255,0.25)", textTransform:"uppercase", margin:0, lineHeight:1.3 }}>{b.sub}</p>
+                  <p style={{ fontFamily:"monospace",fontSize:"7px",letterSpacing:"0.28em",color:"rgba(255,255,255,0.55)",textTransform:"uppercase",margin:0,lineHeight:1.3 }}>{b.label}</p>
+                  <p style={{ fontFamily:"monospace",fontSize:"6px",letterSpacing:"0.2em",color:"rgba(255,255,255,0.25)",textTransform:"uppercase",margin:0,lineHeight:1.3 }}>{b.sub}</p>
                 </div>
               </a>
             ))}
@@ -922,43 +883,21 @@ export default function Research() {
         </div>
       </header>
 
-      {/* ── FILTER RIBBON — horizontal scroll, no clipping ── */}
+      {/* ── FILTER RIBBON ── */}
       <nav aria-label="Knowledge categories"
-        style={{
-          position:"sticky", top:"64px", zIndex:20,
-          background:"rgba(0,0,0,0.96)", backdropFilter:"blur(20px)", WebkitBackdropFilter:"blur(20px)",
-          borderBottom:"1px solid rgba(243,186,47,0.1)",
-        }}>
+        style={{ position:"sticky",top:"64px",zIndex:20,background:"rgba(0,0,0,0.96)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",borderBottom:"1px solid rgba(243,186,47,0.1)" }}>
         <div className="max-w-5xl mx-auto px-5">
-          <div className="filter-ribbon" role="tablist" style={{ display:"flex", marginBottom:"-1px" }}>
+          <div className="filter-ribbon" role="tablist" style={{ display:"flex",marginBottom:"-1px" }}>
             {FILTERS.map(f => {
               const isA = active === f;
               return (
-                <button
-                  key={f}
-                  role="tab"
-                  aria-selected={isA}
-                  onClick={() => setActive(f)}
-                  className="filter-btn"
-                  style={{
-                    display:"inline-flex", alignItems:"center", gap:"5px",
-                    padding:"0 16px", minHeight:"52px",
-                    fontFamily:"monospace", fontSize:"8.5px", letterSpacing:"0.28em",
-                    textTransform:"uppercase", whiteSpace:"nowrap",
-                    color: isA ? "#F3BA2F" : "rgba(255,255,255,0.28)",
-                    transition:"color 0.2s ease",
-                  }}
-                >
+                <button key={f} role="tab" aria-selected={isA} onClick={() => setActive(f)} className="flt-btn"
+                  style={{ display:"inline-flex",alignItems:"center",gap:"5px",padding:"0 16px",minHeight:"52px",fontFamily:"monospace",fontSize:"8.5px",letterSpacing:"0.28em",textTransform:"uppercase",whiteSpace:"nowrap",color:isA ? "#F3BA2F" : "rgba(255,255,255,0.28)",transition:"color 0.2s ease",position:"relative" }}>
                   {f}
-                  <span style={{ opacity:0.45, fontSize:"7.5px" }}>({counts[f]})</span>
+                  <span style={{ opacity:0.45,fontSize:"7.5px" }}>({counts[f]})</span>
                   {isA && (
                     <motion.span layoutId="filter-bar"
-                      style={{
-                        position:"absolute", bottom:0, left:"8px", right:"8px",
-                        height:"1px", background:"#F3BA2F",
-                        boxShadow:"0 0 8px rgba(243,186,47,0.9)",
-                      }}
-                    />
+                      style={{ position:"absolute",bottom:0,left:"8px",right:"8px",height:"1px",background:"#F3BA2F",boxShadow:"0 0 8px rgba(243,186,47,0.9)" }} />
                   )}
                 </button>
               );
@@ -971,7 +910,7 @@ export default function Research() {
       <main role="tabpanel" aria-label={active} className="py-8 pb-24 relative z-10">
         <div className="max-w-5xl mx-auto px-5 space-y-4">
           {filtered.length === 0 && (
-            <p role="status" style={{ textAlign:"center", padding:"5rem 0", fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.4em", color:"rgba(255,255,255,0.14)", textTransform:"uppercase" }}>
+            <p role="status" style={{ textAlign:"center",padding:"5rem 0",fontFamily:"monospace",fontSize:"10px",letterSpacing:"0.4em",color:"rgba(255,255,255,0.14)",textTransform:"uppercase" }}>
               No entries in this category
             </p>
           )}
@@ -983,16 +922,16 @@ export default function Research() {
         </div>
       </main>
 
-      {/* ── CODA ── */}
+      {/* ── FOOTER ── */}
       <footer className="pb-16 relative z-10">
         <div className="max-w-5xl mx-auto px-5">
-          <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between", gap:"12px", paddingTop:"1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
-            <p style={{ fontFamily:"monospace", color:"rgba(255,255,255,0.1)", fontSize:"8px", letterSpacing:"0.3em", textTransform:"uppercase", margin:0 }}>
+          <div style={{ display:"flex",flexWrap:"wrap",alignItems:"center",justifyContent:"space-between",gap:"12px",paddingTop:"1.5rem",borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+            <p style={{ fontFamily:"monospace",color:"rgba(255,255,255,0.1)",fontSize:"8px",letterSpacing:"0.3em",textTransform:"uppercase",margin:0 }}>
               CITATION: {AUTHOR.name} · {AUTHOR.org} · 2024 · ORCID: {AUTHOR.orcidId}
             </p>
-            <div style={{ display:"flex", alignItems:"center", gap:"8px" }}>
-              <span className="animate-pulse" style={{ width:"6px", height:"6px", borderRadius:"50%", background:"#F3BA2F", display:"inline-block" }} />
-              <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", color:"rgba(243,186,47,0.4)", textTransform:"uppercase" }}>
+            <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
+              <span className="animate-pulse" style={{ width:"6px",height:"6px",borderRadius:"50%",background:"#F3BA2F",display:"inline-block" }} />
+              <span style={{ fontFamily:"monospace",fontSize:"8px",letterSpacing:"0.28em",color:"rgba(243,186,47,0.4)",textTransform:"uppercase" }}>
                 {ENTRIES.length} ENTRIES · INDEXING ACTIVE
               </span>
             </div>
