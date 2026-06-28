@@ -107,7 +107,36 @@ import { motion, AnimatePresence } from "framer-motion";
     roadmap: { module: string; desc: string }[];
     pdfUrl?: string; githubUrl?: string;
   }> = {
-    "orakzai-properties": {
+    "qorix": {
+        title: "Multi-agent AI Intelligence Platform: GPT-4o + LangGraph for Enterprise Automation",
+        bio: "Qorix is a next-generation AI orchestration platform designed for enterprise ecosystems. It leverages multi-agent AI systems to automate complex workflows, generate critical insights, and operate business infrastructure efficiently — minimizing human intervention and bottlenecks. Built to provide sovereign infrastructure for advanced AI applications.",
+        description: "Powered by a robust modern stack: Intelligence Layer (GPT-4o + Claude 3.5) for reasoning and generation; LangGraph + CrewAI for multi-agent pipelines and coordination; FastAPI + TypeScript as a unified API gateway; Vector DB (pgvector) for persistent agent memory across sessions; and n8n + custom workers for workflow automation. Designed to serve Real Estate, Perfume E-commerce, Blockchain, and enterprise Operations at scale.",
+        uniqueFeatures: [
+          "Multi-agent orchestration with GPT-4o + Claude 3.5 reasoning",
+          "LangGraph + CrewAI for interconnected AI agent pipelines",
+          "Persistent memory via Vector DB (pgvector) — context-aware agents",
+          "Unified API gateway (FastAPI + TypeScript) for seamless enterprise integration",
+          "End-to-end workflow automation via n8n + custom workers",
+          "6 specialized agents: Research, Content, Financial, OPS, Comms, Code",
+        ],
+        benefits: [
+          { label: "Increased Efficiency", desc: "Automates complex and repetitive tasks, freeing human resources to focus on strategic initiatives and dramatically boosting enterprise productivity." },
+          { label: "Enhanced Decision-Making", desc: "Real-time AI-generated insights — especially in financial and research domains — enable more informed, data-driven decisions." },
+          { label: "Cost Reduction", desc: "Automation of workflows and operational tasks delivers substantial and measurable cost savings for businesses at scale." },
+          { label: "Innovation & Scalability", desc: "Modular architecture enables rapid deployment of new AI applications and seamless integration into diverse business environments." },
+          { label: "Reduced Human Error", desc: "Automated systems perform tasks with higher accuracy and consistency than manual processes, improving overall output quality." },
+          { label: "Democratization of AI", desc: "Makes advanced multi-agent AI capabilities accessible to enterprises without requiring extensive in-house AI expertise." },
+        ],
+        roadmap: [
+          { module: "Core Multi-Agent Orchestration Engine", desc: "Development of the foundational orchestration layer connecting GPT-4o, Claude 3.5, LangGraph, and CrewAI agents into coherent pipelines." },
+          { module: "API Gateway & Authentication Layer", desc: "Implementation of a unified FastAPI + TypeScript gateway with enterprise-grade authentication and rate limiting." },
+          { module: "Production Deployment — Phase 1 (Q3 2025)", desc: "Full production rollout with enterprise client onboarding pipeline, SLA guarantees, and monitoring dashboards." },
+          { module: "Custom LLM Fine-Tuning", desc: "Fine-tuning language models on ORAKZAI domain-specific data — real estate, fintech, and operations — for superior contextual performance." },
+          { module: "Real-Time Decision Intelligence Dashboard", desc: "Live monitoring dashboard tracking agent performance, KPIs, system health, and AI-driven decision outcomes in real time." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab/Adamorakzaix",
+      },
+      "orakzai-properties": {
       title: "Pakistan's Premier Real Estate Tokenization & Investment Platform",
       bio: "Orakzai Properties is a prominent platform in Pakistan for tokenized real estate and property investment. It bridges physical land assets and blockchain-based ownership — enabling fractional investment, transparent title, and 24/7 liquidity.",
       description: "A PropTech and DeFi solution that digitalizes Pakistan's real estate market. Investments start from as low as PKR 50,000 using ERC-1155 fractional property tokens on the Polygon Network, with on-chain title deeds and automatic rental yield distribution via smart contracts. Focused on Lahore and Islamabad markets with plans for national expansion.",
