@@ -1826,6 +1826,51 @@ As the digital economy evolves, blockchain is expected to become a foundational 
   const h4Style: React.CSSProperties = { fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1rem,2.5vw,1.2rem)", color:"rgba(255,255,255,0.8)", margin:"1.75rem 0 0.6rem", lineHeight:1.35 };
 
   /* ── Main Component ──────────────────────────────────────────────────────── */
+
+/* ── Cite This Article Block ──────────────────────────────────────────────── */
+function CitеBlock({ title, year, slug }: { title: string; year: string; slug: string }) {
+  const [fmt, setFmt] = React.useState<"APA"|"MLA"|"CHICAGO">("APA");
+  const [cpd, setCpd] = React.useState(false);
+
+  const citations = {
+    APA: `Orakzai, F. (${year}). ${title}. Orakzai Research Lab. https://faisalorakzai.vercel.app/research/${slug}`,
+    MLA: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}, faisalorakzai.vercel.app/research/${slug}.`,
+    CHICAGO: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}. https://faisalorakzai.vercel.app/research/${slug}.`,
+  };
+
+  const copy = () => {
+    navigator.clipboard.writeText(citations[fmt]).then(() => { setCpd(true); setTimeout(() => setCpd(false), 2000); });
+  };
+
+  return (
+    <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"1.5rem", marginBottom:"1.5rem" }}>
+      <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+        <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(243,186,47,0.55)", textTransform:"uppercase" }}>Cite This Article</span>
+        <div style={{ flex:1, height:"1px", background:"rgba(255,255,255,0.06)" }} />
+      </div>
+      {/* Format selector */}
+      <div style={{ display:"flex", gap:"4px", marginBottom:"10px" }}>
+        {(["APA","MLA","CHICAGO"] as const).map(f => (
+          <button key={f} onClick={() => setFmt(f)}
+            style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.2em", padding:"4px 12px", border:`1px solid ${fmt===f ? "rgba(243,186,47,0.6)" : "rgba(255,255,255,0.1)"}`, color: fmt===f ? "#F3BA2F" : "rgba(255,255,255,0.3)", background: fmt===f ? "rgba(243,186,47,0.07)" : "none", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
+            {f}
+          </button>
+        ))}
+      </div>
+      {/* Citation text */}
+      <div style={{ position:"relative" }}>
+        <code style={{ display:"block", fontFamily:"monospace", fontSize:"11px", color:"rgba(255,255,255,0.55)", background:"rgba(255,255,255,0.03)", padding:"12px 14px", border:"1px solid rgba(255,255,255,0.07)", lineHeight:1.8, wordBreak:"break-word" as const }}>
+          {citations[fmt]}
+        </code>
+        <button onClick={copy}
+          style={{ position:"absolute", top:"8px", right:"8px", fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.25em", border:`1px solid ${cpd ? "rgba(74,222,128,0.4)" : "rgba(255,255,255,0.1)"}`, color: cpd ? "#4ade80" : "rgba(255,255,255,0.3)", background:"rgba(0,0,0,0.8)", padding:"4px 10px", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
+          {cpd ? "✓ COPIED" : "COPY"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
   export default function ResearchArticle() {
     useFonts();
     const { slug } = useParams<{ slug: string }>();
@@ -1963,12 +2008,8 @@ As the digital economy evolves, blockchain is expected to become a foundational 
 
             {/* Footer */}
             <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"2rem", paddingBottom:"4.5rem", display:"flex", flexDirection:"column", gap:"1.25rem" }}>
-              <div style={{ display:"flex", flexWrap:"wrap", gap:"10px", alignItems:"center" }}>
-                <span style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.2)", letterSpacing:"0.22em" }}>CITE AS:</span>
-                <code style={{ fontFamily:"monospace", fontSize:"10px", color:"rgba(255,255,255,0.38)", background:"rgba(255,255,255,0.04)", padding:"6px 12px", border:"1px solid rgba(255,255,255,0.07)", flex:1, minWidth:"180px", lineHeight:1.7 }}>
-                  Orakzai, M. F. ({article.year}). {article.title}. Orakzai Research Lab. faisalorakzai.com/research/{article.slug}
-                </code>
-              </div>
+              {/* Cite This Article */}
+              <CiteBlock title={article.title} year={article.year} slug={article.slug} />
               <button onClick={() => setLocation("/research")} style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", border:"1px solid rgba(243,186,47,0.3)", color:"#F3BA2F", background:"none", padding:"8px 16px", cursor:"pointer", textTransform:"uppercase", alignSelf:"flex-start" }}>← ALL ARTICLES</button>
             </div>
           </div>
