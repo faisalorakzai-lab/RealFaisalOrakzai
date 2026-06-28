@@ -130,7 +130,32 @@
             "url": "https://faisalorakzai.com",
             "description": "Official website of Muhammad Faisal Orakzai Ã¢ÂÂ Founder Orakzai Group, Orakzai Bond blockchain, Shamim Forever luxury brand",
             "inLanguage": ["en", "ur"],
-            "publisher": { "@id": "https://www.wikidata.org/wiki/Q140264666" }
+            "publisher": { "@id": "https://www.wikidata.org/wiki/Q140264666" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": { "@type": "EntryPoint", "urlTemplate": "https://faisalorakzai.com/research?q={search_term_string}" },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://faisalorakzai.com/#organization",
+            "name": "Orakzai Group",
+            "url": "https://faisalorakzai.com",
+            "logo": { "@type": "ImageObject", "url": "https://faisalorakzai.com/og-image.jpg" },
+            "founder": { "@id": "https://www.wikidata.org/wiki/Q140264666" },
+            "foundingDate": "2022",
+            "foundingLocation": { "@type": "Place", "name": "Karachi, Pakistan" },
+            "description": "Pakistan's pioneering blockchain-native conglomerate — Orakzai Bond (OKBOND), Shamim Forever, OkzByte Technology, QORIX AI, OrakzaiX.",
+            "sameAs": ["https://orakzaibond.com", "https://www.shamimforever.com"],
+            "subOrganization": [
+              { "@type": "Organization", "name": "Orakzai Bond", "url": "https://orakzaibond.com" },
+              { "@type": "Organization", "name": "Shamim Forever", "url": "https://www.shamimforever.com" },
+              { "@type": "Organization", "name": "OkzByte Technology", "url": "https://faisalorakzai.com/ecosystem" },
+              { "@type": "Organization", "name": "QORIX AI", "url": "https://faisalorakzai.com/ecosystem" }
+            ],
+            "areaServed": "Global",
+            "numberOfEmployees": { "@type": "QuantitativeValue", "value": 50 }
           }
         ]
       }
