@@ -2,7 +2,6 @@ import { useEffect, useRef, lazy, Suspense, useState, useCallback } from "react"
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useGetDashboardSummary } from "@workspace/api-client-react";
 
 const BlockchainOrb = lazy(() => import("@/components/three/BlockchainOrb"));
 
@@ -163,7 +162,6 @@ function ConstellationBg() {
 type HeroPhase = "photo" | "webm" | "old";
 
 export default function Home() {
-  const { data: summary } = useGetDashboardSummary();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 600], [0, -120]);
   const opacity1 = useTransform(scrollY, [0, 400], [1, 0]);
