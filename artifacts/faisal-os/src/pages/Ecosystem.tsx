@@ -106,6 +106,7 @@ import { motion, AnimatePresence } from "framer-motion";
     uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
     roadmap: { module: string; desc: string }[];
     pdfUrl?: string; githubUrl?: string; socialUsername?: string;
+    docs?: { label: string; url: string }[];
   }> = {
     "qorix": {
         title: "Multi-agent AI Intelligence Platform: GPT-4o + LangGraph for Enterprise Automation",
@@ -216,8 +217,9 @@ import { motion, AnimatePresence } from "framer-motion";
         ],
         githubUrl: "https://github.com/faisalorakzai-lab",
         socialUsername: "orakzaix",
-      docs: [{ label: "OrakzaiX Project Profile (PDF)", url: "https://drive.google.com/file/d/1hY3iUVNgBofI3lOsK2Os3QMJcjGIdcnS/view" }],
-    }, []);
+        docs: [{ label: "OrakzaiX Project Profile (PDF)", url: "https://drive.google.com/file/d/1hY3iUVNgBofI3lOsK2Os3QMJcjGIdcnS/view" }],
+      },
+  };
 
     useEffect(() => {
       document.title = "Orakzai Ecosystem — Live Cores, Infrastructure & Organizations · Faisal Orakzai";
