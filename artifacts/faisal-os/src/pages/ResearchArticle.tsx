@@ -1828,48 +1828,96 @@ As the digital economy evolves, blockchain is expected to become a foundational 
   /* ── Main Component ──────────────────────────────────────────────────────── */
 
 /* ── Cite This Article Block ──────────────────────────────────────────────── */
-function CitеBlock({ title, year, slug }: { title: string; year: string; slug: string }) {
-  const [fmt, setFmt] = React.useState<"APA"|"MLA"|"CHICAGO">("APA");
-  const [cpd, setCpd] = React.useState(false);
+  function CiteBlock({ title, year, slug, pdfUrl }: { title: string; year: string; slug: string; pdfUrl?: string }) {
+    const [fmt, setFmt] = React.useState<"APA"|"MLA"|"CHICAGO">("APA");
+    const [cpd, setCpd] = React.useState(false);
 
-  const citations = {
-    APA: `Orakzai, F. (${year}). ${title}. Orakzai Research Lab. https://faisalorakzai.vercel.app/research/${slug}`,
-    MLA: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}, faisalorakzai.vercel.app/research/${slug}.`,
-    CHICAGO: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}. https://faisalorakzai.vercel.app/research/${slug}.`,
-  };
+    const citations = {
+      APA: `Orakzai, F. (${year}). ${title}. Orakzai Research Lab. https://faisalorakzai.vercel.app/research/${slug}`,
+      MLA: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}, faisalorakzai.vercel.app/research/${slug}.`,
+      CHICAGO: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}. https://faisalorakzai.vercel.app/research/${slug}.`,
+    };
 
-  const copy = () => {
-    navigator.clipboard.writeText(citations[fmt]).then(() => { setCpd(true); setTimeout(() => setCpd(false), 2000); });
-  };
+    const copy = () => {
+      navigator.clipboard.writeText(citations[fmt]).then(() => { setCpd(true); setTimeout(() => setCpd(false), 2000); });
+    };
 
-  return (
-    <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"1.5rem", marginBottom:"1.5rem" }}>
-      <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
-        <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(243,186,47,0.55)", textTransform:"uppercase" }}>Cite This Article</span>
-        <div style={{ flex:1, height:"1px", background:"rgba(255,255,255,0.06)" }} />
-      </div>
-      {/* Format selector */}
-      <div style={{ display:"flex", gap:"4px", marginBottom:"10px" }}>
-        {(["APA","MLA","CHICAGO"] as const).map(f => (
-          <button key={f} onClick={() => setFmt(f)}
-            style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.2em", padding:"4px 12px", border:`1px solid ${fmt===f ? "rgba(243,186,47,0.6)" : "rgba(255,255,255,0.1)"}`, color: fmt===f ? "#F3BA2F" : "rgba(255,255,255,0.3)", background: fmt===f ? "rgba(243,186,47,0.07)" : "none", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
-            {f}
-          </button>
-        ))}
-      </div>
-      {/* Citation text */}
-      <div style={{ position:"relative" }}>
-        <code style={{ display:"block", fontFamily:"monospace", fontSize:"11px", color:"rgba(255,255,255,0.55)", background:"rgba(255,255,255,0.03)", padding:"12px 14px", border:"1px solid rgba(255,255,255,0.07)", lineHeight:1.8, wordBreak:"break-word" as const }}>
-          {citations[fmt]}
-        </code>
-        <button onClick={copy}
-          style={{ position:"absolute", top:"8px", right:"8px", fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.25em", border:`1px solid ${cpd ? "rgba(74,222,128,0.4)" : "rgba(255,255,255,0.1)"}`, color: cpd ? "#4ade80" : "rgba(255,255,255,0.3)", background:"rgba(0,0,0,0.8)", padding:"4px 10px", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
-          {cpd ? "✓ COPIED" : "COPY"}
-        </button>
-      </div>
+    const downloadCitationSheet = () => {
+      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Citation — ${title}</title>
+  <style>
+    body{font-family:'Georgia',serif;max-width:680px;margin:60px auto;color:#111;line-height:1.7}
+    h1{font-size:1.45rem;margin-bottom:0.25rem}
+    .subtitle{color:#555;font-style:italic;margin-bottom:1.5rem;font-size:0.95rem}
+    .label{font-family:monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:#888;margin-top:1.5rem;margin-bottom:0.4rem}
+    .cite{background:#f5f5f0;padding:12px 16px;border-left:3px solid #c8900a;font-size:0.88rem;word-break:break-word}
+    .meta{font-size:0.8rem;color:#777;margin-top:2rem;border-top:1px solid #ddd;padding-top:1rem}
+    @media print{body{margin:40px}}
+  </style></head>
+  <body>
+    <h1>${title}</h1>
+    <div class="subtitle">Orakzai Research Lab · ${year}</div>
+    <div class="label">APA</div>
+    <div class="cite">${citations.APA}</div>
+    <div class="label">MLA</div>
+    <div class="cite">${citations.MLA}</div>
+    <div class="label">Chicago</div>
+    <div class="cite">${citations.CHICAGO}</div>
+    <div class="meta">
+      Author: Faisal Orakzai · ORCID: 0009-0000-0915-7272<br/>
+      URL: https://faisalorakzai.vercel.app/research/${slug}<br/>
+      Generated: ${new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}
     </div>
-  );
-}
+  </body></html>`;
+      const blob = new Blob([html], { type:"text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `citation-${slug}.html`;
+      a.click(); URL.revokeObjectURL(url);
+    };
+
+    return (
+      <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"1.5rem", marginBottom:"1.5rem" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+          <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(243,186,47,0.55)", textTransform:"uppercase" }}>Cite This Article</span>
+          <div style={{ flex:1, height:"1px", background:"rgba(255,255,255,0.06)" }} />
+        </div>
+        {/* Format selector */}
+        <div style={{ display:"flex", gap:"4px", marginBottom:"10px" }}>
+          {(["APA","MLA","CHICAGO"] as const).map(f => (
+            <button key={f} onClick={() => setFmt(f)}
+              style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.2em", padding:"4px 12px", border:`1px solid ${fmt===f ? "rgba(243,186,47,0.6)" : "rgba(255,255,255,0.1)"}`, color: fmt===f ? "#F3BA2F" : "rgba(255,255,255,0.3)", background: fmt===f ? "rgba(243,186,47,0.07)" : "none", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
+              {f}
+            </button>
+          ))}
+        </div>
+        {/* Citation text */}
+        <div style={{ position:"relative" }}>
+          <code style={{ display:"block", fontFamily:"monospace", fontSize:"11px", color:"rgba(255,255,255,0.55)", background:"rgba(255,255,255,0.03)", padding:"12px 14px", border:"1px solid rgba(255,255,255,0.07)", lineHeight:1.8, wordBreak:"break-word" as const }}>
+            {citations[fmt]}
+          </code>
+          <button onClick={copy}
+            style={{ position:"absolute", top:"8px", right:"8px", fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.25em", border:`1px solid ${cpd ? "rgba(74,222,128,0.4)" : "rgba(255,255,255,0.1)"}`, color: cpd ? "#4ade80" : "rgba(255,255,255,0.3)", background:"rgba(0,0,0,0.8)", padding:"4px 10px", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s" }}>
+            {cpd ? "✓ COPIED" : "COPY"}
+          </button>
+        </div>
+        {/* Download buttons */}
+        <div style={{ display:"flex", gap:"8px", marginTop:"10px" }}>
+          {pdfUrl ? (
+            <a href={pdfUrl} download
+              style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.25em", border:"1px solid rgba(243,186,47,0.35)", color:"#F3BA2F", background:"rgba(243,186,47,0.05)", padding:"6px 14px", cursor:"pointer", textTransform:"uppercase", textDecoration:"none", transition:"all 0.18s", display:"inline-flex", alignItems:"center", gap:"5px" }}>
+              ↓ DOWNLOAD PDF
+            </a>
+          ) : (
+            <button onClick={downloadCitationSheet}
+              style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.25em", border:"1px solid rgba(243,186,47,0.35)", color:"#F3BA2F", background:"rgba(243,186,47,0.05)", padding:"6px 14px", cursor:"pointer", textTransform:"uppercase", transition:"all 0.18s", display:"inline-flex", alignItems:"center", gap:"5px" }}>
+              ↓ DOWNLOAD CITATION SHEET
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
 
   export default function ResearchArticle() {
     useFonts();
@@ -2009,7 +2057,7 @@ function CitеBlock({ title, year, slug }: { title: string; year: string; slug: 
             {/* Footer */}
             <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"2rem", paddingBottom:"4.5rem", display:"flex", flexDirection:"column", gap:"1.25rem" }}>
               {/* Cite This Article */}
-              <CiteBlock title={article.title} year={article.year} slug={article.slug} />
+              <CiteBlock title={article.title} year={article.year} slug={article.slug} pdfUrl={article.pdfUrl} />
               <button onClick={() => setLocation("/research")} style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", border:"1px solid rgba(243,186,47,0.3)", color:"#F3BA2F", background:"none", padding:"8px 16px", cursor:"pointer", textTransform:"uppercase", alignSelf:"flex-start" }}>← ALL ARTICLES</button>
             </div>
           </div>
