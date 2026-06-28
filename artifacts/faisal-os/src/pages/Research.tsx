@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "wouter";
 import { motion, useInView } from "framer-motion";
 
 // ─── Author identity ──────────────────────────────────────────────────────────
@@ -31,6 +32,7 @@ const DOCS = {
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Category =
   | "MARKET KNOWLEDGE"
+  | "BLOCKCHAIN"
   | "ARTIFACTS & BLUEPRINTS"
   | "CRYPTOGRAPHIC WHITE PAPERS"
   | "PRODUCTION CODE";
@@ -51,14 +53,30 @@ interface Entry {
   commits?:  string;
   deploy?:   string;
   db?:       string;
-  pdfUrl?:   string;   // View URL (for button)
-  pdfDl?:    string;   // Direct download URL (for citation_pdf_url meta)
+  pdfUrl?:   string;
+  pdfDl?:    string;
+  slug?:      string;
+  thumbnail?: string;
+  readTime?:  string;
   keywords:  string;
 }
 
 // ─── Dataset ──────────────────────────────────────────────────────────────────
 const ENTRIES: Entry[] = [
-  // ── MARKET KNOWLEDGE
+  // ── BLOCKCHAIN ARTICLES
+    {
+      id: "bc-01", category: "BLOCKCHAIN", year: "2026",
+      title: "What is Blockchain? A Complete Beginner's Guide",
+      subtitle: "From distributed ledgers to smart contracts — the definitive primer on blockchain technology",
+      abstract: "Blockchain is one of the most revolutionary technologies of the 21st century. Often associated with cryptocurrencies like Bitcoin, blockchain is far more than just digital money — it is a secure, transparent, decentralized system for storing, managing, and verifying data. This comprehensive guide covers blockchain fundamentals, core components, history, benefits, limitations, real-world applications across 10+ industries, emerging trends, FAQs, and common myths.",
+      tags: ["Blockchain", "DLT", "Web3", "DeFi", "Cryptography", "RWA", "Tokenization", "Smart Contracts"],
+      status: "PUBLISHED",
+      slug: "blockchain-basic",
+      thumbnail: "/mk/blockchain-guide.png",
+      readTime: "25 min read",
+      keywords: "blockchain, what is blockchain, distributed ledger, smart contracts, DeFi, Web3, cryptocurrency, Faisal Orakzai",
+    },
+    // ── MARKET KNOWLEDGE
   {
     id: "mk-01", category: "MARKET KNOWLEDGE", year: "2024",
     title: "Macro-Liquidity Networks & Cross-Border Fintech Dynamics",
@@ -235,6 +253,7 @@ const ENTRIES: Entry[] = [
 const FILTERS = [
   "ALL INTEL",
   "MARKET KNOWLEDGE",
+  "BLOCKCHAIN",
   "ARTIFACTS & BLUEPRINTS",
   "CRYPTOGRAPHIC WHITE PAPERS",
   "PRODUCTION CODE",
@@ -508,7 +527,98 @@ function CardHeader({ entry, hov, isWp }: { entry: Entry; hov: boolean; isWp?: b
 }
 
 // ─── Card: Research / Artifacts ───────────────────────────────────────────────
-function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
+// ─── Card: Article (journal/blog style with thumbnail) ──────────────────────
+  function ArticleCard({ entry, i }: { entry: Entry; i: number }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const inView = useInView(ref, { once: true, margin: "-40px" });
+    const [, setLocation] = useLocation();
+    const excerpt = entry.abstract.length > 200 ? entry.abstract.slice(0, 200).trim() + "…" : entry.abstract;
+
+    return (
+      <motion.div ref={ref} initial={{ opacity:0, y:28 }} animate={inView ? { opacity:1, y:0 } : {}}
+        transition={{ duration:0.65, delay:i*0.08, ease:[0.22,1,0.36,1] }}
+        style={{ willChange:"transform, opacity", cursor:"pointer" }}
+        onClick={() => setLocation(`/research/${entry.slug}`)}
+      >
+        <article style={{
+          border:"1px solid rgba(243,186,47,0.12)",
+          background:"rgba(0,0,0,0.97)",
+          overflow:"hidden",
+          transition:"all 0.28s ease",
+        }}
+          onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.border="1px solid rgba(243,186,47,0.35)";el.style.boxShadow="0 8px 40px rgba(243,186,47,0.08)";}}
+          onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.border="1px solid rgba(243,186,47,0.12)";el.style.boxShadow="none";}}
+        >
+          {/* Thumbnail */}
+          {entry.thumbnail && (
+            <div style={{ position:"relative", width:"100%", aspectRatio:"16/9", overflow:"hidden", background:"#0a0a0a" }}>
+              <img
+                src={entry.thumbnail}
+                alt={entry.title}
+                style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block", transition:"transform 0.5s ease" }}
+                onMouseEnter={e=>{(e.currentTarget as HTMLImageElement).style.transform="scale(1.03)";}}
+                onMouseLeave={e=>{(e.currentTarget as HTMLImageElement).style.transform="scale(1)";}}
+                loading="lazy"
+              />
+              {/* Category badge overlay */}
+              <div style={{ position:"absolute", top:"14px", left:"14px", background:"rgba(0,0,0,0.82)", backdropFilter:"blur(8px)", border:"1px solid rgba(243,186,47,0.4)", padding:"4px 10px" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"#F3BA2F", textTransform:"uppercase" }}>{entry.category}</span>
+              </div>
+              {entry.readTime && (
+                <div style={{ position:"absolute", top:"14px", right:"14px", background:"rgba(0,0,0,0.82)", backdropFilter:"blur(8px)", padding:"4px 10px" }}>
+                  <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.2em", color:"rgba(255,255,255,0.4)" }}>{entry.readTime}</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Content */}
+          <div style={{ padding:"clamp(1.25rem,3vw,1.75rem)" }}>
+            {/* Tags */}
+            <div style={{ display:"flex", flexWrap:"wrap" as const, gap:"5px", marginBottom:"1rem" }}>
+              {entry.tags.slice(0,5).map(t => (
+                <span key={t} style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.22em", padding:"2px 8px", border:"1px solid rgba(243,186,47,0.2)", color:"rgba(243,186,47,0.55)", textTransform:"uppercase" as const }}>#{t}</span>
+              ))}
+            </div>
+
+            {/* Title */}
+            <h3 style={{ fontFamily:"'Playfair Display', Georgia, serif", fontWeight:700, fontSize:"clamp(1.15rem,2.8vw,1.55rem)", lineHeight:1.3, color:"rgba(255,255,255,0.92)", margin:"0 0 0.75rem 0", letterSpacing:"-0.01em" }}>
+              {entry.title}
+            </h3>
+
+            {/* Subtitle */}
+            {entry.subtitle && (
+              <p style={{ color:"rgba(243,186,47,0.55)", fontSize:"12px", fontFamily:"monospace", letterSpacing:"0.05em", margin:"0 0 0.85rem 0", lineHeight:1.5, fontStyle:"italic" }}>
+                {entry.subtitle}
+              </p>
+            )}
+
+            {/* Excerpt */}
+            <p style={{ color:"rgba(255,255,255,0.42)", fontSize:"clamp(0.85rem,2vw,0.95rem)", lineHeight:1.75, fontWeight:300, marginBottom:"1.25rem" }}>
+              {excerpt}
+            </p>
+
+            {/* Footer meta */}
+            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap" as const, gap:"8px", paddingTop:"0.9rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
+                <div style={{ width:"24px", height:"24px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"10px", fontWeight:700, color:"black" }}>F</div>
+                <div>
+                  <div style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.5)", letterSpacing:"0.15em", textTransform:"uppercase" as const }}>Muhammad Faisal Orakzai</div>
+                  <div style={{ fontFamily:"monospace", fontSize:"7px", color:"rgba(255,255,255,0.2)", letterSpacing:"0.12em" }}>{entry.year} · Orakzai Research Lab</div>
+                </div>
+              </div>
+              <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"#F3BA2F", textTransform:"uppercase" as const, opacity:0.7, display:"flex", alignItems:"center", gap:"4px" }}>
+                READ ARTICLE
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5 2l3 3-3 3" stroke="#F3BA2F" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      </motion.div>
+    );
+  }
+
+  function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [hov, setHov] = useState(false);
@@ -703,8 +813,16 @@ function Frame() {
 export default function Research() {
   useSEO();
   const [active, setActive] = useState<Filter>("ALL INTEL");
-  const filtered = ENTRIES.filter(e => active === "ALL INTEL" || e.category === active);
-  const counts = Object.fromEntries(FILTERS.map(f => [f, f==="ALL INTEL" ? ENTRIES.length : ENTRIES.filter(e=>e.category===f).length]));
+  const filtered = ENTRIES.filter(e =>
+      active === "ALL INTEL" ? true :
+      active === "MARKET KNOWLEDGE" ? (e.category === "MARKET KNOWLEDGE" || e.category === "BLOCKCHAIN") :
+      e.category === active
+    );
+    const counts = Object.fromEntries(FILTERS.map(f =>
+      [f, f === "ALL INTEL" ? ENTRIES.length :
+          f === "MARKET KNOWLEDGE" ? ENTRIES.filter(e => e.category === "MARKET KNOWLEDGE" || e.category === "BLOCKCHAIN").length :
+          ENTRIES.filter(e => e.category === f).length]
+    ));
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -806,6 +924,7 @@ export default function Research() {
           {filtered.map((entry, i) => {
             if (entry.category === "CRYPTOGRAPHIC WHITE PAPERS") return <WhitePaperCard key={entry.id} entry={entry} i={i} />;
             if (entry.category === "PRODUCTION CODE")             return <RepoCard       key={entry.id} entry={entry} i={i} />;
+            if (entry.slug)                                        return <ArticleCard    key={entry.id} entry={entry} i={i} />;
             return                                                       <ResearchCard   key={entry.id} entry={entry} i={i} />;
           })}
         </div>
