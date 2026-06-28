@@ -83,21 +83,21 @@ import { motion, AnimatePresence } from "framer-motion";
 
   /* ── Organizations / Foundations ─────────────────────────── */
   const ORGANIZATIONS = [
-    {
-      id: "awami-khedmat", name: "Awami Khedmat", ticker: "AKF",
-      logo: null,
-      tag: "FOUNDATION · SERVICE",
-      desc: "Awami Khedmat Foundation — serving communities and uplifting the people of Pakistan.",
-      statusColor: "#4ade80",
-    },
-    {
-      id: "son-of-orakzai", name: "Son of Orakzai", ticker: "SOO",
-      logo: "/logos/son-of-orakzai.jpg",
-      tag: "ORGANIZATION",
-      desc: "Son of Orakzai — a community and heritage organization representing the proud Orakzai identity.",
-      statusColor: "#4ade80",
-    },
-  ];
+      {
+        id: "pihro", name: "PIHRO", ticker: "PIHRO",
+        logo: null,
+        tag: "HUMAN RIGHTS · PAKISTAN",
+        desc: "Pakistan International Human Rights Organisation — Chairman Habib Malik Orakzai · Karachi Chairman Faisal Orakzai.",
+        statusColor: "#60a5fa",
+      },
+      {
+        id: "son-of-orakzai", name: "Son of Orakzai", ticker: "SOO",
+        logo: "/logos/son-of-orakzai.jpg",
+        tag: "ORGANIZATION",
+        desc: "Son of Orakzai — a community and heritage organization representing the proud Orakzai identity.",
+        statusColor: "#4ade80",
+      },
+    ];
 
   
   /* ── Venture detail panels ───────────────────────────────── */
@@ -1004,7 +1004,76 @@ import { motion, AnimatePresence } from "framer-motion";
           </div>
         </section>
 
-        <style>{`
+
+          {/* ── ORG DETAIL PANEL ── */}
+          <AnimatePresence mode="wait">
+            {activeOrg && ORG_DETAILS[activeOrg] && (() => {
+              const org = ORGANIZATIONS.find(o => o.id === activeOrg)!;
+              const d = ORG_DETAILS[activeOrg];
+              return (
+                <motion.section
+                  key={activeOrg}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px 20px" }}>
+                    <div style={{ border: `1px solid ${org.statusColor}25`, borderTop: `3px solid ${org.statusColor}`, background: `linear-gradient(180deg, ${org.statusColor}06 0%, transparent 40%)`, padding: "32px" }}>
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", flexWrap: "wrap", marginBottom: "28px" }}>
+                        <div style={{ width: "72px", height: "72px", borderRadius: "50%", border: `2px solid ${org.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {org.logo ? <img src={org.logo} alt={org.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 800, color: org.statusColor }}>{org.ticker}</span>}
+                        </div>
+                        <div style={{ flex: 1, minWidth: "240px" }}>
+                          <div style={{ fontFamily: "monospace", fontSize: "9px", color: org.statusColor, letterSpacing: "0.3em", marginBottom: "6px" }}>{org.tag}</div>
+                          <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 6px" }}>{org.name}</h2>
+                          <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.title}</p>
+                        </div>
+                        <button onClick={() => setActiveOrg(null)} style={{ all: "unset", cursor: "pointer", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.25)", flexShrink: 0 }}>✕ CLOSE</button>
+                      </div>
+                      {/* Leadership */}
+                      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
+                        {d.leadership.map((l, i) => (
+                          <div key={i} style={{ padding: "10px 18px", border: `1px solid ${org.statusColor}30`, background: `${org.statusColor}08` }}>
+                            <div style={{ fontFamily: "monospace", fontSize: "8px", color: org.statusColor, letterSpacing: "0.2em", marginBottom: "4px" }}>{l.role}</div>
+                            <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff" }}>{l.name}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, marginBottom: "24px", maxWidth: "800px", borderLeft: `3px solid ${org.statusColor}40`, paddingLeft: "16px" }}>{d.bio}</p>
+                      <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", lineHeight: 1.8, marginBottom: "28px", maxWidth: "800px" }}>{d.description}</p>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+                        <div>
+                          <div style={{ fontFamily: "monospace", fontSize: "9px", color: org.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// KEY FEATURES</div>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                            {d.uniqueFeatures.map((f, i) => (
+                              <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                                <span style={{ color: org.statusColor, fontSize: "10px", flexShrink: 0, marginTop: "2px" }}>▸</span>
+                                <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>{f}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <div style={{ fontFamily: "monospace", fontSize: "9px", color: org.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// IMPACT & BENEFITS</div>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                            {d.benefits.map((b, i) => (
+                              <div key={i} style={{ padding: "10px 14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
+                                <div style={{ fontSize: "11px", fontWeight: 700, color: "#fff", marginBottom: "3px" }}>{b.label}</div>
+                                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{b.desc}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.section>
+              );
+            })()}
+          </AnimatePresence>
+          <style>{`
           @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
           @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
         `}</style>
