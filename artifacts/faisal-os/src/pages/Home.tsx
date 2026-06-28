@@ -469,7 +469,116 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── QUOTE ── */}
+      {/* ── MASTER THE CODE — Research Thumbnail Ticker ── */}
+        <section className="py-20 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
+          <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 90% 70% at 50% 50%, rgba(243,186,47,0.035) 0%, transparent 70%)" }} />
+
+          {/* Heading */}
+          <div className="text-center mb-14 px-6">
+            <h3 style={{
+              fontFamily:"'Playfair Display',Georgia,serif",
+              fontWeight:800,
+              fontSize:"clamp(1.6rem,5vw,2.6rem)",
+              letterSpacing:"-0.015em",
+              lineHeight:1.15,
+              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 30%,#ffe27a 50%,#F3BA2F 70%,#c8900a 100%)",
+              backgroundSize:"300% auto",
+              WebkitBackgroundClip:"text",
+              WebkitTextFillColor:"transparent",
+              backgroundClip:"text",
+              animation:"codeShimmer2 3s linear infinite",
+              filter:"drop-shadow(0 0 24px rgba(243,186,47,0.65)) drop-shadow(0 0 60px rgba(243,186,47,0.22))",
+              marginBottom:"6px",
+            }}>Master the Code.</h3>
+            <h3 style={{
+              fontFamily:"'Playfair Display',Georgia,serif",
+              fontWeight:800,
+              fontSize:"clamp(1.6rem,5vw,2.6rem)",
+              letterSpacing:"-0.015em",
+              lineHeight:1.15,
+              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 30%,#ffe27a 50%,#F3BA2F 70%,#c8900a 100%)",
+              backgroundSize:"300% auto",
+              WebkitBackgroundClip:"text",
+              WebkitTextFillColor:"transparent",
+              backgroundClip:"text",
+              animation:"codeShimmer2 3s linear infinite 0.4s",
+              filter:"drop-shadow(0 0 24px rgba(243,186,47,0.65)) drop-shadow(0 0 60px rgba(243,186,47,0.22))",
+            }}>Rule the World.</h3>
+          </div>
+
+          {/* Scrolling ticker — slow, big cards */}
+          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)" }}>
+            <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content" }}>
+              {([
+                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
+                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
+                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
+                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
+                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
+                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
+                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
+                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
+                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
+                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
+                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
+                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
+                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
+                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
+                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
+                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
+                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
+                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
+              ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
+                const el = (
+                  <div key={i} style={{ width:"300px", marginRight:"24px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="translateY(-6px) scale(1.03)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="translateY(0) scale(1)"; }}>
+                    {/* Thumbnail */}
+                    <div style={{ position:"relative", borderRadius:"10px", overflow:"hidden", aspectRatio:"16/9", boxShadow:"0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(243,186,47,0.1)" }}>
+                      <img src={card.src} alt={card.label} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      {/* Overlay gradient at bottom */}
+                      <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)", pointerEvents:"none" }} />
+                      {card.href && (
+                        <div style={{ position:"absolute", inset:0, background:"rgba(243,186,47,0)", transition:"background 0.28s", display:"flex", alignItems:"center", justifyContent:"center" }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="rgba(243,186,47,0.10)"; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="rgba(243,186,47,0)"; }}>
+                          <div style={{ width:"48px", height:"48px", borderRadius:"50%", background:"rgba(243,186,47,0.92)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 4px 20px rgba(243,186,47,0.5)" }}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2.5h5.5v5.5M13.5 2.5L6 10" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* Label */}
+                    <div style={{ marginTop:"12px", paddingLeft:"4px" }}>
+                      <div style={{ fontFamily:"system-ui,sans-serif", fontSize:"13px", fontWeight:600, color:"rgba(255,255,255,0.82)", letterSpacing:"0.01em", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{card.label}</div>
+                      <div style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.22em", color:"rgba(243,186,47,0.5)", textTransform:"uppercase", marginTop:"4px" }}>Research</div>
+                    </div>
+                  </div>
+                );
+                return card.href ? (
+                  <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration:"none" }}>{el}</a>
+                ) : (
+                  <div key={i}>{el}</div>
+                );
+              })}
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes codeShimmer2 {
+              0%   { background-position: 300% center; }
+              100% { background-position: -300% center; }
+            }
+            @keyframes researchScroll2 {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}</style>
+        </section>
+
+              {/* ── QUOTE ── */}
       <section className="py-36 border-t border-[#F3BA2F]/10 relative overflow-hidden">
         {/* Deep gold atmospheric background */}
         <div className="absolute inset-0 pointer-events-none">
@@ -499,99 +608,7 @@ export default function Home() {
       </section>
 
 
-        {/* ── MASTER THE CODE — Research Thumbnail Ticker ── */}
-        <section className="py-16 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
-          <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 80% 60% at 50% 50%, rgba(243,186,47,0.03) 0%, transparent 70%)" }} />
-
-          {/* Heading */}
-          <div className="flex items-center justify-center gap-5 mb-12">
-            <div className="h-px flex-1 max-w-[60px]" style={{ background:"linear-gradient(to right,transparent,rgba(243,186,47,0.45))" }} />
-            <h3 style={{
-              fontFamily:"'Playfair Display',Georgia,serif",
-              fontWeight:800,
-              fontSize:"clamp(1.3rem,4vw,2.1rem)",
-              letterSpacing:"-0.01em",
-              textAlign:"center",
-              background:"linear-gradient(90deg,#c8900a 0%,#F3BA2F 35%,#ffe27a 55%,#F3BA2F 75%,#c8900a 100%)",
-              backgroundSize:"250% auto",
-              WebkitBackgroundClip:"text",
-              WebkitTextFillColor:"transparent",
-              backgroundClip:"text",
-              animation:"codeShimmer 3s linear infinite",
-              filter:"drop-shadow(0 0 20px rgba(243,186,47,0.6)) drop-shadow(0 0 50px rgba(243,186,47,0.2))",
-            }}>Master the Code. Rule the World.</h3>
-            <div className="h-px flex-1 max-w-[60px]" style={{ background:"linear-gradient(to left,transparent,rgba(243,186,47,0.45))" }} />
-          </div>
-
-          {/* Scrolling ticker */}
-          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)" }}>
-            <div className="flex items-stretch" style={{ animation:"researchScroll 32s linear infinite", willChange:"transform", width:"max-content" }}>
-              {([
-                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",      href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",       href:null },
-                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",  href:null },
-                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",       href:null },
-                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",        href:null },
-                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",         href:null },
-                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",    href:null },
-                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",             href:null },
-                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",        href:null },
-                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",        href:null },
-                /* duplicate for seamless loop */
-                { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",      href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-                { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",       href:null },
-                { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",  href:null },
-                { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",       href:null },
-                { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",        href:null },
-                { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",         href:null },
-                { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",    href:null },
-                { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",             href:null },
-                { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",        href:null },
-                { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",        href:null },
-              ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
-                const inner = (
-                  <div style={{ width:"260px", marginRight:"20px", flexShrink:0, cursor: card.href ? "pointer" : "default", position:"relative" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="scale(1.04)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="scale(1)"; }}>
-                    <div style={{ position:"relative", borderRadius:"8px", overflow:"hidden", border:"1px solid rgba(243,186,47,0.12)", transition:"border-color 0.3s", aspectRatio:"16/9" }}>
-                      <img src={card.src} alt={card.label} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
-                      {card.href && (
-                        <div style={{ position:"absolute", inset:0, background:"rgba(0,0,0,0)", transition:"background 0.3s", display:"flex", alignItems:"center", justifyContent:"center" }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="rgba(243,186,47,0.12)"; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="rgba(0,0,0,0)"; }}>
-                          <div style={{ width:"40px", height:"40px", borderRadius:"50%", background:"rgba(243,186,47,0.9)", display:"flex", alignItems:"center", justifyContent:"center", opacity:0, transition:"opacity 0.25s" }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity="1"; }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity="0"; }}>
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2h5v5M12 2L6 8" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div style={{ marginTop:"10px", fontFamily:"monospace", fontSize:"11px", letterSpacing:"0.14em", color:"rgba(255,255,255,0.55)", textTransform:"uppercase", textAlign:"center", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{card.label}</div>
-                  </div>
-                );
-                return card.href ? (
-                  <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration:"none", transition:"transform 0.3s" }}>{inner}</a>
-                ) : (
-                  <div key={i} style={{ transition:"transform 0.3s" }}>{inner}</div>
-                );
-              })}
-            </div>
-          </div>
-
-          <style>{`
-            @keyframes codeShimmer {
-              0%   { background-position: 250% center; }
-              100% { background-position: -250% center; }
-            }
-            @keyframes researchScroll {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
-        </section>
-
-              {/* ── INVESTORS & SUPPORTERS ── */}
+        {/* ── INVESTORS & SUPPORTERS ── */}
         <section className="py-16 border-t border-[#F3BA2F]/15 relative overflow-hidden bg-black">
           {/* Ambient glow behind section */}
           <div className="absolute inset-0 pointer-events-none" style={{ background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
