@@ -108,13 +108,14 @@ export default function Ecosystem() {
   const OUTER_R = 290; // 12 nodes orbit
 
   return (
-    <
+    <>
       <SEOHead
         title="Orakzai Ecosystem — Ventures, Blockchain & AI Infrastructure"
         description="The complete Orakzai Group ecosystem — OKBOND blockchain, Shamim Forever luxury brand, OkzByte Technology AI, OrakzaiX automation platform, and real estate tokenization."
         path="/ecosystem"
         keywords="Orakzai Group ecosystem, OKBOND Polygon, Shamim Forever, OkzByte, OrakzaiX AI, blockchain Pakistan"
-      />div style={{ background: "#000", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
+      />
+      <div style={{ background: "#000", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
 
       {/* ── HERO ── */}
       <section style={{ paddingTop: "100px", paddingBottom: "40px", borderBottom: `1px solid ${GOLD_DIM}`, position: "relative", overflow: "hidden" }}>
@@ -603,5 +604,6 @@ export default function Ecosystem() {
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
       `}</style>
     </div>
+    </>
   );
 }
