@@ -29,13 +29,26 @@ import { useEffect } from "react";
     el.setAttribute("href", url);
   }
 
+  function injectBreadcrumb(path: string) {
+    document.getElementById("seo-breadcrumb")?.remove();
+    const segments = path.split("/").filter(Boolean);
+    if (segments.length === 0) return;
+    const items: object[] = [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://faisalorakzai.com/" }];
+    let built = "";
+    segments.forEach((seg, idx) => {
+      built += "/" + seg;
+      const name = seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " ");
+      items.push({ "@type": "ListItem", "position": idx + 2, "name": name, "item": "https://faisalorakzai.com" + built });
+    });
+    const ld = document.createElement("script");
+    ld.id = "seo-breadcrumb";
+    ld.type = "application/ld+json";
+    ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items });
+    document.head.appendChild(ld);
+  }
+
   export default function SEOHead({
-    title,
-    description,
-    path,
-    type = "website",
-    image,
-    keywords,
+    title, description, path, type = "website", image, keywords,
   }: SEOHeadProps) {
     const url = `https://faisalorakzai.com${path}`;
     const img = image ?? "https://faisalorakzai.com/story/story-03.png";
@@ -64,11 +77,13 @@ import { useEffect } from "react";
       setMeta("name", "twitter:creator", "@faisalorakzaii");
 
       setCanonical(url);
+      injectBreadcrumb(path);
 
       return () => {
         document.title = prev;
+        document.getElementById("seo-breadcrumb")?.remove();
       };
-    }, [fullTitle, description, url, img, type, keywords]);
+    }, [fullTitle, description, url, img, type, keywords, path]);
 
     return null;
   }
