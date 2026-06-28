@@ -47,7 +47,49 @@
         "keywords": a.tags.join(", "), "inLanguage":"en-US", "isAccessibleForFree":true });
       document.getElementById("article-ld")?.remove();
       document.head.appendChild(ld);
-      return () => { document.title = prev; document.getElementById("article-ld")?.remove(); };
+
+      // FAQPage schema — extract Q&As from article content for Google rich snippets
+      document.getElementById("faq-ld")?.remove();
+      const contentLines = (a.content || "").split("\n").map((s: string) => s.trim()).filter(Boolean);
+      const faqPairs: { q: string; a: string }[] = [];
+      let inFAQz = false;
+      let curQz = "";
+      let curAz: string[] = [];
+      for (const fl of contentLines) {
+        if (fl === "Frequently Asked Questions (FAQs)") { inFAQz = true; continue; }
+        if (fl === "Key Takeaways" || fl === "Final Conclusion" || fl === "Common Blockchain Myths") {
+          inFAQz = false;
+          if (curQz && curAz.length) { faqPairs.push({ q: curQz, a: curAz.join(" ") }); curQz = ""; curAz = []; }
+          continue;
+        }
+        if (!inFAQz) continue;
+        const qm = fl.match(/^\d+\.\s+(.+)/);
+        if (qm) {
+          if (curQz && curAz.length) faqPairs.push({ q: curQz, a: curAz.join(" ") });
+          curQz = qm[1]; curAz = [];
+        } else if (curQz) curAz.push(fl);
+      }
+      if (curQz && curAz.length) faqPairs.push({ q: curQz, a: curAz.join(" ") });
+      if (faqPairs.length > 0) {
+        const faqLd = document.createElement("script");
+        faqLd.id = "faq-ld"; faqLd.type = "application/ld+json";
+        faqLd.text = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqPairs.slice(0, 10).map(({ q, a }) => ({
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": { "@type": "Answer", "text": a }
+          }))
+        });
+        document.head.appendChild(faqLd);
+      }
+
+      return () => {
+        document.title = prev;
+        document.getElementById("article-ld")?.remove();
+        document.getElementById("faq-ld")?.remove();
+      };
     }, [a]);
   }
 
