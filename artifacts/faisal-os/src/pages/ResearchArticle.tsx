@@ -3,6 +3,7 @@
  * Luxury editorial design with holographic elements
  */
 
+  import React from "react";
   import { useEffect, useRef, useState } from "react";
   import { motion } from "framer-motion";
   import { useParams, useLocation } from "wouter";
