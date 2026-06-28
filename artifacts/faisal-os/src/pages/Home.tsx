@@ -498,7 +498,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── LIVE STATS — with count-up and gold glows ── */}
+
+        {/* ── INVESTORS & SUPPORTERS ── */}
+        <section className="py-10 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
+          {/* Title */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-px w-10 bg-[#F3BA2F]/30" />
+            <span className="font-mono text-[9px] tracking-[0.4em] text-white/30 uppercase">Investors &amp; Supporters</span>
+            <div className="h-px w-10 bg-[#F3BA2F]/30" />
+          </div>
+
+          {/* Scrolling ticker */}
+          <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)" }}>
+            <div className="flex" style={{ animation:"investorScroll 22s linear infinite", willChange:"transform", width:"max-content" }}>
+              {[
+                { src:"/logos/investors/sequoia.png",         name:"Sequoia Capital" },
+                { src:"/logos/investors/a16z.png",            name:"Andreessen Horowitz" },
+                { src:"/logos/investors/ycombinator.png",     name:"Y Combinator" },
+                { src:"/logos/investors/pantera.png",         name:"Pantera Capital" },
+                { src:"/logos/investors/paradigm.png",        name:"Paradigm" },
+                { src:"/logos/investors/dcg.png",             name:"Digital Currency Group" },
+                { src:"/logos/investors/coinbase.png",        name:"Coinbase" },
+                { src:"/logos/investors/polygon.png",         name:"Polygon" },
+                { src:"/logos/investors/mgx.png",             name:"MGX" },
+                { src:"/logos/investors/systems.png",         name:"Systems" },
+                { src:"/logos/investors/founder-institute.png", name:"Founder Institute" },
+                /* duplicate set for seamless loop */
+                { src:"/logos/investors/sequoia.png",         name:"Sequoia Capital" },
+                { src:"/logos/investors/a16z.png",            name:"Andreessen Horowitz" },
+                { src:"/logos/investors/ycombinator.png",     name:"Y Combinator" },
+                { src:"/logos/investors/pantera.png",         name:"Pantera Capital" },
+                { src:"/logos/investors/paradigm.png",        name:"Paradigm" },
+                { src:"/logos/investors/dcg.png",             name:"Digital Currency Group" },
+                { src:"/logos/investors/coinbase.png",        name:"Coinbase" },
+                { src:"/logos/investors/polygon.png",         name:"Polygon" },
+                { src:"/logos/investors/mgx.png",             name:"MGX" },
+                { src:"/logos/investors/systems.png",         name:"Systems" },
+                { src:"/logos/investors/founder-institute.png", name:"Founder Institute" },
+              ].map((logo, i) => (
+                <div key={i} className="flex items-center justify-center mx-10 flex-shrink-0" style={{ height:"52px", width:"120px" }}>
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    title={logo.name}
+                    style={{ maxHeight:"40px", maxWidth:"110px", objectFit:"contain", filter:"grayscale(1) brightness(4) contrast(0.65) opacity(0.55)", transition:"filter 0.3s" }}
+                    onMouseEnter={e => (e.currentTarget.style.filter="grayscale(0) brightness(1) contrast(1) opacity(1)")}
+                    onMouseLeave={e => (e.currentTarget.style.filter="grayscale(1) brightness(4) contrast(0.65) opacity(0.55)")}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <style>{
+            `@keyframes investorScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }`
+          }</style>
+        </section>
+
+        {/* ── LIVE STATS — with count-up and gold glows ── */}
       <section className="py-0 border-t border-[#F3BA2F]/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-0">
