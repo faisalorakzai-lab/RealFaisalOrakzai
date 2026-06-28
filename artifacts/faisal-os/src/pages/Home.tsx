@@ -581,7 +581,26 @@ export default function Home() {
             100% { transform: translateX(-50%); }
           }
         `}</style>
-      </section>
+
+        {/* View All Research button */}
+        <div style={{ display:"flex", justifyContent:"center", marginTop:"40px" }}>
+          <a href="/research" style={{
+            fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.32em", textTransform:"uppercase",
+            display:"inline-flex", alignItems:"center", gap:"10px", textDecoration:"none",
+            padding:"13px 32px",
+            border:"1px solid rgba(243,186,47,0.55)",
+            color:"#F3BA2F",
+            background:"rgba(243,186,47,0.05)",
+            boxShadow:"0 0 22px rgba(243,186,47,0.13)",
+            transition:"all 0.25s",
+          }}
+          onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background="rgba(243,186,47,0.13)"; el.style.boxShadow="0 0 32px rgba(243,186,47,0.3)"; el.style.borderColor="rgba(243,186,47,0.9)"; }}
+          onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background="rgba(243,186,47,0.05)"; el.style.boxShadow="0 0 22px rgba(243,186,47,0.13)"; el.style.borderColor="rgba(243,186,47,0.55)"; }}>
+            View All Research
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#F3BA2F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </a>
+        </div>
+            </section>
 
             {/* ── INVESTORS & SUPPORTERS ── */}
         <section className="py-16 border-t border-[#F3BA2F]/15 relative overflow-hidden bg-black">
