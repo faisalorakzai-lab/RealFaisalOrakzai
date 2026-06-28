@@ -605,31 +605,52 @@ import { motion, AnimatePresence } from "framer-motion";
             )}
           </AnimatePresence>
 
-                  {/* ── LIVE CORES STRIP ── */}
-        <section style={{ padding: "40px 0 0" }}>
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-            <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.4em", marginBottom: "20px" }}>// LIVE CORES</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1px", background: GOLD_DIM }}>
-              {LIVE_CORES.map((core) => (
-                <div key={core.id} style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", cursor: core.url ? "pointer" : "default" }}
-                  onClick={() => CORE_DETAILS[core.id] ? setActiveCore(activeCore === core.id ? null : core.id) : core.url && window.open(core.url, "_blank")}>
-                  <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${core.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
-                    <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: core.statusColor, letterSpacing: "0.2em", marginBottom: "4px" }}>● {core.status} · {core.tag}</div>
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{core.name}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{core.desc.substring(0, 80)}…</div>
-                    {CORE_DETAILS[core.id] ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>TAP FOR DETAILS ↓</div>) : core.url ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>{core.url.replace("https://", "")} ↗</div>) : null}
-                  </div>
-                </div>
-              ))}
+                  {/* ── LIVE CORES STRIP — auto-scroll ticker ── */}
+          <section style={{ padding: "40px 0 0", overflow: "hidden" }}>
+            <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px", marginBottom: "12px" }}>
+              <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.4em" }}>// LIVE CORES</div>
             </div>
-          </div>
-        </section>
+            <div style={{ position: "relative", overflow: "hidden", borderTop: `1px solid ${GOLD_DIM}`, borderBottom: `1px solid ${GOLD_DIM}` }}>
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+              <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+              <div style={{ display: "flex", animation: "ticker 28s linear infinite", width: "max-content" }}>
+                {[...LIVE_CORES, ...LIVE_CORES].map((core, idx) => (
+                  <div key={idx} onClick={() => CORE_DETAILS[core.id] ? setActiveCore(activeCore === core.id ? null : core.id) : core.url && window.open(core.url, "_blank")}
+                    style={{ minWidth: "280px", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", cursor: "pointer", borderRight: `1px solid ${GOLD_DIM}`, background: "#000", flexShrink: 0 }}>
+                    <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${core.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
+                      <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "monospace", fontSize: "8px", color: core.statusColor, letterSpacing: "0.2em", marginBottom: "4px" }}>● {core.status} · {core.tag}</div>
+                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{core.name}</div>
+                      <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5, maxWidth: "180px" }}>{core.desc.substring(0, 70)}…</div>
+                      {CORE_DETAILS[core.id] ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>TAP FOR DETAILS ↓</div>) : core.url ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>{core.url.replace("https://", "")} ↗</div>) : null}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
-        {/* ── UNDER DEVELOPMENT SECTION ── */}
-        <section style={{ padding: "60px 0 0" }}>
+          {/* ── ALL VENTURES TICKER ── */}
+          <section style={{ padding: "24px 0 0", overflow: "hidden" }}>
+            <div style={{ position: "relative", overflow: "hidden", padding: "12px 0", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "60px", background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+              <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "60px", background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+              <div style={{ display: "flex", animation: "ticker 50s linear infinite", width: "max-content", alignItems: "center" }}>
+                {[...UNDER_DEV, ...LIVE_CORES.map(c => ({ id: c.id, name: c.name, ticker: c.ticker, tag: c.tag, statusColor: c.statusColor, desc: "" })), ...UNDER_DEV, ...LIVE_CORES.map(c => ({ id: c.id, name: c.name, ticker: c.ticker, tag: c.tag, statusColor: c.statusColor, desc: "" }))].map((v, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "0 28px", borderRight: "1px solid rgba(255,255,255,0.05)", flexShrink: 0 }}>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: v.statusColor, display: "inline-block", flexShrink: 0 }} />
+                    <span style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 700, color: "#fff", whiteSpace: "nowrap" }}>{v.name}</span>
+                    <span style={{ fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.2em", whiteSpace: "nowrap" }}>{v.tag}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── UNDER DEVELOPMENT SECTION ── */}
+          <section style={{ padding: "60px 0 0" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
               <div style={{ fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.4em" }}>// UNDER DEVELOPMENT</div>
