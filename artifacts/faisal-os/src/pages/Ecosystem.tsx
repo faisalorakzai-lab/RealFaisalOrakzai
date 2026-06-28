@@ -174,6 +174,34 @@ import { motion, AnimatePresence } from "framer-motion";
       socialUsername?: string;
       docs?: { label: string; url: string }[];
     }> = {
+      "okzbyte": {
+        title: "End-to-End Digital Transformation — Blockchain, AI & Big Data Engineering",
+        bio: "OkzByte is a forward-thinking technology company specializing in comprehensive digital solutions, ranging from foundational web development to cutting-edge advancements in Blockchain Technology, Artificial Intelligence (AI), and Big Data. With a commitment to innovation and excellence, OkzByte empowers businesses globally to navigate the complexities of the digital landscape and harness the power of emerging technologies for sustainable growth and competitive advantage.",
+        description: "OkzByte provides end-to-end development and management services across advanced technological domains. Our expertise spans robust web development and extends into the transformative realms of Blockchain, AI, and Big Data. We design, implement, and manage bespoke solutions that drive efficiency, foster security, and unlock unprecedented insights. Our integrated approach ensures businesses leverage the full potential of each technology through a synergistic ecosystem — traditional infrastructure augmented by next-generation AI systems and decentralized protocols.",
+        uniqueFeatures: [
+          "Integrated ecosystem approach — traditional web + Blockchain + AI + Big Data in one unified stack",
+          "Bespoke client-centric development process with adaptive architectures tailored per organization",
+          "Enterprise-grade decentralized applications (dApps) and secure digital asset management",
+          "Advanced machine learning models for predictive analytics, automation, and deep business insights",
+          "Ethical innovation framework — every solution evaluated for security, privacy, and societal impact",
+          "High-throughput engineering engine powering the entire Orakzai Group sovereign infrastructure",
+        ],
+        benefits: [
+          { label: "Enhanced Data Security", desc: "Blockchain-powered transparency and security foster trust in digital interactions, protecting sensitive data in finance, healthcare, and governance." },
+          { label: "Informed Decision-Making", desc: "AI and Big Data solutions empower organizations to optimize resource allocation and develop intelligent systems that anticipate market shifts." },
+          { label: "Democratized Technology", desc: "Makes advanced Blockchain and AI capabilities accessible to businesses of all sizes, reducing the barriers to digital transformation." },
+          { label: "Innovation Acceleration", desc: "By staying at the frontier of decentralized systems and autonomous AI, OkzByte enables clients to leapfrog traditional digital maturity cycles." },
+          { label: "Sustainable Digital Growth", desc: "Integrated solutions drive efficiency, reduce waste, and build resilient digital infrastructure that scales with organizational growth." },
+        ],
+        roadmap: [
+          { module: "AI & Big Data Platform Enhancement", desc: "Integrating advanced machine learning models for deeper insights and automation across the core analytics platform." },
+          { module: "Enterprise Blockchain Expansion", desc: "Expanding offerings in enterprise-grade decentralized applications and secure digital asset management at scale." },
+          { module: "Global Strategic Partnerships", desc: "Mid-term: establishing strategic partnerships with global technology leaders to broaden service capabilities and market reach." },
+          { module: "Autonomous AI Solutions", desc: "Building a global ecosystem of interconnected digital services powered by decentralized systems and autonomous AI agents." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab",
+        socialUsername: "OkzBytee",
+      },
       "okbond": {
         title: "Pakistan's First On-Chain Bond Marketplace — Decentralized Treasury & RWA Tokenization",
         bio: "Orakzai Bond serves as Pakistan's pioneering on-chain bond marketplace, functioning as a decentralized financial platform engineered for staking, investment pools, and tokenized utilities. Operating as the DeFi arm of the Orakzai Group, the platform empowers a global investor base by migrating traditional fixed-income instruments onto the blockchain — establishing a transparent, secure, and highly accessible sovereign financial ecosystem.",
@@ -498,7 +526,7 @@ import { motion, AnimatePresence } from "framer-motion";
                             <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 6px" }}>{core.name}</h2>
                             <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.title}</p>
                           </div>
-                          <div style={{ display: "flex", gap: "10px", flexShrink: 0, flexWrap: "wrap" }}>
+                          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "4px" }}>
                             {d.websiteUrl && (
                               <a href={d.websiteUrl} target="_blank" rel="noopener noreferrer"
                                 style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: `${core.statusColor}15`, border: `1px solid ${core.statusColor}50`, color: core.statusColor, fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
@@ -669,7 +697,7 @@ import { motion, AnimatePresence } from "framer-motion";
                         <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 6px" }}>{v.name}</h2>
                         <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.title}</p>
                       </div>
-                      <div style={{ display: "flex", gap: "10px", flexShrink: 0, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "4px" }}>
                         {d.pdfUrl && (
                           <a href={d.pdfUrl} target="_blank" rel="noopener noreferrer"
                             style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: `${v.statusColor}15`, border: `1px solid ${v.statusColor}50`, color: v.statusColor, fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none", cursor: "pointer" }}>
