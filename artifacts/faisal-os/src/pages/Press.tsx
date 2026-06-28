@@ -12,6 +12,7 @@ import SEOHead from "@/components/shared/SEOHead";
     publisherUrl: string;
     articleUrl: string;
     seeAwardUrl?: string;
+    publisherLogo?: string;
     datePublished: string;
     dateModified?: string;
     category: "Featured" | "Blockchain" | "Founder" | "Awards" | "Partnerships" | "Interviews" | "Announcements";
@@ -38,6 +39,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "founder-institute-2026",
+        publisherLogo: "https://logo.clearbit.com/fi.co",
         headline: "Muhammad Faisal Orakzai Assessed by Founder Institute — Pakistan's Leading Blockchain Entrepreneur",
         summary: "Muhammad Faisal Orakzai completes the Founder Institute assessment, recognised as one of Pakistan's leading blockchain entrepreneurs, validating his work on Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain and his sovereign digital economy model.",
         publisher: "Founder Institute",
@@ -624,7 +626,14 @@ import SEOHead from "@/components/shared/SEOHead";
                         </h2>
                         <p className="text-white/50 text-sm leading-relaxed mb-6">{lead.summary}</p>
                         <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-white/30">
-                          <span className="flex items-center gap-2"><Building2 className="w-3 h-3" />{lead.publisher}</span>
+                          <span className="flex items-center gap-2">
+                              {lead.publisherLogo ? (
+                                <img src={lead.publisherLogo} alt={lead.publisher} className="w-4 h-4 object-contain rounded-sm" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                              ) : (
+                                <Building2 className="w-3 h-3" />
+                              )}
+                              {lead.publisher}
+                            </span>
                           <span className="flex items-center gap-2"><Calendar className="w-3 h-3" />{new Date(lead.datePublished).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
                           <a
                             href={lead.articleUrl}
@@ -690,7 +699,12 @@ import SEOHead from "@/components/shared/SEOHead";
                       </h3>
                       <p className="text-white/35 text-xs leading-relaxed mb-4 line-clamp-2">{article.summary}</p>
                       <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                        <span className="text-xs font-mono text-white/25 truncate">{article.publisher}</span>
+                        <span className="flex items-center gap-1.5 text-xs font-mono text-white/25 truncate">
+                            {article.publisherLogo ? (
+                              <img src={article.publisherLogo} alt={article.publisher} className="w-3 h-3 object-contain rounded-sm flex-shrink-0" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                            ) : null}
+                            {article.publisher}
+                          </span>
                         <div className="flex items-center gap-1 text-[#F3BA2F]/40 group-hover:text-[#F3BA2F] transition-colors">
                           <ExternalLink className="w-3 h-3" />
                         </div>
