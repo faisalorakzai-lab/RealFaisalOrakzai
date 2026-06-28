@@ -191,31 +191,31 @@ import { motion, AnimatePresence } from "framer-motion";
       },
 
       "orakzaix": {
-        title: "Next-Generation AI Automation & Intelligence Platform for the Orakzai Ecosystem",
-        bio: "OrakzaiX is the AI automation and intelligence arm of the Orakzai Group sovereign ecosystem. It is architected to power intelligent workflows, automate repetitive enterprise operations, and deliver real-time decision intelligence across the full Orakzai portfolio — from real estate and finance to luxury commerce and transport.",
-        description: "OrakzaiX integrates cutting-edge large language models, automation pipelines, and data orchestration to create a unified AI layer over the Orakzai Group's operations. The platform connects with Orakzai Bond (DeFi analytics), Shamim Forever (luxury client AI), Orakzai Properties (property valuation & lead scoring), and OTC (ride matching & demand prediction) — acting as the intelligent backbone that amplifies every venture in the ecosystem.",
+        title: "Sovereign Intelligence System — AI, Blockchain & Autonomous Digital Services (Est. 14 April 2024)",
+        bio: "OrakzaiX is a cutting-edge, multi-faceted platform harnessing advanced Artificial Intelligence, Blockchain, and integrated digital services. Active since 14 April 2024, it serves as a sovereign intelligence system offering autonomous operations, predictive analytics, market intelligence, and creative content generation. Built with modularity and scalability at its core, OrakzaiX provides a robust intelligent ecosystem for diverse applications — from enterprise automation to personal AI assistance.",
+        description: "OrakzaiX features a powerful API server orchestrating AI-driven reasoning (ORACLE), market intelligence (TRADER), legal AI, image generation (SENTINEL), and emotional AI (COACH). It integrates with Claude AI, Alchemy (blockchain), CoinMarketCap (crypto data), WhatsApp, Cloudinary, and GitHub — creating a comprehensive multi-service intelligence platform. The Sovereign Intelligence Dashboard provides real-time monitoring and control over all AI models and system health. Since its founding on 14 April 2024, OrakzaiX has operated continuously as the intelligent backbone of the Orakzai Group ecosystem.",
         uniqueFeatures: [
-          "Sovereign AI layer — purpose-built for the Orakzai Group ecosystem, not a generic SaaS tool",
-          "Cross-venture intelligence — unified AI brain connecting Bond, Properties, Shamim Forever, OTC, and more",
-          "Automated workflow orchestration — intelligent, self-correcting pipelines replacing manual operations",
-          "Real-time decision intelligence — live dashboards tracking KPIs, anomalies, and opportunity signals",
-          "LLM-powered content and communication automation across all Orakzai Group ventures",
-          "Modular architecture — each venture plugs in independently with its own AI agent configuration",
+          "Founded 14 April 2024 — continuously operational sovereign AI system since inception",
+          "Comprehensive AI model suite: ORACLE (reasoning), TRADER (market AI), SENTINEL (image gen), COACH (emotional AI)",
+          "Advanced blockchain integration — multi-chain capabilities and digital asset management via Alchemy",
+          "Sovereign Intelligence Dashboard — real-time monitoring and control center for all AI models and system health",
+          "Autonomous and self-correcting systems — platform adapts and optimizes performance dynamically without manual intervention",
+          "Extensive external integrations: Claude, CoinMarketCap, WhatsApp, Cloudinary, GitHub, and more",
         ],
         benefits: [
-          { label: "Operational Excellence", desc: "Automates routine enterprise tasks across all Orakzai ventures, freeing human talent for strategy and innovation." },
-          { label: "Unified Intelligence", desc: "A single AI layer ensures consistent decision quality and cross-venture data synergies across the full Group." },
-          { label: "Competitive Advantage", desc: "Gives every Orakzai venture access to state-of-the-art AI without individual R&D investment — a sovereign AI moat." },
-          { label: "Speed to Insight", desc: "Real-time dashboards and automated analytics compress the time from raw data to actionable decision by orders of magnitude." },
-          { label: "Scalable Automation", desc: "Modular design means new ventures or workflows can be onboarded to the AI layer in days, not months." },
+          { label: "Enhanced Decision-Making", desc: "Powerful predictive analytics and deep intelligence empower organizations and individuals to make more informed strategic decisions." },
+          { label: "Increased Efficiency", desc: "Autonomous AI-driven capabilities streamline complex workflows, reduce manual effort, and significantly boost operational efficiency." },
+          { label: "Improved Data Security", desc: "Blockchain integrations contribute to more secure and transparent digital environments, fostering trust in transactions and data management." },
+          { label: "Democratization of Advanced AI", desc: "Comprehensive integrated AI tools make advanced artificial intelligence accessible to a broader audience, fostering innovation globally." },
+          { label: "Digital Transformation Catalyst", desc: "Enables businesses to adopt cutting-edge technologies, adapt to the evolving digital landscape, and create new economic opportunities." },
         ],
         roadmap: [
-          { module: "Core Automation Engine", desc: "Deploy intelligent workflow pipelines across all Orakzai Group ventures, starting with Properties lead scoring and Bond yield analytics." },
-          { module: "Cross-Venture Data Layer", desc: "Build unified data infrastructure connecting all ventures for shared intelligence, anomaly detection, and group-level reporting." },
-          { module: "LLM Fine-Tuning on Orakzai Data", desc: "Fine-tune language models on proprietary Orakzai domain data for superior contextual performance across real estate, DeFi, and luxury." },
-          { module: "Real-Time Decision Dashboard", desc: "Launch a live monitoring dashboard tracking KPIs, agent performance, and decision outcomes across the full ecosystem." },
+          { module: "Short-term: AI & Blockchain Enhancement (0–6 months)", desc: "Enhance existing AI models and integrations in predictive analytics, market intelligence, and autonomous operations. Optimize API server performance and strengthen blockchain security protocols." },
+          { module: "Mid-term: New AI Models & Multi-Chain (6–18 months)", desc: "Introduce new AI models, explore quantum computing readiness for blockchain, advanced NLP, and expanded multi-chain environment support." },
+          { module: "Long-term: Global Sovereign AI Leadership (18+ months)", desc: "Establish OrakzaiX as a global leader in sovereign AI and decentralized intelligence, fostering an ecosystem of AI-powered applications and pioneering autonomous digital governance." },
         ],
         githubUrl: "https://github.com/faisalorakzai-lab",
+        socialUsername: "orakzaix",
       },
 
       "psc-exchange": {
@@ -379,6 +379,62 @@ import { motion, AnimatePresence } from "framer-motion";
       },
     };
 
+  
+    /* ── Organization detail panels ─────────────────────────── */
+    const ORG_DETAILS: Record<string, {
+      title: string; bio: string; description: string;
+      leadership: { role: string; name: string }[];
+      uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
+    }> = {
+      "pihro": {
+        title: "Pakistan International Human Rights Organisation — Defending Rights, Dignity & Justice",
+        bio: "Pakistan International Human Rights Organisation (PIHRO) is a sovereign civil society organisation dedicated to the protection, promotion, and enforcement of fundamental human rights across Pakistan and internationally. Under the national chairmanship of Habib Malik Orakzai and the Karachi chapter led by Faisal Orakzai, PIHRO stands as an independent voice for justice, accountability, and the dignity of every individual regardless of status.",
+        description: "PIHRO operates at the intersection of legal advocacy, community empowerment, and international human rights standards. The organisation works to document human rights violations, provide legal support to victims, engage with international bodies, and hold institutions accountable to Pakistan's constitutional obligations and international conventions. PIHRO's Karachi chapter, led by Faisal Orakzai, drives urban advocacy and bridges the gap between grassroots communities and formal legal systems.",
+        leadership: [
+          { role: "Chairman (National)", name: "Habib Malik Orakzai" },
+          { role: "Chairman (Karachi)", name: "Faisal Orakzai" },
+        ],
+        uniqueFeatures: [
+          "Independent civil society organisation — not affiliated with any political party or government body",
+          "Dual-leadership structure: national chairman and city-level chairmanship for effective local advocacy",
+          "International mandate — engages with global human rights bodies on Pakistan-specific issues",
+          "Legal support and documentation services for victims of rights violations",
+          "Community-level outreach and awareness programs across Karachi and beyond",
+          "Orakzai lineage-driven ethos of justice, sovereignty, and service to the people",
+        ],
+        benefits: [
+          { label: "Accountability", desc: "Holds institutions, officials, and entities accountable to Pakistan's constitutional obligations and international human rights law." },
+          { label: "Victim Support", desc: "Provides direct legal assistance and documentation support to individuals whose fundamental rights have been violated." },
+          { label: "Community Empowerment", desc: "Educates communities on their legal rights and equips them with the tools to advocate for themselves." },
+          { label: "International Visibility", desc: "Elevates Pakistani human rights issues onto the international stage, engaging global bodies for systemic change." },
+          { label: "Sovereign Voice", desc: "Represents an independent, uncaptured civil voice — free from political influence — that speaks truth to power." },
+        ],
+      },
+      "son-of-orakzai": {
+        title: "Community & Heritage Organisation — Representing the Proud Orakzai Identity",
+        bio: "Son of Orakzai is a community and heritage organisation representing the proud Orakzai tribal identity and diaspora. It serves as a gathering point for the global Orakzai community — preserving cultural heritage, strengthening tribal bonds, and elevating the Orakzai name as a symbol of honour, resilience, and sovereignty.",
+        description: "Son of Orakzai functions as a cultural institution that bridges the traditional Orakzai tribal heritage with the demands of the modern world. It facilitates community connections across geographies, documents and preserves Orakzai history and traditions, and creates platforms for the next generation of Orakzai leaders. The organisation is deeply aligned with the broader Orakzai Group mission — carrying forward the lineage's values of integrity, strength, and empire-building.",
+        leadership: [
+          { role: "Founder", name: "Faisal Orakzai" },
+        ],
+        uniqueFeatures: [
+          "Heritage preservation — documents Orakzai tribal history, traditions, and lineage records",
+          "Global diaspora network — connects Orakzai communities across Pakistan, the Gulf, and internationally",
+          "Cultural identity platform — celebrates and elevates the Orakzai name and Pashtun heritage",
+          "Next-generation leadership development — nurtures young Orakzai leaders for the future",
+          "Aligned with Orakzai Group philosophy — empire-thinking, sovereignty, and long-horizon vision",
+          "Community solidarity — welfare and mutual support among Orakzai community members",
+        ],
+        benefits: [
+          { label: "Cultural Continuity", desc: "Ensures Orakzai heritage, traditions, and identity are preserved and passed to future generations in a changing world." },
+          { label: "Community Cohesion", desc: "Strengthens bonds among the global Orakzai diaspora, creating a unified and supportive community network." },
+          { label: "Identity & Pride", desc: "Gives Orakzai community members a sovereign identity to rally around — a source of pride, honour, and belonging." },
+          { label: "Leadership Pipeline", desc: "Develops future Orakzai leaders who carry forward the tribe's values of integrity, resilience, and sovereign thinking." },
+          { label: "Welfare & Solidarity", desc: "Provides community welfare support, ensuring no Orakzai community member faces hardship without a support network." },
+        ],
+      },
+    };
+
     /* ── Position helpers ────────────────────────────────────── */
   function corePos(angleDeg: number, radius: number, cx: number, cy: number) {
     const a = (angleDeg * Math.PI) / 180;
@@ -389,6 +445,7 @@ import { motion, AnimatePresence } from "framer-motion";
   export default function Ecosystem() {
     const [activeCore, setActiveCore] = useState<string | null>(null);
     const [activeVenture, setActiveVenture] = useState<string | null>(null);
+      const [activeOrg, setActiveOrg] = useState<string | null>(null);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
