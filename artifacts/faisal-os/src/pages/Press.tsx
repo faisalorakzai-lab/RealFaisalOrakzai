@@ -11,6 +11,7 @@ import SEOHead from "@/components/shared/SEOHead";
     publisher: string;
     publisherUrl: string;
     articleUrl: string;
+    seeAwardUrl?: string;
     datePublished: string;
     dateModified?: string;
     category: "Featured" | "Blockchain" | "Founder" | "Awards" | "Partnerships" | "Interviews" | "Announcements";
@@ -28,6 +29,7 @@ import SEOHead from "@/components/shared/SEOHead";
       publisher: "Stevie Awards",
       publisherUrl: "https://www.stevieawards.com",
       articleUrl: "https://www.stevieawards.com",
+      seeAwardUrl: "https://drive.google.com/file/d/12YR3guJ8w-650RYqewhC-CuMUZKgubuk/view?usp=drivesdk",
       datePublished: "2026-03-15",
       category: "Awards",
       image: "/story/story-05.png",
@@ -588,14 +590,7 @@ import SEOHead from "@/components/shared/SEOHead";
             >
               {/* Lead Article */}
               {lead && (
-                <a
-                  href={lead.articleUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mb-px group"
-                  aria-label={`Read: ${lead.headline}`}
-                >
-                  <motion.article
+                <motion.article
                     className="bg-[#0a0a00] border border-[#F3BA2F]/20 p-8 md:p-12 hover:border-[#F3BA2F]/60 transition-all duration-500 relative overflow-hidden"
                     whileHover={{ scale: 1.002 }}
                   >
@@ -631,12 +626,28 @@ import SEOHead from "@/components/shared/SEOHead";
                         <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-white/30">
                           <span className="flex items-center gap-2"><Building2 className="w-3 h-3" />{lead.publisher}</span>
                           <span className="flex items-center gap-2"><Calendar className="w-3 h-3" />{new Date(lead.datePublished).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
-                          <span className="flex items-center gap-2 text-[#F3BA2F]/60 group-hover:text-[#F3BA2F] transition-colors"><ExternalLink className="w-3 h-3" />Read Source</span>
+                          <a
+                            href={lead.articleUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-[#F3BA2F]/60 hover:text-[#F3BA2F] transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3" />Read Source
+                          </a>
+                          {lead.seeAwardUrl && (
+                            <a
+                              href={lead.seeAwardUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 border border-[#F3BA2F]/25 text-[#F3BA2F]/70 hover:text-[#F3BA2F] hover:border-[#F3BA2F] px-3 py-1 transition-all text-[10px] font-mono tracking-widest uppercase"
+                            >
+                              <Award className="w-3 h-3" />See Award
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>
                   </motion.article>
-                </a>
               )}
 
               {/* Rest Grid */}
