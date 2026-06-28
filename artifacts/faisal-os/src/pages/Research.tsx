@@ -4,8 +4,8 @@ import { motion, useInView } from "framer-motion";
 
 // ─── Author identity ──────────────────────────────────────────────────────────
 const AUTHOR = {
-  name:         "Muhammad Faisal Orakzai",
-  nameCitation: "Orakzai, Muhammad Faisal",
+  name:         "Faisal Orakzai",
+  nameCitation: "Orakzai, Faisal",
   orcid:        "https://orcid.org/0009-0000-0915-7272",
   orcidId:      "0009-0000-0915-7272",
   scholar:      "https://scholar.google.com/citations?user=faisalorakzai",
@@ -275,7 +275,7 @@ const STATUS_CLS: Record<string, string> = {
 function useSEO() {
   useEffect(() => {
     const prev = document.title;
-    document.title = "Central Knowledge Repository — Muhammad Faisal Orakzai";
+    document.title = "Central Knowledge Repository — Faisal Orakzai";
 
     let dcLink = document.querySelector<HTMLLinkElement>("link[rel='schema.DC']");
     const dcNew = !dcLink;
@@ -288,10 +288,10 @@ function useSEO() {
 
     const singletons: [string, string, "name" | "property"][] = [
       ["description",   `Central Knowledge Repository of ${AUTHOR.name} — blockchain engineering, AI systems, cryptographic white papers, RWA tokenization. ORCID: ${AUTHOR.orcidId}.`, "name"],
-      ["keywords",      `Faisal Orakzai, Muhammad Faisal Orakzai, blockchain research, RWA tokenization, cryptographic protocols, QORIX AI, OkzByte, OKBOND, AdamX, OrakzaiX, DeFi, fintech Pakistan, ORCID ${AUTHOR.orcidId}`, "name"],
+      ["keywords",      `Faisal Orakzai, Faisal Orakzai, blockchain research, RWA tokenization, cryptographic protocols, QORIX AI, OkzByte, OKBOND, AdamX, OrakzaiX, DeFi, fintech Pakistan, ORCID ${AUTHOR.orcidId}`, "name"],
       ["robots",        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1", "name"],
       ["author",        AUTHOR.name, "name"],
-      ["DC.title",      "Central Knowledge Repository — Muhammad Faisal Orakzai", "name"],
+      ["DC.title",      "Central Knowledge Repository — Faisal Orakzai", "name"],
       ["DC.creator",    AUTHOR.nameCitation, "name"],
       ["DC.subject",    "Blockchain Engineering; Cryptographic Protocols; AI Systems; RWA Tokenization; DeFi; OKBOND", "name"],
       ["DC.publisher",  AUTHOR.org, "name"],
@@ -300,7 +300,7 @@ function useSEO() {
       ["DC.format",     "text/html", "name"],
       ["DC.identifier", `${AUTHOR.website}/research`, "name"],
       ["DC.language",   "en", "name"],
-      ["og:title",      "Central Knowledge Repository — Muhammad Faisal Orakzai", "property"],
+      ["og:title",      "Central Knowledge Repository — Faisal Orakzai", "property"],
       ["og:description","Blockchain engineering research, cryptographic white papers, OKBOND sovereign bond protocol, and live production repositories.", "property"],
       ["og:type",       "website", "property"],
       ["og:url",        `${AUTHOR.website}/research`, "property"],
@@ -601,9 +601,12 @@ function CardHeader({ entry, hov, isWp }: { entry: Entry; hov: boolean; isWp?: b
             {/* Footer meta */}
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap" as const, gap:"8px", paddingTop:"0.9rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
               <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
-                <div style={{ width:"24px", height:"24px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"10px", fontWeight:700, color:"black" }}>F</div>
+                <img src="/faisal-avatar.png" alt="Faisal Orakzai"
+                  onError={(e)=>{ const el=e.target as HTMLImageElement; el.style.display="none"; const fb=el.parentElement?.querySelector(".card-fb") as HTMLElement; if(fb) fb.style.display="flex"; }}
+                  style={{ width:"28px", height:"28px", borderRadius:"50%", objectFit:"cover", objectPosition:"center 15%", border:"1.5px solid rgba(243,186,47,0.45)", flexShrink:0 }} />
+                <div className="card-fb" style={{ width:"28px", height:"28px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", display:"none", alignItems:"center", justifyContent:"center", fontSize:"11px", fontWeight:700, color:"black", flexShrink:0 }}>F</div>
                 <div>
-                  <div style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.5)", letterSpacing:"0.15em", textTransform:"uppercase" as const }}>Muhammad Faisal Orakzai</div>
+                  <div style={{ fontSize:"12px", fontWeight:600, color:"rgba(255,255,255,0.72)", letterSpacing:"0.01em", fontFamily:"system-ui,sans-serif" }}>Faisal Orakzai</div>
                   <div style={{ fontFamily:"monospace", fontSize:"7px", color:"rgba(255,255,255,0.2)", letterSpacing:"0.12em" }}>{entry.year} · Orakzai Research Lab</div>
                 </div>
               </div>
