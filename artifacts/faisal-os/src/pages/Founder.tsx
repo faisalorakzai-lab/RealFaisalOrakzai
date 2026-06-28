@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import SEOHead from "@/components/shared/SEOHead";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -99,6 +100,12 @@ export default function Founder() {
 
   return (
     <div className="bg-black text-white min-h-screen overflow-x-hidden">
+      <SEOHead
+        title="About Faisal Orakzai — Founder Biography"
+        description="Full biography of Muhammad Faisal Orakzai — born April 30, 2006, Orakzai Agency KPK Pakistan. Founder & Chairman of Orakzai Group, blockchain architect, creator of OKBOND on Polygon Layer-2."
+        path="/founder"
+        keywords="Faisal Orakzai biography, Muhammad Faisal Orakzai, Orakzai Group founder, blockchain Pakistan, OKBOND creator"
+      />
 
       {/* ── HERO ── */}
       <section className="relative pt-28 pb-16 border-b border-[#F3BA2F]/10 overflow-hidden">
