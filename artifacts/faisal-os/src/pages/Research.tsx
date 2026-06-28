@@ -75,8 +75,21 @@ const ENTRIES: Entry[] = [
       thumbnail: "/mk/blockchain-guide.png",
       readTime: "25 min read",
       keywords: "blockchain, what is blockchain, distributed ledger, smart contracts, DeFi, Web3, cryptocurrency, Faisal Orakzai",
-    },
-    // ── MARKET KNOWLEDGE
+      },
+      {
+        id: "bc-02", category: "BLOCKCHAIN", year: "2026",
+        title: "Blockchain Infrastructure Explained",
+        subtitle: "The Complete Guide to the Technology That Powers Blockchain Networks",
+        abstract:
+          "Blockchain infrastructure is the complete technical environment that keeps a blockchain network secure, decentralized, synchronized, and continuously operational. This comprehensive guide covers blockchain nodes, consensus layers, networking, cryptography, smart contracts, RPC infrastructure, APIs, validator operations, Layer-2 scaling, oracle networks, cross-chain protocols, indexing, monitoring, and the full spectrum of enterprise-grade blockchain infrastructure components.",
+        tags: ["Blockchain", "Infrastructure", "Nodes", "Consensus", "Layer-2", "Validators", "RPC", "Web3"],
+        status: "PUBLISHED",
+        slug: "blockchain-infra",
+        thumbnail: "/mk/thumb-blockchain-infra.png",
+        readTime: "35 min read",
+        keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
+      },
+      // ── MARKET KNOWLEDGE
   {
     id: "mk-01", category: "MARKET KNOWLEDGE", year: "2024",
     title: "Macro-Liquidity Networks & Cross-Border Fintech Dynamics",
