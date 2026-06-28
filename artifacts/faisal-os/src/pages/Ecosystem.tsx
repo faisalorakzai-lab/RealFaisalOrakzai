@@ -171,7 +171,43 @@ import { motion, AnimatePresence } from "framer-motion";
       uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
       roadmap: { module: string; desc: string }[];
       websiteUrl?: string; githubUrl?: string;
+      socialUsername?: string;
+      docs?: { label: string; url: string }[];
     }> = {
+      "okbond": {
+        title: "Pakistan's First On-Chain Bond Marketplace — Decentralized Treasury & RWA Tokenization",
+        bio: "Orakzai Bond serves as Pakistan's pioneering on-chain bond marketplace, functioning as a decentralized financial platform engineered for staking, investment pools, and tokenized utilities. Operating as the DeFi arm of the Orakzai Group, the platform empowers a global investor base by migrating traditional fixed-income instruments onto the blockchain — establishing a transparent, secure, and highly accessible sovereign financial ecosystem.",
+        description: "Built on the Polygon blockchain (PoS + zkEVM) for gas-efficient settlement, Orakzai Bond leverages the ERC-1155 multi-token standard to tokenize real-world debt instruments. The marketplace offers Government-backed instruments (91-day T-Bills, Pakistan Investment Bonds 1–30yr, Sukuk), fixed-yield corporate debt, and property-backed real estate notes with quarterly yields. Every bond issuance, transaction, and yield payment is recorded on-chain — providing immutable provenance and replacing central institutional authority with unstoppable smart contracts.",
+        uniqueFeatures: [
+          "First in region to tokenize real-world assets (RWA) — government & corporate debt — on Polygon blockchain",
+          "ERC-1155 standard for complex bond logic: automated coupon distributions and maturity auto-redemption",
+          "Polygon PoS + zkEVM dual-layer architecture for gas-efficient, rapid T+0 blockchain-native settlement",
+          "Full investor sovereignty — no central authority controls user assets; self-custody or institutional custodian options",
+          "OKBOND token as universal settlement currency across the Orakzai sovereign ecosystem",
+          "Order-book DEX (in development) optimized specifically for bond trading with secondary market liquidity",
+        ],
+        benefits: [
+          { label: "Democratized Fixed-Income Access", desc: "Lowers barriers to government and corporate debt, letting a broader range of investors access wealth-building opportunities previously reserved for institutions." },
+          { label: "Unparalleled Transparency", desc: "Every issuance, transaction, and yield payment recorded immutably on-chain — accessible to anyone with an internet connection." },
+          { label: "Financial Inclusion", desc: "Empowers individuals globally — including the unbanked — to participate in sovereign wealth management without traditional intermediaries." },
+          { label: "Efficiency & Cost Reduction", desc: "Blockchain-native T+0 settlement drastically reduces time and costs vs traditional financial intermediaries." },
+          { label: "Capital Protection", desc: "Treasury-backed capital protection combined with DeFi yield mechanisms positions OKBOND as a premier asset for the global elite." },
+        ],
+        roadmap: [
+          { module: "Secondary Market DEX", desc: "Order-book-based DEX optimized for bond trading, enabling T+0 blockchain-native settlement and secondary market exit liquidity for all participants." },
+          { module: "Mobile Applications (iOS & Android)", desc: "Dedicated mobile apps to bring sovereign wealth management to the fingertips of global users anywhere in the world." },
+          { module: "International Expansion", desc: "Scaling the Orakzai Global Network from Karachi headquarters to key financial hubs worldwide." },
+          { module: "Universal OKBOND Currency", desc: "Establishing OKBOND token as a universal settlement and loyalty currency across the entire Orakzai sovereign infrastructure." },
+        ],
+        websiteUrl: "https://orakzaibond.com",
+        githubUrl: "https://github.com/faisalorakzai-lab/orakzaibondwebsiten",
+        socialUsername: "orakzaibond",
+        docs: [
+          { label: "MASTER PDF", url: "https://drive.google.com/file/d/1Q6bClDOeBCBxBZfKdD9SnqSpNFrG-u7A/view?usp=drivesdk" },
+          { label: "SECURITY REVIEW", url: "https://drive.google.com/file/d/1T_isI9xvQQr_Mbkt1YyBvNF4kLUOcVgj/view?usp=drivesdk" },
+          { label: "WHITEPAPER", url: "https://drive.google.com/file/d/1Psz7Iy5aREH_ltKPGLglTwR2ln1VTHWS/view?usp=drivesdk" },
+        ],
+      },
       "shamim": {
         title: "Global Sovereign Luxury Digital House — Fragrances, Jewellery & Web3 Provenance",
         bio: "Shamim Forever is a global sovereign luxury digital house established in 2024 by Faisal Orakzai. Based in Pakistan and serving a worldwide clientele, the house specializes in bespoke fragrances, sovereign high jewellery, and blockchain-verified couture collections. It operates as part of the Orakzai Group portfolio, merging ancient Arabian perfumery heritage with modern digital commerce and Web3 technology.",
@@ -199,6 +235,7 @@ import { motion, AnimatePresence } from "framer-motion";
         ],
         websiteUrl: "https://www.shamimforever.com",
         githubUrl: "https://github.com/faisalorakzai-lab/shamimforever",
+        socialUsername: "shamimforever",
       },
     };
 
@@ -468,12 +505,24 @@ import { motion, AnimatePresence } from "framer-motion";
                                 ↗ VISIT WEBSITE
                               </a>
                             )}
+                            {d.socialUsername && (
+                              <a href={`https://twitter.com/${d.socialUsername}`} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
+                                𝕏 @{d.socialUsername}
+                              </a>
+                            )}
                             {d.githubUrl && (
                               <a href={d.githubUrl} target="_blank" rel="noopener noreferrer"
                                 style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
                                 ↗ GITHUB REPO
                               </a>
                             )}
+                            {d.docs && d.docs.map((doc, i) => (
+                              <a key={i} href={doc.url} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: `${core.statusColor}10`, border: `1px solid ${core.statusColor}30`, color: core.statusColor, fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
+                                ↓ {doc.label}
+                              </a>
+                            ))}
                             <button onClick={() => setActiveCore(null)}
                               style={{ all: "unset", cursor: "pointer", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.25)" }}>
                               ✕ CLOSE
