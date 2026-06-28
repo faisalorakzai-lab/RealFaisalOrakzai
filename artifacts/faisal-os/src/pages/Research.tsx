@@ -4,6 +4,7 @@
    * Mobile-first responsive with hardware-accelerated transitions
    */
 
+  import React from "react";
   import { motion, useInView, AnimatePresence } from "framer-motion";
   import { useEffect, useRef, useState } from "react";
 
