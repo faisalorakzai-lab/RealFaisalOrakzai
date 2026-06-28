@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import SEOHead from "@/components/shared/SEOHead";
   import { useSubmitContact, useGetContactStats, getGetContactStatsQueryKey } from "@workspace/api-client-react";
   import { useQueryClient } from "@tanstack/react-query";
   import { useToast } from "@/hooks/use-toast";
@@ -235,6 +236,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
     return (
       <div className="bg-black text-white min-h-screen">
+      <SEOHead
+        title="Contact Faisal Orakzai — Sovereign Gateway"
+        description="Contact Muhammad Faisal Orakzai and Orakzai Group for strategic partnerships, media inquiries, investment discussions, and collaboration. Email: chairman@faisalorakzai.com"
+        path="/contact"
+        keywords="contact Faisal Orakzai, Orakzai Group partnership, blockchain investment Pakistan, chairman@faisalorakzai.com"
+      />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
