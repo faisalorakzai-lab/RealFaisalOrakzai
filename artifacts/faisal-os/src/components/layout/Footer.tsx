@@ -22,6 +22,7 @@ import { motion } from "framer-motion";
     { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE" },
     { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE" },
     { label: "Wellfound",       url: "https://wellfound.com/u/faisal-orakzai-1",                         cat: "STARTUP" },
+    { label: "Tracxn · OKBOND",   url: "https://platform.tracxn.com/a/d/company/69d7b7bd06c1367e438e2743/orakzaibond", cat: "VENTURE · LIVE" },
   ];
 
   const tier2 = [
