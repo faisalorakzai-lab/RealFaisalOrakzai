@@ -1,39 +1,157 @@
 /**
-   * RESEARCH ARTICLE PAGE — /research/:slug
-   * shamimforever.com/journal style — editorial, professional, mobile-first
+   * RESEARCH ARTICLE — /research/:slug
+   * Features: TOC sidebar, profile photo, FAQ accordion, blockchain SVG graphics, SEO
    */
-  import React, { useEffect, useState } from "react";
-  import { motion } from "framer-motion";
+  import React, { useEffect, useRef, useState, useCallback } from "react";
+  import { motion, AnimatePresence } from "framer-motion";
   import { useParams, useLocation } from "wouter";
 
+  /* ── Fonts ─────────────────────────────────────────────────────────────────── */
   function useFonts() {
     useEffect(() => {
-      if (document.getElementById("article-fonts")) return;
+      if (document.getElementById("art-fonts")) return;
       const l = document.createElement("link");
-      l.id = "article-fonts";
-      l.rel = "stylesheet";
-      l.href = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap";
+      l.id = "art-fonts"; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap";
       document.head.appendChild(l);
     }, []);
   }
 
-  // ─── Article Database ────────────────────────────────────────────────────────
+  /* ── SEO ────────────────────────────────────────────────────────────────────── */
+  function useArticleSEO(article: typeof ARTICLES[string] | undefined) {
+    useEffect(() => {
+      if (!article) return;
+      const prev = document.title;
+      document.title = article.title + " | Faisal Orakzai Research Lab";
+
+      const setMeta = (name: string, val: string, prop = false) => {
+        const sel = prop ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+        let el = document.querySelector(sel) as HTMLMetaElement;
+        if (!el) { el = document.createElement("meta"); el.setAttribute(prop ? "property" : "name", name); document.head.appendChild(el); }
+        el.content = val;
+      };
+      setMeta("description", article.subtitle);
+      setMeta("keywords", article.tags.join(", ") + ", Faisal Orakzai, blockchain Pakistan");
+      setMeta("author", article.authors);
+      setMeta("og:title", article.title, true);
+      setMeta("og:description", article.subtitle, true);
+      setMeta("og:type", "article", true);
+      setMeta("og:url", "https://faisalorakzai.com/research/" + article.slug, true);
+      if (article.thumbnail) setMeta("og:image", "https://faisalorakzai.com" + article.thumbnail, true);
+      setMeta("twitter:card", "summary_large_image");
+      setMeta("twitter:title", article.title);
+      setMeta("twitter:description", article.subtitle);
+      setMeta("citation_title", article.title);
+      setMeta("citation_author", "Orakzai, Muhammad Faisal");
+      setMeta("citation_publication_date", article.year + "/01/01");
+      setMeta("citation_online_date", article.year + "/06/01");
+      setMeta("citation_abstract_html_url", "https://faisalorakzai.com/research/" + article.slug);
+
+      // JSON-LD schema
+      const ld = document.createElement("script");
+      ld.id = "article-ld"; ld.type = "application/ld+json";
+      ld.text = JSON.stringify({
+        "@context": "https://schema.org", "@type": "Article",
+        "headline": article.title, "description": article.subtitle,
+        "author": { "@type": "Person", "name": article.authors, "url": "https://faisalorakzai.com/founder", "sameAs": ["https://orcid.org/0009-0000-0915-7272", "https://www.linkedin.com/in/faisalorakzaii"] },
+        "publisher": { "@type": "Organization", "name": "Orakzai Research Lab", "url": "https://faisalorakzai.com" },
+        "datePublished": article.year + "-06-01", "dateModified": "2026-06-28",
+        "url": "https://faisalorakzai.com/research/" + article.slug,
+        "image": article.thumbnail ? "https://faisalorakzai.com" + article.thumbnail : undefined,
+        "keywords": article.tags.join(", "),
+        "inLanguage": "en-US", "isAccessibleForFree": true,
+      });
+      document.getElementById("article-ld")?.remove();
+      document.head.appendChild(ld);
+
+      return () => {
+        document.title = prev;
+        document.getElementById("article-ld")?.remove();
+      };
+    }, [article]);
+  }
+
+  /* ── Blockchain SVG Decorators ──────────────────────────────────────────────── */
+  function BlockchainDivider() {
+    return (
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"0", margin:"2.5rem 0", opacity:0.22 }}>
+        <div style={{ flex:1, height:"1px", background:"rgba(243,186,47,0.3)" }} />
+        <svg width="220" height="44" viewBox="0 0 220 44" fill="none" style={{ flexShrink:0 }}>
+          {[0,72,144].map((x,i) => (
+            <g key={i}>
+              <rect x={x} y="9" width="44" height="26" rx="3" stroke="#F3BA2F" strokeWidth="1"/>
+              <line x1={x+6} y1="17" x2={x+38} y2="17" stroke="#F3BA2F" strokeWidth="0.6" opacity="0.6"/>
+              <line x1={x+6} y1="22" x2={x+38} y2="22" stroke="#F3BA2F" strokeWidth="0.6" opacity="0.6"/>
+              <line x1={x+6} y1="27" x2={x+30} y2="27" stroke="#F3BA2F" strokeWidth="0.6" opacity="0.4"/>
+              {i < 2 && <><line x1={x+44} y1="22" x2={x+72} y2="22" stroke="#F3BA2F" strokeWidth="1" strokeDasharray="3 2"/><circle cx={x+58} cy="22" r="2.5" fill="#F3BA2F"/></>}
+            </g>
+          ))}
+          <rect x="188" y="9" width="32" height="26" rx="3" stroke="#F3BA2F" strokeWidth="0.7" strokeDasharray="4 2" opacity="0.5"/>
+          <text x="197" y="26" fontSize="11" fill="#F3BA2F" opacity="0.5" fontFamily="monospace">···</text>
+        </svg>
+        <div style={{ flex:1, height:"1px", background:"rgba(243,186,47,0.3)" }} />
+      </div>
+    );
+  }
+
+  function NodeGraphic() {
+    return (
+      <div style={{ display:"flex", justifyContent:"center", margin:"1.5rem 0", opacity:0.18 }}>
+        <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+          <circle cx="80" cy="40" r="10" stroke="#F3BA2F" strokeWidth="1"/>
+          {[[35,18],[125,18],[35,62],[125,62],[10,40],[150,40]].map(([cx,cy],i) => (
+            <g key={i}>
+              <circle cx={cx} cy={cy} r="6" stroke="#F3BA2F" strokeWidth="0.8" opacity="0.7"/>
+              <line x1={cx > 80 ? cx-6 : cx+6} y1={cy} x2={cy < 40 ? (cx > 80 ? 86 : 74) : (cy > 40 ? (cx > 80 ? 86 : 74) : (cx > 80 ? 86 : 74))} y2={cy < 40 ? 32 : cy > 40 ? 48 : 40} stroke="#F3BA2F" strokeWidth="0.6" opacity="0.4" strokeDasharray="3 2"/>
+            </g>
+          ))}
+          <text x="74" y="44" fontSize="8" fill="#F3BA2F" opacity="0.8" fontFamily="monospace">NODE</text>
+        </svg>
+      </div>
+    );
+  }
+
+  /* ── Article Database ─────────────────────────────────────────────────────────── */
+  const TOC_SECTIONS = [
+    { id:"intro",       label:"Introduction & History" },
+    { id:"components",  label:"Core Components" },
+    { id:"benefits",    label:"Benefits" },
+    { id:"limitations", label:"Limitations" },
+    { id:"industries",  label:"Industries" },
+    { id:"trends",      label:"Emerging Trends" },
+    { id:"future",      label:"The Future" },
+    { id:"faq",         label:"FAQs" },
+    { id:"myths",       label:"Common Myths" },
+    { id:"takeaways",   label:"Key Takeaways" },
+  ];
+
+  const HEADING_ID_MAP: Record<string, string> = {
+    "1: Introduction, Blockchain Basics & History": "intro",
+    "Core Components of Blockchain": "components",
+    "Benefits of Blockchain": "benefits",
+    "Limitations of Blockchain": "limitations",
+    "Blockchain Across Industries": "industries",
+    "Emerging Trends in Blockchain": "trends",
+    "The Future of Blockchain": "future",
+    "Frequently Asked Questions (FAQs)": "faq",
+    "Common Blockchain Myths": "myths",
+    "Key Takeaways": "takeaways",
+  };
+
   const ARTICLES: Record<string, {
     slug: string; title: string; subtitle: string;
     authors: string; year: string; category: string;
-    thumbnail?: string; tags: string[]; readTime: string;
-    content: string;
+    thumbnail?: string; tags: string[]; readTime: string; content: string;
   }> = {
     "blockchain-basic": {
       slug: "blockchain-basic",
       title: "What is Blockchain? A Complete Beginner's Guide",
       subtitle: "From distributed ledgers to smart contracts — the definitive primer on blockchain technology",
       authors: "Muhammad Faisal Orakzai",
-      year: "2026",
-      category: "BLOCKCHAIN",
+      year: "2026", category: "BLOCKCHAIN",
       thumbnail: "/mk/blockchain-guide.png",
       readTime: "25 min read",
-      tags: ["Blockchain", "DLT", "Web3", "DeFi", "Cryptography", "RWA", "Tokenization", "Smart Contracts"],
+      tags: ["Blockchain","DLT","Web3","DeFi","Cryptography","RWA","Tokenization","Smart Contracts"],
       content: `
 What is Blockchain? A Complete Beginner's Guide
 
@@ -1426,38 +1544,215 @@ As the digital economy evolves, blockchain is expected to become a foundational 
     },
   };
 
-  // ─── Content Renderer ────────────────────────────────────────────────────────
-  function ArticleBody({ content }: { content: string }) {
+  /* ── TOC Sidebar ─────────────────────────────────────────────────────────────── */
+  function TOCSidebar({ activeId }: { activeId: string }) {
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const tocList = (
+      <ol style={{ listStyle:"none", margin:0, padding:0, display:"flex", flexDirection:"column", gap:"2px" }}>
+        {TOC_SECTIONS.map(({ id, label }) => {
+          const isActive = activeId === id;
+          return (
+            <li key={id}>
+              <a href={"#" + id} onClick={() => setMobileOpen(false)}
+                style={{ display:"flex", alignItems:"center", gap:"8px", padding:"6px 8px", textDecoration:"none",
+                  fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.18em", textTransform:"uppercase",
+                  color: isActive ? "#F3BA2F" : "rgba(255,255,255,0.3)",
+                  background: isActive ? "rgba(243,186,47,0.07)" : "transparent",
+                  borderLeft: isActive ? "2px solid #F3BA2F" : "2px solid transparent",
+                  transition:"all 0.2s ease", lineHeight:1.4 }}>
+                {label}
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    );
+
+    return (
+      <>
+        {/* Desktop sticky sidebar */}
+        <aside style={{ display:"none" }} className="toc-desktop">
+          <div style={{ position:"sticky", top:"100px", width:"180px", padding:"16px 0" }}>
+            <div style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.45em", color:"rgba(243,186,47,0.5)", textTransform:"uppercase", marginBottom:"12px", paddingLeft:"8px" }}>Contents</div>
+            {tocList}
+          </div>
+        </aside>
+
+        {/* Mobile collapsible TOC */}
+        <div className="toc-mobile" style={{ marginBottom:"1.5rem", border:"1px solid rgba(243,186,47,0.15)", background:"rgba(0,0,0,0.6)" }}>
+          <button onClick={() => setMobileOpen(p => !p)}
+            style={{ width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between", padding:"12px 16px", background:"none", border:"none", cursor:"pointer", fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.35em", color:"rgba(255,255,255,0.5)", textTransform:"uppercase" }}>
+            <span>Table of Contents</span>
+            <span style={{ transform: mobileOpen ? "rotate(180deg)" : "none", transition:"transform 0.2s", color:"#F3BA2F", fontSize:"11px" }}>▾</span>
+          </button>
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div initial={{ height:0, opacity:0 }} animate={{ height:"auto", opacity:1 }} exit={{ height:0, opacity:0 }} transition={{ duration:0.25 }} style={{ overflow:"hidden" }}>
+                <div style={{ padding:"4px 8px 12px" }}>{tocList}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </>
+    );
+  }
+
+  /* ── FAQ Accordion ─────────────────────────────────────────────────────────── */
+  interface FAQItem { q: string; a: string[] }
+
+  function FAQAccordion({ items }: { items: FAQItem[] }) {
+    const [open, setOpen] = useState<number | null>(null);
+    return (
+      <div style={{ display:"flex", flexDirection:"column", gap:"2px", margin:"1rem 0 2rem 0" }}>
+        {items.map(({ q, a }, idx) => {
+          const isOpen = open === idx;
+          return (
+            <div key={idx} style={{ border:"1px solid rgba(243,186,47,0.15)", background: isOpen ? "rgba(243,186,47,0.04)" : "transparent", transition:"background 0.2s" }}>
+              <button onClick={() => setOpen(isOpen ? null : idx)}
+                style={{ width:"100%", display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"12px", padding:"14px 16px", background:"none", border:"none", cursor:"pointer", textAlign:"left" }}>
+                <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(0.95rem,2.5vw,1.1rem)", color:"rgba(255,255,255,0.88)", lineHeight:1.4, flex:1 }}>{q}</span>
+                <span style={{ color:"#F3BA2F", flexShrink:0, fontSize:"14px", marginTop:"2px", transform: isOpen ? "rotate(45deg)" : "none", transition:"transform 0.25s", display:"inline-block" }}>+</span>
+              </button>
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div initial={{ height:0, opacity:0 }} animate={{ height:"auto", opacity:1 }} exit={{ height:0, opacity:0 }} transition={{ duration:0.28 }} style={{ overflow:"hidden" }}>
+                    <div style={{ padding:"0 16px 16px 16px", borderTop:"1px solid rgba(243,186,47,0.08)" }}>
+                      {a.map((line, j) => (
+                        <p key={j} style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(0.95rem,2.3vw,1.05rem)", color:"rgba(255,255,255,0.6)", lineHeight:1.85, margin:"8px 0 0 0", fontWeight:400 }}>{line}</p>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  /* ── Myth/Reality Cards ──────────────────────────────────────────────────────── */
+  function MythCard({ myth, reality }: { myth: string; reality: string }) {
+    return (
+      <div style={{ border:"1px solid rgba(255,255,255,0.06)", marginBottom:"12px", overflow:"hidden" }}>
+        <div style={{ background:"rgba(243,186,47,0.06)", padding:"10px 14px", borderLeft:"3px solid rgba(243,186,47,0.5)" }}>
+          <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.32em", color:"rgba(243,186,47,0.7)", textTransform:"uppercase", display:"block", marginBottom:"4px" }}>MYTH</span>
+          <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1rem", color:"rgba(255,255,255,0.75)", margin:0, lineHeight:1.6 }}>{myth}</p>
+        </div>
+        <div style={{ background:"rgba(74,222,128,0.03)", padding:"10px 14px", borderLeft:"3px solid rgba(74,222,128,0.4)" }}>
+          <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.32em", color:"rgba(74,222,128,0.7)", textTransform:"uppercase", display:"block", marginBottom:"4px" }}>REALITY</span>
+          <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1rem", color:"rgba(255,255,255,0.6)", margin:0, lineHeight:1.6 }}>{reality}</p>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Article Content Renderer ───────────────────────────────────────────────── */
+  function ArticleBody({ content, onSection }: { content: string; onSection: (id: string) => void }) {
     const lines = content.split("\n");
     const nodes: React.ReactNode[] = [];
-    let i = 0;
     let key = 0;
+    let i = 0;
+    let inFAQ = false;
+    let inMyths = false;
+    const faqItems: FAQItem[] = [];
+    let currentFAQ: FAQItem | null = null;
+    const myths: { myth: string; reality: string }[] = [];
+    let currentMyth = "";
+
+    // First pass: extract FAQ items and Myths
+    for (let fi = 0; fi < lines.length; fi++) {
+      const fl = lines[fi].trim();
+      if (fl === "Frequently Asked Questions (FAQs)") { inFAQ = true; inMyths = false; continue; }
+      if (fl === "Common Blockchain Myths") { inFAQ = false; inMyths = true; if (currentFAQ) { faqItems.push(currentFAQ); currentFAQ = null; } continue; }
+      if (fl === "Key Takeaways") { inMyths = false; continue; }
+
+      if (inFAQ && fl) {
+        const qMatch = fl.match(/^(\d+)\.\s+(.+)/);
+        if (qMatch) {
+          if (currentFAQ) faqItems.push(currentFAQ);
+          currentFAQ = { q: qMatch[2], a: [] };
+        } else if (currentFAQ && !fl.startsWith("Blockchain is") && fl !== "No." || currentFAQ) {
+          if (currentFAQ) currentFAQ.a.push(fl);
+        }
+      }
+      if (inMyths) {
+        if (fl.startsWith("Myth ")) { currentMyth = ""; }
+        else if (fl.startsWith("Reality:")) {
+          const r = fl.replace("Reality:", "").trim() || lines[fi+1]?.trim() || "";
+          myths.push({ myth: currentMyth, reality: r });
+          currentMyth = "";
+        } else if (fl && !fl.startsWith("Reality:")) {
+          currentMyth = currentMyth ? currentMyth + " " + fl : fl;
+        }
+      }
+    }
+    if (currentFAQ) faqItems.push(currentFAQ);
+
+    // Second pass: render content
+    inFAQ = false; inMyths = false;
+    let faqRendered = false;
+    let mythsRendered = false;
+    let dividerCount = 0;
 
     while (i < lines.length) {
-      const raw = lines[i];
-      const line = raw.trim();
-
+      const raw = lines[i]; const line = raw.trim();
       if (!line) { i++; continue; }
 
-      // ── Horizontal divider
-      if (line === "---") {
-        nodes.push(<div key={key++} style={{ margin: "2.5rem 0", borderTop: "1px solid rgba(243,186,47,0.12)" }} />);
+      // Section markers
+      if (line === "Frequently Asked Questions (FAQs)") {
+        inFAQ = true; inMyths = false;
+        nodes.push(<h2 key={key++} id="faq" data-section="faq" style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.5rem,4vw,2.1rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1rem 0", lineHeight:1.25, letterSpacing:"-0.02em" }}>Frequently Asked Questions</h2>);
         i++;
+        if (!faqRendered) {
+          nodes.push(<FAQAccordion key={key++} items={faqItems} />);
+          faqRendered = true;
+        }
+        // Skip to end of FAQ section
+        while (i < lines.length && lines[i].trim() !== "Common Blockchain Myths") i++;
         continue;
       }
 
-      // ── Bullet list — collect all consecutive bullets
+      if (line === "Common Blockchain Myths") {
+        inFAQ = false; inMyths = true;
+        nodes.push(
+          <div key={key++}>
+            <h2 id="myths" data-section="myths" style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.5rem,4vw,2.1rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1.25rem 0", lineHeight:1.25 }}>Common Blockchain Myths</h2>
+            {myths.map((m, mi) => <MythCard key={mi} myth={m.myth} reality={m.reality} />)}
+          </div>
+        );
+        mythsRendered = true;
+        // Skip to Key Takeaways
+        while (i < lines.length && lines[i].trim() !== "Key Takeaways") i++;
+        continue;
+      }
+
+      if (line === "Key Takeaways" || line === "Final Conclusion") {
+        inMyths = false; inFAQ = false;
+        const sectionId = line === "Key Takeaways" ? "takeaways" : "conclusion";
+        nodes.push(<h2 key={key++} id={sectionId} data-section={sectionId} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.5rem,4vw,2.1rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1rem 0", lineHeight:1.25 }}>{line}</h2>);
+        i++; continue;
+      }
+
+      // Dividers — alternate between chain graphic and simple line
+      if (line === "---") {
+        dividerCount++;
+        if (dividerCount % 6 === 0) nodes.push(<BlockchainDivider key={key++} />);
+        else if (dividerCount % 10 === 0) nodes.push(<NodeGraphic key={key++} />);
+        else nodes.push(<div key={key++} style={{ margin:"2.5rem 0", borderTop:"1px solid rgba(243,186,47,0.1)" }} />);
+        i++; continue;
+      }
+
+      // Bullet list
       if (line.startsWith("- ")) {
         const items: string[] = [];
-        while (i < lines.length && lines[i].trim().startsWith("- ")) {
-          items.push(lines[i].trim().slice(2));
-          i++;
-        }
+        while (i < lines.length && lines[i].trim().startsWith("- ")) { items.push(lines[i].trim().slice(2)); i++; }
         nodes.push(
-          <ul key={key++} style={{ margin: "1rem 0 1.5rem 0", padding: 0, listStyle: "none" }}>
+          <ul key={key++} style={{ margin:"1rem 0 1.5rem 0", padding:0, listStyle:"none" }}>
             {items.map((item, j) => (
-              <li key={j} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px", color: "rgba(255,255,255,0.6)", fontSize: "clamp(0.9rem,2vw,1.02rem)", lineHeight: 1.75, fontFamily: "'Cormorant Garamond',Georgia,serif", fontWeight: 400 }}>
-                <span style={{ color: "#F3BA2F", flexShrink: 0, marginTop: "0.45em", fontSize: "10px" }}>◆</span>
+              <li key={j} style={{ display:"flex", gap:"10px", alignItems:"flex-start", marginBottom:"7px", color:"rgba(255,255,255,0.62)", fontSize:"clamp(0.9rem,2vw,1rem)", lineHeight:1.8, fontFamily:"'Cormorant Garamond',Georgia,serif" }}>
+                <span style={{ color:"#F3BA2F", flexShrink:0, marginTop:"0.5em", fontSize:"9px" }}>◆</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -1466,292 +1761,184 @@ As the digital economy evolves, blockchain is expected to become a foundational 
         continue;
       }
 
-      // ── Heading detection
       const prevEmpty = i === 0 || lines[i - 1].trim() === "";
 
+      // Headings
       if (prevEmpty && line.length < 80 && !line.startsWith("«") && !line.includes("→") && !line.startsWith("↓")) {
+        const sectionId = HEADING_ID_MAP[line];
 
-        // Major section: "1: Introduction..." style
-        if (/^d+:s/.test(line)) {
-          nodes.push(
-            <h2 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.5rem,4vw,2.1rem)", color: "rgba(255,255,255,0.95)", margin: "3.5rem 0 1rem 0", lineHeight: 1.25, letterSpacing: "-0.02em" }}>
-              {line}
-            </h2>
-          );
-          i++;
-          continue;
+        if (/^\d+:\s/.test(line)) {
+          nodes.push(<h2 key={key++} id={sectionId || undefined} data-section={sectionId} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.4rem,4vw,2rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1rem 0", lineHeight:1.25, letterSpacing:"-0.02em" }}>{line}</h2>);
+          i++; continue;
         }
 
-        // Numbered section heading: "1. Decentralization", "2. Enhanced Security" etc
-        if (/^[1-9]d?.s/.test(line) && line.length < 60) {
-          nodes.push(
-            <h3 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.2rem,3vw,1.5rem)", color: "rgba(255,255,255,0.9)", margin: "2.5rem 0 0.75rem 0", lineHeight: 1.3 }}>
-              {line}
-            </h3>
-          );
-          i++;
-          continue;
+        const isMajorHeading = !!sectionId;
+        if (isMajorHeading) {
+          nodes.push(<h2 key={key++} id={sectionId} data-section={sectionId} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.4rem,4vw,2rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1rem 0", lineHeight:1.25 }}>{line}</h2>);
+          i++; continue;
         }
 
-        // Step headings: "Step 1: ...", "Step N: ..."
-        if (/^Steps+d+:/i.test(line)) {
-          nodes.push(
-            <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.05rem,2.5vw,1.25rem)", color: "#F3BA2F", margin: "2rem 0 0.6rem 0", lineHeight: 1.35 }}>
-              {line}
-            </h4>
-          );
-          i++;
-          continue;
+        if (/^[1-9]\d?\.\s/.test(line) && line.length < 60) {
+          nodes.push(<h3 key={key++} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1.15rem,3vw,1.5rem)", color:"rgba(255,255,255,0.9)", margin:"2.5rem 0 0.75rem 0", lineHeight:1.3 }}>{line}</h3>);
+          i++; continue;
         }
-
-        // Timeline headings: "2008 – Bitcoin Whitepaper", "1970s – Cryptography"
-        if (/^d{4}s?s[–—]/.test(line) || /^d{4}[–—]/.test(line)) {
-          nodes.push(
-            <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(243,186,47,0.85)", margin: "2rem 0 0.6rem 0", lineHeight: 1.35, borderLeft: "2px solid rgba(243,186,47,0.3)", paddingLeft: "12px" }}>
-              {line}
-            </h4>
-          );
-          i++;
-          continue;
+        if (/^Step\s+\d+:/i.test(line)) {
+          nodes.push(<h4 key={key++} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1rem,2.5vw,1.25rem)", color:"#F3BA2F", margin:"2rem 0 0.6rem 0", lineHeight:1.35 }}>{line}</h4>);
+          i++; continue;
         }
-
-        // Sub-heading: medium length, standalone line
-        if (line.length > 3 && line.length < 70 && !line.endsWith(".") && !line.endsWith(",")) {
-          const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : "";
-          // If followed by empty line or list or another heading — treat as heading
-          if (nextLine === "" || nextLine === "---" || nextLine.startsWith("- ")) {
-            nodes.push(
-              <h3 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.1rem,2.8vw,1.4rem)", color: "rgba(255,255,255,0.88)", margin: "2.5rem 0 0.75rem 0", lineHeight: 1.3 }}>
-                {line}
-              </h3>
-            );
-            i++;
-            continue;
-          }
-          // Short standalone word/phrase (like "Block", "Chain", "Applications", "Benefits")
-          if (line.length < 40) {
-            nodes.push(
-              <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(255,255,255,0.82)", margin: "1.75rem 0 0.5rem 0", lineHeight: 1.4 }}>
-                {line}
-              </h4>
-            );
-            i++;
-            continue;
-          }
+        if (/^\d{4}s?\s[–—]/.test(line) || /^\d{4}[–—]/.test(line)) {
+          nodes.push(<h4 key={key++} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1rem,2.4vw,1.2rem)", color:"rgba(243,186,47,0.85)", margin:"2rem 0 0.6rem 0", lineHeight:1.35, borderLeft:"2px solid rgba(243,186,47,0.3)", paddingLeft:"12px" }}>{line}</h4>);
+          i++; continue;
+        }
+        if (line.length < 70 && !line.endsWith(".") && !line.endsWith(",")) {
+          nodes.push(<h3 key={key++} style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1.05rem,2.6vw,1.35rem)", color:"rgba(255,255,255,0.85)", margin:"2rem 0 0.6rem 0", lineHeight:1.35 }}>{line}</h3>);
+          i++; continue;
         }
       }
 
-      // ── FAQ questions (start with digit and period or "Myth N:" )
-      if (/^(Frequently Asked|Common Blockchain Myths|Key Takeaways|Final Conclusion)/.test(line) && prevEmpty) {
-        nodes.push(
-          <h2 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.5rem,4vw,2rem)", color: "rgba(255,255,255,0.95)", margin: "3.5rem 0 1rem 0", lineHeight: 1.25 }}>
-            {line}
-          </h2>
-        );
-        i++;
-        continue;
-      }
-
-      if (/^d+.s.{5,}/.test(line) && prevEmpty && line.length < 120) {
-        nodes.push(
-          <p key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(0.95rem,2.2vw,1.1rem)", color: "rgba(255,255,255,0.85)", margin: "1.5rem 0 0.5rem 0", lineHeight: 1.5 }}>
-            {line}
-          </p>
-        );
-        i++;
-        continue;
-      }
-
-      if (/^(Myths+d+:|Reality:)/.test(line)) {
-        const isMyth = line.startsWith("Myth");
-        nodes.push(
-          <p key={key++} style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "0.2em", color: isMyth ? "#F3BA2F" : "rgba(74,222,128,0.8)", textTransform: "uppercase", margin: "1rem 0 0.25rem 0", fontWeight: 600 }}>
-            {line}
-          </p>
-        );
-        i++;
-        continue;
-      }
-
-      // ── Code-like or special lines (Block #100 → Hash)
+      // Code/special lines
       if (line.includes("→") || line.includes("↓") || line.startsWith("«") || line.startsWith("Block #")) {
-        nodes.push(
-          <div key={key++} style={{ fontFamily: "monospace", fontSize: "clamp(0.8rem,2vw,0.95rem)", color: "rgba(243,186,47,0.7)", background: "rgba(243,186,47,0.04)", border: "1px solid rgba(243,186,47,0.12)", padding: "8px 14px", margin: "0.5rem 0", letterSpacing: "0.05em" }}>
-            {line}
-          </div>
-        );
-        i++;
-        continue;
+        nodes.push(<div key={key++} style={{ fontFamily:"monospace", fontSize:"clamp(0.8rem,2vw,0.9rem)", color:"rgba(243,186,47,0.75)", background:"rgba(243,186,47,0.05)", border:"1px solid rgba(243,186,47,0.15)", padding:"8px 14px", margin:"0.4rem 0", letterSpacing:"0.04em" }}>{line}</div>);
+        i++; continue;
       }
 
-      // ── Default: paragraph
-      nodes.push(
-        <p key={key++} style={{ fontFamily: "'Cormorant Garamond',Georgia,serif", fontWeight: 400, fontSize: "clamp(1rem,2.4vw,1.12rem)", lineHeight: 1.9, color: "rgba(255,255,255,0.62)", marginBottom: "1.1rem" }}>
-          {line}
-        </p>
-      );
+      // Default paragraph
+      nodes.push(<p key={key++} style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontWeight:400, fontSize:"clamp(1rem,2.4vw,1.12rem)", lineHeight:1.92, color:"rgba(255,255,255,0.62)", marginBottom:"1.1rem" }}>{line}</p>);
       i++;
     }
 
     return <>{nodes}</>;
   }
 
-  // ─── Main Component ──────────────────────────────────────────────────────────
+  /* ── Main ─────────────────────────────────────────────────────────────────────── */
   export default function ResearchArticle() {
     useFonts();
     const { slug } = useParams<{ slug: string }>();
     const [, setLocation] = useLocation();
     const [copied, setCopied] = useState(false);
+    const [activeSection, setActiveSection] = useState("intro");
     const article = ARTICLES[slug ?? ""];
+    useArticleSEO(article);
 
-    // SEO
+    // Scroll spy using IntersectionObserver
     useEffect(() => {
-      if (!article) return;
-      const prev = document.title;
-      document.title = `${article.title} — Faisal Orakzai Research`;
-      const desc = document.querySelector('meta[name="description"]');
-      if (desc) desc.setAttribute("content", article.subtitle);
-      return () => { document.title = prev; };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = (entry.target as HTMLElement).dataset.section;
+              if (id) setActiveSection(id);
+            }
+          });
+        },
+        { rootMargin:"-20% 0px -70% 0px", threshold:0 }
+      );
+      const headings = document.querySelectorAll("[data-section]");
+      headings.forEach(h => observer.observe(h));
+      return () => observer.disconnect();
     }, [article]);
 
-    // 404 state
-    if (!article) {
-      return (
-        <div style={{ minHeight: "100vh", background: "#000", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
-          <p style={{ fontFamily: "monospace", color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", fontSize: "11px", textTransform: "uppercase" }}>ARTICLE NOT FOUND</p>
-          <button onClick={() => setLocation("/research")} style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.35em", border: "1px solid rgba(243,186,47,0.4)", color: "#F3BA2F", background: "none", padding: "10px 20px", cursor: "pointer", textTransform: "uppercase" }}>
-            ← BACK TO RESEARCH
-          </button>
-        </div>
-      );
-    }
+    if (!article) return (
+      <div style={{ minHeight:"100vh", background:"#000", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
+        <p style={{ fontFamily:"monospace", color:"rgba(255,255,255,0.2)", letterSpacing:"0.3em", fontSize:"11px", textTransform:"uppercase" }}>Article not found</p>
+        <button onClick={() => setLocation("/research")} style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.35em", border:"1px solid rgba(243,186,47,0.4)", color:"#F3BA2F", background:"none", padding:"10px 20px", cursor:"pointer", textTransform:"uppercase" }}>← BACK TO RESEARCH</button>
+      </div>
+    );
 
     const handleCopy = () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      });
+      navigator.clipboard.writeText(window.location.href).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
     };
 
     return (
-      <div style={{ minHeight: "100vh", background: "#000", color: "#fff", overflowX: "hidden" }}>
+      <div style={{ minHeight:"100vh", background:"#000", color:"#fff", overflowX:"hidden" }}>
+        <style>{`
+          @media (min-width:1100px){.toc-desktop{display:block!important}.toc-mobile{display:none!important}}
+          @media (max-width:1099px){.toc-desktop{display:none!important}.toc-mobile{display:block!important}}
+          a[href^="#"]{scroll-behavior:smooth}
+        `}</style>
 
-        {/* ── Hero / Thumbnail ────────────────────────────────────────── */}
-        <div style={{ position: "relative", width: "100%", maxHeight: "520px", overflow: "hidden", background: "#060606" }}>
-          {article.thumbnail ? (
-            <motion.img
-              src={article.thumbnail}
-              alt={article.title}
-              initial={{ scale: 1.06, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              style={{ width: "100%", height: "100%", maxHeight: "520px", objectFit: "cover", objectPosition: "center top", display: "block" }}
-            />
-          ) : (
-            <div style={{ width: "100%", height: "320px", background: "linear-gradient(135deg,#0a0500,#000)" }} />
+        {/* Hero */}
+        <div style={{ position:"relative", width:"100%", maxHeight:"520px", overflow:"hidden", background:"#060606" }}>
+          {article.thumbnail && (
+            <motion.img src={article.thumbnail} alt={article.title} initial={{ scale:1.05, opacity:0 }} animate={{ scale:1, opacity:1 }} transition={{ duration:0.9, ease:[0.22,1,0.36,1] }}
+              style={{ width:"100%", maxHeight:"520px", objectFit:"cover", objectPosition:"center top", display:"block" }} />
           )}
-          {/* Gradient overlay */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.65) 70%, rgba(0,0,0,1) 100%)" }} />
-
-          {/* Back button */}
-          <motion.button
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+          <div style={{ position:"absolute", inset:0, background:"linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 70%,rgba(0,0,0,1) 100%)" }} />
+          <motion.button initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.3 }}
             onClick={() => setLocation("/research")}
-            style={{ position: "absolute", top: "24px", left: "24px", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.35em", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.6)", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", padding: "8px 14px", cursor: "pointer", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px", zIndex: 10 }}
-          >
+            style={{ position:"absolute", top:"24px", left:"24px", fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.35em", border:"1px solid rgba(255,255,255,0.18)", color:"rgba(255,255,255,0.65)", background:"rgba(0,0,0,0.55)", backdropFilter:"blur(8px)", padding:"8px 14px", cursor:"pointer", textTransform:"uppercase", display:"flex", alignItems:"center", gap:"6px", zIndex:10 }}>
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 5H2M4 2.5L1.5 5 4 7.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/></svg>
             RESEARCH
           </motion.button>
         </div>
 
-        {/* ── Article Header ──────────────────────────────────────────── */}
-        <div style={{ maxWidth: "780px", margin: "0 auto", padding: "0 clamp(1.25rem,5vw,2.5rem)" }}>
+        {/* Layout: main content + TOC sidebar */}
+        <div style={{ maxWidth:"1200px", margin:"0 auto", padding:"0 clamp(1.25rem,4vw,2rem)", display:"flex", gap:"3rem", alignItems:"flex-start" }}>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{ paddingTop: "2.5rem" }}
-          >
-            {/* Category + reading time */}
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", marginBottom: "1.25rem" }}>
-              <span style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.38em", color: "#F3BA2F", textTransform: "uppercase", border: "1px solid rgba(243,186,47,0.3)", padding: "4px 10px", background: "rgba(243,186,47,0.05)" }}>
-                {article.category}
-              </span>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.25)" }}>
-                {article.readTime}
-              </span>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)" }}>
-                {article.year}
-              </span>
-            </div>
+          {/* Article column */}
+          <div style={{ flex:1, minWidth:0 }}>
+            <motion.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, ease:[0.22,1,0.36,1] }} style={{ paddingTop:"2.5rem" }}>
 
-            {/* Title */}
-            <h1 style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.9rem,6vw,3.25rem)", lineHeight: 1.18, color: "rgba(255,255,255,0.97)", letterSpacing: "-0.025em", margin: "0 0 1.1rem 0" }}>
-              {article.title}
-            </h1>
-
-            {/* Subtitle */}
-            <p style={{ fontFamily: "'Cormorant Garamond',Georgia,serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(1.05rem,2.8vw,1.35rem)", color: "rgba(255,255,255,0.45)", lineHeight: 1.65, margin: "0 0 1.75rem 0" }}>
-              {article.subtitle}
-            </p>
-
-            {/* Author + meta row */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "1.1rem 0", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)", marginBottom: "1rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div style={{ width: "38px", height: "38px", borderRadius: "50%", background: "linear-gradient(135deg,#F3BA2F 0%,#c8900a 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "15px", color: "#000", flexShrink: 0 }}>F</div>
-                <div>
-                  <div style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.65)", letterSpacing: "0.12em", textTransform: "uppercase" }}>{article.authors}</div>
-                  <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.22)", letterSpacing: "0.1em", marginTop: "2px" }}>Orakzai Research Lab · ORCID 0009-0000-0915-7272</div>
-                </div>
+              {/* Category + meta badges */}
+              <div style={{ display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap", marginBottom:"1.1rem" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.38em", color:"#F3BA2F", textTransform:"uppercase", border:"1px solid rgba(243,186,47,0.3)", padding:"4px 10px", background:"rgba(243,186,47,0.05)" }}>{article.category}</span>
+                <span style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.2em", color:"rgba(255,255,255,0.25)" }}>{article.readTime}</span>
+                <span style={{ fontFamily:"monospace", fontSize:"9px", color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>{article.year}</span>
               </div>
-              {/* Share / copy link */}
-              <button onClick={handleCopy} style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.28em", border: "1px solid rgba(255,255,255,0.1)", color: copied ? "#4ade80" : "rgba(255,255,255,0.35)", background: "none", padding: "7px 14px", cursor: "pointer", textTransform: "uppercase", transition: "all 0.2s" }}>
-                {copied ? "✓ COPIED" : "SHARE ↗"}
-              </button>
-            </div>
 
-            {/* Tags */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "2.5rem" }}>
-              {article.tags.map(t => (
-                <span key={t} style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.22em", padding: "3px 9px", border: "1px solid rgba(243,186,47,0.18)", color: "rgba(243,186,47,0.5)", textTransform: "uppercase" }}>#{t}</span>
-              ))}
-            </div>
-          </motion.div>
+              {/* Title */}
+              <h1 style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.9rem,6vw,3.2rem)", lineHeight:1.18, color:"rgba(255,255,255,0.97)", letterSpacing:"-0.025em", margin:"0 0 1rem 0" }}>{article.title}</h1>
+              <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontStyle:"italic", fontWeight:300, fontSize:"clamp(1.05rem,2.8vw,1.35rem)", color:"rgba(255,255,255,0.42)", lineHeight:1.65, margin:"0 0 1.75rem 0" }}>{article.subtitle}</p>
 
-          {/* ── Article Body ─────────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.7 }}
-            style={{ paddingBottom: "5rem" }}
-          >
-            <ArticleBody content={article.content} />
-          </motion.div>
+              {/* Author row */}
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"12px", padding:"1rem 0", borderTop:"1px solid rgba(255,255,255,0.07)", borderBottom:"1px solid rgba(255,255,255,0.07)", marginBottom:"1.25rem" }}>
+                <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
+                  <img src="/faisal-avatar.png" alt="Muhammad Faisal Orakzai"
+                    style={{ width:"42px", height:"42px", borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:"2px solid rgba(243,186,47,0.5)", flexShrink:0 }} />
+                  <div>
+                    <div style={{ fontFamily:"monospace", fontSize:"10px", color:"rgba(255,255,255,0.7)", letterSpacing:"0.14em", textTransform:"uppercase", fontWeight:500 }}>Muhammad Faisal Orakzai</div>
+                    <div style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.22)", letterSpacing:"0.1em", marginTop:"3px" }}>
+                      Orakzai Research Lab · <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ color:"rgba(166,206,57,0.6)", textDecoration:"none" }}>ORCID ↗</a>
+                    </div>
+                  </div>
+                </div>
+                <button onClick={handleCopy} style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.28em", border:"1px solid rgba(255,255,255,0.1)", color: copied ? "#4ade80" : "rgba(255,255,255,0.35)", background:"none", padding:"7px 14px", cursor:"pointer", textTransform:"uppercase", transition:"all 0.2s" }}>
+                  {copied ? "✓ COPIED" : "SHARE ↗"}
+                </button>
+              </div>
 
-          {/* ── Article Footer ────────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "2rem", paddingBottom: "4rem", display: "flex", flexDirection: "column", gap: "1.25rem" }}
-          >
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", alignItems: "center" }}>
-              <span style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.25em" }}>CITE AS:</span>
-              <code style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.38)", background: "rgba(255,255,255,0.04)", padding: "4px 10px", border: "1px solid rgba(255,255,255,0.07)", letterSpacing: "0.02em", flex: 1, minWidth: "200px" }}>
-                Orakzai, M. F. ({article.year}). {article.title}. Orakzai Research Lab. faisalorakzai.com/research/{article.slug}
-              </code>
+              {/* Tags */}
+              <div style={{ display:"flex", flexWrap:"wrap", gap:"6px", marginBottom:"2rem" }}>
+                {article.tags.map(t => (<span key={t} style={{ fontFamily:"monospace", fontSize:"7px", letterSpacing:"0.22em", padding:"3px 9px", border:"1px solid rgba(243,186,47,0.18)", color:"rgba(243,186,47,0.5)", textTransform:"uppercase" }}>#{t}</span>))}
+              </div>
+
+              {/* Mobile TOC */}
+              <TOCSidebar activeId={activeSection} />
+            </motion.div>
+
+            {/* Article body */}
+            <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.25, duration:0.7 }} style={{ paddingBottom:"5rem" }}>
+              <ArticleBody content={article.content} onSection={setActiveSection} />
+            </motion.div>
+
+            {/* Footer */}
+            <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:"2rem", paddingBottom:"4rem", display:"flex", flexDirection:"column", gap:"1.25rem" }}>
+              <div style={{ display:"flex", flexWrap:"wrap", gap:"10px", alignItems:"center" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(255,255,255,0.2)", letterSpacing:"0.25em" }}>CITE AS:</span>
+                <code style={{ fontFamily:"monospace", fontSize:"10px", color:"rgba(255,255,255,0.38)", background:"rgba(255,255,255,0.04)", padding:"6px 12px", border:"1px solid rgba(255,255,255,0.07)", flex:1, minWidth:"200px", lineHeight:1.6 }}>
+                  Orakzai, M. F. ({article.year}). {article.title}. Orakzai Research Lab. faisalorakzai.com/research/{article.slug}
+                </code>
+              </div>
+              <div style={{ display:"flex", gap:"12px", alignItems:"center", flexWrap:"wrap" }}>
+                <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ fontFamily:"monospace", fontSize:"8px", color:"rgba(166,206,57,0.65)", letterSpacing:"0.2em", textDecoration:"none" }}>ORCID 0009-0000-0915-7272 ↗</a>
+                <span style={{ color:"rgba(255,255,255,0.1)" }}>·</span>
+                <button onClick={() => setLocation("/research")} style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", border:"1px solid rgba(243,186,47,0.3)", color:"#F3BA2F", background:"none", padding:"8px 16px", cursor:"pointer", textTransform:"uppercase" }}>← ALL ARTICLES</button>
+              </div>
             </div>
-            <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-              <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(166,206,57,0.65)", letterSpacing: "0.2em", textDecoration: "none" }}>ORCID: 0009-0000-0915-7272 ↗</a>
-              <span style={{ color: "rgba(255,255,255,0.1)" }}>·</span>
-              <button onClick={() => setLocation("/research")} style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.3em", border: "1px solid rgba(243,186,47,0.3)", color: "#F3BA2F", background: "none", padding: "8px 16px", cursor: "pointer", textTransform: "uppercase" }}>
-                ← ALL ARTICLES
-              </button>
-            </div>
-          </motion.div>
+          </div>
+
+          {/* Desktop TOC sidebar */}
+          <TOCSidebar activeId={activeSection} />
         </div>
       </div>
     );
