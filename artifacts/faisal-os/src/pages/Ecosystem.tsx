@@ -164,7 +164,45 @@ import { motion, AnimatePresence } from "framer-motion";
     },
   };
 
-  /* ── Position helpers ────────────────────────────────────── */
+
+    /* ── Live Core detail panels ─────────────────────────────── */
+    const CORE_DETAILS: Record<string, {
+      title: string; bio: string; description: string;
+      uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
+      roadmap: { module: string; desc: string }[];
+      websiteUrl?: string; githubUrl?: string;
+    }> = {
+      "shamim": {
+        title: "Global Sovereign Luxury Digital House — Fragrances, Jewellery & Web3 Provenance",
+        bio: "Shamim Forever is a global sovereign luxury digital house established in 2024 by Faisal Orakzai. Based in Pakistan and serving a worldwide clientele, the house specializes in bespoke fragrances, sovereign high jewellery, and blockchain-verified couture collections. It operates as part of the Orakzai Group portfolio, merging ancient Arabian perfumery heritage with modern digital commerce and Web3 technology.",
+        description: "Shamim Forever is an avant-garde digital luxury platform that redefines luxury through cultural sovereignty, authenticity, and permanence. The platform offers curated fragrances from iconic maisons (Prada, Armani, Burberry, Carolina Herrera, Lancôme, Dolce & Gabbana, Narciso Rodriguez) alongside its own bespoke creations. Built on Next.js 14, Supabase, and Vercel Edge Network, the platform delivers a seamless mobile-first digital boutique with real-time inventory sync. Every creation receives a blockchain-verified identity on Polygon Mainnet — cryptographically immutable and permanently linked.",
+        uniqueFeatures: [
+          "Bio-Signature DNA Authentication — invisible nano-markers embedded in each fragrance, verifiable via spectrographic analysis",
+          "Personal Scent Signature — client body chemistry documented and encoded as a biometric fingerprint for all future commissions",
+          "Blockchain Verification & NFT Passports — every creation receives a Polygon Mainnet identity certifying authenticity, ownership, and collector history",
+          "Quantum Encrypted Heirloom Vault — Swiss-grade digital succession system with smart-contract governed multi-generation transfer",
+          "OKBOND Protocol — proprietary loyalty currency providing sovereign discounts and Web3 ecosystem integration",
+          "Adaptive Fragrance Chemistry — future formulas designed to evolve with the wearer's unique skin chemistry over time",
+        ],
+        benefits: [
+          { label: "Preservation of Heritage", desc: "Honors centuries of craftsmanship — from Taif roses to Assam oud — elevating ancient perfumery traditions with modern science." },
+          { label: "Eradication of Counterfeits", desc: "DNA nano-markers and blockchain technology provide a foolproof solution against the global counterfeit luxury market." },
+          { label: "Sustainable Legacy", desc: "Products engineered to last generations, reducing waste by encouraging heirlooms over fleeting trends." },
+          { label: "Cultural Sovereignty", desc: "Empowers clients to architect their identity through personalized, biologically adapted creations celebrating cultural independence." },
+          { label: "Web3 Retail Pioneer", desc: "Seamlessly blends NFTs and smart contracts with physical luxury goods, setting a new global standard for provenance and trust." },
+        ],
+        roadmap: [
+          { module: "Future Luxury Releases", desc: "Continuous expansion of bespoke fragrance lines and sovereign jewellery collections with early access for Inner Circle members and founders." },
+          { module: "Adaptive Fragrance Chemistry", desc: "Next-generation fragrance formulas designed to adapt to the wearer's biological profile, evolving with their unique skin chemistry over time." },
+          { module: "Orakzai Group Expansion", desc: "Launch of future luxury ventures and expansion of the OKBOND Protocol utility as a sovereign loyalty currency across the Group ecosystem." },
+          { module: "Multi-Generation Heirloom Transfer", desc: "Enhanced Heirloom Vault enabling legal, smart-contract-governed transfer of physical items and their digital NFT identities across generations." },
+        ],
+        websiteUrl: "https://www.shamimforever.com",
+        githubUrl: "https://github.com/faisalorakzai-lab/shamimforever",
+      },
+    };
+
+    /* ── Position helpers ────────────────────────────────────── */
   function corePos(angleDeg: number, radius: number, cx: number, cy: number) {
     const a = (angleDeg * Math.PI) / 180;
     return { x: cx + radius * Math.cos(a), y: cy + radius * Math.sin(a) };
@@ -362,7 +400,7 @@ import { motion, AnimatePresence } from "framer-motion";
                   <div style={{ display: "flex", gap: "12px", overflowX: "auto", paddingBottom: "8px" }}>
                     {LIVE_CORES.map((core) => (
                       <div key={core.id}
-                        onClick={() => core.url ? window.open(core.url, "_blank") : setActiveCore(activeCore === core.id ? null : core.id)}
+                        onClick={() => CORE_DETAILS[core.id] ? setActiveCore(activeCore === core.id ? null : core.id) : core.url ? window.open(core.url, "_blank") : setActiveCore(activeCore === core.id ? null : core.id)}
                         style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", cursor: "pointer", minWidth: "80px" }}>
                         <div style={{ width: "68px", height: "68px", borderRadius: "50%", border: `2px solid ${core.statusColor}`, boxShadow: `0 0 16px ${core.statusColor}40`, overflow: "hidden", background: "#000" }}>
                           <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -380,48 +418,124 @@ import { motion, AnimatePresence } from "framer-motion";
         </section>
 
         {/* ── EXPANDED PANEL: Live Core info ── */}
-        <AnimatePresence mode="wait">
-          {activeCore && (
-            <motion.section
-              key={activeCore}
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-                {(() => {
-                  const core = LIVE_CORES.find(c => c.id === activeCore)!;
-                  return (
-                    <div style={{ border: `1px solid ${core.statusColor}30`, borderTop: `2px solid ${core.statusColor}`, padding: "24px 28px", background: `linear-gradient(135deg, ${core.statusColor}05 0%, transparent 60%)`, display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
-                      <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: `2px solid ${core.statusColor}`, overflow: "hidden", flexShrink: 0 }}>
-                        <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <AnimatePresence mode="wait">
+            {activeCore && (
+              <motion.section
+                key={activeCore}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px 20px" }}>
+                  {(() => {
+                    const core = LIVE_CORES.find(c => c.id === activeCore)!;
+                    const d = CORE_DETAILS[activeCore];
+                    if (!d) {
+                      return (
+                        <div style={{ border: `1px solid ${core.statusColor}30`, borderTop: `2px solid ${core.statusColor}`, padding: "24px 28px", background: `linear-gradient(135deg, ${core.statusColor}05 0%, transparent 60%)`, display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+                          <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: `2px solid ${core.statusColor}`, overflow: "hidden", flexShrink: 0 }}>
+                            <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          </div>
+                          <div style={{ flex: 1, minWidth: "220px" }}>
+                            <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "4px" }}>{core.tag}</div>
+                            <h3 style={{ fontSize: "18px", fontWeight: 800, color: "#fff", marginBottom: "6px" }}>{core.name}</h3>
+                            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{core.desc}</p>
+                          </div>
+                          <div style={{ display: "flex", gap: "10px" }}>
+                            <span style={{ padding: "4px 10px", border: `1px solid ${core.statusColor}40`, fontFamily: "monospace", fontSize: "9px", color: core.statusColor }}>{core.status}</span>
+                            <button onClick={() => setActiveCore(null)} style={{ all: "unset", cursor: "pointer", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>✕ CLOSE</button>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return (
+                      <div style={{ border: `1px solid ${core.statusColor}25`, borderTop: `3px solid ${core.statusColor}`, background: `linear-gradient(180deg, ${core.statusColor}06 0%, transparent 40%)`, padding: "32px" }}>
+                        <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", flexWrap: "wrap", marginBottom: "28px" }}>
+                          <div style={{ width: "72px", height: "72px", borderRadius: "50%", border: `2px solid ${core.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
+                            <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          </div>
+                          <div style={{ flex: 1, minWidth: "240px" }}>
+                            <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "6px" }}>{core.tag} · <span style={{ color: core.statusColor }}>● {core.status}</span></div>
+                            <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 6px" }}>{core.name}</h2>
+                            <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.title}</p>
+                          </div>
+                          <div style={{ display: "flex", gap: "10px", flexShrink: 0, flexWrap: "wrap" }}>
+                            {d.websiteUrl && (
+                              <a href={d.websiteUrl} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: `${core.statusColor}15`, border: `1px solid ${core.statusColor}50`, color: core.statusColor, fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
+                                ↗ VISIT WEBSITE
+                              </a>
+                            )}
+                            {d.githubUrl && (
+                              <a href={d.githubUrl} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
+                                ↗ GITHUB REPO
+                              </a>
+                            )}
+                            <button onClick={() => setActiveCore(null)}
+                              style={{ all: "unset", cursor: "pointer", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.25)" }}>
+                              ✕ CLOSE
+                            </button>
+                          </div>
+                        </div>
+                        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, marginBottom: "28px", maxWidth: "800px", borderLeft: `3px solid ${core.statusColor}40`, paddingLeft: "16px" }}>{d.bio}</p>
+                        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", lineHeight: 1.8, marginBottom: "32px", maxWidth: "800px" }}>{d.description}</p>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+                          <div>
+                            <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// UNIQUE FEATURES</div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                              {d.uniqueFeatures.map((f, i) => (
+                                <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                                  <span style={{ color: core.statusColor, fontSize: "10px", flexShrink: 0, marginTop: "2px" }}>▸</span>
+                                  <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>{f}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// GLOBAL BENEFITS</div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                              {d.benefits.map((b, i) => (
+                                <div key={i} style={{ padding: "10px 14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
+                                  <div style={{ fontSize: "11px", fontWeight: 700, color: "#fff", marginBottom: "3px" }}>{b.label}</div>
+                                  <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{b.desc}</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{ marginTop: "28px" }}>
+                          <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// ROADMAP & FUTURE</div>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                            {d.roadmap.map((r, i) => (
+                              <div key={i} style={{ display: "flex", gap: "16px", padding: "14px 18px", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.015)", alignItems: "flex-start" }}>
+                                <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.1em", flexShrink: 0, paddingTop: "2px", minWidth: "24px" }}>{String(i + 1).padStart(2, "0")}</div>
+                                <div>
+                                  <div style={{ fontSize: "12px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{r.module}</div>
+                                  <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{r.desc}</div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <div style={{ flex: 1, minWidth: "220px" }}>
-                        <div style={{ fontFamily: "monospace", fontSize: "9px", color: core.statusColor, letterSpacing: "0.3em", marginBottom: "4px" }}>{core.tag}</div>
-                        <h3 style={{ fontSize: "18px", fontWeight: 800, color: "#fff", marginBottom: "6px" }}>{core.name}</h3>
-                        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{core.desc}</p>
-                      </div>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <span style={{ padding: "4px 10px", border: `1px solid ${core.statusColor}40`, fontFamily: "monospace", fontSize: "9px", color: core.statusColor }}>{core.status}</span>
-                        <button onClick={() => setActiveCore(null)} style={{ all: "unset", cursor: "pointer", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>✕ CLOSE</button>
-                      </div>
-                    </div>
-                  );
-                })()}
-              </div>
-            </motion.section>
-          )}
-        </AnimatePresence>
+                    );
+                  })()}
+                </div>
+              </motion.section>
+            )}
+          </AnimatePresence>
 
-        {/* ── LIVE CORES STRIP ── */}
+                  {/* ── LIVE CORES STRIP ── */}
         <section style={{ padding: "40px 0 0" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
             <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.4em", marginBottom: "20px" }}>// LIVE CORES</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1px", background: GOLD_DIM }}>
               {LIVE_CORES.map((core) => (
                 <div key={core.id} style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", cursor: core.url ? "pointer" : "default" }}
-                  onClick={() => core.url && window.open(core.url, "_blank")}>
+                  onClick={() => CORE_DETAILS[core.id] ? setActiveCore(activeCore === core.id ? null : core.id) : core.url && window.open(core.url, "_blank")}>
                   <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${core.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
                     <img src={core.logo} alt={core.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
@@ -429,7 +543,7 @@ import { motion, AnimatePresence } from "framer-motion";
                     <div style={{ fontFamily: "monospace", fontSize: "8px", color: core.statusColor, letterSpacing: "0.2em", marginBottom: "4px" }}>● {core.status} · {core.tag}</div>
                     <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{core.name}</div>
                     <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{core.desc.substring(0, 80)}…</div>
-                    {core.url && <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>{core.url.replace("https://", "")} ↗</div>}
+                    {CORE_DETAILS[core.id] ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>TAP FOR DETAILS ↓</div>) : core.url ? (<div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, marginTop: "8px" }}>{core.url.replace("https://", "")} ↗</div>) : null}
                   </div>
                 </div>
               ))}
