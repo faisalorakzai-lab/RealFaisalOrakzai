@@ -99,6 +99,42 @@ import { motion, AnimatePresence } from "framer-motion";
     },
   ];
 
+  
+  /* ── Venture detail panels ───────────────────────────────── */
+  const VENTURE_DETAILS: Record<string, {
+    title: string; bio: string; description: string;
+    uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
+    roadmap: { module: string; desc: string }[];
+    pdfUrl?: string; githubUrl?: string;
+  }> = {
+    "orakzai-properties": {
+      title: "Pakistan's Premier Real Estate Tokenization & Investment Platform",
+      bio: "Orakzai Properties is a prominent platform in Pakistan for tokenized real estate and property investment. It bridges physical land assets and blockchain-based ownership — enabling fractional investment, transparent title, and 24/7 liquidity.",
+      description: "A PropTech and DeFi solution that digitalizes Pakistan's real estate market. Investments start from as low as PKR 50,000 using ERC-1155 fractional property tokens on the Polygon Network, with on-chain title deeds and automatic rental yield distribution via smart contracts. Focused on Lahore and Islamabad markets with plans for national expansion.",
+      uniqueFeatures: [
+        "Fractional ownership from PKR 50,000",
+        "Blockchain title deeds — immutable & transparent on Polygon",
+        "Automated monthly rental yield via smart contracts",
+        "Secondary marketplace for exit liquidity",
+        "ERC-1155 standard fractional property tokens",
+      ],
+      benefits: [
+        { label: "Financial Inclusion", desc: "Allows small investors to participate in real estate for the first time." },
+        { label: "Transparency & Trust", desc: "Blockchain ownership records reduce fraud risk and title disputes." },
+        { label: "Increased Liquidity", desc: "Fractional tokens make real estate assets easily tradeable." },
+        { label: "Economic Growth", desc: "Promotes investment and introduces new PropTech business models." },
+        { label: "Innovation in PropTech", desc: "Integrates DeFi and blockchain into Pakistan's traditional property industry." },
+      ],
+      roadmap: [
+        { module: "Module 6 — Elite Rental Engine", desc: "Full rental management with filters (Furnished Status, Occupancy Type, Duration), WhatsApp tenant–owner chat, and availability controls." },
+        { module: "Module 14 — Subscription & Monetization", desc: "Three tiers — Free, Premium, Sovereign — with wallet-based payments, listing limits, and a full checkout flow." },
+        { module: "Module 15 — Lead Management for Agents", desc: "Track leads by status (New, Contacted, Visit Scheduled, Negotiation, Closed) and score (Hot, Warm, Cold), with call logs, real-time chat, and performance analytics." },
+      ],
+      pdfUrl: "https://drive.google.com/file/d/1YTdi9b7eL6ECuBtkSZlbhJZsX-F0paI3/view?usp=drivesdk",
+      githubUrl: "https://github.com/faisalorakzai-lab/Orakzai-Properties",
+    },
+  };
+
   /* ── Position helpers ────────────────────────────────────── */
   function corePos(angleDeg: number, radius: number, cx: number, cy: number) {
     const a = (angleDeg * Math.PI) / 180;
@@ -108,6 +144,7 @@ import { motion, AnimatePresence } from "framer-motion";
   /* ── Main Component ─────────────────────────────────────── */
   export default function Ecosystem() {
     const [activeCore, setActiveCore] = useState<string | null>(null);
+    const [activeVenture, setActiveVenture] = useState<string | null>(null);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -385,7 +422,8 @@ import { motion, AnimatePresence } from "framer-motion";
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4 }}
-                  style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden" }}
+                  onClick={() => VENTURE_DETAILS[venture.id] ? setActiveVenture(activeVenture === venture.id ? null : venture.id) : undefined}
+                  style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden", cursor: VENTURE_DETAILS[venture.id] ? "pointer" : "default" }}
                 >
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, ${venture.statusColor}60, transparent)` }} />
                   <div style={{ width: "52px", height: "52px", borderRadius: "50%", border: `1.5px solid ${venture.statusColor}30`, overflow: "hidden", flexShrink: 0, background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -403,6 +441,7 @@ import { motion, AnimatePresence } from "framer-motion";
                     <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.15)", letterSpacing: "0.2em", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
                       <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "inline-block" }} />
                       IN DEVELOPMENT
+                      {VENTURE_DETAILS[venture.id] && <span style={{ color: GOLD, marginLeft: "8px" }}>· TAP FOR DETAILS</span>}
                     </div>
                   </div>
                 </motion.div>
@@ -410,6 +449,110 @@ import { motion, AnimatePresence } from "framer-motion";
             </div>
           </div>
         </section>
+
+  
+        {/* ── VENTURE DETAIL PANEL ── */}
+        <AnimatePresence mode="wait">
+          {activeVenture && VENTURE_DETAILS[activeVenture] && (() => {
+            const v = UNDER_DEV.find(u => u.id === activeVenture)!;
+            const d = VENTURE_DETAILS[activeVenture];
+            return (
+              <motion.section
+                key={activeVenture}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px 20px" }}>
+                  <div style={{ border: `1px solid ${v.statusColor}25`, borderTop: `3px solid ${v.statusColor}`, background: `linear-gradient(180deg, ${v.statusColor}06 0%, transparent 40%)`, padding: "32px" }}>
+                    {/* Header row */}
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", flexWrap: "wrap", marginBottom: "28px" }}>
+                      <div style={{ width: "72px", height: "72px", borderRadius: "50%", border: `2px solid ${v.statusColor}50`, overflow: "hidden", flexShrink: 0, background: "#050505" }}>
+                        {v.logo && <img src={v.logo} alt={v.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
+                      </div>
+                      <div style={{ flex: 1, minWidth: "240px" }}>
+                        <div style={{ fontFamily: "monospace", fontSize: "9px", color: v.statusColor, letterSpacing: "0.3em", marginBottom: "6px" }}>{v.tag}</div>
+                        <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 6px" }}>{v.name}</h2>
+                        <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.title}</p>
+                      </div>
+                      <div style={{ display: "flex", gap: "10px", flexShrink: 0, flexWrap: "wrap" }}>
+                        {d.pdfUrl && (
+                          <a href={d.pdfUrl} target="_blank" rel="noopener noreferrer"
+                            style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: `${v.statusColor}15`, border: `1px solid ${v.statusColor}50`, color: v.statusColor, fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none", cursor: "pointer" }}>
+                            ↓ PDF DETAILS
+                          </a>
+                        )}
+                        {d.githubUrl && (
+                          <a href={d.githubUrl} target="_blank" rel="noopener noreferrer"
+                            style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.15em", textDecoration: "none" }}>
+                            ↗ GITHUB REPO
+                          </a>
+                        )}
+                        <button onClick={() => setActiveVenture(null)}
+                          style={{ all: "unset", cursor: "pointer", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.25)" }}>
+                          ✕ CLOSE
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Bio */}
+                    <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, marginBottom: "28px", maxWidth: "800px", borderLeft: `3px solid ${v.statusColor}40`, paddingLeft: "16px" }}>{d.bio}</p>
+
+                    {/* Description */}
+                    <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", lineHeight: 1.8, marginBottom: "32px", maxWidth: "800px" }}>{d.description}</p>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+                      {/* Unique Features */}
+                      <div>
+                        <div style={{ fontFamily: "monospace", fontSize: "9px", color: v.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// UNIQUE FEATURES</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                          {d.uniqueFeatures.map((f, i) => (
+                            <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                              <span style={{ color: v.statusColor, fontSize: "10px", flexShrink: 0, marginTop: "2px" }}>▸</span>
+                              <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>{f}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Benefits */}
+                      <div>
+                        <div style={{ fontFamily: "monospace", fontSize: "9px", color: v.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// GLOBAL BENEFITS</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                          {d.benefits.map((b, i) => (
+                            <div key={i} style={{ padding: "10px 14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
+                              <div style={{ fontSize: "11px", fontWeight: 700, color: "#fff", marginBottom: "3px" }}>{b.label}</div>
+                              <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{b.desc}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Roadmap */}
+                    <div style={{ marginTop: "28px" }}>
+                      <div style={{ fontFamily: "monospace", fontSize: "9px", color: v.statusColor, letterSpacing: "0.3em", marginBottom: "14px" }}>// ROADMAP & MODULES</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                        {d.roadmap.map((r, i) => (
+                          <div key={i} style={{ display: "flex", gap: "16px", padding: "14px 18px", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.015)", alignItems: "flex-start" }}>
+                            <div style={{ fontFamily: "monospace", fontSize: "9px", color: v.statusColor, letterSpacing: "0.1em", flexShrink: 0, paddingTop: "2px", minWidth: "24px" }}>{String(i + 1).padStart(2, "0")}</div>
+                            <div>
+                              <div style={{ fontSize: "12px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{r.module}</div>
+                              <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{r.desc}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </motion.section>
+            );
+          })()}
+        </AnimatePresence>
 
         {/* ── ORGANIZATIONS SECTION ── */}
         <section style={{ padding: "60px 0 80px" }}>
