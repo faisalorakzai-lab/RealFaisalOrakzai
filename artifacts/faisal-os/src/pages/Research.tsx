@@ -4,7 +4,7 @@
    * Mobile-first responsive with hardware-accelerated transitions
    */
 
-  import { motion, useInView } from "framer-motion";
+  import { motion, useInView, AnimatePresence } from "framer-motion";
   import { useEffect, useRef, useState } from "react";
 
   // âââ Types ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
@@ -800,6 +800,109 @@
   }
 
 
+
+  // ─── MK Auto-Carousel ───────────────────────────────────────────────────────
+  function MKCarousel({ entries }: { entries: Entry[] }) {
+    const [current, setCurrent] = useState(0);
+    const [hovCard, setHovCard] = useState(false);
+    useMKFonts();
+    const basePath = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
+
+    useEffect(() => {
+      if (entries.length <= 1) return;
+      const t = setInterval(() => setCurrent(c => (c + 1) % entries.length), 4000);
+      return () => clearInterval(t);
+    }, [entries.length]);
+
+    if (!entries.length) return null;
+    const entry = entries[current];
+
+    const AbstractBg = () => (
+      <div style={{ width:"100%", height:"100%", background:"linear-gradient(160deg,#0c0c0c 0%,#0d1117 50%,#0a0800 100%)", position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(243,186,47,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(243,186,47,0.06) 1px,transparent 1px)", backgroundSize:"24px 24px" }} />
+        <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center" }}>
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style={{ opacity:0.18 }}>
+            <rect x="30" y="30" width="20" height="20" stroke="#F3BA2F" strokeWidth="1"/>
+            <rect x="20" y="20" width="40" height="40" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <line x1="40" y1="0" x2="40" y2="80" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <line x1="0" y1="40" x2="80" y2="40" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <circle cx="40" cy="40" r="28" stroke="#F3BA2F" strokeWidth="0.5"/>
+            <circle cx="40" cy="40" r="4" fill="#F3BA2F"/>
+          </svg>
+        </div>
+      </div>
+    );
+
+    return (
+      <div style={{ width:"100%", maxWidth:"720px", margin:"0 auto", padding:"0 1.25rem", boxSizing:"border-box" }}>
+        <AnimatePresence mode="wait">
+          <motion.article
+            key={entry.id}
+            initial={{ opacity:0, x:50 }}
+            animate={{ opacity:1, x:0 }}
+            exit={{ opacity:0, x:-50 }}
+            transition={{ duration:0.4, ease:[0.22,1,0.36,1] }}
+            onClick={() => entry.slug && (window.location.href = basePath + "/research/" + entry.slug)}
+            onHoverStart={() => setHovCard(true)}
+            onHoverEnd={() => setHovCard(false)}
+            style={{
+              width:"100%", display:"flex", flexDirection:"column",
+              border: hovCard ? "1px solid rgba(243,186,47,0.45)" : "1px solid rgba(243,186,47,0.12)",
+              background:"#080808", overflow:"hidden", cursor: entry.slug ? "pointer" : "default",
+              boxShadow: hovCard ? "0 8px 48px rgba(243,186,47,0.08)" : "none",
+              transition:"border-color 0.3s, box-shadow 0.3s",
+            }}
+          >
+            {/* Image full width — NO text overlay */}
+            <div style={{ position:"relative", height:"clamp(240px,55vw,440px)", overflow:"hidden", flexShrink:0 }}>
+              {entry.thumbnail ? (
+                <img src={entry.thumbnail} alt={entry.title}
+                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", transition:"transform 0.9s ease", transform: hovCard ? "scale(1.04)" : "scale(1)" }} />
+              ) : (
+                <AbstractBg />
+              )}
+              <div style={{ position:"absolute", top:"1rem", left:"1rem" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"#F3BA2F", textTransform:"uppercase", background:"rgba(0,0,0,0.82)", padding:"0.3rem 0.65rem", border:"1px solid rgba(243,186,47,0.3)", backdropFilter:"blur(6px)" }}>
+                  {entry.category}
+                </span>
+              </div>
+            </div>
+
+            {/* ALL text BELOW the image */}
+            <div style={{ padding:"1.75rem 1.75rem 2rem", display:"flex", flexDirection:"column" }}>
+              <span style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.2em", color:"rgba(255,255,255,0.28)", textTransform:"uppercase", marginBottom:"0.75rem", display:"block" }}>{entry.year}</span>
+              <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"clamp(1.4rem,5vw,2.1rem)", fontWeight:700, color:"#fff", lineHeight:1.18, marginBottom:"0.75rem", letterSpacing:"-0.01em" }}>{entry.title}</h2>
+              {entry.subtitle && (
+                <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"0.95rem", color:"rgba(243,186,47,0.65)", lineHeight:1.6, marginBottom:"0.85rem", fontStyle:"italic", fontWeight:300 }}>{entry.subtitle}</p>
+              )}
+              <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1rem", color:"rgba(255,255,255,0.48)", lineHeight:1.75, marginBottom:"1.25rem", fontWeight:300, display:"-webkit-box", WebkitLineClamp:3, overflow:"hidden", ...({"WebkitBoxOrient":"vertical"} as Record<string,unknown>) }}>{entry.abstract}</p>
+              <div style={{ height:"1px", background:"linear-gradient(90deg,rgba(243,186,47,0.3) 0%,transparent 100%)", marginBottom:"1.1rem" }} />
+              <motion.div animate={{ x: hovCard ? 6 : 0 }} transition={{ duration:0.2 }} style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem" }}>
+                <span style={{ fontFamily:"monospace", fontSize:"10px", letterSpacing:"0.22em", color:"#F3BA2F", textTransform:"uppercase" }}>READ ARTICLE</span>
+                <span style={{ fontSize:"14px", color:"#F3BA2F" }}>→</span>
+              </motion.div>
+            </div>
+          </motion.article>
+        </AnimatePresence>
+
+        {/* Dots + arrows */}
+        {entries.length > 1 && (
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"0.6rem", marginTop:"1.5rem" }}>
+            <button onClick={() => setCurrent(c => (c - 1 + entries.length) % entries.length)} aria-label="Previous"
+              style={{ background:"transparent", border:"1px solid rgba(243,186,47,0.22)", color:"#F3BA2F", width:"30px", height:"30px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"13px", flexShrink:0 }}>←</button>
+            {entries.map((_e, idx) => (
+              <button key={idx} onClick={() => setCurrent(idx)} aria-label={`Slide ${idx+1}`}
+                style={{ width:idx===current?"22px":"7px", height:"7px", borderRadius:idx===current?"4px":"50%", background:idx===current?"#F3BA2F":"rgba(243,186,47,0.22)", border:"none", cursor:"pointer", transition:"all 0.35s ease", padding:0 }} />
+            ))}
+            <button onClick={() => setCurrent(c => (c + 1) % entries.length)} aria-label="Next"
+              style={{ background:"transparent", border:"1px solid rgba(243,186,47,0.22)", color:"#F3BA2F", width:"30px", height:"30px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"13px", flexShrink:0 }}>→</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+
   function ResearchCard({ entry, i }: { entry: Entry; i: number }) {
     const ref = useRef<HTMLElement>(null);
     const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -1237,20 +1340,25 @@
         </nav>
 
         {/* ââ ENTRIES ââ */}
+        {/* ── ENTRIES ── */}
         <main className="py-8 pb-24 relative z-10" role="tabpanel" aria-label={active}>
-          <div className="max-w-5xl mx-auto px-5" style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:"1.25rem", alignItems:"start" }}>
-            {filtered.length === 0 && (
-              <p role="status" className="text-center py-20 font-mono text-sm tracking-[0.4em] text-white/20 uppercase">
-                No entries in this category
-              </p>
-            )}
-            {filtered.map((entry, i) => {
-              if (entry.category === "CRYPTOGRAPHIC WHITE PAPERS") return <WhitePaperCard key={entry.id} entry={entry} i={i} />;
-              if (entry.category === "PRODUCTION CODE")             return <RepoCard       key={entry.id} entry={entry} i={i} />;
-              if (entry.category === "MARKET KNOWLEDGE")            return <MagazineCard   key={entry.id} entry={entry} i={i} />;
-              return                                                        <ResearchCard   key={entry.id} entry={entry} i={i} />;
-            })}
-          </div>
+          {active === "MARKET KNOWLEDGE" ? (
+            <MKCarousel entries={filtered} />
+          ) : (
+            <div className="max-w-5xl mx-auto px-5" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(100%,320px),1fr))", gap:"1.25rem", alignItems:"start" }}>
+              {filtered.length === 0 && (
+                <p role="status" className="text-center py-20 font-mono text-sm tracking-[0.4em] text-white/20 uppercase" style={{ gridColumn:"1/-1" }}>
+                  No entries in this category
+                </p>
+              )}
+              {filtered.map((entry, i) => {
+                if (entry.category === "CRYPTOGRAPHIC WHITE PAPERS") return <WhitePaperCard key={entry.id} entry={entry} i={i} />;
+                if (entry.category === "PRODUCTION CODE")             return <RepoCard       key={entry.id} entry={entry} i={i} />;
+                if (entry.category === "MARKET KNOWLEDGE")            return <MagazineCard   key={entry.id} entry={entry} i={i} />;
+                return                                                        <ResearchCard   key={entry.id} entry={entry} i={i} />;
+              })}
+            </div>
+          )}
         </main>
 
         {/* ââ CODA ââ */}
