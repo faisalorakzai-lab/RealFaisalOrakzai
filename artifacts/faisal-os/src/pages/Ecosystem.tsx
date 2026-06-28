@@ -973,36 +973,38 @@ import { motion, AnimatePresence } from "framer-motion";
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1px", background: "rgba(255,255,255,0.04)" }}>
               {ORGANIZATIONS.map((org) => (
-                <motion.div key={org.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden" }}
-                >
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, ${org.statusColor}60, transparent)` }} />
-                  <div style={{ width: "52px", height: "52px", borderRadius: "50%", border: `1.5px solid ${org.statusColor}30`, overflow: "hidden", flexShrink: 0, background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {org.logo ? (
-                      <img src={org.logo} alt={org.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-                    ) : (
-                      <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 800, color: org.statusColor }}>{org.ticker}</span>
-                    )}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.2em", marginBottom: "4px" }}>{org.tag}</div>
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "6px" }}>{org.name}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", lineHeight: 1.5 }}>{org.desc}</div>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: org.statusColor, letterSpacing: "0.2em", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: org.statusColor, display: "inline-block", animation: "dp 2s infinite" }} />
-                      ACTIVE
+                  <motion.div key={org.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                    onClick={() => ORG_DETAILS[org.id] ? setActiveOrg(activeOrg === org.id ? null : org.id) : undefined}
+                    style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden", cursor: ORG_DETAILS[org.id] ? "pointer" : "default" }}
+                  >
+                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, ${org.statusColor}60, transparent)` }} />
+                    <div style={{ width: "52px", height: "52px", borderRadius: "50%", border: `1.5px solid ${org.statusColor}30`, overflow: "hidden", flexShrink: 0, background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {org.logo ? (
+                        <img src={org.logo} alt={org.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                      ) : (
+                        <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 800, color: org.statusColor }}>{org.ticker}</span>
+                      )}
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.2em", marginBottom: "4px" }}>{org.tag}</div>
+                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "6px" }}>{org.name}</div>
+                      <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", lineHeight: 1.5 }}>{org.desc}</div>
+                      <div style={{ fontFamily: "monospace", fontSize: "8px", color: org.statusColor, letterSpacing: "0.2em", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: org.statusColor, display: "inline-block", animation: "dp 2s infinite" }} />
+                        ACTIVE
+                        {ORG_DETAILS[org.id] && <span style={{ color: "#F3BA2F", marginLeft: "8px" }}>· TAP FOR DETAILS</span>}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
 
           {/* ── ORG DETAIL PANEL ── */}
