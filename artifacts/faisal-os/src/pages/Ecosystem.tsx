@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import SEOHead from "@/components/shared/SEOHead";
 
 /* ============================================================
    ORAKZAI SOVEREIGN ECOSYSTEM
@@ -107,7 +108,13 @@ export default function Ecosystem() {
   const OUTER_R = 290; // 12 nodes orbit
 
   return (
-    <div style={{ background: "#000", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
+    <
+      <SEOHead
+        title="Orakzai Ecosystem — Ventures, Blockchain & AI Infrastructure"
+        description="The complete Orakzai Group ecosystem — OKBOND blockchain, Shamim Forever luxury brand, OkzByte Technology AI, OrakzaiX automation platform, and real estate tokenization."
+        path="/ecosystem"
+        keywords="Orakzai Group ecosystem, OKBOND Polygon, Shamim Forever, OkzByte, OrakzaiX AI, blockchain Pakistan"
+      />div style={{ background: "#000", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
 
       {/* ── HERO ── */}
       <section style={{ paddingTop: "100px", paddingBottom: "40px", borderBottom: `1px solid ${GOLD_DIM}`, position: "relative", overflow: "hidden" }}>
