@@ -24,7 +24,7 @@ const domains = [
 ];
 
 const STATS = [
-  { label: "VENTURES", value: "250", suffix: "+", key: "totalCompanies" as const },
+  { label: "LIVE VENTURES", value: "5", suffix: "", key: "totalCompanies" as const },
   { label: "CATEGORIES", value: "12", suffix: "", key: "totalProjects" as const },
   { label: "RESEARCH PAPERS", value: "46", suffix: "", key: "totalResearch" as const },
   { label: "ARTIFICIAL SYSTEMS", value: "98", suffix: "", key: "totalArticles" as const },
@@ -628,38 +628,32 @@ export default function Home() {
           {/* Scrolling ticker */}
           <div className="relative overflow-hidden" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)" }}>
             <div className="flex items-center" style={{ animation:"investorScroll 28s linear infinite", willChange:"transform", width:"max-content" }}>
-              {[
-                { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false },
-                { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false },
-                { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false },
-                { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false },
-                { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true  },
-                { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true  },
-                { src:"/logos/investors/coinbase.png",         name:"Coinbase",                dark:false },
-                { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true  },
-                { src:"/logos/investors/mgx.png",              name:"MGX",                     dark:true  },
-                { src:"/logos/investors/systems.png",          name:"Systems",                 dark:false },
-                { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false },
-                /* duplicate for seamless loop */
-                { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false },
-                { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false },
-                { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false },
-                { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false },
-                { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true  },
-                { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true  },
-                { src:"/logos/investors/coinbase.png",         name:"Coinbase",                dark:false },
-                { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true  },
-                { src:"/logos/investors/mgx.png",             name:"MGX",                     dark:true  },
-                { src:"/logos/investors/systems.png",          name:"Systems",                 dark:false },
-                { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false },
-              ].map((logo, i) => (
-                <div key={i} className="flex-shrink-0 mx-8" style={{ padding:"14px 22px", border:"1px solid rgba(255,255,255,0.07)", borderRadius:"6px", background: logo.dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.92)", height:"72px", width:"148px", display:"flex", alignItems:"center", justifyContent:"center", transition:"border-color 0.3s, transform 0.3s", cursor:"default" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor="rgba(243,186,47,0.45)"; (e.currentTarget as HTMLElement).style.transform="scale(1.06)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.07)"; (e.currentTarget as HTMLElement).style.transform="scale(1)"; }}>
-                  <img src={logo.src} alt={logo.name} title={logo.name}
-                    style={{ maxHeight:"44px", maxWidth:"120px", objectFit:"contain", display:"block" }} />
-                </div>
-              ))}
+              {(() => {
+                const logos = [
+                  { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false, href:"https://www.sequoiacap.com" },
+                  { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false, href:"https://a16z.com" },
+                  { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false, href:"https://www.ycombinator.com" },
+                  { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false, href:"https://panteracapital.com" },
+                  { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true,  href:"https://www.paradigm.xyz" },
+                  { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true,  href:"https://dcg.co" },
+                  { src:"/logos/investors/coinbase.png",         name:"Coinbase Ventures",       dark:false, href:"https://www.coinbase.com/ventures" },
+                  { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true,  href:"https://polygon.technology" },
+                  { src:"/logos/investors/mgx.png",              name:"MGX",                     dark:true,  href:"https://www.mgx.com" },
+                  { src:"/logos/investors/systems.png",          name:"Systems Limited",         dark:false, href:"https://www.systemsltd.com" },
+                  { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false, href:"https://fi.co" },
+                ];
+                const all = [...logos, ...logos]; // duplicate for seamless loop
+                return all.map((logo, i) => (
+                  <a key={i} href={logo.href} target="_blank" rel="noopener noreferrer"
+                    className="flex-shrink-0 mx-8" title={`Visit ${logo.name}`}
+                    style={{ padding:"14px 22px", border:"1px solid rgba(255,255,255,0.07)", borderRadius:"6px", background: logo.dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.92)", height:"72px", width:"148px", display:"flex", alignItems:"center", justifyContent:"center", transition:"border-color 0.3s, transform 0.3s, box-shadow 0.3s", cursor:"pointer", textDecoration:"none" }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor="rgba(243,186,47,0.55)"; el.style.transform="scale(1.06)"; el.style.boxShadow="0 0 18px rgba(243,186,47,0.18)"; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor="rgba(255,255,255,0.07)"; el.style.transform="scale(1)"; el.style.boxShadow="none"; }}>
+                    <img src={logo.src} alt={logo.name} title={logo.name}
+                      style={{ maxHeight:"44px", maxWidth:"120px", objectFit:"contain", display:"block" }} />
+                  </a>
+                ));
+              })()}
             </div>
           </div>
 
