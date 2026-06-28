@@ -1,36 +1,27 @@
 /**
- * RESEARCH ARTICLE PAGE — /research/:slug
- * Luxury editorial design with holographic elements
- */
-
-  import React from "react";
-  import { useEffect, useRef, useState } from "react";
+   * RESEARCH ARTICLE PAGE — /research/:slug
+   * shamimforever.com/journal style — editorial, professional, mobile-first
+   */
+  import React, { useEffect, useState } from "react";
   import { motion } from "framer-motion";
   import { useParams, useLocation } from "wouter";
 
-  // ─── Font Loader ─────────────────────────────────────────────────────────────
-  function useLuxuryFonts() {
+  function useFonts() {
     useEffect(() => {
-      if (document.getElementById("luxury-fonts-link")) return;
-      const link = document.createElement("link");
-      link.id = "luxury-fonts-link";
-      link.rel = "stylesheet";
-      link.href =
-        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap";
-      document.head.appendChild(link);
+      if (document.getElementById("article-fonts")) return;
+      const l = document.createElement("link");
+      l.id = "article-fonts";
+      l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap";
+      document.head.appendChild(l);
     }, []);
   }
 
-  // ─── Article Database ─────────────────────────────────────────────────────────
+  // ─── Article Database ────────────────────────────────────────────────────────
   const ARTICLES: Record<string, {
-    slug: string;
-    title: string;
-    subtitle: string;
-    authors: string;
-    year: string;
-    category: string;
-    thumbnail?: string;
-    tags: string[];
+    slug: string; title: string; subtitle: string;
+    authors: string; year: string; category: string;
+    thumbnail?: string; tags: string[]; readTime: string;
     content: string;
   }> = {
     "blockchain-basic": {
@@ -39,10 +30,12 @@
       subtitle: "From distributed ledgers to smart contracts — the definitive primer on blockchain technology",
       authors: "Muhammad Faisal Orakzai",
       year: "2026",
-      category: "MARKET KNOWLEDGE",
+      category: "BLOCKCHAIN",
       thumbnail: "/mk/blockchain-guide.png",
-      tags: ["Blockchain", "Distributed Ledger", "Smart Contracts", "Cryptography", "Web3", "DeFi", "Tokenization"],
-      content: `What is Blockchain? A Complete Beginner's Guide
+      readTime: "25 min read",
+      tags: ["Blockchain", "DLT", "Web3", "DeFi", "Cryptography", "RWA", "Tokenization", "Smart Contracts"],
+      content: `
+What is Blockchain? A Complete Beginner's Guide
 
 1: Introduction, Blockchain Basics & History
 
@@ -1428,253 +1421,339 @@ Final Conclusion
 Blockchain has evolved from a groundbreaking idea into one of the most influential technologies of the digital age. While it first gained global attention through Bitcoin, its true potential lies far beyond digital currencies.
 Today, blockchain is reshaping finance, healthcare, logistics, education, real estate, digital identity, enterprise systems, and many other industries. It enables organizations to build transparent, secure, and efficient solutions that reduce dependence on centralized intermediaries while improving trust and accountability.
 Like any transformative technology, blockchain faces challenges including scalability, regulation, interoperability, and user adoption. However, ongoing innovation continues to address these limitations, paving the way for broader implementation.
-As the digital economy evolves, blockchain is expected to become a foundational layer supporting Web3, tokenized assets, decentralized finance, trusted AI systems, and next-generation enterprise infrastructure. Understanding blockchain today is not only valuable for developers and businesses—it is increasingly important for anyone seeking to understand the future of technology.`,
+As the digital economy evolves, blockchain is expected to become a foundational layer supporting Web3, tokenized assets, decentralized finance, trusted AI systems, and next-generation enterprise infrastructure. Understanding blockchain today is not only valuable for developers and businesses—it is increasingly important for anyone seeking to understand the future of technology.
+`,
     },
   };
 
-  // ─── Article Content Renderer ─────────────────────────────────────────────────
+  // ─── Content Renderer ────────────────────────────────────────────────────────
   function ArticleBody({ content }: { content: string }) {
     const lines = content.split("\n");
-    const elements: JSX.Element[] = [];
-    let listItems: string[] = [];
-    let k = 0;
+    const nodes: React.ReactNode[] = [];
+    let i = 0;
+    let key = 0;
 
-    const flushList = () => {
-      if (!listItems.length) return;
-      elements.push(
-        <ul key={k++} className="article-list">
-          {listItems.map((item, idx) => (
-            <li key={idx}>
-              <span className="list-bullet">▸</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      );
-      listItems = [];
-    };
+    while (i < lines.length) {
+      const raw = lines[i];
+      const line = raw.trim();
 
-    for (let j = 0; j < lines.length; j++) {
-      const line = lines[j];
-      if (line.startsWith("- ")) { listItems.push(line.slice(2)); continue; }
-      flushList();
-      const trimmed = line.trim();
+      if (!line) { i++; continue; }
+
+      // ── Horizontal divider
       if (line === "---") {
-        elements.push(<hr key={k++} className="article-divider" />);
-      } else if (!trimmed) {
-        // skip blank
-      } else {
-        const prevBlank = j === 0 || !lines[j - 1].trim() || lines[j - 1] === "---";
-        const nextBlank = j === lines.length - 1 || !lines[j + 1].trim() || lines[j + 1] === "---" || lines[j + 1].startsWith("- ");
-        const isShort = trimmed.length <= 90;
-        if (isShort && prevBlank && nextBlank && !trimmed.endsWith(",") && !trimmed.endsWith(";")) {
-          elements.push(<h2 key={k++} className="article-h2">{trimmed}</h2>);
-        } else {
-          elements.push(<p key={k++} className="article-p">{trimmed}</p>);
+        nodes.push(<div key={key++} style={{ margin: "2.5rem 0", borderTop: "1px solid rgba(243,186,47,0.12)" }} />);
+        i++;
+        continue;
+      }
+
+      // ── Bullet list — collect all consecutive bullets
+      if (line.startsWith("- ")) {
+        const items: string[] = [];
+        while (i < lines.length && lines[i].trim().startsWith("- ")) {
+          items.push(lines[i].trim().slice(2));
+          i++;
+        }
+        nodes.push(
+          <ul key={key++} style={{ margin: "1rem 0 1.5rem 0", padding: 0, listStyle: "none" }}>
+            {items.map((item, j) => (
+              <li key={j} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px", color: "rgba(255,255,255,0.6)", fontSize: "clamp(0.9rem,2vw,1.02rem)", lineHeight: 1.75, fontFamily: "'Cormorant Garamond',Georgia,serif", fontWeight: 400 }}>
+                <span style={{ color: "#F3BA2F", flexShrink: 0, marginTop: "0.45em", fontSize: "10px" }}>◆</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        );
+        continue;
+      }
+
+      // ── Heading detection
+      const prevEmpty = i === 0 || lines[i - 1].trim() === "";
+
+      if (prevEmpty && line.length < 80 && !line.startsWith("«") && !line.includes("→") && !line.startsWith("↓")) {
+
+        // Major section: "1: Introduction..." style
+        if (/^d+:s/.test(line)) {
+          nodes.push(
+            <h2 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.5rem,4vw,2.1rem)", color: "rgba(255,255,255,0.95)", margin: "3.5rem 0 1rem 0", lineHeight: 1.25, letterSpacing: "-0.02em" }}>
+              {line}
+            </h2>
+          );
+          i++;
+          continue;
+        }
+
+        // Numbered section heading: "1. Decentralization", "2. Enhanced Security" etc
+        if (/^[1-9]d?.s/.test(line) && line.length < 60) {
+          nodes.push(
+            <h3 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.2rem,3vw,1.5rem)", color: "rgba(255,255,255,0.9)", margin: "2.5rem 0 0.75rem 0", lineHeight: 1.3 }}>
+              {line}
+            </h3>
+          );
+          i++;
+          continue;
+        }
+
+        // Step headings: "Step 1: ...", "Step N: ..."
+        if (/^Steps+d+:/i.test(line)) {
+          nodes.push(
+            <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.05rem,2.5vw,1.25rem)", color: "#F3BA2F", margin: "2rem 0 0.6rem 0", lineHeight: 1.35 }}>
+              {line}
+            </h4>
+          );
+          i++;
+          continue;
+        }
+
+        // Timeline headings: "2008 – Bitcoin Whitepaper", "1970s – Cryptography"
+        if (/^d{4}s?s[–—]/.test(line) || /^d{4}[–—]/.test(line)) {
+          nodes.push(
+            <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(243,186,47,0.85)", margin: "2rem 0 0.6rem 0", lineHeight: 1.35, borderLeft: "2px solid rgba(243,186,47,0.3)", paddingLeft: "12px" }}>
+              {line}
+            </h4>
+          );
+          i++;
+          continue;
+        }
+
+        // Sub-heading: medium length, standalone line
+        if (line.length > 3 && line.length < 70 && !line.endsWith(".") && !line.endsWith(",")) {
+          const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : "";
+          // If followed by empty line or list or another heading — treat as heading
+          if (nextLine === "" || nextLine === "---" || nextLine.startsWith("- ")) {
+            nodes.push(
+              <h3 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1.1rem,2.8vw,1.4rem)", color: "rgba(255,255,255,0.88)", margin: "2.5rem 0 0.75rem 0", lineHeight: 1.3 }}>
+                {line}
+              </h3>
+            );
+            i++;
+            continue;
+          }
+          // Short standalone word/phrase (like "Block", "Chain", "Applications", "Benefits")
+          if (line.length < 40) {
+            nodes.push(
+              <h4 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(255,255,255,0.82)", margin: "1.75rem 0 0.5rem 0", lineHeight: 1.4 }}>
+                {line}
+              </h4>
+            );
+            i++;
+            continue;
+          }
         }
       }
+
+      // ── FAQ questions (start with digit and period or "Myth N:" )
+      if (/^(Frequently Asked|Common Blockchain Myths|Key Takeaways|Final Conclusion)/.test(line) && prevEmpty) {
+        nodes.push(
+          <h2 key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.5rem,4vw,2rem)", color: "rgba(255,255,255,0.95)", margin: "3.5rem 0 1rem 0", lineHeight: 1.25 }}>
+            {line}
+          </h2>
+        );
+        i++;
+        continue;
+      }
+
+      if (/^d+.s.{5,}/.test(line) && prevEmpty && line.length < 120) {
+        nodes.push(
+          <p key={key++} style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 600, fontSize: "clamp(0.95rem,2.2vw,1.1rem)", color: "rgba(255,255,255,0.85)", margin: "1.5rem 0 0.5rem 0", lineHeight: 1.5 }}>
+            {line}
+          </p>
+        );
+        i++;
+        continue;
+      }
+
+      if (/^(Myths+d+:|Reality:)/.test(line)) {
+        const isMyth = line.startsWith("Myth");
+        nodes.push(
+          <p key={key++} style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "0.2em", color: isMyth ? "#F3BA2F" : "rgba(74,222,128,0.8)", textTransform: "uppercase", margin: "1rem 0 0.25rem 0", fontWeight: 600 }}>
+            {line}
+          </p>
+        );
+        i++;
+        continue;
+      }
+
+      // ── Code-like or special lines (Block #100 → Hash)
+      if (line.includes("→") || line.includes("↓") || line.startsWith("«") || line.startsWith("Block #")) {
+        nodes.push(
+          <div key={key++} style={{ fontFamily: "monospace", fontSize: "clamp(0.8rem,2vw,0.95rem)", color: "rgba(243,186,47,0.7)", background: "rgba(243,186,47,0.04)", border: "1px solid rgba(243,186,47,0.12)", padding: "8px 14px", margin: "0.5rem 0", letterSpacing: "0.05em" }}>
+            {line}
+          </div>
+        );
+        i++;
+        continue;
+      }
+
+      // ── Default: paragraph
+      nodes.push(
+        <p key={key++} style={{ fontFamily: "'Cormorant Garamond',Georgia,serif", fontWeight: 400, fontSize: "clamp(1rem,2.4vw,1.12rem)", lineHeight: 1.9, color: "rgba(255,255,255,0.62)", marginBottom: "1.1rem" }}>
+          {line}
+        </p>
+      );
+      i++;
     }
-    flushList();
-    return <>{elements}</>;
+
+    return <>{nodes}</>;
   }
 
-  // ─── Main Article Page ─────────────────────────────────────────────────────────
+  // ─── Main Component ──────────────────────────────────────────────────────────
   export default function ResearchArticle() {
-    const params = useParams<{ slug: string }>();
-    const [, navigate] = useLocation();
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [progress, setProgress] = useState(0);
-    useLuxuryFonts();
+    useFonts();
+    const { slug } = useParams<{ slug: string }>();
+    const [, setLocation] = useLocation();
+    const [copied, setCopied] = useState(false);
+    const article = ARTICLES[slug ?? ""];
 
-    const article = params.slug ? ARTICLES[params.slug] : null;
-
+    // SEO
     useEffect(() => {
-      window.scrollTo(0, 0);
-      if (article) document.title = article.title + " — Faisal Orakzai";
+      if (!article) return;
+      const prev = document.title;
+      document.title = `${article.title} — Faisal Orakzai Research`;
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute("content", article.subtitle);
+      return () => { document.title = prev; };
     }, [article]);
 
-    const handleScroll = () => {
-      const el = document.documentElement;
-      const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
-      setProgress(Math.min(100, pct));
-    };
-
-    useEffect(() => {
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
+    // 404 state
     if (!article) {
       return (
-        <div style={{ minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#000" }}>
-          <p style={{ fontFamily: "monospace", color: "rgba(243,186,47,0.5)", letterSpacing: "0.3em", fontSize: "12px", textTransform: "uppercase" }}>
-            Article not found
-          </p>
-          <button onClick={() => navigate("/research")} style={{ marginTop: "1.5rem", fontFamily: "monospace", fontSize: "11px", letterSpacing: "0.2em", color: "#F3BA2F", textTransform: "uppercase", background: "none", border: "1px solid rgba(243,186,47,0.3)", padding: "0.6rem 1.25rem", cursor: "pointer" }}>
-            ← Back to Research
+        <div style={{ minHeight: "100vh", background: "#000", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+          <p style={{ fontFamily: "monospace", color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", fontSize: "11px", textTransform: "uppercase" }}>ARTICLE NOT FOUND</p>
+          <button onClick={() => setLocation("/research")} style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.35em", border: "1px solid rgba(243,186,47,0.4)", color: "#F3BA2F", background: "none", padding: "10px 20px", cursor: "pointer", textTransform: "uppercase" }}>
+            ← BACK TO RESEARCH
           </button>
         </div>
       );
     }
 
-    return (
-      <>
-        {/* ─── Global article styles ─────────────────────────────────────── */}
-        <style>{`
-          .article-h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-            font-weight: 600;
-            color: #F3BA2F;
-            margin: 2.5rem 0 0.75rem;
-            letter-spacing: 0.01em;
-            line-height: 1.3;
-          }
-          .article-p {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            line-height: 1.9;
-            color: rgba(255,255,255,0.75);
-            margin-bottom: 1.1rem;
-            font-weight: 300;
-          }
-          .article-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.5rem 0 1.5rem;
-          }
-          .article-list li {
-            display: flex;
-            gap: 0.65rem;
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-            color: rgba(255,255,255,0.65);
-            line-height: 1.75;
-            margin-bottom: 0.4rem;
-            font-weight: 300;
-          }
-          .list-bullet {
-            color: #F3BA2F;
-            flex-shrink: 0;
-            margin-top: 0.2rem;
-          }
-          .article-divider {
-            border: none;
-            border-top: 1px solid rgba(243,186,47,0.12);
-            margin: 2.5rem 0;
-          }
-          @keyframes holoSpin {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .holo-line {
-            background: linear-gradient(90deg, #F3BA2F, #00d4ff, #b44fff, #00ff88, #F3BA2F);
-            background-size: 300% 100%;
-            animation: holoSpin 5s linear infinite;
-          }
-        `}</style>
+    const handleCopy = () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    };
 
-        {/* ─── Reading progress bar ─────────────────────────────────────────── */}
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "3px", zIndex: 9999, background: "rgba(255,255,255,0.04)" }}>
-          <div className="holo-line" style={{ height: "100%", width: `${progress}%`, transition: "width 0.1s" }} />
+    return (
+      <div style={{ minHeight: "100vh", background: "#000", color: "#fff", overflowX: "hidden" }}>
+
+        {/* ── Hero / Thumbnail ────────────────────────────────────────── */}
+        <div style={{ position: "relative", width: "100%", maxHeight: "520px", overflow: "hidden", background: "#060606" }}>
+          {article.thumbnail ? (
+            <motion.img
+              src={article.thumbnail}
+              alt={article.title}
+              initial={{ scale: 1.06, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              style={{ width: "100%", height: "100%", maxHeight: "520px", objectFit: "cover", objectPosition: "center top", display: "block" }}
+            />
+          ) : (
+            <div style={{ width: "100%", height: "320px", background: "linear-gradient(135deg,#0a0500,#000)" }} />
+          )}
+          {/* Gradient overlay */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.65) 70%, rgba(0,0,0,1) 100%)" }} />
+
+          {/* Back button */}
+          <motion.button
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            onClick={() => setLocation("/research")}
+            style={{ position: "absolute", top: "24px", left: "24px", fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.35em", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.6)", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", padding: "8px 14px", cursor: "pointer", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px", zIndex: 10 }}
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 5H2M4 2.5L1.5 5 4 7.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            RESEARCH
+          </motion.button>
         </div>
 
-        <article style={{ background: "#000", minHeight: "100vh" }}>
+        {/* ── Article Header ──────────────────────────────────────────── */}
+        <div style={{ maxWidth: "780px", margin: "0 auto", padding: "0 clamp(1.25rem,5vw,2.5rem)" }}>
 
-          {/* ─── Hero image ─────────────────────────────────────────────────── */}
-          {article.thumbnail && (
-            <div style={{ position: "relative", height: "clamp(280px, 45vw, 520px)", overflow: "hidden" }}>
-              <img
-                src={article.thumbnail}
-                alt={article.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-              {/* Gradient overlay */}
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,1) 100%)" }} />
-              {/* Grid overlay */}
-              <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(243,186,47,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(243,186,47,0.05) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-              {/* Holographic color wash */}
-              <div className="holo-line" style={{ position: "absolute", inset: 0, opacity: 0.08, mixBlendMode: "screen" }} />
-            </div>
-          )}
-
-          {/* ─── Article header ──────────────────────────────────────────────── */}
-          <div style={{ maxWidth: "780px", margin: "0 auto", padding: "0 1.25rem" }}>
-
-            {/* Back nav */}
-            <div style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-              <button
-                onClick={() => navigate("/research")}
-                style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "0.22em", color: "rgba(243,186,47,0.7)", textTransform: "uppercase", background: "none", border: "none", cursor: "pointer", padding: 0, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-              >
-                ← Research
-              </button>
-            </div>
-
-            {/* Holographic accent line */}
-            <div className="holo-line" style={{ height: "2px", marginBottom: "2rem", borderRadius: "1px" }} />
-
-            {/* Category + year */}
-            <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "1.25rem", flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.28em", color: "#F3BA2F", textTransform: "uppercase" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            style={{ paddingTop: "2.5rem" }}
+          >
+            {/* Category + reading time */}
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", marginBottom: "1.25rem" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.38em", color: "#F3BA2F", textTransform: "uppercase", border: "1px solid rgba(243,186,47,0.3)", padding: "4px 10px", background: "rgba(243,186,47,0.05)" }}>
                 {article.category}
               </span>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.25)" }}>
+                {article.readTime}
+              </span>
+              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)" }}>
                 {article.year}
               </span>
             </div>
 
             {/* Title */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(1.75rem, 5vw, 3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.15, marginBottom: "1.25rem", letterSpacing: "-0.01em" }}
-            >
+            <h1 style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: "clamp(1.9rem,6vw,3.25rem)", lineHeight: 1.18, color: "rgba(255,255,255,0.97)", letterSpacing: "-0.025em", margin: "0 0 1.1rem 0" }}>
               {article.title}
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", color: "rgba(243,186,47,0.7)", lineHeight: 1.65, marginBottom: "1.75rem", fontStyle: "italic", fontWeight: 300 }}>
+            <p style={{ fontFamily: "'Cormorant Garamond',Georgia,serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(1.05rem,2.8vw,1.35rem)", color: "rgba(255,255,255,0.45)", lineHeight: 1.65, margin: "0 0 1.75rem 0" }}>
               {article.subtitle}
             </p>
 
-            {/* Author meta */}
-            <div style={{ display: "flex", gap: "1.5rem", paddingBottom: "2rem", borderBottom: "1px solid rgba(243,186,47,0.1)", flexWrap: "wrap", alignItems: "center" }}>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>
-                By {article.authors}
-              </span>
-              <span style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase" }}>
-                Orakzai Research Lab
-              </span>
-            </div>
-
-            {/* ─── Article body ──────────────────────────────────────────────── */}
-            <div style={{ paddingTop: "2.5rem", paddingBottom: "4rem" }}>
-              <ArticleBody content={article.content} />
+            {/* Author + meta row */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "1.1rem 0", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)", marginBottom: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ width: "38px", height: "38px", borderRadius: "50%", background: "linear-gradient(135deg,#F3BA2F 0%,#c8900a 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "15px", color: "#000", flexShrink: 0 }}>F</div>
+                <div>
+                  <div style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.65)", letterSpacing: "0.12em", textTransform: "uppercase" }}>{article.authors}</div>
+                  <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.22)", letterSpacing: "0.1em", marginTop: "2px" }}>Orakzai Research Lab · ORCID 0009-0000-0915-7272</div>
+                </div>
+              </div>
+              {/* Share / copy link */}
+              <button onClick={handleCopy} style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.28em", border: "1px solid rgba(255,255,255,0.1)", color: copied ? "#4ade80" : "rgba(255,255,255,0.35)", background: "none", padding: "7px 14px", cursor: "pointer", textTransform: "uppercase", transition: "all 0.2s" }}>
+                {copied ? "✓ COPIED" : "SHARE ↗"}
+              </button>
             </div>
 
             {/* Tags */}
-            <div style={{ paddingTop: "2rem", paddingBottom: "4rem", borderTop: "1px solid rgba(243,186,47,0.1)", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-              {article.tags.map(tag => (
-                <span key={tag} style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "0.18em", color: "rgba(243,186,47,0.55)", textTransform: "uppercase", border: "1px solid rgba(243,186,47,0.15)", padding: "0.3rem 0.7rem" }}>
-                  {tag}
-                </span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "2.5rem" }}>
+              {article.tags.map(t => (
+                <span key={t} style={{ fontFamily: "monospace", fontSize: "7px", letterSpacing: "0.22em", padding: "3px 9px", border: "1px solid rgba(243,186,47,0.18)", color: "rgba(243,186,47,0.5)", textTransform: "uppercase" }}>#{t}</span>
               ))}
             </div>
+          </motion.div>
 
-            {/* Back button */}
-            <div style={{ paddingBottom: "5rem" }}>
-              <button
-                onClick={() => navigate("/research")}
-                style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "0.22em", color: "#F3BA2F", textTransform: "uppercase", background: "none", border: "1px solid rgba(243,186,47,0.3)", padding: "0.75rem 1.5rem", cursor: "pointer" }}
-              >
-                ← Back to Research
+          {/* ── Article Body ─────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.7 }}
+            style={{ paddingBottom: "5rem" }}
+          >
+            <ArticleBody content={article.content} />
+          </motion.div>
+
+          {/* ── Article Footer ────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "2rem", paddingBottom: "4rem", display: "flex", flexDirection: "column", gap: "1.25rem" }}
+          >
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", alignItems: "center" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.25em" }}>CITE AS:</span>
+              <code style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.38)", background: "rgba(255,255,255,0.04)", padding: "4px 10px", border: "1px solid rgba(255,255,255,0.07)", letterSpacing: "0.02em", flex: 1, minWidth: "200px" }}>
+                Orakzai, M. F. ({article.year}). {article.title}. Orakzai Research Lab. faisalorakzai.com/research/{article.slug}
+              </code>
+            </div>
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+              <a href="https://orcid.org/0009-0000-0915-7272" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(166,206,57,0.65)", letterSpacing: "0.2em", textDecoration: "none" }}>ORCID: 0009-0000-0915-7272 ↗</a>
+              <span style={{ color: "rgba(255,255,255,0.1)" }}>·</span>
+              <button onClick={() => setLocation("/research")} style={{ fontFamily: "monospace", fontSize: "8px", letterSpacing: "0.3em", border: "1px solid rgba(243,186,47,0.3)", color: "#F3BA2F", background: "none", padding: "8px 16px", cursor: "pointer", textTransform: "uppercase" }}>
+                ← ALL ARTICLES
               </button>
             </div>
-          </div>
-        </article>
-      </>
+          </motion.div>
+        </div>
+      </div>
     );
   }
+  
