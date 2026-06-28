@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
   interface SEOHeadProps {
     title: string;
@@ -7,6 +7,26 @@ import { Helmet } from "react-helmet-async";
     type?: "website" | "profile" | "article";
     image?: string;
     keywords?: string;
+  }
+
+  function setMeta(attr: "name" | "property", key: string, val: string) {
+    let el = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, key);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", val);
+  }
+
+  function setCanonical(url: string) {
+    let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!el) {
+      el = document.createElement("link");
+      el.setAttribute("rel", "canonical");
+      document.head.appendChild(el);
+    }
+    el.setAttribute("href", url);
   }
 
   export default function SEOHead({
@@ -21,26 +41,35 @@ import { Helmet } from "react-helmet-async";
     const img = image ?? "https://faisalorakzai.com/story/story-03.png";
     const fullTitle = `${title} | Faisal Orakzai`;
 
-    return (
-      <Helmet>
-        <title>{fullTitle}</title>
-        <meta name="description" content={description} />
-        {keywords && <meta name="keywords" content={keywords} />}
-        <link rel="canonical" href={url} />
-        <meta property="og:title" content={fullTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={url} />
-        <meta property="og:type" content={type} />
-        <meta property="og:image" content={img} />
-        <meta property="og:site_name" content="Faisal Orakzai" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={fullTitle} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={img} />
-        <meta name="twitter:creator" content="@faisalorakzaii" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <meta name="author" content="Muhammad Faisal Orakzai" />
-      </Helmet>
-    );
+    useEffect(() => {
+      const prev = document.title;
+      document.title = fullTitle;
+
+      setMeta("name", "description", description);
+      setMeta("name", "author", "Muhammad Faisal Orakzai");
+      setMeta("name", "robots", "index, follow, max-image-preview:large");
+      if (keywords) setMeta("name", "keywords", keywords);
+
+      setMeta("property", "og:title", fullTitle);
+      setMeta("property", "og:description", description);
+      setMeta("property", "og:url", url);
+      setMeta("property", "og:type", type);
+      setMeta("property", "og:image", img);
+      setMeta("property", "og:site_name", "Faisal Orakzai");
+
+      setMeta("name", "twitter:card", "summary_large_image");
+      setMeta("name", "twitter:title", fullTitle);
+      setMeta("name", "twitter:description", description);
+      setMeta("name", "twitter:image", img);
+      setMeta("name", "twitter:creator", "@faisalorakzaii");
+
+      setCanonical(url);
+
+      return () => {
+        document.title = prev;
+      };
+    }, [fullTitle, description, url, img, type, keywords]);
+
+    return null;
   }
   
