@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
   import { Newspaper, ExternalLink, Calendar, Building2, Globe, Award, Mic, TrendingUp } from "lucide-react";
 import SEOHead from "@/components/shared/SEOHead";
 
-  // Ã¢ÂÂÃ¢ÂÂ Types Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+  // ── Types ─────────────────────────────────────────────────────
   interface PressArticle {
     id: string;
     headline: string;
@@ -20,12 +20,12 @@ import SEOHead from "@/components/shared/SEOHead";
     authoritative?: boolean;
   }
 
-  // Ã¢ÂÂÃ¢ÂÂ Press Data (real verified mentions) Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+  // ── Press Data (real verified mentions) ───────────────────────
   const PRESS_ARTICLES: PressArticle[] = [
     {
       id: "stevie-2026",
       headline: "Muhammad Faisal Orakzai Wins Stevie Gold Award for Technology Innovation 2026",
-      summary: "Pakistan's youngest blockchain architect, Muhammad Faisal Orakzai, receives the prestigious Stevie Gold Award Ã¢ÂÂ the first Pakistani to win in the Technology Innovation category, recognised for Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain.",
+      summary: "Pakistan's youngest blockchain architect, Muhammad Faisal Orakzai, receives the prestigious Stevie Gold Award — the first Pakistani to win in the Technology Innovation category, recognised for Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain.",
       publisher: "Stevie Awards",
       publisherUrl: "https://www.stevieawards.com",
       articleUrl: "https://www.stevieawards.com",
@@ -37,20 +37,20 @@ import SEOHead from "@/components/shared/SEOHead";
       authoritative: true,
     },
     {
-      id: "gma-silicon-valley-2025",
-      headline: "Faisal Orakzai Addresses GMA Silicon Valley as Pakistan's Youngest Blockchain Founder",
-      summary: "Muhammad Faisal Orakzai represented Pakistan at GMA Silicon Valley 2025, presenting Orakzai Bond's Polygon Layer-2 infrastructure and the sovereign digital economy model for emerging markets.",
-      publisher: "GMA Silicon Valley",
-      publisherUrl: "https://www.gmasilionvalley.com",
-      articleUrl: "https://www.gmasilionvalley.com",
-      datePublished: "2025-11-20",
-      category: "Featured",
-      image: "/story/story-05.png",
-      authoritative: true,
-    },
-    {
-      id: "okbond-polygon-launch",
-      headline: "Orakzai Bond (OKBOND) Launches on Polygon Layer-2 Ã¢ÂÂ Pakistan's First Sovereign Blockchain Token",
+      id: "founder-institute-2026",
+        headline: "Muhammad Faisal Orakzai Assessed by Founder Institute — Pakistan's Leading Blockchain Entrepreneur",
+        summary: "Muhammad Faisal Orakzai completes the Founder Institute assessment, recognised as one of Pakistan's leading blockchain entrepreneurs, validating his work on Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain and his sovereign digital economy model.",
+        publisher: "Founder Institute",
+        publisherUrl: "https://fi.co",
+        articleUrl: "https://fi.co/assessment/report",
+        datePublished: "2026-04-12",
+        category: "Featured",
+        image: "/story/story-05.png",
+        authoritative: true,
+      },
+      {
+        id: "okbond-polygon-launch",
+      headline: "Orakzai Bond (OKBOND) Launches on Polygon Layer-2 — Pakistan's First Sovereign Blockchain Token",
       summary: "Orakzai Group officially launches OKBOND, a deflationary cryptocurrency on Polygon Layer-2 blockchain. Founded by Muhammad Faisal Orakzai, OKBOND is designed as Pakistan's sovereign digital reserve asset with real-economy tokenization of real estate, luxury, and agriculture.",
       publisher: "Orakzai Bond Official",
       publisherUrl: "https://orakzaibond.com",
@@ -63,7 +63,7 @@ import SEOHead from "@/components/shared/SEOHead";
     {
       id: "shamim-forever-launch",
       headline: "Shamim Forever Launches Web3-Authenticated Luxury Perfumes with Blockchain Provenance",
-      summary: "Shamim Forever (shamimforever.com) Ã¢ÂÂ the luxury brand under Orakzai Group Ã¢ÂÂ launches its first collection of cryptographically authenticated perfumes and sapphire jewelry, where each product carries an on-chain provenance certificate on Polygon.",
+      summary: "Shamim Forever (shamimforever.com) — the luxury brand under Orakzai Group — launches its first collection of cryptographically authenticated perfumes and sapphire jewelry, where each product carries an on-chain provenance certificate on Polygon.",
       publisher: "Shamim Forever",
       publisherUrl: "https://www.shamimforever.com",
       articleUrl: "https://www.shamimforever.com",
@@ -73,9 +73,9 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "wikidata-q140264666",
-      headline: "Muhammad Faisal Orakzai Listed on Wikidata as Recognised Public Figure Ã¢ÂÂ Q140264666",
+      headline: "Muhammad Faisal Orakzai Listed on Wikidata as Recognised Public Figure — Q140264666",
       summary: "Faisal Orakzai becomes one of Pakistan's youngest entrepreneurs to receive a verified Wikidata entity (Q140264666), establishing his footprint on the open knowledge graph used by Google, Wikipedia, and Siri for knowledge panel recognition.",
-      publisher: "Wikidata Ã¢ÂÂ Wikimedia Foundation",
+      publisher: "Wikidata — Wikimedia Foundation",
       publisherUrl: "https://www.wikidata.org/wiki/Q140264666",
       articleUrl: "https://www.wikidata.org/wiki/Q140264666",
       datePublished: "2025-07-01",
@@ -84,9 +84,9 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "okzbyte-ai-stack",
-      headline: "OkzByte Technology Ã¢ÂÂ Orakzai Group's AI Engineering Division Launches High-Throughput Infrastructure",
-      summary: "OkzByte Technology, the AI and engineering arm of Orakzai Group led by Faisal Orakzai, announces its AI infrastructure stack for autonomous financial management, powering QORIX Ã¢ÂÂ the group's autonomous capital allocation engine.",
-      publisher: "OkzByte Technology Ã¢ÂÂ GitHub",
+      headline: "OkzByte Technology — Orakzai Group's AI Engineering Division Launches High-Throughput Infrastructure",
+      summary: "OkzByte Technology, the AI and engineering arm of Orakzai Group led by Faisal Orakzai, announces its AI infrastructure stack for autonomous financial management, powering QORIX — the group's autonomous capital allocation engine.",
+      publisher: "OkzByte Technology — GitHub",
       publisherUrl: "https://github.com/faisalorakzai-lab",
       articleUrl: "https://github.com/faisalorakzai-lab",
       datePublished: "2025-12-01",
@@ -95,7 +95,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "qorix-autonomous-finance",
-      headline: "QORIX Ã¢ÂÂ Orakzai Group Unveils Autonomous Financial AI System for Sovereign Capital Management",
+      headline: "QORIX — Orakzai Group Unveils Autonomous Financial AI System for Sovereign Capital Management",
       summary: "QORIX, developed under OkzByte Technology (Orakzai Group), is an autonomous AI financial management system designed for sovereign capital allocation. Founded by Muhammad Faisal Orakzai, QORIX integrates on-chain treasury management with AI-driven portfolio rebalancing.",
       publisher: "Orakzai Group",
       publisherUrl: "https://faisalorakzai.com/ecosystem",
@@ -106,8 +106,8 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "dusseldorf-international",
-      headline: "Faisal Orakzai Expands Orakzai Group's International Footprint Ã¢ÂÂ DÃÂ¼sseldorf, Germany",
-      summary: "Muhammad Faisal Orakzai visits DÃÂ¼sseldorf, Germany, representing Orakzai Group in European blockchain and luxury market discussions, solidifying the Group's international expansion beyond Pakistan.",
+      headline: "Faisal Orakzai Expands Orakzai Group's International Footprint — Düsseldorf, Germany",
+      summary: "Muhammad Faisal Orakzai visits Düsseldorf, Germany, representing Orakzai Group in European blockchain and luxury market discussions, solidifying the Group's international expansion beyond Pakistan.",
       publisher: "Orakzai Group International",
       publisherUrl: "https://faisalorakzai.com",
       articleUrl: "https://faisalorakzai.com/founder",
@@ -118,7 +118,7 @@ import SEOHead from "@/components/shared/SEOHead";
     {
       id: "wall-street-new-york",
       headline: "Faisal Orakzai at Wall Street: Pakistan's Blockchain Tokenization Vision for Global Capital Markets",
-      summary: "Muhammad Faisal Orakzai makes a landmark visit to Wall Street, New York, meeting with institutional investors to discuss Orakzai Bond's Polygon Layer-2 infrastructure and real estate tokenization Ã¢ÂÂ bridging Pakistan's economy to global capital markets.",
+      summary: "Muhammad Faisal Orakzai makes a landmark visit to Wall Street, New York, meeting with institutional investors to discuss Orakzai Bond's Polygon Layer-2 infrastructure and real estate tokenization — bridging Pakistan's economy to global capital markets.",
       publisher: "Orakzai Group Media",
       publisherUrl: "https://faisalorakzai.com",
       articleUrl: "https://faisalorakzai.com/founder",
@@ -128,7 +128,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "everybodywiki-profile",
-      headline: "Faisal Orakzai Profiled on EverybodyWiki Ã¢ÂÂ Verified Public Entrepreneur Biography",
+      headline: "Faisal Orakzai Profiled on EverybodyWiki — Verified Public Entrepreneur Biography",
       summary: "An independent verified biography of Muhammad Faisal Orakzai is published on EverybodyWiki, providing an authoritative reference point for Google's knowledge graph verification of Faisal as a recognised public entrepreneur from Pakistan.",
       publisher: "EverybodyWiki",
       publisherUrl: "https://en.everybodywiki.com/Faisal_Orakzai",
@@ -139,7 +139,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "crunchbase-profile",
-      headline: "Muhammad Faisal Orakzai Listed on Crunchbase Ã¢ÂÂ Pakistan Blockchain Startup Founder",
+      headline: "Muhammad Faisal Orakzai Listed on Crunchbase — Pakistan Blockchain Startup Founder",
       summary: "Faisal Orakzai and Orakzai Group receive a verified Crunchbase profile, recognised as a startup founder in the blockchain and AI sector from Pakistan. Crunchbase is a key trust signal for Google Knowledge Panel.",
       publisher: "Crunchbase",
       publisherUrl: "https://www.crunchbase.com/person/faisal-orakzai",
@@ -150,9 +150,9 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "orcid-researcher",
-      headline: "Muhammad Faisal Orakzai Assigned ORCID Research ID Ã¢ÂÂ Blockchain & AI Research Recognition",
-      summary: "Faisal Orakzai receives an ORCID researcher ID (0009-0000-0915-7272), validating his contributions to blockchain research, AI system architecture, and tokenization frameworks Ã¢ÂÂ signalling academic-grade credibility for Knowledge Panel.",
-      publisher: "ORCID Ã¢ÂÂ Open Researcher and Contributor ID",
+      headline: "Muhammad Faisal Orakzai Assigned ORCID Research ID — Blockchain & AI Research Recognition",
+      summary: "Faisal Orakzai receives an ORCID researcher ID (0009-0000-0915-7272), validating his contributions to blockchain research, AI system architecture, and tokenization frameworks — signalling academic-grade credibility for Knowledge Panel.",
+      publisher: "ORCID — Open Researcher and Contributor ID",
       publisherUrl: "https://orcid.org/0009-0000-0915-7272",
       articleUrl: "https://orcid.org/0009-0000-0915-7272",
       datePublished: "2025-05-01",
@@ -174,7 +174,7 @@ import SEOHead from "@/components/shared/SEOHead";
 
   const ALL_CATEGORIES = ["All", "Featured", "Blockchain", "Founder", "Awards", "Announcements"];
 
-  // Ã¢ÂÂÃ¢ÂÂ JSON-LD injection Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+  // ── JSON-LD injection ────────────────────────────────────────
   function injectPressSchema(articles: PressArticle[]) {
     const existing = document.getElementById("press-schema");
     if (existing) existing.remove();
@@ -182,10 +182,10 @@ import SEOHead from "@/components/shared/SEOHead";
     const schema = {
       "@context": "https://schema.org",
       "@graph": [
-        // WebPage with Wikidata sameAs â for search spider institutional linking
+        // WebPage with Wikidata sameAs — for search spider institutional linking
           {
             "@type": "WebPage",
-            "name": "Official Press Room â Muhammad Faisal Orakzai",
+            "name": "Official Press Room — Muhammad Faisal Orakzai",
             "description": "Media coverage, global awards, and verified institutional profiles for Muhammad Faisal Orakzai.",
             "url": "https://faisalorakzai.com/press",
             "about": {
@@ -197,7 +197,7 @@ import SEOHead from "@/components/shared/SEOHead";
           // ItemList of all articles
         {
           "@type": "ItemList",
-          "name": "Faisal Orakzai Press Coverage Ã¢ÂÂ Orakzai Group Media",
+          "name": "Faisal Orakzai Press Coverage — Orakzai Group Media",
           "description": "Press mentions, awards, and news coverage of Muhammad Faisal Orakzai, Founder & Chairman of Orakzai Group Pakistan",
           "url": "https://faisalorakzai.com/press",
           "numberOfItems": articles.length,
@@ -254,7 +254,7 @@ import SEOHead from "@/components/shared/SEOHead";
     document.head.appendChild(tag);
   }
 
-  // Ã¢ÂÂÃ¢ÂÂ Component Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+  // ── Component ────────────────────────────────────────────────
   export default function Press() {
     const [activeCategory, setActiveCategory] = useState("All");
 
@@ -268,9 +268,9 @@ import SEOHead from "@/components/shared/SEOHead";
     useEffect(() => {
       injectPressSchema(PRESS_ARTICLES);
       // Update OG tags for press page
-      document.title = "Press Room Ã¢ÂÂ Faisal Orakzai | Orakzai Group Media Coverage | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ";
+      document.title = "Press Room — Faisal Orakzai | Orakzai Group Media Coverage | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ";
       const ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle) ogTitle.setAttribute("content", "Press Room Ã¢ÂÂ Muhammad Faisal Orakzai | Stevie Gold Award Winner | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ");
+      if (ogTitle) ogTitle.setAttribute("content", "Press Room — Muhammad Faisal Orakzai | Stevie Gold Award Winner | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ");
       const ogUrl = document.querySelector('meta[property="og:url"]');
       if (ogUrl) ogUrl.setAttribute("content", "https://faisalorakzai.com/press");
       const canonical = document.querySelector('link[rel="canonical"]');
@@ -287,7 +287,7 @@ import SEOHead from "@/components/shared/SEOHead";
         keywords="Faisal Orakzai press, Orakzai Group news, Stevie Award blockchain, GMA Silicon Valley Pakistan"
       />
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Hero Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* ── Hero ─────────────────────────────────────────── */}
         <section className="pt-36 md:pt-40 pb-0 border-b border-[#F3BA2F]/10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -305,7 +305,7 @@ import SEOHead from "@/components/shared/SEOHead";
                 Press <span className="gold-gradient">Room</span>
               </h1>
               <p className="text-white/40 font-mono text-sm mt-3 pb-8">
-                Media coverage ÃÂ· Awards ÃÂ· Verified mentions Ã¢ÂÂ Muhammad Faisal Orakzai, ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ
+                Media coverage · Awards · Verified mentions — Muhammad Faisal Orakzai, ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ
               </p>
 
               {/* Category tabs */}
@@ -329,7 +329,7 @@ import SEOHead from "@/components/shared/SEOHead";
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Stats Bar Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* ── Stats Bar ─────────────────────────────────────── */}
         <section className="border-b border-[#F3BA2F]/10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#F3BA2F]/10">
@@ -363,7 +363,7 @@ import SEOHead from "@/components/shared/SEOHead";
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Articles Grid Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* ── Articles Grid ──────────────────────────────────── */}
         
           {/* ── Press Kit Download ──────────────────────────────────────────── */}
           <section className="border-t border-[#F3BA2F]/10">
@@ -612,7 +612,7 @@ import SEOHead from "@/components/shared/SEOHead";
                         <div className="flex flex-wrap items-center gap-3 mb-4">
                           {lead.authoritative && (
                             <span className="text-xs font-mono bg-[#F3BA2F] text-black px-3 py-1 font-bold tracking-wider">
-                              Ã¢ÂÂ AUTHORITATIVE SOURCE
+                              ★ AUTHORITATIVE SOURCE
                             </span>
                           )}
                           <span className="text-xs font-mono border border-[#F3BA2F]/30 text-[#F3BA2F]/70 px-3 py-1 uppercase tracking-wider">
@@ -669,7 +669,7 @@ import SEOHead from "@/components/shared/SEOHead";
                     >
                       <div className="flex items-center gap-2 mb-4">
                         {article.authoritative && (
-                          <span className="text-xs font-mono bg-[#F3BA2F]/10 text-[#F3BA2F] px-2 py-0.5 border border-[#F3BA2F]/20">Ã¢ÂÂ VERIFIED</span>
+                          <span className="text-xs font-mono bg-[#F3BA2F]/10 text-[#F3BA2F] px-2 py-0.5 border border-[#F3BA2F]/20">★ VERIFIED</span>
                         )}
                         <span className="text-xs font-mono text-white/20 uppercase tracking-wider">{article.category}</span>
                       </div>
@@ -703,7 +703,7 @@ import SEOHead from "@/components/shared/SEOHead";
           </AnimatePresence>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Media Inquiry CTA Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* ── Media Inquiry CTA ─────────────────────────────── */}
         <section className="border-t border-[#F3BA2F]/10 py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -717,21 +717,21 @@ import SEOHead from "@/components/shared/SEOHead";
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <a href="/contact" className="px-6 py-3 bg-[#F3BA2F] text-black text-xs font-mono font-bold tracking-wider hover:bg-[#F3BA2F]/90 transition-colors">
-                    PRESS CONTACT Ã¢ÂÂ
+                    PRESS CONTACT →
                   </a>
                   <a href="https://orakzaibond.com" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-[#F3BA2F]/30 text-[#F3BA2F] text-xs font-mono tracking-wider hover:border-[#F3BA2F] transition-colors">
-                    ORAKZAIBOND.COM Ã¢ÂÂ
+                    ORAKZAIBOND.COM ↗
                   </a>
                   <a href="https://www.shamimforever.com" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-white/10 text-white/40 text-xs font-mono tracking-wider hover:border-white/30 hover:text-white/70 transition-colors">
-                    SHAMIMFOREVER.COM Ã¢ÂÂ
+                    SHAMIMFOREVER.COM ↗
                   </a>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: "Languages", value: "English ÃÂ· ÃÂ§ÃÂ±ÃÂ¯ÃÂ ÃÂ· Pashto" },
-                  { label: "Expertise", value: "Blockchain ÃÂ· AI ÃÂ· Real Estate" },
-                  { label: "Region", value: "Pakistan ÃÂ· Global" },
+                  { label: "Languages", value: "English · ÃÂ§ÃÂ±ÃÂ¯ÃÂ · Pashto" },
+                  { label: "Expertise", value: "Blockchain · AI · Real Estate" },
+                  { label: "Region", value: "Pakistan · Global" },
                   { label: "Press Kit", value: "Available on Request" },
                 ].map(({ label, value }) => (
                   <div key={label} className="border border-[#F3BA2F]/10 p-5 hover:border-[#F3BA2F]/30 transition-colors">
@@ -744,18 +744,18 @@ import SEOHead from "@/components/shared/SEOHead";
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Cross-Site Links (SEO) Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* ── Cross-Site Links (SEO) ─────────────────────────── */}
         <section className="border-t border-[#F3BA2F]/10 py-12 bg-[#050500]">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-xs font-mono text-white/20 text-center mb-6 tracking-[0.3em]">ORAKZAI NETWORK</div>
             <div className="flex flex-wrap justify-center gap-6 text-xs font-mono">
-              <a href="https://orakzaibond.com" target="_blank" rel="noopener noreferrer" className="text-[#F3BA2F]/50 hover:text-[#F3BA2F] transition-colors">orakzaibond.com Ã¢ÂÂ OKBOND Polygon</a>
-              <span className="text-white/10">ÃÂ·</span>
-              <a href="https://www.shamimforever.com" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">shamimforever.com Ã¢ÂÂ Luxury Web3</a>
-              <span className="text-white/10">ÃÂ·</span>
+              <a href="https://orakzaibond.com" target="_blank" rel="noopener noreferrer" className="text-[#F3BA2F]/50 hover:text-[#F3BA2F] transition-colors">orakzaibond.com — OKBOND Polygon</a>
+              <span className="text-white/10">·</span>
+              <a href="https://www.shamimforever.com" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">shamimforever.com — Luxury Web3</a>
+              <span className="text-white/10">·</span>
               <a href="https://www.wikidata.org/wiki/Q140264666" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">Wikidata Q140264666</a>
-              <span className="text-white/10">ÃÂ·</span>
-              <a href="https://www.linkedin.com/in/faisalorakzaii" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">LinkedIn Ã¢ÂÂ Faisal Orakzai</a>
+              <span className="text-white/10">·</span>
+              <a href="https://www.linkedin.com/in/faisalorakzaii" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">LinkedIn — Faisal Orakzai</a>
             </div>
           </div>
         </section>
