@@ -1,101 +1,293 @@
-import { motion } from "framer-motion";
-import { useListMedia } from "@workspace/api-client-react";
-import { getListMediaQueryKey } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
-import { Play, Mic, Video, MonitorPlay, Clock } from "lucide-react";
-import { useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+  import { useRef, useState } from "react";
+  import SEOHead from "@/components/shared/SEOHead";
+  import { X, MapPin, Calendar, ExternalLink, Play } from "lucide-react";
 
-const types = ["All", "Video", "Podcast", "Interview", "Keynote", "Product Demo"];
+  const GOLD = "#F3BA2F";
+  const fade = { hidden:{opacity:0,y:28}, show:(i=0)=>({opacity:1,y:0,transition:{duration:0.65,delay:i*0.08}}) };
 
-const typeIcons: Record<string, React.ReactNode> = {
-  Video: <Video className="h-4 w-4" />,
-  Podcast: <Mic className="h-4 w-4" />,
-  Interview: <MonitorPlay className="h-4 w-4" />,
-  Keynote: <MonitorPlay className="h-4 w-4" />,
-  "Product Demo": <Play className="h-4 w-4" />,
-};
+  function InView({ children, custom=0, className="" }: { children:React.ReactNode; custom?:number; className?:string }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const inView = useInView(ref,{once:true,margin:"-60px"});
+    return <motion.div ref={ref} className={className} initial="hidden" animate={inView?"show":"hidden"} variants={fade} custom={custom}>{children}</motion.div>;
+  }
 
-export default function Media() {
-  const [activeType, setActiveType] = useState("All");
-  const params = activeType !== "All" ? { type: activeType } : undefined;
-  const { data: media, isLoading } = useListMedia(params, {
-    query: { queryKey: getListMediaQueryKey(params) },
-  });
+  const GALLERY = [
+    { src:"/story/story-01.jpg", caption:"Orakzai Executive Studio",    year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-02.jpg", caption:"Global Vision — World Stage", year:"2026", location:"International" },
+    { src:"/story/story-03.png", caption:"The Chairman",                year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-04.jpg", caption:"GMA Silicon Valley Summit",   year:"2025", location:"Silicon Valley, USA" },
+    { src:"/story/story-05.png", caption:"Building the Future",         year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-06.jpg", caption:"Orakzai Headquarters",        year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-07.jpg", caption:"Dubai — Global Expansion",    year:"2024", location:"Dubai, UAE" },
+    { src:"/story/story-08.jpg", caption:"Karachi — The Pivot",         year:"2024", location:"Karachi, Pakistan" },
+    { src:"/story/story-09.jpg", caption:"Roots — Identity Preserved",  year:"2023", location:"KPK, Pakistan" },
+    { src:"/story/story-10.jpg", caption:"KPK — The Origin",            year:"2021", location:"Orakzai Agency, KPK" },
+    { src:"/story/story-11.jpg", caption:"Karachi Coastline",           year:"2022", location:"Karachi, Pakistan" },
+    { src:"/story/story-12.jpg", caption:"Vision from the Heights",     year:"2022", location:"Pakistan" },
+    { src:"/story/story-13.jpg", caption:"Metropolitan Network",        year:"2023", location:"Karachi, Pakistan" },
+    { src:"/story/story-14.jpg", caption:"Orakzai Agency — Genesis",    year:"2020", location:"Orakzai Agency, KPK" },
+    { src:"/story/story-15.jpg", caption:"Sovereign Vision",            year:"2025", location:"International" },
+    { src:"/story/story-16.jpg", caption:"The Architect",               year:"2025", location:"Karachi, Pakistan" },
+    { src:"/story/story-17.jpg", caption:"Heritage & Legacy",           year:"2024", location:"KPK, Pakistan" },
+    { src:"/story/story-18.jpg", caption:"Rising Leader",               year:"2024", location:"Karachi, Pakistan" },
+    { src:"/story/story-19.jpg", caption:"Orakzai Nation",              year:"2023", location:"Pakistan" },
+    { src:"/story/story-20.jpg", caption:"Genesis Point",               year:"2019", location:"Orakzai Agency, KPK" },
+  ];
 
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative py-20 border-b border-border/50 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-card/50 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(ellipse at center, #00d4ff 0%, transparent 70%)" }} />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/30 bg-secondary/5 text-secondary text-xs font-mono tracking-widest mb-6">
-            <span className="animate-pulse h-2 w-2 rounded-full bg-secondary inline-block" /> MEDIA CENTER
-          </div>
-          <h1 className="text-4xl lg:text-5xl font-bold font-mono tracking-tighter uppercase mb-4">VIDEO & <span className="text-primary">AUDIO HUB</span></h1>
-          <p className="text-muted-foreground max-w-lg mx-auto">Founder videos, podcasts, interviews, keynote speeches, and product demos from across the Orakzai ecosystem.</p>
-        </div>
-      </section>
+  const APPEARANCES = [
+    {
+      event:"GMA Silicon Valley Global Blockchain Conference",
+      date:"2025", location:"Silicon Valley, California, USA",
+      type:"CONFERENCE", color:"#F3BA2F",
+      desc:"Recognized as an emerging blockchain leader from Pakistan. Speaker and award recipient at one of Silicon Valley's premier blockchain summits. Represented Pakistan's growing tech ecosystem on the global stage.",
+      link:"https://faisalorakzai.com/press",
+    },
+    {
+      event:"Stevie Awards — Gold for Technology Innovation",
+      date:"2026", location:"International",
+      type:"AWARD", color:"#34d399",
+      desc:"Orakzai Group received the prestigious Stevie Gold Award for Technology Innovation 2026 — one of the world's most competitive business awards programs recognizing exceptional innovation in technology.",
+      link:"https://faisalorakzai.com/press",
+    },
+    {
+      event:"Wall Street — Global Blockchain Summit",
+      date:"2025", location:"Wall Street, New York City, USA",
+      type:"SUMMIT", color:"#a78bfa",
+      desc:"Represented Orakzai Bond (OKBOND) at the global blockchain summit on Wall Street. Engaged with institutional investors, fund managers, and blockchain infrastructure builders on decentralized finance and tokenomics.",
+      link:"https://orakzaibond.com",
+    },
+    {
+      event:"Dusseldorf International Expansion Summit",
+      date:"2024", location:"Dusseldorf, Germany",
+      type:"EXPANSION", color:"#f87171",
+      desc:"Represented Orakzai Group in Dusseldorf, Germany for European market outreach and international expansion discussions. Established key European partnership frameworks for Shamim Forever and OKBOND.",
+      link:"https://www.shamimforever.com",
+    },
+    {
+      event:"Dubai Global Ventures Forum",
+      date:"2024", location:"Dubai, UAE",
+      type:"FORUM", color:"#fbbf24",
+      desc:"Participated in Dubai's global ventures forum, exploring Middle East market entry for Orakzai Group ventures. UAE is a key target market for Shamim Forever luxury distribution and OKBOND DeFi adoption.",
+      link:"https://faisalorakzai.com/ecosystem",
+    },
+    {
+      event:"Pakistan Blockchain Summit — Keynote",
+      date:"2025", location:"Karachi, Pakistan",
+      type:"KEYNOTE", color:"#06b6d4",
+      desc:"Delivered keynote address on Pakistan's blockchain renaissance — covering OKBOND's architecture, the case for Polygon L2 in emerging markets, and the Orakzai model for sovereign digital asset infrastructure.",
+      link:"https://faisalorakzai.com/research",
+    },
+  ];
 
-      {/* Filter */}
-      <section className="border-b border-border/50 bg-card/20 sticky top-16 z-30">
-        <div className="container mx-auto px-4 flex gap-0 overflow-x-auto">
-          {types.map((type) => (
-            <button key={type} onClick={() => setActiveType(type)} className={`px-5 py-3 text-xs font-mono uppercase tracking-wider whitespace-nowrap border-b-2 transition-all ${activeType === type ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`}>
-              {type}
-            </button>
-          ))}
-        </div>
-      </section>
+  const PRESS_LINKS = [
+    { pub:"PRLog", title:"Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever", url:"https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html" },
+    { pub:"Hackernoon", title:"Faisal Orakzai — Blockchain Architect, Author", url:"https://hackernoon.com/u/faisalorakzai" },
+    { pub:"Shamim Forever", title:"Faisal Orakzai — Founder & Blockchain Architect", url:"https://www.shamimforever.com" },
+    { pub:"Crunchbase", title:"Faisal Orakzai — Founder & Chairman @ Orakzai Group (Rank #28)", url:"https://www.crunchbase.com/person/faisal-orakzai" },
+    { pub:"Wikidata", title:"Muhammad Faisal Orakzai — Q140264666", url:"https://www.wikidata.org/wiki/Q140264666" },
+    { pub:"EveryBodyWiki", title:"Faisal Orakzai — Entrepreneur, Blockchain", url:"https://en.everybodywiki.com/Faisal_Orakzai" },
+    { pub:"Wellfound", title:"Faisal Orakzai — Startup Profile", url:"https://wellfound.com/u/faisal-orakzai-1" },
+    { pub:"F6S", title:"Faisal Orakzai — Founder Profile", url:"https://www.f6s.com/faisalorakzai" },
+  ];
 
-      <section className="container mx-auto px-4 py-12">
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => <Skeleton key={i} className="h-64 w-full" />)}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {media?.map((item, i) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} className="bg-card border border-border/50 group cursor-pointer hover:border-secondary/40 transition-all overflow-hidden" data-testid={`card-media-${item.id}`}>
-                {/* Thumbnail */}
-                <div className="relative aspect-video bg-muted overflow-hidden">
-                  {item.thumbnailUrl ? (
-                    <img src={item.thumbnailUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-card to-muted">
-                      <div className="text-secondary opacity-50">{typeIcons[item.type] ?? <Play className="h-8 w-8" />}</div>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full border-2 border-secondary flex items-center justify-center text-secondary glow-blue">
-                      <Play className="h-6 w-6 fill-current ml-1" />
-                    </div>
-                  </div>
-                  {item.duration && (
-                    <div className="absolute bottom-2 right-2 bg-background/80 px-2 py-0.5 text-xs font-mono text-muted-foreground flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {item.duration}
-                    </div>
-                  )}
+  type GalleryItem = typeof GALLERY[0];
+
+  export default function Media() {
+    const [lightbox, setLightbox] = useState<GalleryItem|null>(null);
+    const [activeFilter, setActiveFilter] = useState("All");
+
+    const years = ["All", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019"];
+    const filtered = activeFilter === "All" ? GALLERY : GALLERY.filter(g => g.year === activeFilter);
+
+    return (
+      <>
+        <SEOHead
+          title="Media Gallery — Faisal Orakzai | Events, Conferences & Campaigns"
+          description="Photo gallery, conference appearances, and press coverage of Faisal Orakzai — GMA Silicon Valley, Wall Street NY, Dusseldorf Germany, Stevie Awards, and Pakistan events."
+          path="/media"
+          keywords="Faisal Orakzai photos, GMA Silicon Valley, Orakzai Group events, blockchain conference Pakistan, Stevie Awards 2026"
+        />
+        <div className="min-h-screen bg-black text-white">
+
+          {/* Hero */}
+          <section className="pt-32 pb-20 px-6 border-b border-[#F3BA2F]/10">
+            <div className="max-w-7xl mx-auto">
+              <motion.div initial="hidden" animate="show" variants={fade} custom={0}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-px w-8 bg-[#F3BA2F]" />
+                  <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.35em] uppercase">Media Archive</span>
                 </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge className="bg-secondary/10 text-secondary border-secondary/30 font-mono text-xs flex items-center gap-1">
-                      {typeIcons[item.type] ?? <Play className="h-3 w-3" />} {item.type}
-                    </Badge>
-                  </div>
-                  <h3 className="font-bold text-sm mb-2 group-hover:text-secondary transition-colors leading-snug">{item.title}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
-                  <div className="text-xs text-muted-foreground font-mono mt-3">{new Date(item.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</div>
-                </div>
+                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
+                  Global<br/>
+                  <span style={{color:GOLD}}>Presence</span>
+                </h1>
+                <p className="text-white/50 text-lg max-w-2xl leading-relaxed">
+                  From Orakzai Agency KPK to Silicon Valley — a visual archive of Faisal Orakzai's
+                  journey across 3 continents, 6+ countries, and dozens of international
+                  stages, conferences, and media appearances.
+                </p>
               </motion.div>
-            ))}
-          </div>
-        )}
-        {media?.length === 0 && (
-          <div className="text-center py-20 text-muted-foreground font-mono text-sm">NO MEDIA FOUND</div>
-        )}
-      </section>
-    </motion.div>
-  );
-}
+            </div>
+          </section>
+
+          {/* Stats */}
+          <section className="border-b border-[#F3BA2F]/10 py-10 px-6">
+            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { value:"3+", label:"CONTINENTS COVERED" },
+                { value:"6+", label:"COUNTRIES VISITED" },
+                { value:"20+", label:"EVENTS & CONFERENCES" },
+                { value:"2019–2026", label:"DOCUMENTED JOURNEY" },
+              ].map((s,i) => (
+                <motion.div key={s.label} initial="hidden" animate="show" variants={fade} custom={i*0.08}>
+                  <div className="text-4xl font-black mb-1" style={{color:GOLD}}>{s.value}</div>
+                  <div className="text-white/40 font-mono text-[9px] tracking-widest uppercase">{s.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          {/* Photo Gallery */}
+          <section className="py-24 px-6 border-b border-[#F3BA2F]/10">
+            <div className="max-w-7xl mx-auto">
+              <InView>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-8 bg-[#F3BA2F]" />
+                  <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.35em] uppercase">Photo Archive</span>
+                </div>
+                <h2 className="text-4xl font-black mb-8">Visual<br/><span className="text-white/40">Chronicle</span></h2>
+              </InView>
+
+              {/* Year filter */}
+              <div className="flex flex-wrap gap-2 mb-10">
+                {years.map(y => (
+                  <button key={y} onClick={()=>setActiveFilter(y)}
+                    className={`px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase transition-colors ${activeFilter===y?"bg-[#F3BA2F] text-black":"border border-white/10 text-white/40 hover:border-[#F3BA2F]/40 hover:text-[#F3BA2F]/60"}`}>
+                    {y}
+                  </button>
+                ))}
+              </div>
+
+              {/* Masonry-style Grid */}
+              <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <AnimatePresence mode="popLayout">
+                  {filtered.map((img, i) => (
+                    <motion.button key={img.src} layout initial={{opacity:0,scale:0.9}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.9}}
+                      transition={{duration:0.3,delay:i*0.03}}
+                      onClick={()=>setLightbox(img)}
+                      className={`relative group overflow-hidden bg-white/5 ${i % 7 === 0 || i % 7 === 4 ? "col-span-2 row-span-2" : ""}`}
+                      style={{aspectRatio: (i%7===0||i%7===4) ? "1.5/1" : "1/1"}}>
+                      <img src={img.src} alt={img.caption} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100">
+                        <div className="text-white font-semibold text-sm mb-1">{img.caption}</div>
+                        <div className="flex items-center gap-2 text-[#F3BA2F] text-xs font-mono">
+                          <MapPin size={10}/> {img.location}
+                          <span className="text-white/30">·</span>
+                          {img.year}
+                        </div>
+                      </div>
+                    </motion.button>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Lightbox */}
+          <AnimatePresence>
+            {lightbox && (
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
+                className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-6"
+                onClick={()=>setLightbox(null)}>
+                <motion.div initial={{scale:0.9}} animate={{scale:1}} exit={{scale:0.9}}
+                  className="relative max-w-4xl w-full" onClick={e=>e.stopPropagation()}>
+                  <button onClick={()=>setLightbox(null)}
+                    className="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors z-10">
+                    <X size={28}/>
+                  </button>
+                  <img src={lightbox.src} alt={lightbox.caption} className="w-full max-h-[75vh] object-contain" />
+                  <div className="mt-4 flex items-start justify-between">
+                    <div>
+                      <div className="font-bold text-lg mb-1">{lightbox.caption}</div>
+                      <div className="flex items-center gap-3 text-white/40 text-sm font-mono">
+                        <MapPin size={12}/> {lightbox.location}
+                        <span>·</span>
+                        <Calendar size={12}/> {lightbox.year}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Appearances */}
+          <section className="py-24 px-6 border-b border-[#F3BA2F]/10">
+            <div className="max-w-7xl mx-auto">
+              <InView>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-8 bg-[#F3BA2F]" />
+                  <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.35em] uppercase">Global Appearances</span>
+                </div>
+                <h2 className="text-4xl font-black mb-16">Stages &<br/><span className="text-white/40">Summits</span></h2>
+              </InView>
+              <div className="space-y-6">
+                {APPEARANCES.map((a,i) => (
+                  <InView key={a.event} custom={i*0.08}>
+                    <div className="border border-white/8 p-6 md:p-8 hover:border-[#F3BA2F]/20 transition-colors group">
+                      <div className="flex flex-col md:flex-row md:items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <span className="font-mono text-[9px] tracking-[0.3em] px-3 py-1 border text-xs uppercase"
+                            style={{borderColor:a.color+"40",color:a.color}}>{a.type}</span>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-lg mb-2 group-hover:text-[#F3BA2F] transition-colors">{a.event}</h3>
+                          <div className="flex flex-wrap items-center gap-4 text-white/40 text-xs font-mono mb-4">
+                            <span className="flex items-center gap-1"><MapPin size={10}/>{a.location}</span>
+                            <span className="flex items-center gap-1"><Calendar size={10}/>{a.date}</span>
+                          </div>
+                          <p className="text-white/55 text-sm leading-relaxed">{a.desc}</p>
+                        </div>
+                        <a href={a.link} target="_blank" rel="noopener noreferrer"
+                           className="flex-shrink-0 flex items-center gap-1 text-white/20 hover:text-[#F3BA2F] transition-colors text-xs font-mono">
+                          Details <ExternalLink size={12}/>
+                        </a>
+                      </div>
+                    </div>
+                  </InView>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Press Coverage */}
+          <section className="py-24 px-6">
+            <div className="max-w-7xl mx-auto">
+              <InView>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-8 bg-[#F3BA2F]" />
+                  <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.35em] uppercase">Press Coverage</span>
+                </div>
+                <h2 className="text-4xl font-black mb-16">As Seen<br/><span className="text-white/40">In</span></h2>
+              </InView>
+              <div className="grid md:grid-cols-2 gap-4">
+                {PRESS_LINKS.map((p,i) => (
+                  <InView key={p.pub} custom={i*0.06}>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer"
+                       className="flex items-start gap-4 border border-white/8 p-5 hover:border-[#F3BA2F]/30 transition-colors group">
+                      <span className="font-mono text-[10px] text-[#F3BA2F] tracking-widest uppercase shrink-0 w-28 pt-0.5">{p.pub}</span>
+                      <span className="text-white/60 text-sm group-hover:text-white transition-colors leading-snug flex-1">{p.title}</span>
+                      <ExternalLink size={14} className="text-white/20 group-hover:text-[#F3BA2F] transition-colors shrink-0 mt-0.5"/>
+                    </a>
+                  </InView>
+                ))}
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </>
+    );
+  }
+  
