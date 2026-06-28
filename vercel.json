@@ -1,7 +1,7 @@
 {
   "buildCommand": "pnpm --filter @workspace/faisal-os run build",
   "outputDirectory": "artifacts/faisal-os/dist/public",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "installCommand": "pnpm install",
   "redirects": [
     {
       "source": "/story",
