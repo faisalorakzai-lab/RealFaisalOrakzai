@@ -105,7 +105,7 @@ import { motion, AnimatePresence } from "framer-motion";
     title: string; bio: string; description: string;
     uniqueFeatures: string[]; benefits: { label: string; desc: string }[];
     roadmap: { module: string; desc: string }[];
-    pdfUrl?: string; githubUrl?: string;
+    pdfUrl?: string; githubUrl?: string; socialUsername?: string;
   }> = {
     "qorix": {
         title: "Multi-agent AI Intelligence Platform: GPT-4o + LangGraph for Enterprise Automation",
@@ -162,6 +162,118 @@ import { motion, AnimatePresence } from "framer-motion";
       pdfUrl: "https://drive.google.com/file/d/1YTdi9b7eL6ECuBtkSZlbhJZsX-F0paI3/view?usp=drivesdk",
       githubUrl: "https://github.com/faisalorakzai-lab/Orakzai-Properties",
     },
+      "otc": {
+        title: "Multi-Service On-Demand Platform — Rides, Flights, Hotels & Real-Time Bidding",
+        bio: "Orakzai Transport Corporation (OTC) is a dynamic mobile application built on Expo and React Native, serving as a comprehensive platform for on-demand services. OTC integrates ride-sharing, flight and hotel bookings, rentals, and a unique real-time bidding system — all supported by robust backend infrastructure and instant communication. It is the premium transportation and logistics arm of the Orakzai Group sovereign infrastructure.",
+        description: "Built with Expo, React Native, and TypeScript for seamless cross-platform performance, OTC functions as a multi-service platform encompassing rides, flight reservations, hotel bookings, and rental accommodations. A standout feature is its integrated real-time bidding system powered by Ably — users request services and providers bid instantly. The backend runs on Supabase for secure authentication, scalable data storage, and real-time sync. Dedicated interfaces serve end-users, service providers (drivers), and administrators separately for optimal UX across all stakeholders.",
+        uniqueFeatures: [
+          "Integrated multi-service platform — rides, flights, hotels, rentals, and live bidding in one app",
+          "Real-time bidding system powered by Ably — instant updates for requests, bids, and ride statuses",
+          "Distinct optimized interfaces for users, drivers/service providers, and platform administrators",
+          "Supabase backend for secure authentication, scalable data storage, and real-time synchronization",
+          "Cross-platform Expo + React Native + TypeScript stack for high-performance iOS & Android experience",
+          "AI-driven matching algorithms (roadmap) for optimized service allocation and dynamic pricing",
+        ],
+        benefits: [
+          { label: "Enhanced Convenience", desc: "Centralizing multiple on-demand services simplifies daily logistics and travel planning, saving users significant time and effort." },
+          { label: "Economic Empowerment", desc: "Creates flexible earning opportunities for service providers, contributing to local economies through an open bidding model." },
+          { label: "Optimized Resource Utilization", desc: "Real-time demand-supply matching optimizes use of vehicles and accommodations, reducing waste and idle capacity." },
+          { label: "Improved Accessibility", desc: "Provides a comprehensive digital platform for essential services, particularly impactful where traditional service infrastructure is limited." },
+          { label: "Innovation Showcase", desc: "Demonstrates how mobile development, real-time communication, and scalable backends combine to create impactful consumer solutions." },
+        ],
+        roadmap: [
+          { module: "Core Service Refinement (0–6 months)", desc: "Refine existing modules (rides, flights, hotels, rentals), optimize real-time bidding and communication, enhance UX for providers and customers." },
+          { module: "AI Integration (6–18 months)", desc: "Introduce AI for personalized recommendations, dynamic pricing, and efficient resource matching. Explore blockchain for transaction security." },
+          { module: "Global Scale (18+ months)", desc: "Scale to a global user base, build an ecosystem for third-party service integrations, and establish OTC as the industry standard for multi-service on-demand platforms." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab/otc",
+        socialUsername: "okzotc",
+      },
+
+      "orakzaix": {
+        title: "Next-Generation AI Automation & Intelligence Platform for the Orakzai Ecosystem",
+        bio: "OrakzaiX is the AI automation and intelligence arm of the Orakzai Group sovereign ecosystem. It is architected to power intelligent workflows, automate repetitive enterprise operations, and deliver real-time decision intelligence across the full Orakzai portfolio — from real estate and finance to luxury commerce and transport.",
+        description: "OrakzaiX integrates cutting-edge large language models, automation pipelines, and data orchestration to create a unified AI layer over the Orakzai Group's operations. The platform connects with Orakzai Bond (DeFi analytics), Shamim Forever (luxury client AI), Orakzai Properties (property valuation & lead scoring), and OTC (ride matching & demand prediction) — acting as the intelligent backbone that amplifies every venture in the ecosystem.",
+        uniqueFeatures: [
+          "Sovereign AI layer — purpose-built for the Orakzai Group ecosystem, not a generic SaaS tool",
+          "Cross-venture intelligence — unified AI brain connecting Bond, Properties, Shamim Forever, OTC, and more",
+          "Automated workflow orchestration — intelligent, self-correcting pipelines replacing manual operations",
+          "Real-time decision intelligence — live dashboards tracking KPIs, anomalies, and opportunity signals",
+          "LLM-powered content and communication automation across all Orakzai Group ventures",
+          "Modular architecture — each venture plugs in independently with its own AI agent configuration",
+        ],
+        benefits: [
+          { label: "Operational Excellence", desc: "Automates routine enterprise tasks across all Orakzai ventures, freeing human talent for strategy and innovation." },
+          { label: "Unified Intelligence", desc: "A single AI layer ensures consistent decision quality and cross-venture data synergies across the full Group." },
+          { label: "Competitive Advantage", desc: "Gives every Orakzai venture access to state-of-the-art AI without individual R&D investment — a sovereign AI moat." },
+          { label: "Speed to Insight", desc: "Real-time dashboards and automated analytics compress the time from raw data to actionable decision by orders of magnitude." },
+          { label: "Scalable Automation", desc: "Modular design means new ventures or workflows can be onboarded to the AI layer in days, not months." },
+        ],
+        roadmap: [
+          { module: "Core Automation Engine", desc: "Deploy intelligent workflow pipelines across all Orakzai Group ventures, starting with Properties lead scoring and Bond yield analytics." },
+          { module: "Cross-Venture Data Layer", desc: "Build unified data infrastructure connecting all ventures for shared intelligence, anomaly detection, and group-level reporting." },
+          { module: "LLM Fine-Tuning on Orakzai Data", desc: "Fine-tune language models on proprietary Orakzai domain data for superior contextual performance across real estate, DeFi, and luxury." },
+          { module: "Real-Time Decision Dashboard", desc: "Launch a live monitoring dashboard tracking KPIs, agent performance, and decision outcomes across the full ecosystem." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab",
+      },
+
+      "psc-exchange": {
+        title: "Pak Stock Chain — Decentralized Exchange Bridging Pakistan Capital Markets with Blockchain",
+        bio: "PSC Exchange (Pak Stock Chain) is a pioneering decentralized exchange engineered to bridge Pakistan's traditional capital markets with the transparency, efficiency, and accessibility of blockchain technology. PSC Exchange represents the Orakzai Group's vision for a sovereign, on-chain financial infrastructure that democratizes access to Pakistani equities and instruments for both local and global investors.",
+        description: "PSC Exchange is being architected on a blockchain-native stack, leveraging DeFi primitives to tokenize Pakistani equities, mutual funds, and capital market instruments. By bringing Pakistan Stock Exchange (PSX)-listed assets on-chain, PSC removes traditional intermediaries, enables T+0 settlement, and opens fractional investment to retail participants globally — merging regulatory-grade compliance with the permissionless efficiency of Web3 infrastructure.",
+        uniqueFeatures: [
+          "First decentralized exchange bridging Pakistan Stock Exchange (PSX) assets to blockchain",
+          "Tokenization of Pakistani equities and capital market instruments for on-chain trading",
+          "T+0 blockchain-native settlement — eliminating multi-day clearing delays of traditional markets",
+          "Fractional investment enabling retail participation in high-value Pakistani blue-chip stocks",
+          "DeFi primitives (AMM / order book) combined with regulatory-grade compliance infrastructure",
+          "Global investor access to Pakistan capital markets without traditional brokerage barriers",
+        ],
+        benefits: [
+          { label: "Financial Inclusion", desc: "Opens Pakistan's capital markets to retail investors globally who lack access to traditional brokerage accounts or face high minimums." },
+          { label: "Market Efficiency", desc: "T+0 blockchain settlement and on-chain price discovery improve liquidity and reduce systemic risk vs legacy T+2 clearing." },
+          { label: "Transparency", desc: "Every trade, settlement, and ownership transfer recorded immutably on-chain — an auditable public ledger for Pakistan's capital markets." },
+          { label: "Economic Sovereignty", desc: "Keeps Pakistan's capital market infrastructure sovereign and on-chain, reducing dependency on foreign financial systems." },
+          { label: "Innovation Catalyst", desc: "Signals to global DeFi communities that Pakistan's capital markets are open, modern, and blockchain-ready — attracting foreign investment." },
+        ],
+        roadmap: [
+          { module: "Protocol Architecture & Smart Contracts", desc: "Design and audit core exchange smart contracts, AMM liquidity mechanisms, and tokenization standards for Pakistani equities." },
+          { module: "Regulatory Framework & PSX Integration", desc: "Establish compliance framework and integration pathways with Pakistan Stock Exchange and SECP." },
+          { module: "Alpha Launch — Tokenized Equity Trading", desc: "Launch alpha platform with a curated selection of tokenized PSX-listed securities for early adopters and institutional partners." },
+          { module: "Retail Expansion & Global Access", desc: "Open to global retail investors with fiat on-ramps, mobile apps, and multi-language support for 30+ countries." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab",
+      },
+
+      "orakzai-empire": {
+        title: "The Sovereign Heritage Brand — Legacy, Vision & Identity of the Orakzai Lineage",
+        bio: "Orakzai Empire is the sovereign heritage brand of the Orakzai Group — the living embodiment of the Orakzai lineage's vision, values, and ambition. It serves as the cultural and identity nucleus from which all Orakzai Group ventures draw their founding philosophy: building systems that outlast generations, not just businesses that serve a quarter.",
+        description: "Orakzai Empire operates at the intersection of heritage, sovereignty, and empire-building. It is the brand under which Faisal Orakzai's founding philosophy is codified — combining Pashtun tribal pride with a global builder's mindset. The Empire brand spans culture, thought leadership, and sovereign identity: from the architectural vision of the Orakzai Group to its public narrative, community, and legacy infrastructure. It is the flag under which every Orakzai venture marches.",
+        uniqueFeatures: [
+          "Sovereign identity brand — the cultural DNA and founding philosophy of every Orakzai Group venture",
+          "Heritage-forward positioning — ancient Orakzai tribal lineage merged with a modern builder's ethos",
+          "Long-horizon empire thinking — all ventures designed to outlast generations, not just market cycles",
+          "Thought leadership platform — Faisal Orakzai's vision, research, and philosophy published under this brand",
+          "Community nucleus — uniting the global Orakzai diaspora and Pashtun communities around a shared vision",
+          "Cultural sovereignty — preserving and elevating Orakzai heritage permanently in the digital age",
+        ],
+        benefits: [
+          { label: "Cultural Preservation", desc: "Documents and elevates Orakzai tribal heritage, history, and values for future generations in a permanent digital format." },
+          { label: "Identity & Pride", desc: "Gives the global Orakzai diaspora and Pashtun community a sovereign brand to rally around — a digital homeland of identity." },
+          { label: "Inspirational Blueprint", desc: "Demonstrates that heritage and innovation are not opposites — a tribe with centuries of history can build the systems of tomorrow." },
+          { label: "Group Cohesion", desc: "Acts as the philosophical anchor giving all Orakzai Group ventures a shared mission, aesthetic, and long-term purpose beyond profit." },
+          { label: "Legacy Infrastructure", desc: "Ensures the Orakzai name, story, and vision are permanently encoded in digital infrastructure — immutable and sovereign." },
+        ],
+        roadmap: [
+          { module: "Heritage Documentation Platform", desc: "Build a digital archive of Orakzai lineage history, tribal records, and cultural artifacts — stored on decentralized infrastructure." },
+          { module: "Thought Leadership Publication", desc: "Launch a flagship publication platform for Faisal Orakzai's philosophy, essays, and vision for Pakistan and the Orakzai Group." },
+          { module: "Community & Diaspora Network", desc: "Connect the global Orakzai diaspora through a sovereign digital community platform with verified heritage credentials." },
+          { module: "Empire Events & Activations", desc: "Host sovereign-level summits and cultural activations cementing Orakzai Empire as a respected cultural and business institution." },
+        ],
+        githubUrl: "https://github.com/faisalorakzai-lab",
+      },
+  
   };
 
 
