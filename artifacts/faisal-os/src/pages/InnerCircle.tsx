@@ -1654,127 +1654,70 @@ function CardPhase({
 /* ─────────────────────────────────────────
      PHASE 5 — WEB3 OS DASHBOARD
   ───────────────────────────────────────── */
-  type NavTab = "home" | "community" | "academy" | "passport";
+  type NavTab = "home" | "community" | "academy" | "signals" | "spaces";
+
+  const FOREX_SIGNALS = [
+    { id:1,  pair:"EUR/USD",  dir:"SHORT", entry:"1.0847", tp1:"1.0790", tp2:"1.0730", sl:"1.0890", conf:"HIGH",   date:"29 Jun 2026", session:"London", pips:57   },
+    { id:2,  pair:"GBP/JPY",  dir:"LONG",  entry:"198.40", tp1:"199.80", tp2:"201.20", sl:"197.10", conf:"MEDIUM", date:"28 Jun 2026", session:"Tokyo",  pips:140  },
+    { id:3,  pair:"USD/CAD",  dir:"SHORT", entry:"1.3620", tp1:"1.3550", tp2:"1.3480", sl:"1.3680", conf:"HIGH",   date:"27 Jun 2026", session:"NY",     pips:70   },
+    { id:4,  pair:"AUD/USD",  dir:"LONG",  entry:"0.6485", tp1:"0.6540", tp2:"0.6590", sl:"0.6445", conf:"MEDIUM", date:"26 Jun 2026", session:"Sydney", pips:55   },
+    { id:5,  pair:"XAU/USD",  dir:"LONG",  entry:"2318.0", tp1:"2345.0", tp2:"2368.0", sl:"2295.0", conf:"HIGH",   date:"25 Jun 2026", session:"London", pips:270  },
+  ];
+
+  const SPOT_SIGNALS = [
+    { id:1,  pair:"BTC/USDT",  dir:"LONG",  entry:"67,450", tp1:"69,200", tp2:"71,000", sl:"66,000", conf:"HIGH",   date:"29 Jun 2026", capital:"5%" },
+    { id:2,  pair:"ETH/USDT",  dir:"LONG",  entry:"3,420",  tp1:"3,580",  tp2:"3,750",  sl:"3,300",  conf:"HIGH",   date:"28 Jun 2026", capital:"4%" },
+    { id:3,  pair:"SOL/USDT",  dir:"SHORT", entry:"182.40", tp1:"175.00", tp2:"168.00", sl:"189.00", conf:"MEDIUM", date:"27 Jun 2026", capital:"3%" },
+    { id:4,  pair:"BNB/USDT",  dir:"LONG",  entry:"582.00", tp1:"610.00", tp2:"635.00", sl:"562.00", conf:"MEDIUM", date:"26 Jun 2026", capital:"3%" },
+    { id:5,  pair:"MATIC/USDT",dir:"SHORT", entry:"0.685",  tp1:"0.640",  tp2:"0.600",  sl:"0.720",  conf:"LOW",    date:"25 Jun 2026", capital:"2%" },
+  ];
+
+  const FUTURES_SIGNALS = [
+    { id:1,  pair:"DEXE/USDT", dir:"SHORT", entry:"11.80",  tp1:"10.50",  tp2:"9.20",   sl:"12.80",  lev:"1x",  capital:"1%", date:"23 Jun 2026" },
+    { id:2,  pair:"SYN/USDT",  dir:"SHORT", entry:"0.220",  tp1:"0.190",  tp2:"0.165",  sl:"0.245",  lev:"1x",  capital:"1%", date:"22 Jun 2026" },
+    { id:3,  pair:"BEAT/USDT", dir:"SHORT", entry:"0.0085", tp1:"0.0072", tp2:"0.0060", sl:"0.0095", lev:"1x",  capital:"1%", date:"11 Jun 2026" },
+    { id:4,  pair:"BTC/USDT",  dir:"LONG",  entry:"67,200", tp1:"69,000", tp2:"71,500", sl:"65,500", lev:"3x",  capital:"2%", date:"29 Jun 2026" },
+    { id:5,  pair:"ETH/USDT",  dir:"LONG",  entry:"3,400",  tp1:"3,600",  tp2:"3,800",  sl:"3,250",  lev:"2x",  capital:"2%", date:"28 Jun 2026" },
+  ];
+
+  const COMMUNITY_POSTS = [
+    { id:1, initials:"FO", type:"SIGNAL",       time:"2m ago",  body:"📊 BTC/USD — LONG · Entry $67,450 · TP1 $69,200 · TP2 $71,000 · SL $66,000 · Confidence: HIGH", likes:34 },
+    { id:2, initials:"FO", type:"ANALYSIS",     time:"18m ago", body:"🔍 ETH/USDT — Bullish divergence on 4H RSI. Support $3,420 holding. Watch breakout above $3,580.", likes:27 },
+    { id:3, initials:"FO", type:"FOREX",        time:"1h ago",  body:"💱 EUR/USD SHORT · Entry 1.0847 · TP1 1.0790 · SL 1.0890 · London Open session. NFP Friday — manage risk.", likes:19 },
+    { id:4, initials:"FO", type:"LEARNING",     time:"3h ago",  body:"📚 Module 7 live: Wyckoff Accumulation — Institutional order flow, spring patterns, sign-of-strength.", likes:41 },
+    { id:5, initials:"FO", type:"ANNOUNCEMENT", time:"5h ago",  body:"🔔 NEXT ZOOM: Saturday July 5 · 8 PM PKT — Advanced Risk & Portfolio Sizing. Live Q&A. All tiers.", likes:56 },
+  ];
 
   const COURSES = [
-    { cat:"Forex Learning",          title:"Wyckoff Accumulation Secrets",      sub:"Institutional order flow & spring patterns",  locked:false, level:"INTERMEDIATE" },
-    { cat:"Crypto Learning",         title:"BTC On-Chain Analysis Mastery",     sub:"UTXO sets, whale wallets & exchange flows",    locked:false, level:"ADVANCED"      },
-    { cat:"Stock Markets",           title:"Elliott Wave & Fibonacci Confluence",sub:"Multi-timeframe wave counting strategies",     locked:true,  level:"ADVANCED"      },
-    { cat:"Artificial Intelligence", title:"AI Trading Bots with Python",       sub:"ML signal generation & backtesting",           locked:false, level:"BEGINNER"      },
-    { cat:"Blockchain Infrastructure",title:"DeFi Protocol Architecture",       sub:"Smart contracts, liquidity pools & AMMs",      locked:true,  level:"ADVANCED"      },
-    { cat:"Forex Learning",          title:"London Session Breakout Strategy",  sub:"High-frequency setups during NY overlap",      locked:false, level:"BEGINNER"      },
-    { cat:"Crypto Learning",         title:"Altcoin Season Rotation Model",     sub:"Sector rotation signals & BTC dominance",      locked:true,  level:"INTERMEDIATE"  },
-    { cat:"Artificial Intelligence", title:"GPT Prompt Engineering for Traders",sub:"AI-assisted market research automation",       locked:false, level:"BEGINNER"      },
+    { cat:"Forex Learning",           title:"Wyckoff Accumulation Secrets",       sub:"Institutional order flow & spring patterns",   locked:false, level:"INTERMEDIATE" },
+    { cat:"Crypto Learning",          title:"BTC On-Chain Analysis Mastery",      sub:"UTXO sets, whale wallets & exchange flows",     locked:false, level:"ADVANCED"     },
+    { cat:"Stock Markets",            title:"Elliott Wave & Fibonacci Confluence", sub:"Multi-timeframe wave counting strategies",      locked:true,  level:"ADVANCED"     },
+    { cat:"Artificial Intelligence",  title:"AI Trading Bots with Python",        sub:"ML signal generation & backtesting",            locked:false, level:"BEGINNER"     },
+    { cat:"Blockchain Infrastructure",title:"DeFi Protocol Architecture",         sub:"Smart contracts, liquidity pools & AMMs",       locked:true,  level:"ADVANCED"     },
+    { cat:"Forex Learning",           title:"London Session Breakout Strategy",   sub:"High-frequency setups during NY overlap",       locked:false, level:"BEGINNER"     },
+    { cat:"Crypto Learning",          title:"Altcoin Season Rotation Model",      sub:"Sector rotation signals & BTC dominance",       locked:true,  level:"INTERMEDIATE" },
+    { cat:"Artificial Intelligence",  title:"GPT Prompt Engineering for Traders", sub:"AI-assisted market research automation",        locked:false, level:"BEGINNER"     },
   ];
 
-  const INIT_POSTS = [
-    { id:1, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"SIGNAL",       time:"2m ago",  body:"📊 BTC/USD — LONG · Entry $67,450 · TP1 $69,200 · TP2 $71,000 · SL $66,000 · Confidence: HIGH", likes:34, reposts:8  },
-    { id:2, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANALYSIS",     time:"18m ago", body:"🔍 ETH/USDT — Bullish divergence on 4H RSI. Support $3,420 holding. Watch breakout above $3,580.", likes:27, reposts:5  },
-    { id:3, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"FOREX",        time:"1h ago",  body:"💱 EUR/USD SHORT · Entry 1.0847 · TP1 1.0790 · SL 1.0890 · London Open session. NFP Friday — manage risk.", likes:19, reposts:3  },
-    { id:4, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"LEARNING",     time:"3h ago",  body:"📚 Module 7 live: Wyckoff Accumulation — Institutional order flow, spring patterns, sign-of-strength candles.", likes:41, reposts:12 },
-    { id:5, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANNOUNCEMENT", time:"5h ago",  body:"🔔 NEXT ZOOM: Saturday July 5 · 8 PM PKT — Advanced Risk & Portfolio Sizing. Live Q&A. All tiers welcome.", likes:56, reposts:18 },
-  ];
+  const ACADEMY_CATS = ["All","Forex Learning","Crypto Learning","Stock Markets","Artificial Intelligence","Blockchain Infrastructure"];
 
-  const CATS = ["All","Forex Learning","Crypto Learning","Stock Markets","Artificial Intelligence","Blockchain Infrastructure"];
+  const SPACES = [
+    { id:1, host:"Faisal Orakzai", title:"Markets Open: BTC & Macro Analysis", live:true,  listeners:47, speakers:["FO","MK","AS"], topic:"Crypto · Macro",  startIn:null    },
+    { id:2, host:"Faisal Orakzai", title:"Forex London Session Prep",          live:false, listeners:0,  speakers:["FO"],           topic:"Forex",          startIn:"2h 15m" },
+    { id:3, host:"Faisal Orakzai", title:"Web3 Builder Roundtable",            live:false, listeners:0,  speakers:["FO","ZK"],      topic:"Web3 · Dev",     startIn:"Tomorrow 9PM" },
+    { id:4, host:"Faisal Orakzai", title:"DeFi Protocol Deep Dive",            live:false, listeners:0,  speakers:["FO"],           topic:"DeFi · Crypto",  startIn:"Saturday 8PM" },
+  ];
 
   function VerifiedBadge({ tier, accent }: { tier: Tier; accent: string }) {
     const cfg = TIER_CFG[tier];
     return (
       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[9px] font-black tracking-widest uppercase"
-        style={{ background:`${accent}18`, border:`1px solid ${accent}50`, color: accent, boxShadow:`0 0 10px ${accent}25` }}>
+        style={{ background:`${accent}18`, border:`1px solid ${accent}50`, color:accent, boxShadow:`0 0 10px ${accent}25` }}>
         {tier === 3 && (
           <img src="/logos/okzbyte.png" alt="" style={{ width:9, height:9, objectFit:"contain", filter:`drop-shadow(0 0 3px ${accent})` }}/>
         )}
         {cfg.emoji} {cfg.name}
       </span>
-    );
-  }
-
-  function PostCard({
-    post, accent, profilePhoto, profileName, myTier,
-    liked, onLike, reposted, onRepost,
-    commentOpen, onToggleComment, commentText, onCommentChange, comments, onComment,
-    followed, onFollow,
-  }: {
-    post: typeof INIT_POSTS[0]; accent: string; profilePhoto: string|null; profileName: string; myTier: Tier;
-    liked: boolean; onLike: ()=>void; reposted: boolean; onRepost: ()=>void;
-    commentOpen: boolean; onToggleComment: ()=>void;
-    commentText: string; onCommentChange: (v:string)=>void;
-    comments: string[]; onComment: ()=>void;
-    followed: boolean; onFollow: ()=>void;
-  }) {
-    const cfg = TIER_CFG[post.tier];
-    return (
-      <div className="rounded-2xl overflow-hidden" style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)", backdropFilter:"blur(12px)" }}>
-        {/* Fine grid overlay */}
-        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-[0.025]"
-          style={{ backgroundImage:`linear-gradient(${accent} 1px,transparent 1px),linear-gradient(90deg,${accent} 1px,transparent 1px)`, backgroundSize:"20px 20px" }}/>
-        <div className="relative p-4">
-          {/* Author row */}
-          <div className="flex items-start gap-3 mb-3">
-            <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden flex items-center justify-center font-bold text-sm"
-              style={{ background:`${cfg.accent}22`, border:`1.5px solid ${cfg.accent}50`, color: cfg.accent }}>
-              {post.initials}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-white font-bold text-sm">{post.author}</span>
-                <VerifiedBadge tier={post.tier} accent={cfg.accent} />
-                <button onClick={onFollow}
-                  className="ml-auto font-mono text-[8px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full transition-all"
-                  style={{ border:`1px solid ${followed ? accent : "rgba(255,255,255,0.15)"}`, color: followed ? accent : "rgba(255,255,255,0.35)", background: followed ? `${accent}12` : "transparent" }}>
-                  {followed ? "Following" : "+ Follow"}
-                </button>
-              </div>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="font-mono text-[8px] tracking-widest uppercase px-1.5 py-0.5 rounded"
-                  style={{ background:`${accent}12`, color:`${accent}70` }}>{post.type}</span>
-                <span className="font-mono text-[8px] text-white/20">{post.time}</span>
-              </div>
-            </div>
-          </div>
-          {/* Body */}
-          <p className="text-white/75 text-[13px] leading-relaxed mb-4">{post.body}</p>
-          {/* Action bar */}
-          <div className="flex items-center gap-6 pt-3" style={{ borderTop:"1px solid rgba(255,255,255,0.05)" }}>
-            <button onClick={onLike} className="flex items-center gap-1.5 transition-all group">
-              <Heart size={14} fill={liked ? "#ef4444" : "none"} style={{ color: liked ? "#ef4444" : "rgba(255,255,255,0.3)", transition:"all 0.15s" }} />
-              <span className="font-mono text-[10px]" style={{ color: liked ? "#ef4444" : "rgba(255,255,255,0.3)" }}>{post.likes + (liked ? 1 : 0)}</span>
-            </button>
-            <button onClick={onToggleComment} className="flex items-center gap-1.5">
-              <MessageCircle size={14} style={{ color: commentOpen ? accent : "rgba(255,255,255,0.3)" }} />
-              <span className="font-mono text-[10px]" style={{ color: commentOpen ? accent : "rgba(255,255,255,0.3)" }}>{comments.length}</span>
-            </button>
-            <button onClick={onRepost} className="flex items-center gap-1.5">
-              <ArrowRight size={14} style={{ color: reposted ? "#22c55e" : "rgba(255,255,255,0.3)" }} />
-              <span className="font-mono text-[10px]" style={{ color: reposted ? "#22c55e" : "rgba(255,255,255,0.3)" }}>{post.reposts + (reposted ? 1 : 0)}</span>
-            </button>
-          </div>
-          {/* Inline comments */}
-          {commentOpen && (
-            <div className="mt-3 space-y-2">
-              {comments.map((c,ci)=>(
-                <div key={ci} className="flex gap-2 text-[12px] py-1.5 pl-3" style={{ borderLeft:`2px solid ${accent}30` }}>
-                  <span className="font-bold text-white/60">{profileName.split(" ")[0]}</span>
-                  <span className="text-white/45">{c}</span>
-                </div>
-              ))}
-              <div className="flex gap-2 mt-2">
-                <input value={commentText} onChange={e=>onCommentChange(e.target.value)}
-                  onKeyDown={e=>{ if(e.key==="Enter") onComment(); }}
-                  placeholder="Reply..."
-                  className="flex-1 bg-white/5 rounded-xl px-3 py-2 text-[12px] text-white/70 outline-none border border-white/10 focus:border-amber-500/40 transition-colors"
-                />
-                <button onClick={onComment}
-                  className="px-3 py-2 rounded-xl font-mono text-[9px] font-bold tracking-widest uppercase"
-                  style={{ background:`${accent}25`, color: accent, border:`1px solid ${accent}40` }}>
-                  POST
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
     );
   }
 
@@ -1790,26 +1733,34 @@ function CardPhase({
     const [activeTab, setActiveTab] = useState<NavTab>("home");
     const [daysLeft, setDaysLeft] = useState(30);
 
-    // Profile
+    /* ── Profile state ── */
     const [editingProfile, setEditingProfile] = useState(false);
     const [profileName, setProfileName] = useState(LS.get("okz_name") || "Sovereign Member");
-    const [profileBio, setProfileBio] = useState(LS.get("okz_bio") || "Web3 trader & builder. Silicon Valley.");
-    const [profilePhoto, setProfilePhoto] = useState<string|null>(LS.get("okz_photo") || null);
+    const [profileBio,  setProfileBio]  = useState(LS.get("okz_bio")  || "Web3 trader & builder. Silicon Valley.");
+    const [profilePhoto,setProfilePhoto]= useState<string|null>(LS.get("okz_photo") || null);
     const photoRef = useRef<HTMLInputElement>(null);
 
-    // Community
-    const [posts, setPosts] = useState(INIT_POSTS);
-    const [newPost, setNewPost] = useState("");
-    const mediaRef = useRef<HTMLInputElement>(null);
-    const [liked, setLiked] = useState<Record<number,boolean>>({});
-    const [reposted, setReposted] = useState<Record<number,boolean>>({});
-    const [commentOpen, setCommentOpen] = useState<Record<number,boolean>>({});
-    const [commentText, setCommentText] = useState<Record<number,string>>({});
-    const [comments, setComments] = useState<Record<number,string[]>>({});
-    const [followed, setFollowed] = useState<Record<number,boolean>>({});
+    /* ── Community state ── */
+    const [posts,   setPosts]    = useState(COMMUNITY_POSTS);
+    const [newPost, setNewPost]  = useState("");
+    const [liked,   setLiked]   = useState<Record<number,boolean>>({});
+    const [reposted,setReposted]= useState<Record<number,boolean>>({});
+    const [commentOpen,  setCommentOpen]  = useState<Record<number,boolean>>({});
+    const [commentText,  setCommentText]  = useState<Record<number,string>>({});
+    const [comments,     setComments]     = useState<Record<number,string[]>>({});
+    const [followed,     setFollowed]     = useState<Record<number,boolean>>({});
 
-    // Academy
+    /* ── Academy state ── */
     const [activeCat, setActiveCat] = useState("All");
+
+    /* ── Signals state ── */
+    const [sigMarket,  setSigMarket]  = useState<"forex"|"crypto"|null>(null);
+    const [sigSubcat,  setSigSubcat]  = useState<"spot"|"futures"|null>(null);
+
+    /* ── Spaces state ── */
+    const [activeSpace, setActiveSpace] = useState<number|null>(null);
+    const [isSpeaking,  setIsSpeaking]  = useState(false);
+    const [isMuted,     setIsMuted]     = useState(true);
 
     useEffect(() => {
       document.title = "OkzByte Hub";
@@ -1827,34 +1778,36 @@ function CardPhase({
 
     const saveProfile = () => {
       LS.set("okz_name", profileName);
-      LS.set("okz_bio", profileBio);
+      LS.set("okz_bio",  profileBio);
       if (profilePhoto) LS.set("okz_photo", profilePhoto);
       setEditingProfile(false);
     };
 
     const broadcast = () => {
       if (!newPost.trim()) return;
-      setPosts(prev => [{ id: Date.now(), author: profileName, initials: profileName.slice(0,2).toUpperCase(), tier, type:"POST", time:"now", body: newPost.trim(), likes:0, reposts:0 }, ...prev]);
+      setPosts(prev => [{
+        id: Date.now(), initials: profileName.slice(0,2).toUpperCase(),
+        type:"POST", time:"now", body:newPost.trim(), likes:0,
+      }, ...prev]);
       setNewPost("");
     };
 
-    const filteredCourses = activeCat === "All" ? COURSES : COURSES.filter(c => c.cat === activeCat);
+    /* ──────────────────────── COMPONENTS ──────────────────────── */
 
-    /* ─── PROFILE HEADER (always visible) ─── */
+    /* Profile Header — no photo in top bar */
     const ProfileHeader = () => (
-      <div className="relative rounded-3xl overflow-hidden mb-1"
+      <div className="relative rounded-3xl overflow-hidden mb-2"
         style={{ background:"rgba(12,9,3,0.85)", border:`1px solid ${accent}22`, backdropFilter:"blur(24px)", boxShadow:`0 0 40px ${accent}08` }}>
-        {/* Gold gradient banner */}
+        {/* Banner */}
         <div className="h-20 relative overflow-hidden"
-          style={{ background:`linear-gradient(135deg, #0a0600 0%, #1a1000 30%, ${accent}22 60%, #0d0800 100%)` }}>
+          style={{ background:`linear-gradient(135deg,#0a0600 0%,#1a1000 30%,${accent}22 60%,#0d0800 100%)` }}>
           <div className="absolute inset-0" style={{ backgroundImage:"radial-gradient(ellipse 80% 100% at 70% 50%, rgba(212,175,55,0.15) 0%, transparent 70%)" }}/>
-          {/* Fine grid */}
-          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage:`linear-gradient(${accent} 1px,transparent 1px),linear-gradient(90deg,${accent} 1px,transparent 1px)`, backgroundSize:"18px 18px" }}/>
-          {/* Admin row */}
+          <div className="absolute inset-0 opacity-[0.06]"
+            style={{ backgroundImage:`linear-gradient(${accent} 1px,transparent 1px),linear-gradient(90deg,${accent} 1px,transparent 1px)`, backgroundSize:"18px 18px" }}/>
           {isAdmin && (
             <div className="absolute top-2 left-3 right-3 flex items-center gap-1.5 flex-wrap">
               <span className="font-mono text-[7px] uppercase tracking-widest" style={{color:`${accent}60`}}>
-                <Crown size={8} className="inline mr-1" style={{color:accent}}/>Admin:
+                <Crown size={8} className="inline mr-0.5" style={{color:accent}}/>Admin:
               </span>
               {([1,2,3] as Tier[]).map(t=>(
                 <button key={t} onClick={()=>onGoToCard(t)}
@@ -1867,8 +1820,8 @@ function CardPhase({
             </div>
           )}
         </div>
-        {/* Avatar (overlapping banner) */}
         <div className="px-5 pb-4">
+          {/* Avatar overlapping banner */}
           <div className="flex items-end justify-between -mt-8 mb-3">
             <div className="relative">
               <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center font-bold text-2xl"
@@ -1879,17 +1832,17 @@ function CardPhase({
               </div>
               <button onClick={()=>photoRef.current?.click()}
                 className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
-                style={{ background:accent, boxShadow:`0 0 8px ${accent}60` }}>
+                style={{ background:accent }}>
                 <Upload size={9} color="#000"/>
               </button>
               <input ref={photoRef} type="file" accept="image/*" className="hidden"
                 onChange={e=>{
                   const f=e.target.files?.[0]; if(!f) return;
-                  const r=new FileReader(); r.onload=ev=>setProfilePhoto(ev.target?.result as string); r.readAsDataURL(f);
+                  const r=new FileReader(); r.onload=ev=>{ setProfilePhoto(ev.target?.result as string); }; r.readAsDataURL(f);
                 }}/>
             </div>
             <button onClick={editingProfile ? saveProfile : ()=>setEditingProfile(true)}
-              className="mb-1 font-mono text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full transition-all"
+              className="mb-1 font-mono text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full"
               style={{ border:`1px solid ${accent}50`, color:accent, background:`${accent}10` }}>
               {editingProfile ? "Save" : "Edit"}
             </button>
@@ -1898,20 +1851,18 @@ function CardPhase({
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             {editingProfile
               ? <input value={profileName} onChange={e=>setProfileName(e.target.value)}
-                  className="bg-transparent border-b text-white font-black text-lg outline-none leading-tight"
-                  style={{ borderColor:`${accent}50`, color:"#FFF3B0" }} maxLength={40}/>
+                  className="bg-transparent border-b text-[#FFF3B0] font-black text-lg outline-none leading-tight"
+                  style={{ borderColor:`${accent}50` }} maxLength={40}/>
               : <span className="font-black text-lg leading-tight" style={{ color:"#FFF3B0", textShadow:`0 0 20px ${accent}60` }}>{profileName}</span>
             }
             <VerifiedBadge tier={tier} accent={accent}/>
           </div>
-          {/* Bio */}
           {editingProfile
             ? <input value={profileBio} onChange={e=>setProfileBio(e.target.value)}
                 className="bg-transparent border-b text-neutral-400 text-[11px] font-mono w-full outline-none mb-2"
                 style={{ borderColor:`${accent}30`, letterSpacing:"0.04em" }} maxLength={100}/>
             : <p className="text-[11px] font-mono text-neutral-400 tracking-wider mb-3 leading-relaxed">{profileBio}</p>
           }
-          {/* Meta row */}
           <div className="flex items-center gap-4 pt-3" style={{ borderTop:`1px solid ${accent}15` }}>
             <div>
               <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Member ID</div>
@@ -1920,7 +1871,7 @@ function CardPhase({
             <div className="w-px h-6 bg-white/10"/>
             <div>
               <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Wallet</div>
-              <div className="font-mono text-[10px] text-neutral-500">{walletAddr.slice(0,12)}…{walletAddr.slice(-6)}</div>
+              <div className="font-mono text-[10px] text-neutral-500">{walletAddr.slice(0,10)}…{walletAddr.slice(-6)}</div>
             </div>
             <div className="ml-auto text-right">
               <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Expires</div>
@@ -1944,46 +1895,37 @@ function CardPhase({
             <span className="font-mono text-[8px] tracking-widest text-emerald-400 uppercase">Live</span>
           </div>
         </div>
-        {posts.slice(0,5).map((post,i)=>(
-          <div key={post.id} className="relative rounded-2xl overflow-hidden"
+        {COMMUNITY_POSTS.slice(0,5).map((post,i)=>(
+          <div key={post.id} className="rounded-2xl p-4"
             style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
-            <div className="p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[10px] flex-shrink-0"
-                  style={{ background:`${accent}20`, border:`1.5px solid ${accent}45`, color:accent }}>FO</div>
-                <span className="font-mono text-[8px] tracking-widest uppercase" style={{ color:`${accent}55` }}>{post.type}</span>
-                <span className="font-mono text-[8px] text-white/20 ml-auto">{post.time}</span>
-              </div>
-              <p className="text-white/70 text-[13px] leading-relaxed mb-3">{post.body}</p>
-              <button onClick={()=>setLiked(prev=>({...prev,[i]:!prev[i]}))}
-                className="flex items-center gap-1.5 transition-all"
-                style={{ color: liked[i] ? "#ef4444" : "rgba(255,255,255,0.25)" }}>
-                <Heart size={12} fill={liked[i] ? "#ef4444" : "none"}/>
-                <span className="font-mono text-[10px]">{post.likes+(liked[i]?1:0)}</span>
-              </button>
-            </div>
-          </div>
-        ))}
-        {/* Live Sessions */}
-        <div className="pt-2">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-4 h-px" style={{ background:accent }}/>
-            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color:`${accent}80` }}>Live Sessions</span>
-          </div>
-          <div className="rounded-2xl p-4" style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex items-center gap-2 mb-2">
-              <Video size={13} style={{color:accent}}/>
-              <span className="font-mono text-[9px] uppercase tracking-widest" style={{color:accent}}>Zoom Masterclass</span>
-              <span className="ml-auto font-mono text-[7px] border border-white/10 px-1.5 py-0.5 text-white/25">UPCOMING</span>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[10px] flex-shrink-0"
+                style={{ background:`${accent}20`, border:`1.5px solid ${accent}45`, color:accent }}>{post.initials}</div>
+              <span className="font-mono text-[8px] tracking-widest uppercase" style={{ color:`${accent}55` }}>{post.type}</span>
+              <span className="font-mono text-[8px] text-white/20 ml-auto">{post.time}</span>
             </div>
-            <p className="text-white font-semibold text-sm mb-1">Advanced Risk Management & Portfolio Sizing</p>
-            <p className="font-mono text-[10px] text-white/30 mb-3">Saturday, July 5 · 8:00 PM PKT</p>
-            <button onClick={()=>alert("Zoom link will be sent 30 mins before session.")}
-              className="w-full py-2.5 rounded-xl font-mono font-bold text-[10px] tracking-widest uppercase border transition-colors"
-              style={{ borderColor:`${accent}40`, color:accent }}>
-              Join Zoom Session
+            <p className="text-white/70 text-[13px] leading-relaxed mb-3">{post.body}</p>
+            <button onClick={()=>setLiked(prev=>({...prev,[i]:!prev[i]}))}
+              className="flex items-center gap-1.5"
+              style={{ color: liked[i] ? "#ef4444" : "rgba(255,255,255,0.25)" }}>
+              <Heart size={12} fill={liked[i] ? "#ef4444" : "none"}/>
+              <span className="font-mono text-[10px]">{post.likes+(liked[i]?1:0)}</span>
             </button>
           </div>
+        ))}
+        <div className="rounded-2xl p-4" style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
+          <div className="flex items-center gap-2 mb-2">
+            <Video size={13} style={{color:accent}}/>
+            <span className="font-mono text-[9px] uppercase tracking-widest" style={{color:accent}}>Zoom Masterclass</span>
+            <span className="ml-auto font-mono text-[7px] border border-white/10 px-1.5 py-0.5 text-white/25">UPCOMING</span>
+          </div>
+          <p className="text-white font-bold text-sm mb-1">Advanced Risk Management & Portfolio Sizing</p>
+          <p className="font-mono text-[10px] text-white/30 mb-3">Saturday, July 5 · 8:00 PM PKT</p>
+          <button onClick={()=>alert("Zoom link will be sent 30 mins before session.")}
+            className="w-full py-2.5 rounded-xl font-mono font-bold text-[10px] tracking-widest uppercase border transition-colors"
+            style={{ borderColor:`${accent}40`, color:accent }}>
+            Join Zoom Session
+          </button>
         </div>
       </div>
     );
@@ -1991,10 +1933,9 @@ function CardPhase({
     /* ─── COMMUNITY TAB ─── */
     const CommunityTab = () => (
       <div className="space-y-3">
-        {/* Composer */}
         <div className="rounded-2xl p-4" style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${accent}22`, backdropFilter:"blur(16px)" }}>
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden flex items-center justify-center font-bold"
+            <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center font-bold overflow-hidden"
               style={{ background:`${accent}20`, border:`1.5px solid ${accent}50`, color:accent }}>
               {profilePhoto ? <img src={profilePhoto} className="w-full h-full object-cover"/> : profileName[0]?.toUpperCase()}
             </div>
@@ -2003,171 +1944,545 @@ function CardPhase({
               className="flex-1 bg-transparent text-white/80 text-sm resize-none outline-none leading-relaxed placeholder:text-white/20"
               style={{ borderBottom:`1px solid ${accent}15`, paddingBottom:8 }} rows={3}/>
           </div>
-          <div className="flex items-center justify-between mt-3 pt-2" style={{ borderTop:`1px solid rgba(255,255,255,0.06)` }}>
+          <div className="flex items-center justify-between mt-3 pt-2" style={{ borderTop:"1px solid rgba(255,255,255,0.06)" }}>
             <span className="font-mono text-[9px] text-white/20">{280-newPost.length}/280</span>
             <button onClick={broadcast}
               className="font-mono text-[9px] font-black tracking-widest uppercase px-5 py-2 rounded-full transition-all active:scale-95"
-              style={{ background: newPost.trim() ? accent : `${accent}30`, color:"#000", boxShadow: newPost.trim() ? `0 0 20px ${accent}40` : "none" }}>
+              style={{ background:newPost.trim()?accent:`${accent}30`, color:"#000", boxShadow:newPost.trim()?`0 0 20px ${accent}40`:"none" }}>
               ⚡ Broadcast
             </button>
           </div>
         </div>
-        {/* Feed */}
         {posts.map(post=>(
-          <PostCard key={post.id} post={post} accent={accent}
-            profilePhoto={profilePhoto} profileName={profileName} myTier={tier}
-            liked={!!liked[post.id]} onLike={()=>setLiked(p=>({...p,[post.id]:!p[post.id]}))}
-            reposted={!!reposted[post.id]} onRepost={()=>setReposted(p=>({...p,[post.id]:!p[post.id]}))}
-            commentOpen={!!commentOpen[post.id]} onToggleComment={()=>setCommentOpen(p=>({...p,[post.id]:!p[post.id]}))}
-            commentText={commentText[post.id]||""} onCommentChange={v=>setCommentText(p=>({...p,[post.id]:v}))}
-            comments={comments[post.id]||[]}
-            onComment={()=>{
-              const t=(commentText[post.id]||"").trim();
-              if(!t) return;
-              setComments(p=>({...p,[post.id]:[...(p[post.id]||[]),t]}));
-              setCommentText(p=>({...p,[post.id]:""}));
-            }}
-            followed={!!followed[post.id]} onFollow={()=>setFollowed(p=>({...p,[post.id]:!p[post.id]}))}
-          />
+          <div key={post.id} className="rounded-2xl p-4"
+            style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+                style={{ background:`${accent}22`, border:`1.5px solid ${accent}50`, color:accent }}>{post.initials}</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-white font-bold text-sm">{profileName}</span>
+                  <VerifiedBadge tier={tier} accent={accent}/>
+                  <button onClick={()=>setFollowed(p=>({...p,[post.id]:!p[post.id]}))}
+                    className="ml-auto font-mono text-[8px] font-bold uppercase px-2.5 py-0.5 rounded-full"
+                    style={{ border:`1px solid ${followed[post.id]?accent:"rgba(255,255,255,0.15)"}`, color:followed[post.id]?accent:"rgba(255,255,255,0.35)", background:followed[post.id]?`${accent}12`:"transparent" }}>
+                    {followed[post.id]?"Following":"+ Follow"}
+                  </button>
+                </div>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="font-mono text-[8px] uppercase px-1.5 py-0.5 rounded tracking-wider"
+                    style={{ background:`${accent}12`, color:`${accent}70` }}>{post.type}</span>
+                  <span className="font-mono text-[8px] text-white/20">{post.time}</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-white/75 text-[13px] leading-relaxed mb-4">{post.body}</p>
+            <div className="flex items-center gap-6 pt-3" style={{ borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+              <button onClick={()=>setLiked(p=>({...p,[post.id]:!p[post.id]}))} className="flex items-center gap-1.5">
+                <Heart size={14} fill={liked[post.id]?"#ef4444":"none"} style={{ color:liked[post.id]?"#ef4444":"rgba(255,255,255,0.3)" }}/>
+                <span className="font-mono text-[10px]" style={{ color:liked[post.id]?"#ef4444":"rgba(255,255,255,0.3)" }}>{post.likes+(liked[post.id]?1:0)}</span>
+              </button>
+              <button onClick={()=>setCommentOpen(p=>({...p,[post.id]:!p[post.id]}))} className="flex items-center gap-1.5">
+                <MessageCircle size={14} style={{ color:commentOpen[post.id]?accent:"rgba(255,255,255,0.3)" }}/>
+                <span className="font-mono text-[10px]" style={{ color:commentOpen[post.id]?accent:"rgba(255,255,255,0.3)" }}>{(comments[post.id]||[]).length}</span>
+              </button>
+              <button onClick={()=>setReposted(p=>({...p,[post.id]:!p[post.id]}))} className="flex items-center gap-1.5">
+                <ArrowRight size={14} style={{ color:reposted[post.id]?"#22c55e":"rgba(255,255,255,0.3)" }}/>
+                <span className="font-mono text-[10px]" style={{ color:reposted[post.id]?"#22c55e":"rgba(255,255,255,0.3)" }}>Repost</span>
+              </button>
+            </div>
+            {commentOpen[post.id] && (
+              <div className="mt-3 space-y-1.5">
+                {(comments[post.id]||[]).map((c,ci)=>(
+                  <div key={ci} className="pl-3 py-1.5 text-[12px]" style={{ borderLeft:`2px solid ${accent}30` }}>
+                    <span className="font-bold text-white/60 mr-2">{profileName.split(" ")[0]}</span>
+                    <span className="text-white/45">{c}</span>
+                  </div>
+                ))}
+                <div className="flex gap-2 mt-2">
+                  <input value={commentText[post.id]||""} onChange={e=>setCommentText(p=>({...p,[post.id]:e.target.value}))}
+                    onKeyDown={e=>{ if(e.key==="Enter"){ const t=(commentText[post.id]||"").trim(); if(!t) return; setComments(p=>({...p,[post.id]:[...(p[post.id]||[]),t]})); setCommentText(p=>({...p,[post.id]:""})); }}}
+                    placeholder="Reply..." className="flex-1 bg-white/5 rounded-xl px-3 py-2 text-[12px] text-white/70 outline-none border border-white/10 focus:border-amber-500/40"/>
+                  <button onClick={()=>{ const t=(commentText[post.id]||"").trim(); if(!t) return; setComments(p=>({...p,[post.id]:[...(p[post.id]||[]),t]})); setCommentText(p=>({...p,[post.id]:""})); }}
+                    className="px-3 py-2 rounded-xl font-mono text-[9px] font-bold uppercase"
+                    style={{ background:`${accent}25`, color:accent, border:`1px solid ${accent}40` }}>POST</button>
+                </div>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     );
 
     /* ─── ACADEMY TAB ─── */
-    const AcademyTab = () => (
-      <div className="space-y-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-4 h-px" style={{background:accent}}/>
-            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${accent}80`}}>OkzByte Academy</span>
+    const AcademyTab = () => {
+      const filtered = activeCat === "All" ? COURSES : COURSES.filter(c=>c.cat===activeCat);
+      return (
+        <div className="space-y-4">
+          <div>
+            <div className="flex items-center gap-2 mb-0.5">
+              <div className="w-4 h-px" style={{background:accent}}/>
+              <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${accent}80`}}>OkzByte Academy</span>
+            </div>
+            <p className="font-mono text-[10px] text-neutral-500 tracking-wider ml-6">Elite trading & builder curriculum</p>
           </div>
-          <p className="font-mono text-[10px] text-neutral-500 tracking-wider">Curated for elite traders & builders</p>
-        </div>
-        {/* Filter pills */}
-        <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth:"none" }}>
-          {CATS.map(cat=>(
-            <button key={cat} onClick={()=>setActiveCat(cat)}
-              className="flex-shrink-0 font-bold text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full transition-all"
-              style={{
-                border: `1px solid ${activeCat===cat ? accent : "rgba(212,175,55,0.3)"}`,
-                background: activeCat===cat ? accent : "rgba(9,7,2,0.6)",
-                color: activeCat===cat ? "#000" : "#D4AF37",
-                boxShadow: activeCat===cat ? `0 0 18px ${accent}40` : "none",
-              }}>
-              {cat}
-            </button>
-          ))}
-        </div>
-        {/* Courses */}
-        <div className="space-y-3">
-          {filteredCourses.map((c,i)=>(
-            <motion.div key={i} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.04}}
-              className="relative rounded-2xl overflow-hidden"
-              style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${c.locked ? "rgba(255,255,255,0.05)" : `${accent}25`}` }}>
-              {c.locked && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center z-10"
-                  style={{ background:"rgba(0,0,0,0.7)", backdropFilter:"blur(3px)" }}>
-                  <div className="text-2xl mb-1">🔒</div>
-                  <div className="font-mono text-[8px] text-white/35 uppercase tracking-widest">Higher Tier Required</div>
-                </div>
-              )}
-              <div className="p-4 flex items-start gap-3">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-mono text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-sm"
-                      style={{ background:`${accent}12`, color:`${accent}70`, border:`1px solid ${accent}20` }}>
-                      {c.cat}
-                    </span>
-                    <span className="font-mono text-[8px] text-white/20">{c.level}</span>
+          <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth:"none" }}>
+            {ACADEMY_CATS.map(cat=>(
+              <button key={cat} onClick={()=>setActiveCat(cat)}
+                className="flex-shrink-0 font-bold text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full transition-all"
+                style={{ border:`1px solid ${activeCat===cat?accent:"rgba(212,175,55,0.3)"}`, background:activeCat===cat?accent:"rgba(9,7,2,0.6)", color:activeCat===cat?"#000":"#D4AF37", boxShadow:activeCat===cat?`0 0 18px ${accent}40`:"none" }}>
+                {cat}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-3">
+            {filtered.map((c,i)=>(
+              <motion.div key={i} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.04}}
+                className="relative rounded-2xl overflow-hidden"
+                style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${c.locked?"rgba(255,255,255,0.05)":`${accent}25`}` }}>
+                {c.locked && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 rounded-2xl"
+                    style={{ background:"rgba(0,0,0,0.7)", backdropFilter:"blur(3px)" }}>
+                    <div className="text-2xl mb-1">🔒</div>
+                    <div className="font-mono text-[8px] text-white/35 uppercase tracking-widest">Higher Tier Required</div>
                   </div>
-                  <h3 className="text-white font-bold text-sm mb-1">{c.title}</h3>
-                  <p className="text-neutral-500 text-[11px] font-mono">{c.sub}</p>
+                )}
+                <div className="p-4 flex items-start gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-mono text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-sm"
+                        style={{ background:`${accent}12`, color:`${accent}70`, border:`1px solid ${accent}20` }}>{c.cat}</span>
+                      <span className="font-mono text-[8px] text-white/20">{c.level}</span>
+                    </div>
+                    <h3 className="text-white font-bold text-sm mb-1">{c.title}</h3>
+                    <p className="text-neutral-500 text-[11px] font-mono">{c.sub}</p>
+                  </div>
+                  {!c.locked && (
+                    <button onClick={()=>alert(`Opening: ${c.title}`)}
+                      className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background:`${accent}20`, border:`1px solid ${accent}50` }}>
+                      <ChevronRight size={14} style={{color:accent}}/>
+                    </button>
+                  )}
                 </div>
-                {!c.locked && (
-                  <button onClick={()=>alert(`Opening: ${c.title}`)}
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background:`${accent}20`, border:`1px solid ${accent}50` }}>
-                    <ChevronRight size={14} style={{color:accent}}/>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    /* ─── SIGNALS TAB ─── */
+    const SignalsTab = () => {
+      const sigAccent = "#D4AF37";
+      return (
+        <div className="space-y-4">
+          {/* Market filter — Forex / Crypto */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-4 h-px" style={{background:sigAccent}}/>
+              <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${sigAccent}80`}}>Trading Signals</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {(["forex","crypto"] as const).map(m=>{
+                const active = sigMarket === m;
+                return (
+                  <button key={m} onClick={()=>{ setSigMarket(m); setSigSubcat(null); }}
+                    className="py-4 rounded-2xl flex flex-col items-center gap-2 transition-all active:scale-95"
+                    style={{ background:active?`${sigAccent}18`:"rgba(15,12,6,0.8)", border:`1.5px solid ${active?sigAccent:"rgba(255,255,255,0.07)"}`, boxShadow:active?`0 0 20px ${sigAccent}20`:"none" }}>
+                    <span className="text-3xl">{m==="forex"?"💱":"🪙"}</span>
+                    <span className="font-mono font-black text-[11px] tracking-widest uppercase" style={{ color:active?sigAccent:"rgba(255,255,255,0.5)" }}>
+                      {m==="forex"?"Forex":"Crypto"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Crypto sub-filter */}
+          {sigMarket === "crypto" && (
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-4 h-px" style={{background:sigAccent}}/>
+                <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${sigAccent}80`}}>Market Type</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {(["spot","futures"] as const).map(s=>{
+                  const active = sigSubcat === s;
+                  return (
+                    <button key={s} onClick={()=>setSigSubcat(s)}
+                      className="py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                      style={{ background:active?`${sigAccent}18`:"rgba(15,12,6,0.8)", border:`1.5px solid ${active?sigAccent:"rgba(255,255,255,0.07)"}` }}>
+                      <span className="text-xl">{s==="spot"?"📈":"⚡"}</span>
+                      <span className="font-mono font-bold text-[11px] tracking-widest uppercase" style={{ color:active?sigAccent:"rgba(255,255,255,0.4)" }}>
+                        {s==="spot"?"Spot":"Futures"}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Forex signals */}
+          {sigMarket === "forex" && (
+            <div className="space-y-3">
+              <p className="font-mono text-[8px] text-red-400/70 bg-red-900/20 border border-red-500/20 rounded-xl px-3 py-2 text-center tracking-wider">
+                ⚠ Trade at your own risk. OkzByte is not responsible for losses.
+              </p>
+              {FOREX_SIGNALS.map((s,i)=>(
+                <motion.div key={s.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.05}}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${sigAccent}22` }}>
+                  <div className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs"
+                        style={{ background:`${sigAccent}15`, border:`1px solid ${sigAccent}40`, color:sigAccent }}>
+                        {s.pair.split("/")[0]}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-bold text-base">{s.pair}</span>
+                          <span className="font-mono text-[9px] font-black px-2 py-0.5 rounded"
+                            style={{ background:s.dir==="LONG"?"#16a34a22":"#dc262622", color:s.dir==="LONG"?"#22c55e":"#ef4444", border:`1px solid ${s.dir==="LONG"?"#22c55e40":"#ef444440"}` }}>
+                            {s.dir}
+                          </span>
+                        </div>
+                        <div className="font-mono text-[8px] text-white/25 mt-0.5">{s.session} Session · {s.date}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-mono text-[8px] text-white/20 mb-0.5">Confidence</div>
+                        <div className="font-mono text-[9px] font-bold" style={{ color:s.conf==="HIGH"?"#22c55e":s.conf==="MEDIUM"?"#f59e0b":"#94a3b8" }}>{s.conf}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[["Entry",s.entry],["TP1",s.tp1],["TP2",s.tp2],["SL",s.sl]].map(([label,val])=>(
+                        <div key={label} className="rounded-lg p-2 text-center"
+                          style={{ background:label==="SL"?"rgba(239,68,68,0.08)":label==="Entry"?`${sigAccent}10`:"rgba(34,197,94,0.08)", border:`1px solid ${label==="SL"?"rgba(239,68,68,0.2)":label==="Entry"?`${sigAccent}30`:"rgba(34,197,94,0.2)"}` }}>
+                          <div className="font-mono text-[7px] text-white/30 uppercase mb-1">{label}</div>
+                          <div className="font-mono text-[10px] font-bold text-white">{val}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Spot signals */}
+          {sigMarket === "crypto" && sigSubcat === "spot" && (
+            <div className="space-y-3">
+              <p className="font-mono text-[8px] text-red-400/70 bg-red-900/20 border border-red-500/20 rounded-xl px-3 py-2 text-center tracking-wider">
+                ⚠ Trade at your own risk. OkzByte is not responsible for losses.
+              </p>
+              {SPOT_SIGNALS.map((s,i)=>(
+                <motion.div key={s.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.05}}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${sigAccent}22` }}>
+                  <div className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs"
+                        style={{ background:`${sigAccent}15`, border:`1px solid ${sigAccent}40`, color:sigAccent }}>
+                        {s.pair.split("/")[0].slice(0,3)}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-bold text-base">{s.pair}</span>
+                          <span className="font-mono text-[9px] font-black px-2 py-0.5 rounded"
+                            style={{ background:s.dir==="LONG"?"#16a34a22":"#dc262622", color:s.dir==="LONG"?"#22c55e":"#ef4444", border:`1px solid ${s.dir==="LONG"?"#22c55e40":"#ef444440"}` }}>
+                            {s.dir}
+                          </span>
+                        </div>
+                        <div className="font-mono text-[8px] text-white/25 mt-0.5">{s.date}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-mono text-[8px] text-white/20 mb-0.5">Capital</div>
+                        <div className="font-mono text-[9px] font-bold text-emerald-400">{s.capital}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[["Entry",s.entry],["TP1",s.tp1],["TP2",s.tp2],["SL",s.sl]].map(([label,val])=>(
+                        <div key={label} className="rounded-lg p-2 text-center"
+                          style={{ background:label==="SL"?"rgba(239,68,68,0.08)":label==="Entry"?`${sigAccent}10`:"rgba(34,197,94,0.08)", border:`1px solid ${label==="SL"?"rgba(239,68,68,0.2)":label==="Entry"?`${sigAccent}30`:"rgba(34,197,94,0.2)"}` }}>
+                          <div className="font-mono text-[7px] text-white/30 uppercase mb-1">{label}</div>
+                          <div className="font-mono text-[10px] font-bold text-white">{val}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Futures signals */}
+          {sigMarket === "crypto" && sigSubcat === "futures" && (
+            <div className="space-y-3">
+              <p className="font-mono text-[8px] text-red-400/70 bg-red-900/20 border border-red-500/20 rounded-xl px-3 py-2 text-center tracking-wider">
+                ⚠ Trade at your own risk. OkzByte is not responsible for losses.
+              </p>
+              {FUTURES_SIGNALS.map((s,i)=>(
+                <motion.div key={s.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.05}}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${sigAccent}22` }}>
+                  <div className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs"
+                        style={{ background:`${sigAccent}15`, border:`1px solid ${sigAccent}40`, color:sigAccent }}>
+                        {s.pair.split("/")[0].slice(0,4)}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-bold text-base">{s.pair}</span>
+                          <span className="font-mono text-[9px] font-black px-2 py-0.5 rounded"
+                            style={{ background:s.dir==="LONG"?"#16a34a22":"#dc262622", color:s.dir==="LONG"?"#22c55e":"#ef4444", border:`1px solid ${s.dir==="LONG"?"#22c55e40":"#ef444440"}` }}>
+                            {s.dir}
+                          </span>
+                        </div>
+                        <div className="font-mono text-[8px] text-white/25 mt-0.5">{s.date}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex gap-2">
+                          <div className="rounded px-2 py-1 text-center" style={{ background:"#16a34a22", border:"1px solid #22c55e40" }}>
+                            <div className="font-mono text-[7px] text-white/30 mb-0.5">Leverage</div>
+                            <div className="font-mono text-[10px] font-bold text-emerald-400">{s.lev}</div>
+                          </div>
+                          <div className="rounded px-2 py-1 text-center" style={{ background:`${sigAccent}12`, border:`1px solid ${sigAccent}30` }}>
+                            <div className="font-mono text-[7px] text-white/30 mb-0.5">Capital</div>
+                            <div className="font-mono text-[10px] font-bold" style={{color:sigAccent}}>{s.capital}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[["Entry",s.entry],["TP1",s.tp1],["TP2",s.tp2],["SL",s.sl]].map(([label,val])=>(
+                        <div key={label} className="rounded-lg p-2 text-center"
+                          style={{ background:label==="SL"?"rgba(239,68,68,0.08)":label==="Entry"?`${sigAccent}10`:"rgba(34,197,94,0.08)", border:`1px solid ${label==="SL"?"rgba(239,68,68,0.2)":label==="Entry"?`${sigAccent}30`:"rgba(34,197,94,0.2)"}` }}>
+                          <div className="font-mono text-[7px] text-white/30 uppercase mb-1">{label}</div>
+                          <div className="font-mono text-[10px] font-bold text-white">{val}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty state */}
+          {sigMarket === "crypto" && !sigSubcat && (
+            <div className="text-center py-12">
+              <div className="text-4xl mb-3">🪙</div>
+              <p className="font-mono text-[11px] text-white/25 uppercase tracking-widest">Select Spot or Futures above</p>
+            </div>
+          )}
+          {!sigMarket && (
+            <div className="text-center py-12">
+              <div className="text-4xl mb-3">📊</div>
+              <p className="font-mono text-[11px] text-white/25 uppercase tracking-widest">Select a market to view signals</p>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    /* ─── SPACES TAB ─── */
+    const SpacesTab = () => {
+      const spaceAccent = accent;
+      if (activeSpace !== null) {
+        const sp = SPACES.find(s=>s.id===activeSpace)!;
+        return (
+          <div className="space-y-4">
+            <button onClick={()=>{ setActiveSpace(null); setIsSpeaking(false); setIsMuted(true); }}
+              className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest"
+              style={{ color:"rgba(255,255,255,0.3)" }}>
+              <ChevronRight size={12} style={{ transform:"rotate(180deg)" }}/> Back to Spaces
+            </button>
+            {/* Live room */}
+            <div className="rounded-3xl overflow-hidden"
+              style={{ background:"rgba(12,9,3,0.9)", border:`1px solid ${spaceAccent}30`, backdropFilter:"blur(24px)" }}>
+              {/* Header */}
+              <div className="p-5" style={{ background:`linear-gradient(180deg,${spaceAccent}12 0%,transparent 100%)`, borderBottom:`1px solid ${spaceAccent}15` }}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      {sp.live && (
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background:"rgba(239,68,68,0.15)", border:"1px solid rgba(239,68,68,0.4)" }}>
+                          <motion.div className="w-1.5 h-1.5 rounded-full bg-red-500" animate={{ opacity:[1,0.3,1] }} transition={{ duration:0.8, repeat:Infinity }}/>
+                          <span className="font-mono text-[8px] font-bold text-red-400 tracking-widest uppercase">LIVE</span>
+                        </div>
+                      )}
+                      <span className="font-mono text-[8px] text-white/25 uppercase tracking-widest">{sp.topic}</span>
+                    </div>
+                    <h2 className="text-white font-black text-lg leading-tight">{sp.title}</h2>
+                    <p className="font-mono text-[10px] text-white/30 mt-1">Hosted by {sp.host}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <motion.div className="w-2 h-2 rounded-full bg-emerald-400" animate={{ opacity:[1,0.3,1] }} transition={{ duration:1, repeat:Infinity }}/>
+                  <span className="font-mono text-[10px] text-emerald-400">{sp.listeners + (sp.live?1:0)} listening</span>
+                </div>
+              </div>
+              {/* Speaker avatars */}
+              <div className="p-5">
+                <div className="font-mono text-[8px] text-white/25 uppercase tracking-widest mb-4">Speakers</div>
+                <div className="flex gap-4 flex-wrap">
+                  {sp.speakers.map((s,i)=>(
+                    <div key={i} className="flex flex-col items-center gap-2">
+                      <div className="relative">
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center font-black text-base"
+                          style={{ background:`${spaceAccent}18`, border:`2px solid ${spaceAccent}60`, color:spaceAccent, boxShadow:`0 0 16px ${spaceAccent}25` }}>
+                          {s}
+                        </div>
+                        {i===0 && (
+                          <motion.div className="absolute -inset-1 rounded-full border" style={{ borderColor:spaceAccent }}
+                            animate={{ opacity:[0.8,0.2,0.8], scale:[1,1.05,1] }} transition={{ duration:1.5, repeat:Infinity }}/>
+                        )}
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
+                          style={{ background:i===0?"#22c55e":"rgba(255,255,255,0.15)", border:"1.5px solid #000" }}>
+                          {i===0 ? <Mic size={8} color="#000"/> : <MicOff size={8} color="rgba(255,255,255,0.5)"/>}
+                        </div>
+                      </div>
+                      <span className="font-mono text-[9px] text-white/50">{s===sp.speakers[0]?"Host":s}</span>
+                    </div>
+                  ))}
+                  {/* My avatar */}
+                  {isSpeaking && (
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="relative">
+                        <div className="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center font-black text-base"
+                          style={{ background:`${spaceAccent}18`, border:`2px solid ${spaceAccent}40`, color:spaceAccent }}>
+                          {profilePhoto ? <img src={profilePhoto} className="w-full h-full object-cover"/> : profileName[0]}
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
+                          style={{ background:isMuted?"rgba(255,255,255,0.1)":"#22c55e", border:"1.5px solid #000" }}>
+                          {isMuted ? <MicOff size={8} color="rgba(255,255,255,0.4)"/> : <Mic size={8} color="#000"/>}
+                        </div>
+                      </div>
+                      <span className="font-mono text-[9px] text-white/50">You</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              {/* Controls */}
+              <div className="p-5 flex items-center justify-between" style={{ borderTop:`1px solid ${spaceAccent}12` }}>
+                {!isSpeaking ? (
+                  <button onClick={()=>{ setIsSpeaking(true); setIsMuted(false); }}
+                    className="flex-1 py-3 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase mr-3"
+                    style={{ background:`${spaceAccent}20`, border:`1.5px solid ${spaceAccent}50`, color:spaceAccent }}>
+                    🎙️ Request to Speak
+                  </button>
+                ) : (
+                  <button onClick={()=>setIsMuted(p=>!p)}
+                    className="flex-1 py-3 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase mr-3 transition-all"
+                    style={{ background:isMuted?"rgba(255,255,255,0.08)":"rgba(34,197,94,0.2)", border:`1.5px solid ${isMuted?"rgba(255,255,255,0.15)":"rgba(34,197,94,0.5)"}`, color:isMuted?"rgba(255,255,255,0.4)":"#22c55e" }}>
+                    {isMuted ? "🔇 Unmute" : "🎙️ Mute"}
                   </button>
                 )}
+                <button onClick={()=>{ setActiveSpace(null); setIsSpeaking(false); setIsMuted(true); }}
+                  className="py-3 px-4 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase"
+                  style={{ background:"rgba(239,68,68,0.15)", border:"1.5px solid rgba(239,68,68,0.4)", color:"#ef4444" }}>
+                  Leave
+                </button>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    );
-
-    /* ─── PASSPORT TAB ─── */
-    const PassportTab = () => (
-      <div className="space-y-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-4 h-px" style={{background:accent}}/>
-            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${accent}80`}}>Identity Passport</span>
+            </div>
           </div>
-          <p className="font-mono text-[10px] text-neutral-500 tracking-wider">Generate your 24K Liquid Gold Sovereign Card</p>
-        </div>
-        <div className="space-y-3">
-          {([1,2,3] as Tier[]).map(t=>{
-            const tc = TIER_CFG[t];
-            const ta = t === 3 ? "#D4AF37" : tc.accent;
-            return (
-              <button key={t} onClick={()=>onGoToCard(t)}
-                className="w-full relative rounded-2xl p-5 text-left overflow-hidden transition-all active:scale-[0.98]"
-                style={{ background:`linear-gradient(135deg,${tc.cardBg[0]},${tc.cardBg[1]})`, border:`1px solid ${ta}35`, boxShadow:`0 0 25px ${ta}10` }}>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-                    style={{ background:`${ta}18`, border:`1px solid ${ta}40` }}>{tc.emoji}</div>
-                  <div>
-                    <div className="text-white font-black text-base">{tc.name}</div>
-                    <div className="font-mono text-[9px] uppercase tracking-widest mt-0.5" style={{color:`${ta}65`}}>Tier {t} · {tc.priceLabel}/mo</div>
+        );
+      }
+
+      return (
+        <div className="space-y-4">
+          <div>
+            <div className="flex items-center gap-2 mb-0.5">
+              <div className="w-4 h-px" style={{background:spaceAccent}}/>
+              <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${spaceAccent}80`}}>OkzByte Spaces</span>
+            </div>
+            <p className="font-mono text-[10px] text-neutral-500 tracking-wider ml-6">Live voice rooms & scheduled sessions</p>
+          </div>
+          {/* Schedule a space (host only hint) */}
+          {isAdmin && (
+            <button onClick={()=>alert("Space scheduling coming soon — you'll be able to set title, time, and topic.")}
+              className="w-full py-3 rounded-2xl font-mono font-black text-[10px] tracking-widest uppercase flex items-center justify-center gap-2"
+              style={{ background:`${spaceAccent}12`, border:`1px dashed ${spaceAccent}35`, color:`${spaceAccent}70` }}>
+              + Schedule a Space
+            </button>
+          )}
+          {/* Space cards */}
+          <div className="space-y-3">
+            {SPACES.map((sp,i)=>(
+              <motion.div key={sp.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.06}}
+                className="rounded-2xl overflow-hidden cursor-pointer transition-all active:scale-[0.98]"
+                style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${sp.live?`${spaceAccent}35`:"rgba(255,255,255,0.06)"}`, boxShadow:sp.live?`0 0 20px ${spaceAccent}10`:"none" }}
+                onClick={()=>setActiveSpace(sp.id)}>
+                <div className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0"
+                      style={{ background:`${spaceAccent}18`, border:`1px solid ${spaceAccent}40`, color:spaceAccent }}>
+                      {sp.live ? "🔴" : "🎙️"}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        {sp.live && (
+                          <span className="font-mono text-[8px] font-black px-2 py-0.5 rounded tracking-widest"
+                            style={{ background:"rgba(239,68,68,0.15)", color:"#ef4444", border:"1px solid rgba(239,68,68,0.4)" }}>LIVE</span>
+                        )}
+                        <span className="font-mono text-[8px] text-white/25 uppercase">{sp.topic}</span>
+                      </div>
+                      <h3 className="text-white font-bold text-sm leading-tight mb-1">{sp.title}</h3>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-[9px] text-white/30">by {sp.host}</span>
+                        {sp.live
+                          ? <span className="font-mono text-[9px] text-emerald-400">🎧 {sp.listeners} listening</span>
+                          : <span className="font-mono text-[9px] text-white/25">⏰ {sp.startIn}</span>
+                        }
+                      </div>
+                    </div>
+                    <div style={{color:`${spaceAccent}40`}}><ChevronRight size={16}/></div>
                   </div>
-                  <div className="ml-auto" style={{color:`${ta}50`}}><ChevronRight size={20}/></div>
                 </div>
-                <motion.div className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{ border:`1px solid ${ta}` }}
-                  animate={{ opacity:[0.05,0.2,0.05] }} transition={{ duration:3, repeat:Infinity, delay:t*0.7 }}/>
-              </button>
-            );
-          })}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
     const tabs: { id: NavTab; icon: string; label: string }[] = [
       { id:"home",      icon:"🏠", label:"Home"      },
       { id:"community", icon:"👥", label:"Community" },
       { id:"academy",   icon:"🎓", label:"Academy"   },
-      { id:"passport",  icon:"🎟️", label:"Passport"  },
+      { id:"signals",   icon:"📊", label:"Signals"   },
+      { id:"spaces",    icon:"🎙️", label:"Spaces"    },
     ];
 
     return (
       <div className="min-h-screen bg-black text-white" style={{ fontFamily:"system-ui,sans-serif" }}>
-        {/* OkzByte top bar */}
+        {/* Top bar — OkzByte logo only, NO user photo */}
         <div className="sticky top-0 z-40 px-4 py-3 flex items-center justify-between"
-          style={{ background:"rgba(0,0,0,0.9)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+          style={{ background:"rgba(0,0,0,0.92)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
           <div className="flex items-center gap-2">
-            <img src="/logos/okzbyte.png" style={{ width:28, height:28, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
-            <div className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color:`${accent}70` }}>OkzByte Hub</div>
+            <img src="/logos/okzbyte.png" alt="OkzByte" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
+            <span className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color:`${accent}70` }}>OkzByte Hub</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="font-mono text-[8px] text-white/25 border border-white/10 px-2 py-1 rounded-full">{daysLeft}d left</div>
-          </div>
+          <div className="font-mono text-[8px] border border-white/10 px-2.5 py-1 rounded-full text-white/25">{daysLeft}d left</div>
         </div>
 
-        {/* Scrollable content */}
+        {/* Scrollable area */}
         <div className="max-w-lg mx-auto px-4 pt-4 pb-28">
           <ProfileHeader/>
-          {/* Tab indicator strip */}
-          <div className="flex gap-0 mb-4 mt-3 rounded-2xl overflow-hidden" style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)" }}>
+
+          {/* Tab strip */}
+          <div className="flex mb-4 mt-3 rounded-2xl overflow-hidden" style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)" }}>
             {tabs.map(tab=>{
               const isActive = activeTab === tab.id;
               return (
                 <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
-                  className="flex-1 flex flex-col items-center justify-center py-3 relative transition-all"
-                  style={{ color: isActive ? accent : "rgba(255,255,255,0.3)", background: isActive ? `${accent}10` : "transparent" }}>
+                  className="flex-1 flex flex-col items-center justify-center py-2.5 relative transition-all"
+                  style={{ color:isActive?accent:"rgba(255,255,255,0.3)", background:isActive?`${accent}10`:"transparent" }}>
                   <span className="text-sm mb-0.5">{tab.icon}</span>
-                  <span className="font-mono text-[8px] font-bold tracking-wider uppercase">{tab.label}</span>
+                  <span className="font-mono text-[7px] font-bold tracking-wide uppercase">{tab.label}</span>
                   {isActive && (
                     <motion.div layoutId="tab-line" className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full"
                       style={{ background:accent }} transition={{ type:"spring", bounce:0.2, duration:0.35 }}/>
@@ -2177,42 +2492,24 @@ function CardPhase({
             })}
           </div>
 
-          {/* Tab content */}
+          {/* Content */}
           <AnimatePresence mode="wait">
             <motion.div key={activeTab}
-              initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-6 }}
-              transition={{ duration:0.2 }}>
+              initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-6 }}
+              transition={{ duration:0.18 }}>
               {activeTab === "home"      && <HomeTab/>}
               {activeTab === "community" && <CommunityTab/>}
               {activeTab === "academy"   && <AcademyTab/>}
-              {activeTab === "passport"  && <PassportTab/>}
+              {activeTab === "signals"   && <SignalsTab/>}
+              {activeTab === "spaces"    && <SpacesTab/>}
             </motion.div>
           </AnimatePresence>
-        </div>
-
-        {/* Fixed glass dock bottom */}
-        <div className="fixed bottom-0 left-0 right-0 h-16 z-50 px-8 flex justify-between items-center"
-          style={{ backdropFilter:"blur(24px)", background:"rgba(0,0,0,0.85)", borderTop:"1px solid rgba(255,255,255,0.08)", boxShadow:"0 -10px 30px rgba(0,0,0,0.6)" }}>
-          {tabs.map(tab=>{
-            const isActive = activeTab === tab.id;
-            return (
-              <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
-                className="flex flex-col items-center justify-center gap-1 transition-all"
-                style={{ color: isActive ? accent : "rgba(255,255,255,0.3)" }}>
-                <span className="text-lg leading-none">{tab.icon}</span>
-                <span className="font-mono text-[8px] font-bold tracking-wider uppercase" style={{ opacity: isActive ? 1 : 0.6 }}>
-                  {tab.label}
-                </span>
-              </button>
-            );
-          })}
         </div>
       </div>
     );
   }
 
   
-/* ─────────────────────────────────────────
    MAIN PAGE — STEP ROUTER
 ───────────────────────────────────────── */
 export default function OkzByteHub() {
