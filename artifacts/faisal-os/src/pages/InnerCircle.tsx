@@ -1,11 +1,11 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import SEOHead from "@/components/shared/SEOHead";
 import {
-  Globe, Bot, BarChart2, Users, Shield, Crown, Star,
+  Globe, Bot, BarChart2, Users, Shield, Crown,
   Mic, Video, Heart, MessageCircle, ChevronDown, X,
-  Wallet, Check, ArrowRight, Zap, Clock, Bell,
-  TrendingUp, Lock, Radio
+  Wallet, Check, ArrowRight, Clock,
+  Radio
 } from "lucide-react";
 
 const GOLD = "#F3BA2F";
