@@ -497,7 +497,7 @@ export default function Home() {
           <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content", paddingLeft:"40px" }}>
             {([
               { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:"/research/blockchain-infra" },
               { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
               { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
               { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
@@ -507,7 +507,7 @@ export default function Home() {
               { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
               { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
               { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:null },
+              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:"/research/blockchain-infra" },
               { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
               { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
               { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:null },
