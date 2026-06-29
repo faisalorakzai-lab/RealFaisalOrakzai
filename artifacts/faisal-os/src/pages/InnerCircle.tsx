@@ -1766,7 +1766,7 @@ function CardPhase({
 
     /* ── HOME TAB ── */
     const HomeTab = () => (
-      <div className="space-y-8 pb-28">
+      <div className="space-y-8 pb-6">
         {/* Profile Card */}
         <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:0.5}}>
           <div className="relative rounded-2xl overflow-hidden p-6"
@@ -1925,7 +1925,7 @@ function CardPhase({
 
     /* ── COMMUNITY TAB ── */
     const CommunityTab = () => (
-      <div className="space-y-5 pb-28">
+      <div className="space-y-5 pb-6">
         {/* Post composer */}
         <div className="rounded-xl p-4" style={{ background:"rgba(255,255,255,0.025)", border:`1px solid ${cfg.accent}25` }}>
           <div className="flex items-start gap-3 mb-3">
@@ -2058,7 +2058,7 @@ function CardPhase({
 
     /* ── ACADEMY TAB ── */
     const AcademyTab = () => (
-      <div className="space-y-6 pb-28">
+      <div className="space-y-6 pb-6">
         <div>
           <Label text="OkzByte Academy" />
           <p className="text-white/35 text-xs mt-1">Curated education for elite traders & builders</p>
@@ -2121,7 +2121,7 @@ function CardPhase({
 
     /* ── PASSPORT TAB ── */
     const PassportTab = () => (
-      <div className="space-y-6 pb-28">
+      <div className="space-y-6 pb-6">
         <Label text="Identity Passport" />
         <p className="text-white/35 text-xs">Generate your 24K Liquid Gold Sovereign Card</p>
         <div className="grid grid-cols-1 gap-4">
@@ -2179,6 +2179,39 @@ function CardPhase({
           </div>
         </div>
 
+          {/* ── STICKY TAB NAV ── */}
+          <div className="sticky z-39 border-b px-2"
+            style={{ top:"57px", background:"rgba(0,0,0,0.95)", backdropFilter:"blur(20px)", borderColor:"rgba(255,255,255,0.07)" }}>
+            <div className="max-w-2xl mx-auto">
+              <div className="grid grid-cols-4">
+                {([
+                  { id:"home" as NavTab,      icon:"🏠", label:"Home"      },
+                  { id:"community" as NavTab, icon:"👥", label:"Community" },
+                  { id:"academy" as NavTab,   icon:"🎓", label:"Academy"   },
+                  { id:"passport" as NavTab,  icon:"🎟️", label:"Passport"  },
+                ]).map(item=>{
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button key={item.id} onClick={()=>setActiveTab(item.id)}
+                      className="relative flex flex-col items-center justify-center py-3 transition-all w-full"
+                      style={{ color: isActive ? cfg.accent : "rgba(255,255,255,0.3)" }}>
+                      <span className="text-base leading-none mb-1">{item.icon}</span>
+                      <span className="font-mono text-[8px] tracking-wider uppercase" style={{ fontWeight: isActive ? 900 : 400 }}>
+                        {item.label}
+                      </span>
+                      {isActive && (
+                        <motion.div layoutId="nav-indicator"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full"
+                          style={{ background:cfg.accent }}
+                          transition={{ type:"spring", bounce:0.2, duration:0.4 }} />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
         {/* ── MAIN CONTENT ── */}
         <div className="max-w-2xl mx-auto px-5 pt-6">
           <AnimatePresence mode="wait">
@@ -2195,42 +2228,6 @@ function CardPhase({
           </AnimatePresence>
         </div>
 
-        {/* ── FIXED BOTTOM NAV ── */}
-        <div className="fixed bottom-0 left-0 right-0 z-50"
-          style={{ background:"rgba(0,0,0,0.95)", backdropFilter:"blur(24px)", borderTop:"1px solid rgba(255,255,255,0.08)" }}>
-          <div className="max-w-2xl mx-auto px-2 py-1">
-            <div className="grid grid-cols-4 gap-1">
-              {([
-                { id:"home" as NavTab,      icon:"🏠", label:"Home"      },
-                { id:"community" as NavTab, icon:"👥", label:"Community" },
-                { id:"academy" as NavTab,   icon:"🎓", label:"Academy"   },
-                { id:"passport" as NavTab,  icon:"🎟️", label:"Passport"  },
-              ]).map(item=>{
-                const isActive = activeTab === item.id;
-                return (
-                  <button key={item.id} onClick={()=>setActiveTab(item.id)}
-                    className="flex flex-col items-center justify-center py-2.5 rounded-lg transition-all"
-                    style={{
-                      background: isActive ? `${cfg.accent}15` : "transparent",
-                      color: isActive ? cfg.accent : "rgba(255,255,255,0.3)",
-                    }}>
-                    <span className="text-base leading-none mb-1">{item.icon}</span>
-                    <span className="font-mono text-[8px] tracking-wider uppercase" style={{ fontWeight: isActive ? 900 : 400 }}>
-                      {item.label}
-                    </span>
-                    {isActive && (
-                      <motion.div layoutId="nav-indicator"
-                        className="absolute bottom-0 w-6 h-0.5 rounded-full"
-                        style={{ background:cfg.accent }}
-                        transition={{ type:"spring", bounce:0.2, duration:0.4 }} />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
     );
   }
 
