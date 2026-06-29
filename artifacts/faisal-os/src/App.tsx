@@ -65,7 +65,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
                 <Route path="/media" component={Media} />
                 <Route path="/investment" component={Investment} />
                 <Route path="/contact" component={Contact} />
-                <Route path="/inner-circle" component={InnerCircle} />
+                <Route path="/okzbyte-hub" component={InnerCircle} />
                 <Route component={NotFound} />
               </Switch>
             </motion.div>
