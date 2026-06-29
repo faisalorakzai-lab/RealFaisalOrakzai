@@ -20,6 +20,7 @@ import {
    CONSTANTS
 ───────────────────────────────────────── */
 const GOLD = "#F3BA2F";
+const ADMIN_WALLET = "0x9b02e2edd6f58d626aaa91889708dbf39dfa8cd7";
 const OWNER = "0x9b02e2edd6f58d626aaa91889708dbf39dfa8cd7";
 const USDT_POLYGON = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
 const CHAIN_ID_POLYGON = "0x89";
@@ -978,16 +979,19 @@ function Tier3Card({ userName, memberId, userPhotoUrl, userSignatureUrl, issueDa
    PHASE 4 — SOVEREIGN CARD GENERATOR
 ───────────────────────────────────────── */
 function CardPhase({
-  tier,
+  tier: initialTier,
   memberId,
   txHash,
   onDone,
+  isAdmin,
 }: {
   tier: Tier;
   memberId: string;
   txHash: string;
   onDone: () => void;
+  isAdmin?: boolean;
 }) {
+  const [tier, setTier] = useState<Tier>(initialTier);
   const cfg = TIER_CFG[tier];
   const cardRef = useRef<HTMLDivElement>(null);
   const sigCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -1096,6 +1100,32 @@ function CardPhase({
             )}
           </div>
         </motion.div>
+
+        {/* Admin tier switcher */}
+        {isAdmin && (
+          <div className="flex flex-wrap items-center gap-2 mb-8 p-3 border border-[#F3BA2F]/15 bg-[#F3BA2F]/5">
+            <div className="flex items-center gap-1 mr-2">
+              <Crown size={10} style={{ color: GOLD }} />
+              <span className="font-mono text-[8px] tracking-widest uppercase" style={{ color: `${GOLD}80` }}>Admin — Switch Card Design:</span>
+            </div>
+            {([1, 2, 3] as Tier[]).map((t) => {
+              const c = TIER_CFG[t];
+              return (
+                <button key={t} onClick={() => setTier(t)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 font-mono text-[9px] tracking-widest uppercase transition-all"
+                  style={{
+                    background: tier === t ? c.accent : "transparent",
+                    color: tier === t ? "black" : c.accent,
+                    border: `1px solid ${c.accent}60`,
+                    fontWeight: 700,
+                  }}
+                >
+                  {c.emoji} Tier {t}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
           {/* ── INPUT PANEL ── */}
@@ -1247,13 +1277,18 @@ function CommunityPhase({
   walletAddr,
   memberId,
   onExpired,
+  onGoToCard,
+  onReset,
 }: {
   tier: Tier;
   walletAddr: string;
   memberId: string;
   onExpired: () => void;
+  onGoToCard: (t: Tier) => void;
+  onReset: () => void;
 }) {
   const cfg = TIER_CFG[tier];
+  const isAdmin = walletAddr.toLowerCase() === ADMIN_WALLET;
   const name = LS.get("okz_name") || "Sovereign Member";
   const [liked, setLiked] = useState<Record<number, boolean>>({});
   const [daysLeft, setDaysLeft] = useState(30);
@@ -1484,6 +1519,42 @@ function CommunityPhase({
           </div>
         </motion.div>
 
+        {/* ── ADMIN PANEL ── */}
+        {isAdmin && (
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+            className="border-t border-[#F3BA2F]/20 pt-8 mt-4"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <Crown size={12} style={{ color: GOLD }} />
+              <span className="font-mono text-[9px] tracking-[0.35em] uppercase" style={{ color: GOLD }}>Admin Panel · {walletAddr.slice(0,10)}...{walletAddr.slice(-4)}</span>
+            </div>
+            <p className="text-white/25 text-[10px] font-mono mb-6">Full admin access. Preview all 3 card designs or reset your session to test the full flow.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {([1, 2, 3] as Tier[]).map((t) => {
+                const c = TIER_CFG[t];
+                return (
+                  <button key={t} onClick={() => onGoToCard(t)}
+                    className="flex flex-col gap-2 p-4 border transition-all text-left hover:scale-[1.02] active:scale-95"
+                    style={{ borderColor: `${c.accent}40`, background: `${c.accent}08` }}
+                  >
+                    <span className="text-xl">{c.emoji}</span>
+                    <span className="font-mono text-[9px] tracking-widest uppercase" style={{ color: c.accent }}>Tier {t} — {c.name}</span>
+                    <span className="text-white/30 text-[9px] font-mono">{c.priceLabel}/month</span>
+                    <span className="font-mono text-[8px] mt-1 px-2 py-0.5 self-start" style={{ background: `${c.accent}22`, color: c.accent, border: `1px solid ${c.accent}44` }}>
+                      PREVIEW CARD →
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <button onClick={onReset}
+              className="w-full py-3 border border-red-500/30 bg-red-500/5 text-red-400 font-mono text-[10px] tracking-widest uppercase hover:bg-red-500/15 transition-colors"
+            >
+              ⚠ Reset Full Session — Return to Intro
+            </button>
+          </motion.div>
+        )}
+
       </div>
     </div>
   );
@@ -1545,6 +1616,22 @@ export default function OkzByteHub() {
     setStep("tiers");
   };
 
+  // Admin-only: jump to card phase with chosen tier
+  const handleAdminGoToCard = (t: Tier) => {
+    setMemberTier(t);
+    setStep("card");
+  };
+
+  // Admin-only: wipe session and restart from intro
+  const handleAdminReset = () => {
+    LS.del("okz_wallet", "okz_tier", "okz_expires", "okz_tx", "okz_name", "okz_photo");
+    setWalletAddr("");
+    setMemberTier(2);
+    setTxHash("");
+    setIsExpired(false);
+    setStep("intro");
+  };
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -1562,7 +1649,7 @@ export default function OkzByteHub() {
           <TiersPhase walletAddr={walletAddr} isExpired={isExpired} onBuy={handleBuy} />
         )}
         {step === "card" && (
-          <CardPhase tier={memberTier} memberId={memberId} txHash={txHash} onDone={handleCardDone} />
+          <CardPhase tier={memberTier} memberId={memberId} txHash={txHash} onDone={handleCardDone} isAdmin={walletAddr.toLowerCase() === ADMIN_WALLET} />
         )}
         {step === "community" && (
           <CommunityPhase
@@ -1570,6 +1657,8 @@ export default function OkzByteHub() {
             walletAddr={walletAddr}
             memberId={memberId}
             onExpired={handleExpired}
+            onGoToCard={handleAdminGoToCard}
+            onReset={handleAdminReset}
           />
         )}
       </motion.div>
