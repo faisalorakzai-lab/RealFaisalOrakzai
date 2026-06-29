@@ -89,7 +89,20 @@ const ENTRIES: Entry[] = [
         readTime: "35 min read",
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
-      // ── MARKET KNOWLEDGE
+        {
+          id: "bc-03", category: "BLOCKCHAIN", year: "2026",
+          title: "Public vs Private vs Consortium Blockchains",
+          subtitle: "The Complete Enterprise Guide to Blockchain Architecture (2026)",
+          abstract:
+            "Blockchain networks are not all the same. Public blockchains are open and permissionless; private blockchains are controlled by one organisation; consortium blockchains are governed by multiple trusted partners; and hybrid blockchains combine public and private infrastructure. This complete enterprise guide explains all four types in depth, compares them across security, scalability, governance, cost, and compliance, and provides a decision framework for choosing the right blockchain architecture for any use case.",
+          tags: ["Blockchain Types", "Public Blockchain", "Private Blockchain", "Consortium Blockchain", "Hybrid Blockchain", "Enterprise Blockchain", "Permissioned", "Web3"],
+          status: "PUBLISHED",
+          slug: "blockchain-types",
+          thumbnail: "/mk/thumb-blockchain-types.png",
+          readTime: "28 min read",
+          keywords: "public blockchain, private blockchain, consortium blockchain, hybrid blockchain, enterprise blockchain, permissioned blockchain, blockchain architecture, Faisal Orakzai",
+        },
+        // ── MARKET KNOWLEDGE
   {
     id: "mk-01", category: "MARKET KNOWLEDGE", year: "2024",
     title: "Macro-Liquidity Networks & Cross-Border Fintech Dynamics",
