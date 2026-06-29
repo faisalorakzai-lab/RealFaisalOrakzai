@@ -1321,34 +1321,8 @@ function CommunityPhase({
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Admin sticky bar — only visible to admin wallet */}
-      {isAdmin && (
-        <div className="fixed top-0 left-0 right-0 z-50 border-b" style={{ background: "#0a0800", borderColor: `${GOLD}40` }}>
-          <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-2 flex-wrap">
-            <Crown size={11} style={{ color: GOLD }} />
-            <span className="font-mono text-[8px] tracking-widest uppercase" style={{ color: `${GOLD}80` }}>Admin:</span>
-            {([1, 2, 3] as Tier[]).map((t) => {
-              const c = TIER_CFG[t];
-              return (
-                <button key={t} onClick={() => onGoToCard(t)}
-                  className="font-mono text-[9px] tracking-widest uppercase px-3 py-1 transition-all active:scale-95"
-                  style={{ background: `${c.accent}18`, color: c.accent, border: `1px solid ${c.accent}50` }}
-                >
-                  {c.emoji} Tier {t}
-                </button>
-              );
-            })}
-            <div className="flex-1" />
-            <button onClick={onReset}
-              className="font-mono text-[8px] tracking-widest uppercase px-3 py-1 border border-red-500/40 text-red-400 bg-red-500/10 hover:bg-red-500/20 transition-colors"
-            >
-              ↺ RESET
-            </button>
-          </div>
-        </div>
-      )}
       {/* Header */}
-      <div className="border-b border-[#F3BA2F]/10 bg-black pt-20 pb-5 px-6 sticky top-0 z-40 backdrop-blur-xl" style={isAdmin ? { top: 36 } : {}}>
+      <div className="border-b border-[#F3BA2F]/10 bg-black pt-20 pb-5 px-6 sticky top-0 z-40 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-3">
           <div>
             <div className="font-mono text-[8px] tracking-[0.4em] text-[#F3BA2F]/60 uppercase mb-0.5">OkzByte Hub · Member Dashboard</div>
@@ -1366,6 +1340,31 @@ function CommunityPhase({
               {daysLeft}d left
             </div>
           </div>
+          {/* Admin controls inline in header */}
+          {isAdmin && (
+            <div className="mt-3 flex flex-wrap items-center gap-2 pt-3 border-t" style={{ borderColor: `${GOLD}20` }}>
+              <div className="flex items-center gap-1 mr-1">
+                <Crown size={10} style={{ color: GOLD }} />
+                <span className="font-mono text-[8px] uppercase tracking-widest" style={{ color: `${GOLD}70` }}>Admin · Preview Card:</span>
+              </div>
+              {([1, 2, 3] as Tier[]).map((t) => {
+                const c = TIER_CFG[t];
+                return (
+                  <button key={t} onClick={() => onGoToCard(t)}
+                    className="font-mono text-[9px] tracking-widest uppercase px-3 py-1.5 transition-all active:scale-95 hover:opacity-80"
+                    style={{ background: `${c.accent}20`, color: c.accent, border: `1px solid ${c.accent}55`, fontWeight: 700 }}
+                  >
+                    {c.emoji} Tier {t}
+                  </button>
+                );
+              })}
+              <button onClick={onReset}
+                className="ml-auto font-mono text-[8px] tracking-widest uppercase px-3 py-1.5 border border-red-500/40 text-red-400 hover:bg-red-500/15 transition-colors"
+              >
+                ↺ RESET SESSION
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
