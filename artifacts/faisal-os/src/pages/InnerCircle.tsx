@@ -1652,46 +1652,129 @@ function CardPhase({
 
 
 /* ─────────────────────────────────────────
-     PHASE 5 — WEB3 DASHBOARD
+     PHASE 5 — WEB3 OS DASHBOARD
   ───────────────────────────────────────── */
   type NavTab = "home" | "community" | "academy" | "passport";
 
-  const ACADEMY_COURSES = [
-    { cat:"Forex Learning", title:"Wyckoff Accumulation Secrets", sub:"Institutional order flow & spring patterns", locked:false, level:"INTERMEDIATE" },
-    { cat:"Crypto Learning", title:"BTC On-Chain Analysis Mastery", sub:"UTXO sets, whale wallets & exchange flows", locked:false, level:"ADVANCED" },
-    { cat:"Stock Markets", title:"Elliott Wave & Fibonacci Confluence", sub:"Multi-timeframe wave counting strategies", locked:true, level:"ADVANCED" },
-    { cat:"Artificial Intelligence", title:"AI Trading Bots with Python", sub:"ML signal generation & backtesting", locked:false, level:"BEGINNER" },
-    { cat:"Blockchain Infrastructure", title:"DeFi Protocol Architecture", sub:"Smart contracts, liquidity pools & AMMs", locked:true, level:"ADVANCED" },
-    { cat:"Forex Learning", title:"London Session Breakout Strategy", sub:"High-frequency setups during NY overlap", locked:false, level:"BEGINNER" },
-    { cat:"Crypto Learning", title:"Altcoin Season Rotation Model", sub:"Sector rotation signals & BTC dominance", locked:true, level:"INTERMEDIATE" },
-    { cat:"Artificial Intelligence", title:"GPT Prompt Engineering for Traders", sub:"AI-assisted market research automation", locked:false, level:"BEGINNER" },
+  const COURSES = [
+    { cat:"Forex Learning",          title:"Wyckoff Accumulation Secrets",      sub:"Institutional order flow & spring patterns",  locked:false, level:"INTERMEDIATE" },
+    { cat:"Crypto Learning",         title:"BTC On-Chain Analysis Mastery",     sub:"UTXO sets, whale wallets & exchange flows",    locked:false, level:"ADVANCED"      },
+    { cat:"Stock Markets",           title:"Elliott Wave & Fibonacci Confluence",sub:"Multi-timeframe wave counting strategies",     locked:true,  level:"ADVANCED"      },
+    { cat:"Artificial Intelligence", title:"AI Trading Bots with Python",       sub:"ML signal generation & backtesting",           locked:false, level:"BEGINNER"      },
+    { cat:"Blockchain Infrastructure",title:"DeFi Protocol Architecture",       sub:"Smart contracts, liquidity pools & AMMs",      locked:true,  level:"ADVANCED"      },
+    { cat:"Forex Learning",          title:"London Session Breakout Strategy",  sub:"High-frequency setups during NY overlap",      locked:false, level:"BEGINNER"      },
+    { cat:"Crypto Learning",         title:"Altcoin Season Rotation Model",     sub:"Sector rotation signals & BTC dominance",      locked:true,  level:"INTERMEDIATE"  },
+    { cat:"Artificial Intelligence", title:"GPT Prompt Engineering for Traders",sub:"AI-assisted market research automation",       locked:false, level:"BEGINNER"      },
   ];
 
-  const FEED_POSTS = [
-    { id:1, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"SIGNAL", time:"2m ago", body:"📊 BTC/USD — LONG · Entry $67,450 · TP1 $69,200 · TP2 $71,000 · SL $66,000 · Confidence: HIGH", likes:34, reposts:8 },
-    { id:2, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANALYSIS", time:"18m ago", body:"🔍 ETH/USDT — Bullish divergence on 4H RSI. Support $3,420 holding. Watch breakout above $3,580.", likes:27, reposts:5 },
-    { id:3, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"FOREX", time:"1h ago", body:"💱 EUR/USD SHORT · Entry 1.0847 · TP1 1.0790 · SL 1.0890 · London Open session. NFP Friday — manage risk.", likes:19, reposts:3 },
-    { id:4, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"LEARNING", time:"3h ago", body:"📚 Module 7 live: Wyckoff Accumulation — Institutional order flow, spring patterns, sign-of-strength candles.", likes:41, reposts:12 },
-    { id:5, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANNOUNCEMENT", time:"5h ago", body:"🔔 NEXT ZOOM: Saturday July 5 · 8 PM PKT — Advanced Risk & Portfolio Sizing. Live Q&A. All tiers welcome.", likes:56, reposts:18 },
+  const INIT_POSTS = [
+    { id:1, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"SIGNAL",       time:"2m ago",  body:"📊 BTC/USD — LONG · Entry $67,450 · TP1 $69,200 · TP2 $71,000 · SL $66,000 · Confidence: HIGH", likes:34, reposts:8  },
+    { id:2, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANALYSIS",     time:"18m ago", body:"🔍 ETH/USDT — Bullish divergence on 4H RSI. Support $3,420 holding. Watch breakout above $3,580.", likes:27, reposts:5  },
+    { id:3, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"FOREX",        time:"1h ago",  body:"💱 EUR/USD SHORT · Entry 1.0847 · TP1 1.0790 · SL 1.0890 · London Open session. NFP Friday — manage risk.", likes:19, reposts:3  },
+    { id:4, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"LEARNING",     time:"3h ago",  body:"📚 Module 7 live: Wyckoff Accumulation — Institutional order flow, spring patterns, sign-of-strength candles.", likes:41, reposts:12 },
+    { id:5, author:"Faisal Orakzai", initials:"FO", tier:3 as Tier, type:"ANNOUNCEMENT", time:"5h ago",  body:"🔔 NEXT ZOOM: Saturday July 5 · 8 PM PKT — Advanced Risk & Portfolio Sizing. Live Q&A. All tiers welcome.", likes:56, reposts:18 },
   ];
 
-  function TierBadge({ tier, size = "sm" }: { tier: Tier; size?: "sm"|"xs" }) {
+  const CATS = ["All","Forex Learning","Crypto Learning","Stock Markets","Artificial Intelligence","Blockchain Infrastructure"];
+
+  function VerifiedBadge({ tier, accent }: { tier: Tier; accent: string }) {
     const cfg = TIER_CFG[tier];
-    const isFounder = tier === 3;
-    const px = size === "xs" ? "px-1.5 py-0.5 text-[7px]" : "px-2.5 py-1 text-[8px]";
     return (
-      <span className={`inline-flex items-center gap-1 font-mono font-bold tracking-widest uppercase rounded-sm ${px}`}
-        style={{
-          color: isFounder ? "#D4AF37" : cfg.accent,
-          background: isFounder ? "rgba(212,175,55,0.12)" : `${cfg.accent}18`,
-          border: `1px solid ${isFounder ? "#D4AF37" : cfg.accent}55`,
-          boxShadow: `0 0 8px ${isFounder ? "#D4AF37" : cfg.accent}30`,
-        }}>
-        {isFounder && (
-          <img src="/logos/okzbyte.png" alt="" style={{ width:10, height:10, objectFit:"contain", filter:"drop-shadow(0 0 3px #D4AF37)" }} />
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[9px] font-black tracking-widest uppercase"
+        style={{ background:`${accent}18`, border:`1px solid ${accent}50`, color: accent, boxShadow:`0 0 10px ${accent}25` }}>
+        {tier === 3 && (
+          <img src="/logos/okzbyte.png" alt="" style={{ width:9, height:9, objectFit:"contain", filter:`drop-shadow(0 0 3px ${accent})` }}/>
         )}
         {cfg.emoji} {cfg.name}
       </span>
+    );
+  }
+
+  function PostCard({
+    post, accent, profilePhoto, profileName, myTier,
+    liked, onLike, reposted, onRepost,
+    commentOpen, onToggleComment, commentText, onCommentChange, comments, onComment,
+    followed, onFollow,
+  }: {
+    post: typeof INIT_POSTS[0]; accent: string; profilePhoto: string|null; profileName: string; myTier: Tier;
+    liked: boolean; onLike: ()=>void; reposted: boolean; onRepost: ()=>void;
+    commentOpen: boolean; onToggleComment: ()=>void;
+    commentText: string; onCommentChange: (v:string)=>void;
+    comments: string[]; onComment: ()=>void;
+    followed: boolean; onFollow: ()=>void;
+  }) {
+    const cfg = TIER_CFG[post.tier];
+    return (
+      <div className="rounded-2xl overflow-hidden" style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)", backdropFilter:"blur(12px)" }}>
+        {/* Fine grid overlay */}
+        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-[0.025]"
+          style={{ backgroundImage:`linear-gradient(${accent} 1px,transparent 1px),linear-gradient(90deg,${accent} 1px,transparent 1px)`, backgroundSize:"20px 20px" }}/>
+        <div className="relative p-4">
+          {/* Author row */}
+          <div className="flex items-start gap-3 mb-3">
+            <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden flex items-center justify-center font-bold text-sm"
+              style={{ background:`${cfg.accent}22`, border:`1.5px solid ${cfg.accent}50`, color: cfg.accent }}>
+              {post.initials}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-white font-bold text-sm">{post.author}</span>
+                <VerifiedBadge tier={post.tier} accent={cfg.accent} />
+                <button onClick={onFollow}
+                  className="ml-auto font-mono text-[8px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full transition-all"
+                  style={{ border:`1px solid ${followed ? accent : "rgba(255,255,255,0.15)"}`, color: followed ? accent : "rgba(255,255,255,0.35)", background: followed ? `${accent}12` : "transparent" }}>
+                  {followed ? "Following" : "+ Follow"}
+                </button>
+              </div>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="font-mono text-[8px] tracking-widest uppercase px-1.5 py-0.5 rounded"
+                  style={{ background:`${accent}12`, color:`${accent}70` }}>{post.type}</span>
+                <span className="font-mono text-[8px] text-white/20">{post.time}</span>
+              </div>
+            </div>
+          </div>
+          {/* Body */}
+          <p className="text-white/75 text-[13px] leading-relaxed mb-4">{post.body}</p>
+          {/* Action bar */}
+          <div className="flex items-center gap-6 pt-3" style={{ borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+            <button onClick={onLike} className="flex items-center gap-1.5 transition-all group">
+              <Heart size={14} fill={liked ? "#ef4444" : "none"} style={{ color: liked ? "#ef4444" : "rgba(255,255,255,0.3)", transition:"all 0.15s" }} />
+              <span className="font-mono text-[10px]" style={{ color: liked ? "#ef4444" : "rgba(255,255,255,0.3)" }}>{post.likes + (liked ? 1 : 0)}</span>
+            </button>
+            <button onClick={onToggleComment} className="flex items-center gap-1.5">
+              <MessageCircle size={14} style={{ color: commentOpen ? accent : "rgba(255,255,255,0.3)" }} />
+              <span className="font-mono text-[10px]" style={{ color: commentOpen ? accent : "rgba(255,255,255,0.3)" }}>{comments.length}</span>
+            </button>
+            <button onClick={onRepost} className="flex items-center gap-1.5">
+              <ArrowRight size={14} style={{ color: reposted ? "#22c55e" : "rgba(255,255,255,0.3)" }} />
+              <span className="font-mono text-[10px]" style={{ color: reposted ? "#22c55e" : "rgba(255,255,255,0.3)" }}>{post.reposts + (reposted ? 1 : 0)}</span>
+            </button>
+          </div>
+          {/* Inline comments */}
+          {commentOpen && (
+            <div className="mt-3 space-y-2">
+              {comments.map((c,ci)=>(
+                <div key={ci} className="flex gap-2 text-[12px] py-1.5 pl-3" style={{ borderLeft:`2px solid ${accent}30` }}>
+                  <span className="font-bold text-white/60">{profileName.split(" ")[0]}</span>
+                  <span className="text-white/45">{c}</span>
+                </div>
+              ))}
+              <div className="flex gap-2 mt-2">
+                <input value={commentText} onChange={e=>onCommentChange(e.target.value)}
+                  onKeyDown={e=>{ if(e.key==="Enter") onComment(); }}
+                  placeholder="Reply..."
+                  className="flex-1 bg-white/5 rounded-xl px-3 py-2 text-[12px] text-white/70 outline-none border border-white/10 focus:border-amber-500/40 transition-colors"
+                />
+                <button onClick={onComment}
+                  className="px-3 py-2 rounded-xl font-mono text-[9px] font-bold tracking-widest uppercase"
+                  style={{ background:`${accent}25`, color: accent, border:`1px solid ${accent}40` }}>
+                  POST
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     );
   }
 
@@ -1699,24 +1782,24 @@ function CardPhase({
     tier, walletAddr, memberId, onExpired, onGoToCard, onReset,
   }: {
     tier: Tier; walletAddr: string; memberId: string;
-    onExpired: () => void; onGoToCard: (t: Tier) => void; onReset: () => void;
+    onExpired: ()=>void; onGoToCard: (t: Tier)=>void; onReset: ()=>void;
   }) {
     const cfg = TIER_CFG[tier];
+    const accent = tier === 3 ? "#D4AF37" : cfg.accent;
     const isAdmin = walletAddr.toLowerCase() === ADMIN_WALLET;
     const [activeTab, setActiveTab] = useState<NavTab>("home");
     const [daysLeft, setDaysLeft] = useState(30);
 
-    // Profile state
+    // Profile
     const [editingProfile, setEditingProfile] = useState(false);
     const [profileName, setProfileName] = useState(LS.get("okz_name") || "Sovereign Member");
-    const [profileBio, setProfileBio] = useState(LS.get("okz_bio") || "Web3 trader & builder. Silicon Valley network.");
+    const [profileBio, setProfileBio] = useState(LS.get("okz_bio") || "Web3 trader & builder. Silicon Valley.");
     const [profilePhoto, setProfilePhoto] = useState<string|null>(LS.get("okz_photo") || null);
     const photoRef = useRef<HTMLInputElement>(null);
 
-    // Community feed state
-    const [posts, setPosts] = useState(FEED_POSTS);
+    // Community
+    const [posts, setPosts] = useState(INIT_POSTS);
     const [newPost, setNewPost] = useState("");
-    const [postMedia, setPostMedia] = useState<string|null>(null);
     const mediaRef = useRef<HTMLInputElement>(null);
     const [liked, setLiked] = useState<Record<number,boolean>>({});
     const [reposted, setReposted] = useState<Record<number,boolean>>({});
@@ -1725,16 +1808,15 @@ function CardPhase({
     const [comments, setComments] = useState<Record<number,string[]>>({});
     const [followed, setFollowed] = useState<Record<number,boolean>>({});
 
-    // Academy state
-    const [activeCategory, setActiveCategory] = useState("All");
-    const categories = ["All", "Forex Learning", "Crypto Learning", "Stock Markets", "Artificial Intelligence", "Blockchain Infrastructure"];
+    // Academy
+    const [activeCat, setActiveCat] = useState("All");
 
     useEffect(() => {
-      document.title = "OkzByte Hub — Dashboard";
-      const expires = parseInt(LS.get("okz_expires") || "0");
-      if (!expires) return;
+      document.title = "OkzByte Hub";
+      const exp = parseInt(LS.get("okz_expires") || "0");
+      if (!exp) return;
       const tick = () => {
-        const rem = expires - Date.now();
+        const rem = exp - Date.now();
         if (rem <= 0) { LS.del("okz_wallet","okz_tier","okz_expires","okz_tx"); onExpired(); return; }
         setDaysLeft(Math.ceil(rem / 86400000));
       };
@@ -1750,366 +1832,262 @@ function CardPhase({
       setEditingProfile(false);
     };
 
-    const handleBroadcast = () => {
+    const broadcast = () => {
       if (!newPost.trim()) return;
-      const p = {
-        id: Date.now(), author: profileName, initials: profileName.slice(0,2).toUpperCase(),
-        tier, type:"POST", time:"just now", body: newPost.trim(), likes:0, reposts:0,
-      };
-      setPosts(prev => [p, ...prev]);
-      setNewPost(""); setPostMedia(null);
+      setPosts(prev => [{ id: Date.now(), author: profileName, initials: profileName.slice(0,2).toUpperCase(), tier, type:"POST", time:"now", body: newPost.trim(), likes:0, reposts:0 }, ...prev]);
+      setNewPost("");
     };
 
-    const filteredCourses = activeCategory === "All"
-      ? ACADEMY_COURSES
-      : ACADEMY_COURSES.filter(c => c.cat === activeCategory);
+    const filteredCourses = activeCat === "All" ? COURSES : COURSES.filter(c => c.cat === activeCat);
 
-    /* ── HOME TAB ── */
-    const HomeTab = () => (
-      <div className="space-y-8 pb-6">
-        {/* Profile Card */}
-        <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:0.5}}>
-          <div className="relative rounded-2xl overflow-hidden p-6"
-            style={{ background:"linear-gradient(135deg,#0d0900,#060400)", border:`1px solid ${cfg.accent}35`,
-              boxShadow:`0 0 40px ${cfg.accent}12` }}>
-            {/* grid watermark */}
-            <div className="absolute inset-0 opacity-[0.03]" style={{
-              backgroundImage:`linear-gradient(${cfg.accent} 1px,transparent 1px),linear-gradient(90deg,${cfg.accent} 1px,transparent 1px)`,
-              backgroundSize:"24px 24px" }}/>
-            <div className="relative z-10">
-              <div className="flex items-start gap-4">
-                {/* Avatar */}
-                <div className="relative flex-shrink-0">
-                  <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center font-bold text-xl"
-                    style={{ background:`${cfg.accent}22`, border:`2px solid ${cfg.accent}60`,
-                      boxShadow:`0 0 20px ${cfg.accent}30`, color:cfg.accent }}>
-                    {profilePhoto
-                      ? <img src={profilePhoto} className="w-full h-full object-cover" />
-                      : profileName[0]?.toUpperCase()}
-                  </div>
-                  <button onClick={()=>photoRef.current?.click()}
-                    className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
-                    style={{ background:cfg.accent }}>
-                    <Upload size={9} color="#000" />
-                  </button>
-                  <input ref={photoRef} type="file" accept="image/*" className="hidden"
-                    onChange={e=>{
-                      const f=e.target.files?.[0]; if(!f) return;
-                      const r=new FileReader(); r.onload=ev=>setProfilePhoto(ev.target?.result as string); r.readAsDataURL(f);
-                    }}/>
-                </div>
-                {/* Name + badge */}
-                <div className="flex-1 min-w-0">
-                  {editingProfile ? (
-                    <input value={profileName} onChange={e=>setProfileName(e.target.value)}
-                      className="bg-transparent border-b text-white font-bold text-lg w-full outline-none mb-1"
-                      style={{ borderColor:`${cfg.accent}60` }} maxLength={40} />
-                  ) : (
-                    <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="text-white font-bold text-base">{profileName}</span>
-                      <TierBadge tier={tier} size="xs" />
-                    </div>
-                  )}
-                  {editingProfile ? (
-                    <input value={profileBio} onChange={e=>setProfileBio(e.target.value)}
-                      className="bg-transparent border-b text-white/50 text-xs w-full outline-none"
-                      style={{ borderColor:`${cfg.accent}40` }} maxLength={80} />
-                  ) : (
-                    <p className="text-white/45 text-xs leading-relaxed">{profileBio}</p>
-                  )}
-                  <div className="mt-1 font-mono text-[8px] text-white/20 truncate">
-                    {walletAddr.slice(0,14)}...{walletAddr.slice(-6)}
-                  </div>
-                </div>
-                {/* Edit button */}
-                <button onClick={editingProfile ? saveProfile : ()=>setEditingProfile(true)}
-                  className="flex-shrink-0 font-mono text-[8px] tracking-widest uppercase px-3 py-1.5 rounded"
-                  style={{ border:`1px solid ${cfg.accent}50`, color:cfg.accent, background:`${cfg.accent}12` }}>
-                  {editingProfile ? "SAVE" : "EDIT"}
+    /* ─── PROFILE HEADER (always visible) ─── */
+    const ProfileHeader = () => (
+      <div className="relative rounded-3xl overflow-hidden mb-1"
+        style={{ background:"rgba(12,9,3,0.85)", border:`1px solid ${accent}22`, backdropFilter:"blur(24px)", boxShadow:`0 0 40px ${accent}08` }}>
+        {/* Gold gradient banner */}
+        <div className="h-20 relative overflow-hidden"
+          style={{ background:`linear-gradient(135deg, #0a0600 0%, #1a1000 30%, ${accent}22 60%, #0d0800 100%)` }}>
+          <div className="absolute inset-0" style={{ backgroundImage:"radial-gradient(ellipse 80% 100% at 70% 50%, rgba(212,175,55,0.15) 0%, transparent 70%)" }}/>
+          {/* Fine grid */}
+          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage:`linear-gradient(${accent} 1px,transparent 1px),linear-gradient(90deg,${accent} 1px,transparent 1px)`, backgroundSize:"18px 18px" }}/>
+          {/* Admin row */}
+          {isAdmin && (
+            <div className="absolute top-2 left-3 right-3 flex items-center gap-1.5 flex-wrap">
+              <span className="font-mono text-[7px] uppercase tracking-widest" style={{color:`${accent}60`}}>
+                <Crown size={8} className="inline mr-1" style={{color:accent}}/>Admin:
+              </span>
+              {([1,2,3] as Tier[]).map(t=>(
+                <button key={t} onClick={()=>onGoToCard(t)}
+                  className="font-mono text-[7px] font-bold uppercase px-1.5 py-0.5 rounded"
+                  style={{ background:`${TIER_CFG[t].accent}25`, color:TIER_CFG[t].accent, border:`1px solid ${TIER_CFG[t].accent}40` }}>
+                  {TIER_CFG[t].emoji}T{t}
                 </button>
-              </div>
-              {/* Membership info row */}
-              <div className="mt-4 pt-4 flex items-center justify-between flex-wrap gap-2"
-                style={{ borderTop:`1px solid ${cfg.accent}20` }}>
-                <div>
-                  <div className="font-mono text-[7px] text-white/25 uppercase mb-0.5">Member ID</div>
-                  <div className="font-mono text-xs" style={{ color:cfg.accent }}>{memberId}</div>
-                </div>
-                <div className="text-right">
-                  <div className="font-mono text-[7px] text-white/25 uppercase mb-0.5">Expires</div>
-                  <div className="font-mono text-xs text-white/50">{daysLeft} days</div>
-                </div>
-              </div>
+              ))}
+              <button onClick={onReset} className="ml-auto font-mono text-[7px] uppercase px-1.5 py-0.5 rounded border border-red-500/30 text-red-400">↺</button>
             </div>
-            <motion.div className="absolute inset-0 pointer-events-none rounded-2xl"
-              style={{ border:`1px solid ${cfg.accent}` }}
-              animate={{ opacity:[0.1,0.4,0.1] }} transition={{ duration:3, repeat:Infinity }} />
-          </div>
-        </motion.div>
-
-        {/* Admin controls */}
-        {isAdmin && (
-          <div className="rounded-xl p-3 flex flex-wrap items-center gap-2" style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.07)" }}>
-            <Crown size={10} style={{color:GOLD}} />
-            <span className="font-mono text-[7px] uppercase tracking-widest" style={{color:`${GOLD}60`}}>Admin · Preview:</span>
-            {([1,2,3] as Tier[]).map(t=>(
-              <button key={t} onClick={()=>onGoToCard(t)}
-                className="font-mono text-[8px] tracking-widest uppercase px-2.5 py-1 transition-all active:scale-95"
-                style={{ background:`${TIER_CFG[t].accent}20`, color:TIER_CFG[t].accent, border:`1px solid ${TIER_CFG[t].accent}50` }}>
-                {TIER_CFG[t].emoji} T{t}
+          )}
+        </div>
+        {/* Avatar (overlapping banner) */}
+        <div className="px-5 pb-4">
+          <div className="flex items-end justify-between -mt-8 mb-3">
+            <div className="relative">
+              <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center font-bold text-2xl"
+                style={{ background:`linear-gradient(135deg,#1a1000,#2a1a00)`, border:`2.5px solid ${accent}`, boxShadow:`0 0 20px ${accent}50`, color:accent }}>
+                {profilePhoto
+                  ? <img src={profilePhoto} className="w-full h-full object-cover"/>
+                  : profileName[0]?.toUpperCase()}
+              </div>
+              <button onClick={()=>photoRef.current?.click()}
+                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
+                style={{ background:accent, boxShadow:`0 0 8px ${accent}60` }}>
+                <Upload size={9} color="#000"/>
               </button>
-            ))}
-            <button onClick={onReset}
-              className="ml-auto font-mono text-[8px] tracking-widest uppercase px-2.5 py-1 border border-red-500/30 text-red-400">
-              ↺ RESET
+              <input ref={photoRef} type="file" accept="image/*" className="hidden"
+                onChange={e=>{
+                  const f=e.target.files?.[0]; if(!f) return;
+                  const r=new FileReader(); r.onload=ev=>setProfilePhoto(ev.target?.result as string); r.readAsDataURL(f);
+                }}/>
+            </div>
+            <button onClick={editingProfile ? saveProfile : ()=>setEditingProfile(true)}
+              className="mb-1 font-mono text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full transition-all"
+              style={{ border:`1px solid ${accent}50`, color:accent, background:`${accent}10` }}>
+              {editingProfile ? "Save" : "Edit"}
             </button>
           </div>
-        )}
-
-        {/* Daily Signals Feed */}
-        <motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5}}>
-          <div className="flex items-center justify-between mb-4">
-            <Label text="Daily Signals Feed" />
-            <div className="flex items-center gap-1.5">
-              <motion.div className="w-1.5 h-1.5 rounded-full bg-emerald-400"
-                animate={{opacity:[1,0.2,1]}} transition={{duration:1.2,repeat:Infinity}} />
-              <span className="font-mono text-[8px] tracking-widest text-emerald-400 uppercase">Live</span>
+          {/* Name + badge */}
+          <div className="flex items-center gap-2 flex-wrap mb-1.5">
+            {editingProfile
+              ? <input value={profileName} onChange={e=>setProfileName(e.target.value)}
+                  className="bg-transparent border-b text-white font-black text-lg outline-none leading-tight"
+                  style={{ borderColor:`${accent}50`, color:"#FFF3B0" }} maxLength={40}/>
+              : <span className="font-black text-lg leading-tight" style={{ color:"#FFF3B0", textShadow:`0 0 20px ${accent}60` }}>{profileName}</span>
+            }
+            <VerifiedBadge tier={tier} accent={accent}/>
+          </div>
+          {/* Bio */}
+          {editingProfile
+            ? <input value={profileBio} onChange={e=>setProfileBio(e.target.value)}
+                className="bg-transparent border-b text-neutral-400 text-[11px] font-mono w-full outline-none mb-2"
+                style={{ borderColor:`${accent}30`, letterSpacing:"0.04em" }} maxLength={100}/>
+            : <p className="text-[11px] font-mono text-neutral-400 tracking-wider mb-3 leading-relaxed">{profileBio}</p>
+          }
+          {/* Meta row */}
+          <div className="flex items-center gap-4 pt-3" style={{ borderTop:`1px solid ${accent}15` }}>
+            <div>
+              <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Member ID</div>
+              <div className="font-mono text-[11px] font-bold" style={{ color:accent }}>{memberId}</div>
+            </div>
+            <div className="w-px h-6 bg-white/10"/>
+            <div>
+              <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Wallet</div>
+              <div className="font-mono text-[10px] text-neutral-500">{walletAddr.slice(0,12)}…{walletAddr.slice(-6)}</div>
+            </div>
+            <div className="ml-auto text-right">
+              <div className="font-mono text-[8px] text-white/20 uppercase tracking-widest mb-0.5">Expires</div>
+              <div className="font-mono text-[11px] text-white/50">{daysLeft}d</div>
             </div>
           </div>
-          <div className="space-y-2">
-            {posts.slice(0,5).map((p,i)=>(
-              <div key={p.id} className="rounded-xl p-4 transition-colors"
-                style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.06)" }}>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[9px] flex-shrink-0"
-                    style={{ background:`${GOLD}22`, color:GOLD }}>FO</div>
-                  <span className="font-mono text-[7px] tracking-widest uppercase" style={{color:`${GOLD}60`}}>{p.type}</span>
-                  <span className="text-white/20 text-[8px] font-mono ml-auto">{p.time}</span>
-                </div>
-                <p className="text-white/65 text-sm leading-relaxed mb-3">{p.body}</p>
-                <button onClick={()=>setLiked(prev=>({...prev,[i]:!prev[i]}))}
-                  className="flex items-center gap-1.5 text-xs transition-colors"
-                  style={{ color:liked[i] ? GOLD : "rgba(255,255,255,0.25)" }}>
-                  <Heart size={11} fill={liked[i] ? GOLD : "none"} />
-                  <span>{p.likes+(liked[i]?1:0)}</span>
-                </button>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Live Sessions */}
-        <motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5}}>
-          <Label text="Live Sessions" />
-          <div className="grid grid-cols-1 gap-3">
-            <div className="rounded-xl p-5 transition-colors" style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.07)" }}>
-              <div className="flex items-center gap-2 mb-3">
-                <Video size={14} style={{color:GOLD}} />
-                <span className="font-mono text-[8px] tracking-widest uppercase" style={{color:GOLD}}>Zoom Masterclass</span>
-                <span className="ml-auto font-mono text-[7px] border border-white/10 px-1.5 py-0.5 text-white/25">UPCOMING</span>
-              </div>
-              <h3 className="text-white font-semibold text-sm mb-1">Advanced Risk Management & Portfolio Sizing</h3>
-              <div className="flex items-center gap-1.5 text-white/35 text-xs font-mono mb-4">
-                <Clock size={10} /><span>Saturday, July 5 · 8:00 PM PKT</span>
-              </div>
-              <button onClick={()=>alert("Zoom link will be sent 30 minutes before the session.")}
-                className="w-full py-2.5 font-bold text-xs tracking-wider font-mono border transition-colors"
-                style={{ borderColor:`${GOLD}40`, color:GOLD }}>
-                JOIN ZOOM SESSION
-              </button>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     );
 
-    /* ── COMMUNITY TAB ── */
-    const CommunityTab = () => (
-      <div className="space-y-5 pb-6">
-        {/* Post composer */}
-        <div className="rounded-xl p-4" style={{ background:"rgba(255,255,255,0.025)", border:`1px solid ${cfg.accent}25` }}>
-          <div className="flex items-start gap-3 mb-3">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 overflow-hidden"
-              style={{ background:`${cfg.accent}25`, color:cfg.accent, border:`1px solid ${cfg.accent}50` }}>
-              {profilePhoto ? <img src={profilePhoto} className="w-full h-full object-cover" /> : profileName[0]?.toUpperCase()}
-            </div>
-            <textarea value={newPost} onChange={e=>setNewPost(e.target.value.slice(0,280))}
-              placeholder="Share a signal, insight or announcement..."
-              className="flex-1 bg-transparent text-white/80 text-sm resize-none outline-none leading-relaxed"
-              style={{ borderBottom:"1px solid rgba(255,255,255,0.08)", paddingBottom:8 }}
-              rows={3} />
+    /* ─── HOME TAB ─── */
+    const HomeTab = () => (
+      <div className="space-y-3">
+        <div className="flex items-center justify-between py-1">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-px" style={{ background:accent }}/>
+            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color:`${accent}80` }}>Daily Signals Feed</span>
           </div>
-          {postMedia && (
-            <div className="relative mb-3 rounded-lg overflow-hidden">
-              <img src={postMedia} className="w-full max-h-48 object-cover rounded-lg" />
-              <button onClick={()=>setPostMedia(null)} className="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/70 flex items-center justify-center">
-                <X size={12} color="#fff" />
+          <div className="flex items-center gap-1.5">
+            <motion.div className="w-1.5 h-1.5 rounded-full bg-emerald-400" animate={{ opacity:[1,0.3,1] }} transition={{ duration:1.2, repeat:Infinity }}/>
+            <span className="font-mono text-[8px] tracking-widest text-emerald-400 uppercase">Live</span>
+          </div>
+        </div>
+        {posts.slice(0,5).map((post,i)=>(
+          <div key={post.id} className="relative rounded-2xl overflow-hidden"
+            style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
+            <div className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[10px] flex-shrink-0"
+                  style={{ background:`${accent}20`, border:`1.5px solid ${accent}45`, color:accent }}>FO</div>
+                <span className="font-mono text-[8px] tracking-widest uppercase" style={{ color:`${accent}55` }}>{post.type}</span>
+                <span className="font-mono text-[8px] text-white/20 ml-auto">{post.time}</span>
+              </div>
+              <p className="text-white/70 text-[13px] leading-relaxed mb-3">{post.body}</p>
+              <button onClick={()=>setLiked(prev=>({...prev,[i]:!prev[i]}))}
+                className="flex items-center gap-1.5 transition-all"
+                style={{ color: liked[i] ? "#ef4444" : "rgba(255,255,255,0.25)" }}>
+                <Heart size={12} fill={liked[i] ? "#ef4444" : "none"}/>
+                <span className="font-mono text-[10px]">{post.likes+(liked[i]?1:0)}</span>
               </button>
             </div>
-          )}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <button onClick={()=>mediaRef.current?.click()} className="text-white/30 hover:text-white/60 transition-colors">
-                <Upload size={14} />
-              </button>
-              <input ref={mediaRef} type="file" accept="image/*" className="hidden"
-                onChange={e=>{
-                  const f=e.target.files?.[0]; if(!f) return;
-                  const r=new FileReader(); r.onload=ev=>setPostMedia(ev.target?.result as string); r.readAsDataURL(f);
-                }}/>
-              <span className="font-mono text-[8px] text-white/20">{280-newPost.length}</span>
+          </div>
+        ))}
+        {/* Live Sessions */}
+        <div className="pt-2">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-4 h-px" style={{ background:accent }}/>
+            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color:`${accent}80` }}>Live Sessions</span>
+          </div>
+          <div className="rounded-2xl p-4" style={{ background:"rgba(15,12,6,0.8)", border:"1px solid rgba(255,255,255,0.06)" }}>
+            <div className="flex items-center gap-2 mb-2">
+              <Video size={13} style={{color:accent}}/>
+              <span className="font-mono text-[9px] uppercase tracking-widest" style={{color:accent}}>Zoom Masterclass</span>
+              <span className="ml-auto font-mono text-[7px] border border-white/10 px-1.5 py-0.5 text-white/25">UPCOMING</span>
             </div>
-            <button onClick={handleBroadcast}
-              className="font-mono text-[9px] font-bold tracking-widest uppercase px-4 py-2 rounded-lg transition-all active:scale-95"
-              style={{ background:newPost.trim() ? GOLD : `${GOLD}40`, color:"#000" }}>
-              ⚡ BROADCAST
+            <p className="text-white font-semibold text-sm mb-1">Advanced Risk Management & Portfolio Sizing</p>
+            <p className="font-mono text-[10px] text-white/30 mb-3">Saturday, July 5 · 8:00 PM PKT</p>
+            <button onClick={()=>alert("Zoom link will be sent 30 mins before session.")}
+              className="w-full py-2.5 rounded-xl font-mono font-bold text-[10px] tracking-widest uppercase border transition-colors"
+              style={{ borderColor:`${accent}40`, color:accent }}>
+              Join Zoom Session
             </button>
           </div>
         </div>
+      </div>
+    );
 
+    /* ─── COMMUNITY TAB ─── */
+    const CommunityTab = () => (
+      <div className="space-y-3">
+        {/* Composer */}
+        <div className="rounded-2xl p-4" style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${accent}22`, backdropFilter:"blur(16px)" }}>
+          <div className="flex gap-3">
+            <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden flex items-center justify-center font-bold"
+              style={{ background:`${accent}20`, border:`1.5px solid ${accent}50`, color:accent }}>
+              {profilePhoto ? <img src={profilePhoto} className="w-full h-full object-cover"/> : profileName[0]?.toUpperCase()}
+            </div>
+            <textarea value={newPost} onChange={e=>setNewPost(e.target.value.slice(0,280))}
+              placeholder="Share a signal, analysis or insight..."
+              className="flex-1 bg-transparent text-white/80 text-sm resize-none outline-none leading-relaxed placeholder:text-white/20"
+              style={{ borderBottom:`1px solid ${accent}15`, paddingBottom:8 }} rows={3}/>
+          </div>
+          <div className="flex items-center justify-between mt-3 pt-2" style={{ borderTop:`1px solid rgba(255,255,255,0.06)` }}>
+            <span className="font-mono text-[9px] text-white/20">{280-newPost.length}/280</span>
+            <button onClick={broadcast}
+              className="font-mono text-[9px] font-black tracking-widest uppercase px-5 py-2 rounded-full transition-all active:scale-95"
+              style={{ background: newPost.trim() ? accent : `${accent}30`, color:"#000", boxShadow: newPost.trim() ? `0 0 20px ${accent}40` : "none" }}>
+              ⚡ Broadcast
+            </button>
+          </div>
+        </div>
         {/* Feed */}
-        {posts.map((post) => (
-          <motion.div key={post.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{duration:0.3}}
-            className="rounded-xl p-4" style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.07)" }}>
-            {/* Author row */}
-            <div className="flex items-start gap-3 mb-3">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
-                style={{ background:`${TIER_CFG[post.tier].accent}22`, color:TIER_CFG[post.tier].accent }}>
-                {post.initials}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-white font-semibold text-sm">{post.author}</span>
-                  <TierBadge tier={post.tier} size="xs" />
-                  <button onClick={()=>setFollowed(prev=>({...prev,[post.id]:!prev[post.id]}))}
-                    className="ml-auto font-mono text-[7px] tracking-widest uppercase px-2 py-0.5 rounded transition-all"
-                    style={{ border:`1px solid ${followed[post.id] ? GOLD : "rgba(255,255,255,0.2)"}`,
-                      color:followed[post.id] ? GOLD : "rgba(255,255,255,0.3)" }}>
-                    {followed[post.id] ? "Following" : "Follow"}
-                  </button>
-                </div>
-                <span className="font-mono text-[8px] text-white/25">{post.time}</span>
-              </div>
-            </div>
-
-            {/* Content */}
-            <p className="text-white/70 text-sm leading-relaxed mb-4">{post.body}</p>
-
-            {/* Action bar */}
-            <div className="flex items-center gap-5 pt-3" style={{ borderTop:"1px solid rgba(255,255,255,0.05)" }}>
-              <button onClick={()=>setLiked(prev=>({...prev,[post.id]:!prev[post.id]}))}
-                className="flex items-center gap-1.5 text-xs transition-colors"
-                style={{ color:liked[post.id] ? "#ef4444" : "rgba(255,255,255,0.3)" }}>
-                <Heart size={13} fill={liked[post.id] ? "#ef4444" : "none"} />
-                <span>{post.likes+(liked[post.id]?1:0)}</span>
-              </button>
-              <button onClick={()=>setCommentOpen(prev=>({...prev,[post.id]:!prev[post.id]}))}
-                className="flex items-center gap-1.5 text-xs transition-colors"
-                style={{ color:commentOpen[post.id] ? GOLD : "rgba(255,255,255,0.3)" }}>
-                <MessageCircle size={13} />
-                <span>{(comments[post.id]||[]).length}</span>
-              </button>
-              <button onClick={()=>setReposted(prev=>({...prev,[post.id]:!prev[post.id]}))}
-                className="flex items-center gap-1.5 text-xs transition-colors"
-                style={{ color:reposted[post.id] ? "#22c55e" : "rgba(255,255,255,0.3)" }}>
-                <ArrowRight size={13} />
-                <span>{post.reposts+(reposted[post.id]?1:0)}</span>
-              </button>
-            </div>
-
-            {/* Inline comments */}
-            {commentOpen[post.id] && (
-              <div className="mt-3 space-y-2">
-                {(comments[post.id]||[]).map((c,ci)=>(
-                  <div key={ci} className="flex items-start gap-2 text-xs text-white/50 pl-2"
-                    style={{ borderLeft:`2px solid ${cfg.accent}30` }}>
-                    <span className="font-semibold text-white/70">{profileName.split(" ")[0]}</span>
-                    <span>{c}</span>
-                  </div>
-                ))}
-                <div className="flex gap-2 mt-2">
-                  <input value={commentText[post.id]||""} onChange={e=>setCommentText(prev=>({...prev,[post.id]:e.target.value}))}
-                    placeholder="Write a reply..."
-                    className="flex-1 bg-transparent text-white/60 text-xs outline-none py-1.5 px-2 rounded"
-                    style={{ border:"1px solid rgba(255,255,255,0.1)" }}
-                    onKeyDown={e=>{
-                      if(e.key==="Enter" && commentText[post.id]?.trim()) {
-                        setComments(prev=>({...prev,[post.id]:[...(prev[post.id]||[]),commentText[post.id].trim()]}));
-                        setCommentText(prev=>({...prev,[post.id]:""}));
-                      }
-                    }} />
-                  <button onClick={()=>{
-                      if(commentText[post.id]?.trim()) {
-                        setComments(prev=>({...prev,[post.id]:[...(prev[post.id]||[]),commentText[post.id].trim()]}));
-                        setCommentText(prev=>({...prev,[post.id]:""}));
-                      }
-                    }}
-                    className="font-mono text-[8px] tracking-widest px-2 py-1 rounded"
-                    style={{ background:`${GOLD}25`, color:GOLD }}>
-                    REPLY
-                  </button>
-                </div>
-              </div>
-            )}
-          </motion.div>
+        {posts.map(post=>(
+          <PostCard key={post.id} post={post} accent={accent}
+            profilePhoto={profilePhoto} profileName={profileName} myTier={tier}
+            liked={!!liked[post.id]} onLike={()=>setLiked(p=>({...p,[post.id]:!p[post.id]}))}
+            reposted={!!reposted[post.id]} onRepost={()=>setReposted(p=>({...p,[post.id]:!p[post.id]}))}
+            commentOpen={!!commentOpen[post.id]} onToggleComment={()=>setCommentOpen(p=>({...p,[post.id]:!p[post.id]}))}
+            commentText={commentText[post.id]||""} onCommentChange={v=>setCommentText(p=>({...p,[post.id]:v}))}
+            comments={comments[post.id]||[]}
+            onComment={()=>{
+              const t=(commentText[post.id]||"").trim();
+              if(!t) return;
+              setComments(p=>({...p,[post.id]:[...(p[post.id]||[]),t]}));
+              setCommentText(p=>({...p,[post.id]:""}));
+            }}
+            followed={!!followed[post.id]} onFollow={()=>setFollowed(p=>({...p,[post.id]:!p[post.id]}))}
+          />
         ))}
       </div>
     );
 
-    /* ── ACADEMY TAB ── */
+    /* ─── ACADEMY TAB ─── */
     const AcademyTab = () => (
-      <div className="space-y-6 pb-6">
+      <div className="space-y-4">
         <div>
-          <Label text="OkzByte Academy" />
-          <p className="text-white/35 text-xs mt-1">Curated education for elite traders & builders</p>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-4 h-px" style={{background:accent}}/>
+            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${accent}80`}}>OkzByte Academy</span>
+          </div>
+          <p className="font-mono text-[10px] text-neutral-500 tracking-wider">Curated for elite traders & builders</p>
         </div>
-        {/* Category filter pills */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {categories.map(cat=>(
-            <button key={cat} onClick={()=>setActiveCategory(cat)}
-              className="flex-shrink-0 font-mono text-[8px] font-bold tracking-wider uppercase px-3 py-2 rounded-full transition-all"
+        {/* Filter pills */}
+        <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth:"none" }}>
+          {CATS.map(cat=>(
+            <button key={cat} onClick={()=>setActiveCat(cat)}
+              className="flex-shrink-0 font-bold text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full transition-all"
               style={{
-                background: activeCategory===cat ? GOLD : "rgba(255,255,255,0.05)",
-                color: activeCategory===cat ? "#000" : "rgba(255,255,255,0.45)",
-                border: activeCategory===cat ? `1px solid ${GOLD}` : "1px solid rgba(255,255,255,0.1)",
-                boxShadow: activeCategory===cat ? `0 0 16px ${GOLD}40` : "none",
+                border: `1px solid ${activeCat===cat ? accent : "rgba(212,175,55,0.3)"}`,
+                background: activeCat===cat ? accent : "rgba(9,7,2,0.6)",
+                color: activeCat===cat ? "#000" : "#D4AF37",
+                boxShadow: activeCat===cat ? `0 0 18px ${accent}40` : "none",
               }}>
               {cat}
             </button>
           ))}
         </div>
-        {/* Course grid */}
-        <div className="grid grid-cols-1 gap-3">
-          {filteredCourses.map((course, i)=>(
-            <motion.div key={i} initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:i*0.05}}
-              className="relative rounded-xl p-4 overflow-hidden"
-              style={{ background:"rgba(255,255,255,0.025)", border:`1px solid ${course.locked ? "rgba(255,255,255,0.06)" : `${GOLD}30`}` }}>
-              {course.locked && (
-                <div className="absolute inset-0 flex items-center justify-center rounded-xl z-10"
-                  style={{ background:"rgba(0,0,0,0.65)", backdropFilter:"blur(2px)" }}>
-                  <div className="text-center">
-                    <div className="text-2xl mb-1">🔒</div>
-                    <div className="font-mono text-[8px] text-white/40 uppercase tracking-widest">Higher Tier Required</div>
-                  </div>
+        {/* Courses */}
+        <div className="space-y-3">
+          {filteredCourses.map((c,i)=>(
+            <motion.div key={i} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.04}}
+              className="relative rounded-2xl overflow-hidden"
+              style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${c.locked ? "rgba(255,255,255,0.05)" : `${accent}25`}` }}>
+              {c.locked && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10"
+                  style={{ background:"rgba(0,0,0,0.7)", backdropFilter:"blur(3px)" }}>
+                  <div className="text-2xl mb-1">🔒</div>
+                  <div className="font-mono text-[8px] text-white/35 uppercase tracking-widest">Higher Tier Required</div>
                 </div>
               )}
-              <div className="flex items-start justify-between gap-3">
+              <div className="p-4 flex items-start gap-3">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="font-mono text-[7px] tracking-widest uppercase px-2 py-0.5 rounded-sm"
-                      style={{ background:`${GOLD}15`, color:`${GOLD}80`, border:`1px solid ${GOLD}25` }}>
-                      {course.cat}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-mono text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-sm"
+                      style={{ background:`${accent}12`, color:`${accent}70`, border:`1px solid ${accent}20` }}>
+                      {c.cat}
                     </span>
-                    <span className="font-mono text-[7px] tracking-widest uppercase text-white/25">{course.level}</span>
+                    <span className="font-mono text-[8px] text-white/20">{c.level}</span>
                   </div>
-                  <h3 className="text-white font-semibold text-sm mb-1 leading-tight">{course.title}</h3>
-                  <p className="text-white/40 text-xs">{course.sub}</p>
+                  <h3 className="text-white font-bold text-sm mb-1">{c.title}</h3>
+                  <p className="text-neutral-500 text-[11px] font-mono">{c.sub}</p>
                 </div>
-                {!course.locked && (
-                  <button className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ background:`${GOLD}20`, border:`1px solid ${GOLD}50` }}
-                    onClick={()=>alert(`Opening: ${course.title}`)}>
-                    <ChevronRight size={14} style={{color:GOLD}} />
+                {!c.locked && (
+                  <button onClick={()=>alert(`Opening: ${c.title}`)}
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background:`${accent}20`, border:`1px solid ${accent}50` }}>
+                    <ChevronRight size={14} style={{color:accent}}/>
                   </button>
                 )}
               </div>
@@ -2119,37 +2097,36 @@ function CardPhase({
       </div>
     );
 
-    /* ── PASSPORT TAB ── */
+    /* ─── PASSPORT TAB ─── */
     const PassportTab = () => (
-      <div className="space-y-6 pb-6">
-        <Label text="Identity Passport" />
-        <p className="text-white/35 text-xs">Generate your 24K Liquid Gold Sovereign Card</p>
-        <div className="grid grid-cols-1 gap-4">
+      <div className="space-y-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-4 h-px" style={{background:accent}}/>
+            <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${accent}80`}}>Identity Passport</span>
+          </div>
+          <p className="font-mono text-[10px] text-neutral-500 tracking-wider">Generate your 24K Liquid Gold Sovereign Card</p>
+        </div>
+        <div className="space-y-3">
           {([1,2,3] as Tier[]).map(t=>{
-            const tc=TIER_CFG[t];
+            const tc = TIER_CFG[t];
+            const ta = t === 3 ? "#D4AF37" : tc.accent;
             return (
               <button key={t} onClick={()=>onGoToCard(t)}
-                className="relative rounded-xl p-5 text-left overflow-hidden transition-all active:scale-[0.98]"
-                style={{ background:`linear-gradient(135deg,${tc.cardBg[0]},${tc.cardBg[1]})`,
-                  border:`1px solid ${tc.accent}40`, boxShadow:`0 0 25px ${tc.accent}15` }}>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
-                    style={{ background:`${tc.accent}20`, border:`1px solid ${tc.accent}50` }}>
-                    {tc.emoji}
-                  </div>
+                className="w-full relative rounded-2xl p-5 text-left overflow-hidden transition-all active:scale-[0.98]"
+                style={{ background:`linear-gradient(135deg,${tc.cardBg[0]},${tc.cardBg[1]})`, border:`1px solid ${ta}35`, boxShadow:`0 0 25px ${ta}10` }}>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                    style={{ background:`${ta}18`, border:`1px solid ${ta}40` }}>{tc.emoji}</div>
                   <div>
-                    <div className="text-white font-bold text-sm">{tc.name}</div>
-                    <div className="font-mono text-[8px] uppercase tracking-widest mt-0.5" style={{color:`${tc.accent}70`}}>
-                      Tier {t} · {tc.priceLabel}/mo
-                    </div>
+                    <div className="text-white font-black text-base">{tc.name}</div>
+                    <div className="font-mono text-[9px] uppercase tracking-widest mt-0.5" style={{color:`${ta}65`}}>Tier {t} · {tc.priceLabel}/mo</div>
                   </div>
-                  <div className="ml-auto" style={{color:`${tc.accent}60`}}>
-                    <ChevronRight size={18} />
-                  </div>
+                  <div className="ml-auto" style={{color:`${ta}50`}}><ChevronRight size={20}/></div>
                 </div>
-                <motion.div className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{ border:`1px solid ${tc.accent}` }}
-                  animate={{ opacity:[0.05,0.25,0.05] }} transition={{ duration:3, repeat:Infinity, delay:t*0.5 }} />
+                <motion.div className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{ border:`1px solid ${ta}` }}
+                  animate={{ opacity:[0.05,0.2,0.05] }} transition={{ duration:3, repeat:Infinity, delay:t*0.7 }}/>
               </button>
             );
           })}
@@ -2157,77 +2134,80 @@ function CardPhase({
       </div>
     );
 
+    const tabs: { id: NavTab; icon: string; label: string }[] = [
+      { id:"home",      icon:"🏠", label:"Home"      },
+      { id:"community", icon:"👥", label:"Community" },
+      { id:"academy",   icon:"🎓", label:"Academy"   },
+      { id:"passport",  icon:"🎟️", label:"Passport"  },
+    ];
+
     return (
       <div className="min-h-screen bg-black text-white" style={{ fontFamily:"system-ui,sans-serif" }}>
-
-        {/* ── TOP HEADER ── */}
-        <div className="sticky top-0 z-40 border-b pt-12 pb-3 px-5"
-          style={{ background:"rgba(0,0,0,0.92)", backdropFilter:"blur(20px)", borderColor:"rgba(255,255,255,0.07)" }}>
-          <div className="max-w-2xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <img src="/logos/okzbyte.png" alt="OkzByte"
-                style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 6px ${cfg.accent}80)` }} />
-              <div>
-                <div className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${cfg.accent}70`}}>OkzByte Hub</div>
-                <div className="text-white font-bold text-sm leading-tight capitalize">{activeTab === "home" ? `Welcome, ${profileName.split(" ")[0]}` : activeTab === "community" ? "Community" : activeTab === "academy" ? "Academy" : "Identity Passport"}</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <TierBadge tier={tier} size="xs" />
-              <div className="font-mono text-[8px] text-white/25 border border-white/10 px-2 py-1">{daysLeft}d</div>
-            </div>
+        {/* OkzByte top bar */}
+        <div className="sticky top-0 z-40 px-4 py-3 flex items-center justify-between"
+          style={{ background:"rgba(0,0,0,0.9)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+          <div className="flex items-center gap-2">
+            <img src="/logos/okzbyte.png" style={{ width:28, height:28, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
+            <div className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color:`${accent}70` }}>OkzByte Hub</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="font-mono text-[8px] text-white/25 border border-white/10 px-2 py-1 rounded-full">{daysLeft}d left</div>
           </div>
         </div>
 
-          {/* ── STICKY TAB NAV ── */}
-          <div className="sticky z-39 border-b px-2"
-            style={{ top:"57px", background:"rgba(0,0,0,0.95)", backdropFilter:"blur(20px)", borderColor:"rgba(255,255,255,0.07)" }}>
-            <div className="max-w-2xl mx-auto">
-              <div className="grid grid-cols-4">
-                {([
-                  { id:"home" as NavTab,      icon:"🏠", label:"Home"      },
-                  { id:"community" as NavTab, icon:"👥", label:"Community" },
-                  { id:"academy" as NavTab,   icon:"🎓", label:"Academy"   },
-                  { id:"passport" as NavTab,  icon:"🎟️", label:"Passport"  },
-                ]).map(item=>{
-                  const isActive = activeTab === item.id;
-                  return (
-                    <button key={item.id} onClick={()=>setActiveTab(item.id)}
-                      className="relative flex flex-col items-center justify-center py-3 transition-all w-full"
-                      style={{ color: isActive ? cfg.accent : "rgba(255,255,255,0.3)" }}>
-                      <span className="text-base leading-none mb-1">{item.icon}</span>
-                      <span className="font-mono text-[8px] tracking-wider uppercase" style={{ fontWeight: isActive ? 900 : 400 }}>
-                        {item.label}
-                      </span>
-                      {isActive && (
-                        <motion.div layoutId="nav-indicator"
-                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full"
-                          style={{ background:cfg.accent }}
-                          transition={{ type:"spring", bounce:0.2, duration:0.4 }} />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+        {/* Scrollable content */}
+        <div className="max-w-lg mx-auto px-4 pt-4 pb-28">
+          <ProfileHeader/>
+          {/* Tab indicator strip */}
+          <div className="flex gap-0 mb-4 mt-3 rounded-2xl overflow-hidden" style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)" }}>
+            {tabs.map(tab=>{
+              const isActive = activeTab === tab.id;
+              return (
+                <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
+                  className="flex-1 flex flex-col items-center justify-center py-3 relative transition-all"
+                  style={{ color: isActive ? accent : "rgba(255,255,255,0.3)", background: isActive ? `${accent}10` : "transparent" }}>
+                  <span className="text-sm mb-0.5">{tab.icon}</span>
+                  <span className="font-mono text-[8px] font-bold tracking-wider uppercase">{tab.label}</span>
+                  {isActive && (
+                    <motion.div layoutId="tab-line" className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full"
+                      style={{ background:accent }} transition={{ type:"spring", bounce:0.2, duration:0.35 }}/>
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-        {/* ── MAIN CONTENT ── */}
-        <div className="max-w-2xl mx-auto px-5 pt-6">
+          {/* Tab content */}
           <AnimatePresence mode="wait">
             <motion.div key={activeTab}
-              initial={{ opacity:0, y:10 }}
-              animate={{ opacity:1, y:0 }}
-              exit={{ opacity:0, y:-8 }}
-              transition={{ duration:0.22 }}>
-              {activeTab === "home"      && <HomeTab />}
-              {activeTab === "community" && <CommunityTab />}
-              {activeTab === "academy"   && <AcademyTab />}
-              {activeTab === "passport"  && <PassportTab />}
+              initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-6 }}
+              transition={{ duration:0.2 }}>
+              {activeTab === "home"      && <HomeTab/>}
+              {activeTab === "community" && <CommunityTab/>}
+              {activeTab === "academy"   && <AcademyTab/>}
+              {activeTab === "passport"  && <PassportTab/>}
             </motion.div>
           </AnimatePresence>
         </div>
 
+        {/* Fixed glass dock bottom */}
+        <div className="fixed bottom-0 left-0 right-0 h-16 z-50 px-8 flex justify-between items-center"
+          style={{ backdropFilter:"blur(24px)", background:"rgba(0,0,0,0.85)", borderTop:"1px solid rgba(255,255,255,0.08)", boxShadow:"0 -10px 30px rgba(0,0,0,0.6)" }}>
+          {tabs.map(tab=>{
+            const isActive = activeTab === tab.id;
+            return (
+              <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
+                className="flex flex-col items-center justify-center gap-1 transition-all"
+                style={{ color: isActive ? accent : "rgba(255,255,255,0.3)" }}>
+                <span className="text-lg leading-none">{tab.icon}</span>
+                <span className="font-mono text-[8px] font-bold tracking-wider uppercase" style={{ opacity: isActive ? 1 : 0.6 }}>
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 
