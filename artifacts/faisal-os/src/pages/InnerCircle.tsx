@@ -8,7 +8,6 @@
  */
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { toPng } from "html-to-image";
 import {
   Globe, Bot, BarChart2, Users, Shield, Crown, Mic, Video,
   Heart, MessageCircle, Clock, Radio, ChevronRight, ChevronDown,
@@ -1064,6 +1063,8 @@ function CardPhase({
     if (!el || !name.trim()) return;
     setExporting(true);
     try {
+      // Dynamic CDN import — no lockfile change needed
+      const { toPng } = await import("https://esm.sh/html-to-image@1.11.11" as string) as { toPng: (node: HTMLElement, opts?: object) => Promise<string> };
       const dataUrl = await toPng(el, { pixelRatio: 3, cacheBust: true });
       const link = document.createElement("a");
       link.download = `sovereign-id-${memberId}.png`;
