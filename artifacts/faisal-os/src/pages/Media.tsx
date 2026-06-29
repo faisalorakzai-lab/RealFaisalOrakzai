@@ -81,15 +81,19 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
   ];
 
   const PRESS_LINKS = [
-    { pub:"PRLog", title:"Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever", url:"https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html" },
-    { pub:"Hackernoon", title:"Faisal Orakzai — Blockchain Architect, Author", url:"https://hackernoon.com/u/faisalorakzai" },
-    { pub:"Shamim Forever", title:"Faisal Orakzai — Founder & Blockchain Architect", url:"https://www.shamimforever.com" },
-    { pub:"Crunchbase", title:"Faisal Orakzai — Founder & Chairman @ Orakzai Group (Rank #28)", url:"https://www.crunchbase.com/person/faisal-orakzai" },
-    { pub:"Wikidata", title:"Muhammad Faisal Orakzai — Q140264666", url:"https://www.wikidata.org/wiki/Q140264666" },
-    { pub:"EveryBodyWiki", title:"Faisal Orakzai — Entrepreneur, Blockchain", url:"https://en.everybodywiki.com/Faisal_Orakzai" },
-    { pub:"Wellfound", title:"Faisal Orakzai — Startup Profile", url:"https://wellfound.com/u/faisal-orakzai-1" },
-    { pub:"F6S", title:"Faisal Orakzai — Founder Profile", url:"https://www.f6s.com/faisalorakzai" },
-  ];
+      { pub:"Google Panel",    type:"KNOWLEDGE GRAPH",  title:"Muhammad Faisal Orakzai — Google Knowledge Panel",                                    url:"https://www.google.com/search?q=Muhammad+Faisal+Orakzai", logo:"/logos/google.webp" },
+      { pub:"Wikidata",        type:"KNOWLEDGE GRAPH",  title:"Muhammad Faisal Orakzai — Q140264666",                                                url:"https://www.wikidata.org/wiki/Q140264666",                logo:"/logos/wikidata.png" },
+      { pub:"Crunchbase",      type:"INVESTOR NETWORK", title:"Faisal Orakzai — Founder & Chairman @ Orakzai Group (Rank #28)",                      url:"https://www.crunchbase.com/person/faisal-orakzai",        logo:null },
+      { pub:"EveryBodyWiki",   type:"ENCYCLOPEDIA",     title:"Faisal Orakzai — Entrepreneur, Blockchain",                                           url:"https://en.everybodywiki.com/Faisal_Orakzai",            logo:"/logos/everybodywiki.png" },
+      { pub:"ORCID",           type:"RESEARCH ID",      title:"Muhammad Faisal Orakzai — 0009-0000-0915-7272",                                       url:"https://orcid.org/0009-0000-0915-7272",                  logo:"/logos/orcid.png" },
+      { pub:"Orakzai Bond",    type:"VENTURE · LIVE",   title:"OKBOND — Polygon L2 Blockchain Token",                                               url:"https://orakzaibond.com",                                logo:"/logos/orakzai-bond.jpg" },
+      { pub:"Shamim Forever",  type:"VENTURE · LIVE",   title:"Faisal Orakzai — Founder & Blockchain Architect",                                    url:"https://www.shamimforever.com",                          logo:"/logos/shamim-forever.jpg" },
+      { pub:"Wellfound",       type:"STARTUP",          title:"Faisal Orakzai — Startup Profile",                                                   url:"https://wellfound.com/u/faisal-orakzai-1",               logo:"/logos/wellfound.png" },
+      { pub:"Tracxn · OKBOND", type:"VENTURE · LIVE",   title:"OKBOND — Tracxn Company Profile",                                                    url:"https://tracxn.com/d/companies/okbond",                  logo:"/logos/tracxn.png" },
+      { pub:"PRLog",           type:"PRESS",            title:"Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever", url:"https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html", logo:null },
+      { pub:"Hackernoon",      type:"PRESS",            title:"Faisal Orakzai — Blockchain Architect, Author",                                       url:"https://hackernoon.com/u/faisalorakzai",                 logo:null },
+      { pub:"F6S",             type:"STARTUP",          title:"Faisal Orakzai — Founder Profile",                                                   url:"https://www.f6s.com/faisalorakzai",                      logo:null },
+    ];
 
   type GalleryItem = typeof GALLERY[0];
 
@@ -271,18 +275,30 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
                 </div>
                 <h2 className="text-4xl font-black mb-16">As Seen<br/><span className="text-white/40">In</span></h2>
               </InView>
-              <div className="grid md:grid-cols-2 gap-4">
-                {PRESS_LINKS.map((p,i) => (
-                  <InView key={p.pub} custom={i*0.06}>
-                    <a href={p.url} target="_blank" rel="noopener noreferrer"
-                       className="flex items-start gap-4 border border-white/8 p-5 hover:border-[#F3BA2F]/30 transition-colors group">
-                      <span className="font-mono text-[10px] text-[#F3BA2F] tracking-widest uppercase shrink-0 w-28 pt-0.5">{p.pub}</span>
-                      <span className="text-white/60 text-sm group-hover:text-white transition-colors leading-snug flex-1">{p.title}</span>
-                      <ExternalLink size={14} className="text-white/20 group-hover:text-[#F3BA2F] transition-colors shrink-0 mt-0.5"/>
-                    </a>
-                  </InView>
-                ))}
-              </div>
+              <div className="grid md:grid-cols-2 gap-3">
+                  {PRESS_LINKS.map((p,i) => (
+                    <InView key={p.pub} custom={i*0.06}>
+                      <a href={p.url} target="_blank" rel="noopener noreferrer"
+                         className="flex items-center gap-3 border border-white/8 p-4 hover:border-[#F3BA2F]/30 transition-colors group rounded-sm">
+                        <div className="w-11 h-11 rounded-lg shrink-0 flex items-center justify-center overflow-hidden bg-white/5 border border-white/8">
+                          {p.logo ? (
+                            <img src={p.logo} alt={p.pub} className="w-full h-full object-contain p-1.5" />
+                          ) : (
+                            <span className="font-mono text-[8px] font-bold text-[#F3BA2F] text-center leading-tight">{p.pub.slice(0,3).toUpperCase()}</span>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-0.5">
+                            <span className="font-mono text-[10px] text-[#F3BA2F] tracking-widest uppercase leading-none">{p.pub}</span>
+                            {p.type && <span className="font-mono text-[7px] text-white/30 tracking-wider border border-white/10 px-1 py-px rounded leading-none">{p.type}</span>}
+                          </div>
+                          <span className="text-white/55 text-xs group-hover:text-white/80 transition-colors leading-snug line-clamp-2 block">{p.title}</span>
+                        </div>
+                        <ExternalLink size={13} className="text-white/20 group-hover:text-[#F3BA2F] transition-colors shrink-0"/>
+                      </a>
+                    </InView>
+                  ))}
+                </div>
             </div>
           </section>
 
