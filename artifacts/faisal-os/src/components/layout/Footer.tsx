@@ -14,34 +14,34 @@ import { motion } from "framer-motion";
   ];
 
   const tier1 = [
-    { label: "Google Panel",    url: "https://share.google/jJqhayo6kkfz4k7Nb",                           cat: "KNOWLEDGE GRAPH" },
-    { label: "Wikidata",        url: "https://www.wikidata.org/wiki/Q140264666",                          cat: "KNOWLEDGE GRAPH" },
-    { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK" },
-    { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA" },
-    { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID" },
-    { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE" },
-    { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE" },
-    { label: "Wellfound",       url: "https://wellfound.com/u/faisal-orakzai-1",                         cat: "STARTUP" },
-    { label: "Tracxn · OKBOND",   url: "https://platform.tracxn.com/a/d/company/69d7b7bd06c1367e438e2743/orakzaibond", cat: "VENTURE · LIVE" },
+    { label: "Google Panel",    url: "https://share.google/jJqhayo6kkfz4k7Nb",                           cat: "KNOWLEDGE GRAPH",  logo: "/logos/google.png" },
+    { label: "Wikidata",        url: "https://www.wikidata.org/wiki/Q140264666",                          cat: "KNOWLEDGE GRAPH",  logo: "/logos/wikidata.png" },
+    { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.png" },
+    { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.png" },
+    { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.png" },
+    { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE",   logo: "/logos/orakzai-bond.jpg" },
+    { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE",   logo: "/logos/shamim-forever.jpg" },
+    { label: "Wellfound",       url: "https://wellfound.com/u/faisal-orakzai-1",                         cat: "STARTUP",          logo: "/logos/wellfound.png" },
+    { label: "Tracxn · OKBOND", url: "https://platform.tracxn.com/a/d/company/69d7b7bd06c1367e438e2743/orakzaibond", cat: "VENTURE · LIVE", logo: "/logos/tracxn.png" },
   ];
 
   const tier2 = [
-    { label: "Peerlist",       url: "https://peerlist.io/faisalorakzai" },
-    { label: "Hackernoon",     url: "https://hackernoon.com/u/faisalorakzai" },
-    { label: "F6S",            url: "https://www.f6s.com/faisalorakzai" },
-    { label: "TheOrg",         url: "https://theorg.com/org/orakzai-bond?person=faisal-orakzai" },
-    { label: "Gust",           url: "https://gust.com/user/014bee5e-1c09-4f2d-b5ae-f5c937bbcc0e" },
-    { label: "Startup School", url: "https://www.startupschool.org/cofounder-matching/candidate/Hm8t79WI2" },
-    { label: "About.me",       url: "https://about.me/faisalorakzai" },
-    { label: "Gravatar",       url: "https://gravatar.com/faisalorakzaii" },
-    { label: "Linktree",       url: "https://linktr.ee/faisalorakzaiofficial" },
-    { label: "GenGlobal",      url: "https://www.genglobal.org/user/faisal1" },
-    { label: "Bebee",          url: "https://bebee.com/pk/people/faisalorakzai" },
-    { label: "Pa.bio",         url: "https://pa.bio/faisalorakzaii" },
-    { label: "Bio.site",       url: "https://bio.site/faisalorakzai" },
-    { label: "LeetCode",       url: "https://leetcode.com/u/faisalorakzai/" },
-    { label: "PRLog",          url: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html" },
-    { label: "Polygon Scan",   url: "https://polygonscan.com" },
+    { label: "Peerlist",       url: "https://peerlist.io/faisalorakzai",                                                                                          logo: "/logos/peerlist.png" },
+    { label: "Hackernoon",     url: "https://hackernoon.com/u/faisalorakzai",                                                                                     logo: "/logos/hackernoon.png" },
+    { label: "F6S",            url: "https://www.f6s.com/faisalorakzai",                                                                                          logo: "/logos/f6s.png" },
+    { label: "TheOrg",         url: "https://theorg.com/org/orakzai-bond?person=faisal-orakzai",                                                                 logo: "/logos/theorg.png" },
+    { label: "Gust",           url: "https://gust.com/user/014bee5e-1c09-4f2d-b5ae-f5c937bbcc0e",                                                                logo: "/logos/gust.png" },
+    { label: "Startup School", url: "https://www.startupschool.org/cofounder-matching/candidate/Hm8t79WI2",                                                       logo: "/logos/startup-school.png" },
+    { label: "About.me",       url: "https://about.me/faisalorakzai",                                                                                            logo: "/logos/about-me.png" },
+    { label: "Gravatar",       url: "https://gravatar.com/faisalorakzaii",                                                                                        logo: "/logos/gravatar.png" },
+    { label: "Linktree",       url: "https://linktr.ee/faisalorakzaiofficial",                                                                                    logo: "/logos/linktree.png" },
+    { label: "GenGlobal",      url: "https://www.genglobal.org/user/faisal1",                                                                                     logo: "/logos/genglobal.png" },
+    { label: "Bebee",          url: "https://bebee.com/pk/people/faisalorakzai",                                                                                  logo: "/logos/bebee.png" },
+    { label: "Pa.bio",         url: "https://pa.bio/faisalorakzaii",                                                                                              logo: "/logos/pabio.png" },
+    { label: "Bio.site",       url: "https://bio.site/faisalorakzai",                                                                                            logo: "/logos/biosite.png" },
+    { label: "LeetCode",       url: "https://leetcode.com/u/faisalorakzai/",                                                                                     logo: "/logos/leetcode.png" },
+    { label: "PRLog",          url: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html",   logo: "/logos/prlog-logo.png" },
+    { label: "Polygon Scan",   url: "https://polygonscan.com",                                                                                                    logo: "/logos/polygonscan.png" },
   ];
 
   export default function Footer() {
@@ -88,9 +88,14 @@ import { motion } from "framer-motion";
                 {socials.map((s) => (
                   <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-2 group">
-                    <span className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden rounded-sm">
-                      <img src={s.logo} alt={s.label} className="w-full h-full object-cover"
-                        style={s.filter ? { filter: s.filter } : undefined} />
+                    <span className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden rounded-sm bg-white/5">
+                      <img
+                        src={s.logo}
+                        alt={s.label}
+                        className="w-full h-full object-cover"
+                        style={s.filter ? { filter: s.filter } : undefined}
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
                     </span>
                     <span className="text-white/60 text-sm group-hover:text-[#F3BA2F] transition-colors truncate">{s.label}</span>
                   </a>
@@ -108,7 +113,17 @@ import { motion } from "framer-motion";
                 {tier1.map((l) => (
                   <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-between group py-1 border-b border-white/4 hover:border-[#F3BA2F]/20 transition-colors">
-                    <span className="text-white/60 text-sm group-hover:text-[#F3BA2F] transition-colors">{l.label}</span>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-5 h-5 flex items-center justify-center shrink-0 overflow-hidden rounded-sm bg-white/5">
+                        <img
+                          src={l.logo}
+                          alt={l.label}
+                          className="w-full h-full object-cover"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      </span>
+                      <span className="text-white/60 text-sm group-hover:text-[#F3BA2F] transition-colors truncate">{l.label}</span>
+                    </div>
                     <span className="font-mono text-[8px] tracking-widest text-white/20 group-hover:text-[#F3BA2F]/50 transition-colors shrink-0 ml-2">{l.cat}</span>
                   </a>
                 ))}
@@ -122,10 +137,20 @@ import { motion } from "framer-motion";
               <div className="h-px w-4 bg-[#F3BA2F]/50" />
               <span className="text-white/25 font-mono text-[9px] tracking-[0.3em] uppercase">Directories & Profiles</span>
             </div>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-x-5 gap-y-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-x-4 gap-y-3">
               {tier2.map((l) => (
                 <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer"
-                  className="text-white/35 text-xs hover:text-[#F3BA2F] transition-colors truncate">{l.label}</a>
+                  className="flex items-center gap-1.5 group min-w-0">
+                  <span className="w-5 h-5 flex items-center justify-center shrink-0 overflow-hidden rounded-sm bg-white/5">
+                    <img
+                      src={l.logo}
+                      alt={l.label}
+                      className="w-full h-full object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  </span>
+                  <span className="text-white/35 text-xs group-hover:text-[#F3BA2F] transition-colors truncate">{l.label}</span>
+                </a>
               ))}
             </div>
           </div>
@@ -162,4 +187,3 @@ import { motion } from "framer-motion";
       </footer>
     );
   }
-  
