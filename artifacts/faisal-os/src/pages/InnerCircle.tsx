@@ -795,283 +795,183 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
     qrDataUrl: string | null;
   }
 
-  /* Shared circuit SVG background */
-  function CircuitBoard({ color, opacity = 0.18 }: { color: string; opacity?: number }) {
+  /* ── SVG Circuit Traces Background ── */
+  function CircuitBg({ c }: { c: string }) {
     return (
-      <svg
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity, pointerEvents: "none" }}
-        viewBox="0 0 540 320" preserveAspectRatio="xMidYMid slice"
-      >
-        {/* Corner traces - top left */}
-        <polyline points="0,50 30,50 50,30 120,30" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="0,80 20,80 40,60" stroke={color} strokeWidth="0.4" fill="none"/>
-        <polyline points="50,0 50,25" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="80,0 80,20 100,20" stroke={color} strokeWidth="0.4" fill="none"/>
-        <circle cx="50" cy="30" r="2.5" fill={color}/>
-        <circle cx="120" cy="30" r="1.5" fill={color}/>
-        <rect x="46" y="46" width="8" height="8" fill="none" stroke={color} strokeWidth="0.5"/>
-        {/* Corner traces - top right */}
-        <polyline points="540,50 510,50 490,30 420,30" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="540,80 520,80 500,60" stroke={color} strokeWidth="0.4" fill="none"/>
-        <polyline points="490,0 490,25" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="460,0 460,20 440,20" stroke={color} strokeWidth="0.4" fill="none"/>
-        <circle cx="490" cy="30" r="2.5" fill={color}/>
-        <circle cx="420" cy="30" r="1.5" fill={color}/>
-        <rect x="486" y="46" width="8" height="8" fill="none" stroke={color} strokeWidth="0.5"/>
-        {/* Corner traces - bottom left */}
-        <polyline points="0,270 30,270 50,290 120,290" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="0,240 20,240 40,260" stroke={color} strokeWidth="0.4" fill="none"/>
-        <polyline points="50,320 50,295" stroke={color} strokeWidth="0.6" fill="none"/>
-        <circle cx="50" cy="290" r="2.5" fill={color}/>
-        <circle cx="120" cy="290" r="1.5" fill={color}/>
-        <rect x="46" y="266" width="8" height="8" fill="none" stroke={color} strokeWidth="0.5"/>
-        {/* Corner traces - bottom right */}
-        <polyline points="540,270 510,270 490,290 420,290" stroke={color} strokeWidth="0.6" fill="none"/>
-        <polyline points="540,240 520,240 500,260" stroke={color} strokeWidth="0.4" fill="none"/>
-        <polyline points="490,320 490,295" stroke={color} strokeWidth="0.6" fill="none"/>
-        <circle cx="490" cy="290" r="2.5" fill={color}/>
-        <circle cx="420" cy="290" r="1.5" fill={color}/>
-        <rect x="486" y="266" width="8" height="8" fill="none" stroke={color} strokeWidth="0.5"/>
-        {/* Radial rings - center watermark */}
-        <circle cx="270" cy="160" r="55" stroke={color} strokeWidth="0.4" fill="none" strokeDasharray="3 5"/>
-        <circle cx="270" cy="160" r="80" stroke={color} strokeWidth="0.3" fill="none" strokeDasharray="4 8"/>
-        <circle cx="270" cy="160" r="105" stroke={color} strokeWidth="0.25" fill="none" strokeDasharray="2 10"/>
-        {/* Mid traces */}
-        <line x1="0" y1="160" x2="60" y2="160" stroke={color} strokeWidth="0.4"/>
-        <line x1="480" y1="160" x2="540" y2="160" stroke={color} strokeWidth="0.4"/>
-        <circle cx="60" cy="160" r="1.5" fill={color}/>
-        <circle cx="480" cy="160" r="1.5" fill={color}/>
-        {/* Small circuit nodes */}
-        <circle cx="130" cy="30" r="1" fill={color}/>
-        <line x1="130" y1="30" x2="130" y2="55" stroke={color} strokeWidth="0.4"/>
-        <circle cx="410" cy="30" r="1" fill={color}/>
-        <line x1="410" y1="30" x2="410" y2="55" stroke={color} strokeWidth="0.4"/>
-        <circle cx="130" cy="290" r="1" fill={color}/>
-        <line x1="130" y1="290" x2="130" y2="265" stroke={color} strokeWidth="0.4"/>
-        <circle cx="410" cy="290" r="1" fill={color}/>
-        <line x1="410" y1="290" x2="410" y2="265" stroke={color} strokeWidth="0.4"/>
+      <svg style={{ position:"absolute",inset:0,width:"100%",height:"100%",pointerEvents:"none" }}
+        viewBox="0 0 540 320" preserveAspectRatio="xMidYMid slice">
+        {/* top-left corner */}
+        <polyline points="0,45 25,45 45,25 110,25" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <polyline points="45,0 45,22" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <circle cx="45" cy="25" r="2" fill={c} opacity="0.35"/>
+        <circle cx="110" cy="25" r="1.5" fill={c} opacity="0.25"/>
+        <line x1="110" y1="25" x2="110" y2="50" stroke={c} strokeWidth="0.5" opacity="0.2"/>
+        {/* top-right corner */}
+        <polyline points="540,45 515,45 495,25 430,25" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <polyline points="495,0 495,22" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <circle cx="495" cy="25" r="2" fill={c} opacity="0.35"/>
+        <circle cx="430" cy="25" r="1.5" fill={c} opacity="0.25"/>
+        <line x1="430" y1="25" x2="430" y2="50" stroke={c} strokeWidth="0.5" opacity="0.2"/>
+        {/* bottom-left corner */}
+        <polyline points="0,275 25,275 45,295 110,295" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <polyline points="45,320 45,298" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <circle cx="45" cy="295" r="2" fill={c} opacity="0.35"/>
+        <circle cx="110" cy="295" r="1.5" fill={c} opacity="0.25"/>
+        <line x1="110" y1="295" x2="110" y2="270" stroke={c} strokeWidth="0.5" opacity="0.2"/>
+        {/* bottom-right corner */}
+        <polyline points="540,275 515,275 495,295 430,295" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <polyline points="495,320 495,298" stroke={c} strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <circle cx="495" cy="295" r="2" fill={c} opacity="0.35"/>
+        {/* center radial rings */}
+        <circle cx="270" cy="160" r="52" stroke={c} strokeWidth="0.4" fill="none" strokeDasharray="3 6" opacity="0.18"/>
+        <circle cx="270" cy="160" r="80" stroke={c} strokeWidth="0.3" fill="none" strokeDasharray="2 8" opacity="0.12"/>
+        {/* mid-edge traces */}
+        <line x1="0" y1="160" x2="55" y2="160" stroke={c} strokeWidth="0.5" opacity="0.2"/>
+        <line x1="485" y1="160" x2="540" y2="160" stroke={c} strokeWidth="0.5" opacity="0.2"/>
+        <circle cx="55" cy="160" r="1.5" fill={c} opacity="0.25"/>
+        <circle cx="485" cy="160" r="1.5" fill={c} opacity="0.25"/>
       </svg>
     );
   }
 
-  /* Gold microchip component */
-  function GoldChip({ accent }: { accent: string }) {
+  /* ── Gold Microchip ── */
+  function Chip({ a }: { a: string }) {
     return (
-      <div style={{ position: "relative", width: 36, height: 28 }}>
-        <div style={{
-          width: 36, height: 28, borderRadius: 4,
-          background: `linear-gradient(135deg, #2a1f00 0%, ${accent}33 50%, #1a1200 100%)`,
-          border: `1px solid ${accent}80`,
-          position: "relative", overflow: "hidden",
-          boxShadow: `0 0 8px ${accent}40`,
-        }}>
-          {/* Chip grid lines */}
-          {[0.25, 0.5, 0.75].map((f, i) => (
-            <div key={i} style={{ position: "absolute", top: `${f * 100}%`, left: 0, right: 0, height: 0.5, background: `${accent}50` }}/>
-          ))}
-          {[0.33, 0.66].map((f, i) => (
-            <div key={i} style={{ position: "absolute", left: `${f * 100}%`, top: 0, bottom: 0, width: 0.5, background: `${accent}50` }}/>
-          ))}
-          {/* Center die */}
-          <div style={{
-            position: "absolute", top: "20%", left: "20%", right: "20%", bottom: "20%",
-            background: `linear-gradient(135deg, ${accent}60, ${accent}20)`,
-            border: `0.5px solid ${accent}90`,
-            borderRadius: 2,
-          }}/>
-          {/* Pin marks */}
-          {[-1, 0, 1].map((j) => (
-            <div key={j} style={{ position: "absolute", top: 4 + j * 8, left: -3, width: 3, height: 2, background: accent, borderRadius: 0.5 }}/>
-          ))}
-          {[-1, 0, 1].map((j) => (
-            <div key={j} style={{ position: "absolute", top: 4 + j * 8, right: -3, width: 3, height: 2, background: accent, borderRadius: 0.5 }}/>
-          ))}
-        </div>
+      <div style={{width:34,height:26,borderRadius:4,flexShrink:0,
+        background:`linear-gradient(135deg,#1a1200,#2a1f00)`,
+        border:`1px solid ${a}70`,
+        boxShadow:`0 0 8px ${a}30`,
+        position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"30%",left:0,right:0,height:1,background:`${a}40`}}/>
+        <div style={{position:"absolute",top:"65%",left:0,right:0,height:1,background:`${a}40`}}/>
+        <div style={{position:"absolute",left:"35%",top:0,bottom:0,width:1,background:`${a}40`}}/>
+        <div style={{position:"absolute",left:"65%",top:0,bottom:0,width:1,background:`${a}40`}}/>
+        <div style={{position:"absolute",top:"22%",left:"22%",right:"22%",bottom:"22%",
+          background:`linear-gradient(135deg,${a}50,${a}20)`,
+          border:`0.5px solid ${a}80`,borderRadius:2}}/>
+        {[-1,0,1].map(j=><div key={j} style={{position:"absolute",top:4+j*8,left:-2,width:2,height:1.5,background:a,borderRadius:1}}/>)}
+        {[-1,0,1].map(j=><div key={j} style={{position:"absolute",top:4+j*8,right:-2,width:2,height:1.5,background:a,borderRadius:1}}/>)}
       </div>
     );
   }
 
-  /* Shared logo box (top right) */
-  function LogoBox({ accent, opacity = 1 }: { accent: string; opacity?: number }) {
-    return (
-      <div style={{
-        width: 44, height: 44, flexShrink: 0,
-        background: `rgba(0,0,0,0.6)`,
-        border: `1.5px solid ${accent}70`,
-        borderRadius: 10,
-        display: "flex", flexDirection: "column",
-        alignItems: "center", justifyContent: "center",
-        boxShadow: `0 0 12px ${accent}30, inset 0 0 10px ${accent}10`,
-        backdropFilter: "blur(4px)",
-        overflow: "hidden",
-        opacity,
-      }}>
-        <img
-          src="/logos/okzbyte.png"
-          style={{ width: 28, height: 28, objectFit: "contain", filter: `drop-shadow(0 0 4px ${accent}80)` }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-        />
-        <div style={{ fontSize: 5.5, color: accent, fontWeight: 900, letterSpacing: "0.12em", marginTop: 1, fontFamily: "monospace" }}>OKZBYTE</div>
-      </div>
-    );
-  }
-
-  /* Watermark component */
-  function Watermark({ color }: { color: string }) {
-    return (
-      <div style={{
-        position: "absolute", inset: 0, display: "flex",
-        alignItems: "center", justifyContent: "center",
-        pointerEvents: "none", overflow: "hidden", zIndex: 1,
-      }}>
-        <div style={{
-          transform: "rotate(-20deg)",
-          textAlign: "center",
-          lineHeight: 1.4,
-          opacity: 0.04,
-        }}>
-          <div style={{ fontSize: 13, fontWeight: 900, letterSpacing: "0.4em", color, fontFamily: "monospace", whiteSpace: "nowrap" }}>
-            OFFICIAL INTEGRITY
-          </div>
-          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: "0.35em", color, fontFamily: "monospace", whiteSpace: "nowrap" }}>
-            ORAKZAI GROUP
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ── TIER 1 CARD — MATRIX DEVELOPER (Cyberpunk Violet) ── */
+  /* ── TIER 1 — MATRIX DEVELOPER (Cyberpunk Violet) ── */
   function Tier1Card({ userName, memberId, userPhotoUrl, userSignatureUrl, issueDate, expiryDate, qrDataUrl }: CardProps) {
-    const ACC = "#7c3aed";
-    const ACC2 = "#a78bfa";
-    const ACC3 = "#c4b5fd";
+    const A = "#8b5cf6"; const B = "#a78bfa"; const C = "#c4b5fd";
     return (
-      <div style={{
-        position: "relative", overflow: "hidden", fontFamily: "monospace",
-        width: 540, height: 320, flexShrink: 0,
-        background: "radial-gradient(ellipse at 20% 30%, #0d0620 0%, #05020e 55%, #020008 100%)",
-        border: `1px solid ${ACC}55`,
-        borderRadius: 20,
-        boxShadow: `0 0 50px ${ACC}22, inset 0 0 80px ${ACC}08, 0 0 1px ${ACC2}60 inset`,
-        padding: 0, color: "#fff", userSelect: "none",
-      }}>
-        {/* Top gold/purple border strip */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${ACC2}80, ${ACC3}, ${ACC2}80, transparent)`, borderRadius: "20px 20px 0 0" }}/>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${ACC}80, ${ACC2}60, ${ACC}80, transparent)`, borderRadius: "0 0 20px 20px" }}/>
-
-        <CircuitBoard color={ACC2} opacity={0.15}/>
-        <Watermark color={ACC2}/>
-
-        <div style={{ position: "relative", zIndex: 10, padding: "20px 22px 18px 22px", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
-          {/* Header row */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 900, letterSpacing: "0.25em", textTransform: "uppercase",
-                background: `linear-gradient(90deg, ${ACC3}, ${ACC2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                OKZBYTE HUB
-              </div>
-              <div style={{ fontSize: 6.5, color: "rgba(167,139,250,0.55)", letterSpacing: "0.1em", marginTop: 2 }}>
-                Silicon Valley Network // Tier 01 — Matrix Developer
-              </div>
-            </div>
-            <LogoBox accent={ACC2}/>
+      <div style={{position:"relative",overflow:"hidden",fontFamily:"'Courier New',monospace",
+        width:540,height:320,flexShrink:0,
+        background:"radial-gradient(ellipse at 18% 28%,#0e0820 0%,#060112 50%,#020008 100%)",
+        border:`1px solid ${B}50`,borderRadius:18,
+        boxShadow:`0 0 50px ${A}20,0 0 0 1px ${B}15 inset`,
+        color:"#fff",userSelect:"none",padding:0}}>
+        {/* shimmer borders */}
+        <div style={{position:"absolute",top:0,left:0,right:0,height:1.5,borderRadius:"18px 18px 0 0",
+          background:`linear-gradient(90deg,transparent,${B}90,${C},${B}90,transparent)`}}/>
+        <div style={{position:"absolute",bottom:0,left:0,right:0,height:1.5,borderRadius:"0 0 18px 18px",
+          background:`linear-gradient(90deg,transparent,${A}70,${B}60,${A}70,transparent)`}}/>
+        <CircuitBg c={B}/>
+        {/* watermark */}
+        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
+          pointerEvents:"none",overflow:"hidden",zIndex:1}}>
+          <div style={{transform:"rotate(-20deg)",textAlign:"center",opacity:0.04,lineHeight:1.5}}>
+            <div style={{fontSize:14,fontWeight:900,letterSpacing:"0.4em",color:C,whiteSpace:"nowrap"}}>OFFICIAL INTEGRITY</div>
+            <div style={{fontSize:11,fontWeight:900,letterSpacing:"0.35em",color:C,whiteSpace:"nowrap"}}>ORAKZAI GROUP</div>
           </div>
-
-          {/* Main content */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 14, flex: 1 }}>
-            {/* Photo frame */}
-            <div style={{ position: "relative", flexShrink: 0 }}>
-              <div style={{
-                width: 88, height: 88, borderRadius: 12,
-                border: `2px solid ${ACC2}90`,
-                boxShadow: `0 0 20px ${ACC}40, 0 0 8px ${ACC2}30 inset`,
-                background: `linear-gradient(135deg, ${ACC}30, #0a0520)`,
-                overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                {userPhotoUrl
-                  ? <img src={userPhotoUrl} style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
-                  : <span style={{ fontSize: 30, fontWeight: 900, background: `linear-gradient(135deg, ${ACC3}, ${ACC2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{(userName || "?")[0].toUpperCase()}</span>
-                }
-              </div>
-              {/* Frame corners */}
-              {[{top:0,left:0},{top:0,right:0},{bottom:0,left:0},{bottom:0,right:0}].map((pos,i) => (
-                <div key={i} style={{ position:"absolute", width:8, height:8, ...pos, border:`1.5px solid ${ACC2}`, borderRadius:1,
-                  borderRight: (pos as any).right !== undefined ? `1.5px solid ${ACC2}` : "none",
-                  borderBottom: (pos as any).bottom !== undefined ? `1.5px solid ${ACC2}` : "none",
-                  borderLeft: (pos as any).left !== undefined ? `1.5px solid ${ACC2}` : "none",
-                  borderTop: (pos as any).top !== undefined ? `1.5px solid ${ACC2}` : "none",
-                }}/>
-              ))}
+        </div>
+        <div style={{position:"relative",zIndex:10,padding:"18px 20px 16px 20px",height:"100%",
+          display:"flex",flexDirection:"column",boxSizing:"border-box"}}>
+          {/* header */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
+            <div>
+              <div style={{fontSize:10,fontWeight:900,letterSpacing:"0.28em",textTransform:"uppercase",color:C,
+                textShadow:`0 0 10px ${B}`}}>OKZBYTE HUB</div>
+              <div style={{fontSize:6.5,color:`${B}60`,letterSpacing:"0.1em",marginTop:2}}>
+                Silicon Valley Network // Tier 01 — Matrix Developer</div>
             </div>
-
-            {/* Identity block */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{
-                fontSize: 19, fontWeight: 900, letterSpacing: "0.06em", textTransform: "uppercase",
-                background: `linear-gradient(135deg, ${ACC3} 0%, ${ACC2} 50%, ${ACC}cc 100%)`,
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-                textShadow: "none", lineHeight: 1.1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
-              }}>{userName || "IDENTITY NAME"}</div>
-              <div style={{
-                marginTop: 6, display: "inline-flex", alignItems: "center",
-                fontSize: 7.5, color: ACC2, fontWeight: 700, letterSpacing: "0.2em",
-                background: `${ACC}18`, border: `1px solid ${ACC2}55`,
-                padding: "2.5px 10px", borderRadius: 99,
-                boxShadow: `0 0 8px ${ACC}30`,
-              }}>{memberId || "OKZ-2026-0000"}</div>
-              <div style={{ marginTop: 6, fontSize: 6.5, color: `${ACC3}70`, letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            {/* logo box */}
+            <div style={{width:42,height:42,flexShrink:0,borderRadius:9,
+              background:"rgba(0,0,0,0.65)",border:`1.5px solid ${B}60`,
+              boxShadow:`0 0 12px ${A}30,inset 0 0 8px ${A}10`,
+              display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:1}}>
+              <div style={{fontSize:9,fontWeight:900,color:C,letterSpacing:"0.05em",textAlign:"center",lineHeight:1.1}}>OKZ</div>
+              <div style={{fontSize:5,fontWeight:700,color:`${B}80`,letterSpacing:"0.1em",textAlign:"center"}}>BYTE</div>
+              <img src="/logos/okzbyte.png" alt="" style={{position:"absolute",width:28,height:28,objectFit:"contain",
+                filter:`drop-shadow(0 0 4px ${B}90)`}}
+                onError={(e)=>{(e.target as HTMLImageElement).style.opacity="0"}}/>
+            </div>
+          </div>
+          {/* main content */}
+          <div style={{display:"flex",alignItems:"center",gap:14,flex:1}}>
+            {/* photo */}
+            <div style={{flexShrink:0,position:"relative"}}>
+              <div style={{width:85,height:85,borderRadius:11,overflow:"hidden",
+                border:`2px solid ${B}80`,
+                boxShadow:`0 0 20px ${A}40,0 0 8px ${B}20 inset`,
+                background:`linear-gradient(135deg,${A}20,#050010)`,
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
+                {userPhotoUrl
+                  ? <img src={userPhotoUrl} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                  : <span style={{fontSize:28,fontWeight:900,color:C}}>{(userName||"?")[0].toUpperCase()}</span>}
+              </div>
+            </div>
+            {/* identity */}
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:18,fontWeight:900,letterSpacing:"0.07em",textTransform:"uppercase",
+                color:C,textShadow:`0 0 12px ${B}90,0 0 4px ${A}`,
+                overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",lineHeight:1.1}}>
+                {userName||"IDENTITY NAME"}
+              </div>
+              <div style={{marginTop:6,display:"inline-flex",alignItems:"center",
+                fontSize:7.5,color:B,fontWeight:700,letterSpacing:"0.2em",
+                background:`${A}18`,border:`1px solid ${B}50`,
+                padding:"2.5px 10px",borderRadius:99,boxShadow:`0 0 6px ${A}25`}}>
+                {memberId||"OKZ-2026-0000"}
+              </div>
+              <div style={{marginTop:6,fontSize:6.5,color:`${C}60`,letterSpacing:"0.15em",textTransform:"uppercase"}}>
                 MATRIX DEVELOPER · ELITE MEMBER
               </div>
             </div>
-
-            {/* QR + verified */}
+            {/* QR */}
             {qrDataUrl && (
-              <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
-                <div style={{
-                  background: "rgba(0,0,0,0.5)", border: `1px solid ${ACC2}55`,
-                  borderRadius: 8, padding: 5,
-                  boxShadow: `0 0 10px ${ACC}30`,
-                }}>
-                  <div style={{ width: 56, height: 56, background: "white", borderRadius: 4, padding: 2 }}>
-                    <img src={qrDataUrl} style={{ width: "100%", height: "100%", imageRendering: "pixelated" }}/>
+              <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+                <div style={{background:"rgba(0,0,0,0.55)",border:`1px solid ${B}45`,borderRadius:7,padding:5,
+                  boxShadow:`0 0 10px ${A}20`}}>
+                  <div style={{width:55,height:55,background:"white",borderRadius:4,padding:2}}>
+                    <img src={qrDataUrl} style={{width:"100%",height:"100%",imageRendering:"pixelated"}}/>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                  <div style={{ width: 5, height: 5, borderRadius: 99, background: "#22c55e", boxShadow: "0 0 4px #22c55e" }}/>
-                  <span style={{ fontSize: 5, color: "#22c55e", letterSpacing: "0.1em", fontWeight: 700 }}>VERIFIED</span>
+                <div style={{display:"flex",alignItems:"center",gap:2}}>
+                  <div style={{width:5,height:5,borderRadius:99,background:"#22c55e",boxShadow:"0 0 4px #22c55e"}}/>
+                  <span style={{fontSize:5,color:"#22c55e",letterSpacing:"0.1em",fontWeight:700}}>VERIFIED</span>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Bottom row */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "auto" }}>
+          {/* bottom */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginTop:10}}>
             <div>
-              <img src={FOUNDER_SIG_B64} style={{ height: 26, maxWidth: 95, objectFit: "contain",
-                filter: `brightness(0.5) sepia(1) hue-rotate(220deg) saturate(5) brightness(1.4)` }}/>
-              <div style={{ fontSize: 5.5, color: `${ACC2}70`, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>ISSUING AUTHORITY: F. ORAKZAI</div>
-              <div style={{ display: "flex", gap: 8, fontSize: 5.5, color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 2 }}>
-                <span>ISSUE: <span style={{ color: `${ACC2}90` }}>{issueDate}</span></span>
-                <span>EXPIRY: <span style={{ color: `${ACC2}90` }}>{expiryDate}</span></span>
+              <img src={FOUNDER_SIG_B64} style={{height:24,maxWidth:90,objectFit:"contain",display:"block",
+                filter:"brightness(0.5) sepia(1) hue-rotate(220deg) saturate(5) brightness(1.5)"}}/>
+              <div style={{fontSize:5.5,color:`${B}65`,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",marginTop:2}}>
+                ISSUING AUTHORITY: F. ORAKZAI</div>
+              <div style={{display:"flex",gap:8,marginTop:2,fontSize:5.5,color:"rgba(255,255,255,0.3)",letterSpacing:"0.08em",textTransform:"uppercase"}}>
+                <span>ISSUE: <span style={{color:`${B}80`}}>{issueDate}</span></span>
+                <span>EXPIRY: <span style={{color:`${B}80`}}>{expiryDate}</span></span>
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 3 }}>
-                <div style={{
-                  height: 34, width: 100, position: "relative",
-                  background: "rgba(0,0,0,0.4)", border: `1px solid ${ACC}40`,
-                  borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center",
-                  backdropFilter: "blur(4px)",
-                }}>
-                  {userSignatureUrl
-                    ? <img src={userSignatureUrl} style={{ height: 26, maxWidth: 90, objectFit: "contain", filter: `drop-shadow(0 0 4px ${ACC2})` }}/>
-                    : <span style={{ fontSize: 6, color: `${ACC}40`, letterSpacing: "0.05em" }}>MEMBER SIGNATURE</span>
-                  }
-                  <span style={{ position: "absolute", bottom: 2, right: 4, fontSize: 4.5, color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>AUTHORIZED LOG NODE</span>
-                </div>
+            <div style={{display:"flex",alignItems:"flex-end",gap:8}}>
+              <div style={{height:32,width:96,position:"relative",flexShrink:0,
+                background:"rgba(0,0,0,0.45)",border:`1px solid ${A}35`,borderRadius:6,
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
+                {userSignatureUrl
+                  ? <img src={userSignatureUrl} style={{height:24,maxWidth:86,objectFit:"contain",
+                      filter:`drop-shadow(0 0 4px ${C})`}}/>
+                  : <span style={{fontSize:5.5,color:`${A}40`,letterSpacing:"0.05em"}}>MEMBER SIGNATURE</span>}
+                <span style={{position:"absolute",bottom:2,right:3,fontSize:4.5,color:"rgba(255,255,255,0.2)",letterSpacing:"0.04em"}}>
+                  AUTHORIZED LOG NODE</span>
               </div>
-              <GoldChip accent={ACC2}/>
+              <Chip a={B}/>
             </div>
           </div>
         </div>
@@ -1079,128 +979,125 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
     );
   }
 
-  /* ── TIER 2 CARD — ENTERPRISE ARCHITECT (Gold/Amber) ── */
+  /* ── TIER 2 — ENTERPRISE ARCHITECT (Gold / Amber) ── */
   function Tier2Card({ userName, memberId, userPhotoUrl, userSignatureUrl, issueDate, expiryDate, qrDataUrl }: CardProps) {
-    const ACC = "#d97706";
-    const ACC2 = "#fbbf24";
-    const ACC3 = "#fde68a";
+    const A = "#b45309"; const B = "#f59e0b"; const C = "#fde68a";
     return (
-      <div style={{
-        position: "relative", overflow: "hidden", fontFamily: "monospace",
-        width: 540, height: 320, flexShrink: 0,
-        background: "radial-gradient(ellipse at 20% 30%, #120a00 0%, #070400 55%, #020100 100%)",
-        border: `1px solid ${ACC2}55`,
-        borderRadius: 20,
-        boxShadow: `0 0 55px ${ACC}22, inset 0 0 80px ${ACC}08, 0 0 1px ${ACC2}60 inset`,
-        padding: 0, color: "#fff", userSelect: "none",
-      }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${ACC2}80, ${ACC3}, ${ACC2}80, transparent)`, borderRadius: "20px 20px 0 0" }}/>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${ACC}80, ${ACC2}60, ${ACC}80, transparent)`, borderRadius: "0 0 20px 20px" }}/>
-
-        <CircuitBoard color={ACC2} opacity={0.16}/>
-        <Watermark color={ACC2}/>
-
-        <div style={{ position: "relative", zIndex: 10, padding: "20px 22px 18px 22px", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 900, letterSpacing: "0.25em", textTransform: "uppercase",
-                background: `linear-gradient(90deg, ${ACC3}, ${ACC2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                OKZBYTE HUB
-              </div>
-              <div style={{ fontSize: 6.5, color: "rgba(251,191,36,0.5)", letterSpacing: "0.1em", marginTop: 2 }}>
-                Silicon Valley Network // Tier 02 — Enterprise Architect
-              </div>
-            </div>
-            <LogoBox accent={ACC2}/>
+      <div style={{position:"relative",overflow:"hidden",fontFamily:"'Courier New',monospace",
+        width:540,height:320,flexShrink:0,
+        background:"radial-gradient(ellipse at 18% 28%,#120800 0%,#060300 50%,#020100 100%)",
+        border:`1px solid ${B}50`,borderRadius:18,
+        boxShadow:`0 0 55px ${A}22,0 0 0 1px ${B}18 inset`,
+        color:"#fff",userSelect:"none",padding:0}}>
+        <div style={{position:"absolute",top:0,left:0,right:0,height:1.5,borderRadius:"18px 18px 0 0",
+          background:`linear-gradient(90deg,transparent,${B}90,${C},${B}90,transparent)`}}/>
+        <div style={{position:"absolute",bottom:0,left:0,right:0,height:1.5,borderRadius:"0 0 18px 18px",
+          background:`linear-gradient(90deg,transparent,${A}70,${B}60,${A}70,transparent)`}}/>
+        <CircuitBg c={B}/>
+        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
+          pointerEvents:"none",overflow:"hidden",zIndex:1}}>
+          <div style={{transform:"rotate(-20deg)",textAlign:"center",opacity:0.04,lineHeight:1.5}}>
+            <div style={{fontSize:14,fontWeight:900,letterSpacing:"0.4em",color:C,whiteSpace:"nowrap"}}>OFFICIAL INTEGRITY</div>
+            <div style={{fontSize:11,fontWeight:900,letterSpacing:"0.35em",color:C,whiteSpace:"nowrap"}}>ORAKZAI GROUP</div>
           </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 14, flex: 1 }}>
-            <div style={{ position: "relative", flexShrink: 0 }}>
-              <div style={{
-                width: 88, height: 88, borderRadius: 12,
-                border: `2px solid ${ACC2}90`,
-                boxShadow: `0 0 22px ${ACC}50, 0 0 10px ${ACC2}30 inset`,
-                background: `linear-gradient(135deg, ${ACC}30, #0a0500)`,
-                overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
+        </div>
+        <div style={{position:"relative",zIndex:10,padding:"18px 20px 16px 20px",height:"100%",
+          display:"flex",flexDirection:"column",boxSizing:"border-box"}}>
+          {/* header */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
+            <div>
+              <div style={{fontSize:10,fontWeight:900,letterSpacing:"0.28em",textTransform:"uppercase",color:C,
+                textShadow:`0 0 12px ${B}`}}>OKZBYTE HUB</div>
+              <div style={{fontSize:6.5,color:`${B}55`,letterSpacing:"0.1em",marginTop:2}}>
+                Silicon Valley Network // Tier 02 — Enterprise Architect</div>
+            </div>
+            <div style={{width:42,height:42,flexShrink:0,borderRadius:9,
+              background:"rgba(0,0,0,0.65)",border:`1.5px solid ${B}60`,
+              boxShadow:`0 0 14px ${A}35,inset 0 0 8px ${A}12`,
+              display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",
+              position:"relative",overflow:"hidden",gap:1}}>
+              <div style={{fontSize:9,fontWeight:900,color:C,letterSpacing:"0.05em",lineHeight:1.1}}>OKZ</div>
+              <div style={{fontSize:5,fontWeight:700,color:`${B}80`,letterSpacing:"0.1em"}}>BYTE</div>
+              <img src="/logos/okzbyte.png" alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"contain",
+                padding:7,filter:`drop-shadow(0 0 5px ${B}90)`}}
+                onError={(e)=>{(e.target as HTMLImageElement).style.opacity="0"}}/>
+            </div>
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:14,flex:1}}>
+            {/* photo with corner marks */}
+            <div style={{flexShrink:0,position:"relative",width:85,height:85}}>
+              <div style={{width:85,height:85,borderRadius:11,overflow:"hidden",
+                border:`2px solid ${B}80`,
+                boxShadow:`0 0 22px ${A}50,0 0 10px ${B}20 inset`,
+                background:`linear-gradient(135deg,${A}20,#050200)`,
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
                 {userPhotoUrl
-                  ? <img src={userPhotoUrl} style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
-                  : <span style={{ fontSize: 30, fontWeight: 900, background: `linear-gradient(135deg, ${ACC3}, ${ACC2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{(userName || "?")[0].toUpperCase()}</span>
-                }
+                  ? <img src={userPhotoUrl} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                  : <span style={{fontSize:28,fontWeight:900,color:C}}>{(userName||"?")[0].toUpperCase()}</span>}
               </div>
-              {/* Multi-layer gold frame corners */}
-              {[{top:-2,left:-2},{top:-2,right:-2},{bottom:-2,left:-2},{bottom:-2,right:-2}].map((pos,i) => (
-                <div key={i} style={{ position:"absolute", width:10, height:10, ...pos,
-                  borderTop: (pos as any).top !== undefined ? `2px solid ${ACC2}` : "none",
-                  borderBottom: (pos as any).bottom !== undefined ? `2px solid ${ACC2}` : "none",
-                  borderLeft: (pos as any).left !== undefined ? `2px solid ${ACC2}` : "none",
-                  borderRight: (pos as any).right !== undefined ? `2px solid ${ACC2}` : "none",
-                  filter: `drop-shadow(0 0 2px ${ACC})`,
-                }}/>
+              {/* corner accents */}
+              {[{t:-2,l:-2,bl:0,br:0},{t:-2,r:-2,bl:0,bl2:0},{b:-2,l:-2,tr:0},{b:-2,r:-2}].map((_,i)=>(
+                <div key={i} style={{position:"absolute",width:9,height:9,
+                  top:i<2?-2:undefined,bottom:i>=2?-2:undefined,
+                  left:i%2===0?-2:undefined,right:i%2===1?-2:undefined,
+                  borderTop:i<2?`2px solid ${B}`:"none",borderBottom:i>=2?`2px solid ${B}`:"none",
+                  borderLeft:i%2===0?`2px solid ${B}`:"none",borderRight:i%2===1?`2px solid ${B}`:"none"}}/>
               ))}
             </div>
-
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{
-                fontSize: 19, fontWeight: 900, letterSpacing: "0.06em", textTransform: "uppercase",
-                background: `linear-gradient(135deg, ${ACC3} 0%, ${ACC2} 50%, ${ACC} 100%)`,
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-                lineHeight: 1.1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
-              }}>{userName || "IDENTITY NAME"}</div>
-              <div style={{
-                marginTop: 6, display: "inline-flex", alignItems: "center",
-                fontSize: 7.5, color: ACC2, fontWeight: 700, letterSpacing: "0.2em",
-                background: `${ACC}18`, border: `1px solid ${ACC2}55`,
-                padding: "2.5px 10px", borderRadius: 99,
-                boxShadow: `0 0 8px ${ACC}30`,
-              }}>{memberId || "OKZ-2026-0000"}</div>
-              <div style={{ marginTop: 6, fontSize: 6.5, color: `${ACC3}60`, letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:18,fontWeight:900,letterSpacing:"0.07em",textTransform:"uppercase",
+                color:C,textShadow:`0 0 14px ${B}90,0 0 4px ${A}`,
+                overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",lineHeight:1.1}}>
+                {userName||"IDENTITY NAME"}
+              </div>
+              <div style={{marginTop:6,display:"inline-flex",alignItems:"center",
+                fontSize:7.5,color:B,fontWeight:700,letterSpacing:"0.2em",
+                background:`${A}18`,border:`1px solid ${B}50`,
+                padding:"2.5px 10px",borderRadius:99,boxShadow:`0 0 8px ${A}30`}}>
+                {memberId||"OKZ-2026-0000"}
+              </div>
+              <div style={{marginTop:6,fontSize:6.5,color:`${C}55`,letterSpacing:"0.15em",textTransform:"uppercase"}}>
                 ENTERPRISE ARCHITECT · ELITE MEMBER
               </div>
             </div>
-
             {qrDataUrl && (
-              <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
-                <div style={{
-                  background: "rgba(0,0,0,0.5)", border: `1px solid ${ACC2}55`,
-                  borderRadius: 8, padding: 5, boxShadow: `0 0 12px ${ACC}30`,
-                }}>
-                  <div style={{ width: 56, height: 56, background: "white", borderRadius: 4, padding: 2 }}>
-                    <img src={qrDataUrl} style={{ width: "100%", height: "100%", imageRendering: "pixelated" }}/>
+              <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+                <div style={{background:"rgba(0,0,0,0.55)",border:`1px solid ${B}50`,borderRadius:7,padding:5,
+                  boxShadow:`0 0 12px ${A}25`}}>
+                  <div style={{width:55,height:55,background:"white",borderRadius:4,padding:2}}>
+                    <img src={qrDataUrl} style={{width:"100%",height:"100%",imageRendering:"pixelated"}}/>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                  <div style={{ width: 5, height: 5, borderRadius: 99, background: "#22c55e", boxShadow: "0 0 4px #22c55e" }}/>
-                  <span style={{ fontSize: 5, color: "#22c55e", letterSpacing: "0.1em", fontWeight: 700 }}>PAYMENT VERIFIED</span>
+                <div style={{display:"flex",alignItems:"center",gap:2}}>
+                  <div style={{width:5,height:5,borderRadius:99,background:"#22c55e",boxShadow:"0 0 4px #22c55e"}}/>
+                  <span style={{fontSize:5,color:"#22c55e",letterSpacing:"0.1em",fontWeight:700}}>PAYMENT VERIFIED</span>
                 </div>
               </div>
             )}
           </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "auto" }}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginTop:10}}>
             <div>
-              <img src={FOUNDER_SIG_B64} style={{ height: 26, maxWidth: 95, objectFit: "contain",
-                filter: `sepia(1) brightness(1.4) saturate(4) hue-rotate(8deg)` }}/>
-              <div style={{ fontSize: 5.5, color: `${ACC2}70`, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>ISSUING AUTHORITY: F. ORAKZAI</div>
-              <div style={{ display: "flex", gap: 8, fontSize: 5.5, color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 2 }}>
-                <span>ISSUE: <span style={{ color: `${ACC2}90` }}>{issueDate}</span></span>
-                <span>EXPIRY: <span style={{ color: `${ACC2}90` }}>{expiryDate}</span></span>
+              <img src={FOUNDER_SIG_B64} style={{height:24,maxWidth:90,objectFit:"contain",display:"block",
+                filter:"sepia(1) brightness(1.4) saturate(4) hue-rotate(8deg)"}}/>
+              <div style={{fontSize:5.5,color:`${B}65`,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",marginTop:2}}>
+                ISSUING AUTHORITY: F. ORAKZAI</div>
+              <div style={{display:"flex",gap:8,marginTop:2,fontSize:5.5,color:"rgba(255,255,255,0.3)",letterSpacing:"0.08em",textTransform:"uppercase"}}>
+                <span>ISSUE: <span style={{color:`${B}80`}}>{issueDate}</span></span>
+                <span>EXPIRY: <span style={{color:`${B}80`}}>{expiryDate}</span></span>
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-              <div style={{
-                height: 34, width: 100, position: "relative",
-                background: "rgba(0,0,0,0.4)", border: `1px solid ${ACC}40`,
-                borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center",
-                backdropFilter: "blur(4px)",
-              }}>
+            <div style={{display:"flex",alignItems:"flex-end",gap:8}}>
+              <div style={{height:32,width:96,position:"relative",flexShrink:0,
+                background:"rgba(0,0,0,0.45)",border:`1px solid ${A}35`,borderRadius:6,
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
                 {userSignatureUrl
-                  ? <img src={userSignatureUrl} style={{ height: 26, maxWidth: 90, objectFit: "contain", filter: `sepia(1) brightness(1.5) saturate(4) hue-rotate(10deg) drop-shadow(0 0 4px ${ACC2})` }}/>
-                  : <span style={{ fontSize: 6, color: `${ACC}40`, letterSpacing: "0.05em" }}>MEMBER SIGNATURE</span>
-                }
-                <span style={{ position: "absolute", bottom: 2, right: 4, fontSize: 4.5, color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>AUTHORIZED LOG NODE</span>
+                  ? <img src={userSignatureUrl} style={{height:24,maxWidth:86,objectFit:"contain",
+                      filter:`sepia(1) brightness(1.5) saturate(4) hue-rotate(10deg) drop-shadow(0 0 5px ${B})`}}/>
+                  : <span style={{fontSize:5.5,color:`${A}40`,letterSpacing:"0.05em"}}>MEMBER SIGNATURE</span>}
+                <span style={{position:"absolute",bottom:2,right:3,fontSize:4.5,color:"rgba(255,255,255,0.2)",letterSpacing:"0.04em"}}>
+                  AUTHORIZED LOG NODE</span>
               </div>
-              <GoldChip accent={ACC2}/>
+              <Chip a={B}/>
             </div>
           </div>
         </div>
@@ -1208,197 +1105,146 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
     );
   }
 
-  /* ── TIER 3 CARD — SOVEREIGN FOUNDER (Ultimate Liquid Gold) ── */
+  /* ── TIER 3 — SOVEREIGN FOUNDER (Ultimate Liquid Gold) ── */
   function Tier3Card({ userName, memberId, userPhotoUrl, userSignatureUrl, issueDate, expiryDate, qrDataUrl }: CardProps) {
-    const GOLD_DEEP = "#b8860b";
-    const GOLD_MID = "#D4AF37";
-    const GOLD_BRIGHT = "#FFD700";
-    const GOLD_LIGHT = "#FFF3B0";
+    const G1 = "#b8860b"; const G2 = "#D4AF37"; const G3 = "#FFD700"; const G4 = "#FFF3B0";
     return (
-      <div style={{
-        position: "relative", overflow: "hidden", fontFamily: "monospace",
-        width: 540, height: 320, flexShrink: 0,
-        background: "radial-gradient(ellipse at 15% 25%, #0e0b00 0%, #050400 45%, #020200 100%)",
-        border: `1px solid ${GOLD_MID}70`,
-        borderRadius: 20,
-        boxShadow: `0 0 60px rgba(255,215,0,0.18), inset 0 0 100px rgba(255,215,0,0.04), 0 0 0 1px rgba(255,215,0,0.12)`,
-        padding: 0, color: "#fff", userSelect: "none",
-      }}>
-        {/* Shimmer top border */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2,
-          background: `linear-gradient(90deg, transparent 0%, ${GOLD_DEEP}80 15%, ${GOLD_BRIGHT} 40%, ${GOLD_LIGHT} 50%, ${GOLD_BRIGHT} 60%, ${GOLD_DEEP}80 85%, transparent 100%)`,
-          borderRadius: "20px 20px 0 0" }}/>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
-          background: `linear-gradient(90deg, transparent 0%, ${GOLD_DEEP}60 20%, ${GOLD_BRIGHT}90 50%, ${GOLD_DEEP}60 80%, transparent 100%)`,
-          borderRadius: "0 0 20px 20px" }}/>
-        {/* Side borders glow */}
-        <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: 1.5,
-          background: `linear-gradient(180deg, transparent, ${GOLD_MID}60, transparent)`, borderRadius: "20px 0 0 20px" }}/>
-        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, width: 1.5,
-          background: `linear-gradient(180deg, transparent, ${GOLD_MID}60, transparent)`, borderRadius: "0 20px 20px 0" }}/>
-
-        <CircuitBoard color={GOLD_MID} opacity={0.18}/>
-        <Watermark color={GOLD_BRIGHT}/>
-
-        {/* Holographic radial overlay */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse 60% 60% at 65% 50%, rgba(255,215,0,0.04) 0%, transparent 70%)" }}/>
-
-        <div style={{ position: "relative", zIndex: 10, padding: "20px 22px 18px 22px", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
-          {/* Header */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+      <div style={{position:"relative",overflow:"hidden",fontFamily:"'Courier New',monospace",
+        width:540,height:320,flexShrink:0,
+        background:"radial-gradient(ellipse at 18% 28%,#130d00 0%,#070400 50%,#020100 100%)",
+        border:`1px solid ${G2}65`,borderRadius:18,
+        boxShadow:`0 0 60px rgba(255,215,0,0.18),0 0 0 1px ${G3}15 inset`,
+        color:"#fff",userSelect:"none",padding:0}}>
+        {/* top shimmer */}
+        <div style={{position:"absolute",top:0,left:0,right:0,height:2,borderRadius:"18px 18px 0 0",
+          background:`linear-gradient(90deg,transparent 0%,${G1}80 15%,${G3} 40%,${G4} 50%,${G3} 60%,${G1}80 85%,transparent 100%)`}}/>
+        {/* bottom shimmer */}
+        <div style={{position:"absolute",bottom:0,left:0,right:0,height:1.5,borderRadius:"0 0 18px 18px",
+          background:`linear-gradient(90deg,transparent,${G1}70,${G2}80,${G1}70,transparent)`}}/>
+        {/* side glows */}
+        <div style={{position:"absolute",top:0,left:0,bottom:0,width:1.5,
+          background:`linear-gradient(180deg,transparent,${G2}50,transparent)`}}/>
+        <div style={{position:"absolute",top:0,right:0,bottom:0,width:1.5,
+          background:`linear-gradient(180deg,transparent,${G2}50,transparent)`}}/>
+        <CircuitBg c={G2}/>
+        {/* holographic center glow */}
+        <div style={{position:"absolute",inset:0,pointerEvents:"none",
+          background:"radial-gradient(ellipse 55% 55% at 62% 50%,rgba(255,215,0,0.05) 0%,transparent 70%)"}}/>
+        {/* watermark */}
+        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
+          pointerEvents:"none",overflow:"hidden",zIndex:1}}>
+          <div style={{transform:"rotate(-20deg)",textAlign:"center",opacity:0.04,lineHeight:1.5}}>
+            <div style={{fontSize:14,fontWeight:900,letterSpacing:"0.4em",color:G3,whiteSpace:"nowrap"}}>OFFICIAL INTEGRITY</div>
+            <div style={{fontSize:11,fontWeight:900,letterSpacing:"0.35em",color:G3,whiteSpace:"nowrap"}}>ORAKZAI GROUP</div>
+          </div>
+        </div>
+        <div style={{position:"relative",zIndex:10,padding:"18px 20px 16px 20px",height:"100%",
+          display:"flex",flexDirection:"column",boxSizing:"border-box"}}>
+          {/* header */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
             <div>
-              <div style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: "0.28em", textTransform: "uppercase",
-                background: `linear-gradient(90deg, ${GOLD_LIGHT}, ${GOLD_BRIGHT}, ${GOLD_MID})`,
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-                filter: `drop-shadow(0 0 6px ${GOLD_MID}60)`,
-              }}>OKZBYTE HUB</div>
-              <div style={{ fontSize: 6.5, color: `${GOLD_MID}60`, letterSpacing: "0.1em", marginTop: 2 }}>
-                Silicon Valley Network // Tier 03 Elite — Sovereign Founder
-              </div>
+              <div style={{fontSize:11,fontWeight:900,letterSpacing:"0.28em",textTransform:"uppercase",
+                color:G3,textShadow:`0 0 14px ${G2},0 0 4px ${G3}`}}>OKZBYTE HUB</div>
+              <div style={{fontSize:6.5,color:`${G2}60`,letterSpacing:"0.1em",marginTop:2}}>
+                Silicon Valley Network // Tier 03 Elite — Sovereign Founder</div>
             </div>
-            {/* Premium logo box */}
-            <div style={{
-              width: 46, height: 46, flexShrink: 0,
-              background: "rgba(0,0,0,0.7)",
-              border: `1.5px solid ${GOLD_MID}80`,
-              borderRadius: 10,
-              display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center",
-              boxShadow: `0 0 16px ${GOLD_MID}35, inset 0 0 12px ${GOLD_MID}15, 0 0 0 0.5px ${GOLD_BRIGHT}30`,
-            }}>
-              <img src="/logos/okzbyte.png"
-                style={{ width: 28, height: 28, objectFit: "contain", filter: `drop-shadow(0 0 5px ${GOLD_MID}90)` }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}/>
-              <div style={{ fontSize: 5.5, fontWeight: 900, letterSpacing: "0.1em",
-                background: `linear-gradient(90deg, ${GOLD_MID}, ${GOLD_BRIGHT})`,
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginTop: 1 }}>OKZBYTE</div>
+            {/* premium logo box */}
+            <div style={{width:44,height:44,flexShrink:0,borderRadius:9,
+              background:"rgba(0,0,0,0.70)",
+              border:`1.5px solid ${G2}75`,
+              boxShadow:`0 0 16px ${G2}35,inset 0 0 12px ${G2}12,0 0 0 0.5px ${G3}25`,
+              display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",
+              position:"relative",overflow:"hidden",gap:1}}>
+              <div style={{fontSize:9,fontWeight:900,color:G3,letterSpacing:"0.05em",lineHeight:1.1,
+                textShadow:`0 0 8px ${G2}`}}>OKZ</div>
+              <div style={{fontSize:5,fontWeight:700,color:`${G2}90`,letterSpacing:"0.1em"}}>BYTE</div>
+              <img src="/logos/okzbyte.png" alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"contain",
+                padding:7,filter:`drop-shadow(0 0 5px ${G2}90)`}}
+                onError={(e)=>{(e.target as HTMLImageElement).style.opacity="0"}}/>
             </div>
           </div>
-
-          {/* Main content row */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 14, flex: 1 }}>
-            {/* Triple-layer gold photo frame */}
-            <div style={{ position: "relative", flexShrink: 0 }}>
-              {/* Outer glow ring */}
-              <div style={{
-                position: "absolute", inset: -4, borderRadius: 16,
-                border: `1px solid ${GOLD_DEEP}60`,
-                boxShadow: `0 0 12px ${GOLD_MID}40`,
-              }}/>
-              {/* Mid frame */}
-              <div style={{
-                position: "absolute", inset: -2, borderRadius: 14,
-                border: `1.5px solid ${GOLD_MID}90`,
-                background: `linear-gradient(135deg, ${GOLD_MID}30, ${GOLD_DEEP}20, ${GOLD_MID}30)`,
-              }}/>
-              {/* Inner photo container */}
-              <div style={{
-                width: 90, height: 90, borderRadius: 12,
-                border: `2px solid ${GOLD_BRIGHT}80`,
-                boxShadow: `0 0 30px ${GOLD_MID}55, 0 0 12px ${GOLD_BRIGHT}20 inset`,
-                background: `linear-gradient(135deg, #1a1000, #0a0800)`,
-                overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
+          {/* main row */}
+          <div style={{display:"flex",alignItems:"center",gap:15,flex:1}}>
+            {/* triple-layer gold photo frame */}
+            <div style={{flexShrink:0,position:"relative"}}>
+              {/* outer glow ring */}
+              <div style={{position:"absolute",inset:-5,borderRadius:17,
+                border:`1px solid ${G1}50`,boxShadow:`0 0 14px ${G2}40`}}/>
+              {/* inner photo */}
+              <div style={{width:88,height:88,borderRadius:12,overflow:"hidden",
+                border:`2px solid ${G3}80`,
+                boxShadow:`0 0 28px ${G2}55,0 0 10px ${G3}15 inset`,
+                background:`linear-gradient(135deg,#1a1000,#080500)`,
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
                 {userPhotoUrl
-                  ? <img src={userPhotoUrl} style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
-                  : <span style={{ fontSize: 30, fontWeight: 900,
-                      background: `linear-gradient(135deg, ${GOLD_LIGHT}, ${GOLD_BRIGHT}, ${GOLD_MID})`,
-                      WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{(userName || "?")[0].toUpperCase()}</span>
-                }
+                  ? <img src={userPhotoUrl} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                  : <span style={{fontSize:28,fontWeight:900,color:G3,textShadow:`0 0 10px ${G2}`}}>
+                      {(userName||"?")[0].toUpperCase()}</span>}
               </div>
             </div>
-
-            {/* Identity block */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              {/* Name — primary gold gradient */}
-              <div style={{
-                fontSize: 20, fontWeight: 900, letterSpacing: "0.07em", textTransform: "uppercase",
-                background: `linear-gradient(135deg, ${GOLD_LIGHT} 0%, ${GOLD_BRIGHT} 40%, ${GOLD_MID} 70%, ${GOLD_DEEP} 100%)`,
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-                filter: `drop-shadow(0 0 8px ${GOLD_MID}50)`,
-                lineHeight: 1.1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
-              }}>{userName || "IDENTITY NAME"}</div>
-
-              {/* Member ID — gold metal capsule */}
-              <div style={{
-                marginTop: 7, display: "inline-flex", alignItems: "center",
-                fontSize: 7.5, fontWeight: 900, letterSpacing: "0.22em",
-                color: GOLD_BRIGHT,
-                background: `linear-gradient(135deg, rgba(180,135,0,0.2), rgba(80,60,0,0.3))`,
-                border: `1px solid ${GOLD_MID}70`,
-                padding: "3px 12px", borderRadius: 99,
-                boxShadow: `0 0 10px ${GOLD_MID}30, inset 0 0 8px ${GOLD_MID}10`,
-              }}>{memberId || "OKZ-2026-0000"}</div>
-
-              <div style={{ marginTop: 6, fontSize: 6.5, color: `${GOLD_MID}65`, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+            {/* identity */}
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:20,fontWeight:900,letterSpacing:"0.07em",textTransform:"uppercase",
+                color:G3,textShadow:`0 0 16px ${G2}90,0 0 4px ${G1}`,
+                overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",lineHeight:1.1}}>
+                {userName||"IDENTITY NAME"}
+              </div>
+              <div style={{marginTop:7,display:"inline-flex",alignItems:"center",
+                fontSize:7.5,fontWeight:900,letterSpacing:"0.22em",color:G3,
+                background:`linear-gradient(135deg,rgba(180,135,0,0.2),rgba(80,60,0,0.3))`,
+                border:`1px solid ${G2}65`,padding:"3px 12px",borderRadius:99,
+                boxShadow:`0 0 10px ${G2}30,inset 0 0 8px ${G2}08`}}>
+                {memberId||"OKZ-2026-0000"}
+              </div>
+              <div style={{marginTop:6,fontSize:6.5,color:`${G2}65`,letterSpacing:"0.18em",textTransform:"uppercase"}}>
                 SOVEREIGN FOUNDER · ELITE MEMBER
               </div>
             </div>
-
-            {/* QR + Payment Verified */}
+            {/* QR + verified */}
             {qrDataUrl && (
-              <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
-                <div style={{
-                  background: "rgba(0,0,0,0.6)",
-                  border: `1px solid ${GOLD_MID}60`,
-                  borderRadius: 8, padding: 5,
-                  boxShadow: `0 0 14px ${GOLD_MID}25`,
-                }}>
-                  <div style={{ width: 58, height: 58, background: "white", borderRadius: 4, padding: 2 }}>
-                    <img src={qrDataUrl} style={{ width: "100%", height: "100%", imageRendering: "pixelated" }}/>
+              <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+                <div style={{background:"rgba(0,0,0,0.60)",border:`1px solid ${G2}55`,
+                  borderRadius:8,padding:5,boxShadow:`0 0 14px ${G2}25`}}>
+                  <div style={{width:58,height:58,background:"white",borderRadius:4,padding:2}}>
+                    <img src={qrDataUrl} style={{width:"100%",height:"100%",imageRendering:"pixelated"}}/>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                  <div style={{ width: 5, height: 5, borderRadius: 99, background: "#22c55e", boxShadow: "0 0 5px #22c55e" }}/>
-                  <span style={{ fontSize: 5, color: "#22c55e", letterSpacing: "0.1em", fontWeight: 700 }}>PAYMENT VERIFIED</span>
+                <div style={{display:"flex",alignItems:"center",gap:3}}>
+                  <div style={{width:5,height:5,borderRadius:99,background:"#22c55e",boxShadow:"0 0 5px #22c55e"}}/>
+                  <span style={{fontSize:5,color:"#22c55e",letterSpacing:"0.1em",fontWeight:700}}>PAYMENT VERIFIED</span>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Bottom row */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "auto" }}>
-            {/* Authority signature — liquid gold script */}
+          {/* bottom row */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginTop:10}}>
             <div>
-              <img src={FOUNDER_SIG_B64} style={{ height: 28, maxWidth: 100, objectFit: "contain",
-                filter: `sepia(1) brightness(1.5) saturate(5) hue-rotate(6deg) drop-shadow(0 0 5px ${GOLD_MID}80)` }}/>
-              <div style={{ fontSize: 5.5, fontWeight: 900, color: `${GOLD_MID}80`, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>
-                ISSUING AUTHORITY: F. ORAKZAI
-              </div>
-              <div style={{ display: "flex", gap: 8, marginTop: 2 }}>
-                <div style={{ fontSize: 5, color: "rgba(255,255,255,0.25)", letterSpacing: "0.08em", textTransform: "uppercase", border: `0.5px solid rgba(255,255,255,0.12)`, padding: "1.5px 5px", borderRadius: 3 }}>
-                  ISSUE: <span style={{ color: `${GOLD_MID}80` }}>{issueDate}</span>
-                </div>
-                <div style={{ fontSize: 5, color: "rgba(255,255,255,0.25)", letterSpacing: "0.08em", textTransform: "uppercase", border: `0.5px solid rgba(255,255,255,0.12)`, padding: "1.5px 5px", borderRadius: 3 }}>
-                  EXPIRY: <span style={{ color: `${GOLD_MID}80` }}>{expiryDate}</span>
-                </div>
+              <img src={FOUNDER_SIG_B64} style={{height:26,maxWidth:96,objectFit:"contain",display:"block",
+                filter:`sepia(1) brightness(1.5) saturate(5) hue-rotate(6deg) drop-shadow(0 0 5px ${G2}80)`}}/>
+              <div style={{fontSize:5.5,fontWeight:900,color:`${G2}80`,letterSpacing:"0.12em",textTransform:"uppercase",marginTop:2}}>
+                ISSUING AUTHORITY: F. ORAKZAI</div>
+              <div style={{display:"flex",gap:6,marginTop:3}}>
+                <div style={{fontSize:5,color:"rgba(255,255,255,0.25)",letterSpacing:"0.08em",textTransform:"uppercase",
+                  border:`0.5px solid rgba(255,255,255,0.12)`,padding:"1.5px 5px",borderRadius:3}}>
+                  ISSUE: <span style={{color:`${G2}80`}}>{issueDate}</span></div>
+                <div style={{fontSize:5,color:"rgba(255,255,255,0.25)",letterSpacing:"0.08em",textTransform:"uppercase",
+                  border:`0.5px solid rgba(255,255,255,0.12)`,padding:"1.5px 5px",borderRadius:3}}>
+                  EXPIRY: <span style={{color:`${G2}80`}}>{expiryDate}</span></div>
               </div>
             </div>
-
-            {/* Right bottom — user sig + chip */}
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-              {/* User signature — neon gold */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                <div style={{
-                  height: 34, width: 100, position: "relative",
-                  background: "rgba(0,0,0,0.5)",
-                  border: `1px solid ${GOLD_MID}45`,
-                  borderRadius: 6,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  backdropFilter: "blur(4px)",
-                  boxShadow: `inset 0 0 10px ${GOLD_MID}08`,
-                }}>
-                  {userSignatureUrl
-                    ? <img src={userSignatureUrl} style={{ height: 26, maxWidth: 90, objectFit: "contain",
-                        filter: `sepia(1) brightness(1.6) saturate(6) hue-rotate(6deg) drop-shadow(0 0 6px ${GOLD_BRIGHT})` }}/>
-                    : <span style={{ fontSize: 5.5, color: `${GOLD_MID}35`, letterSpacing: "0.06em" }}>MEMBER SIGNATURE</span>
-                  }
-                  <span style={{ position: "absolute", bottom: 2, right: 4, fontSize: 4.5, color: `${GOLD_MID}50`, letterSpacing: "0.06em" }}>AUTHORIZED LOG NODE</span>
-                </div>
+            <div style={{display:"flex",alignItems:"flex-end",gap:8}}>
+              <div style={{height:34,width:100,position:"relative",flexShrink:0,
+                background:"rgba(0,0,0,0.50)",border:`1px solid ${G2}40`,borderRadius:6,
+                display:"flex",alignItems:"center",justifyContent:"center",
+                boxShadow:`inset 0 0 10px ${G2}08`}}>
+                {userSignatureUrl
+                  ? <img src={userSignatureUrl} style={{height:26,maxWidth:90,objectFit:"contain",
+                      filter:`sepia(1) brightness(1.6) saturate(6) hue-rotate(6deg) drop-shadow(0 0 6px ${G3})`}}/>
+                  : <span style={{fontSize:5.5,color:`${G2}35`,letterSpacing:"0.06em"}}>MEMBER SIGNATURE</span>}
+                <span style={{position:"absolute",bottom:2,right:4,fontSize:4.5,color:`${G2}50`,letterSpacing:"0.06em"}}>
+                  AUTHORIZED LOG NODE</span>
               </div>
-              {/* Hyper-realistic gold chip */}
-              <GoldChip accent={GOLD_BRIGHT}/>
+              <Chip a={G3}/>
             </div>
           </div>
         </div>
@@ -1406,6 +1252,7 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
     );
   }
 
+  
   /* ─────────────────────────────────────────
    PHASE 4 — SOVEREIGN CARD GENERATOR
 ───────────────────────────────────────── */
