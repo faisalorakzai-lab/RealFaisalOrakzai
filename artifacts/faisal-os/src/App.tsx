@@ -15,6 +15,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   import Media from "@/pages/Media";
   import Investment from "@/pages/Investment";
   import Contact from "@/pages/Contact";
+  import InnerCircle from "@/pages/InnerCircle";
   import Navbar from "@/components/layout/Navbar";
   import Footer from "@/components/layout/Footer";
   import ChatWidget from "@/components/shared/ChatWidget";
@@ -64,6 +65,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
                 <Route path="/media" component={Media} />
                 <Route path="/investment" component={Investment} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/inner-circle" component={InnerCircle} />
                 <Route component={NotFound} />
               </Switch>
             </motion.div>

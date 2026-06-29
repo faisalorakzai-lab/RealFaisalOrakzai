@@ -11,6 +11,7 @@ const links = [
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/research", label: "Research" },
   { href: "/press", label: "Press" },
+  { href: "/inner-circle", label: "Inner Circle" },
   { href: "/contact", label: "Contact" },
 ];
 
