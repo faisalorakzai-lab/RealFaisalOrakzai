@@ -11,7 +11,7 @@ const links = [
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/research", label: "Research" },
   { href: "/press", label: "Press" },
-  { href: "/inner-circle", label: "Inner Circle" },
+  { href: "/inner-circle", label: "OkzByte Hub" },
   { href: "/contact", label: "Contact" },
 ];
 
