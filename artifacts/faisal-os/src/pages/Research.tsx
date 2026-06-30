@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-05", category: "BLOCKCHAIN", year: "2026",
+          title: "Tokenization of Real World Assets (RWA)",
+          subtitle: "Complete Guide to Blockchain Asset Tokenization — Fractional Ownership, Infrastructure, Compliance & Enterprise Adoption (2026)",
+          abstract: "Real World Asset (RWA) tokenization bridges traditional finance and DeFi by representing physical and financial assets as secure digital tokens on a blockchain. This complete guide covers what RWA tokenization is, how it works technically, the token lifecycle, fractional ownership, compliance requirements, challenges, 12+ industries being tokenized, enterprise adoption, and the future of programmable digital ownership.",
+          tags: ["RWA","Real World Assets","Asset Tokenization","Blockchain Assets","Fractional Ownership","Tokenized Real Estate","Security Tokens","Digital Assets","Enterprise Blockchain","Digital Finance","DeFi","Smart Contracts"],
+          status: "PUBLISHED",
+          slug: "rwa-tokenization",
+          thumbnail: "/mk/rwa-hero.png",
+          readTime: "32 min read",
+          keywords: "Real World Asset tokenization, RWA blockchain, asset tokenization guide, tokenized real estate, fractional ownership blockchain, security tokens, digital assets, enterprise blockchain, DeFi RWA, blockchain investment, token economy, Faisal Orakzai",
+        },
+        {
           id: "bc-04", category: "BLOCKCHAIN", year: "2026",
           title: "How Smart Contracts Work",
           subtitle: "Complete Beginner to Advanced Guide — Architecture, Lifecycle, Security & Enterprise Use Cases (2026)",
