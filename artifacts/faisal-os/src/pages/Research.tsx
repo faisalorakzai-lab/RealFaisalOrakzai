@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-04", category: "BLOCKCHAIN", year: "2026",
+          title: "How Smart Contracts Work",
+          subtitle: "Complete Beginner to Advanced Guide — Architecture, Lifecycle, Security & Enterprise Use Cases (2026)",
+          abstract: "Smart contracts are self-executing computer programs stored on a blockchain that automatically perform agreed actions when predetermined conditions are satisfied. This comprehensive guide covers smart contract architecture, execution lifecycle, programming languages, gas mechanics, oracle networks, token standards, industries from DeFi to enterprise, security best practices, common vulnerabilities, and the future of blockchain automation.",
+          tags: ["Smart Contracts", "Blockchain", "Ethereum", "Solidity", "DeFi", "Web3", "dApps", "Blockchain Automation", "Smart Contract Security", "Enterprise Blockchain"],
+          status: "PUBLISHED",
+          slug: "smart-contracts",
+          thumbnail: "/mk/smart-contracts-hero.png",
+          readTime: "30 min read",
+          keywords: "how smart contracts work, smart contract explained, smart contract guide, blockchain smart contracts, solidity smart contracts, ethereum smart contracts, smart contract development, enterprise blockchain, decentralized applications, web3 infrastructure, blockchain automation, digital contracts, Faisal Orakzai",
+        },
+        {
           id: "bc-03", category: "BLOCKCHAIN", year: "2026",
           title: "Public vs Private vs Consortium Blockchains",
           subtitle: "The Complete Enterprise Guide to Blockchain Architecture (2026)",
