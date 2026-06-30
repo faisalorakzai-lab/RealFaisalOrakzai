@@ -2288,158 +2288,440 @@ function CardPhase({
       );
     };
 
-    /* ─── SPACES TAB ─── */
+  /* ─── SPACES TAB ─── */
     const SpacesTab = () => {
-      const spaceAccent = accent;
-      if (activeSpace !== null) {
-        const sp = SPACES.find(s=>s.id===activeSpace)!;
-        return (
-          <div className="space-y-4">
-            <button onClick={()=>{ setActiveSpace(null); setIsSpeaking(false); setIsMuted(true); }}
-              className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest"
-              style={{ color:"rgba(255,255,255,0.3)" }}>
-              <ChevronRight size={12} style={{ transform:"rotate(180deg)" }}/> Back to Spaces
+      const spAccent = accent;
+      // spaceView: "list" | "preview" | "room" | "guests"
+      const [spaceView, setSpaceView] = useState<"list"|"preview"|"room"|"guests">("list");
+      const [selectedId, setSelectedId] = useState<number|null>(null);
+      const [spMuted, setSpMuted] = useState(true);
+      const [spSpeaking, setSpSpeaking] = useState(false);
+      const [guestFilter, setGuestFilter] = useState<"all"|"cohosts"|"speakers"|"listening">("all");
+      const [showWelcome, setShowWelcome] = useState(false);
+      const [emojiBurst, setEmojiBurst] = useState<string|null>(null);
+
+      const sp = SPACES.find(s => s.id === selectedId) ?? null;
+
+      const MOCK_SPEAKERS = [
+        { initials:"FO", name:"Faisal Orakzai", handle:"faisalorakzaii", role:"Host",     muted:false, verified:true  },
+        { initials:"MK", name:"M. Khan",        handle:"mkhan_web3",    role:"Speaker",  muted:true,  verified:true  },
+        { initials:"AS", name:"A. Sheikh",      handle:"asheikh_fx",    role:"Speaker",  muted:false, verified:false },
+        { initials:"ZR", name:"Zara R.",        handle:"zara_crypto",   role:"Speaker",  muted:true,  verified:true  },
+      ];
+      const MOCK_LISTENERS = [
+        { initials:"HR", name:"Hamza R.",     handle:"hamza_r",    role:"Listener", verified:false },
+        { initials:"NK", name:"Naveed K.",    handle:"navk21",     role:"Listener", verified:true  },
+        { initials:"SA", name:"Sara A.",      handle:"sara_trade", role:"Listener", verified:false },
+        { initials:"BI", name:"Bilal I.",     handle:"bilal_io",   role:"Listener", verified:true  },
+        { initials:"FQ", name:"Farhan Q.",    handle:"farhanq",    role:"Listener", verified:false },
+        { initials:"WN", name:"Waqar N.",     handle:"waqarn",     role:"Listener", verified:false },
+        { initials:"PK", name:"P. Khan",      handle:"pkhan",      role:"Listener", verified:true  },
+        { initials:"DJ", name:"D. Javed",     handle:"djaved",     role:"Listener", verified:false },
+      ];
+
+      const EMOJIS = ["😂","😮","😢","💜","💯","👏","🤜","👍","👎","🎉"];
+
+      /* ── Welcome overlay ── */
+      if (showWelcome) return (
+        <div className="min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
+          <div className="text-6xl mb-6">🎙️</div>
+          <h2 className="text-white font-black text-2xl mb-2">Welcome to Spaces</h2>
+          <p className="text-white/45 text-sm mb-8">Where live audio conversations happen</p>
+          <div className="w-full space-y-5 mb-10 text-left">
+            {[
+              { icon:"🌐", title:"Spaces are public", desc:"Anyone can listen, including people not logged in to OkzByte Hub." },
+              { icon:"🔊", title:"Listen or request to speak", desc:"Your followers can always see what Spaces you're speaking in." },
+              { icon:"🛡️", title:"Manage your experience", desc:"You can block and report people in a Space." },
+            ].map((item,i)=>(
+              <div key={i} className="flex gap-4">
+                <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                <div>
+                  <div className="text-white font-bold text-sm mb-0.5">{item.title}</div>
+                  <div className="text-white/40 text-[12px] leading-relaxed">{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-white/25 text-[10px] text-center mb-6">OkzByte keeps Spaces for a limited time to review for spam and abuse.</p>
+          <button onClick={()=>setShowWelcome(false)}
+            className="w-full py-4 rounded-full font-bold text-base text-white"
+            style={{ background:"linear-gradient(135deg,#7c3aed,#4f46e5)" }}>
+            Got it
+          </button>
+        </div>
+      );
+
+      /* ── Guests list ── */
+      if (spaceView === "guests") return (
+        <div className="min-h-screen bg-black">
+          <div className="flex items-center gap-4 px-4 py-4 border-b border-white/08">
+            <button onClick={()=>setSpaceView("room")} className="text-white/60">
+              <ChevronRight size={22} style={{ transform:"rotate(180deg)" }}/>
             </button>
-            {/* Live room */}
-            <div className="rounded-3xl overflow-hidden"
-              style={{ background:"rgba(12,9,3,0.9)", border:`1px solid ${spaceAccent}30`, backdropFilter:"blur(24px)" }}>
-              {/* Header */}
-              <div className="p-5" style={{ background:`linear-gradient(180deg,${spaceAccent}12 0%,transparent 100%)`, borderBottom:`1px solid ${spaceAccent}15` }}>
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      {sp.live && (
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background:"rgba(239,68,68,0.15)", border:"1px solid rgba(239,68,68,0.4)" }}>
-                          <motion.div className="w-1.5 h-1.5 rounded-full bg-red-500" animate={{ opacity:[1,0.3,1] }} transition={{ duration:0.8, repeat:Infinity }}/>
-                          <span className="font-mono text-[8px] font-bold text-red-400 tracking-widest uppercase">LIVE</span>
-                        </div>
-                      )}
-                      <span className="font-mono text-[8px] text-white/25 uppercase tracking-widest">{sp.topic}</span>
+            <h2 className="text-white font-bold text-lg flex-1">Guests</h2>
+          </div>
+          {/* Search */}
+          <div className="px-4 py-3">
+            <div className="flex items-center gap-3 bg-white/08 rounded-full px-4 py-2.5">
+              <span className="text-white/30 text-sm">🔍</span>
+              <span className="text-white/25 text-sm">Search for people and groups</span>
+            </div>
+          </div>
+          {/* Filter pills */}
+          <div className="flex gap-2 px-4 pb-3 overflow-x-auto" style={{scrollbarWidth:"none"}}>
+            {(["all","cohosts","speakers","listening"] as const).map(f=>(
+              <button key={f} onClick={()=>setGuestFilter(f)}
+                className="flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-all"
+                style={{
+                  background: guestFilter===f ? "rgba(29,155,240,0.15)" : "transparent",
+                  borderColor: guestFilter===f ? "#1d9bf0" : "rgba(255,255,255,0.2)",
+                  color: guestFilter===f ? "#1d9bf0" : "rgba(255,255,255,0.6)",
+                }}>
+                {f==="all"?"All":f==="cohosts"?"Co-hosts":f==="speakers"?"Speakers":"Listening"}
+              </button>
+            ))}
+          </div>
+          {/* Sections */}
+          <div className="px-4 space-y-1">
+            {(guestFilter==="all"||guestFilter==="cohosts") && (
+              <div className="mb-4">
+                <div className="text-white font-bold text-base mb-0.5">Co-hosts</div>
+                <div className="text-white/30 text-sm mb-3">0 co-hosts</div>
+              </div>
+            )}
+            {(guestFilter==="all"||guestFilter==="speakers") && (
+              <div className="mb-4">
+                <div className="text-white font-bold text-base mb-0.5">Speakers</div>
+                <div className="text-white/30 text-sm mb-3">{MOCK_SPEAKERS.length} speakers · 5 open spots</div>
+                {MOCK_SPEAKERS.map((s,i)=>(
+                  <div key={i} className="flex items-center gap-3 py-3 border-b border-white/06">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base flex-shrink-0"
+                      style={{ background:`${spAccent}20`, border:`2px solid ${spAccent}50`, color:spAccent }}>{s.initials}</div>
+                    <div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-white font-bold text-sm">{s.name}</span>
+                        {s.verified && <span className="text-[#1d9bf0] text-xs">✓</span>}
+                      </div>
+                      <div className="text-white/30 text-[12px]">@{s.handle}</div>
                     </div>
-                    <h2 className="text-white font-black text-lg leading-tight">{sp.title}</h2>
-                    <p className="font-mono text-[10px] text-white/30 mt-1">Hosted by {sp.host}</p>
+                    <div className="ml-auto">
+                      {s.muted ? <MicOff size={14} color="rgba(255,255,255,0.2)"/> : <Mic size={14} color="#22c55e"/>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {(guestFilter==="all"||guestFilter==="listening") && (
+              <div>
+                <div className="text-white font-bold text-base mb-0.5">Listeners</div>
+                <div className="text-white/30 text-sm mb-3">{MOCK_LISTENERS.length + 41} people are listening</div>
+                {MOCK_LISTENERS.map((s,i)=>(
+                  <div key={i} className="flex items-center gap-3 py-3 border-b border-white/06">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base flex-shrink-0"
+                      style={{ background:"rgba(255,255,255,0.08)", border:"2px solid rgba(255,255,255,0.15)", color:"rgba(255,255,255,0.6)" }}>{s.initials}</div>
+                    <div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-white font-bold text-sm">{s.name}</span>
+                        {s.verified && <span className="text-[#1d9bf0] text-xs">✓</span>}
+                      </div>
+                      <div className="text-white/30 text-[12px]">@{s.handle}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="h-20"/>
+        </div>
+      );
+
+      /* ── Space preview (join screen) ── */
+      if (spaceView === "preview" && sp) return (
+        <div className="bg-black min-h-screen">
+          {/* Context card */}
+          <div className="px-4 pt-4 pb-3 mx-4 rounded-2xl mb-4"
+            style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.1)" }}>
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0"
+                style={{ background:`${spAccent}20`, border:`2px solid ${spAccent}50`, color:spAccent }}>FO</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-1">
+                  <span className="text-white font-bold text-sm">Faisal Orakzai</span>
+                  <span style={{color:spAccent}} className="text-xs">✓</span>
+                  <span className="text-white/30 text-xs">@faisalorakzaii · 2h</span>
+                </div>
+                <p className="text-white/70 text-sm mt-1 leading-relaxed">
+                  We are OkzByte Hub — a Web3 trading & education community for elite members. Follow for daily signals, Academy modules, and live market analysis.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-white/40 text-xs">
+              <span className="text-base">🎙️</span>
+              <span>Shared by Faisal Orakzai</span>
+            </div>
+          </div>
+          {/* Speakers grid */}
+          <div className="px-4 mb-3">
+            {sp.live && (
+              <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md" style={{ background:"rgba(239,68,68,0.15)", border:"1px solid rgba(239,68,68,0.4)" }}>
+                  <motion.div className="w-2 h-2 rounded-full bg-red-500" animate={{ opacity:[1,0.3,1] }} transition={{ duration:0.8, repeat:Infinity }}/>
+                  <span className="font-mono text-[9px] font-bold text-red-400 tracking-widest">REC</span>
+                </div>
+                <p className="text-white/40 text-[11px]">The Host is recording this Space. Everyone that speaks will be included in the public recording.</p>
+              </div>
+            )}
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {MOCK_SPEAKERS.map((s,i)=>(
+                <div key={i} className="flex flex-col items-center gap-1.5">
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-base"
+                      style={{ background:i===0?`${spAccent}20`:"rgba(255,255,255,0.06)", border:`2.5px solid ${i===0?spAccent:"rgba(255,255,255,0.2)"}`, color:i===0?spAccent:"rgba(255,255,255,0.6)" }}>
+                      {s.initials}
+                    </div>
+                    {i===0 && <motion.div className="absolute -inset-0.5 rounded-full border-2" style={{borderColor:spAccent}} animate={{opacity:[0.8,0.2,0.8]}} transition={{duration:1.5,repeat:Infinity}}/>}
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
+                      style={{ background:s.muted?"rgba(0,0,0,0.8)":"rgba(0,0,0,0.8)", border:"1.5px solid rgba(255,255,255,0.15)" }}>
+                      {s.muted ? <MicOff size={9} color="rgba(255,255,255,0.3)"/> : <Mic size={9} color="#22c55e"/>}
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white text-[10px] font-medium leading-tight truncate w-16 text-center">{s.name.split(" ")[0]}...</div>
+                    <div className="flex items-center justify-center gap-0.5">
+                      {s.verified && <span className="text-[#1d9bf0] text-[8px]">✓</span>}
+                      <span className="text-white/30 text-[9px]">{s.role}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <motion.div className="w-2 h-2 rounded-full bg-emerald-400" animate={{ opacity:[1,0.3,1] }} transition={{ duration:1, repeat:Infinity }}/>
-                  <span className="font-mono text-[10px] text-emerald-400">{sp.listeners + (sp.live?1:0)} listening</span>
+              ))}
+            </div>
+            {/* Listeners count pill */}
+            <button className="w-full py-3 rounded-full border border-white/15 text-white/50 text-sm font-medium mb-4">
+              +{MOCK_LISTENERS.length + 41} other listeners
+            </button>
+          </div>
+          {/* Start listening */}
+          <div className="px-4">
+            <button onClick={()=>setSpaceView("room")}
+              className="w-full py-4 rounded-full font-bold text-base text-white mb-3"
+              style={{ background:"linear-gradient(135deg,#7c3aed,#4f46e5)", boxShadow:"0 8px 30px rgba(124,58,237,0.4)" }}>
+              Start listening
+            </button>
+          </div>
+        </div>
+      );
+
+      /* ── Inside the room ── */
+      if (spaceView === "room" && sp) return (
+        <div className="bg-black min-h-screen flex flex-col">
+          {/* Top bar */}
+          <div className="flex items-center justify-between px-4 pt-4 pb-2">
+            <button onClick={()=>setSpaceView("preview")} className="text-white/50 text-2xl leading-none">∨</button>
+            <div className="flex items-center gap-4">
+              <button className="text-white/50">•••</button>
+              <button onClick={()=>{ setSpaceView("list"); setSelectedId(null); }}
+                className="font-bold text-sm" style={{ color:"#ef4444" }}>Leave</button>
+            </div>
+          </div>
+
+          {/* Content scroll area */}
+          <div className="flex-1 overflow-y-auto px-4 pb-4">
+            {/* REC badge + Title */}
+            <div className="mb-4">
+              {sp.live && (
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md mb-3"
+                  style={{ background:"rgba(255,255,255,0.1)", border:"1px solid rgba(255,255,255,0.2)" }}>
+                  <motion.div className="w-2 h-2 rounded-full bg-red-500" animate={{ opacity:[1,0.3,1] }} transition={{ duration:0.8, repeat:Infinity }}/>
+                  <span className="font-bold text-white text-xs tracking-wider">REC</span>
+                </div>
+              )}
+              <h1 className="text-white font-black text-2xl leading-tight">{sp.title}</h1>
+            </div>
+
+            {/* Host context card */}
+            <div className="rounded-2xl p-4 mb-5"
+              style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)" }}>
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold flex-shrink-0"
+                  style={{ background:`${spAccent}20`, border:`2px solid ${spAccent}50`, color:spAccent }}>FO</div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-1 mb-1">
+                    <span className="text-white font-bold text-sm">Faisal Orakzai</span>
+                    <span style={{color:spAccent}} className="text-[10px]">✓</span>
+                    <span className="text-white/30 text-[11px]">@faisalorakzaii · 2h</span>
+                  </div>
+                  <p className="text-white/65 text-[13px] leading-relaxed">We are OkzByte Hub — a Web3 trading & education community for elite members. Follow for daily signals, Academy modules, and live market analysis.</p>
                 </div>
               </div>
-              {/* Speaker avatars */}
-              <div className="p-5">
-                <div className="font-mono text-[8px] text-white/25 uppercase tracking-widest mb-4">Speakers</div>
-                <div className="flex gap-4 flex-wrap">
-                  {sp.speakers.map((s,i)=>(
-                    <div key={i} className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center font-black text-base"
-                          style={{ background:`${spaceAccent}18`, border:`2px solid ${spaceAccent}60`, color:spaceAccent, boxShadow:`0 0 16px ${spaceAccent}25` }}>
-                          {s}
-                        </div>
-                        {i===0 && (
-                          <motion.div className="absolute -inset-1 rounded-full border" style={{ borderColor:spaceAccent }}
-                            animate={{ opacity:[0.8,0.2,0.8], scale:[1,1.05,1] }} transition={{ duration:1.5, repeat:Infinity }}/>
-                        )}
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
-                          style={{ background:i===0?"#22c55e":"rgba(255,255,255,0.15)", border:"1.5px solid #000" }}>
-                          {i===0 ? <Mic size={8} color="#000"/> : <MicOff size={8} color="rgba(255,255,255,0.5)"/>}
-                        </div>
-                      </div>
-                      <span className="font-mono text-[9px] text-white/50">{s===sp.speakers[0]?"Host":s}</span>
-                    </div>
-                  ))}
-                  {/* My avatar */}
-                  {isSpeaking && (
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <div className="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center font-black text-base"
-                          style={{ background:`${spaceAccent}18`, border:`2px solid ${spaceAccent}40`, color:spaceAccent }}>
-                          {profilePhoto ? <img src={profilePhoto} className="w-full h-full object-cover"/> : profileName[0]}
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
-                          style={{ background:isMuted?"rgba(255,255,255,0.1)":"#22c55e", border:"1.5px solid #000" }}>
-                          {isMuted ? <MicOff size={8} color="rgba(255,255,255,0.4)"/> : <Mic size={8} color="#000"/>}
-                        </div>
-                      </div>
-                      <span className="font-mono text-[9px] text-white/50">You</span>
-                    </div>
-                  )}
-                </div>
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/08 text-white/35 text-xs">
+                <span>🎙️</span><span>Shared by Faisal Orakzai</span>
               </div>
-              {/* Controls */}
-              <div className="p-5 flex items-center justify-between" style={{ borderTop:`1px solid ${spaceAccent}12` }}>
-                {!isSpeaking ? (
-                  <button onClick={()=>{ setIsSpeaking(true); setIsMuted(false); }}
-                    className="flex-1 py-3 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase mr-3"
-                    style={{ background:`${spaceAccent}20`, border:`1.5px solid ${spaceAccent}50`, color:spaceAccent }}>
-                    🎙️ Request to Speak
-                  </button>
-                ) : (
-                  <button onClick={()=>setIsMuted(p=>!p)}
-                    className="flex-1 py-3 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase mr-3 transition-all"
-                    style={{ background:isMuted?"rgba(255,255,255,0.08)":"rgba(34,197,94,0.2)", border:`1.5px solid ${isMuted?"rgba(255,255,255,0.15)":"rgba(34,197,94,0.5)"}`, color:isMuted?"rgba(255,255,255,0.4)":"#22c55e" }}>
-                    {isMuted ? "🔇 Unmute" : "🎙️ Mute"}
-                  </button>
-                )}
-                <button onClick={()=>{ setActiveSpace(null); setIsSpeaking(false); setIsMuted(true); }}
-                  className="py-3 px-4 rounded-2xl font-mono font-black text-[11px] tracking-widest uppercase"
-                  style={{ background:"rgba(239,68,68,0.15)", border:"1.5px solid rgba(239,68,68,0.4)", color:"#ef4444" }}>
-                  Leave
-                </button>
+            </div>
+
+            {/* Swipe indicator */}
+            <div className="flex justify-center mb-4">
+              <div className="w-8 h-1 rounded-full bg-white/20"/>
+            </div>
+
+            {/* Speakers grid — 4 per row */}
+            <div className="grid grid-cols-4 gap-3 mb-6">
+              {MOCK_SPEAKERS.map((s,i)=>(
+                <div key={`sp-${i}`} className="flex flex-col items-center gap-1.5">
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold text-lg"
+                      style={{ background:i===0?`${spAccent}20`:"rgba(255,255,255,0.06)", border:`2.5px solid ${i===0?spAccent:s.muted?"rgba(255,255,255,0.15)":"#22c55e"}`, color:i===0?spAccent:"rgba(255,255,255,0.7)", boxShadow:!s.muted&&i!==0?"0 0 12px rgba(34,197,94,0.3)":"none" }}>
+                      {s.initials}
+                    </div>
+                    {!s.muted && <motion.div className="absolute -inset-0.5 rounded-full border-2" style={{borderColor:i===0?spAccent:"#22c55e"}} animate={{opacity:[0.8,0.15,0.8]}} transition={{duration:1.2,repeat:Infinity,delay:i*0.3}}/>}
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
+                      style={{ background:"#000", border:"1.5px solid rgba(255,255,255,0.1)" }}>
+                      {s.muted ? <MicOff size={9} color="rgba(255,255,255,0.3)"/> : <Mic size={9} color="#22c55e"/>}
+                    </div>
+                  </div>
+                  <div className="text-center max-w-[64px]">
+                    <div className="text-white text-[10px] font-semibold leading-tight truncate w-full text-center">{s.name.split(" ")[0]}...</div>
+                    <div className="flex items-center justify-center gap-0.5">
+                      {s.verified && <span className="text-[#1d9bf0] text-[8px]">✓</span>}
+                      <span className="text-white/30 text-[9px] truncate">{s.role}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {/* Listeners */}
+              {MOCK_LISTENERS.slice(0,8).map((s,i)=>(
+                <div key={`li-${i}`} className="flex flex-col items-center gap-1.5">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold text-lg"
+                    style={{ background:"rgba(255,255,255,0.05)", border:"2px solid rgba(255,255,255,0.1)", color:"rgba(255,255,255,0.4)" }}>
+                    {s.initials}
+                  </div>
+                  <div className="text-center max-w-[64px]">
+                    <div className="flex items-center justify-center gap-0.5">
+                      {s.verified && <span className="text-[#1d9bf0] text-[8px]">✓</span>}
+                      <span className="text-white text-[10px] font-medium truncate">{s.name.split(" ")[0]}</span>
+                    </div>
+                    <div className="text-white/25 text-[9px]">Listener</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Emoji reactions */}
+            <div className="space-y-2 mb-4">
+              {emojiBurst && (
+                <motion.div key={emojiBurst} initial={{opacity:1,y:0}} animate={{opacity:0,y:-40}} transition={{duration:1.2}}
+                  className="flex justify-center">
+                  <span className="text-3xl">{emojiBurst}</span>
+                </motion.div>
+              )}
+              <div className="flex gap-2 justify-center flex-wrap">
+                {EMOJIS.map(e=>(
+                  <button key={e} onClick={()=>{ setEmojiBurst(e); setTimeout(()=>setEmojiBurst(null),1300); }}
+                    className="text-2xl active:scale-90 transition-transform">{e}</button>
+                ))}
               </div>
             </div>
           </div>
-        );
-      }
 
+          {/* Bottom dock — X Spaces style */}
+          <div className="border-t border-white/08 px-6 py-3"
+            style={{ background:"rgba(0,0,0,0.95)", backdropFilter:"blur(20px)" }}>
+            <div className="flex items-center justify-between">
+              {/* Mic / Request */}
+              <div className="flex flex-col items-center gap-1">
+                <button onClick={()=>{ if(!spSpeaking){setSpSpeaking(true);setSpMuted(false);}else{setSpMuted(p=>!p);} }}
+                  className="w-14 h-14 rounded-full flex items-center justify-center transition-all"
+                  style={{ background: spSpeaking&&!spMuted ? "#22c55e22" : "rgba(255,255,255,0.08)", border:`2px solid ${spSpeaking&&!spMuted?"#22c55e":"rgba(255,255,255,0.2)"}` }}>
+                  {spSpeaking&&!spMuted ? <Mic size={22} color="#22c55e"/> : <MicOff size={22} color="rgba(255,255,255,0.5)"/>}
+                </button>
+                <span className="text-white/40 text-[9px] font-medium">{spSpeaking?"Mute":"Request"}</span>
+              </div>
+              {/* People */}
+              <div className="flex flex-col items-center gap-1">
+                <button onClick={()=>setSpaceView("guests")}
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background:"rgba(255,255,255,0.05)" }}>
+                  <span className="text-white/50 text-xl">👥</span>
+                </button>
+                <span className="text-white/30 text-[9px]">{MOCK_SPEAKERS.length + MOCK_LISTENERS.length + 41}</span>
+              </div>
+              {/* Heart */}
+              <div className="flex flex-col items-center gap-1">
+                <button className="w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background:"rgba(255,255,255,0.05)" }}>
+                  <Heart size={20} color="rgba(255,255,255,0.4)"/>
+                </button>
+                <span className="text-white/30 text-[9px]">Like</span>
+              </div>
+              {/* Share */}
+              <div className="flex flex-col items-center gap-1">
+                <button className="w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background:"rgba(255,255,255,0.05)" }}>
+                  <ArrowRight size={20} color="rgba(255,255,255,0.4)"/>
+                </button>
+                <span className="text-white/30 text-[9px]">Share</span>
+              </div>
+              {/* Comments */}
+              <div className="flex flex-col items-center gap-1">
+                <button className="w-12 h-12 rounded-full flex items-center justify-center relative"
+                  style={{ background:"linear-gradient(135deg,#7c3aed,#4f46e5)" }}>
+                  <MessageCircle size={20} color="#fff"/>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 flex items-center justify-center">
+                    <span className="text-white text-[8px] font-bold">1</span>
+                  </div>
+                </button>
+                <span className="text-white/30 text-[9px]">Chat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+      /* ── Space list ── */
       return (
         <div className="space-y-4">
-          <div>
-            <div className="flex items-center gap-2 mb-0.5">
-              <div className="w-4 h-px" style={{background:spaceAccent}}/>
-              <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${spaceAccent}80`}}>OkzByte Spaces</span>
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-0.5">
+                <div className="w-4 h-px" style={{background:spAccent}}/>
+                <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{color:`${spAccent}80`}}>OkzByte Spaces</span>
+              </div>
+              <p className="font-mono text-[10px] text-neutral-500 tracking-wider ml-6">Live voice rooms & scheduled sessions</p>
             </div>
-            <p className="font-mono text-[10px] text-neutral-500 tracking-wider ml-6">Live voice rooms & scheduled sessions</p>
+            <button onClick={()=>setShowWelcome(true)} className="font-mono text-[8px] uppercase tracking-widest text-white/20 border border-white/10 px-2 py-1 rounded-full">?</button>
           </div>
-          {/* Schedule a space (host only hint) */}
           {isAdmin && (
-            <button onClick={()=>alert("Space scheduling coming soon — you'll be able to set title, time, and topic.")}
+            <button onClick={()=>alert("Space scheduling coming soon.")}
               className="w-full py-3 rounded-2xl font-mono font-black text-[10px] tracking-widest uppercase flex items-center justify-center gap-2"
-              style={{ background:`${spaceAccent}12`, border:`1px dashed ${spaceAccent}35`, color:`${spaceAccent}70` }}>
+              style={{ background:`${spAccent}10`, border:`1px dashed ${spAccent}35`, color:`${spAccent}60` }}>
               + Schedule a Space
             </button>
           )}
-          {/* Space cards */}
           <div className="space-y-3">
-            {SPACES.map((sp,i)=>(
-              <motion.div key={sp.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.06}}
-                className="rounded-2xl overflow-hidden cursor-pointer transition-all active:scale-[0.98]"
-                style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${sp.live?`${spaceAccent}35`:"rgba(255,255,255,0.06)"}`, boxShadow:sp.live?`0 0 20px ${spaceAccent}10`:"none" }}
-                onClick={()=>setActiveSpace(sp.id)}>
+            {SPACES.map((room,i)=>(
+              <motion.div key={room.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:i*0.06}}
+                className="rounded-2xl overflow-hidden cursor-pointer active:scale-[0.98] transition-all"
+                style={{ background:"rgba(15,12,6,0.85)", border:`1px solid ${room.live?`${spAccent}35`:"rgba(255,255,255,0.06)"}`, boxShadow:room.live?`0 0 20px ${spAccent}10`:"none" }}
+                onClick={()=>{ setSelectedId(room.id); setSpaceView("preview"); }}>
                 <div className="p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0"
-                      style={{ background:`${spaceAccent}18`, border:`1px solid ${spaceAccent}40`, color:spaceAccent }}>
-                      {sp.live ? "🔴" : "🎙️"}
+                  {room.live && (
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md mb-2"
+                      style={{ background:"rgba(239,68,68,0.12)", border:"1px solid rgba(239,68,68,0.3)" }}>
+                      <motion.div className="w-1.5 h-1.5 rounded-full bg-red-500" animate={{opacity:[1,0.3,1]}} transition={{duration:0.8,repeat:Infinity}}/>
+                      <span className="font-mono text-[8px] font-bold text-red-400 tracking-widest">LIVE</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        {sp.live && (
-                          <span className="font-mono text-[8px] font-black px-2 py-0.5 rounded tracking-widest"
-                            style={{ background:"rgba(239,68,68,0.15)", color:"#ef4444", border:"1px solid rgba(239,68,68,0.4)" }}>LIVE</span>
-                        )}
-                        <span className="font-mono text-[8px] text-white/25 uppercase">{sp.topic}</span>
-                      </div>
-                      <h3 className="text-white font-bold text-sm leading-tight mb-1">{sp.title}</h3>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-[9px] text-white/30">by {sp.host}</span>
-                        {sp.live
-                          ? <span className="font-mono text-[9px] text-emerald-400">🎧 {sp.listeners} listening</span>
-                          : <span className="font-mono text-[9px] text-white/25">⏰ {sp.startIn}</span>
-                        }
-                      </div>
-                    </div>
-                    <div style={{color:`${spaceAccent}40`}}><ChevronRight size={16}/></div>
+                  )}
+                  <h3 className="text-white font-bold text-[15px] leading-snug mb-2">{room.title}</h3>
+                  {/* Speaker avatars row */}
+                  <div className="flex items-center gap-2 mb-3">
+                    {room.speakers.map((s,si)=>(
+                      <div key={si} className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[10px] flex-shrink-0"
+                        style={{ background:`${spAccent}18`, border:`1.5px solid ${spAccent}45`, color:spAccent }}>{s}</div>
+                    ))}
+                    <span className="font-mono text-[10px] text-white/30 ml-1">{room.live ? `· ${room.listeners} listening` : room.startIn}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[9px] uppercase tracking-widest" style={{color:`${spAccent}50`}}>{room.topic}</span>
+                    <div className="font-bold text-sm" style={{color:`${spAccent}40`}}>›</div>
                   </div>
                 </div>
               </motion.div>
@@ -2448,7 +2730,7 @@ function CardPhase({
         </div>
       );
     };
-
+  
     const tabs: { id: NavTab; icon: string; label: string }[] = [
       { id:"home",      icon:"🏠", label:"Home"      },
       { id:"community", icon:"👥", label:"Community" },
