@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-06", category: "BLOCKCHAIN", year: "2026",
+          title: "Blockchain Security & Consensus Mechanisms Explained",
+          subtitle: "PoW, PoS, Cryptography, Attacks, Validator Security & Future Security Guide (2026)",
+          abstract: "Blockchain security depends on cryptography, consensus mechanisms, and network architecture working together. This comprehensive guide covers cryptographic hash functions, digital signatures, Merkle trees, Proof of Work, Proof of Stake, DPoS, PBFT, PoA, the Blockchain Trilemma, 51% attacks, Sybil attacks, Eclipse attacks, double spending, validator security, node hardening, Zero Knowledge Proofs, post-quantum cryptography, AI-driven threat detection, and enterprise blockchain security best practices.",
+          tags: ["Blockchain Security","Consensus Mechanisms","Proof of Work","Proof of Stake","Cryptography","51% Attack","Merkle Tree","Digital Signatures","Validator Security","Zero Knowledge Proof","Post-Quantum Cryptography","Web3 Security"],
+          status: "PUBLISHED",
+          slug: "blockchain-security",
+          thumbnail: "/mk/blockchain-security-hero.png",
+          readTime: "35 min read",
+          keywords: "blockchain security, consensus mechanisms, proof of work, proof of stake, cryptographic hashing, digital signatures, Merkle tree, 51% attack, Sybil attack, validator security, post-quantum cryptography, zero knowledge proof, enterprise blockchain security, Faisal Orakzai",
+        },
+        {
           id: "bc-05", category: "BLOCKCHAIN", year: "2026",
           title: "Tokenization of Real World Assets (RWA)",
           subtitle: "Complete Guide to Blockchain Asset Tokenization — Fractional Ownership, Infrastructure, Compliance & Enterprise Adoption (2026)",
