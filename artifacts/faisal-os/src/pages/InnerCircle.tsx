@@ -2291,10 +2291,6 @@ function CardPhase({
         </div>
       );
 
-      /* Fallback: if preview/room but no selectedSpace */
-      if ((spaceView==="preview"||spaceView==="room") && !selectedSpace) {
-        setSpaceView("list");
-      }
 
       /* ── Space List ── */
       return (
