@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-07", category: "BLOCKCHAIN", year: "2026",
+          title: "The Future of Web3 Infrastructure",
+          subtitle: "AI, Digital Identity, Cross-Chain Networks & the Next Internet (2026)",
+          abstract: "Web3 infrastructure is the foundation of the next internet — combining blockchain networks, decentralized storage, AI agents, digital identity, cross-chain interoperability, DePIN, modular blockchain, CBDCs, stablecoins, enterprise adoption, smart cities, DAOs, and quantum-resistant cryptography into a unified programmable digital economy. This comprehensive guide explores every layer from Web1 evolution to the 2035–2050 vision of autonomous digital ecosystems.",
+          tags: ["Future of Web3","Web3 Infrastructure","Decentralized Internet","AI and Web3","Digital Identity","Cross-Chain Interoperability","DePIN","Modular Blockchain","CBDC","Tokenized Economy","Enterprise Web3","Smart Cities"],
+          status: "PUBLISHED",
+          slug: "future-of-web3",
+          thumbnail: "/mk/web3-future-hero.png",
+          readTime: "38 min read",
+          keywords: "future of web3, web3 infrastructure, decentralized internet, AI blockchain, digital identity, cross-chain interoperability, DePIN, modular blockchain, CBDC, stablecoin, enterprise web3, smart cities, DAOs, quantum cryptography, Faisal Orakzai",
+        },
+        {
           id: "bc-06", category: "BLOCKCHAIN", year: "2026",
           title: "Blockchain Security & Consensus Mechanisms Explained",
           subtitle: "PoW, PoS, Cryptography, Attacks, Validator Security & Future Security Guide (2026)",
