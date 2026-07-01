@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-09", category: "BLOCKCHAIN", year: "2026",
+          title: "Cross-Chain Technology Explained",
+          subtitle: "Blockchain Interoperability, Bridges, IBC, CCIP & LayerZero Guide (2026)",
+          abstract: "A comprehensive guide to cross-chain technology and blockchain interoperability — covering blockchain bridges (lock-and-mint, burn-and-release, federated, trustless), atomic swaps, HTLC, cross-chain messaging protocols, LayerZero, Chainlink CCIP, Axelar, Cosmos IBC, Polkadot XCM, wrapped assets, cross-chain liquidity, chain abstraction, intent-based architecture, bridge security, and the future of multi-chain Web3 infrastructure.",
+          tags: ["Cross-Chain Technology","Blockchain Interoperability","Cross-Chain Bridges","Atomic Swaps","LayerZero","Chainlink CCIP","Cosmos IBC","Polkadot XCM","Chain Abstraction","Multi-Chain Architecture","Web3 Interoperability","Cross-Chain Liquidity"],
+          status: "PUBLISHED",
+          slug: "cross-chain-technology",
+          thumbnail: "/mk/cross-chain-hero.png",
+          readTime: "38 min read",
+          keywords: "cross-chain technology, blockchain interoperability, cross-chain bridges, blockchain bridges, atomic swaps, HTLC, LayerZero, Chainlink CCIP, Cosmos IBC, Polkadot XCM, cross-chain messaging, chain abstraction, multi-chain architecture, web3 interoperability, cross-chain liquidity, Faisal Orakzai",
+        },
+        {
           id: "bc-08", category: "BLOCKCHAIN", year: "2026",
           title: "How Digital Identity Works on Blockchain",
           subtitle: "DIDs, SSI, Verifiable Credentials, Zero-Knowledge Proofs & Future Guide (2026)",
