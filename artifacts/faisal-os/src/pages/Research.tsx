@@ -90,6 +90,18 @@ const ENTRIES: Entry[] = [
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
         {
+          id: "bc-08", category: "BLOCKCHAIN", year: "2026",
+          title: "How Digital Identity Works on Blockchain",
+          subtitle: "DIDs, SSI, Verifiable Credentials, Zero-Knowledge Proofs & Future Guide (2026)",
+          abstract: "A comprehensive technical guide to blockchain digital identity — covering Decentralized Identifiers (DIDs), Self-Sovereign Identity (SSI), Verifiable Credentials, Zero-Knowledge Proofs, selective disclosure, identity wallets, recovery mechanisms, revocation registries, enterprise identity architecture, cross-border identity, government programs, healthcare, banking KYC, education credentials, post-quantum cryptography, and the future of identity in 2035–2050.",
+          tags: ["Blockchain Digital Identity","Decentralized Identity","Self-Sovereign Identity","DID","Verifiable Credentials","Zero-Knowledge Proofs","Web3 Identity","Enterprise Digital Identity","Blockchain Authentication","Blockchain Privacy","Future of Digital Identity","Identity Verification"],
+          status: "PUBLISHED",
+          slug: "blockchain-digital-identity",
+          thumbnail: "/mk/blockchain-identity-hero.png",
+          readTime: "40 min read",
+          keywords: "blockchain digital identity, decentralized identity, self-sovereign identity, SSI, DID, decentralized identifiers, verifiable credentials, zero-knowledge proofs, blockchain authentication, identity on blockchain, web3 identity, enterprise digital identity, identity verification, blockchain privacy, future of digital identity, Faisal Orakzai",
+        },
+        {
           id: "bc-07", category: "BLOCKCHAIN", year: "2026",
           title: "The Future of Web3 Infrastructure",
           subtitle: "AI, Digital Identity, Cross-Chain Networks & the Next Internet (2026)",
