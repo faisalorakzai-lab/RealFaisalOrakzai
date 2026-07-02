@@ -603,12 +603,7 @@ import { motion, AnimatePresence } from "framer-motion";
                             const t = e.target as HTMLImageElement;
                             t.style.display = "none";
                             const p = t.parentElement!;
-                            p.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#F3BA2F;">${core.ticker}</div>
-  @keyframes ticker {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-`;
+                            p.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#F3BA2F;">${core.ticker}</div>`;
                           }}
                         />
                         <div style={{ position: "absolute", bottom: "4px", right: "4px", width: "8px", height: "8px", borderRadius: "50%", background: core.statusColor, boxShadow: `0 0 6px ${core.statusColor}`, animation: "dp 2s infinite" }} />
@@ -1081,6 +1076,7 @@ import { motion, AnimatePresence } from "framer-motion";
             })()}
           </AnimatePresence>
           <style>{`
+          @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
           @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
         `}</style>
