@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useInView } from "fra
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/shared/SEOHead";
+import HomeSchema from "@/components/shared/HomeSchema";
 
 const BlockchainOrb = lazy(() => import("@/components/three/BlockchainOrb"));
 
@@ -206,6 +207,7 @@ export default function Home() {
   return (
     <>
       <SEOHead title="Faisal Orakzai — Founder & Chairman, Orakzai Group" description="Official site of Muhammad Faisal Orakzai — Pakistan's blockchain entrepreneur, creator of OKBOND on Polygon L2, Shamim Forever, OkzByte Technology & OrakzaiX AI. Crunchbase Rank #28." path="/" keywords="Faisal Orakzai, Muhammad Faisal Orakzai, Orakzai Group, OKBOND blockchain Pakistan" />
+      <HomeSchema />
       <div className="bg-black text-white overflow-hidden">
 
       {/* ── HERO ── */}
