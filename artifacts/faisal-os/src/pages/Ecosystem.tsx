@@ -603,7 +603,12 @@ import { motion, AnimatePresence } from "framer-motion";
                             const t = e.target as HTMLImageElement;
                             t.style.display = "none";
                             const p = t.parentElement!;
-                            p.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#F3BA2F;">${core.ticker}</div>`;
+                            p.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#F3BA2F;">${core.ticker}</div>
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+`;
                           }}
                         />
                         <div style={{ position: "absolute", bottom: "4px", right: "4px", width: "8px", height: "8px", borderRadius: "50%", background: core.statusColor, boxShadow: `0 0 6px ${core.statusColor}`, animation: "dp 2s infinite" }} />
@@ -783,7 +788,7 @@ import { motion, AnimatePresence } from "framer-motion";
             <div style={{ position: "relative", overflow: "hidden", borderTop: `1px solid ${GOLD_DIM}`, borderBottom: `1px solid ${GOLD_DIM}` }}>
               <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
               <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
-              <div style={{ display: "flex", animation: "ticker 28s linear infinite", width: "max-content" }}>
+              <div style={{ display: "flex", animation: "ticker 28s linear infinite", width: "max-content", flexWrap: "nowrap" }}>
                 {[...LIVE_CORES, ...LIVE_CORES].map((core, idx) => (
                   <div key={idx} onClick={() => CORE_DETAILS[core.id] ? setActiveCore(activeCore === core.id ? null : core.id) : core.url && window.open(core.url, "_blank")}
                     style={{ minWidth: "280px", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", cursor: "pointer", borderRight: `1px solid ${GOLD_DIM}`, background: "#000", flexShrink: 0 }}>
@@ -807,7 +812,7 @@ import { motion, AnimatePresence } from "framer-motion";
             <div style={{ position: "relative", overflow: "hidden", padding: "12px 0", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
               <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "60px", background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
               <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "60px", background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
-              <div style={{ display: "flex", animation: "ticker 50s linear infinite", width: "max-content", alignItems: "center" }}>
+              <div style={{ display: "flex", animation: "ticker 50s linear infinite", width: "max-content", alignItems: "center", flexWrap: "nowrap" }}>
                 {[...UNDER_DEV, ...LIVE_CORES.map(c => ({ id: c.id, name: c.name, ticker: c.ticker, tag: c.tag, statusColor: c.statusColor, desc: "" })), ...UNDER_DEV, ...LIVE_CORES.map(c => ({ id: c.id, name: c.name, ticker: c.ticker, tag: c.tag, statusColor: c.statusColor, desc: "" }))].map((v, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "0 28px", borderRight: "1px solid rgba(255,255,255,0.05)", flexShrink: 0 }}>
                     <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: v.statusColor, display: "inline-block", flexShrink: 0 }} />
