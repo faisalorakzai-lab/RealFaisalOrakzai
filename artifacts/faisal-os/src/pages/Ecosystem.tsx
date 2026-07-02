@@ -826,7 +826,7 @@ import { motion, AnimatePresence } from "framer-motion";
               <div style={{ fontFamily: "monospace", fontSize: "9px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.4em" }}>// UNDER DEVELOPMENT</div>
               <div style={{ flex: 1, height: "1px", background: GOLD_DIM }} />
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1px", background: "rgba(255,255,255,0.04)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "16px" }}>
               {UNDER_DEV.map((venture) => (
                 <motion.div key={venture.id}
                   initial={{ opacity: 0, y: 16 }}
@@ -834,10 +834,9 @@ import { motion, AnimatePresence } from "framer-motion";
                   viewport={{ once: true }}
                   transition={{ duration: 0.4 }}
                   onClick={() => VENTURE_DETAILS[venture.id] ? setActiveVenture(activeVenture === venture.id ? null : venture.id) : undefined}
-                  style={{ background: "#000", padding: "20px 24px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden", cursor: VENTURE_DETAILS[venture.id] ? "pointer" : "default" }}
+                  style={{ background: "#050505", border: `1px solid ${venture.statusColor}25`, borderTop: `3px solid ${venture.statusColor}80`, borderRadius: "10px", padding: "22px 20px", display: "flex", gap: "16px", alignItems: "flex-start", position: "relative", overflow: "hidden", cursor: VENTURE_DETAILS[venture.id] ? "pointer" : "default", boxShadow: `0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px ${venture.statusColor}10` }}
                 >
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, ${venture.statusColor}60, transparent)` }} />
-                  <div style={{ width: "52px", height: "52px", borderRadius: "50%", border: `1.5px solid ${venture.statusColor}30`, overflow: "hidden", flexShrink: 0, background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: `2px solid ${venture.statusColor}55`, overflow: "hidden", flexShrink: 0, background: "#000", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 0 16px ${venture.statusColor}30` }}>
                     {venture.logo ? (
                       <img src={venture.logo} alt={venture.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
@@ -846,12 +845,12 @@ import { motion, AnimatePresence } from "framer-motion";
                     )}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.2em", marginBottom: "4px" }}>{venture.tag}</div>
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", marginBottom: "6px" }}>{venture.name}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", lineHeight: 1.5 }}>{venture.desc.substring(0, 75)}…</div>
+                    <div style={{ fontFamily: "monospace", fontSize: "8px", color: venture.statusColor, letterSpacing: "0.25em", marginBottom: "6px", opacity: 0.8 }}>{venture.tag}</div>
+                    <div style={{ fontSize: "15px", fontWeight: 800, color: "#fff", marginBottom: "8px", letterSpacing: "-0.01em" }}>{venture.name}</div>
+                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6, marginBottom: "12px" }}>{venture.desc.substring(0, 90)}…</div>
                     <div style={{ fontFamily: "monospace", fontSize: "8px", color: "rgba(255,255,255,0.15)", letterSpacing: "0.2em", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "inline-block" }} />
-                      IN DEVELOPMENT
+                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: venture.statusColor, display: "inline-block", opacity: 0.5 }} />
+                      <span style={{ color: "rgba(255,255,255,0.3)" }}>IN DEVELOPMENT</span>
                       {VENTURE_DETAILS[venture.id] && <span style={{ color: GOLD, marginLeft: "8px" }}>· TAP FOR DETAILS</span>}
                     </div>
                   </div>
