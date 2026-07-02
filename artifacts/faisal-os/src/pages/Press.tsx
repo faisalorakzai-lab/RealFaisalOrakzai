@@ -25,8 +25,8 @@ import SEOHead from "@/components/shared/SEOHead";
   const PRESS_ARTICLES: PressArticle[] = [
     {
       id: "stevie-2026",
-      headline: "Muhammad Faisal Orakzai Wins Stevie Gold Award for Technology Innovation 2026",
-      summary: "Pakistan's youngest blockchain architect, Muhammad Faisal Orakzai, receives the prestigious Stevie Gold Award — the first Pakistani to win in the Technology Innovation category, recognised for Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain.",
+      headline: "Faisal Orakzai Wins Stevie Gold Award for Technology Innovation 2026",
+      summary: "Pakistan's youngest blockchain architect, Faisal Orakzai, receives the prestigious Stevie Gold Award — the first Pakistani to win in the Technology Innovation category, recognised for Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain.",
       publisher: "Stevie Awards",
       publisherUrl: "https://www.stevieawards.com",
       articleUrl: "https://www.stevieawards.com",
@@ -40,8 +40,8 @@ import SEOHead from "@/components/shared/SEOHead";
     {
       id: "founder-institute-2026",
         publisherLogo: "https://logo.clearbit.com/fi.co",
-        headline: "Muhammad Faisal Orakzai Assessed by Founder Institute — Pakistan's Leading Blockchain Entrepreneur",
-        summary: "Muhammad Faisal Orakzai completes the Founder Institute assessment, recognised as one of Pakistan's leading blockchain entrepreneurs, validating his work on Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain and his sovereign digital economy model.",
+        headline: "Faisal Orakzai Assessed by Founder Institute — Pakistan's Leading Blockchain Entrepreneur",
+        summary: "Faisal Orakzai completes the Founder Institute assessment, recognised as one of Pakistan's leading blockchain entrepreneurs, validating his work on Orakzai Bond (OKBOND) on Polygon Layer-2 blockchain and his sovereign digital economy model.",
         publisher: "Founder Institute",
         publisherUrl: "https://fi.co",
         articleUrl: "https://fi.co/assessment/report",
@@ -53,7 +53,7 @@ import SEOHead from "@/components/shared/SEOHead";
       {
         id: "okbond-polygon-launch",
       headline: "Orakzai Bond (OKBOND) Launches on Polygon Layer-2 — Pakistan's First Sovereign Blockchain Token",
-      summary: "Orakzai Group officially launches OKBOND, a deflationary cryptocurrency on Polygon Layer-2 blockchain. Founded by Muhammad Faisal Orakzai, OKBOND is designed as Pakistan's sovereign digital reserve asset with real-economy tokenization of real estate, luxury, and agriculture.",
+      summary: "Orakzai Group officially launches OKBOND, a deflationary cryptocurrency on Polygon Layer-2 blockchain. Founded by Faisal Orakzai, OKBOND is designed as Pakistan's sovereign digital reserve asset with real-economy tokenization of real estate, luxury, and agriculture.",
       publisher: "Orakzai Bond Official",
       publisherUrl: "https://orakzaibond.com",
       articleUrl: "https://orakzaibond.com",
@@ -75,7 +75,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "wikidata-q140264666",
-      headline: "Muhammad Faisal Orakzai Listed on Wikidata as Recognised Public Figure — Q140264666",
+      headline: "Faisal Orakzai Listed on Wikidata as Recognised Public Figure — Q140264666",
       summary: "Faisal Orakzai becomes one of Pakistan's youngest entrepreneurs to receive a verified Wikidata entity (Q140264666), establishing his footprint on the open knowledge graph used by Google, Wikipedia, and Siri for knowledge panel recognition.",
       publisher: "Wikidata — Wikimedia Foundation",
       publisherUrl: "https://www.wikidata.org/wiki/Q140264666",
@@ -98,35 +98,13 @@ import SEOHead from "@/components/shared/SEOHead";
     {
       id: "qorix-autonomous-finance",
       headline: "QORIX — Orakzai Group Unveils Autonomous Financial AI System for Sovereign Capital Management",
-      summary: "QORIX, developed under OkzByte Technology (Orakzai Group), is an autonomous AI financial management system designed for sovereign capital allocation. Founded by Muhammad Faisal Orakzai, QORIX integrates on-chain treasury management with AI-driven portfolio rebalancing.",
+      summary: "QORIX, developed under OkzByte Technology (Orakzai Group), is an autonomous AI financial management system designed for sovereign capital allocation. Founded by Faisal Orakzai, QORIX integrates on-chain treasury management with AI-driven portfolio rebalancing.",
       publisher: "Orakzai Group",
       publisherUrl: "https://faisalorakzai.com/ecosystem",
       articleUrl: "https://faisalorakzai.com/ecosystem",
       datePublished: "2026-01-15",
       category: "Blockchain",
       image: "/logos/qorix.png",
-    },
-    {
-      id: "dusseldorf-international",
-      headline: "Faisal Orakzai Expands Orakzai Group's International Footprint — Düsseldorf, Germany",
-      summary: "Muhammad Faisal Orakzai visits Düsseldorf, Germany, representing Orakzai Group in European blockchain and luxury market discussions, solidifying the Group's international expansion beyond Pakistan.",
-      publisher: "Orakzai Group International",
-      publisherUrl: "https://faisalorakzai.com",
-      articleUrl: "https://faisalorakzai.com/founder",
-      datePublished: "2026-02-10",
-      category: "Founder",
-      image: "/story/story-17.jpg",
-    },
-    {
-      id: "wall-street-new-york",
-      headline: "Faisal Orakzai at Wall Street: Pakistan's Blockchain Tokenization Vision for Global Capital Markets",
-      summary: "Muhammad Faisal Orakzai makes a landmark visit to Wall Street, New York, meeting with institutional investors to discuss Orakzai Bond's Polygon Layer-2 infrastructure and real estate tokenization — bridging Pakistan's economy to global capital markets.",
-      publisher: "Orakzai Group Media",
-      publisherUrl: "https://faisalorakzai.com",
-      articleUrl: "https://faisalorakzai.com/founder",
-      datePublished: "2026-04-01",
-      category: "Founder",
-      image: "/story/story-12.jpg",
     },
     {
       id: "everybodywiki-profile",
@@ -141,8 +119,8 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "crunchbase-profile",
-      headline: "Muhammad Faisal Orakzai Listed on Crunchbase — Pakistan Blockchain Startup Founder",
-      summary: "Faisal Orakzai and Orakzai Group receive a verified Crunchbase profile, recognised as a startup founder in the blockchain and AI sector from Pakistan. Crunchbase is a key trust signal for Google Knowledge Panel.",
+      headline: "Faisal Orakzai Listed on Crunchbase — Pakistan Blockchain Startup Founder",
+      summary: "Faisal Orakzai and Orakzai Group receive a verified Crunchbase profile, recognised as a startup founder in the blockchain and AI sector from Pakistan.",
       publisher: "Crunchbase",
       publisherUrl: "https://www.crunchbase.com/person/faisal-orakzai",
       articleUrl: "https://www.crunchbase.com/person/faisal-orakzai",
@@ -152,7 +130,7 @@ import SEOHead from "@/components/shared/SEOHead";
     },
     {
       id: "orcid-researcher",
-      headline: "Muhammad Faisal Orakzai Assigned ORCID Research ID — Blockchain & AI Research Recognition",
+      headline: "Faisal Orakzai Assigned ORCID Research ID — Blockchain & AI Research Recognition",
       summary: "Faisal Orakzai receives an ORCID researcher ID (0009-0000-0915-7272), validating his contributions to blockchain research, AI system architecture, and tokenization frameworks — signalling academic-grade credibility for Knowledge Panel.",
       publisher: "ORCID — Open Researcher and Contributor ID",
       publisherUrl: "https://orcid.org/0009-0000-0915-7272",
@@ -410,19 +388,19 @@ import SEOHead from "@/components/shared/SEOHead";
                 </motion.a>
 
                 {/* High-Res Headshot */}
-                <motion.a href="/story/story-05.png" download="faisal-orakzai-headshot.png" target="_blank" rel="noopener noreferrer"
+                <motion.a href="/faisal-official.jpg" download="faisal-orakzai-headshot.jpg" target="_blank" rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                   className="group bg-black p-6 flex flex-col gap-4 hover:bg-[#0a0a00] transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 border border-[#F3BA2F]/25 overflow-hidden">
-                      <img src="/story/story-05.png" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" />
+                      <img src="/faisal-official.jpg" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity object-top" />
                     </div>
                     <span className="text-[10px] font-mono text-white/20 uppercase tracking-wider border border-white/8 px-2 py-1">PNG</span>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-white/85 group-hover:text-white mb-1">High-Res Headshot</div>
-                    <div className="text-xs text-white/35 font-mono">Official press photo — Muhammad Faisal Orakzai</div>
+                    <div className="text-xs text-white/35 font-mono">Official press photo — Faisal Orakzai</div>
                   </div>
                   <div className="mt-auto flex items-center gap-1 text-[#F3BA2F]/50 group-hover:text-[#F3BA2F] text-xs font-mono transition-colors">
                     <ExternalLink className="w-3 h-3" /> Download Photo →
@@ -542,7 +520,7 @@ import SEOHead from "@/components/shared/SEOHead";
                   </div>
                   <div>
                     <div className="text-sm font-bold text-white/85 group-hover:text-white mb-1">Curriculum Vitae</div>
-                    <div className="text-xs text-white/35 font-mono">Full professional CV — Muhammad Faisal Orakzai</div>
+                    <div className="text-xs text-white/35 font-mono">Full professional CV — Faisal Orakzai</div>
                   </div>
                   <div className="mt-auto flex items-center gap-1 text-[#F3BA2F]/50 group-hover:text-[#F3BA2F] text-xs font-mono transition-colors">
                     <ExternalLink className="w-3 h-3" /> Download CV →
