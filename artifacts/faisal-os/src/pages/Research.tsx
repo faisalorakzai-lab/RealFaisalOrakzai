@@ -12,7 +12,7 @@ const AUTHOR = {
   linkedin:     "https://www.linkedin.com/in/faisalorakzaii",
   hackernoon:   "https://hackernoon.com/u/faisalorakzai",
   github:       "https://github.com/faisalorakzai-lab",
-  website:      "https://faisalorakzai.vercel.app",
+  website:      "https://www.faisalorakzai.com",
   org:          "Orakzai Research Lab",
 };
 
