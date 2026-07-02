@@ -16,12 +16,12 @@ import SEOHead from "@/components/shared/SEOHead";
   ];
 
   const socialLinks = [
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/faisalorakzaii" },
-    { label: "Twitter / X", url: "https://x.com/faisalorakzaii" },
-    { label: "Instagram", url: "https://www.instagram.com/faisalorakzaii" },
-    { label: "Crunchbase", url: "https://www.crunchbase.com/person/faisal-orakzai" },
-    { label: "GitHub", url: "https://github.com/faisalorakzai-lab" },
-    { label: "ORCID", url: "https://orcid.org/0009-0000-0915-7272" },
+    { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",         logo: "/logos/linkedin.jpg" },
+    { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                       logo: "/logos/x.png" },
+    { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",           logo: "/logos/instagram.png" },
+    { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",  logo: "/logos/crunchbase.png" },
+    { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",               logo: "/logos/github.png" },
+    { label: "ORCID",       url: "https://orcid.org/0009-0000-0915-7272",              logo: "/logos/orcid.png" },
   ];
 
   const HANDSHAKE_LINES = [
@@ -224,7 +224,7 @@ import SEOHead from "@/components/shared/SEOHead";
   }
 
   export default function Contact() {
-    const [activeType, setActiveType] = useState<string | null>(null);
+    const [activeType, setActiveType] = useState<string | null>("Business Inquiry");
     const queryClient = useQueryClient();
 
     const toggle = (type: string) =>
@@ -354,9 +354,14 @@ import SEOHead from "@/components/shared/SEOHead";
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-white/30 hover:text-[#F3BA2F] transition-colors font-mono text-xs"
+                        className="flex items-center gap-2 text-white/40 hover:text-[#F3BA2F] transition-colors font-mono text-xs group"
                       >
-                        <span className="text-[#F3BA2F]/30">→</span> {s.label}
+                        {s.logo ? (
+                          <img src={s.logo} alt={s.label} style={{ width: "16px", height: "16px", objectFit: "contain", borderRadius: "3px", opacity: 0.55, filter: s.label === "GitHub" ? "invert(1)" : undefined }} className="group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        ) : (
+                          <span className="text-[#F3BA2F]/30">→</span>
+                        )}
+                        {s.label}
                       </a>
                     ))}
                   </div>
