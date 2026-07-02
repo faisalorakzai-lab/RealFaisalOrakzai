@@ -174,7 +174,19 @@ const ENTRIES: Entry[] = [
           readTime: "28 min read",
           keywords: "public blockchain, private blockchain, consortium blockchain, hybrid blockchain, enterprise blockchain, permissioned blockchain, blockchain architecture, Faisal Orakzai",
         },
-        // ── MARKET KNOWLEDGE
+        {
+          id: "bc-10", category: "BLOCKCHAIN", year: "2026",
+          title: "Building Enterprise Blockchain Ecosystems",
+          subtitle: "The Complete Guide for Businesses & Governments — Architecture, Governance & Future (2026)",
+          abstract: "Enterprise blockchain ecosystems go far beyond cryptocurrency — connecting AI, cloud, digital identity, IoT, APIs, tokenization, analytics, compliance, and cybersecurity into one secure, scalable platform. This comprehensive guide covers enterprise blockchain architecture, permissioned deployment models (private, consortium, hybrid), smart contract automation, digital identity management, interoperability across ecosystems, AI integration, regulatory compliance frameworks, governance models, and real-world enterprise use cases across finance, healthcare, manufacturing, logistics, and government. The final article in the 10-part Blockchain Knowledge Hub.",
+          tags: ["Enterprise Blockchain", "Blockchain Architecture", "Enterprise Smart Contracts", "Blockchain Governance", "Digital Public Infrastructure", "AI and Blockchain", "Enterprise Tokenization", "Permissioned Blockchain", "Blockchain Interoperability", "Enterprise Digital Identity", "Blockchain Security", "Enterprise Web3"],
+          status: "PUBLISHED",
+          slug: "enterprise-blockchain-ecosystems-guide",
+          thumbnail: "/mk/enterprise-blockchain-hero.png",
+          readTime: "40 min read",
+          keywords: "enterprise blockchain, enterprise blockchain ecosystem, blockchain architecture, enterprise smart contracts, blockchain governance, AI and blockchain, digital public infrastructure, blockchain interoperability, enterprise tokenization, permissioned blockchain, blockchain security, enterprise web3, enterprise digital transformation, Faisal Orakzai",
+        },
+                // ── MARKET KNOWLEDGE
   {
     id: "mk-01", category: "MARKET KNOWLEDGE", year: "2024",
     title: "Macro-Liquidity Networks & Cross-Border Fintech Dynamics",
