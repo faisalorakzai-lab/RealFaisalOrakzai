@@ -242,6 +242,7 @@ const ENTRIES: Entry[] = [
       "Complete production-grade PostgreSQL schema for the OrakzaiX venture infrastructure. Covers multi-entity relational models for orakzai_ventures, orakzai_positions, compliance_ledger, and capital_allocation tables. Includes index strategies, JSONB field patterns, row-level security configurations, and full audit trail design.",
     tags: ["PostgreSQL", "SQL Architecture", "JSONB", "RLS", "Schema Design"],
     status: "PRODUCTION",
+    pdfUrl: "https://drive.google.com/file/d/1hY3iUVNgBofI3lOsK2Os3QMJcjGIdcnS/view?usp=drivesdk",
     keywords: "PostgreSQL schema, database architecture, venture tracking, RLS, OrakzaiX, sovereign infrastructure",
   },
   // ── CRYPTOGRAPHIC WHITE PAPERS
