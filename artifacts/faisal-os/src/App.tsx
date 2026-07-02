@@ -71,7 +71,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
             </motion.div>
           </AnimatePresence>
         </main>
-        <Footer />
+        {location === "/" && <Footer />}
         <ChatWidget />
         <GlobalSearch />
       </div>
