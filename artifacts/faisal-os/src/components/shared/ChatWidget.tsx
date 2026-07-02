@@ -16,100 +16,157 @@ const QUICK = [
   "How can I collaborate?",
 ];
 
-const FAQ_KNOWLEDGE = `
-You are the official AI assistant for Faisal Orakzai's personal website (faisalorakzai.com).
-Answer questions professionally, concisely, and helpfully about Faisal Orakzai and his work.
-Keep answers under 120 words unless the user asks for detail. Stay on topic.
+interface FAQ { q: string[]; a: string; }
 
-KNOWLEDGE BASE:
-1. Who is Faisal Orakzai? Faisal Orakzai is a technology entrepreneur and founder of Orakzai Group, focused on AI, blockchain infrastructure, digital assets, and enterprise technology solutions. Born 30 April 2006 in Pakistan, he began in real estate at age 12, later expanded into blockchain, AI, and founded Orakzai Group in 2023.
-2. What is Orakzai Group? Orakzai Group is a technology-focused organization developing solutions in blockchain, artificial intelligence, fintech, and digital infrastructure.
-3. What is Orakzai Bond? Orakzai Bond is a blockchain-based digital asset project designed to explore transparent treasury systems, staking infrastructure, and tokenized digital finance. Website: orakzaibond.com
-4. What is OKZBYTE Technology? OKZBYTE Technology provides technology services ranging from web development to AI, blockchain, software engineering, and digital transformation solutions.
-5. What is Shamim Forever? Shamim Forever is a digital platform created to preserve memories, stories, and meaningful tributes through modern technology. Website: shamimforever.com
-6. What industries does Faisal Orakzai work in? Artificial Intelligence, Blockchain, FinTech, Enterprise Software, Web Development, and Digital Infrastructure.
-7. What is Faisal Orakzai's mission? To build scalable technology platforms that contribute to secure, efficient, and innovative digital ecosystems.
-8. What technologies does he specialize in? AI, Blockchain, Web3, Smart Contracts, Tokenization, Enterprise Systems, and Cloud Technologies.
-9. Does Faisal Orakzai write technical articles? Yes. He publishes educational articles covering blockchain, AI, Web3, digital identity, interoperability, and enterprise blockchain topics.
-10. What is his long-term vision? To contribute to the development of trusted digital infrastructure that supports future financial and technological ecosystems.
-11. What is blockchain? Blockchain is a distributed ledger technology that enables secure, transparent, and verifiable digital transactions.
-12. Why is AI important? AI helps automate processes, improve decision-making, and increase efficiency across industries.
-13. What is Web3? Web3 represents the next generation of the internet built around decentralization, digital ownership, and blockchain technologies.
-14. What is tokenization? Tokenization is the process of representing real-world or digital assets as blockchain-based tokens.
-15. What is enterprise blockchain? Enterprise blockchain is the use of blockchain technology by organizations to improve security, transparency, and operational efficiency.
-16. What is digital identity? Digital identity is a secure representation of an individual's or organization's identity in digital environments.
-17. What are smart contracts? Smart contracts are self-executing blockchain programs that automatically enforce predefined rules.
-18. What is DeFi? Decentralized Finance (DeFi) provides financial services using blockchain technology without relying solely on traditional intermediaries.
-19. What is interoperability? Interoperability enables different blockchain networks to communicate and exchange data securely.
-20. Why is cybersecurity important? Cybersecurity protects digital systems, infrastructure, and users from cyber threats and unauthorized access.
-21. Does Faisal Orakzai work on AI projects? Yes. His work includes AI-powered automation and intelligent digital solutions.
-22. Does he develop blockchain infrastructure? Yes. His focus includes blockchain architecture and related technologies.
-23. What programming technologies are used? Projects involve HTML, CSS, JavaScript, React, Node.js, blockchain frameworks, and AI technologies depending on requirements.
-24. Does OKZBYTE build custom software? Yes. Custom software development is one of its technology services.
-25. What is digital transformation? Digital transformation is the adoption of technology to improve business processes, services, and customer experiences.
-26. What is a blockchain wallet? A blockchain wallet stores digital credentials and allows interaction with blockchain networks.
-27. Why are digital assets important? Digital assets enable new models for ownership, value exchange, and online economies.
-28. What is Web3 infrastructure? It includes blockchain networks, decentralized storage, identity systems, and supporting technologies.
-29. Does Faisal Orakzai support innovation? Yes. His work emphasizes research, innovation, and practical technology development.
-30. Does he publish educational content? Yes. He regularly creates educational content about emerging technologies.
-31. What is AI automation? AI automation combines artificial intelligence with automated workflows to improve efficiency.
-32. What is digital infrastructure? Digital infrastructure includes networks, software platforms, cloud systems, and technologies supporting digital services.
-33. What industries benefit from blockchain? Finance, healthcare, logistics, manufacturing, education, government, and supply chain management.
-34. Why is transparency important? Transparency builds trust and improves accountability in digital systems.
-35. What is cloud computing? Cloud computing provides computing resources over the internet instead of local hardware.
-36. What is enterprise AI? Enterprise AI applies artificial intelligence to improve business operations and decision-making.
-37. What is blockchain governance? Blockchain governance defines how decisions and protocol changes are managed within a blockchain ecosystem.
-38. Does Faisal Orakzai encourage research? Yes. Research and continuous learning are central themes in his work.
-39. What is decentralized technology? Decentralized technology distributes control across multiple participants rather than a single central authority.
-40. What is digital innovation? Digital innovation is the development of new products, services, or processes using technology.
-41. What is AI infrastructure? AI infrastructure includes computing resources, data systems, and software needed to build and deploy AI solutions.
-42. What is blockchain scalability? Scalability refers to a blockchain's ability to process increasing transaction volumes efficiently.
-43. Why is Web3 education important? It helps individuals and organizations understand emerging digital technologies and their practical applications.
-44. What is digital trust? Digital trust is confidence in the security, privacy, and reliability of digital systems.
-45. What is the future of AI and blockchain? Many experts expect these technologies to increasingly work together across automation, digital identity, finance, and enterprise applications.
-46. Where can I learn more about Faisal Orakzai? Visit the official website at faisalorakzai.com for updates, projects, and articles.
-47. How can I contact Faisal Orakzai? The official contact information is available on the Contact page of faisalorakzai.com.
-48. Where can I follow his latest work? Updates are shared through faisalorakzai.com and professional social media profiles including LinkedIn (@faisalorakzaii) and X (@faisalorakzaii).
-49. Does Faisal Orakzai collaborate on technology projects? Yes. Collaboration opportunities may be considered depending on the project's goals and alignment. Contact via the Contact page.
-50. What is the ultimate goal of Faisal Orakzai's work? To contribute to practical, scalable, and secure digital technologies that help organizations and communities benefit from advances in AI, blockchain, and digital infrastructure.
-`;
+const FAQS: FAQ[] = [
+  {
+    q: ["who is faisal", "about faisal", "tell me about faisal", "faisal orakzai who"],
+    a: "Faisal Orakzai is a technology entrepreneur and founder of Orakzai Group, focused on AI, blockchain infrastructure, digital assets, and enterprise technology solutions. Born on 30 April 2006, he started in real estate at age 12, later expanded into blockchain and AI, and founded Orakzai Group in 2023.",
+  },
+  {
+    q: ["orakzai group", "what is orakzai group", "group"],
+    a: "Orakzai Group is a technology-focused organization developing solutions in blockchain, artificial intelligence, fintech, and digital infrastructure. It serves as the parent organization overseeing multiple ventures including Orakzai Bond, OKZBYTE Technology, Shamim Forever, and OrakzaiX.",
+  },
+  {
+    q: ["orakzai bond", "bond", "okbond", "digital asset", "tokeniz"],
+    a: "Orakzai Bond is a blockchain-based digital asset project designed to explore transparent treasury systems, staking infrastructure, and tokenized digital finance. It bridges traditional finance with Web3 infrastructure. Visit orakzaibond.com for more details.",
+  },
+  {
+    q: ["okzbyte", "okz byte", "technology services", "web development"],
+    a: "OKZBYTE Technology provides technology services ranging from web development to AI, blockchain, software engineering, and digital transformation solutions. Custom software development is one of its core offerings.",
+  },
+  {
+    q: ["shamim forever", "shamim", "memories", "tribute"],
+    a: "Shamim Forever is a digital platform created to preserve memories, stories, and meaningful tributes through modern technology. It represents the fusion of heritage and digital innovation.",
+  },
+  {
+    q: ["mission", "goal", "what does faisal do", "purpose"],
+    a: "Faisal Orakzai's mission is to build scalable technology platforms that contribute to secure, efficient, and innovative digital ecosystems. His ultimate goal is practical, scalable digital technologies that benefit organizations and communities through AI, blockchain, and digital infrastructure.",
+  },
+  {
+    q: ["industries", "sectors", "fields", "which industry"],
+    a: "Faisal Orakzai works across Artificial Intelligence, Blockchain, FinTech, Enterprise Software, Web Development, and Digital Infrastructure — building solutions that span multiple high-growth technology sectors.",
+  },
+  {
+    q: ["technologies", "specializ", "expert", "skills", "tech stack"],
+    a: "Faisal specializes in AI, Blockchain, Web3, Smart Contracts, Tokenization, Enterprise Systems, and Cloud Technologies. His technical work spans both cutting-edge research and production-grade implementations.",
+  },
+  {
+    q: ["articles", "publish", "write", "blog", "content"],
+    a: "Yes. Faisal regularly publishes educational articles and research covering blockchain, AI, Web3, digital identity, interoperability, and enterprise blockchain topics. You can explore his research on the Research page at faisalorakzai.com/research.",
+  },
+  {
+    q: ["vision", "future", "long term", "2040", "plan"],
+    a: "Faisal's long-term vision is to contribute to the development of trusted digital infrastructure that supports future financial and technological ecosystems. His Vision 2040 roadmap targets building world-class AI and blockchain infrastructure across Pakistan and globally.",
+  },
+  {
+    q: ["ai project", "artificial intelligence project", "ai work"],
+    a: "Yes. Faisal's AI work includes AI-powered automation, intelligent digital solutions, and enterprise AI platforms. AI is central to his vision — building systems that scale through intelligent automation.",
+  },
+  {
+    q: ["blockchain", "distributed ledger", "what is blockchain"],
+    a: "Blockchain is a distributed ledger technology that enables secure, transparent, and verifiable digital transactions without relying on a central authority. Faisal has deep expertise in blockchain architecture, enterprise blockchain, and Web3 infrastructure development.",
+  },
+  {
+    q: ["web3", "decentraliz", "next internet", "web 3"],
+    a: "Web3 represents the next generation of the internet built around decentralization, digital ownership, and blockchain technologies. Faisal is a pioneering Web3 innovator — his work spans smart contracts, DeFi, and decentralized infrastructure.",
+  },
+  {
+    q: ["tokeniz", "tokenization", "token"],
+    a: "Tokenization is the process of representing real-world or digital assets as blockchain-based tokens, enabling new models of ownership and value exchange. This is a core focus of Orakzai Bond and Faisal's blockchain research.",
+  },
+  {
+    q: ["smart contract", "self-executing", "contract"],
+    a: "Smart contracts are self-executing blockchain programs that automatically enforce predefined rules — eliminating the need for intermediaries. Faisal's research and projects include extensive work on smart contract architecture.",
+  },
+  {
+    q: ["defi", "decentralized finance", "decentralised finance"],
+    a: "Decentralized Finance (DeFi) provides financial services using blockchain technology without relying solely on traditional intermediaries. Faisal's work in DeFi explores transparent, permissionless financial infrastructure.",
+  },
+  {
+    q: ["collab", "partner", "work with", "opportunity"],
+    a: "Yes. Collaboration opportunities are considered based on goals and alignment. Please submit a formal inquiry via the Contact page at faisalorakzai.com/contact with details about your proposal. Faisal's team reviews every submission.",
+  },
+  {
+    q: ["contact", "reach", "email", "inquir", "get in touch"],
+    a: "You can contact Faisal Orakzai via the Contact page at faisalorakzai.com/contact. For urgent inquiries, connect via LinkedIn at linkedin.com/in/faisalorakzaii or follow on X/Twitter at @faisalorakzaii.",
+  },
+  {
+    q: ["social media", "linkedin", "twitter", "instagram", "follow"],
+    a: "You can follow Faisal Orakzai on LinkedIn (linkedin.com/in/faisalorakzaii), X/Twitter (@faisalorakzaii), Instagram (@faisalorakzaii), and GitHub (github.com/faisalorakzai-lab). Latest updates are shared on faisalorakzai.com.",
+  },
+  {
+    q: ["pakistan", "karachi", "pakistani"],
+    a: "Faisal Orakzai is proudly Pakistani and committed to transforming Pakistan into a global technology leader. His Vision 2040 targets building world-class AI and blockchain infrastructure, creating thousands of tech jobs across Pakistan.",
+  },
+  {
+    q: ["research", "paper", "academic", "publication"],
+    a: "Faisal publishes technical and research papers on blockchain architecture, AI, Web3, and digital infrastructure. His full research portfolio is available at faisalorakzai.com/research.",
+  },
+  {
+    q: ["programming", "coding", "language", "react", "node", "javascript"],
+    a: "Faisal's projects involve HTML, CSS, JavaScript, React, Node.js, PostgreSQL, blockchain frameworks, and AI technologies. His full-stack expertise spans both frontend interfaces and backend infrastructure.",
+  },
+  {
+    q: ["digital transform", "enterprise software"],
+    a: "Digital transformation is the adoption of technology to improve business processes, services, and customer experiences. Faisal's ventures — especially OKZBYTE — offer enterprise digital transformation services.",
+  },
+  {
+    q: ["cloud", "cloud computing", "infrastructure"],
+    a: "Cloud computing and digital infrastructure are core to Faisal's work. His ventures leverage cloud systems, distributed architecture, and modern DevOps to build scalable, production-grade technology platforms.",
+  },
+  {
+    q: ["investment", "investor", "fund", "capital"],
+    a: "Faisal's investment philosophy focuses on deep tech: AI, blockchain, decentralized infrastructure. For collaboration or investment inquiries, visit faisalorakzai.com/contact to submit a formal inquiry.",
+  },
+  {
+    q: ["ecosystem", "venture", "companies", "startup"],
+    a: "The Orakzai Group ecosystem includes Orakzai Bond (blockchain/digital assets), OKZBYTE Technology (software services), Shamim Forever (digital heritage), and OrakzaiX (tech infrastructure). Explore the full ecosystem at faisalorakzai.com/ecosystem.",
+  },
+  {
+    q: ["interoperab", "blockchain networks", "cross-chain"],
+    a: "Interoperability enables different blockchain networks to communicate and exchange data securely. It's a key research area in Faisal's blockchain work — ensuring different systems can work together seamlessly.",
+  },
+  {
+    q: ["security", "cybersecurity", "protect"],
+    a: "Cybersecurity is central to all of Faisal's projects. His infrastructure projects incorporate row-level security, audit trails, and secure system design to protect digital assets and user data.",
+  },
+  {
+    q: ["digital identity", "identity", "decentralized identity"],
+    a: "Digital identity is a secure representation of an individual's or organization's identity in digital environments. Faisal's research covers decentralized identity systems as part of his broader Web3 work.",
+  },
+  {
+    q: ["scalab", "blockchain scale", "transaction volume"],
+    a: "Blockchain scalability — the ability to process increasing transaction volumes efficiently — is a core technical challenge Faisal addresses in his research and infrastructure projects.",
+  },
+];
 
-const GEMINI_KEY = import.meta.env.VITE_GEMINI_KEY || "AIzaSyAb8RN6KhIoPlSQoKdFGCMrck7aenSmZzGlPTCIfawDW4uCz90w";
+function getSmartReply(input: string): string {
+  const t = input.toLowerCase().trim();
 
-async function askGemini(userMessage: string, history: Message[]): Promise<string> {
-  const historyText = history.slice(-6).map(m => `${m.role === "user" ? "User" : "Assistant"}: ${m.text}`).join("\n");
-  const prompt = `${FAQ_KNOWLEDGE}\n\nConversation so far:\n${historyText}\n\nUser: ${userMessage}\nAssistant:`;
-
-  try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 200, temperature: 0.7 },
-        }),
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-    return text || fallbackReply(userMessage);
-  } catch {
-    return fallbackReply(userMessage);
+  // Greetings
+  if (/^(hi|hello|hey|salaam|salam|assalam|greetings|good morning|good evening|good afternoon|howdy|sup|yo)[\s!.?]*$/.test(t) || t.length < 5) {
+    return "Hello! 👋 I'm Faisal Orakzai's AI assistant. I can answer questions about Faisal, his ventures (Orakzai Group, Orakzai Bond, OKZBYTE, Shamim Forever), blockchain, AI, Web3, and collaboration opportunities. What would you like to know?";
   }
-}
 
-function fallbackReply(text: string): string {
-  const t = text.toLowerCase();
-  if (t.includes("bond")) return "Orakzai Bond is a blockchain-based digital asset project exploring transparent treasury systems, staking infrastructure, and tokenized digital finance. Visit orakzaibond.com for more.";
-  if (t.includes("group") || t.includes("orakzai group")) return "Orakzai Group is a technology-focused organization developing solutions in blockchain, artificial intelligence, fintech, and digital infrastructure.";
-  if (t.includes("collab") || t.includes("partner") || t.includes("contact")) return "Collaboration opportunities are considered based on alignment. Please visit the Contact page at faisalorakzai.com/contact to submit a formal inquiry.";
-  if (t.includes("who") || t.includes("faisal")) return "Faisal Orakzai is a technology entrepreneur and founder of Orakzai Group, focused on AI, blockchain infrastructure, digital assets, and enterprise technology solutions.";
-  if (t.includes("ai") || t.includes("artificial")) return "AI is central to Faisal's work — including AI-powered automation, intelligent digital solutions, and enterprise AI research.";
-  if (t.includes("blockchain") || t.includes("web3")) return "Faisal specializes in blockchain infrastructure, Web3, smart contracts, tokenization, and enterprise blockchain solutions.";
-  return "Thank you for your question. For detailed inquiries please visit faisalorakzai.com/contact and I'll ensure Faisal's team responds within 24–72 hours.";
+  // Thanks
+  if (/thank|thanks|thx|appreciate/.test(t)) {
+    return "You're welcome! Feel free to ask anything else about Faisal Orakzai or his work. You can also connect directly via faisalorakzai.com/contact for detailed inquiries.";
+  }
+
+  // Match FAQs
+  for (const faq of FAQS) {
+    if (faq.q.some((keyword) => t.includes(keyword))) {
+      return faq.a;
+    }
+  }
+
+  // Contextual fallbacks
+  if (t.includes("age") || t.includes("born") || t.includes("old")) {
+    return "Faisal Orakzai was born on 30 April 2006. He began his entrepreneurial journey at age 12 and founded Orakzai Group in 2023. He is one of Pakistan's youngest technology founders in the blockchain and AI space.";
+  }
+
+  return "Thank you for your message. I can answer questions about Faisal Orakzai, Orakzai Group, blockchain, AI, Web3, and his ventures. Try asking 'Who is Faisal Orakzai?' or 'What is Orakzai Bond?' — or visit faisalorakzai.com/contact for detailed inquiries.";
 }
 
 function now() {
@@ -119,7 +176,7 @@ function now() {
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: 0, role: "assistant", text: "Hello. I'm the Orakzai Group AI assistant. I can answer questions about Faisal Orakzai, his ventures, blockchain, AI, and more. How can I help you today?", time: now() },
+    { id: 0, role: "assistant", text: "Hello! I'm Faisal Orakzai's AI assistant. Ask me anything about Faisal, his ventures, blockchain, AI, Web3, or how to collaborate.", time: now() },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -137,15 +194,17 @@ export default function ChatWidget() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
-  const send = async (text: string) => {
+  const send = (text: string) => {
     if (!text.trim() || typing) return;
     const userMsg: Message = { id: Date.now(), role: "user", text: text.trim(), time: now() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setTyping(true);
-    const reply = await askGemini(text.trim(), messages);
-    setTyping(false);
-    setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", text: reply, time: now() }]);
+    const delay = 600 + Math.random() * 600;
+    setTimeout(() => {
+      setTyping(false);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, role: "assistant", text: getSmartReply(text.trim()), time: now() }]);
+    }, delay);
   };
 
   return (
@@ -212,7 +271,7 @@ export default function ChatWidget() {
                   </div>
                   <div>
                     <div className="text-white text-sm font-semibold leading-none">AI Assistant</div>
-                    <div className="text-[#F3BA2F]/60 text-[10px] font-mono mt-0.5">Powered by Gemini</div>
+                    <div className="text-green-400 text-[10px] font-mono mt-0.5">● Online — 50 FAQs loaded</div>
                   </div>
                 </div>
                 <button onClick={() => setOpen(false)} className="text-white/30 hover:text-white/70 transition-colors p-1">
@@ -246,7 +305,6 @@ export default function ChatWidget() {
                       {[0, 1, 2].map((i) => (
                         <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]/60" animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }} />
                       ))}
-                      <span className="text-white/30 text-[10px] font-mono ml-2">thinking…</span>
                     </div>
                   </div>
                 )}
@@ -271,7 +329,7 @@ export default function ChatWidget() {
               </div>
 
               <div className="text-center py-2 text-[9px] font-mono text-white/15 border-t border-[#F3BA2F]/5">
-                ORAKZAI GROUP · AI POWERED BY GEMINI
+                ORAKZAI GROUP · AI ASSISTANT
               </div>
             </div>
           </motion.div>
