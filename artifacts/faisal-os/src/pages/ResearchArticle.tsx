@@ -6944,9 +6944,9 @@ Enterprise blockchain represents the evolution of blockchain technology from ind
     const [cpd, setCpd] = React.useState(false);
 
     const citations = {
-      APA: `Orakzai, F. (${year}). ${title}. Orakzai Research Lab. https://faisalorakzai.vercel.app/research/${slug}`,
-      MLA: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}, faisalorakzai.vercel.app/research/${slug}.`,
-      CHICAGO: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}. https://faisalorakzai.vercel.app/research/${slug}.`,
+      APA: `Orakzai, F. (${year}). ${title}. Orakzai Research Lab. https://www.faisalorakzai.com/research/${slug}`,
+      MLA: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}, www.faisalorakzai.com/research/${slug}.`,
+      CHICAGO: `Orakzai, Faisal. "${title}." Orakzai Research Lab, ${year}. https://www.faisalorakzai.com/research/${slug}.`,
     };
 
     const copy = () => {
@@ -6975,7 +6975,7 @@ Enterprise blockchain represents the evolution of blockchain technology from ind
     <div class="cite">${citations.CHICAGO}</div>
     <div class="meta">
       Author: Faisal Orakzai · ORCID: 0009-0000-0915-7272<br/>
-      URL: https://faisalorakzai.vercel.app/research/${slug}<br/>
+      URL: https://www.faisalorakzai.com/research/${slug}<br/>
       Generated: ${new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}
     </div>
   </body></html>`;
