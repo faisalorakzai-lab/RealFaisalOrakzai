@@ -496,26 +496,26 @@ export default function Home() {
         <div className="relative overflow-hidden pb-6" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)" }}>
           <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content", paddingLeft:"40px" }}>
             {([
-              { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:"/research/blockchain-infra" },
-              { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
-              { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
-              { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:"/research/blockchain-types" },
-              { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
-              { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
-              { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
-              { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
-              { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
-              { src:"/mk/thumb-blockchain-basic.png",       label:"Blockchain Basic",       href:"https://faisalorakzai.com/research/blockchain-basic#components" },
-              { src:"/mk/thumb-blockchain-infra.png",       label:"Blockchain Infra",        href:"/research/blockchain-infra" },
-              { src:"/mk/thumb-enterprise-blockchain.png",  label:"Enterprise Blockchain",   href:null },
-              { src:"/mk/thumb-rwa-tokenization.png",       label:"RWA Tokenization",        href:null },
-              { src:"/mk/thumb-blockchain-types.png",       label:"Blockchain Types",         href:"/research/blockchain-types" },
-              { src:"/mk/thumb-smart-contracts.png",        label:"Smart Contracts",          href:null },
-              { src:"/mk/thumb-consensus-security.png",     label:"Consensus & Security",     href:null },
-              { src:"/mk/thumb-web3-future.png",            label:"Web3 Future",              href:null },
-              { src:"/mk/thumb-digital-identity.png",       label:"Digital Identity",         href:null },
-              { src:"/mk/thumb-crosschain-tech.png",        label:"Cross-Chain Tech",         href:null },
+              { src:"/mk/blockchain-guide.png", label:"Blockchain Basic", href:"/research/blockchain-basic" },
+              { src:"/mk/thumb-blockchain-infra.png", label:"Blockchain Infra", href:"/research/blockchain-infra" },
+              { src:"/mk/enterprise-blockchain-hero.png", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
+              { src:"/mk/rwa-hero.png", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
+              { src:"/mk/thumb-blockchain-types.png", label:"Blockchain Types", href:"/research/blockchain-types" },
+              { src:"/mk/smart-contracts-hero.png", label:"Smart Contracts", href:"/research/smart-contracts" },
+              { src:"/mk/blockchain-security-hero.png", label:"Blockchain Security", href:"/research/blockchain-security" },
+              { src:"/mk/web3-future-hero.png", label:"Web3 Future", href:"/research/future-of-web3" },
+              { src:"/mk/blockchain-identity-hero.png", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
+              { src:"/mk/cross-chain-hero.png", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
+              { src:"/mk/blockchain-guide.png", label:"Blockchain Basic", href:"/research/blockchain-basic" },
+              { src:"/mk/thumb-blockchain-infra.png", label:"Blockchain Infra", href:"/research/blockchain-infra" },
+              { src:"/mk/enterprise-blockchain-hero.png", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
+              { src:"/mk/rwa-hero.png", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
+              { src:"/mk/thumb-blockchain-types.png", label:"Blockchain Types", href:"/research/blockchain-types" },
+              { src:"/mk/smart-contracts-hero.png", label:"Smart Contracts", href:"/research/smart-contracts" },
+              { src:"/mk/blockchain-security-hero.png", label:"Blockchain Security", href:"/research/blockchain-security" },
+              { src:"/mk/web3-future-hero.png", label:"Web3 Future", href:"/research/future-of-web3" },
+              { src:"/mk/blockchain-identity-hero.png", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
+              { src:"/mk/cross-chain-hero.png", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
             ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
               const el = (
                 <div key={i} style={{ width:"288px", marginRight:"20px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}
@@ -563,7 +563,7 @@ export default function Home() {
                 </div>
               );
               return card.href ? (
-                <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration:"none" }}>{el}</a>
+                <a key={i} href={card.href} style={{ textDecoration:"none" }}>{el}</a>
               ) : (
                 <div key={i}>{el}</div>
               );
