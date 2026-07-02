@@ -247,8 +247,8 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        <motion.video ref={webmRef} src="/hero-new.webm" muted playsInline preload="auto" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
-        <motion.video ref={oldVideoRef} src="/hero-bg.mp4" loop muted playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.video ref={webmRef} src={heroPhase === "webm" || heroPhase === "old" ? "/hero-new.webm" : undefined} muted playsInline preload="none" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.mp4" : undefined} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
 
         <div className="absolute inset-0 bg-black/65 pointer-events-none z-[3]" />
         <div className="absolute inset-0 pointer-events-none z-[3]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px)" }} />
