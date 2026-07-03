@@ -465,6 +465,26 @@ function useSEO() {
     const schemas: object[] = [
       {
         "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://faisalorakzai.com/research",
+        "name": "Central Knowledge Repository — Faisal Orakzai",
+        "description": "Research hub for blockchain, AI, RWA tokenization, and cryptographic protocols by Muhammad Faisal Orakzai.",
+        "url": "https://faisalorakzai.com/research",
+        "author": { "@id": "https://faisalorakzai.com/#person" },
+        "publisher": { "@id": "https://faisalorakzai.com/#orakzai-group" },
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://faisalorakzai.com/#website" },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://faisalorakzai.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Research", "item": "https://faisalorakzai.com/research" },
+        ],
+      },
+      {
+        "@context": "https://schema.org",
         "@type": "Person",
         "@id": `${AUTHOR.website}#person`,
         name: AUTHOR.name,

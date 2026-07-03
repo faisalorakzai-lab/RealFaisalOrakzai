@@ -251,7 +251,7 @@ import SEOHead from "@/components/shared/SEOHead";
               name: "Sovereign Gateway — Muhammad Faisal Orakzai",
               description:
                 "Secure institutional communication portal for Orakzai infrastructure routing.",
-              mainEntity: { "@type": "Person", name: "Muhammad Faisal Orakzai" },
+              mainEntity: { "@type": "Person", "@id": "https://faisalorakzai.com/#person", name: "Muhammad Faisal Orakzai" },
             }),
           }}
         />

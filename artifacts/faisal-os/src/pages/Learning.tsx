@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-  import { useRef, useState } from "react";
+  import { useRef, useState, useEffect } from "react";
   import SEOHead from "@/components/shared/SEOHead";
   import { BookOpen, ArrowUpRight, Lightbulb, Code2, TrendingUp, Brain, ChevronRight } from "lucide-react";
 
@@ -122,6 +122,28 @@ import { motion, useInView } from "framer-motion";
   export default function Learning() {
     const [activeTrack, setActiveTrack] = useState(0);
     const [openModule, setOpenModule] = useState<number|null>(null);
+
+    useEffect(() => {
+      const id = "learning-collection-schema";
+      if (document.getElementById(id)) return;
+      const s = document.createElement("script");
+      s.id = id;
+      s.type = "application/ld+json";
+      s.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://faisalorakzai.com/learning",
+        "name": "Learning Hub — Blockchain, AI & Entrepreneurship",
+        "description": "Educational resources by Faisal Orakzai covering blockchain fundamentals, DeFi, AI automation, Web3 luxury commerce, and sovereign entrepreneurship.",
+        "url": "https://faisalorakzai.com/learning",
+        "author": { "@id": "https://faisalorakzai.com/#person" },
+        "publisher": { "@id": "https://faisalorakzai.com/#orakzai-group" },
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://faisalorakzai.com/#website" },
+      });
+      document.head.appendChild(s);
+      return () => { document.getElementById(id)?.remove(); };
+    }, []);
 
     return (
       <>

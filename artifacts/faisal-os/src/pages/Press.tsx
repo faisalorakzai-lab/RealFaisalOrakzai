@@ -199,21 +199,23 @@ import SEOHead from "@/components/shared/SEOHead";
           "image": a.image ? `https://faisalorakzai.com${a.image}` : "https://faisalorakzai.com/story/story-01.jpg",
           "author": {
             "@type": "Person",
+            "@id": "https://faisalorakzai.com/#person",
             "name": "Muhammad Faisal Orakzai",
             "url": "https://faisalorakzai.com/founder",
             "sameAs": ["https://www.wikidata.org/wiki/Q140264666", "https://www.linkedin.com/in/faisalorakzaii"],
           },
           "publisher": {
             "@type": "Organization",
+            "@id": "https://faisalorakzai.com/#orakzai-group",
             "name": a.publisher,
             "url": a.publisherUrl,
             "logo": { "@type": "ImageObject", "url": "https://faisalorakzai.com/logo.png" },
           },
           "about": {
             "@type": "Person",
+            "@id": "https://faisalorakzai.com/#person",
             "name": "Muhammad Faisal Orakzai",
             "url": "https://faisalorakzai.com/founder",
-            "@id": "https://www.wikidata.org/wiki/Q140264666",
           },
           "mentions": [
             { "@type": "Person", "name": "Muhammad Faisal Orakzai", "url": "https://faisalorakzai.com/founder" },
