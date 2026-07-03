@@ -19,19 +19,4 @@
   <url><loc>https://faisalorakzai.com/investment</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://faisalorakzai.com/contact</loc><lastmod>2026-07-03</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
 
-  <!-- ── Research Articles (all 10 — verified 200 OK) ── -->
-  <url>
-    <loc>https://faisalorakzai.com/research/blockchain-basic</loc>
-    <lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
-    <image:image><image:loc>https://faisalorakzai.com/mk/blockchain-guide.png</image:loc><image:title>What is Blockchain? A Complete Beginner's Guide — Faisal Orakzai Research Lab</image:title></image:image>
-  </url>
-  <url><loc>https://faisalorakzai.com/research/blockchain-infra</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research/enterprise-blockchain-ecosystems-guide</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://faisalorakzai.com/research/rwa-tokenization</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research/blockchain-types</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research/smart-contracts</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research/blockchain-security</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research/future-of-web3</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://faisalorakzai.com/research/blockchain-digital-identity</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://faisalorakzai.com/research/cross-chain-technology</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
 </urlset>

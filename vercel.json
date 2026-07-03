@@ -76,14 +76,19 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/papers/:paper",
-      "destination": "/papers/:paper.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/papers/:paper", "destination": "/papers/:paper.html" },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/founder", "destination": "/index.html" },
+    { "source": "/ecosystem", "destination": "/index.html" },
+    { "source": "/benchmarks", "destination": "/index.html" },
+    { "source": "/research", "destination": "/index.html" },
+    { "source": "/research/:slug", "destination": "/index.html" },
+    { "source": "/press", "destination": "/index.html" },
+    { "source": "/learning", "destination": "/index.html" },
+    { "source": "/media", "destination": "/index.html" },
+    { "source": "/investment", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/okzbyte-hub", "destination": "/index.html" }
   ],
   "headers": [
     {

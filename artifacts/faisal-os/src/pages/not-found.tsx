@@ -1,21 +1,38 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
+import { Link } from "wouter";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  useEffect(() => {
+    document.title = "404 — Page Not Found | Faisal Orakzai";
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    meta.setAttribute("data-id", "noindex-404");
+    document.head.appendChild(meta);
+
+    return () => {
+      const el = document.querySelector('meta[data-id="noindex-404"]');
+      if (el) el.remove();
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-6 text-center">
+      <p className="text-xs tracking-[0.3em] text-[#C9A84C] uppercase mb-6 font-medium">
+        Error 404
+      </p>
+      <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+        Page Not Found
+      </h1>
+      <p className="text-white/40 text-sm md:text-base max-w-sm mb-12 leading-relaxed">
+        The page you are looking for does not exist or has been moved.
+      </p>
+      <Link href="/">
+        <span className="inline-block border border-[#C9A84C]/50 text-[#C9A84C] text-xs tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#C9A84C]/10 transition-colors duration-200 cursor-pointer">
+          Return Home
+        </span>
+      </Link>
     </div>
   );
 }
