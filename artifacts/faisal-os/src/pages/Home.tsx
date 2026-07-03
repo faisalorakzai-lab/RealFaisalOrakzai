@@ -169,6 +169,8 @@ export default function Home() {
   const opacity1 = useTransform(scrollY, [0, 400], [1, 0]);
   const [activeVideo, setActiveVideo] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const cinematicSectionRef = useRef<HTMLElement>(null);
+  const [cinematicInView, setCinematicInView] = useState(false);
   const [heroPhase, setHeroPhase] = useState<HeroPhase>("photo");
   const [glitchActive, setGlitchActive] = useState(false);
   const webmRef = useRef<HTMLVideoElement>(null);
@@ -197,12 +199,29 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const el = cinematicSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setCinematicInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!cinematicInView) return;
     videoRefs.current.forEach((vid, i) => {
       if (!vid) return;
       if (i === activeVideo) { vid.currentTime = 0; vid.play().catch(() => {}); }
       else vid.pause();
     });
-  }, [activeVideo]);
+  }, [activeVideo, cinematicInView]);
 
   return (
     <>
@@ -250,7 +269,7 @@ export default function Home() {
         </AnimatePresence>
 
         <motion.video ref={webmRef} src={heroPhase === "webm" || heroPhase === "old" ? "/hero-new.webm" : undefined} muted playsInline preload="none" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
-        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.mp4" : undefined} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.webm" : undefined} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
 
         <div className="absolute inset-0 bg-black/65 pointer-events-none z-[3]" />
         <div className="absolute inset-0 pointer-events-none z-[3]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px)" }} />
@@ -299,9 +318,9 @@ export default function Home() {
       </section>
 
       {/* ── CINEMATIC VIDEO ── */}
-      <section className="relative w-full" style={{ height: "100vh" }}>
-        {VIDEOS.map((v, i) => (
-          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} autoPlay={i === 0} loop muted playsInline preload={i === 0 ? "auto" : "none"} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
+      <section ref={cinematicSectionRef} className="relative w-full" style={{ height: "100vh" }}>
+        {cinematicInView && VIDEOS.map((v, i) => (
+          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} autoPlay={i === 0} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
         ))}
         <div className="absolute inset-0 bg-black/60 pointer-events-none" />
         <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />

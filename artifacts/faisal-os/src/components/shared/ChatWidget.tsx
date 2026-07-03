@@ -170,7 +170,7 @@ export default function ChatWidget() {
           style={{ boxShadow: "0 0 20px rgba(243,186,47,0.3), 0 4px 20px rgba(0,0,0,0.5)" }}
           aria-label="Open AI assistant"
         >
-          <video className="absolute inset-0 w-full h-full object-cover" src="/bg-video.mp4" autoPlay loop muted playsInline />
+          <video className="absolute inset-0 w-full h-full object-cover" src="/bg-video.mp4" autoPlay loop muted playsInline preload="none" />
           <div className="absolute inset-0 rounded-full border border-[#F3BA2F]/40 animate-pulse-ring" />
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
             <AnimatePresence mode="wait">
@@ -204,7 +204,7 @@ export default function ChatWidget() {
               <div className="flex items-center justify-between px-5 py-4 border-b border-[#F3BA2F]/10 bg-black">
                 <div className="flex items-center gap-3">
                   <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#F3BA2F]/40 flex-shrink-0">
-                    <video src="/bg-video.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                    <video src="/bg-video.mp4" autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" />
                     <div className="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-green-400 border border-black" />
                   </div>
                   <div>
@@ -222,7 +222,7 @@ export default function ChatWidget() {
                   <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                     {msg.role === "assistant" && (
                       <div className="w-6 h-6 rounded-full overflow-hidden border border-[#F3BA2F]/30 mr-2 flex-shrink-0 mt-1">
-                        <video src="/bg-video.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                        <video src="/bg-video.mp4" autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" />
                       </div>
                     )}
                     <div className={`max-w-[78%] ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-1`}>
@@ -236,7 +236,7 @@ export default function ChatWidget() {
                 {typing && (
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-full overflow-hidden border border-[#F3BA2F]/30">
-                      <video src="/bg-video.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                      <video src="/bg-video.mp4" autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" />
                     </div>
                     <div className="bg-white/5 border border-white/8 px-4 py-3 flex gap-1 items-center">
                       {[0, 1, 2].map((i) => (
