@@ -10,20 +10,20 @@ const PROFILE_PAGE_SCHEMA = {
   "description": "Official profile page of Muhammad Faisal Orakzai, Founder of Orakzai Group.",
   "about": {
     "@type": "Person",
-    "@id": "https://www.wikidata.org/wiki/Q140264666",
+    "@id": "https://faisalorakzai.com/#person",
     "name": "Muhammad Faisal Orakzai",
     "url": "https://faisalorakzai.com"
   },
   "mainEntity": {
     "@type": "Person",
-    "@id": "https://www.wikidata.org/wiki/Q140264666",
+    "@id": "https://faisalorakzai.com/#person",
     "name": "Muhammad Faisal Orakzai",
     "alternateName": ["Faisal Orakzai", "Chairman Orakzai"],
     "url": "https://faisalorakzai.com",
     "sameAs": [
+      "https://www.wikidata.org/wiki/Q140264666",
       "https://www.linkedin.com/in/faisalorakzaiii",
       "https://x.com/faisalorakzaii",
-      "https://www.wikidata.org/wiki/Q140264666",
       "https://orcid.org/0009-0000-0915-7272"
     ]
   }

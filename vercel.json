@@ -4,6 +4,17 @@
   "installCommand": "pnpm install",
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.faisalorakzai.com"
+        }
+      ],
+      "destination": "https://faisalorakzai.com/$1",
+      "permanent": true
+    },
+    {
       "source": "/story",
       "destination": "/founder",
       "permanent": true
