@@ -356,4 +356,9 @@
   # SITEMAP DECLARATION
   # ═══════════════════════════════════════════════════════
   Sitemap: https://faisalorakzai.com/sitemap.xml
-  
+# ═══════════════════════════════════════════════════════
+# SITEMAP DISCOVERY — all major search engines
+# ═══════════════════════════════════════════════════════
+Sitemap: https://faisalorakzai.com/sitemap-index.xml
+Sitemap: https://faisalorakzai.com/sitemap.xml
+Sitemap: https://faisalorakzai.com/research-sitemap.xml
