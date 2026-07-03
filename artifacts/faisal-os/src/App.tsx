@@ -3,25 +3,34 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   import { Toaster } from "@/components/ui/toaster";
   import { TooltipProvider } from "@/components/ui/tooltip";
   import { AnimatePresence, motion } from "framer-motion";
-  import NotFound from "@/pages/not-found";
-  import Home from "@/pages/Home";
-  import Founder from "@/pages/Founder";
-  import Ecosystem from "@/pages/Ecosystem";
-  import Projects from "@/pages/Projects";
-  import Research from "@/pages/Research";
-  import ResearchArticle from "@/pages/ResearchArticle";
-  import Press from "@/pages/Press";
-  import Learning from "@/pages/Learning";
-  import Media from "@/pages/Media";
-  import Investment from "@/pages/Investment";
-  import Contact from "@/pages/Contact";
-  import InnerCircle from "@/pages/InnerCircle";
   import Navbar from "@/components/layout/Navbar";
   import Footer from "@/components/layout/Footer";
   import ChatWidget from "@/components/shared/ChatWidget";
   import GlobalSearch from "@/components/shared/GlobalSearch";
   import SplashScreen from "@/components/shared/SplashScreen";
-  import { useState } from "react";
+  import { Suspense, lazy, useState } from "react";
+
+  const NotFound = lazy(() => import("@/pages/not-found"));
+  const Home = lazy(() => import("@/pages/Home"));
+  const Founder = lazy(() => import("@/pages/Founder"));
+  const Ecosystem = lazy(() => import("@/pages/Ecosystem"));
+  const Projects = lazy(() => import("@/pages/Projects"));
+  const Research = lazy(() => import("@/pages/Research"));
+  const ResearchArticle = lazy(() => import("@/pages/ResearchArticle"));
+  const Press = lazy(() => import("@/pages/Press"));
+  const Learning = lazy(() => import("@/pages/Learning"));
+  const Media = lazy(() => import("@/pages/Media"));
+  const Investment = lazy(() => import("@/pages/Investment"));
+  const Contact = lazy(() => import("@/pages/Contact"));
+  const InnerCircle = lazy(() => import("@/pages/InnerCircle"));
+
+  function RouteLoading() {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh] bg-black">
+        <div className="h-8 w-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+      </div>
+    );
+  }
 
   const queryClient = new QueryClient();
 
@@ -53,21 +62,23 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
               transition={pageTransition}
               style={{ willChange: "transform, opacity" }}
             >
-              <Switch>
-                <Route path="/" component={Home} />
-                <Route path="/founder" component={Founder} />
-                <Route path="/ecosystem" component={Ecosystem} />
-                <Route path="/benchmarks" component={Projects} />
-                <Route path="/research/:slug" component={ResearchArticle} />
-                <Route path="/research" component={Research} />
-                <Route path="/press" component={Press} />
-                <Route path="/learning" component={Learning} />
-                <Route path="/media" component={Media} />
-                <Route path="/investment" component={Investment} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/okzbyte-hub" component={InnerCircle} />
-                <Route component={NotFound} />
-              </Switch>
+              <Suspense fallback={<RouteLoading />}>
+                <Switch>
+                  <Route path="/" component={Home} />
+                  <Route path="/founder" component={Founder} />
+                  <Route path="/ecosystem" component={Ecosystem} />
+                  <Route path="/benchmarks" component={Projects} />
+                  <Route path="/research/:slug" component={ResearchArticle} />
+                  <Route path="/research" component={Research} />
+                  <Route path="/press" component={Press} />
+                  <Route path="/learning" component={Learning} />
+                  <Route path="/media" component={Media} />
+                  <Route path="/investment" component={Investment} />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/okzbyte-hub" component={InnerCircle} />
+                  <Route component={NotFound} />
+                </Switch>
+              </Suspense>
             </motion.div>
           </AnimatePresence>
         </main>
