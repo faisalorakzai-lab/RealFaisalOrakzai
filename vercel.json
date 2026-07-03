@@ -87,6 +87,186 @@
   ],
   "headers": [
     {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/founder",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/founder>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/ecosystem",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/ecosystem>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/benchmarks",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/benchmarks>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/press",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/press>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/learning",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/learning>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/media",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/media>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/investment",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/investment>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/contact",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/contact>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/blockchain-basic",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/blockchain-basic>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/blockchain-infra",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/blockchain-infra>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/blockchain-types",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/blockchain-types>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/smart-contracts",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/smart-contracts>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/rwa-tokenization",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/rwa-tokenization>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/blockchain-security",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/blockchain-security>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/future-of-web3",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/future-of-web3>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/blockchain-digital-identity",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/blockchain-digital-identity>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/cross-chain-technology",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/cross-chain-technology>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/research/enterprise-blockchain-ecosystems-guide",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/enterprise-blockchain-ecosystems-guide>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
