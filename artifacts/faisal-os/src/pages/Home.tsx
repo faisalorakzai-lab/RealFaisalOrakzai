@@ -301,7 +301,7 @@ export default function Home() {
       {/* ── CINEMATIC VIDEO ── */}
       <section className="relative w-full" style={{ height: "100vh" }}>
         {VIDEOS.map((v, i) => (
-          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} autoPlay={i === 0} loop muted playsInline className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
+          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} autoPlay={i === 0} loop muted playsInline preload={i === 0 ? "auto" : "none"} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
         ))}
         <div className="absolute inset-0 bg-black/60 pointer-events-none" />
         <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
