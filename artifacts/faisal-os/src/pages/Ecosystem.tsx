@@ -14,21 +14,21 @@ import { motion, AnimatePresence } from "framer-motion";
   const LIVE_CORES = [
     {
       id: "okbond", name: "Orakzai Bond", ticker: "OKBOND",
-      logo: "/logos/okbond.png", url: "https://orakzaibond.com",
+      logo: "/logos/okbond.webp", url: "https://orakzaibond.com",
       tag: "POLYGON L2", status: "LIVE", statusColor: "#00ff88",
       desc: "Decentralized Treasury Protocol. 10M max supply, treasury-backed capital protection on Polygon.",
       angle: 270,
     },
     {
       id: "shamim", name: "Shamim Forever", ticker: "SHF",
-      logo: "/logos/shamim-forever.jpg", url: "https://www.shamimforever.com",
+      logo: "/logos/shamim-forever.webp", url: "https://www.shamimforever.com",
       tag: "LUXURY · WEB3", status: "LIVE", statusColor: "#00ff88",
       desc: "Elite luxury heritage brand — museum-grade perfumes, sapphire jewelry, cryptographic provenance.",
       angle: 30,
     },
     {
       id: "okzbyte", name: "OkzByte Technology", ticker: "OKZDEV",
-      logo: "/logos/okzbyte.png", url: "https://github.com/faisalorakzai-lab",
+      logo: "/logos/okzbyte.webp", url: "https://github.com/faisalorakzai-lab",
       tag: "ENGINEERING · AI", status: "ACTIVE", statusColor: GOLD,
       desc: "High-throughput technical stack & engineering engine powering the entire Orakzai infrastructure.",
       angle: 150,
@@ -39,42 +39,42 @@ import { motion, AnimatePresence } from "framer-motion";
   const UNDER_DEV = [
     {
       id: "qorix", name: "QORIX", ticker: "QRX",
-      logo: "/logos/qorix.png",
+      logo: "/logos/qorix.webp",
       tag: "AI · FINANCE",
       desc: "Autonomous Financial Management AI System — algorithmic treasury ops and yield optimization.",
       statusColor: "#60a5fa",
     },
     {
       id: "orakzai-properties", name: "Orakzai Properties", ticker: "ORP",
-      logo: "/logos/orakzai-properties.png",
+      logo: "/logos/orakzai-properties.webp",
       tag: "REAL ESTATE",
       desc: "Assets of Today | Legacies of Tomorrow — premium real estate and property investment platform.",
       statusColor: "#f97316",
     },
     {
       id: "otc", name: "Orakzai Transport Corp", ticker: "OTC",
-      logo: "/logos/otc.png",
+      logo: "/logos/otc.webp",
       tag: "TRANSPORT · MOBILITY",
       desc: "Premium transportation and logistics arm of the Orakzai Group sovereign infrastructure.",
       statusColor: GOLD,
     },
     {
       id: "psc-exchange", name: "PSC Exchange", ticker: "PSC",
-      logo: "/logos/psc-exchange.png",
+      logo: "/logos/psc-exchange.webp",
       tag: "BLOCKCHAIN · FINTECH",
       desc: "Pak Stock Chain — decentralized exchange bridging Pakistan's capital markets with blockchain.",
       statusColor: "#a78bfa",
     },
     {
       id: "orakzaix", name: "OrakzaiX", ticker: "OKX",
-      logo: "/logos/orakzaix.png",
+      logo: "/logos/orakzaix.webp",
       tag: "AI · AUTOMATION",
       desc: "Next-generation AI automation and intelligence platform for the Orakzai sovereign ecosystem.",
       statusColor: "#2dd4bf",
     },
     {
       id: "orakzai-empire", name: "Orakzai Empire", ticker: "OKE",
-      logo: "/logos/orakzai-empire.png",
+      logo: "/logos/orakzai-empire.webp",
       tag: "HERITAGE · SOVEREIGN",
       desc: "The sovereign heritage brand — carrying the legacy, vision, and identity of the Orakzai lineage.",
       statusColor: GOLD,
@@ -92,7 +92,7 @@ import { motion, AnimatePresence } from "framer-motion";
       },
       {
         id: "son-of-orakzai", name: "Son of Orakzai", ticker: "SOO",
-        logo: "/logos/son-of-orakzai.jpg",
+        logo: "/logos/son-of-orakzai.webp",
         tag: "ORGANIZATION",
         desc: "Son of Orakzai — a community and heritage organization representing the proud Orakzai identity.",
         statusColor: "#4ade80",
@@ -566,9 +566,9 @@ import { motion, AnimatePresence } from "framer-motion";
                       <div style={{ position: "absolute", inset: "-8px", borderRadius: "50%", background: `conic-gradient(${GOLD}, rgba(243,186,47,0.2), ${GOLD})`, animation: "spin 8s linear infinite" }} />
                       <div style={{ position: "absolute", inset: "-4px", borderRadius: "50%", background: "#000" }} />
                       <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${GOLD}`, boxShadow: `0 0 28px rgba(243,186,47,0.5), 0 0 60px rgba(243,186,47,0.15)`, overflow: "hidden", background: "#111", zIndex: 2 }}>
-                        <img src="/og-logo.jpg" alt="Faisal Orakzai — Founder & Chairman Orakzai Group"
+                        <img src="/og-logo.webp" alt="Faisal Orakzai — Founder & Chairman Orakzai Group"
                           style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px" }}
-                          onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.jpg"; }}
+                          onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.webp"; }}
                         />
                       </div>
                     </div>
@@ -628,8 +628,8 @@ import { motion, AnimatePresence } from "framer-motion";
                     <div style={{ position: "absolute", inset: "-7px", borderRadius: "50%", background: `conic-gradient(${GOLD}, rgba(243,186,47,0.2), ${GOLD})`, animation: "spin 8s linear infinite" }} />
                     <div style={{ position: "absolute", inset: "-3px", borderRadius: "50%", background: "#000" }} />
                     <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${GOLD}`, overflow: "hidden", boxShadow: `0 0 24px rgba(243,186,47,0.4)` }}>
-                      <img src="/og-logo.jpg" alt="Faisal Orakzai" style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px" }}
-                        onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.jpg"; }} />
+                      <img src="/og-logo.webp" alt="Faisal Orakzai" style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px" }}
+                        onError={(e) => { (e.target as HTMLImageElement).src = "/logos/orakzai-group.webp"; }} />
                     </div>
                   </div>
                   <div style={{ fontFamily: "monospace", fontSize: "9px", color: GOLD, letterSpacing: "0.2em" }}>ORAKZAI GROUP</div>

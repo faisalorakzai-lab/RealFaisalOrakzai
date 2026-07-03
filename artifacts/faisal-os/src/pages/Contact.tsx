@@ -16,12 +16,12 @@ import SEOHead from "@/components/shared/SEOHead";
   ];
 
   const socialLinks = [
-    { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",         logo: "/logos/linkedin.jpg" },
-    { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                       logo: "/logos/x.png" },
-    { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",           logo: "/logos/instagram.png" },
-    { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",  logo: "/logos/crunchbase.png" },
-    { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",               logo: "/logos/github.png" },
-    { label: "ORCID",       url: "https://orcid.org/0009-0000-0915-7272",              logo: "/logos/orcid.png" },
+    { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",         logo: "/logos/linkedin.webp" },
+    { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                       logo: "/logos/x.webp" },
+    { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",           logo: "/logos/instagram.webp" },
+    { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",  logo: "/logos/crunchbase.webp" },
+    { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",               logo: "/logos/github.webp" },
+    { label: "ORCID",       url: "https://orcid.org/0009-0000-0915-7272",              logo: "/logos/orcid.webp" },
   ];
 
   const HANDSHAKE_LINES = [

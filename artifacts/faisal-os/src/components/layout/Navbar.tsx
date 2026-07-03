@@ -32,7 +32,7 @@ export default function Navbar() {
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Faisal Orakzai — Founder Orakzai Group Pakistan"
               className="h-10 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 6px rgba(243,186,47,0.35))" }}

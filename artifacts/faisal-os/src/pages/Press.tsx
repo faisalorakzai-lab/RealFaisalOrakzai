@@ -59,7 +59,7 @@ import SEOHead from "@/components/shared/SEOHead";
       articleUrl: "https://orakzaibond.com",
       datePublished: "2025-08-01",
       category: "Blockchain",
-      image: "/logos/okbond.png",
+      image: "/logos/okbond.webp",
       authoritative: true,
     },
     {
@@ -71,7 +71,7 @@ import SEOHead from "@/components/shared/SEOHead";
       articleUrl: "https://www.shamimforever.com",
       datePublished: "2025-10-05",
       category: "Announcements",
-      image: "/logos/shamim-forever.jpg",
+      image: "/logos/shamim-forever.webp",
     },
     {
       id: "wikidata-q140264666",
@@ -93,7 +93,7 @@ import SEOHead from "@/components/shared/SEOHead";
       articleUrl: "https://github.com/faisalorakzai-lab",
       datePublished: "2025-12-01",
       category: "Blockchain",
-      image: "/logos/okzbyte.png",
+      image: "/logos/okzbyte.webp",
     },
     {
       id: "qorix-autonomous-finance",
@@ -104,7 +104,7 @@ import SEOHead from "@/components/shared/SEOHead";
       articleUrl: "https://faisalorakzai.com/ecosystem",
       datePublished: "2026-01-15",
       category: "Blockchain",
-      image: "/logos/qorix.png",
+      image: "/logos/qorix.webp",
     },
     {
       id: "everybodywiki-profile",
@@ -394,7 +394,7 @@ import SEOHead from "@/components/shared/SEOHead";
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 border border-[#F3BA2F]/25 overflow-hidden">
-                      <img src="/faisal-official.jpg" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity object-top" />
+                      <img src="/faisal-official.webp" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity object-top" />
                     </div>
                     <span className="text-[10px] font-mono text-white/20 uppercase tracking-wider border border-white/8 px-2 py-1">PNG</span>
                   </div>

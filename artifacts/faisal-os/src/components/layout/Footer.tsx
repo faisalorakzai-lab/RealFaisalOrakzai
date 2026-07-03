@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
 
   const socials = [
-    { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",           logo: "/logos/linkedin.jpg",   filter: undefined },
-    { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                         logo: "/logos/x.png",          filter: undefined },
-    { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",             logo: "/logos/instagram.png",  filter: undefined },
+    { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",           logo: "/logos/linkedin.webp",   filter: undefined },
+    { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                         logo: "/logos/x.webp",          filter: undefined },
+    { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",             logo: "/logos/instagram.webp",  filter: undefined },
     { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                  logo: "/logos/tiktok.png",     filter: undefined },
-    { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                 logo: "/logos/github.png",     filter: "invert(1)" },
-    { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",    logo: "/logos/crunchbase.png", filter: undefined },
-    { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",             logo: "/logos/pinterest.png",  filter: undefined },
-    { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",              logo: "/logos/facebook.png",   filter: undefined },
-    { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",           logo: "/logos/clubhouse.png",  filter: undefined },
-    { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",               logo: "/logos/mastodon.png",   filter: undefined },
+    { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                 logo: "/logos/github.webp",     filter: "invert(1)" },
+    { label: "Crunchbase",  url: "https://www.crunchbase.com/person/faisal-orakzai",    logo: "/logos/crunchbase.webp", filter: undefined },
+    { label: "Pinterest",   url: "https://www.pinterest.com/faisalorakzaii",             logo: "/logos/pinterest.webp",  filter: undefined },
+    { label: "Facebook",    url: "https://web.facebook.com/faisalorakzaii",              logo: "/logos/facebook.webp",   filter: undefined },
+    { label: "Clubhouse",   url: "https://www.clubhouse.com/c/join/jGOPW7Kp",           logo: "/logos/clubhouse.webp",  filter: undefined },
+    { label: "Mastodon",    url: "https://mastodon.social/@Faisalorakzai",               logo: "/logos/mastodon.webp",   filter: undefined },
   ];
 
   const tier1 = [
     { label: "Google Panel",    url: "https://share.google/jJqhayo6kkfz4k7Nb",                           cat: "KNOWLEDGE GRAPH",  logo: "/logos/google.png" },
-    { label: "Wikidata",        url: "https://www.wikidata.org/wiki/Q140264666",                          cat: "KNOWLEDGE GRAPH",  logo: "/logos/wikidata.png" },
-    { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.png" },
-    { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.png" },
-    { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.png" },
-    { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE",   logo: "/logos/orakzai-bond.jpg" },
-    { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE",   logo: "/logos/shamim-forever.jpg" },
+    { label: "Wikidata",        url: "https://www.wikidata.org/wiki/Q140264666",                          cat: "KNOWLEDGE GRAPH",  logo: "/logos/wikidata.webp" },
+    { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.webp" },
+    { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.webp" },
+    { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.webp" },
+    { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE",   logo: "/logos/orakzai-bond.webp" },
+    { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE",   logo: "/logos/shamim-forever.webp" },
     { label: "Wellfound",       url: "https://wellfound.com/u/faisal-orakzai-1",                         cat: "STARTUP",          logo: "/logos/wellfound.png" },
-    { label: "Tracxn · OKBOND", url: "https://platform.tracxn.com/a/d/company/69d7b7bd06c1367e438e2743/orakzaibond", cat: "VENTURE · LIVE", logo: "/logos/tracxn.png" },
+    { label: "Tracxn · OKBOND", url: "https://platform.tracxn.com/a/d/company/69d7b7bd06c1367e438e2743/orakzaibond", cat: "VENTURE · LIVE", logo: "/logos/tracxn.webp" },
   ];
 
   const tier2 = [
@@ -40,7 +40,7 @@ import { motion } from "framer-motion";
     { label: "Pa.bio",         url: "https://pa.bio/faisalorakzaii",                                                                                              logo: "/logos/pabio.png" },
     { label: "Bio.site",       url: "https://bio.site/faisalorakzai",                                                                                            logo: "/logos/biosite.png" },
     { label: "LeetCode",       url: "https://leetcode.com/u/faisalorakzai/",                                                                                     logo: "/logos/leetcode.png" },
-    { label: "PRLog",          url: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html",   logo: "/logos/prlog-logo.png" },
+    { label: "PRLog",          url: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html",   logo: "/logos/prlog-logo.webp" },
     { label: "Polygon Scan",   url: "https://polygonscan.com",                                                                                                    logo: "/logos/polygonscan.png" },
   ];
 
@@ -55,7 +55,7 @@ import { motion } from "framer-motion";
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <img src="/logo.png" alt="Faisal Orakzai" className="w-9 h-9 object-contain"
+                <img src="/logo.webp" alt="Faisal Orakzai" className="w-9 h-9 object-contain"
                   style={{ filter: "drop-shadow(0 0 6px rgba(243,186,47,0.45))" }} />
                 <div>
                   <div className="text-white font-semibold text-sm">Faisal Orakzai</div>

@@ -216,7 +216,7 @@ export default function Home() {
         <AnimatePresence>
           {heroPhase === "photo" && (
             <motion.div key="hero-photo" initial={{ opacity: 1 }} exit={{ opacity: 0, filter: "brightness(2.5) blur(8px)" }} transition={{ duration: 0.7, ease: "easeIn" }} className="absolute inset-0 z-[2]">
-              <img src="/faisal-hero.png" alt="Faisal Orakzai" className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1)" : "brightness(1)" }} />
+              <img src="/faisal-hero.webp" alt="Faisal Orakzai" className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1)" : "brightness(1)" }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
               <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 80% at 50% 40%, transparent 25%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.92) 100%)" }} />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)" }} />
@@ -498,26 +498,26 @@ export default function Home() {
         <div className="relative overflow-hidden pb-6" style={{ maskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)", WebkitMaskImage:"linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)" }}>
           <div className="flex items-start" style={{ animation:"researchScroll2 65s linear infinite", willChange:"transform", width:"max-content", paddingLeft:"40px" }}>
             {([
-              { src:"/mk/blockchain-guide.png", label:"Blockchain Basic", href:"/research/blockchain-basic" },
-              { src:"/mk/thumb-blockchain-infra.png", label:"Blockchain Infra", href:"/research/blockchain-infra" },
-              { src:"/mk/enterprise-blockchain-hero.png", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
-              { src:"/mk/rwa-hero.png", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
-              { src:"/mk/thumb-blockchain-types.png", label:"Blockchain Types", href:"/research/blockchain-types" },
-              { src:"/mk/smart-contracts-hero.png", label:"Smart Contracts", href:"/research/smart-contracts" },
-              { src:"/mk/blockchain-security-hero.png", label:"Blockchain Security", href:"/research/blockchain-security" },
-              { src:"/mk/web3-future-hero.png", label:"Web3 Future", href:"/research/future-of-web3" },
-              { src:"/mk/blockchain-identity-hero.png", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
-              { src:"/mk/cross-chain-hero.png", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
-              { src:"/mk/blockchain-guide.png", label:"Blockchain Basic", href:"/research/blockchain-basic" },
-              { src:"/mk/thumb-blockchain-infra.png", label:"Blockchain Infra", href:"/research/blockchain-infra" },
-              { src:"/mk/enterprise-blockchain-hero.png", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
-              { src:"/mk/rwa-hero.png", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
-              { src:"/mk/thumb-blockchain-types.png", label:"Blockchain Types", href:"/research/blockchain-types" },
-              { src:"/mk/smart-contracts-hero.png", label:"Smart Contracts", href:"/research/smart-contracts" },
-              { src:"/mk/blockchain-security-hero.png", label:"Blockchain Security", href:"/research/blockchain-security" },
-              { src:"/mk/web3-future-hero.png", label:"Web3 Future", href:"/research/future-of-web3" },
-              { src:"/mk/blockchain-identity-hero.png", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
-              { src:"/mk/cross-chain-hero.png", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
+              { src:"/mk/blockchain-guide.webp", label:"Blockchain Basic", href:"/research/blockchain-basic" },
+              { src:"/mk/thumb-blockchain-infra.webp", label:"Blockchain Infra", href:"/research/blockchain-infra" },
+              { src:"/mk/enterprise-blockchain-hero.webp", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
+              { src:"/mk/rwa-hero.webp", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
+              { src:"/mk/thumb-blockchain-types.webp", label:"Blockchain Types", href:"/research/blockchain-types" },
+              { src:"/mk/smart-contracts-hero.webp", label:"Smart Contracts", href:"/research/smart-contracts" },
+              { src:"/mk/blockchain-security-hero.webp", label:"Blockchain Security", href:"/research/blockchain-security" },
+              { src:"/mk/web3-future-hero.webp", label:"Web3 Future", href:"/research/future-of-web3" },
+              { src:"/mk/blockchain-identity-hero.webp", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
+              { src:"/mk/cross-chain-hero.webp", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
+              { src:"/mk/blockchain-guide.webp", label:"Blockchain Basic", href:"/research/blockchain-basic" },
+              { src:"/mk/thumb-blockchain-infra.webp", label:"Blockchain Infra", href:"/research/blockchain-infra" },
+              { src:"/mk/enterprise-blockchain-hero.webp", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
+              { src:"/mk/rwa-hero.webp", label:"RWA Tokenization", href:"/research/rwa-tokenization" },
+              { src:"/mk/thumb-blockchain-types.webp", label:"Blockchain Types", href:"/research/blockchain-types" },
+              { src:"/mk/smart-contracts-hero.webp", label:"Smart Contracts", href:"/research/smart-contracts" },
+              { src:"/mk/blockchain-security-hero.webp", label:"Blockchain Security", href:"/research/blockchain-security" },
+              { src:"/mk/web3-future-hero.webp", label:"Web3 Future", href:"/research/future-of-web3" },
+              { src:"/mk/blockchain-identity-hero.webp", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
+              { src:"/mk/cross-chain-hero.webp", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
             ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
               const el = (
                 <div key={i} style={{ width:"288px", marginRight:"20px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}
@@ -632,17 +632,17 @@ export default function Home() {
             <div className="flex items-center" style={{ animation:"investorScroll 28s linear infinite", willChange:"transform", width:"max-content" }}>
               {(() => {
                 const logos = [
-                  { src:"/logos/investors/sequoia.png",          name:"Sequoia Capital",        dark:false, href:"https://www.sequoiacap.com" },
-                  { src:"/logos/investors/a16z.png",             name:"Andreessen Horowitz",     dark:false, href:"https://a16z.com" },
-                  { src:"/logos/investors/ycombinator.png",      name:"Y Combinator",            dark:false, href:"https://www.ycombinator.com" },
+                  { src:"/logos/investors/sequoia.webp",          name:"Sequoia Capital",        dark:false, href:"https://www.sequoiacap.com" },
+                  { src:"/logos/investors/a16z.webp",             name:"Andreessen Horowitz",     dark:false, href:"https://a16z.com" },
+                  { src:"/logos/investors/ycombinator.webp",      name:"Y Combinator",            dark:false, href:"https://www.ycombinator.com" },
                   { src:"/logos/investors/pantera.png",          name:"Pantera Capital",         dark:false, href:"https://panteracapital.com" },
                   { src:"/logos/investors/paradigm.png",         name:"Paradigm",                dark:true,  href:"https://www.paradigm.xyz" },
                   { src:"/logos/investors/dcg.png",              name:"Digital Currency Group",  dark:true,  href:"https://dcg.co" },
                   { src:"/logos/investors/coinbase.png",         name:"Coinbase Ventures",       dark:false, href:"https://www.coinbase.com/ventures" },
-                  { src:"/logos/investors/polygon.png",          name:"Polygon",                 dark:true,  href:"https://polygon.technology" },
-                  { src:"/logos/investors/mgx.png",              name:"MGX",                     dark:true,  href:"https://www.mgx.com" },
-                  { src:"/logos/investors/systems.png",          name:"Systems Limited",         dark:false, href:"https://www.systemsltd.com" },
-                  { src:"/logos/investors/founder-institute.png",name:"Founder Institute",       dark:false, href:"https://fi.co" },
+                  { src:"/logos/investors/polygon.webp",          name:"Polygon",                 dark:true,  href:"https://polygon.technology" },
+                  { src:"/logos/investors/mgx.webp",              name:"MGX",                     dark:true,  href:"https://www.mgx.com" },
+                  { src:"/logos/investors/systems.webp",          name:"Systems Limited",         dark:false, href:"https://www.systemsltd.com" },
+                  { src:"/logos/investors/founder-institute.webp",name:"Founder Institute",       dark:false, href:"https://fi.co" },
                 ];
                 const all = [...logos, ...logos]; // duplicate for seamless loop
                 return all.map((logo, i) => (

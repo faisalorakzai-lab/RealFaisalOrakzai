@@ -210,7 +210,7 @@
       title: "What is Blockchain? A Complete Beginner's Guide",
       subtitle: "From distributed ledgers to smart contracts — the definitive primer on blockchain technology",
       authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
-      thumbnail: "/mk/blockchain-guide.png", readTime: "25 min read",
+      thumbnail: "/mk/blockchain-guide.webp", readTime: "25 min read",
       tags: ["Blockchain","DLT","Web3","DeFi","Cryptography","RWA","Tokenization","Smart Contracts"],
       customBody: BlockchainBasicVisual,
       content: `
@@ -1608,7 +1608,7 @@ As the digital economy evolves, blockchain is expected to become a foundational 
         title: "Blockchain Infrastructure Explained",
         subtitle: "The Complete Guide to the Technology That Powers Blockchain Networks",
         authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
-        thumbnail: "/mk/thumb-blockchain-infra.png", readTime: "35 min read",
+        thumbnail: "/mk/thumb-blockchain-infra.webp", readTime: "35 min read",
         tags: ["Blockchain","Infrastructure","Nodes","Consensus","Layer-2","Validators","RPC","Web3"],
         customBody: BlockchainInfraVisual,
         content: `
@@ -2328,7 +2328,7 @@ Layer 2 Blockchain
           title: "Public vs Private vs Consortium Blockchains",
           subtitle: "The Complete Enterprise Guide to Blockchain Architecture (2026)",
           authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
-          thumbnail: "/mk/thumb-blockchain-types.png", readTime: "28 min read",
+          thumbnail: "/mk/thumb-blockchain-types.webp", readTime: "28 min read",
           tags: ["Blockchain Types","Public Blockchain","Private Blockchain","Consortium Blockchain","Hybrid Blockchain","Enterprise Blockchain","Permissioned","Permissionless"],
           customBody: BlockchainTypesVisual,
           content: `
@@ -2409,7 +2409,7 @@ Layer 2 Blockchain
     title: "Building Enterprise Blockchain Ecosystems",
     subtitle: "The Complete Guide for Businesses & Governments — Architecture, Governance & Future (2026)",
     authors: "Faisal Orakzai", year: "2026", category: "BLOCKCHAIN",
-    thumbnail: "/mk/enterprise-blockchain-hero.png", readTime: "40 min read",
+    thumbnail: "/mk/enterprise-blockchain-hero.webp", readTime: "40 min read",
     tags: ["Enterprise Blockchain","Blockchain Architecture","Enterprise Smart Contracts","Blockchain Governance","Digital Public Infrastructure","AI and Blockchain","Enterprise Tokenization","Permissioned Blockchain","Blockchain Interoperability","Enterprise Digital Identity","Blockchain Security","Enterprise Web3"],
     content: `Introduction
 
@@ -7119,7 +7119,7 @@ Enterprise blockchain represents the evolution of blockchain technology from ind
                 {/* Lead Author */}
                 <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"12px", marginBottom:"1.25rem" }}>
                   <div style={{ display:"flex", alignItems:"center", gap:"16px" }}>
-                    <img src="/faisal-avatar.png" alt="Faisal Orakzai"
+                    <img src="/faisal-avatar.webp" alt="Faisal Orakzai"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const fb = e.currentTarget.parentElement?.querySelector(".avatar-fb") as HTMLElement; if(fb) fb.style.display="flex"; }}
                       style={{ width:"64px", height:"64px", borderRadius:"50%", objectFit:"cover", objectPosition:"center 15%", border:"2px solid rgba(243,186,47,0.55)", flexShrink:0 }}/>
                     <div className="avatar-fb" style={{ display:"none", width:"64px", height:"64px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", alignItems:"center", justifyContent:"center", fontWeight:800, fontSize:"22px", color:"#000", flexShrink:0 }}>F</div>
@@ -7141,9 +7141,9 @@ Enterprise blockchain represents the evolution of blockchain technology from ind
                 </div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:"20px" }}>
                   {([
-                    { img:"/coauthor-parkes.jpg", name:"Dr. David Parkes",       role:"Harvard — CS & Economics" },
-                    { img:"/coauthor-saif.jpg",   name:"Dr. Saif Ullah Rehman",  role:"Blockchain Research" },
-                    { img:"/coauthor-shoab.jpg",  name:"Dr. Shoab A. Khan",      role:"NUST — Digital Systems" },
+                    { img:"/coauthor-parkes.webp", name:"Dr. David Parkes",       role:"Harvard — CS & Economics" },
+                    { img:"/coauthor-saif.webp",   name:"Dr. Saif Ullah Rehman",  role:"Blockchain Research" },
+                    { img:"/coauthor-shoab.webp",  name:"Dr. Shoab A. Khan",      role:"NUST — Digital Systems" },
                   ] as { img: string; name: string; role: string }[]).map(co => (
                     <div key={co.name} style={{ display:"flex", alignItems:"center", gap:"10px" }}>
                       <img src={co.img} alt={co.name} style={{ width:"40px", height:"40px", borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:"1.5px solid rgba(243,186,47,0.28)", flexShrink:0, background:"#111" }} />

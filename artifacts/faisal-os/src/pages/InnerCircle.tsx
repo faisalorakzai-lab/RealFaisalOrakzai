@@ -923,7 +923,7 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
               boxShadow:`0 0 20px ${A}40,0 0 8px ${B}20,inset 0 0 12px rgba(0,0,0,0.6)`,
               padding:4,boxSizing:"border-box",
               display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <img src="/logos/okzbyte.png" alt="OkzByte"
+              <img src="/logos/okzbyte.webp" alt="OkzByte"
                 style={{width:"100%",height:"100%",objectFit:"contain",
                   filter:`drop-shadow(0 0 6px ${C}80) brightness(1.1)`}}/>
             </div>
@@ -1080,7 +1080,7 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
               boxShadow:`0 0 22px ${A}45,0 0 10px ${B}25,inset 0 0 12px rgba(0,0,0,0.6)`,
               padding:4,boxSizing:"border-box",
               display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <img src="/logos/okzbyte.png" alt="OkzByte"
+              <img src="/logos/okzbyte.webp" alt="OkzByte"
                 style={{width:"100%",height:"100%",objectFit:"contain",
                   filter:`drop-shadow(0 0 8px ${C}80) sepia(0.4) saturate(1.5) brightness(1.1)`}}/>
             </div>
@@ -1236,7 +1236,7 @@ const FOUNDER_SIG_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHnC
               boxShadow:`0 0 25px ${G2}45,0 0 12px ${G3}20,0 0 0 1px ${G3}10,inset 0 0 16px rgba(0,0,0,0.7)`,
               padding:4,boxSizing:"border-box",
               display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <img src="/logos/okzbyte.png" alt="OkzByte"
+              <img src="/logos/okzbyte.webp" alt="OkzByte"
                 style={{width:"100%",height:"100%",objectFit:"contain",
                   filter:`drop-shadow(0 0 8px ${G3}90) drop-shadow(0 0 16px ${G2}60) brightness(1.15)`}}/>
             </div>
@@ -1725,7 +1725,7 @@ function CardPhase({
     return (
       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[9px] font-black tracking-widest uppercase"
         style={{ background:`${accent}18`, border:`1px solid ${accent}50`, color:accent, boxShadow:`0 0 10px ${accent}25` }}>
-        {tier === 3 && <img src="/logos/okzbyte.png" alt="" style={{ width:9, height:9, objectFit:"contain", filter:`drop-shadow(0 0 3px ${accent})` }}/>}
+        {tier === 3 && <img src="/logos/okzbyte.webp" alt="" style={{ width:9, height:9, objectFit:"contain", filter:`drop-shadow(0 0 3px ${accent})` }}/>}
         {cfg.emoji} {cfg.name}
       </span>
     );
@@ -1918,7 +1918,7 @@ function CardPhase({
         <div className="min-h-screen bg-black text-white">
           <div className="sticky top-0 z-40 px-4 py-3 flex items-center justify-between" style={{ background:"rgba(0,0,0,0.92)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex items-center gap-2">
-              <img src="/logos/okzbyte.png" alt="" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
+              <img src="/logos/okzbyte.webp" alt="" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
               <span className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{color:`${accent}70`}}>OkzByte Hub</span>
             </div>
             <div className="font-mono text-[8px] border border-white/10 px-2.5 py-1 rounded-full text-white/25">{daysLeft}d left</div>
@@ -2297,7 +2297,7 @@ function CardPhase({
         <div className="min-h-screen bg-black text-white">
           <div className="sticky top-0 z-40 px-4 py-3 flex items-center justify-between" style={{ background:"rgba(0,0,0,0.92)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex items-center gap-2">
-              <img src="/logos/okzbyte.png" alt="" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
+              <img src="/logos/okzbyte.webp" alt="" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
               <span className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{color:`${accent}70`}}>OkzByte Hub</span>
             </div>
             <div className="font-mono text-[8px] border border-white/10 px-2.5 py-1 rounded-full text-white/25">{daysLeft}d left</div>
@@ -2381,7 +2381,7 @@ function CardPhase({
         <div className="sticky top-0 z-40 px-4 py-3 flex items-center justify-between"
           style={{ background:"rgba(0,0,0,0.92)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
           <div className="flex items-center gap-2">
-            <img src="/logos/okzbyte.png" alt="OkzByte" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
+            <img src="/logos/okzbyte.webp" alt="OkzByte" style={{ width:26, height:26, objectFit:"contain", filter:`drop-shadow(0 0 8px ${accent}80)` }}/>
             <span className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{color:`${accent}70`}}>OkzByte Hub</span>
           </div>
           <div className="font-mono text-[8px] border border-white/10 px-2.5 py-1 rounded-full text-white/25">{daysLeft}d left</div>

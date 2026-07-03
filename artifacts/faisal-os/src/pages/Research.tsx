@@ -72,7 +72,7 @@ const ENTRIES: Entry[] = [
       tags: ["Blockchain", "DLT", "Web3", "DeFi", "Cryptography", "RWA", "Tokenization", "Smart Contracts"],
       status: "PUBLISHED",
       slug: "blockchain-basic",
-      thumbnail: "/mk/blockchain-guide.png",
+      thumbnail: "/mk/blockchain-guide.webp",
       readTime: "25 min read",
       keywords: "blockchain, what is blockchain, distributed ledger, smart contracts, DeFi, Web3, cryptocurrency, Faisal Orakzai",
       },
@@ -85,7 +85,7 @@ const ENTRIES: Entry[] = [
         tags: ["Blockchain", "Infrastructure", "Nodes", "Consensus", "Layer-2", "Validators", "RPC", "Web3"],
         status: "PUBLISHED",
         slug: "blockchain-infra",
-        thumbnail: "/mk/thumb-blockchain-infra.png",
+        thumbnail: "/mk/thumb-blockchain-infra.webp",
         readTime: "35 min read",
         keywords: "blockchain infrastructure, blockchain nodes, validators, consensus, Layer-2, RPC, smart contracts, Web3, Faisal Orakzai",
       },
@@ -170,7 +170,7 @@ const ENTRIES: Entry[] = [
           tags: ["Blockchain Types", "Public Blockchain", "Private Blockchain", "Consortium Blockchain", "Hybrid Blockchain", "Enterprise Blockchain", "Permissioned", "Web3"],
           status: "PUBLISHED",
           slug: "blockchain-types",
-          thumbnail: "/mk/thumb-blockchain-types.png",
+          thumbnail: "/mk/thumb-blockchain-types.webp",
           readTime: "28 min read",
           keywords: "public blockchain, private blockchain, consortium blockchain, hybrid blockchain, enterprise blockchain, permissioned blockchain, blockchain architecture, Faisal Orakzai",
         },
@@ -182,7 +182,7 @@ const ENTRIES: Entry[] = [
           tags: ["Enterprise Blockchain", "Blockchain Architecture", "Enterprise Smart Contracts", "Blockchain Governance", "Digital Public Infrastructure", "AI and Blockchain", "Enterprise Tokenization", "Permissioned Blockchain", "Blockchain Interoperability", "Enterprise Digital Identity", "Blockchain Security", "Enterprise Web3"],
           status: "PUBLISHED",
           slug: "enterprise-blockchain-ecosystems-guide",
-          thumbnail: "/mk/enterprise-blockchain-hero.png",
+          thumbnail: "/mk/enterprise-blockchain-hero.webp",
           readTime: "40 min read",
           keywords: "enterprise blockchain, enterprise blockchain ecosystem, blockchain architecture, enterprise smart contracts, blockchain governance, AI and blockchain, digital public infrastructure, blockchain interoperability, enterprise tokenization, permissioned blockchain, blockchain security, enterprise web3, enterprise digital transformation, Faisal Orakzai",
         },
@@ -712,7 +712,7 @@ function CardHeader({ entry, hov, isWp }: { entry: Entry; hov: boolean; isWp?: b
             {/* Footer meta */}
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap" as const, gap:"8px", paddingTop:"0.9rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
               <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
-                <img src="/faisal-avatar.png" alt="Faisal Orakzai"
+                <img src="/faisal-avatar.webp" alt="Faisal Orakzai"
                   onError={(e)=>{ const el=e.target as HTMLImageElement; el.style.display="none"; const fb=el.parentElement?.querySelector(".card-fb") as HTMLElement; if(fb) fb.style.display="flex"; }}
                   style={{ width:"28px", height:"28px", borderRadius:"50%", objectFit:"cover", objectPosition:"center 15%", border:"1.5px solid rgba(243,186,47,0.45)", flexShrink:0 }} />
                 <div className="card-fb" style={{ width:"28px", height:"28px", borderRadius:"50%", background:"linear-gradient(135deg,#F3BA2F,#c8900a)", display:"none", alignItems:"center", justifyContent:"center", fontSize:"11px", fontWeight:700, color:"black", flexShrink:0 }}>F</div>
