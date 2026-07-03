@@ -468,6 +468,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
     return (
       <>
+        <style>{`
+          @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+          @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
+          @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+        `}</style>
         <SEOHead
           title="Orakzai Ecosystem — Ventures, Blockchain & AI Infrastructure"
           description="The complete Orakzai Group ecosystem — OKBOND blockchain, Shamim Forever luxury brand, OkzByte Technology AI, OrakzaiX automation platform, and real estate tokenization."
@@ -1075,12 +1080,7 @@ import { motion, AnimatePresence } from "framer-motion";
               );
             })()}
           </AnimatePresence>
-          <style>{`
-          @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-          @keyframes dp { 0%,100%{opacity:1;box-shadow:0 0 6px #F3BA2F} 50%{opacity:0.4;box-shadow:0 0 16px #F3BA2F} }
-          @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-        `}</style>
-      </div>
+          </div>
       </>
     );
   }
