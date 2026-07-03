@@ -4,34 +4,34 @@
           xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
     <!-- ── Core Pages ── -->
-    <url><loc>https://faisalorakzai.com/</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <url><loc>https://faisalorakzai.com/</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
       <image:image><image:loc>https://faisalorakzai.com/og-image.jpg</image:loc><image:title>Muhammad Faisal Orakzai — Founder Orakzai Group</image:title></image:image>
     </url>
-    <url><loc>https://faisalorakzai.com/founder</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.95</priority>
+    <url><loc>https://faisalorakzai.com/founder</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.95</priority>
       <image:image><image:loc>https://faisalorakzai.com/story/story-01.jpg</image:loc><image:title>Faisal Orakzai — Founder &amp; Chairman Orakzai Group</image:title></image:image>
     </url>
-    <url><loc>https://faisalorakzai.com/ecosystem</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
-    <url><loc>https://faisalorakzai.com/benchmarks</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
-    <url><loc>https://faisalorakzai.com/press</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-    <url><loc>https://faisalorakzai.com/learning</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-    <url><loc>https://faisalorakzai.com/media</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-    <url><loc>https://faisalorakzai.com/investment</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/contact</loc><lastmod>2026-06-28</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://faisalorakzai.com/ecosystem</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+    <url><loc>https://faisalorakzai.com/benchmarks</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+    <url><loc>https://faisalorakzai.com/press</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+    <url><loc>https://faisalorakzai.com/learning</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://faisalorakzai.com/media</loc><lastmod>2026-07-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+    <url><loc>https://faisalorakzai.com/investment</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/contact</loc><lastmod>2026-07-03</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
 
     <!-- ── Research Articles ── -->
     <url>
       <loc>https://faisalorakzai.com/research/blockchain-basic</loc>
-      <lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+      <lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
       <image:image><image:loc>https://faisalorakzai.com/mk/blockchain-guide.png</image:loc><image:title>What is Blockchain? A Complete Beginner's Guide — Faisal Orakzai Research Lab</image:title></image:image>
     </url>
-    <url><loc>https://faisalorakzai.com/research/blockchain-infra</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/enterprise-blockchain</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/rwa-tokenization</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/blockchain-types</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/smart-contracts</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/consensus-security</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://faisalorakzai.com/research/web3-future</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-    <url><loc>https://faisalorakzai.com/research/digital-identity</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-    <url><loc>https://faisalorakzai.com/research/crosschain-tech</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+    <url><loc>https://faisalorakzai.com/research/blockchain-infra</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/enterprise-blockchain</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/rwa-tokenization</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/blockchain-types</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/smart-contracts</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/consensus-security</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://faisalorakzai.com/research/web3-future</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+    <url><loc>https://faisalorakzai.com/research/digital-identity</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+    <url><loc>https://faisalorakzai.com/research/crosschain-tech</loc><lastmod>2026-07-03</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
   </urlset>
