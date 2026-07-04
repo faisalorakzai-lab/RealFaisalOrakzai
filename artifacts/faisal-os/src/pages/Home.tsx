@@ -13,9 +13,9 @@ const fadeUp = {
 };
 
 const VIDEOS = [
-  { src: "/video-globe.mp4", label: "01 / DIGITAL EARTH", title: "Global\nPresence", sub: "Building ventures that transcend borders — from Karachi to the world.", tag: "INTERNATIONAL" },
-  { src: "/video-network.mp4", label: "02 / NETWORK INFRASTRUCTURE", title: "Connected\nSystems", sub: "Interconnected nodes of capital, intelligence, and real-world execution.", tag: "ECOSYSTEM" },
-  { src: "/video-blockchain.mp4", label: "03 / BLOCKCHAIN LEDGER", title: "Immutable\nFoundations", sub: "Transparent, decentralized financial systems redefining asset ownership.", tag: "WEB3" },
+  { src: "/video-globe.mp4", poster: "/video-globe-poster.webp", label: "01 / DIGITAL EARTH", title: "Global\nPresence", sub: "Building ventures that transcend borders — from Karachi to the world.", tag: "INTERNATIONAL" },
+  { src: "/video-network.mp4", poster: "/video-network-poster.webp", label: "02 / NETWORK INFRASTRUCTURE", title: "Connected\nSystems", sub: "Interconnected nodes of capital, intelligence, and real-world execution.", tag: "ECOSYSTEM" },
+  { src: "/video-blockchain.mp4", poster: "/video-blockchain-poster.webp", label: "03 / BLOCKCHAIN LEDGER", title: "Immutable\nFoundations", sub: "Transparent, decentralized financial systems redefining asset ownership.", tag: "WEB3" },
 ];
 
 const domains = [
@@ -268,8 +268,8 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        <motion.video ref={webmRef} src={heroPhase === "webm" || heroPhase === "old" ? "/hero-new.webm" : undefined} muted playsInline preload="none" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
-        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.webm" : undefined} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.video ref={webmRef} src={heroPhase === "webm" || heroPhase === "old" ? "/hero-new.webm" : undefined} poster="/hero-new-poster.webp" muted playsInline preload="metadata" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.webm" : undefined} poster="/hero-bg-poster.webp" loop muted playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
 
         <div className="absolute inset-0 bg-black/65 pointer-events-none z-[3]" />
         <div className="absolute inset-0 pointer-events-none z-[3]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px)" }} />
@@ -320,7 +320,7 @@ export default function Home() {
       {/* ── CINEMATIC VIDEO ── */}
       <section ref={cinematicSectionRef} className="relative w-full" style={{ height: "100vh" }}>
         {cinematicInView && VIDEOS.map((v, i) => (
-          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} autoPlay={i === 0} loop muted playsInline preload="none" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
+          <video key={v.src} ref={(el) => { videoRefs.current[i] = el; }} src={v.src} poster={v.poster} autoPlay={i === 0} loop muted playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: activeVideo === i ? 1 : 0 }} />
         ))}
         <div className="absolute inset-0 bg-black/60 pointer-events-none" />
         <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
