@@ -59,7 +59,7 @@ import { useEffect } from "react";
       document.title = fullTitle;
 
       setMeta("name", "description", description);
-      setMeta("name", "author", "Muhammad Faisal Orakzai");
+      setMeta("name", "author", "Faisal Orakzai");
       setMeta("name", "robots", "index, follow, max-image-preview:large");
       if (keywords) setMeta("name", "keywords", keywords);
 
