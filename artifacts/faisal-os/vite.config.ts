@@ -42,6 +42,19 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/framer-motion")) return "framer-motion";
+          if (id.includes("node_modules/three")) return "three";
+          if (
+            id.includes("node_modules/react/") ||
+            id.includes("node_modules/react-dom/")
+          )
+            return "react-vendor";
+        },
+      },
+    },
   },
   server: {
     port,
