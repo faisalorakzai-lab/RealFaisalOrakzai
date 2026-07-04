@@ -15,9 +15,9 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
   const GALLERY = [
     { src:"/story/story-01.jpg", caption:"Orakzai Executive Studio",    year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-02.jpg", caption:"Global Vision — World Stage", year:"2026", location:"International" },
-    { src:"/story/story-03.png", caption:"The Chairman",                year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-03.webp", caption:"The Chairman",                year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-04.webp", caption:"GMA Silicon Valley Summit",   year:"2025", location:"Silicon Valley, USA" },
-    { src:"/story/story-05.png", caption:"Building the Future",         year:"2026", location:"Karachi, Pakistan" },
+    { src:"/story/story-05.webp", caption:"Building the Future",         year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-06.webp", caption:"Orakzai Headquarters",        year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-07.webp", caption:"Dubai — Global Expansion",    year:"2024", location:"Dubai, UAE" },
     { src:"/story/story-08.webp", caption:"Karachi — The Pivot",         year:"2024", location:"Karachi, Pakistan" },

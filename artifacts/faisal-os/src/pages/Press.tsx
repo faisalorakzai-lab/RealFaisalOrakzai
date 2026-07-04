@@ -33,7 +33,7 @@ import SEOHead from "@/components/shared/SEOHead";
       seeAwardUrl: "https://drive.google.com/file/d/12YR3guJ8w-650RYqewhC-CuMUZKgubuk/view?usp=drivesdk",
       datePublished: "2026-03-15",
       category: "Awards",
-      image: "/story/story-05.png",
+      image: "/story/story-05.webp",
       isLead: true,
       authoritative: true,
     },
@@ -47,7 +47,7 @@ import SEOHead from "@/components/shared/SEOHead";
         articleUrl: "https://fi.co/assessment/report",
         datePublished: "2026-04-12",
         category: "Featured",
-        image: "/story/story-05.png",
+        image: "/story/story-05.webp",
         authoritative: true,
       },
       {
