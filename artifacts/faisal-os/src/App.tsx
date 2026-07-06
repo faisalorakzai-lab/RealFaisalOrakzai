@@ -17,6 +17,12 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   const Projects = lazy(() => import("@/pages/Projects"));
   const Research = lazy(() => import("@/pages/Research"));
   const ResearchArticle = lazy(() => import("@/pages/ResearchArticle"));
+    // Kick off the ResearchArticle chunk download early (prefetch on module init)
+    if (typeof window !== "undefined") {
+      const prefetch = () => { import("@/pages/ResearchArticle").catch(() => {}); };
+      if (document.readyState === "complete") prefetch();
+      else window.addEventListener("load", prefetch, { once: true });
+    }
   const Press = lazy(() => import("@/pages/Press"));
   const Learning = lazy(() => import("@/pages/Learning"));
   const Media = lazy(() => import("@/pages/Media"));
@@ -26,8 +32,9 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 
   function RouteLoading() {
     return (
-      <div className="flex items-center justify-center min-h-[60vh] bg-black">
-        <div className="h-8 w-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+      <div className="flex flex-col items-center justify-center min-h-[60vh] bg-black gap-4">
+        <div className="h-8 w-8 rounded-full border-2 border-yellow-400/30 border-t-yellow-400 animate-spin" />
+        <p style={{ fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.25em", color:"rgba(243,186,47,0.5)", textTransform:"uppercase" }}>Loading…</p>
       </div>
     );
   }
@@ -52,7 +59,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
       <div className="flex flex-col min-h-screen bg-black">
         <Navbar />
         <main className="flex-1 relative overflow-hidden">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="sync">
             <motion.div
               key={location}
               variants={pageVariants}
