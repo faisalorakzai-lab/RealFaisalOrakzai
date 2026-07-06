@@ -224,6 +224,38 @@ export default function Founder() {
         </div>
       </section>
 
+      {/* ── EDUCATION ── */}
+      <section className="py-24 border-t border-[#F3BA2F]/10">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-px w-8 bg-[#F3BA2F]" />
+              <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em]">EDUCATION</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold">Foundations of Learning</h2>
+          </motion.div>
+          <div className="space-y-4">
+            {[
+              { org: "Y Combinator", detail: "Startup Accelerator — Entrepreneurship / Entrepreneurial Studies", period: "Jun 2026 – Present" },
+              { org: "Founder Institute", detail: "Founder Program, Karachi (South Asia 2026) — Venture Building", period: "Apr 2025 – Sep 2026" },
+              { org: "Ziauddin University", detail: "Matriculation in Sciences — Islamiat, Pakistan Studies, Civics (Board of Secondary Education)", period: "Apr 2024 – Apr 2026" },
+              { org: "Global Self-Education Platform (GSEP)", detail: "Silent Empire Building — Business Analysis, Advertising", period: "Jan 2019 – Present" },
+              { org: "Yahya Public School, Kohat", detail: "Early education", period: "" },
+              { org: "Madrassa Mahad-ul-Uleman, Kohat", detail: "Early education", period: "" },
+            ].map((e, i) => (
+              <motion.div key={e.org} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} viewport={{ once: true }}
+                className="flex items-start justify-between gap-4 p-5 border border-[#F3BA2F]/10 hover:border-[#F3BA2F]/30 transition-colors flex-wrap">
+                <div>
+                  <p className="text-white font-bold text-base">{e.org}</p>
+                  <p className="text-white/45 text-sm mt-1 leading-relaxed">{e.detail}</p>
+                </div>
+                {e.period && <span className="text-[#F3BA2F] font-mono text-[10px] tracking-widest whitespace-nowrap mt-1">{e.period}</span>}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── FOCUSES ── */}
       <section className="py-24 border-t border-[#F3BA2F]/10">
         <div className="max-w-7xl mx-auto px-6">
