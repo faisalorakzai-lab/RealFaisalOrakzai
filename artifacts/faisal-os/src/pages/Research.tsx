@@ -669,7 +669,7 @@ function CardHeader({ entry, hov, isWp }: { entry: Entry; hov: boolean; isWp?: b
       <motion.div ref={ref} initial={{ opacity:0, y:28 }} animate={inView ? { opacity:1, y:0 } : {}}
         transition={{ duration:0.65, delay:i*0.08, ease:[0.22,1,0.36,1] }}
         style={{ willChange:"transform, opacity", cursor:"pointer" }}
-        onClick={() => setLocation(`/research/${entry.slug}`)}
+        onClick={() => { if (entry.slug) setLocation(`/research/${entry.slug}`); }}
       >
         <article style={{
           border:"1px solid rgba(243,186,47,0.12)",
