@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function BlockchainBasicVisual() {
   const G = "#F3BA2F";
