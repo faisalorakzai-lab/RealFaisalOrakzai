@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Web3FutureVisual() {
   const G = "#F3BA2F";
