@@ -10,6 +10,12 @@ const fadeUp = {
 };
 
 const GALLERY = [
+  { src: "/story/story-mountain.jpg", caption: "Summit — Himalayan Perspective",       year: "2025" },
+  { src: "/story/story-rooftop.jpg",  caption: "Metropolitan Horizon — City Skyline",  year: "2026" },
+  { src: "/story/story-mobile.jpg",   caption: "The Architect — Portrait",             year: "2025" },
+  { src: "/story/story-laughing.jpg", caption: "Visionary at Ease — The Chairman",     year: "2026" },
+  { src: "/story/story-denim.jpg",    caption: "Karachi Streets — Casual Chairman",    year: "2026" },
+  { src: "/story/story-office.jpg",   caption: "Genesis — Early Command",              year: "2022" },
   { src: "/story/story-01.webp", caption: "Orakzai Executive Studio",    year: "2026" },
   { src: "/story/story-02.webp", caption: "Global Vision — World Stage", year: "2026" },
   { src: "/story/story-03.webp", caption: "The Chairman",                year: "2026" },
