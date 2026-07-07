@@ -54,10 +54,10 @@ const FAQ_SCHEMA = {
     },
     {
       "@type": "Question",
-      "name": "What awards has Faisal Orakzai received?",
+      "name": "What is OrakzaiX AI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Faisal Orakzai has received the Stevie Gold Award for Technology Innovation (2026) and GMA Silicon Valley Recognition (2025) for his contributions to blockchain technology and entrepreneurship."
+        "text": "OrakzaiX AI is an artificial intelligence automation platform and research framework under Orakzai Group, founded by Faisal Orakzai. It focuses on developing AI-driven systems for enterprise and consumer applications including intelligent workflow automation and AI infrastructure."
       }
     },
     {
@@ -131,6 +131,10 @@ export default function HomeSchema() {
   useEffect(() => {
     const id = "home-faq-schema";
     if (document.getElementById(id)) return;
+    // Skip if static FAQPage schema already present (prevents duplicate with index.html)
+    const alreadyHasFAQ = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+      .some(s => s.textContent?.includes('"FAQPage"'));
+    if (alreadyHasFAQ) return;
     const s = document.createElement("script");
     s.id = id;
     s.type = "application/ld+json";
