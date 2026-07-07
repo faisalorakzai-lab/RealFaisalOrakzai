@@ -386,7 +386,12 @@ const STATUS_CLS: Record<string, string> = {
 function useSEO() {
   useEffect(() => {
     const prev = document.title;
-    document.title = "Central Knowledge Repository — Faisal Orakzai";
+    document.title = "Orakzai Research Lab — Blockchain, AI & Cryptography | Faisal Orakzai";
+
+    // Set canonical URL for /research
+    { let cel = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!cel) { cel = document.createElement("link"); cel.rel = "canonical"; document.head.appendChild(cel); }
+      cel.href = "https://faisalorakzai.com/research"; }
 
     let dcLink = document.querySelector<HTMLLinkElement>("link[rel='schema.DC']");
     const dcNew = !dcLink;
@@ -406,12 +411,12 @@ function useSEO() {
       ["DC.creator",    AUTHOR.nameCitation, "name"],
       ["DC.subject",    "Blockchain Engineering; Cryptographic Protocols; AI Systems; RWA Tokenization; DeFi; OKBOND", "name"],
       ["DC.publisher",  AUTHOR.org, "name"],
-      ["DC.date",       "2024", "name"],
+      ["DC.date",       "2026", "name"],
       ["DC.type",       "Collection", "name"],
       ["DC.format",     "text/html", "name"],
       ["DC.identifier", `${AUTHOR.website}/research`, "name"],
       ["DC.language",   "en", "name"],
-      ["og:title",      "Central Knowledge Repository — Faisal Orakzai", "property"],
+      ["og:title",      "Orakzai Research Lab — Blockchain, AI & Cryptography | Faisal Orakzai", "property"],
       ["og:description","Blockchain engineering research, cryptographic white papers, OKBOND sovereign bond protocol, and live production repositories.", "property"],
       ["og:type",       "website", "property"],
       ["og:url",        `${AUTHOR.website}/research`, "property"],
