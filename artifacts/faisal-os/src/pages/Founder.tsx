@@ -6,7 +6,7 @@ import SEOHead from "@/components/shared/SEOHead";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1 } }),
+  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1 } })
 };
 
 const GALLERY = [
@@ -19,7 +19,7 @@ const GALLERY = [
   { src: "/story/story-01.webp", caption: "Orakzai Executive Studio",    year: "2026" },
   { src: "/story/story-02.webp", caption: "Global Vision — World Stage", year: "2026" },
   { src: "/story/story-03.webp", caption: "The Chairman",                year: "2026" },
-  { src: "/story/story-04.webp", caption: "GMA Silicon Valley Summit",   year: "2026" },
+  { src: "/story/story-04.webp", caption: "",   year: "2026" },
   { src: "/story/story-05.webp", caption: "Building the Future",         year: "2026" },
   { src: "/story/story-06.webp", caption: "Orakzai Headquarters",        year: "2026" },
   { src: "/story/story-07.webp", caption: "Dubai — Global Expansion",    year: "2024" },
@@ -35,7 +35,7 @@ const GALLERY = [
   { src: "/story/story-17.webp", caption: "Heritage & Legacy",           year: "2024" },
   { src: "/story/story-18.webp", caption: "Rising Leader",               year: "2024" },
   { src: "/story/story-19.webp", caption: "Orakzai Nation",              year: "2023" },
-  { src: "/story/story-20.webp", caption: "Genesis Point",               year: "2019" },
+  { src: "/story/story-20.webp", caption: "Genesis Point",               year: "2019" }
 ];
 
 const TIMELINE = [
@@ -44,16 +44,16 @@ const TIMELINE = [
     events: [
       { year: "2006", title: "Birth Matrix", body: "Muhammad Faisal Orakzai (فیصل اورکزئی) is born on April 30, 2006, in Mamuzai, Orakzai Agency, Tirah, Khyber Pakhtunkhwa — rugged tribal terrain that forged an uncommon resilience." },
       { year: "2010", title: "The Displacement Corridor", body: "Regional conflicts intensify. The family undergoes strategic relocation to Kohat. Faisal manages rural livestock assets in the mountains — anchoring an early, visceral understanding of decentralized resource management." },
-      { year: "2011–2017", title: "Academic Foundations", body: "Parallel processing of traditional and modern systems. Enrolled at Madrassa Mahad-ul-Uleman alongside formal primary schooling at Yahya Public School, Kohat — developing sharp analytical and disciplined cognitive frameworks." },
-    ],
+      { year: "2011–2017", title: "Academic Foundations", body: "Parallel processing of traditional and modern systems. Enrolled at Madrassa Mahad-ul-Uleman alongside formal primary schooling at Yahya Public School, Kohat — developing sharp analytical and disciplined cognitive frameworks." }
+    ]
   },
   {
     phase: "PHASE II", label: "METROPOLITAN SHIFT", range: "2018 – 2023",
     events: [
       { year: "2018", title: "The Karachi Core Deployment", body: "At just 12 years old, facing heavy family challenges, Faisal executes a high-risk transition to the economic capital, Karachi. Living in PECHS, he enters the cutthroat micro-markets of local real estate." },
       { year: "2019–2021", title: "Tri-City Real Estate Nexus", body: "Through rigorous self-study and high-level local mentorship, expands real estate brokerage and arbitrage networks across a tri-city grid: Karachi, Peshawar, and Kohat. Establishes the parent umbrella corporate identity: Orakzai Group." },
-      { year: "2022–2023", title: "The Technical Pivot", body: "Recognizing that physical real estate lacks rapid scalability, Faisal pivots to global technology systems. Begins intensive research into digital asset custody, algorithmic trading, and system design — enrolling at Ziauddin Medical University (SMC) for elite structural academic paradigms." },
-    ],
+      { year: "2022–2023", title: "The Technical Pivot", body: "Recognizing that physical real estate lacks rapid scalability, Faisal pivots to global technology systems. Begins intensive research into digital asset custody, algorithmic trading, and system design — enrolling at Ziauddin Medical University (SMC) for elite structural academic paradigms." }
+    ]
   },
   {
     phase: "PHASE III", label: "BLOCKCHAIN ARTIFACTS", range: "2024 – 2026",
@@ -61,17 +61,17 @@ const TIMELINE = [
       { year: "2024–2025", title: "Global Network Assembly", body: "Orakzai Group evolves into a tech infrastructure lab. Engineers early database schemas for Orakzai Ventures. Expands horizons via institutional gateway networks spanning Dubai and Düsseldorf, Germany — absorbing BlackRock-level tokenization aesthetics." },
       { year: "Early 2026", title: "High-Throughput Automation Era", body: "Launches OrakzaiX and AdamX — high-throughput AI and machine-learning automation frameworks designed to eliminate human latency in corporate digital operations." },
       { year: "April 2026", title: "Orakzai Bond Launch", body: "Architecturally deploys Orakzai Bond (OKBOND) natively on Polygon Layer-2 — a deflationary, 10-million maximum supply, treasury-backed capital protection framework utilizing Cycle-Based Activation Logic with high industrial validation on SolidityScan." },
-      { year: "June 2026", title: "Cryptographic Provenance", body: "Integrates Web3 networks with ultra-luxury markets. Takes ownership as Founder & Owner of Shamim Forever — a museum-grade luxury brand (perfumes, bespoke sapphire jewelry, cosmetics) secured through cryptographic provenance tokens to eliminate global counterfeits." },
-    ],
+      { year: "June 2026", title: "Cryptographic Provenance", body: "Integrates Web3 networks with ultra-luxury markets. Takes ownership as Founder & Owner of Shamim Forever — a museum-grade luxury brand (perfumes, bespoke sapphire jewelry, cosmetics) secured through cryptographic provenance tokens to eliminate global counterfeits." }
+    ]
   },
   {
     phase: "PHASE IV", label: "SOVEREIGN PROJECTIONS", range: "2027 – 2040", future: true,
     events: [
       { year: "2027–2030", title: "OreC Protocol Horizon", body: "Complete deployment of the OreC Protocol — tokenizing multi-million dollar institutional real estate nodes across Pakistan and UAE into tradeable digital fractions under OKBOND." },
       { year: "2031–2035", title: "Automated Global OTC Framework", body: "Launching the OKBOND Over-The-Counter (OTC) ecosystem application globally — integrating micro-mobility services, automated wealth distribution matrix, and high-end fractional investment layers." },
-      { year: "2036–2040", title: "The Autonomous Sovereign Conglomerate", body: "Transitioning Orakzai Group into a fully autonomous, cross-border digital nation asset class — operating where artificial intelligence, blockchain custody, and luxury consumer markets merge into a self-sustaining economic system." },
-    ],
-  },
+      { year: "2036–2040", title: "The Autonomous Sovereign Conglomerate", body: "Transitioning Orakzai Group into a fully autonomous, cross-border digital nation asset class — operating where artificial intelligence, blockchain custody, and luxury consumer markets merge into a self-sustaining economic system." }
+    ]
+  }
 ];
 
 const focuses = [
@@ -80,14 +80,14 @@ const focuses = [
   "Real estate and investment models",
   "Scalable business structures",
   "Luxury commerce & brand development",
-  "Financial technology & tokenization",
+  "Financial technology & tokenization"
 ];
 
 const principles = [
   { title: "System Thinking", desc: "Every business is a system. Understanding the structure reveals the leverage." },
   { title: "Long-Term Value", desc: "Short-term trends fade. Only fundamentals compound." },
   { title: "Technology as Infrastructure", desc: "AI and blockchain aren't sectors — they're the new foundation of commerce." },
-  { title: "Execution Over Ideas", desc: "Ideas are abundant. The rarest resource is disciplined execution." },
+  { title: "Execution Over Ideas", desc: "Ideas are abundant. The rarest resource is disciplined execution." }
 ];
 
 
@@ -241,7 +241,7 @@ export default function Founder() {
               { org: "Ziauddin University", detail: "Matriculation in Sciences — Islamiat, Pakistan Studies, Civics (Board of Secondary Education)", period: "Apr 2024 – Apr 2026" },
               { org: "Global Self-Education Platform (GSEP)", detail: "Silent Empire Building — Business Analysis, Advertising", period: "Jan 2019 – Present" },
               { org: "Yahya Public School, Kohat", detail: "Early education", period: "" },
-              { org: "Madrassa Mahad-ul-Uleman, Kohat", detail: "Early education", period: "" },
+              { org: "Madrassa Mahad-ul-Uleman, Kohat", detail: "Early education", period: "" }
             ].map((e, i) => (
               <motion.div key={e.org} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} viewport={{ once: true }}
                 className="flex items-start justify-between gap-4 p-5 border border-[#F3BA2F]/10 hover:border-[#F3BA2F]/30 transition-colors flex-wrap">
