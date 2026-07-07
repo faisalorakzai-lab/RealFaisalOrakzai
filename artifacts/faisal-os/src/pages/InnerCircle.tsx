@@ -1807,7 +1807,21 @@ function CardPhase({
     const selectedSpace = SPACES_DATA.find(s => s.id === selectedSpId) ?? null;
 
     useEffect(() => {
-      document.title = "OkzByte Hub";
+      document.title = "OkzByte Hub — Sovereign Membership | Faisal Orakzai";
+    // Set per-page meta for this gated community route
+    const _sm = (n: string, v: string, p = false) => {
+      const sel = p ? `meta[property="${n}"]` : `meta[name="${n}"]`;
+      let el = document.querySelector(sel) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement("meta"); el.setAttribute(p ? "property" : "name", n); document.head.appendChild(el); }
+      el.content = v;
+    };
+    _sm("description", "OkzByte Hub by Faisal Orakzai — exclusive blockchain & AI sovereign community. Tiered membership: Matrix Developer, Enterprise Architect, Sovereign Founder. Premium crypto signals, AI knowledge, and direct founder sessions.");
+    _sm("og:title", "OkzByte Hub — Sovereign Membership | Faisal Orakzai", true);
+    _sm("og:description", "OkzByte Hub — exclusive blockchain & AI community by Faisal Orakzai. Tiered membership with crypto signals, AI knowledge base, and 1-on-1 founder access.", true);
+    _sm("og:url", "https://faisalorakzai.com/okzbyte-hub", true);
+    { let cel = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!cel) { cel = document.createElement("link"); cel.rel = "canonical"; document.head.appendChild(cel); }
+      cel.href = "https://faisalorakzai.com/okzbyte-hub"; }
       const exp = parseInt(LS.get("okz_expires") || "0");
       if (!exp) return;
       const tick = () => {
