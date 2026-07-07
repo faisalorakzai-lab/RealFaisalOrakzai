@@ -8,6 +8,17 @@
       "has": [
         {
           "type": "host",
+          "value": "faisalorakzai.vercel.app"
+        }
+      ],
+      "destination": "https://faisalorakzai.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
           "value": "www.faisalorakzai.com"
         }
       ],
@@ -76,19 +87,58 @@
     }
   ],
   "rewrites": [
-    { "source": "/papers/:paper", "destination": "/papers/:paper.html" },
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/founder", "destination": "/index.html" },
-    { "source": "/ecosystem", "destination": "/index.html" },
-    { "source": "/benchmarks", "destination": "/index.html" },
-    { "source": "/research", "destination": "/index.html" },
-    { "source": "/research/:slug", "destination": "/index.html" },
-    { "source": "/press", "destination": "/index.html" },
-    { "source": "/learning", "destination": "/index.html" },
-    { "source": "/media", "destination": "/index.html" },
-    { "source": "/investment", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/okzbyte-hub", "destination": "/index.html" }
+    {
+      "source": "/papers/:paper",
+      "destination": "/papers/:paper.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/founder",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ecosystem",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/benchmarks",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/research",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/research/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/press",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/learning",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/media",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/investment",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/okzbyte-hub",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
@@ -322,6 +372,24 @@
       ]
     },
     {
+      "source": "/research/:slug",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/research/:slug>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/okzbyte-hub",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/okzbyte-hub>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
       "source": "/sitemap.xml",
       "headers": [
         {
@@ -383,6 +451,21 @@
         {
           "key": "X-Robots-Tag",
           "value": "index, follow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "faisalorakzai.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         }
       ]
     }
