@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import SEOHead from "@/components/shared/SEOHead";
 
 // ─── CSS Keyframes ────────────────────────────────────────────────────────────
 const STYLES = `
@@ -382,6 +383,12 @@ const BENCHMARKS = [
 export default function Benchmarks() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <SEOHead
+        title="Benchmarks — Personal Architecture"
+        description="Three personal benchmarks and sovereign principles of Muhammad Faisal Orakzai — Founder & Chairman of Orakzai Group. Personal. Sovereign. Non-negotiable."
+        path="/benchmarks"
+        keywords="Faisal Orakzai benchmarks, personal standards, Orakzai Group founder, blockchain entrepreneur Pakistan"
+      />
       {/* Inject CSS keyframes */}
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
