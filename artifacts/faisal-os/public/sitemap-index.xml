@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages: home, founder, ecosystem, benchmarks, research hub, press, etc. -->
   <sitemap>
     <loc>https://faisalorakzai.com/sitemap.xml</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-07</lastmod>
   </sitemap>
+
+  <!-- Research articles (10 long-form articles) + whitepapers (6 papers) -->
   <sitemap>
     <loc>https://faisalorakzai.com/research-sitemap.xml</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-07</lastmod>
   </sitemap>
+
 </sitemapindex>
