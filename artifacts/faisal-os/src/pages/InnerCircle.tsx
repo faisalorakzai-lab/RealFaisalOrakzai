@@ -386,8 +386,20 @@ function WalletPhase({ onConnected }: { onConnected: (addr: string) => void }) {
               blockExplorerUrls: ["https://polygonscan.com/"],
             }],
           });
+        } else {
+          throw switchErr;
         }
       }
+
+      // Verify we actually ended up on Polygon before proceeding —
+      // switch/add calls can silently no-op if the user dismisses a follow-up prompt.
+      const currentChainId = await eth.request({ method: "eth_chainId" }) as string;
+      if (currentChainId?.toLowerCase() !== CHAIN_ID_POLYGON.toLowerCase()) {
+        setErrMsg("Please switch to the Polygon network in your wallet to continue.");
+        setStatus("error");
+        return;
+      }
+
       onConnected(addr);
     } catch (e: unknown) {
       const err = e as { code?: number; message?: string };
