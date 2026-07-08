@@ -202,7 +202,7 @@
 
   const ARTICLES: Record<string, {
     slug: string; title: string; subtitle: string; authors: string; year: string;
-    category: string; thumbnail?: string; tags: string[]; readTime: string; content: string;
+    category: string; thumbnail?: string; tags: string[]; readTime: string; content: string; pdfUrl?: string;
   }> = {
     "blockchain-basic": {
       slug: "blockchain-basic",

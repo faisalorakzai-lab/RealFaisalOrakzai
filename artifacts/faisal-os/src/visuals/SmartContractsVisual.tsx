@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function SmartContractsVisual() {
   const h2Style: React.CSSProperties = { fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:"clamp(1.45rem,4vw,2rem)", color:"rgba(255,255,255,0.95)", margin:"3.5rem 0 1rem", lineHeight:1.25, letterSpacing:"-0.02em" };
   const h3Style: React.CSSProperties = { fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1.1rem,3vw,1.45rem)", color:"rgba(255,255,255,0.88)", margin:"2.25rem 0 0.75rem", lineHeight:1.3 };
+  const h4Style: React.CSSProperties = { fontFamily:"'Playfair Display',Georgia,serif", fontWeight:600, fontSize:"clamp(1rem,2.4vw,1.2rem)", color:"rgba(255,255,255,0.85)", margin:"0 0 0.5rem", lineHeight:1.35 };
   const G = "#F3BA2F";
   const GB = "rgba(243,186,47,0.18)";
   const GD = "rgba(243,186,47,0.05)";

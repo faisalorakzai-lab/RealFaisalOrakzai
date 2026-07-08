@@ -9,7 +9,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import {
-  Globe, Bot, BarChart2, Users, Shield, Crown, Mic, Video,
+  Globe, Bot, BarChart2, Users, Shield, Crown, Mic, MicOff, Video,
   Heart, MessageCircle, Clock, Radio, ChevronRight, ChevronDown,
   Check, Wallet, Upload, Download, ArrowRight, X, Zap, RotateCcw, Pen,
 } from "lucide-react";
@@ -1382,7 +1382,7 @@ function CardPhase({
   const [exported, setExported] = useState(false);
   const [hasDrawn, setHasDrawn] = useState(false);
 
-  const { clear: clearSig, getDataUrl: getSigDataUrl } = useSignatureCanvas(sigCanvasRef, cfg.sigColor);
+  const { clear: clearSig, getDataUrl: getSigDataUrl } = useSignatureCanvas(sigCanvasRef, cfg.accent);
 
   const issueDate = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   const expiryDate = new Date(Date.now() + MS_30_DAYS).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });

@@ -1,13 +1,9 @@
 kind = "web"
 previewPath = "/"
-title = "FaisalOrakzai Digital OS"
+title = "Faisal Orakzai"
 version = "1.0.0"
 id = "artifacts/faisal-os"
 router = "path"
-
-[[integratedSkills]]
-name = "react-vite"
-version = "1.0.0"
 
 [[services]]
 name = "web"
@@ -19,8 +15,8 @@ run = "pnpm --filter @workspace/faisal-os run dev"
 
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/faisal-os", "run", "build" ]
-publicDir = "artifacts/faisal-os/dist/public"
 serve = "static"
+publicDir = "artifacts/faisal-os/dist/public"
 
 [[services.production.rewrites]]
 from = "/*"

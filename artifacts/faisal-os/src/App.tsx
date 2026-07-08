@@ -49,7 +49,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 
   const pageTransition = {
     duration: 0.35,
-    ease: [0.25, 0.46, 0.45, 0.94],
+    ease: [0.25, 0.46, 0.45, 0.94] as const,
   };
 
   function Router() {

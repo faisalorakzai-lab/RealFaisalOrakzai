@@ -21,6 +21,7 @@
     }
 
     const apiKey = process.env.RESEND_API_KEY;
+    let emailDelivered = false;
 
     if (apiKey) {
       try {
@@ -68,12 +69,20 @@
 
         if (!emailRes.ok) {
           console.error("Resend error:", await emailRes.text());
+        } else {
+          emailDelivered = true;
         }
       } catch (e) {
         console.error("Email send failed:", e.message);
       }
     } else {
       console.warn("RESEND_API_KEY not configured — email skipped");
+    }
+
+    if (!emailDelivered) {
+      return res.status(502).json({
+        error: "We could not deliver your message right now. Please try again shortly or email chairman@faisalorakzai.com directly.",
+      });
     }
 
     return res.status(201).json({

@@ -1,5 +1,5 @@
 import { useEffect, useRef, lazy, Suspense, useState, useCallback } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/shared/SEOHead";
@@ -7,9 +7,9 @@ import HomeSchema from "@/components/shared/HomeSchema";
 
 const BlockchainOrb = lazy(() => import("@/components/three/BlockchainOrb"));
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] } }),
+  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] as const } }),
 };
 
 const VIDEOS = [

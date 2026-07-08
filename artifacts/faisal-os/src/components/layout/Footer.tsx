@@ -162,7 +162,7 @@ import { motion } from "framer-motion";
               <span className="text-white/15 font-mono text-[9px] tracking-[0.3em] uppercase">Pages</span>
             </div>
             <div className="flex flex-wrap gap-x-8 gap-y-1.5">
-              {[["/","Home"],["/founder","Founder"],["/ecosystem","Ecosystem"],["/research","Research"],["/press","Press"],["/learning","Learning"],["/media","Media"],["/investment","Investment"],["/contact","Contact"]].map(([href, label]) => (
+              {[["/","Home"],["/founder","Founder"],["/ecosystem","Ecosystem"],["/benchmarks","Benchmarks"],["/research","Research"],["/press","Press"],["/learning","Learning"],["/media","Media"],["/investment","Investment"],["/okzbyte-hub","OkzByte Hub"],["/contact","Contact"]].map(([href, label]) => (
                 <a key={href} href={href} className="text-white/25 text-xs hover:text-[#F3BA2F] transition-colors font-mono tracking-wider">{label}</a>
               ))}
             </div>
