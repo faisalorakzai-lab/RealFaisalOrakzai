@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- Homepage hero video -->
+  <url>
+    <loc>https://faisalorakzai.com/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://faisalorakzai.com/hero-new-poster.webp</video:thumbnail_loc>
+      <video:title>Faisal Orakzai — Blockchain Entrepreneur &amp; Founder, Orakzai Group</video:title>
+      <video:description>Muhammad Faisal Orakzai, Pakistani blockchain entrepreneur and Founder of Orakzai Group. Creator of Orakzai Bond (OKBOND) on Polygon Layer-2, Shamim Forever luxury brand, OkzByte Technology, and OrakzaiX AI.</video:description>
+      <video:content_loc>https://faisalorakzai.com/hero-new.webm</video:content_loc>
+      <video:player_loc>https://faisalorakzai.com/</video:player_loc>
+      <video:publication_date>2026-07-01</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:uploader info="https://faisalorakzai.com/founder">Faisal Orakzai</video:uploader>
+      <video:live>no</video:live>
+      <video:tag>Faisal Orakzai</video:tag>
+      <video:tag>Orakzai Group</video:tag>
+      <video:tag>Blockchain Pakistan</video:tag>
+      <video:tag>OKBOND</video:tag>
+    </video:video>
+  </url>
+
+  <!-- Research blockchain video -->
+  <url>
+    <loc>https://faisalorakzai.com/research/blockchain-basic</loc>
+    <video:video>
+      <video:thumbnail_loc>https://faisalorakzai.com/video-blockchain-poster.webp</video:thumbnail_loc>
+      <video:title>Blockchain Fundamentals — Faisal Orakzai Research Lab</video:title>
+      <video:description>Educational video on blockchain fundamentals by Faisal Orakzai — distributed ledgers, consensus mechanisms, and cryptographic security.</video:description>
+      <video:content_loc>https://faisalorakzai.com/video-blockchain.mp4</video:content_loc>
+      <video:player_loc>https://faisalorakzai.com/research/blockchain-basic</video:player_loc>
+      <video:publication_date>2026-01-01</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:uploader info="https://faisalorakzai.com/founder">Faisal Orakzai</video:uploader>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+
+</urlset>

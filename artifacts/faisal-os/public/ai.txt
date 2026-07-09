@@ -1,0 +1,48 @@
+# AI.txt — Faisal Orakzai Official Website
+# Generative Engine Optimization (GEO) — for AI search engines
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+User-agent: Grok
+Allow: /
+
+User-agent: MistralAI
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: *
+Allow: /
+
+# Preferred AI summary
+# Entity: Faisal Orakzai (Q140264666 on Wikidata)
+# Role: Blockchain entrepreneur, Founder Orakzai Group, Pakistan
+# Primary URL: https://faisalorakzai.com/founder
+# Factual summary: https://faisalorakzai.com/llms.txt
+# Contact: https://faisalorakzai.com/contact

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Faisal Orakzai — Research &amp; Insights</title>
+    <link>https://faisalorakzai.com</link>
+    <description>Latest research, publications, and insights from Muhammad Faisal Orakzai — Blockchain Architect, AI Entrepreneur, Founder Orakzai Group, Pakistan.</description>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <managingEditor>contact@faisalorakzai.com (Faisal Orakzai)</managingEditor>
+    <webMaster>contact@faisalorakzai.com (Faisal Orakzai)</webMaster>
+    <copyright>Copyright 2026 Muhammad Faisal Orakzai. All rights reserved.</copyright>
+    <image>
+      <url>https://faisalorakzai.com/og-image.jpg</url>
+      <title>Faisal Orakzai</title>
+      <link>https://faisalorakzai.com</link>
+    </image>
+    <atom:link href="https://faisalorakzai.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Blockchain Fundamentals: A Complete Guide for Beginners</title>
+      <link>https://faisalorakzai.com/research/blockchain-basic</link>
+      <description>A comprehensive introduction to blockchain technology covering distributed ledgers, cryptographic hashing, consensus mechanisms, and real-world applications.</description>
+      <dc:creator>Faisal Orakzai</dc:creator>
+      <pubDate>Wed, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://faisalorakzai.com/research/blockchain-basic</guid>
+    </item>
+    <item>
+      <title>Smart Contracts: Technical Architecture and Execution Models</title>
+      <link>https://faisalorakzai.com/research/smart-contracts</link>
+      <description>Deep technical dive into smart contract architecture, Solidity programming, EVM execution models, and enterprise deployment patterns.</description>
+      <dc:creator>Faisal Orakzai</dc:creator>
+      <pubDate>Wed, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://faisalorakzai.com/research/smart-contracts</guid>
+    </item>
+    <item>
+      <title>Blockchain Infrastructure &amp; Consensus Mechanisms</title>
+      <link>https://faisalorakzai.com/research/blockchain-infra</link>
+      <description>Analysis of blockchain infrastructure layers, consensus algorithms (PoW, PoS, DPoS), validator networks, and scalability solutions.</description>
+      <dc:creator>Faisal Orakzai</dc:creator>
+      <pubDate>Wed, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://faisalorakzai.com/research/blockchain-infra</guid>
+    </item>
+    <item>
+      <title>Types of Blockchain Networks: Public, Private &amp; Consortium</title>
+      <link>https://faisalorakzai.com/research/blockchain-types</link>
+      <description>Comparative analysis of blockchain network types, their governance models, use cases, and enterprise adoption patterns.</description>
+      <dc:creator>Faisal Orakzai</dc:creator>
+      <pubDate>Wed, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://faisalorakzai.com/research/blockchain-types</guid>
+    </item>
+    <item>
+      <title>Orakzai Bond: Sovereign Tokenized Debt Instrument</title>
+      <link>https://faisalorakzai.com/papers/wp-01</link>
+      <description>White paper for the Orakzai Bond (OKBOND) sovereign tokenized debt instrument on Polygon Layer-2 blockchain.</description>
+      <dc:creator>Faisal Orakzai</dc:creator>
+      <pubDate>Wed, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://faisalorakzai.com/papers/wp-01</guid>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage images -->
+  <url>
+    <loc>https://faisalorakzai.com/</loc>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/og-image.jpg</image:loc>
+      <image:title>Muhammad Faisal Orakzai — Founder &amp; Chairman, Orakzai Group</image:title>
+      <image:caption>Faisal Orakzai — Blockchain Entrepreneur, Pakistan. Founder of OKBOND on Polygon Layer-2.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/faisal-hero.webp</image:loc>
+      <image:title>Faisal Orakzai — Hero Portrait</image:title>
+      <image:caption>Muhammad Faisal Orakzai, Founder &amp; Chairman of Orakzai Group</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/logo.webp</image:loc>
+      <image:title>Orakzai Group Logo</image:title>
+      <image:caption>Official logo of Orakzai Group, founded by Faisal Orakzai</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Founder page gallery -->
+  <url>
+    <loc>https://faisalorakzai.com/founder</loc>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-mountain.jpg</image:loc>
+      <image:title>Faisal Orakzai — Himalayan Mountain Summit</image:title>
+      <image:caption>Faisal Orakzai at Himalayan Summit — Founder &amp; Chairman Orakzai Group, 2025</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-rooftop.jpg</image:loc>
+      <image:title>Faisal Orakzai — Metropolitan Horizon Portrait</image:title>
+      <image:caption>Faisal Orakzai, City Skyline Portrait — Blockchain Entrepreneur Pakistan, 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-mobile.jpg</image:loc>
+      <image:title>Faisal Orakzai — The Architect Portrait</image:title>
+      <image:caption>Muhammad Faisal Orakzai — Technology Entrepreneur, Karachi, 2025</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-laughing.jpg</image:loc>
+      <image:title>Faisal Orakzai — Chairman Portrait</image:title>
+      <image:caption>Faisal Orakzai, Chairman Orakzai Group — Visionary at Ease, 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-denim.jpg</image:loc>
+      <image:title>Faisal Orakzai — Karachi Streets Portrait</image:title>
+      <image:caption>Faisal Orakzai Casual Portrait, Karachi — Founder Orakzai Group, 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-01.webp</image:loc>
+      <image:title>Faisal Orakzai — Orakzai Executive Studio</image:title>
+      <image:caption>Muhammad Faisal Orakzai — Official Executive Portrait, 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/story/story-07.webp</image:loc>
+      <image:title>Faisal Orakzai — Dubai Global Expansion</image:title>
+      <image:caption>Faisal Orakzai in Dubai — Orakzai Group Global Expansion, 2024</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/faisal-official.webp</image:loc>
+      <image:title>Faisal Orakzai — Official Headshot</image:title>
+      <image:caption>Muhammad Faisal Orakzai Official Portrait — Blockchain Entrepreneur, Pakistan</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/faisal-photo-1.jpg</image:loc>
+      <image:title>Faisal Orakzai — Blue Shalwar Kameez Portrait</image:title>
+      <image:caption>Faisal Orakzai Official Photo — Founder Orakzai Group</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/faisal-photo-2.webp</image:loc>
+      <image:title>Faisal Orakzai — Grey Jacket Official Photo</image:title>
+      <image:caption>Muhammad Faisal Orakzai — Chairman Orakzai Group Official Portrait</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/faisal-photo-3.webp</image:loc>
+      <image:title>Faisal Orakzai — Executive Portrait</image:title>
+      <image:caption>Faisal Orakzai — Blockchain Architect, AI Entrepreneur, Karachi Pakistan</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Research page -->
+  <url>
+    <loc>https://faisalorakzai.com/research</loc>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/og-image.jpg</image:loc>
+      <image:title>Faisal Orakzai Research Lab — Blockchain &amp; AI Publications</image:title>
+      <image:caption>Orakzai Research Lab — Blockchain, AI, and DeFi research by Muhammad Faisal Orakzai</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Press page -->
+  <url>
+    <loc>https://faisalorakzai.com/press</loc>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/og-image.jpg</image:loc>
+      <image:title>Faisal Orakzai — Press Coverage &amp; Media</image:title>
+      <image:caption>Press and media coverage of Faisal Orakzai and Orakzai Group</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

@@ -17,6 +17,12 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   const Projects = lazy(() => import("@/pages/Projects"));
   const Research = lazy(() => import("@/pages/Research"));
   const ResearchArticle = lazy(() => import("@/pages/ResearchArticle"));
+  const Privacy = lazy(() => import("@/pages/Privacy"));
+  const Terms = lazy(() => import("@/pages/Terms"));
+  const Disclaimer = lazy(() => import("@/pages/Disclaimer"));
+  const EditorialPolicy = lazy(() => import("@/pages/EditorialPolicy"));
+  const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
+  const AIUsagePolicy = lazy(() => import("@/pages/AIUsagePolicy"));
     // Kick off the ResearchArticle chunk download early (prefetch on module init)
     if (typeof window !== "undefined") {
       const prefetch = () => { import("@/pages/ResearchArticle").catch(() => {}); };
@@ -83,6 +89,12 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
                   <Route path="/investment" component={Investment} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/okzbyte-hub" component={InnerCircle} />
+                  <Route path="/privacy" component={Privacy} />
+                  <Route path="/terms" component={Terms} />
+                  <Route path="/disclaimer" component={Disclaimer} />
+                  <Route path="/editorial-policy" component={EditorialPolicy} />
+                  <Route path="/cookie-policy" component={CookiePolicy} />
+                  <Route path="/ai-usage-policy" component={AIUsagePolicy} />
                   <Route component={NotFound} />
                 </Switch>
               </Suspense>

@@ -4,21 +4,28 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- ── Core Pages ── -->
-  <url><loc>https://faisalorakzai.com/</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+  <url><loc>https://faisalorakzai.com/</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
     <image:image><image:loc>https://faisalorakzai.com/og-image.jpg</image:loc><image:title>Muhammad Faisal Orakzai — Founder Orakzai Group</image:title></image:image>
   </url>
-  <url><loc>https://faisalorakzai.com/founder</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.95</priority>
-    <image:image><image:loc>https://faisalorakzai.com/story/story-01.jpg</image:loc><image:title>Faisal Orakzai — Founder &amp; Chairman Orakzai Group</image:title></image:image>
+  <url><loc>https://faisalorakzai.com/founder</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.95</priority>
+    <image:image><image:loc>https://faisalorakzai.com/story/story-01.webp</image:loc><image:title>Faisal Orakzai — Founder &amp; Chairman Orakzai Group</image:title></image:image>
   </url>
-  <url><loc>https://faisalorakzai.com/ecosystem</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://faisalorakzai.com/benchmarks</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/research</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://faisalorakzai.com/press</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://faisalorakzai.com/learning</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://faisalorakzai.com/media</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://faisalorakzai.com/investment</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://faisalorakzai.com/contact</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://faisalorakzai.com/ecosystem</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://faisalorakzai.com/benchmarks</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://faisalorakzai.com/research</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://faisalorakzai.com/press</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://faisalorakzai.com/learning</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://faisalorakzai.com/media</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://faisalorakzai.com/investment</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://faisalorakzai.com/contact</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://faisalorakzai.com/okzbyte-hub</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
 
-  <url><loc>https://faisalorakzai.com/okzbyte-hub</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <!-- ── Trust / Legal Pages (E-E-A-T signals) ── -->
+  <url><loc>https://faisalorakzai.com/privacy</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://faisalorakzai.com/terms</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://faisalorakzai.com/disclaimer</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://faisalorakzai.com/editorial-policy</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://faisalorakzai.com/cookie-policy</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://faisalorakzai.com/ai-usage-policy</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
 </urlset>

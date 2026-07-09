@@ -4,13 +4,25 @@
   <!-- Core pages: home, founder, ecosystem, benchmarks, research hub, press, etc. -->
   <sitemap>
     <loc>https://faisalorakzai.com/sitemap.xml</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-09</lastmod>
   </sitemap>
 
   <!-- Research articles (10 long-form articles) + whitepapers (6 papers) -->
   <sitemap>
     <loc>https://faisalorakzai.com/research-sitemap.xml</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-09</lastmod>
+  </sitemap>
+
+  <!-- Image sitemap — all official photos, gallery, og images -->
+  <sitemap>
+    <loc>https://faisalorakzai.com/image-sitemap.xml</loc>
+    <lastmod>2026-07-09</lastmod>
+  </sitemap>
+
+  <!-- Video sitemap — hero reel, research videos -->
+  <sitemap>
+    <loc>https://faisalorakzai.com/video-sitemap.xml</loc>
+    <lastmod>2026-07-09</lastmod>
   </sitemap>
 
 </sitemapindex>

@@ -156,7 +156,7 @@ import { motion } from "framer-motion";
           </div>
 
           {/* ── Site nav ── */}
-          <div className="mb-10 border-t border-[#F3BA2F]/6 pt-8">
+          <div className="mb-6 border-t border-[#F3BA2F]/6 pt-8">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-4 bg-[#F3BA2F]/20" />
               <span className="text-white/15 font-mono text-[9px] tracking-[0.3em] uppercase">Pages</span>
@@ -164,6 +164,19 @@ import { motion } from "framer-motion";
             <div className="flex flex-wrap gap-x-8 gap-y-1.5">
               {[["/","Home"],["/founder","Founder"],["/ecosystem","Ecosystem"],["/benchmarks","Benchmarks"],["/research","Research"],["/press","Press"],["/learning","Learning"],["/media","Media"],["/investment","Investment"],["/okzbyte-hub","OkzByte Hub"],["/contact","Contact"]].map(([href, label]) => (
                 <a key={href} href={href} className="text-white/25 text-xs hover:text-[#F3BA2F] transition-colors font-mono tracking-wider">{label}</a>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Legal / Trust links ── */}
+          <div className="mb-10">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="h-px w-4 bg-[#F3BA2F]/10" />
+              <span className="text-white/10 font-mono text-[9px] tracking-[0.3em] uppercase">Legal & Trust</span>
+            </div>
+            <div className="flex flex-wrap gap-x-6 gap-y-1.5">
+              {[["/privacy","Privacy Policy"],["/terms","Terms of Service"],["/disclaimer","Disclaimer"],["/editorial-policy","Editorial Policy"],["/cookie-policy","Cookie Policy"],["/ai-usage-policy","AI Usage Policy"]].map(([href, label]) => (
+                <a key={href} href={href} className="text-white/18 text-[11px] hover:text-[#F3BA2F]/60 transition-colors font-mono">{label}</a>
               ))}
             </div>
           </div>
