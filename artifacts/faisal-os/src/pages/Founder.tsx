@@ -19,7 +19,7 @@ const GALLERY = [
   { src: "/story/story-01.webp", caption: "Orakzai Executive Studio",    year: "2026" },
   { src: "/story/story-02.webp", caption: "Global Vision — World Stage", year: "2026" },
   { src: "/story/story-03.webp", caption: "The Chairman",                year: "2026" },
-  { src: "/story/story-04.webp", caption: "",   year: "2026" },
+  { src: "/story/story-04.webp", caption: "The Chairman — Orakzai Vision",   year: "2026" },
   { src: "/story/story-05.webp", caption: "Building the Future",         year: "2026" },
   { src: "/story/story-06.webp", caption: "Orakzai Headquarters",        year: "2026" },
   { src: "/story/story-07.webp", caption: "Dubai — Global Expansion",    year: "2024" },
@@ -92,6 +92,36 @@ const principles = [
 
 
 export default function Founder() {
+  // ── ImageGallery Schema — inject for Google image search / Knowledge Panel ──
+  useEffect(() => {
+    const id = "founder-image-schema";
+    document.getElementById(id)?.remove();
+    const imageList = GALLERY.map((g) => ({
+      "@type": "ImageObject",
+      "url": `https://faisalorakzai.com${g.src}`,
+      "contentUrl": `https://faisalorakzai.com${g.src}`,
+      "name": `${g.caption} — Faisal Orakzai`,
+      "description": `${g.caption} — Muhammad Faisal Orakzai, Founder & Chairman Orakzai Group, ${g.year}`,
+      "author": { "@id": "https://faisalorakzai.com/#person" },
+      "copyrightHolder": { "@id": "https://faisalorakzai.com/#person" },
+      "datePublished": `${g.year}-01-01`
+    }));
+    const ld = document.createElement("script");
+    ld.id = id;
+    ld.type = "application/ld+json";
+    ld.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Muhammad Faisal Orakzai — Official Photo Gallery",
+      "description": "Official photo gallery of Faisal Orakzai, Founder & Chairman of Orakzai Group — blockchain entrepreneur, Pakistan.",
+      "url": "https://faisalorakzai.com/founder",
+      "author": { "@id": "https://faisalorakzai.com/#person" },
+      "image": imageList
+    });
+    document.head.appendChild(ld);
+    return () => { document.getElementById(id)?.remove(); };
+  }, []);
+
   // ── Main Slideshow ──
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
