@@ -218,9 +218,6 @@ importers:
 
   artifacts/faisal-os:
     dependencies:
-      '@types/three':
-        specifier: ^0.184.1
-        version: 0.184.1
       three:
         specifier: ^0.184.0
         version: 0.184.0
@@ -336,6 +333,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.17)
+      '@types/three':
+        specifier: ^0.184.1
+        version: 0.184.1
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 5.2.0(vite@7.3.5(@types/node@25.9.4)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.4)(yaml@2.9.0))
