@@ -40,7 +40,7 @@ export default function SmartContractsVisual() {
       {
         "@context":"https://schema.org","@type":"Person","@id":"https://faisalorakzai.com#person",
         "name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder",
-        "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://hackernoon.com/u/faisalorakzai"],
+        "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://hackernoon.com/u/faisalorakzai","https://www.imdb.com/name/nm18674496/"],
         "jobTitle":"Founder & Chairman","affiliation":{"@type":"Organization","name":"Orakzai Group"},
         "identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}
       },

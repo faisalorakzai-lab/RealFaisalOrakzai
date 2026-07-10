@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
     { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.webp" },
     { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.webp" },
     { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.webp" },
+    { label: "IMDb",            url: "https://www.imdb.com/name/nm18674496/",                             cat: "MEDIA PROFILE",    logo: "/logos/imdb.svg" },
     { label: "Orakzai Bond",    url: "https://orakzaibond.com",                                           cat: "VENTURE · LIVE",   logo: "/logos/orakzai-bond.webp" },
     { label: "Shamim Forever",  url: "https://www.shamimforever.com",                                     cat: "VENTURE · LIVE",   logo: "/logos/shamim-forever.webp" },
     { label: "Wellfound",       url: "https://wellfound.com/u/faisal-orakzai-1",                         cat: "STARTUP",          logo: "/logos/wellfound.png" },

@@ -41,7 +41,7 @@
       ld.text = JSON.stringify({ "@context":"https://schema.org", "@type":"Article",
         "headline": a.title, "description": a.subtitle,
         "author": { "@type":"Person", "@id":"https://faisalorakzai.com/#person", "name": a.authors, "url":"https://faisalorakzai.com/founder",
-          "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii"] },
+          "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://www.imdb.com/name/nm18674496/"] },
         "publisher": { "@type":"Organization", "@id":"https://faisalorakzai.com/#orakzai-group", "name":"Orakzai Research Lab", "url":"https://faisalorakzai.com" },
         "datePublished": a.year + "-06-01", "url": "https://faisalorakzai.com/research/" + a.slug,
         "keywords": a.tags.join(", "), "inLanguage":"en-US", "isAccessibleForFree":true });

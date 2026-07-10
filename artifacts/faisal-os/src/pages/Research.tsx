@@ -12,6 +12,7 @@ const AUTHOR = {
   linkedin:     "https://www.linkedin.com/in/faisalorakzaii",
   hackernoon:   "https://hackernoon.com/u/faisalorakzai",
   github:       "https://github.com/faisalorakzai-lab",
+  imdb:         "https://www.imdb.com/name/nm18674496/",
   website:      "https://www.faisalorakzai.com",
   org:          "Orakzai Research Lab",
 };
@@ -494,7 +495,7 @@ function useSEO() {
         "@id": `${AUTHOR.website}#person`,
         name: AUTHOR.name,
         url: AUTHOR.website,
-        sameAs: [AUTHOR.orcid, AUTHOR.linkedin, AUTHOR.github, AUTHOR.scholar, AUTHOR.hackernoon],
+        sameAs: [AUTHOR.orcid, AUTHOR.linkedin, AUTHOR.github, AUTHOR.scholar, AUTHOR.hackernoon, AUTHOR.imdb],
         jobTitle: "Founder & Chairman",
         affiliation: { "@type": "Organization", name: AUTHOR.org },
         identifier: { "@type": "PropertyValue", propertyID: "ORCID", value: AUTHOR.orcidId },

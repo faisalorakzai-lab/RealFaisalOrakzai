@@ -202,7 +202,7 @@ import SEOHead from "@/components/shared/SEOHead";
             "@id": "https://faisalorakzai.com/#person",
             "name": "Muhammad Faisal Orakzai",
             "url": "https://faisalorakzai.com/founder",
-            "sameAs": ["https://www.wikidata.org/wiki/Q140264666", "https://www.linkedin.com/in/faisalorakzaii"],
+            "sameAs": ["https://www.wikidata.org/wiki/Q140264666", "https://www.linkedin.com/in/faisalorakzaii", "https://www.imdb.com/name/nm18674496/"],
           },
           "publisher": {
             "@type": "Organization",
