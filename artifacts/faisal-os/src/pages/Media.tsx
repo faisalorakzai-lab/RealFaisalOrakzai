@@ -82,7 +82,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
   const PRESS_LINKS = [
       { pub:"Google Panel",    type:"KNOWLEDGE GRAPH",  title:"Muhammad Faisal Orakzai — Google Knowledge Panel",                                    url:"https://www.google.com/search?q=Muhammad+Faisal+Orakzai", logo:"/logos/google.webp" },
-      { pub:"Wikidata",        type:"KNOWLEDGE GRAPH",  title:"Muhammad Faisal Orakzai — Q140264666",                                                url:"https://www.wikidata.org/wiki/Q140264666",                logo:"/logos/wikidata.webp" },
       { pub:"Crunchbase",      type:"INVESTOR NETWORK", title:"Faisal Orakzai — Founder & Chairman @ Orakzai Group (Rank #28)",                      url:"https://www.crunchbase.com/person/faisal-orakzai",        logo:null },
       { pub:"EveryBodyWiki",   type:"ENCYCLOPEDIA",     title:"Faisal Orakzai — Entrepreneur, Blockchain",                                           url:"https://en.everybodywiki.com/Faisal_Orakzai",            logo:"/logos/everybodywiki.webp" },
       { pub:"ORCID",           type:"RESEARCH ID",      title:"Muhammad Faisal Orakzai — 0009-0000-0915-7272",                                       url:"https://orcid.org/0009-0000-0915-7272",                  logo:"/logos/orcid.webp" },

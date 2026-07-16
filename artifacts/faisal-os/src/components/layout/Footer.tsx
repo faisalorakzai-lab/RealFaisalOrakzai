@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 
   const tier1 = [
     { label: "Google Panel",    url: "https://share.google/jJqhayo6kkfz4k7Nb",                           cat: "KNOWLEDGE GRAPH",  logo: "/logos/google.png" },
-    { label: "Wikidata",        url: "https://www.wikidata.org/wiki/Q140264666",                          cat: "KNOWLEDGE GRAPH",  logo: "/logos/wikidata.webp" },
     { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.webp" },
     { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.webp" },
     { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.webp" },
@@ -193,7 +192,7 @@ import { motion } from "framer-motion";
             </div>
             <div className="text-white/15 text-[10px] font-mono text-right leading-relaxed">
               <div>orakzaibond.com · shamimforever.com · faisalorakzai.com</div>
-              <div className="mt-1">Crunchbase #28 · Wikidata Q140264666 · ORCID 0009-0000-0915-7272</div>
+              <div className="mt-1">Crunchbase #28 · ORCID 0009-0000-0915-7272</div>
             </div>
           </div>
 

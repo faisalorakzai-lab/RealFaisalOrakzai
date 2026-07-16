@@ -74,17 +74,6 @@ import SEOHead from "@/components/shared/SEOHead";
       image: "/logos/shamim-forever.webp",
     },
     {
-      id: "wikidata-q140264666",
-      headline: "Faisal Orakzai Listed on Wikidata as Recognised Public Figure — Q140264666",
-      summary: "Faisal Orakzai becomes one of Pakistan's youngest entrepreneurs to receive a verified Wikidata entity (Q140264666), establishing his footprint on the open knowledge graph used by Google, Wikipedia, and Siri for knowledge panel recognition.",
-      publisher: "Wikidata — Wikimedia Foundation",
-      publisherUrl: "https://www.wikidata.org/wiki/Q140264666",
-      articleUrl: "https://www.wikidata.org/wiki/Q140264666",
-      datePublished: "2025-07-01",
-      category: "Featured",
-      authoritative: true,
-    },
-    {
       id: "okzbyte-ai-stack",
       headline: "OkzByte Technology — Orakzai Group's AI Engineering Division Launches High-Throughput Infrastructure",
       summary: "OkzByte Technology, the AI and engineering arm of Orakzai Group led by Faisal Orakzai, announces its AI infrastructure stack for autonomous financial management, powering QORIX — the group's autonomous capital allocation engine.",
@@ -171,7 +160,7 @@ import SEOHead from "@/components/shared/SEOHead";
             "about": {
               "@type": "Person",
               "name": "Muhammad Faisal Orakzai",
-              "sameAs": "https://www.wikidata.org/wiki/Q140264666"
+              "sameAs": "https://www.linkedin.com/in/faisalorakzaii"
             }
           },
           // ItemList of all articles
@@ -202,7 +191,7 @@ import SEOHead from "@/components/shared/SEOHead";
             "@id": "https://faisalorakzai.com/#person",
             "name": "Muhammad Faisal Orakzai",
             "url": "https://faisalorakzai.com/founder",
-            "sameAs": ["https://www.wikidata.org/wiki/Q140264666", "https://www.linkedin.com/in/faisalorakzaii", "https://www.imdb.com/name/nm18674496/"],
+            "sameAs": ["https://www.linkedin.com/in/faisalorakzaii", "https://www.imdb.com/name/nm18674496/", "https://orcid.org/0009-0000-0915-7272"],
           },
           "publisher": {
             "@type": "Organization",
@@ -319,7 +308,7 @@ import SEOHead from "@/components/shared/SEOHead";
                 { val: "12+", label: "Press Mentions" },
                 { val: "1", label: "Stevie Gold Award" },
                 { val: "6+", label: "Authority Profiles" },
-                { val: "Q140264666", label: "Wikidata Entity" },
+                { val: "IMDB", label: "IMDB Profile" },
               ].map(({ val, label }, i) => (
                 <motion.div
                   key={label}
@@ -331,9 +320,7 @@ import SEOHead from "@/components/shared/SEOHead";
                   <div
                     className="font-bold gold-gradient font-mono leading-tight"
                     style={{
-                      fontSize: val === "Q140264666"
-                        ? "clamp(1.5rem, 4vw, 2.5rem)"
-                        : "1.5rem",
+                      fontSize: "1.5rem",
                     }}
                   >
                     {val}
@@ -746,8 +733,6 @@ import SEOHead from "@/components/shared/SEOHead";
               <a href="https://orakzaibond.com" target="_blank" rel="noopener noreferrer" className="text-[#F3BA2F]/50 hover:text-[#F3BA2F] transition-colors">orakzaibond.com — OKBOND Polygon</a>
               <span className="text-white/10">·</span>
               <a href="https://www.shamimforever.com" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">shamimforever.com — Luxury Web3</a>
-              <span className="text-white/10">·</span>
-              <a href="https://www.wikidata.org/wiki/Q140264666" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">Wikidata Q140264666</a>
               <span className="text-white/10">·</span>
               <a href="https://www.linkedin.com/in/faisalorakzaii" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white/70 transition-colors">LinkedIn — Faisal Orakzai</a>
             </div>
