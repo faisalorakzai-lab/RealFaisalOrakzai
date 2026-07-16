@@ -298,7 +298,7 @@ export default function Home() {
             <span className="text-white">FAISAL</span><br />
             <span className="gold-gradient text-glow">ORAKZAI</span>
           </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/50 font-mono text-sm tracking-[0.3em] uppercase mb-8">Entrepreneur · Founder · Builder of Future Systems</motion.p>
+          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/50 font-mono text-sm tracking-[0.3em] uppercase mb-8">Technology Entrepreneur & Computer Scientist</motion.p>
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3} className="text-white/70 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
             I don't build businesses.<br />
             <span className="text-[#F3BA2F]">I build systems that shape industries.</span>
@@ -330,7 +330,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-10">About Faisal Orakzai</h2>
 
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, researcher, and author specializing in blockchain infrastructure, artificial intelligence, enterprise software, and financial technology — widely regarded as a blockchain entrepreneur Pakistan is increasingly recognized for on the world stage. Faisal Orakzai is the Founder and Chairman of Orakzai Group, where he leads technology initiatives focused on software engineering, Web3 infrastructure, blockchain applications, digital commerce, and AI-powered business systems.
+                Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, Computer Scientist, and author specializing in blockchain infrastructure, artificial intelligence, enterprise software, and financial technology — widely regarded as a blockchain entrepreneur Pakistan is increasingly recognized for on the world stage. Faisal Orakzai is the Founder and Chairman of Orakzai Group, where he leads technology initiatives focused on software engineering, Web3 infrastructure, blockchain applications, digital commerce, and AI-powered business systems.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
                 Working as an AI systems architect and one of the youngest voices shaping blockchain infrastructure Pakistan has produced, Faisal Orakzai combines practical entrepreneurship with long-term technology research — covering blockchain architecture, decentralized finance (DeFi), smart contracts, cloud infrastructure, cybersecurity, automation, and real-world asset (RWA) tokenization. Through ventures such as Orakzai Bond (OKBOND) on the Polygon Layer 2 network, OkzByte Technology, and Shamim Forever, Faisal Orakzai — OKBOND Founder — focuses on developing scalable digital platforms that integrate emerging technologies with practical business applications. Explore these ventures on <Link href="/ecosystem" className="text-[#F3BA2F] hover:underline">the Orakzai Group ecosystem page</Link>, or read more about his background on <Link href="/founder" className="text-[#F3BA2F] hover:underline">the Founder profile</Link>.
