@@ -34,6 +34,53 @@ const STATS = [
 const PHIL_TEXT = "From effort to leverage. I operate where these shifts begin — at the intersection of artificial intelligence, blockchain infrastructure, and real-world economic systems.";
 const philWords = PHIL_TEXT.split(" ");
 
+// ── Visible FAQ Accordion item (Google FAQ rich results requirement) ──
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.04, 0.3) }}
+      viewport={{ once: true }}
+      className="border-b border-[#F3BA2F]/10 last:border-b-0"
+      itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        className="w-full flex items-start justify-between gap-4 py-5 text-left group"
+        style={{ background: "none", border: "none", cursor: "pointer", padding: "20px 0" }}
+      >
+        <span itemProp="name" className="text-white/85 font-medium text-sm md:text-base leading-snug group-hover:text-white transition-colors pr-4" style={{ flex: 1 }}>
+          {question}
+        </span>
+        <ChevronDown
+          className="flex-shrink-0 mt-0.5 text-[#F3BA2F]/60 transition-transform duration-300"
+          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", width: 18, height: 18 }}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="answer"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
+            itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
+          >
+            <p itemProp="text" className="text-white/45 text-sm leading-relaxed pb-5 pr-8">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 function PhilWord({ word, index, total, scrollProgress }: {
   word: string; index: number; total: number;
   scrollProgress: ReturnType<typeof useScroll>["scrollYProgress"];
@@ -802,6 +849,51 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+           FAQ — VISIBLE ACCORDION (Google FAQ rich results)
+           Visible to users + bots — matches FAQPage JSON-LD
+      ══════════════════════════════════════════════════════ */}
+      <section id="faq-section" className="py-24 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          {/* Header */}
+          <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} transition={{ duration:0.7 }} viewport={{ once:true }} className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-5">
+              <div className="h-px w-10 bg-[#F3BA2F]/35" />
+              <span className="text-[#F3BA2F]/50 font-mono text-[10px] tracking-[0.35em] uppercase">Knowledge Base</span>
+              <div className="h-px w-10 bg-[#F3BA2F]/35" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Frequently Asked <span style={{ background:"linear-gradient(90deg,#c8900a,#F3BA2F,#ffe27a,#F3BA2F,#c8900a)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>Questions</span>
+            </h2>
+            <p className="text-white/35 text-sm font-mono tracking-wide">About Faisal Orakzai &amp; Orakzai Group</p>
+          </motion.div>
+          {/* Accordion items */}
+          {[
+            { q:"Who is Faisal Orakzai?", a:"Muhammad Faisal Orakzai (فیصل اورکزئی) is a Pakistani technology entrepreneur and computer scientist born on 30 April 2006 in Orakzai Agency, Khyber Pakhtunkhwa (KPK), Pakistan. He is the Founder and Chairman of Orakzai Group — the parent organization behind Orakzai Bond (OKBOND) on Polygon blockchain, OkzByte Technology, Shamim Forever luxury brand, and OrakzaiX AI. He is recognized as one of Pakistan's youngest blockchain architects and technology entrepreneurs." },
+            { q:"What is Orakzai Group?", a:"Orakzai Group is a sovereign technology and venture organization founded by Faisal Orakzai, operating across blockchain, artificial intelligence, fintech, luxury commerce, and digital infrastructure. Its ventures include Orakzai Bond (OKBOND) on Polygon, OkzByte Technology, Shamim Forever, OrakzaiX AI, QORIX, and Orakzai Real Estate. Orakzai Group is headquartered in Karachi, Pakistan, with a global operational presence." },
+            { q:"What is Orakzai Bond (OKBOND)?", a:"Orakzai Bond (OKBOND) is a blockchain-based digital asset built on the Polygon Layer-2 network by Faisal Orakzai. It is a sovereign tokenized digital asset with transparent treasury systems, staking infrastructure, and DeFi yield mechanisms. OKBOND is available at orakzaibond.com and represents Pakistan's blockchain-native sovereign digital bond instrument." },
+            { q:"What companies does Faisal Orakzai own?", a:"Faisal Orakzai is Founder and Chairman of Orakzai Group, which includes: (1) Orakzai Bond (OKBOND) on Polygon blockchain; (2) Shamim Forever — Pakistani luxury fashion brand; (3) OkzByte Technology — AI automation and enterprise software; (4) OrakzaiX AI — artificial intelligence research platform; (5) QORIX — strategic technology venture; (6) Orakzai Real Estate — real estate tokenization and property investment." },
+            { q:"Where is Faisal Orakzai from?", a:"Faisal Orakzai is originally from Orakzai Agency (Tirah Valley), Khyber Pakhtunkhwa (KPK), Pakistan. He currently operates from Karachi. He has represented Pakistan internationally at Silicon Valley, Wall Street New York, and Düsseldorf Germany. He is of Pashtun heritage from the historic Orakzai tribe." },
+            { q:"How old is Faisal Orakzai?", a:"Faisal Orakzai was born on 30 April 2006, making him 20 years old as of 2026. He is considered one of Pakistan's youngest founders in blockchain and AI, having launched Orakzai Group and multiple ventures before the age of 20." },
+            { q:"Is Faisal Orakzai a Technology Entrepreneur and Computer Scientist?", a:"Yes. Faisal Orakzai is a Pakistani technology entrepreneur and computer scientist. He specializes in blockchain architecture (Polygon, Ethereum, Solidity), artificial intelligence, Web3, DeFi, real-world asset tokenization, and enterprise software engineering. He is the Founder & Chairman of Orakzai Group and creator of OKBOND on Polygon Layer-2 blockchain." },
+            { q:"What is Faisal Orakzai's education background?", a:"Faisal Orakzai completed matriculation in Sciences at Ziauddin University (SMC), Karachi (Board of Secondary Education, Karachi). He completed the Founder Institute Program in Karachi — South Asia Chapter 2026. He is also part of Y Combinator's Startup Accelerator Program (2026). Earlier schooling at Yahya Public School, Kohat, and Madrassa Mahad-ul-Uleman, Kohat." },
+            { q:"What is OkzByte Technology?", a:"OkzByte Technology (OKZBYTE) is a technology venture under Orakzai Group providing web development, AI automation, blockchain integration, enterprise software, and digital transformation services in Pakistan and internationally." },
+            { q:"What is Shamim Forever?", a:"Shamim Forever is a Pakistani luxury fashion and lifestyle brand founded by Faisal Orakzai under Orakzai Group. It blends premium craftsmanship with digital storytelling and Pakistani cultural heritage. Available at shamimforever.com." },
+            { q:"What is OrakzaiX AI?", a:"OrakzaiX AI is an artificial intelligence automation platform and research framework under Orakzai Group. It develops AI workflow automation, AI agents, LLM integrations, and AI infrastructure for Pakistani and global markets." },
+            { q:"Has Faisal Orakzai appeared at international events?", a:"Yes. Faisal Orakzai has represented Pakistan at Wall Street New York (Global Blockchain Summit), Silicon Valley USA, and Düsseldorf Germany. He is one of the few young Pakistani entrepreneurs to present blockchain projects on global financial stages." },
+            { q:"Does Faisal Orakzai publish research papers?", a:"Yes. Faisal Orakzai publishes technical research through Orakzai Research Lab on blockchain architecture, DeFi, AI, digital identity, and smart contracts. Full portfolio at faisalorakzai.com/research. ORCID: 0009-0000-0915-7272. He has published 6 white papers and 10+ research articles." },
+            { q:"What technologies does Faisal Orakzai specialize in?", a:"Faisal Orakzai specializes in Blockchain Architecture (Polygon, Ethereum, Solidity), Artificial Intelligence and Machine Learning, Web3 and DeFi, Real World Asset (RWA) Tokenization, Enterprise Software Engineering, Cloud Technologies, and Digital Infrastructure." },
+            { q:"What is the Orakzai tribe in Pakistan?", a:"The Orakzai are a proud Pashtun tribe from Orakzai District (formerly Orakzai Agency) in Khyber Pakhtunkhwa (KPK), Pakistan, with deep roots in Tirah Valley. Faisal Orakzai carries this name as tribute to his tribal identity and KPK heritage." },
+            { q:"What is Faisal Orakzai's vision and mission?", a:"Faisal Orakzai's mission is to build scalable technology platforms that shape industries — combining AI, blockchain, and real-world economic systems. His vision is Pakistan-originated technology ecosystems competing globally. His philosophy: 'I don't build businesses. I build systems that shape industries.'" },
+            { q:"What is the official website of Faisal Orakzai?", a:"The official website is faisalorakzai.com. Venture sites: orakzaibond.com (OKBOND) and shamimforever.com. Founder biography at faisalorakzai.com/founder. Social media: @faisalorakzaii on Instagram, X (Twitter), and LinkedIn." },
+            { q:"How can I contact Faisal Orakzai or Orakzai Group?", a:"Contact Faisal Orakzai or Orakzai Group at faisalorakzai.com/contact for partnerships, media/press, investment discussions, speaking, and collaboration. Also reachable at chairman@faisalorakzai.com and on LinkedIn and X (Twitter) @faisalorakzaii." },
+          ].map(({ q, a }, idx) => (
+            <FAQItem key={idx} question={q} answer={a} index={idx} />
+          ))}
         </div>
       </section>
 
