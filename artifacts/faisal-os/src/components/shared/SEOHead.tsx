@@ -51,7 +51,7 @@ import { useEffect } from "react";
     title, description, path, type = "website", image, keywords,
   }: SEOHeadProps) {
     const url = `https://faisalorakzai.com${path}`;
-    const img = image ?? "https://faisalorakzai.com/story/story-03.png";
+    const img = image ?? "https://faisalorakzai.com/og-image.jpg";
     const fullTitle = `${title} | Faisal Orakzai`;
 
     useEffect(() => {
