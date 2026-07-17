@@ -131,10 +131,6 @@ export default function HomeSchema() {
   useEffect(() => {
     const id = "home-faq-schema";
     if (document.getElementById(id)) return;
-    // Skip if static FAQPage schema already present (prevents duplicate with index.html)
-    const alreadyHasFAQ = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
-      .some(s => s.textContent?.includes('"FAQPage"'));
-    if (alreadyHasFAQ) return;
     const s = document.createElement("script");
     s.id = id;
     s.type = "application/ld+json";
