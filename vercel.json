@@ -140,18 +140,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/our-story",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/leadership",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/mission-vision",
-      "destination": "/index.html"
-    },
-    {
       "source": "/privacy",
       "destination": "/index.html"
     },
@@ -422,33 +410,6 @@
         {
           "key": "Link",
           "value": "<https://faisalorakzai.com/okzbyte-hub>; rel=\"canonical\""
-        }
-      ]
-    },
-    {
-      "source": "/our-story",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "<https://faisalorakzai.com/our-story>; rel=\"canonical\""
-        }
-      ]
-    },
-    {
-      "source": "/leadership",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "<https://faisalorakzai.com/leadership>; rel=\"canonical\""
-        }
-      ]
-    },
-    {
-      "source": "/mission-vision",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "<https://faisalorakzai.com/mission-vision>; rel=\"canonical\""
         }
       ]
     },
