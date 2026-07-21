@@ -138,6 +138,42 @@
     {
       "source": "/okzbyte-hub",
       "destination": "/index.html"
+    },
+    {
+      "source": "/our-story",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/leadership",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/mission-vision",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/disclaimer",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/editorial-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ai-usage-policy",
+      "destination": "/index.html"
     }
   ],
   "headers": [
@@ -386,6 +422,33 @@
         {
           "key": "Link",
           "value": "<https://faisalorakzai.com/okzbyte-hub>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/our-story",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/our-story>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/leadership",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/leadership>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/mission-vision",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://faisalorakzai.com/mission-vision>; rel=\"canonical\""
         }
       ]
     },
