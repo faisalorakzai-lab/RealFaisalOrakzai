@@ -35,6 +35,9 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   const Investment = lazy(() => import("@/pages/Investment"));
   const Contact = lazy(() => import("@/pages/Contact"));
   const InnerCircle = lazy(() => import("@/pages/InnerCircle"));
+  const OurStory = lazy(() => import("@/pages/OurStory"));
+  const Leadership = lazy(() => import("@/pages/Leadership"));
+  const MissionVision = lazy(() => import("@/pages/MissionVision"));
 
   function RouteLoading() {
     return (
@@ -89,6 +92,9 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
                   <Route path="/investment" component={Investment} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/okzbyte-hub" component={InnerCircle} />
+                  <Route path="/our-story" component={OurStory} />
+                  <Route path="/leadership" component={Leadership} />
+                  <Route path="/mission-vision" component={MissionVision} />
                   <Route path="/privacy" component={Privacy} />
                   <Route path="/terms" component={Terms} />
                   <Route path="/disclaimer" component={Disclaimer} />
@@ -130,4 +136,3 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
   }
 
   export default App;
-  
