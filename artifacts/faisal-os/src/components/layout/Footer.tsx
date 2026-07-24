@@ -181,6 +181,27 @@ import { motion } from "framer-motion";
             </div>
           </div>
 
+          {/* ── Trustpilot ── */}
+          <div className="mb-4 flex items-center gap-2">
+            <div className="h-px w-4 bg-[#F3BA2F]/10" />
+            <span className="text-white/10 font-mono text-[9px] tracking-[0.3em] uppercase">Reviews</span>
+          </div>
+          <div className="mb-8">
+            {/* TrustBox widget - Micro Button */}
+            <div
+              className="trustpilot-widget"
+              data-locale="en-US"
+              data-template-id="5419b757fa0340045cd0c938"
+              data-businessunit-id="6a63aa31f54e1594b555b136"
+              data-style-height="25px"
+              data-style-width="100%"
+              data-token="ee95f5da-f6cb-49f0-8088-eda33e1243bf"
+            >
+              <a href="https://www.trustpilot.com/review/faisalorakzai.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+            {/* End TrustBox widget */}
+          </div>
+
           {/* ── Divider ── */}
           <div className="border-t border-[#F3BA2F]/10" />
 
