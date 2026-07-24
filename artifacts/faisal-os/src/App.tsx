@@ -101,7 +101,7 @@ function Router() {
           </motion.div>
         </AnimatePresence>
       </main>
-      {!["/privacy","/terms","/disclaimer","/editorial-policy","/cookie-policy","/ai-usage-policy"].includes(location) && <Footer />}
+      <Footer />
       <ChatWidget />
       <GlobalSearch />
     </div>
