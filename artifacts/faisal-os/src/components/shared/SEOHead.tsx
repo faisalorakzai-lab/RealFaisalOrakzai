@@ -55,7 +55,6 @@ import { useEffect } from "react";
     const fullTitle = `${title} | Faisal Orakzai`;
 
     useEffect(() => {
-      const prev = document.title;
       document.title = fullTitle;
 
       setMeta("name", "description", description);
@@ -80,7 +79,6 @@ import { useEffect } from "react";
       injectBreadcrumb(path);
 
       return () => {
-        document.title = prev;
         document.getElementById("seo-breadcrumb")?.remove();
       };
     }, [fullTitle, description, url, img, type, keywords, path]);

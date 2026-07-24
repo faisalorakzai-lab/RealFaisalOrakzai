@@ -238,14 +238,7 @@ import SEOHead from "@/components/shared/SEOHead";
 
     useEffect(() => {
       injectPressSchema(PRESS_ARTICLES);
-      // Update OG tags for press page
-      document.title = "Press Room — Faisal Orakzai | Orakzai Group Media Coverage | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ";
-      const ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle) ogTitle.setAttribute("content", "Press Room — Muhammad Faisal Orakzai | Stevie Gold Award Winner | ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ");
-      const ogUrl = document.querySelector('meta[property="og:url"]');
-      if (ogUrl) ogUrl.setAttribute("content", "https://faisalorakzai.com/press");
-      const canonical = document.querySelector('link[rel="canonical"]');
-      if (canonical) canonical.setAttribute("href", "https://faisalorakzai.com/press");
+      // SEOHead component handles title, canonical and OG tags for /press
       return () => { document.getElementById("press-schema")?.remove(); };
     }, []);
 

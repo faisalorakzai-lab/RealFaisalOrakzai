@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { motion, useInView } from "framer-motion";
+import SEOHead from "@/components/shared/SEOHead";
 
 // ─── Author identity ──────────────────────────────────────────────────────────
 const AUTHOR = {
@@ -966,6 +967,12 @@ export default function Research() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <SEOHead
+        title="Research &amp; Publications — Blockchain, AI, DeFi | Faisal Orakzai"
+        description="Research papers, white papers and technical publications by Faisal Orakzai — blockchain architecture, DeFi, AI automation, Pakistan digital economy. ORCID: 0009-0000-0915-7272."
+        path="/research"
+        keywords="Faisal Orakzai research, blockchain Pakistan, OKBOND white paper, DeFi research, AI Pakistan, ORCID 0009-0000-0915-7272"
+      />
       <style>{`
         @keyframes repoPulse{0%,100%{opacity:.5}50%{opacity:1}}
         .frib{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap;-webkit-mask-image:linear-gradient(to right,black 82%,transparent 100%);mask-image:linear-gradient(to right,black 82%,transparent 100%)}
