@@ -30,7 +30,7 @@ const gView = (id: string) => `https://drive.google.com/file/d/${id}/view`;
 const gDl   = (id: string) => `https://drive.google.com/uc?export=download&id=${id}`;
 
 // ─── Real document IDs ────────────────────────────────────────────────────────
-const DOCS = {
+export const DOCS = {
   profile:     { view: gView("1X1NT-UZzeyqacmjJo2HoAkYE9mUxad-x"), dl: gDl("1X1NT-UZzeyqacmjJo2HoAkYE9mUxad-x") },
   properties:  { view: gView("1YTdi9b7eL6ECuBtkSZlbhJZsX-F0paI3"), dl: gDl("1YTdi9b7eL6ECuBtkSZlbhJZsX-F0paI3") },
   okbondPres:  { view: gView("1Q6bClDOeBCBxBZfKdD9SnqSpNFrG-u7A"), dl: gDl("1Q6bClDOeBCBxBZfKdD9SnqSpNFrG-u7A") },

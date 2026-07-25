@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { motion, useInView } from "framer-motion";
 import SEOHead from "@/components/shared/SEOHead";
 
-import { AUTHOR, Entry, Category, ENTRIES } from "@/data/research-entries";
+import { AUTHOR, Entry, Category, ENTRIES, DOCS } from "@/data/research-entries";
 
 const FILTERS = [
   "ALL INTEL",
