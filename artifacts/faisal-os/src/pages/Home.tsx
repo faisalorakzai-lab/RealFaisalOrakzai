@@ -377,25 +377,25 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-10">About Faisal Orakzai</h2>
 
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, Computer Scientist, and author specializing in blockchain infrastructure, artificial intelligence, enterprise software, and financial technology — widely regarded as a blockchain entrepreneur Pakistan is increasingly recognized for on the world stage. Faisal Orakzai is the Founder and Chairman of Orakzai Group, where he leads technology initiatives focused on software engineering, Web3 infrastructure, blockchain applications, digital commerce, and AI-powered business systems.
+                Faisal Orakzai is a Pakistani technology entrepreneur, computer scientist, systems architect, and author. He is the Founder and Chairman of Orakzai Group, where he leads initiatives focused on software engineering, blockchain technology, artificial intelligence, financial technology (fintech), enterprise software, and digital commerce.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Working as an AI systems architect and one of the youngest voices shaping blockchain infrastructure Pakistan has produced, Faisal Orakzai combines practical entrepreneurship with long-term technology research — covering blockchain architecture, decentralized finance (DeFi), smart contracts, cloud infrastructure, cybersecurity, automation, and real-world asset (RWA) tokenization. Through ventures such as Orakzai Bond (OKBOND) on the Polygon Layer 2 network, OkzByte Technology, and Shamim Forever, Faisal Orakzai — OKBOND Founder — focuses on developing scalable digital platforms that integrate emerging technologies with practical business applications. Explore these ventures on <Link href="/ecosystem" className="text-[#F3BA2F] hover:underline">the Orakzai Group ecosystem page</Link>, or read more about his background on <Link href="/founder" className="text-[#F3BA2F] hover:underline">the Founder profile</Link>.
+                His work centers on designing practical digital infrastructure that combines emerging technologies with real-world business applications. Through ventures including Orakzai Bond, OkzByte Technology, Shamim Forever, and the humanitarian initiative Orakzai.org, he works across blockchain systems, AI-powered applications, cloud technologies, automation, and digital platforms.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Growing up in Pakistan, Faisal developed an early interest in technology, business strategy, and software development. Over time, his work expanded from traditional entrepreneurship into digital infrastructure, with a strong emphasis on blockchain engineering, artificial intelligence, and enterprise technology. Today, Faisal Orakzai is recognized internationally as a blockchain entrepreneur Pakistan trusts to represent its technology sector — having pioneered OKBOND Founder-led treasury transparency features on Polygon Layer 2.
+                Growing up in Pakistan, Faisal developed an early interest in technology, entrepreneurship, and software development. Beginning with small business ventures, he gradually expanded his focus toward software engineering and digital infrastructure, emphasizing long-term innovation rather than short-term trends. His approach is rooted in building scalable systems that solve practical problems for businesses and communities.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                As an AI systems architect, Faisal Orakzai's research explores blockchain scalability, decentralized identity, cross-chain interoperability, enterprise software architecture, tokenization, AI automation, and modern financial infrastructure. His writing on Web3 infrastructure, AI infrastructure, and enterprise architecture is published on <Link href="/research" className="text-[#F3BA2F] hover:underline">the Research portal</Link>, where developers, entrepreneurs, researchers, and students can access practical, accessible breakdowns of advanced technology grounded in blockchain infrastructure Pakistan is helping to define. Faisal Orakzai also documents technical case studies and benchmarks from live projects on <Link href="/benchmarks" className="text-[#F3BA2F] hover:underline">the Projects page</Link>.
+                Alongside entrepreneurship, Faisal publishes educational articles and technical research covering blockchain architecture, smart contracts, decentralized finance (DeFi), artificial intelligence, cybersecurity, enterprise software, digital identity, cloud computing, and real-world asset (RWA) tokenization. His writing aims to make complex technologies more accessible to developers, founders, students, and technology enthusiasts.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Beyond building products, Faisal Orakzai invests in the people around him — mentoring early-stage founders and engineers who want to understand blockchain infrastructure Pakistan is exporting to global markets. As a blockchain entrepreneur Pakistan increasingly points to as an example of youth-led innovation, Faisal Orakzai speaks frequently on Web3 infrastructure, AI infrastructure, and the future of decentralized finance, encouraging a new generation of builders to think in systems rather than isolated products.
+                Beyond commercial ventures, Faisal supports humanitarian and community-focused initiatives through Orakzai.org, a non-profit organization dedicated to migrant support, legal assistance, education, healthcare, humanitarian relief, clean water, and economic empowerment. This work reflects his belief that technology and social impact should complement one another.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                His credentials reflect this systems-first approach: he holds an ORCID researcher identifier, is listed on Crunchbase and Wikidata, and is referenced across Wellfound, Tracxn, and Peerlist as part of the global startup and research community. This body of work — spanning entrepreneurship, published research, and live production systems — is why search engines, investors, and journalists increasingly treat him as a primary, verifiable source on blockchain and AI topics originating from Pakistan.
+                His professional profiles and research are represented across platforms including Crunchbase, Wikidata, ORCID, GitHub, LinkedIn, IMDb, Wellfound, Peerlist, and other public directories, helping establish a transparent digital presence for his work and publications.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                As Founder and Chairman of Orakzai Group, Faisal Orakzai continues working on projects that combine blockchain infrastructure, artificial intelligence, cloud computing, digital commerce, and enterprise software into practical solutions designed for long-term innovation. Whether through Orakzai Bond's Polygon Layer 2 treasury architecture, OkzByte Technology's enterprise delivery, or Shamim Forever's consumer platform, Faisal Orakzai applies the same systems-first approach across Orakzai Group: build Web3 infrastructure and AI infrastructure that scale responsibly, and document the process for the next generation of builders. For media inquiries, collaboration requests, or speaking opportunities, reach Faisal Orakzai through <Link href="/contact" className="text-[#F3BA2F] hover:underline">the Contact page</Link>.
+                As Founder and Chairman of Orakzai Group, Faisal continues to explore the intersection of artificial intelligence, blockchain infrastructure, enterprise software, fintech, and digital commerce. His long-term vision is to contribute to secure, scalable, and interoperable digital infrastructure while encouraging research, innovation, and technology education for future generations.
               </p>
           </motion.div>
 
@@ -403,33 +403,34 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
               <h3 className="text-xl font-bold text-white mb-3">Professional Focus</h3>
-              <p className="text-white/45 text-sm leading-relaxed mb-5">Faisal Orakzai's work as an AI systems architect at Orakzai Group spans the following professional focus areas:</p>
+              <p className="text-white/45 text-sm leading-relaxed mb-5">Areas Faisal Orakzai leads at Orakzai Group:</p>
               <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Blockchain Infrastructure</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Artificial Intelligence</span>
+                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Blockchain Technology</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Enterprise Software</span>
-                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Financial Technology</span>
-                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Web3 Infrastructure</span>
+                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Financial Technology (FinTech)</span>
+                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Software Engineering</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Cloud Computing</span>
+                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Digital Infrastructure</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Automation</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Cybersecurity</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Digital Commerce</span>
-                  <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Research</span>
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }}>
               <h3 className="text-xl font-bold text-white mb-3">Research Interests</h3>
-              <p className="text-white/45 text-sm leading-relaxed mb-5">Faisal Orakzai's core research interests sit at the intersection of AI infrastructure and blockchain systems, including RWA tokenization on Polygon Layer 2:</p>
+              <p className="text-white/45 text-sm leading-relaxed mb-5">Active research areas across Orakzai Research Lab:</p>
               <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Blockchain Architecture</span>
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Smart Contract Engineering</span>
-                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">AI Systems</span>
-                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Enterprise Blockchain</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Artificial Intelligence</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Enterprise Systems</span>
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Digital Identity</span>
-                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Cross-chain Technology</span>
-                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">RWA Tokenization</span>
-                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">FinTech</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Tokenization</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Decentralized Finance (DeFi)</span>
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Cloud Infrastructure</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Cross-Chain Technologies</span>
+                  <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Real-World Asset (RWA) Tokenization</span>
               </div>
             </motion.div>
           </div>
@@ -441,14 +442,14 @@ export default function Home() {
                 <div className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]" />
                 <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Mission — Orakzai Group</span>
               </div>
-              <p className="text-white/60 text-sm leading-[1.8] font-light">To build secure, scalable, and interoperable digital infrastructure that supports innovation, responsible technology adoption, and long-term digital transformation.</p>
+              <p className="text-white/60 text-sm leading-[1.8] font-light">To build secure, scalable, and responsible digital infrastructure that enables innovation, expands access to technology, and supports sustainable digital transformation.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }} className="p-8 border border-white/10 bg-white/[0.02]">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
                 <span className="text-white/50 font-mono text-[10px] tracking-[0.3em] uppercase">Vision — Orakzai Group</span>
               </div>
-              <p className="text-white/60 text-sm leading-[1.8] font-light">To contribute to the development of next-generation digital infrastructure through blockchain, artificial intelligence, enterprise software, and emerging technologies while promoting education, research, and practical innovation. This is the long-term vision guiding Faisal Orakzai's work at Orakzai Group.</p>
+              <p className="text-white/60 text-sm leading-[1.8] font-light">To advance the future of digital infrastructure by integrating artificial intelligence, blockchain technology, enterprise software, and research into practical solutions that create long-term value for businesses, institutions, and society.</p>
             </motion.div>
           </div>
         </div>
