@@ -3067,6 +3067,7 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
                     {copied ? "✓ COPIED" : "SHARE ↗"}
                   </button>
                 </div>
+              </div>
               {/* Mobile TOC — only here, inside article column */}
               <TOCMobile activeId={activeSection}/>
             </motion.div>
