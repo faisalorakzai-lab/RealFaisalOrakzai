@@ -1,12 +1,34 @@
 {
   "installCommand": "pnpm install --no-frozen-lockfile",
+  "redirects": [
+    {
+      "source": "/feed",
+      "destination": "/rss.xml",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|rss\\.xml|feed/).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/rss.xml",
+      "headers": [
+        { "key": "Content-Type",  "value": "application/rss+xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" },
+        { "key": "X-Robots-Tag",  "value": "index, follow" }
+      ]
+    },
+    {
+      "source": "/feed",
+      "headers": [
+        { "key": "Content-Type",  "value": "application/rss+xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
     {
       "source": "/((?!api/).*)",
       "headers": [
