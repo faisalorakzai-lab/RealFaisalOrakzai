@@ -40,7 +40,7 @@ const FAQ_SCHEMA = {
       "name": "Where is Faisal Orakzai from?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Faisal Orakzai is originally from Orakzai Agency (Tirah Valley), Khyber Pakhtunkhwa (KPK), Pakistan. He currently operates from Karachi. He has represented Pakistan internationally at Silicon Valley, Wall Street New York, and Düsseldorf Germany. He is of Pashtun heritage from the historic Orakzai tribe."
+        "text": "Faisal Orakzai is originally from Orakzai Agency (Tirah Valley), Khyber Pakhtunkhwa (KPK), Pakistan. He currently operates from Karachi. He is of Pashtun heritage from the historic Orakzai tribe."
       }
     },
     {
@@ -101,14 +101,6 @@ const FAQ_SCHEMA = {
     },
     {
       "@type": "Question",
-      "name": "Has Faisal Orakzai appeared at international events?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Faisal Orakzai has represented Pakistan at Wall Street New York (Global Blockchain Summit), Silicon Valley USA, and Düsseldorf Germany (International Expansion Summit). He is one of the few young Pakistani entrepreneurs to present blockchain projects on global financial and technology stages."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "Does Faisal Orakzai publish research papers?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -136,7 +128,7 @@ const FAQ_SCHEMA = {
       "name": "What is Faisal Orakzai's vision and mission?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Faisal Orakzai's mission is to build scalable technology platforms that shape industries — combining AI, blockchain, and real-world economic systems. His vision is Pakistan-originated technology ecosystems competing globally. His philosophy: 'I don't build businesses. I build systems that shape industries.'"
+        "text": "Faisal Orakzai's mission is to build scalable technology platforms that shape industries — combining AI, blockchain, and real-world economic systems. His vision is Pakistan-originated technology ecosystems competing globally. His philosophy: 'Redefining Asset Ownership Through Blockchain Architecture.'"
       }
     },
     {

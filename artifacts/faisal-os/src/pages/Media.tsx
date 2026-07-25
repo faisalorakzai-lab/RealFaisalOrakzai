@@ -16,7 +16,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
     { src:"/story/story-01.jpg", caption:"Orakzai Executive Studio",    year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-02.jpg", caption:"Global Vision — World Stage", year:"2026", location:"International" },
     { src:"/story/story-03.webp", caption:"The Chairman",                year:"2026", location:"Karachi, Pakistan" },
-    { src:"/story/story-04.webp", caption:"GMA Silicon Valley Summit",   year:"2025", location:"Silicon Valley, USA" },
+    { src:"/story/story-04.webp", caption:"Orakzai Group — Vision 2025",  year:"2025", location:"International" },
     { src:"/story/story-05.webp", caption:"Building the Future",         year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-06.webp", caption:"Orakzai Headquarters",        year:"2026", location:"Karachi, Pakistan" },
     { src:"/story/story-07.webp", caption:"Dubai — Global Expansion",    year:"2024", location:"Dubai, UAE" },
@@ -37,32 +37,11 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
   const APPEARANCES = [
     {
-      event:"GMA Silicon Valley Global Blockchain Conference",
-      date:"2025", location:"Silicon Valley, California, USA",
-      type:"CONFERENCE", color:"#F3BA2F",
-      desc:"Recognized as an emerging blockchain leader from Pakistan. Speaker and award recipient at one of Silicon Valley's premier blockchain summits. Represented Pakistan's growing tech ecosystem on the global stage.",
-      link:"https://faisalorakzai.com/press",
-    },
-    {
       event:"Stevie Awards — Gold for Technology Innovation",
       date:"2026", location:"International",
       type:"AWARD", color:"#34d399",
       desc:"Orakzai Group received the prestigious Stevie Gold Award for Technology Innovation 2026 — one of the world's most competitive business awards programs recognizing exceptional innovation in technology.",
       link:"https://faisalorakzai.com/press",
-    },
-    {
-      event:"Wall Street — Global Blockchain Summit",
-      date:"2025", location:"Wall Street, New York City, USA",
-      type:"SUMMIT", color:"#a78bfa",
-      desc:"Represented Orakzai Bond (OKBOND) at the global blockchain summit on Wall Street. Engaged with institutional investors, fund managers, and blockchain infrastructure builders on decentralized finance and tokenomics.",
-      link:"https://orakzaibond.com",
-    },
-    {
-      event:"Dusseldorf International Expansion Summit",
-      date:"2024", location:"Dusseldorf, Germany",
-      type:"EXPANSION", color:"#f87171",
-      desc:"Represented Orakzai Group in Dusseldorf, Germany for European market outreach and international expansion discussions. Established key European partnership frameworks for Shamim Forever and OKBOND.",
-      link:"https://www.shamimforever.com",
     },
     {
       event:"Dubai Global Ventures Forum",
@@ -107,9 +86,9 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
       <>
         <SEOHead
           title="Media Gallery — Faisal Orakzai | Events, Conferences & Campaigns"
-          description="Photo gallery, conference appearances, and press coverage of Faisal Orakzai — GMA Silicon Valley, Wall Street NY, Dusseldorf Germany, Stevie Awards, and Pakistan events."
+          description="Photo gallery, conference appearances, and press coverage of Faisal Orakzai — Stevie Awards, Dubai Global Ventures Forum, Pakistan Blockchain Summit, and Orakzai Group events."
           path="/media"
-          keywords="Faisal Orakzai photos, GMA Silicon Valley, Orakzai Group events, blockchain conference Pakistan, Stevie Awards 2026"
+          keywords="Faisal Orakzai photos, Orakzai Group events, blockchain conference Pakistan, Stevie Awards 2026, Dubai ventures"
         />
         <div className="min-h-screen bg-black text-white">
 
@@ -126,9 +105,8 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
                   <span style={{color:GOLD}}>Presence</span>
                 </h1>
                 <p className="text-white/50 text-lg max-w-2xl leading-relaxed">
-                  From Orakzai Agency KPK to Silicon Valley — a visual archive of Faisal Orakzai's
-                  journey across 3 continents, 6+ countries, and dozens of international
-                  stages, conferences, and media appearances.
+                  From Orakzai Agency KPK to the world stage — a visual archive of Faisal Orakzai's
+                  journey across countries and dozens of events, conferences, and media appearances.
                 </p>
               </motion.div>
             </div>

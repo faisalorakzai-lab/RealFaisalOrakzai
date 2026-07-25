@@ -246,9 +246,9 @@ import SEOHead from "@/components/shared/SEOHead";
       <div className="min-h-screen bg-black text-white">
       <SEOHead
         title="Press & Media Coverage — Faisal Orakzai"
-        description="Press coverage, interviews, awards and media appearances of Faisal Orakzai and Orakzai Group — Stevie Gold Award, GMA Silicon Valley, PRLog, Hackernoon, Crunchbase Rank #28."
+        description="Press coverage, interviews, awards and media appearances of Faisal Orakzai and Orakzai Group — Stevie Gold Award, PRLog, Hackernoon, Crunchbase Rank #28."
         path="/press"
-        keywords="Faisal Orakzai press, Orakzai Group news, Stevie Award blockchain, GMA Silicon Valley Pakistan"
+        keywords="Faisal Orakzai press, Orakzai Group news, Stevie Award blockchain, blockchain entrepreneur Pakistan"
       />
 
         {/* ── Hero ─────────────────────────────────────────── */}

@@ -58,7 +58,7 @@ const TIMELINE = [
   {
     phase: "PHASE III", label: "BLOCKCHAIN ARTIFACTS", range: "2024 – 2026",
     events: [
-      { year: "2024–2025", title: "Global Network Assembly", body: "Orakzai Group evolves into a tech infrastructure lab. Engineers early database schemas for Orakzai Ventures. Expands horizons via institutional gateway networks spanning Dubai and Düsseldorf, Germany — absorbing BlackRock-level tokenization aesthetics." },
+      { year: "2024–2025", title: "Global Network Assembly", body: "Orakzai Group evolves into a tech infrastructure lab. Engineers early database schemas for Orakzai Ventures. Expands horizons via institutional gateway networks spanning Dubai and UAE — absorbing BlackRock-level tokenization aesthetics." },
       { year: "Early 2026", title: "High-Throughput Automation Era", body: "Launches OrakzaiX and AdamX — high-throughput AI and machine-learning automation frameworks designed to eliminate human latency in corporate digital operations." },
       { year: "April 2026", title: "Orakzai Bond Launch", body: "Architecturally deploys Orakzai Bond (OKBOND) natively on Polygon Layer-2 — a deflationary, 10-million maximum supply, treasury-backed capital protection framework utilizing Cycle-Based Activation Logic with high industrial validation on SolidityScan." },
       { year: "June 2026", title: "Cryptographic Provenance", body: "Integrates Web3 networks with ultra-luxury markets. Takes ownership as Founder & Owner of Shamim Forever — a museum-grade luxury brand (perfumes, bespoke sapphire jewelry, cosmetics) secured through cryptographic provenance tokens to eliminate global counterfeits." }
