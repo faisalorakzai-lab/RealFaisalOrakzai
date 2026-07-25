@@ -221,7 +221,7 @@ export default function Web3FutureVisual() {
       {/* ── AI + Web3 ── */}
       <div id="components" data-section="components">
         <h2 style={h2Style}>AI + Web3: Intelligent Decentralized Infrastructure</h2>
-        <p style={pSt}>Artificial Intelligence and Web3 are two of the most transformative technologies of the digital era. AI enables machines to learn, reason, and automate complex tasks. Web3 provides decentralized infrastructure that enhances transparency, security, and user ownership. Together, they create intelligent, autonomous digital ecosystems capable of operating with minimal human intervention.</p>
+        <p style={pSt}>Artificial Intelligence and Web3 address distinct but complementary problems. AI enables machines to reason and automate complex decisions. Web3 provides decentralized infrastructure where those decisions execute with verifiable transparency. Together, they support autonomous digital systems — from self-managing DeFi protocols to AI agents transacting across blockchain networks — without requiring constant human oversight.</p>
 
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))", gap:"1px", background:GB, border:`1px solid ${GB}`, borderRadius:"4px", overflow:"hidden", marginBottom:"2.5rem" }}>
           {aiWeb3.map((a,i) => (
@@ -327,7 +327,7 @@ export default function Web3FutureVisual() {
       {/* ── Vision Timeline ── */}
       <div id="trends" data-section="trends">
         <h2 style={h2Style}>Web3 Vision: 2026–2050</h2>
-        <p style={pSt}>By 2035 and beyond, Web3 is expected to evolve from an emerging technology stack into foundational digital infrastructure supporting governments, enterprises, financial institutions, and billions of connected devices. The focus moves beyond cryptocurrencies toward interoperable ecosystems where identity, assets, intelligence, and digital services interact seamlessly.</p>
+        <p style={pSt}>By 2035 and beyond, Web3 is expected to evolve from an emerging technology stack into foundational digital infrastructure supporting governments, enterprises, financial institutions, and billions of connected devices. The focus moves beyond cryptocurrencies toward interoperable ecosystems where identity, assets, intelligence, and digital services interact directly across open protocols.</p>
         <div style={{ display:"flex", flexDirection:"column", gap:"1px", background:GB, border:`1px solid ${GB}`, borderRadius:"4px", overflow:"hidden", marginBottom:"2.5rem" }}>
           {visionTimeline.map((v,i) => (
             <motion.div key={i} initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.08*i }}

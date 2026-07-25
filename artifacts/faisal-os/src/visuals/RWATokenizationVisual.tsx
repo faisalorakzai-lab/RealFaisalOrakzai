@@ -201,7 +201,7 @@ export default function RWATokenizationVisual() {
 
         <h2 style={h2Style}>Introduction</h2>
         <p style={pSt} className="rwa-intro">Throughout history, ownership of valuable assets has been recorded using physical documents, centralized databases, banks, government registries, and financial institutions. Buying a house, investing in gold, purchasing company shares, or owning fine art — all of it has relied on centralized systems that are often slow, expensive, fragmented, and geographically limited.</p>
-        <p style={pSt}>The emergence of blockchain technology has introduced a new paradigm. Instead of relying on paper records or isolated databases, ownership rights can now be digitally represented through blockchain-based tokens. This transformation is known as <strong style={{ color:"rgba(255,255,255,0.92)" }}>Real World Asset (RWA) Tokenization</strong>.</p>
+        <p style={pSt}>Blockchain technology has introduced a new method for recording ownership. Instead of relying on paper records or isolated databases, ownership rights can now be digitally represented through blockchain-based tokens. This approach is known as <strong style={{ color:"rgba(255,255,255,0.92)" }}>Real World Asset (RWA) Tokenization</strong>.</p>
 
         <div className="rwa-def" style={{ border:`1px solid rgba(243,186,47,0.3)`, background:"rgba(243,186,47,0.04)", padding:"1.5rem 1.75rem", marginBottom:"2.5rem", borderRadius:"2px" }}>
           <div style={{ fontFamily:"monospace", fontSize:"7.5px", letterSpacing:"0.38em", color:G, textTransform:"uppercase", marginBottom:"10px" }}>Definition</div>

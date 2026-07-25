@@ -303,7 +303,7 @@ export default function CrossChainVisual() {
       {/* ── Protocols ── */}
       <div id="benefits" data-section="benefits">
         <h2 style={h2Style}>5 Leading Interoperability Protocols Compared</h2>
-        <p style={pSt}>Modern decentralized applications require smart contracts, liquidity, identity, governance, and data to work seamlessly across multiple blockchains. Five leading protocols have emerged — each with different architectures, security models, and strengths.</p>
+        <p style={pSt}>Modern decentralized applications require smart contracts, liquidity, identity, governance, and data to function across multiple blockchains. Five leading protocols have emerged — each with different architectures, security models, and strengths.</p>
         <div style={{ display:"flex", gap:"4px", flexWrap:"wrap", marginBottom:"12px" }}>
           {protocols.map((p,i) => (
             <button key={i} onClick={() => setActiveProtocol(i)}

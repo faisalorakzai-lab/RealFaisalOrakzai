@@ -2421,7 +2421,7 @@ A complete ecosystem includes:
 - Security systems and regulatory compliance
 - Governance frameworks
 
-Together, these components create a trusted digital environment where information flows securely between participants.
+Together, these components create an auditable shared infrastructure where independent participants operate from the same verified data source.
 
 ---
 
@@ -2585,7 +2585,7 @@ Technology is only one part. Governance, organizational change, integration with
 
 Final Conclusion
 
-Enterprise blockchain represents the evolution of blockchain technology from individual applications into large-scale digital ecosystems that enable trusted collaboration across organizations and industries. By combining blockchain with AI, cloud computing, digital identity, tokenization, IoT, and modern enterprise architecture, organizations can build secure, transparent, and resilient digital infrastructure for the next generation of global commerce and public services.`,
+Enterprise blockchain has moved from proof-of-concept to production infrastructure — connecting independent organizations through shared ledgers, smart contracts, and digital identities. The challenge now is governance, compliance integration, and interoperability: getting independent organizations to agree not just on the technology, but on the rules and data standards that make shared infrastructure useful.`,
   },
 };
 
@@ -3067,28 +3067,6 @@ Enterprise blockchain represents the evolution of blockchain technology from ind
                     {copied ? "✓ COPIED" : "SHARE ↗"}
                   </button>
                 </div>
-                {/* Co-Authors */}
-                <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
-                  <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"rgba(255,255,255,0.22)", textTransform:"uppercase", whiteSpace:"nowrap" }}>Co-Authors</span>
-                  <div style={{ flex:1, height:"1px", background:"rgba(255,255,255,0.06)" }} />
-                </div>
-                <div style={{ display:"flex", flexWrap:"wrap", gap:"20px" }}>
-                  {([
-                    { img:"/coauthor-parkes.webp", name:"Dr. David Parkes",       role:"Harvard — CS & Economics" },
-                    { img:"/coauthor-saif.webp",   name:"Dr. Saif Ullah Rehman",  role:"Blockchain Research" },
-                    { img:"/coauthor-shoab.webp",  name:"Dr. Shoab A. Khan",      role:"NUST — Digital Systems" },
-                  ] as { img: string; name: string; role: string }[]).map(co => (
-                    <div key={co.name} style={{ display:"flex", alignItems:"center", gap:"10px" }}>
-                      <img src={co.img} alt={co.name} style={{ width:"40px", height:"40px", borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:"1.5px solid rgba(243,186,47,0.28)", flexShrink:0, background:"#111" }} />
-                      <div>
-                        <div style={{ fontSize:"13px", fontWeight:600, color:"rgba(255,255,255,0.88)", letterSpacing:"0.01em", fontFamily:"system-ui,sans-serif" }}>{co.name}</div>
-                        <div style={{ fontSize:"11px", color:"rgba(255,255,255,0.35)", letterSpacing:"0.03em", fontFamily:"system-ui,sans-serif", marginTop:"2px" }}>{co.role}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Mobile TOC — only here, inside article column */}
               <TOCMobile activeId={activeSection}/>
             </motion.div>

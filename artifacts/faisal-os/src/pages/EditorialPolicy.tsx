@@ -50,7 +50,7 @@ export default function EditorialPolicy() {
           <section>
             <h2 className="text-xl font-bold text-white mb-3">Authorship Standards</h2>
             <ul className="space-y-2 list-disc list-inside">
-              <li>All research is authored or co-authored by Muhammad Faisal Orakzai.</li>
+              <li>All research is authored by Muhammad Faisal Orakzai.</li>
               <li>Co-authors are credited with their full names and affiliations.</li>
               <li>Ghost authorship is not permitted.</li>
               <li>Author affiliations and potential conflicts of interest are disclosed.</li>

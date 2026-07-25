@@ -299,7 +299,7 @@ export default function DigitalIdentityVisual() {
 
         {/* ZKP Section */}
         <h2 style={h2Style}>Zero-Knowledge Proofs: Prove Without Revealing</h2>
-        <p style={pSt}>Zero-Knowledge Proofs are one of the most revolutionary technologies in modern cryptography. They allow someone to prove a statement is true — age over 18, sufficient income, valid degree — without revealing any of the underlying personal data. Traditional verification exposes everything; ZKP verification exposes nothing except the proof itself.</p>
+        <p style={pSt}>Zero-Knowledge Proofs are among the most powerful tools in modern cryptography. They allow someone to prove a statement is true — age over 18, sufficient income, valid degree — without revealing any of the underlying personal data. Traditional verification exposes everything; ZKP verification exposes nothing except the proof itself.</p>
         <div style={{ display:"flex", gap:"4px", flexWrap:"wrap", marginBottom:"12px" }}>
           {zkpExamples.map((z,i) => (
             <button key={i} onClick={() => setActiveZkp(i)}
