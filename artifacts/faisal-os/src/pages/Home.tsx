@@ -19,9 +19,9 @@ const VIDEOS = [
 ];
 
 const domains = [
-  { num: "01", title: "Artificial Intelligence", desc: "Automation-driven systems designed to scale — from intelligent workflows to enterprise AI platforms.", icon: "⬡" },
-  { num: "02", title: "Blockchain & Digital Assets", desc: "Modern financial frameworks, asset tokenization, and next-generation digital infrastructure.", icon: "◈" },
-  { num: "03", title: "Real World Investments", desc: "Long-term value creation through real estate, luxury commerce, and strategic asset allocation.", icon: "◉" },
+  { num: "01", title: "Artificial Intelligence", desc: "Developing intelligent software, automation tools, and AI-enabled applications that improve productivity and business operations.", icon: "⬡" },
+  { num: "02", title: "Blockchain & Digital Assets", desc: "Exploring blockchain infrastructure, smart contracts, tokenisation, and digital asset technologies with a focus on practical implementation.", icon: "◈" },
+  { num: "03", title: "Digital Commerce & Technology", desc: "Building software products, enterprise solutions, and digital commerce platforms that support modern businesses and long-term growth.", icon: "◉" },
 ];
 
 const STATS = [
@@ -31,7 +31,7 @@ const STATS = [
   { label: "ARTIFICIAL SYSTEMS", value: "98", suffix: "", key: "totalArticles" as const },
 ];
 
-const PHIL_TEXT = "From effort to leverage. I operate where these shifts begin — at the intersection of artificial intelligence, blockchain infrastructure, and real-world economic systems.";
+const PHIL_TEXT = "Technology is evolving beyond individual products toward connected digital systems. My work focuses on understanding how software, artificial intelligence, blockchain, and digital infrastructure can work together to solve practical problems and create sustainable value over time.";
 const philWords = PHIL_TEXT.split(" ");
 
 // ── Visible FAQ Accordion item (Google FAQ rich results requirement) ──
@@ -118,10 +118,10 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
 
 const HERO_NAME = "FAISAL ORAKZAI";
 const MANIFESTO_LINES = [
-  { text: "Most people build products.", gold: false },
-  { text: "I build systems that build products.", gold: true },
-  { text: "This is not business.", gold: false },
-  { text: "This is system thinking.", gold: true },
+  { text: "Build with purpose.", gold: true },
+  { text: "Design for scale.", gold: false },
+  { text: "Learn continuously.", gold: false },
+  { text: "Improve consistently.", gold: true },
 ];
 
 function GoldMatrixRain() {
@@ -377,25 +377,22 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-10">About Faisal Orakzai</h2>
 
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Faisal Orakzai is a Pakistani technology entrepreneur, computer scientist, systems architect, and author. He is the Founder and Chairman of Orakzai Group, where he leads initiatives focused on software engineering, blockchain technology, artificial intelligence, financial technology (fintech), enterprise software, and digital commerce.
+                Faisal Orakzai is a Pakistani technology entrepreneur, computer scientist, and the Founder and Chairman of Orakzai Group. His work spans software engineering, artificial intelligence, blockchain technology, financial technology (FinTech), enterprise software, and digital infrastructure — disciplines he has spent years building across, not simply studying.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                His work centers on designing practical digital infrastructure that combines emerging technologies with real-world business applications. Through ventures including Orakzai Bond, OkzByte Technology, Shamim Forever, and the humanitarian initiative Orakzai.org, he works across blockchain systems, AI-powered applications, cloud technologies, automation, and digital platforms.
+                He began his entrepreneurial journey at a young age, moving gradually from traditional business into technology. That transition was deliberate — driven by a focus on building practical digital solutions to real-world challenges, combining software development, emerging technologies, and long-term systems thinking to create products and platforms designed to scale.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Growing up in Pakistan, Faisal developed an early interest in technology, entrepreneurship, and software development. Beginning with small business ventures, he gradually expanded his focus toward software engineering and digital infrastructure, emphasizing long-term innovation rather than short-term trends. His approach is rooted in building scalable systems that solve practical problems for businesses and communities.
+                Through Orakzai Group, he leads a portfolio of distinct ventures: Orakzai Bond, a blockchain-focused digital asset platform; OkzByte Technology, a software development company delivering custom digital solutions for businesses; and Shamim Forever, a digital commerce brand. Beyond commercial work, he supports Orakzai.org — a non-profit organisation working across humanitarian relief, education, healthcare, legal assistance, migrant support, clean water, and community development.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Alongside entrepreneurship, Faisal publishes educational articles and technical research covering blockchain architecture, smart contracts, decentralized finance (DeFi), artificial intelligence, cybersecurity, enterprise software, digital identity, cloud computing, and real-world asset (RWA) tokenization. His writing aims to make complex technologies more accessible to developers, founders, students, and technology enthusiasts.
+                Alongside building companies, Faisal writes and publishes educational articles and technical research covering blockchain architecture, artificial intelligence, enterprise software, smart contracts, decentralised finance (DeFi), cybersecurity, cloud computing, digital identity, and real-world asset (RWA) tokenisation. The goal is straightforward: make complex technologies understandable and accessible for developers, entrepreneurs, students, and business leaders.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                Beyond commercial ventures, Faisal supports humanitarian and community-focused initiatives through Orakzai.org, a non-profit organization dedicated to migrant support, legal assistance, education, healthcare, humanitarian relief, clean water, and economic empowerment. This work reflects his belief that technology and social impact should complement one another.
+                His professional profiles and published work are represented across Crunchbase, Wikidata, ORCID, GitHub, LinkedIn, IMDb, Peerlist, and other public directories — contributing to a transparent and verifiable digital presence grounded in real output, not claims.
               </p>
               <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                His professional profiles and research are represented across platforms including Crunchbase, Wikidata, ORCID, GitHub, LinkedIn, IMDb, Wellfound, Peerlist, and other public directories, helping establish a transparent digital presence for his work and publications.
-              </p>
-              <p className="text-white/60 text-base leading-[1.85] font-light mb-6">
-                As Founder and Chairman of Orakzai Group, Faisal continues to explore the intersection of artificial intelligence, blockchain infrastructure, enterprise software, fintech, and digital commerce. His long-term vision is to contribute to secure, scalable, and interoperable digital infrastructure while encouraging research, innovation, and technology education for future generations.
+                His long-term objective is to contribute to the development of secure, scalable, and interoperable digital infrastructure — and to do that work in a way that promotes innovation, research, entrepreneurship, and responsible technology adoption for the long run.
               </p>
           </motion.div>
 
@@ -403,7 +400,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
               <h3 className="text-xl font-bold text-white mb-3">Professional Focus</h3>
-              <p className="text-white/45 text-sm leading-relaxed mb-5">Areas Faisal Orakzai leads at Orakzai Group:</p>
+              <p className="text-white/45 text-sm leading-relaxed mb-5">Areas of work include:</p>
               <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Artificial Intelligence</span>
                   <span className="px-3 py-1.5 border border-[#F3BA2F]/20 text-[#F3BA2F]/80 text-xs font-mono tracking-wide">Blockchain Technology</span>
@@ -419,7 +416,7 @@ export default function Home() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }}>
               <h3 className="text-xl font-bold text-white mb-3">Research Interests</h3>
-              <p className="text-white/45 text-sm leading-relaxed mb-5">Active research areas across Orakzai Research Lab:</p>
+              <p className="text-white/45 text-sm leading-relaxed mb-5">Current research includes:</p>
               <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Blockchain Architecture</span>
                   <span className="px-3 py-1.5 border border-white/10 text-white/50 text-xs font-mono tracking-wide">Smart Contract Engineering</span>
@@ -442,14 +439,14 @@ export default function Home() {
                 <div className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]" />
                 <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em] uppercase">Mission — Orakzai Group</span>
               </div>
-              <p className="text-white/60 text-sm leading-[1.8] font-light">To build secure, scalable, and responsible digital infrastructure that enables innovation, expands access to technology, and supports sustainable digital transformation.</p>
+              <p className="text-white/60 text-sm leading-[1.8] font-light">To develop secure, scalable, and practical digital infrastructure that supports innovation, responsible technology adoption, and long-term digital transformation.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }} className="p-8 border border-white/10 bg-white/[0.02]">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
                 <span className="text-white/50 font-mono text-[10px] tracking-[0.3em] uppercase">Vision — Orakzai Group</span>
               </div>
-              <p className="text-white/60 text-sm leading-[1.8] font-light">To advance the future of digital infrastructure by integrating artificial intelligence, blockchain technology, enterprise software, and research into practical solutions that create long-term value for businesses, institutions, and society.</p>
+              <p className="text-white/60 text-sm leading-[1.8] font-light">To contribute to the advancement of digital infrastructure through software engineering, artificial intelligence, blockchain technology, enterprise systems, and research — while creating solutions that deliver lasting value for businesses, institutions, and communities.</p>
             </motion.div>
           </div>
         </div>
