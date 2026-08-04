@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
   const socials = [
     { label: "LinkedIn",    url: "https://www.linkedin.com/in/faisalorakzaii",           logo: "/logos/linkedin.webp",   filter: undefined },
     { label: "Twitter / X", url: "https://x.com/faisalorakzaii",                         logo: "/logos/x.webp",          filter: undefined },
+    { label: "CoinMarketCap", url: "https://coinmarketcap.com/community/profile/faisalorakzai", logo: "/logos/coinmarketcap.jpg", filter: undefined },
     { label: "Instagram",   url: "https://www.instagram.com/faisalorakzaii",             logo: "/logos/instagram.webp",  filter: undefined },
     { label: "TikTok",      url: "https://tiktok.com/@chairmanorakzai",                  logo: "/logos/tiktok.png",     filter: undefined },
     { label: "GitHub",      url: "https://github.com/faisalorakzai-lab",                 logo: "/logos/github.webp",     filter: "invert(1)" },
