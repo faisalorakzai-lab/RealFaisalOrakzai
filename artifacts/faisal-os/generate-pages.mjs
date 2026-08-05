@@ -119,6 +119,13 @@ const ROUTES = [
     description: "AI usage policy for faisalorakzai.com — guidelines for artificial intelligence use on the official website of Muhammad Faisal Orakzai.",
     ogType: "website",
   },
+  {
+    path: "wiki",
+    title: "Muhammad Faisal Orakzai — Wiki | Technology Entrepreneur & Computer Scientist",
+    description:
+      "Wikipedia-style reference page for Muhammad Faisal Orakzai — Pakistani technology entrepreneur, computer scientist, and founder of Orakzai Group. Born 30 April 2006, Orakzai Agency KPK Pakistan.",
+    ogType: "profile",
+  },
 ];
 
 /* ──────────────────────────────────────────────────────────────
