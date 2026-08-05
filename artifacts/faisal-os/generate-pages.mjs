@@ -121,9 +121,16 @@ const ROUTES = [
   },
   {
     path: "wiki",
-    title: "Muhammad Faisal Orakzai — Wiki | Technology Entrepreneur & Computer Scientist",
+    title: "FaisalWiki — The Orakzai Group Knowledge Base",
     description:
-      "Wikipedia-style reference page for Muhammad Faisal Orakzai — Pakistani technology entrepreneur, computer scientist, and founder of Orakzai Group. Born 30 April 2006, Orakzai Agency KPK Pakistan.",
+      "FaisalWiki is a free knowledge base documenting Muhammad Faisal Orakzai, Orakzai Group, and related technology ventures. Built for open access.",
+    ogType: "website",
+  },
+  {
+    path: "wiki/faisalorakzai",
+    title: "Muhammad Faisal Orakzai — FaisalWiki",
+    description:
+      "Encyclopedic article on Muhammad Faisal Orakzai — Pakistani technology entrepreneur, computer scientist, founder of Orakzai Group. Born 30 April 2006, Mamozai, District Orakzai, Khyber Pakhtunkhwa.",
     ogType: "profile",
   },
 ];
