@@ -40,7 +40,7 @@ export default function Wiki() {
       <SEOHead
         title="Muhammad Faisal Orakzai — Wiki | faisalorakzai.com"
         description="Muhammad Faisal Orakzai is a Pakistani technology entrepreneur, computer scientist, and founder of Orakzai Group. This wiki documents his life, career, projects, and publications."
-        canonical="https://faisalorakzai.com/wiki"
+        path="/wiki"
       />
 
       {/* Wiki-style page */}
