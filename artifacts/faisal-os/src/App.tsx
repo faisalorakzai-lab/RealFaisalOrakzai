@@ -35,6 +35,7 @@ const Media = lazy(() => import("@/pages/Media"));
 const Investment = lazy(() => import("@/pages/Investment"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const InnerCircle = lazy(() => import("@/pages/InnerCircle"));
+const Wiki = lazy(() => import("@/pages/Wiki"));
 
 function RouteLoading() {
   return (
@@ -95,6 +96,7 @@ function Router() {
                 <Route path="/editorial-policy" component={EditorialPolicy} />
                 <Route path="/cookie-policy" component={CookiePolicy} />
                 <Route path="/ai-usage-policy" component={AIUsagePolicy} />
+                <Route path="/wiki" component={Wiki} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
