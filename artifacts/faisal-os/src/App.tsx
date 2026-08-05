@@ -35,7 +35,8 @@ const Media = lazy(() => import("@/pages/Media"));
 const Investment = lazy(() => import("@/pages/Investment"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const InnerCircle = lazy(() => import("@/pages/InnerCircle"));
-const Wiki = lazy(() => import("@/pages/Wiki"));
+const WikiHome = lazy(() => import("@/pages/WikiHome"));
+const WikiFaisalOrakzai = lazy(() => import("@/pages/WikiFaisalOrakzai"));
 
 function RouteLoading() {
   return (
@@ -96,7 +97,8 @@ function Router() {
                 <Route path="/editorial-policy" component={EditorialPolicy} />
                 <Route path="/cookie-policy" component={CookiePolicy} />
                 <Route path="/ai-usage-policy" component={AIUsagePolicy} />
-                <Route path="/wiki" component={Wiki} />
+                <Route path="/wiki" component={WikiHome} />
+                <Route path="/wiki/faisalorakzai" component={WikiFaisalOrakzai} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
