@@ -57,9 +57,10 @@ Languages: Pashto (native), Urdu (fluent), English (fluent)
 
 ## Verified External Profiles
 - Website: https://faisalorakzai.com
+- Google Knowledge Panel: https://www.google.com/search?kgmid=/g/11zdmbq223&hl=en-PK&q=Faisal+Orakzai
 - Wikidata: https://www.wikidata.org/wiki/Q140264666
 - ORCID: https://orcid.org/0009-0000-0915-7272
-- LinkedIn: https://www.linkedin.com/in/faisalorakzaiii
+- LinkedIn: https://www.linkedin.com/in/faisalorakzaii
 - X (Twitter): https://x.com/faisalorakzaii
 - Instagram: https://www.instagram.com/faisalorakzaii
 - GitHub: https://github.com/faisalorakzai-lab

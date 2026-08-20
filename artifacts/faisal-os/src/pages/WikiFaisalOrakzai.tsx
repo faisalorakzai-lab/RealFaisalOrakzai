@@ -837,7 +837,7 @@ export default function WikiFaisalOrakzai() {
             style={{ fontFamily: "sans-serif" }}
           >
             {[
-              ["Official website", "https://www.faisalorakzai.com"],
+              ["Official website", "https://faisalorakzai.com"],
               ["LinkedIn", "https://www.linkedin.com/in/faisalorakzaii"],
               ["Crunchbase", "https://www.crunchbase.com/person/faisal-orakzai"],
               ["ORCID", "https://orcid.org/0009-0000-0915-7272"],

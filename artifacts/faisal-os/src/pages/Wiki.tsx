@@ -440,7 +440,7 @@ export default function Wiki() {
               <WikiH2 id="external-links">External links</WikiH2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 mb-8 text-[14px]" style={{ fontFamily: "sans-serif" }}>
                 {[
-                  ["Official website", "https://www.faisalorakzai.com"],
+                  ["Official website", "https://faisalorakzai.com"],
                   ["LinkedIn", "https://www.linkedin.com/in/faisalorakzaii"],
                   ["Crunchbase", "https://www.crunchbase.com/person/faisal-orakzai"],
                   ["ORCID", "https://orcid.org/0009-0000-0915-7272"],

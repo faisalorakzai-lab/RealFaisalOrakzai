@@ -21,7 +21,7 @@ export const AUTHOR = {
   hackernoon:   "https://hackernoon.com/u/faisalorakzai",
   github:       "https://github.com/faisalorakzai-lab",
   imdb:         "https://www.imdb.com/name/nm18674496/",
-  website:      "https://www.faisalorakzai.com",
+  website:      "https://faisalorakzai.com",
   org:          "Orakzai Research Lab",
 };
 
