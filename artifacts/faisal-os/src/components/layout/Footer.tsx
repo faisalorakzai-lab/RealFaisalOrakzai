@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
   ];
 
   const tier1 = [
-    { label: "Google Panel",    url: "https://share.google/jJqhayo6kkfz4k7Nb",                           cat: "KNOWLEDGE GRAPH",  logo: "/logos/google.png" },
+    { label: "Google Panel",    url: "https://www.google.com/search?kgmid=/g/11zdmbq223&hl=en-PK&q=Faisal+Orakzai", cat: "KNOWLEDGE GRAPH",  logo: "/logos/google.png" },
     { label: "Crunchbase #28",  url: "https://www.crunchbase.com/person/faisal-orakzai",                 cat: "INVESTOR NETWORK", logo: "/logos/crunchbase.webp" },
     { label: "EveryBodyWiki",   url: "https://en.everybodywiki.com/Faisal_Orakzai",                      cat: "ENCYCLOPEDIA",     logo: "/logos/everybodywiki.webp" },
     { label: "ORCID",           url: "https://orcid.org/0009-0000-0915-7272",                            cat: "RESEARCH ID",      logo: "/logos/orcid.webp" },
