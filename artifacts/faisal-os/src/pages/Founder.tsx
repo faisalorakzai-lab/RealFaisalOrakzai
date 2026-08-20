@@ -11,7 +11,7 @@ const fadeUp = {
 
 const GALLERY = [
   { src: "/faisal-official-knowledge-panel.jpg", caption: "Official Portrait — Faisal Orakzai", year: "2026" },
-  { src: "/story/story-rooftop.jpg",  caption: "Metropolitan Horizon — City Skyline",  year: "2026" },
+  { src: "/faisal-official-gallery-02.jpg", caption: "Official Executive Portrait — Faisal Orakzai", year: "2026" },
   { src: "/story/story-mobile.jpg",   caption: "The Architect — Portrait",             year: "2025" },
   { src: "/story/story-laughing.jpg", caption: "Visionary at Ease — The Chairman",     year: "2026" },
   { src: "/story/story-denim.jpg",    caption: "Karachi Streets — Casual Chairman",    year: "2026" },
