@@ -370,13 +370,13 @@ import SEOHead from "@/components/shared/SEOHead";
                 </motion.a>
 
                 {/* High-Res Headshot */}
-                <motion.a href="/faisal-official.jpg" download="faisal-orakzai-headshot.jpg" target="_blank" rel="noopener noreferrer"
+                <motion.a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg" download="faisal-orakzai-headshot.jpg" target="_blank" rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                   className="group bg-black p-6 flex flex-col gap-4 hover:bg-[#0a0a00] transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 border border-[#F3BA2F]/25 overflow-hidden">
-                      <img src="/faisal-official.webp" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity object-top" />
+                      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg" alt="Faisal Orakzai" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity object-top" />
                     </div>
                     <span className="text-[10px] font-mono text-white/20 uppercase tracking-wider border border-white/8 px-2 py-1">PNG</span>
                   </div>

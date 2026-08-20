@@ -103,7 +103,7 @@ const JSON_LD = {
         { "@type": "PropertyValue", name: "Crunchbase Rank", value: "28" },
       ],
       url: "https://faisalorakzai.com",
-      image: "https://faisalorakzai.com/faisal-wiki.png",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg",
     },
     {
       "@type": "Article",
@@ -123,11 +123,11 @@ const JSON_LD = {
         "@type": "Organization",
         name: "Orakzai Group",
         url: "https://faisalorakzai.com",
-        logo: { "@type": "ImageObject", url: "https://faisalorakzai.com/faisal-official.jpg" },
+        logo: { "@type": "ImageObject", url: "https://faisalorakzai.com/og-logo.webp" },
       },
       datePublished: "2026-08-01",
       dateModified: "2026-08-05",
-      image: "https://faisalorakzai.com/faisal-wiki.png",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg",
     },
     {
       "@type": "BreadcrumbList",
@@ -267,12 +267,12 @@ export default function WikiFaisalOrakzai() {
             {/* Photo */}
             <div className="border-b border-[#F3BA2F]/12 text-center py-3 px-4 bg-[#060606]">
               <img
-                src="/faisal-wiki.png"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg"
                 alt="Muhammad Faisal Orakzai in 2026"
                 className="w-[180px] mx-auto object-cover object-top"
                 style={{ aspectRatio: "1/1" }}
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = "/faisal-official.jpg";
+                  (e.target as HTMLImageElement).src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg";
                 }}
               />
               <div className="text-white/30 text-[11px] mt-2 italic">Orakzai in 2026</div>

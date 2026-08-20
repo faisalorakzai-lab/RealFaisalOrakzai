@@ -200,11 +200,11 @@ export default function WikiHome() {
               </div>
               <div className="flex gap-4">
                 <img
-                  src="/faisal-wiki.png"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg"
                   alt="Faisal Orakzai"
                   className="w-16 h-16 object-cover object-top border border-[#F3BA2F]/20 shrink-0"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/faisal-official.jpg";
+                    (e.target as HTMLImageElement).src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg";
                   }}
                 />
                 <div>

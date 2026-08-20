@@ -85,11 +85,11 @@ export default function Wiki() {
                 {/* Photo */}
                 <div className="border-b border-[#F3BA2F]/15 text-center py-3 px-3">
                   <img
-                    src="/faisal-wiki.png"
+                    src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg"
                     alt="Faisal Orakzai"
                     className="w-48 mx-auto object-cover"
                     style={{ aspectRatio: "1/1", objectPosition: "top" }}
-                    onError={(e) => { (e.target as HTMLImageElement).src = "/faisal-official.jpg"; }}
+                    onError={(e) => { (e.target as HTMLImageElement).src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096108879/EiWGrdKfjMCRlCzX.jpg"; }}
                   />
                   <div className="text-white/35 text-[11px] mt-1.5 italic">Orakzai in 2026</div>
                 </div>
