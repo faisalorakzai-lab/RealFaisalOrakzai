@@ -282,7 +282,7 @@ export default function Home() {
         <AnimatePresence>
           {heroPhase === "photo" && (
             <motion.div key="hero-photo" initial={{ opacity: 1 }} exit={{ opacity: 0, filter: "brightness(2.5) blur(8px)" }} transition={{ duration: 0.7, ease: "easeIn" }} className="absolute inset-0 z-[2]">
-              <img src="/faisal-hero.webp" alt="Faisal Orakzai" className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1)" : "brightness(1)" }} />
+              <img src="/faisal-official-knowledge-panel.jpg" alt="Faisal Orakzai — Official Portrait" className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1)" : "brightness(1)" }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
               <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 80% at 50% 40%, transparent 25%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.92) 100%)" }} />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)" }} />
