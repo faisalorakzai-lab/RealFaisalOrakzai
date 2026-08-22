@@ -662,6 +662,7 @@ export default function Home() {
               { src:"/mk/web3-future-hero.webp", label:"Web3 Future", href:"/research/future-of-web3" },
               { src:"/mk/blockchain-identity-hero.webp", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
               { src:"/mk/cross-chain-hero.webp", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
+              { src:"/mk/cross-chain-zenodo.png", label:"OIL Protocol", href:"/research/cross-chain-zenodo" },
               { src:"/mk/blockchain-guide.webp", label:"Blockchain Basic", href:"/research/blockchain-basic" },
               { src:"/mk/thumb-blockchain-infra.webp", label:"Blockchain Infra", href:"/research/blockchain-infra" },
               { src:"/mk/enterprise-blockchain-hero.webp", label:"Enterprise Blockchain", href:"/research/enterprise-blockchain-ecosystems-guide" },
@@ -672,6 +673,7 @@ export default function Home() {
               { src:"/mk/web3-future-hero.webp", label:"Web3 Future", href:"/research/future-of-web3" },
               { src:"/mk/blockchain-identity-hero.webp", label:"Digital Identity", href:"/research/blockchain-digital-identity" },
               { src:"/mk/cross-chain-hero.webp", label:"Cross-Chain Tech", href:"/research/cross-chain-technology" },
+              { src:"/mk/cross-chain-zenodo.png", label:"OIL Protocol", href:"/research/cross-chain-zenodo" },
             ] as { src: string; label: string; href: string | null }[]).map((card, i) => {
               const el = (
                 <div key={i} style={{ width:"288px", marginRight:"20px", flexShrink:0, transition:"transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)", cursor: card.href ? "pointer" : "default" }}

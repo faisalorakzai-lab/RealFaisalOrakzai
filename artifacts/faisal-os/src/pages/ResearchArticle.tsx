@@ -204,6 +204,27 @@
     slug: string; title: string; subtitle: string; authors: string; year: string;
     category: string; thumbnail?: string; tags: string[]; readTime: string; content: string; pdfUrl?: string;
   }> = {
+    "cross-chain-zenodo": {
+      slug: "cross-chain-zenodo",
+      title: "Cross-Chain Interoperability: Formal Verification and Recursive Zero-Knowledge Architectures",
+      subtitle: "Architecting a Unified Multi-Chain Ecosystem for Vision 2100",
+      authors: "Faisal Orakzai", year: "2026", category: "CRYPTOGRAPHIC WHITE PAPERS",
+      thumbnail: "/mk/cross-chain-zenodo.png", readTime: "White Paper",
+      tags: ["Blockchain", "Computer Science", "Zero-Knowledge", "Formal Verification", "Web3 Infrastructure"],
+      pdfUrl: "https://doi.org/10.5281/zenodo.22047129",
+      content: `
+The fragmentation of liquidity and consensus state across disparate Layer-1 blockchains and Layer-2 rollups constitutes a critical structural bottleneck in contemporary distributed computing. This research treatise introduces the Orakzai Interoperability Layer (OIL) and the Orakzai Sovereign Grid (OSG) as a unified multi-chain ecosystem architecture designed for global enterprise scale.
+
+We present rigorous mathematical formulations for message passing latencies, cross-chain atomic execution guarantees, and formal verification models using TLA+ and Coq. By implementing recursive zero-knowledge proofs and deterministic state-root anchoring, the OIL protocol achieves high-performance state synchronization across heterogeneous shards while maintaining absolute cryptographic safety and liveness invariants.
+
+Key Technical Contributions:
+• Formal Verification: Safety-critical state transitions using TLA+ and Coq.
+• Recursive ZK-Proofs: High-performance state synchronization across heterogeneous networks.
+• Cryptographic Safety: Deterministic state-root anchoring and strong liveness guarantees.
+
+As we build toward Vision 2100, the Sovereign Stack represents my long-term vision for a unified, secure, and scalable digital infrastructure.
+      `
+    },
     "blockchain-basic": {
       slug: "blockchain-basic",
       title: "What is Blockchain? A Complete Beginner's Guide",

@@ -451,20 +451,37 @@ function WhitePaperCard({ entry, i }: { entry: Entry; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [hov, setHov] = useState(false);
+  const [, setLocation] = useLocation();
 
   return (
     <motion.div ref={ref} initial={{ opacity:0, y:28 }} animate={inView ? { opacity:1, y:0 } : {}}
       transition={{ duration:0.65, delay:i*0.08, ease:[0.22,1,0.36,1] }}
       onHoverStart={()=>setHov(true)} onHoverEnd={()=>setHov(false)}
-      style={{ willChange:"transform, opacity" }}>
+      style={{ willChange:"transform, opacity", cursor: entry.slug ? "pointer" : "default" }}
+      onClick={() => { if (entry.slug) setLocation(`/research/${entry.slug}`); }}
+    >
       <article id={entry.id} itemScope itemType="https://schema.org/ScholarlyArticle" style={{
         position:"relative", overflow:"hidden",
         border:`1px solid ${hov ? "rgba(243,186,47,0.35)" : "rgba(243,186,47,0.18)"}`,
         background:"rgba(0,0,0,0.98)",
         boxShadow: hov ? "0 0 40px rgba(243,186,47,0.1), inset 0 0 50px rgba(243,186,47,0.025)" : "none",
         transition:"all 0.28s ease", transform:"translateZ(0)",
-        padding:"clamp(1.25rem,3vw,2rem)",
+        padding:0,
       }}>
+        {entry.thumbnail && (
+          <div style={{ position:"relative", width:"100%", aspectRatio:"16/9", overflow:"hidden", background:"#0a0a0a", borderBottom:"1px solid rgba(243,186,47,0.15)" }}>
+            <img
+              src={entry.thumbnail}
+              alt={entry.title}
+              style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block", transition:"transform 0.5s ease", transform: hov ? "scale(1.03)" : "scale(1)" }}
+              loading="lazy"
+            />
+            <div style={{ position:"absolute", top:"14px", left:"14px", background:"rgba(0,0,0,0.82)", backdropFilter:"blur(8px)", border:"1px solid rgba(243,186,47,0.4)", padding:"4px 10px" }}>
+              <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"#F3BA2F", textTransform:"uppercase" }}>WHITE PAPER</span>
+            </div>
+          </div>
+        )}
+        <div style={{ padding:"clamp(1.25rem,3vw,2rem)" }}>
         {([ {top:"8px",left:"8px",borderTop:"1px solid",borderLeft:"1px solid"},{top:"8px",right:"8px",borderTop:"1px solid",borderRight:"1px solid"},{bottom:"8px",left:"8px",borderBottom:"1px solid",borderLeft:"1px solid"},{bottom:"8px",right:"8px",borderBottom:"1px solid",borderRight:"1px solid"} ] as React.CSSProperties[]).map((s,ci)=>(
           <div key={ci} aria-hidden style={{ position:"absolute", width:"12px", height:"12px", borderColor:"rgba(243,186,47,0.3)", pointerEvents:"none", ...s }} />
         ))}
@@ -497,7 +514,8 @@ function WhitePaperCard({ entry, i }: { entry: Entry; i: number }) {
           </div>
           <PlatformBadges />
         </footer>
-      </article>
+      </div>
+    </article>
     </motion.div>
   );
 }
