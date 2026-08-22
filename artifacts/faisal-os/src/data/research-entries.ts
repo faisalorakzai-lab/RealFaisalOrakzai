@@ -72,6 +72,20 @@ export interface Entry {
 
 // ─── Dataset ──────────────────────────────────────────────────────────────────
 export const ENTRIES: Entry[] = [
+  // ── CRYPTOGRAPHIC WHITE PAPERS ─────────────────────────────────────────────
+  {
+    id: "wp-cross-chain", category: "CRYPTOGRAPHIC WHITE PAPERS", year: "2026",
+    title: "Cross-Chain Interoperability: Formal Verification and Recursive Zero-Knowledge Architectures",
+    subtitle: "Architecting a Unified Multi-Chain Ecosystem for Vision 2100",
+    abstract: "The fragmentation of liquidity and consensus state across disparate L1 and L2 networks remains one of the key challenges in modern distributed systems. This work explores a unified architecture designed for secure, scalable, and interoperable blockchain infrastructure. Key Technical Contributions: Formal Verification (TLA+ and Coq), Recursive ZK-Proofs, and Cryptographic Safety. As we build toward Vision 2100, the Sovereign Stack represents my long-term vision for a unified, secure, and scalable digital infrastructure.",
+    tags: ["Blockchain", "ComputerScience", "ZeroKnowledge", "FormalVerification", "Web3Infrastructure", "FaisalOrakzai", "OrakzaiGroup"],
+    status: "PUBLISHED",
+    slug: "cross-chain-zenodo",
+    thumbnail: "/mk/cross-chain-zenodo.png",
+    readTime: "White Paper",
+    keywords: "Cross-Chain Interoperability, Formal Verification, Recursive Zero-Knowledge Architectures, Heterogeneous Distributed Systems, Faisal Orakzai, Zenodo, ORCID 0009-0000-0915-7272",
+    pdfUrl: "https://doi.org/10.5281/zenodo.22047129",
+  },
   // ── BLOCKCHAIN ARTICLES ───────────────────────────────────────────────────
   {
     id: "bc-01", category: "BLOCKCHAIN", year: "2026",
