@@ -591,6 +591,7 @@ export default function WikiFaisalOrakzai() {
               "Real-World Asset Tokenisation: Protocol Mechanics & Market Depth (2024)",
               "Orakzai Bond — Sovereign Tokenised Debt Instrument White Paper (2024)",
               "OkzByte — Real Estate Tokenisation Protocol (2024)",
+              "Cross-Chain Interoperability: Formal Verification and Recursive Zero-Knowledge Architectures (2026)",
             ].map((p) => (
               <li key={p}>
                 <i className="text-white/90">{p.replace(/ \(\d+\)$/, "")}</i>{" "}
@@ -639,6 +640,10 @@ export default function WikiFaisalOrakzai() {
                   [
                     "2026",
                     "Published The Sovereign Stack: Engineering Next-Generation Blockchain Infrastructure.",
+                  ],
+                  [
+                    "2026",
+                    "Published Cross-Chain Interoperability: Formal Verification and Recursive Zero-Knowledge Architectures on Zenodo.",
                   ],
                 ].map(([year, event], idx) => (
                   <tr
