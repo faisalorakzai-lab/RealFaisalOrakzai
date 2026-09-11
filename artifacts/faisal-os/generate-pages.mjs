@@ -42,6 +42,23 @@ const ROUTES = [
     ogType: "website",
   },
   {
+    path: "research/faisal-orakzai-orakzaix-8b-gguf-hugging-face",
+    title: "Pakistani Technology Entrepreneur & Computer Scientist Faisal Orakzai Publishes OrakzaiX 8B GGUF Model Repository on Hugging Face",
+    description:
+      "Faisal Orakzai has made the OrakzaiX 8B-class GGUF model repository publicly available on Hugging Face. Explore its Llama architecture, quantization options, local inference commands, licensing context and responsible-use guidance.",
+    ogType: "article",
+    image: "/orakzaix-8b-gguf-hugging-face-hero.png",
+    articleSchema: {
+      headline: "Pakistani Technology Entrepreneur & Computer Scientist Faisal Orakzai Publishes OrakzaiX 8B GGUF Model Repository on Hugging Face",
+      datePublished: "2026-09-11",
+      dateModified: "2026-09-11",
+      articleSection: "ARTIFICIAL INTELLIGENCE",
+      keywords: "OrakzaiX 8B, Faisal Orakzai AI, Faisal Orakzai Hugging Face, OrakzaiX GGUF, local AI model, Pakistan AI technology",
+    },
+    noscript:
+      "Faisal Orakzai has made OrakzaiX, an 8-billion-parameter-class GGUF model repository, publicly available on Hugging Face. The community-maintained Llama-architecture release includes multiple quantization options for local AI inference.",
+  },
+  {
     path: "press",
     title: "Press & Media Coverage — Faisal Orakzai | Orakzai Group",
     description:
@@ -211,14 +228,59 @@ for (const route of ROUTES) {
     `<meta name="twitter:description" content="${desc.replace(/"/g, "&quot;")}"`
   );
 
-  // 10. Remove FAQ schema from non-homepage pages (keeps homepage FAQ intact)
+  // 10. Update article image metadata when supplied.
+  if (route.image) {
+    const imageUrl = `${BASE}${route.image}`;
+    html = html.replace(
+      /<meta property="og:image" content="[^"]*"/,
+      `<meta property="og:image" content="${imageUrl}"`
+    );
+    html = html.replace(
+      /<meta name="twitter:image" content="[^"]*"/,
+      `<meta name="twitter:image" content="${imageUrl}"`
+    );
+  }
+
+  // 11. Add crawler-visible article schema and a no-JavaScript summary.
+  if (route.articleSchema) {
+    const articleUrl = `${BASE}/${route.path}`;
+    const imageUrl = route.image ? `${BASE}${route.image}` : undefined;
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      headline: route.articleSchema.headline,
+      description: desc,
+      image: imageUrl ? [imageUrl] : undefined,
+      datePublished: route.articleSchema.datePublished,
+      dateModified: route.articleSchema.dateModified,
+      author: {
+        "@type": "Person",
+        "@id": `${BASE}/#person`,
+        name: "Faisal Orakzai",
+        url: `${BASE}/founder`,
+        sameAs: ["https://orcid.org/0009-0000-0915-7272", "https://www.linkedin.com/in/faisalorakzaii"],
+      },
+      publisher: { "@type": "Organization", "@id": `${BASE}/#orakzai-group`, name: "Orakzai Research Lab", url: BASE },
+      mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+      url: articleUrl,
+      articleSection: route.articleSchema.articleSection,
+      keywords: route.articleSchema.keywords,
+      inLanguage: "en-US",
+      isAccessibleForFree: true,
+    };
+    const jsonLd = `<script id="article-ld" type="application/ld+json">${JSON.stringify(schema)}</script>`;
+    html = html.replace("</head>", `${jsonLd}\n</head>`);
+    html = html.replace("</body>", `<noscript><article><h1>${route.articleSchema.headline}</h1><p>${route.noscript}</p></article></noscript>\n</body>`);
+  }
+
+  // 12. Remove FAQ schema from non-homepage pages (keeps homepage FAQ intact)
   // The FAQ is only relevant on the homepage — having it on every page is schema spam
   html = html.replace(
     /\s*<!-- ══+[\s\S]*?FAQ PAGE SCHEMA[\s\S]*?<\/script>\s*(?=\s*<!-- TrustBox)/,
     "\n    <!-- FAQ schema — homepage only, removed from sub-pages -->\n    "
   );
 
-  // 11. Remove static FAQ <section> from sub-pages
+  // 13. Remove static FAQ <section> from sub-pages
   html = html.replace(
     /<section id="faq"[\s\S]*?<\/section>/,
     "<!-- FAQ section — homepage only -->"

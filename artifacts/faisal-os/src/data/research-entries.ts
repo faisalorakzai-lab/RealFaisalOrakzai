@@ -41,6 +41,7 @@ export const DOCS = {
 // ─── Types ────────────────────────────────────────────────────────────────────
 export type Category =
   | "MARKET KNOWLEDGE"
+  | "ARTIFICIAL INTELLIGENCE"
   | "BLOCKCHAIN"
   | "ARTIFACTS & BLUEPRINTS"
   | "CRYPTOGRAPHIC WHITE PAPERS"
@@ -72,6 +73,22 @@ export interface Entry {
 
 // ─── Dataset ──────────────────────────────────────────────────────────────────
 export const ENTRIES: Entry[] = [
+  // ── ARTIFICIAL INTELLIGENCE ───────────────────────────────────────────────
+  {
+    id: "ai-orakzaix-8b",
+    category: "ARTIFICIAL INTELLIGENCE",
+    year: "2026",
+    title: "Faisal Orakzai Publishes OrakzaiX 8B GGUF Model Repository on Hugging Face",
+    subtitle: "A community-maintained Llama-architecture release for local AI inference across multiple quantization levels",
+    abstract:
+      "Pakistani technology entrepreneur and computer science professional Faisal Orakzai has made OrakzaiX publicly available on Hugging Face. The repository is presented as a community GGUF model release maintained by FaisalOrakzai, with multiple quantization options for local inference.",
+    tags: ["OrakzaiX", "Faisal Orakzai", "Artificial Intelligence", "GGUF", "Hugging Face", "Local AI", "Pakistan AI Technology"],
+    status: "PUBLISHED",
+    slug: "faisal-orakzai-orakzaix-8b-gguf-hugging-face",
+    thumbnail: "/orakzaix-8b-gguf-hugging-face-hero.png",
+    readTime: "Audio report · 4 min read",
+    keywords: "Faisal Orakzai OrakzaiX, OrakzaiX 8B, Faisal Orakzai AI, Faisal Orakzai Hugging Face, OrakzaiX GGUF, local AI model, Pakistan AI technology, AI research Pakistan",
+  },
   // ── CRYPTOGRAPHIC WHITE PAPERS ─────────────────────────────────────────────
   {
     id: "wp-cross-chain", category: "CRYPTOGRAPHIC WHITE PAPERS", year: "2026",

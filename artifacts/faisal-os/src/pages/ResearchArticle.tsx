@@ -2,7 +2,7 @@
    * RESEARCH ARTICLE — /research/:slug
    * Features: TOC sidebar, profile photo, FAQ accordion, 3D blockchain SVG, SEO
    */
-  import React, { useEffect, useState } from "react";
+  import React, { useEffect, useRef, useState } from "react";
   import { motion, AnimatePresence } from "framer-motion";
   import { useParams, useLocation } from "wouter";
 
@@ -23,27 +23,35 @@
       if (!a) return;
       const prev = document.title;
       document.title = a.title + " | Faisal Orakzai Research Lab";
+      const canonicalUrl = "https://faisalorakzai.com/research/" + a.slug;
+      const imageUrl = a.thumbnail ? "https://faisalorakzai.com" + a.thumbnail : undefined;
       const sm = (n: string, v: string, p = false) => {
         const s = p ? `meta[property="${n}"]` : `meta[name="${n}"]`;
         let el = document.querySelector(s) as HTMLMetaElement;
         if (!el) { el = document.createElement("meta"); el.setAttribute(p ? "property" : "name", n); document.head.appendChild(el); }
         el.content = v;
       };
-      sm("description", a.subtitle); sm("keywords", a.tags.join(", ") + ", Faisal Orakzai, blockchain research");
+      sm("description", a.subtitle); sm("keywords", a.tags.join(", ") + ", Faisal Orakzai, AI research Pakistan");
       sm("author", a.authors); sm("og:title", a.title, true); sm("og:description", a.subtitle, true);
-      sm("og:type", "article", true); sm("og:url", "https://faisalorakzai.com/research/" + a.slug, true);
-      if (a.thumbnail) sm("og:image", "https://faisalorakzai.com" + a.thumbnail, true);
+      sm("og:type", "article", true); sm("og:url", canonicalUrl, true);
+      sm("og:site_name", "Faisal Orakzai", true); sm("og:locale", "en_US", true);
+      if (imageUrl) sm("og:image", imageUrl, true);
       sm("twitter:card", "summary_large_image"); sm("twitter:title", a.title); sm("twitter:description", a.subtitle);
+      if (imageUrl) sm("twitter:image", imageUrl);
       sm("citation_title", a.title); sm("citation_author", "Orakzai, Faisal");
-      sm("citation_publication_date", a.year + "/06/01");
+      sm("citation_publication_date", a.datePublished ?? a.year + "-09-11");
       const ld = document.createElement("script");
       ld.id = "article-ld"; ld.type = "application/ld+json";
-      ld.text = JSON.stringify({ "@context":"https://schema.org", "@type":"Article",
+      ld.text = JSON.stringify({ "@context":"https://schema.org", "@type":"NewsArticle",
         "headline": a.title, "description": a.subtitle,
+        "image": imageUrl ? [imageUrl] : undefined,
         "author": { "@type":"Person", "@id":"https://faisalorakzai.com/#person", "name": a.authors, "url":"https://faisalorakzai.com/founder",
           "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://www.imdb.com/name/nm18674496/"] },
         "publisher": { "@type":"Organization", "@id":"https://faisalorakzai.com/#orakzai-group", "name":"Orakzai Research Lab", "url":"https://faisalorakzai.com" },
-        "datePublished": a.year + "-06-01", "url": "https://faisalorakzai.com/research/" + a.slug,
+        "datePublished": a.datePublished ?? a.year + "-09-11",
+        "dateModified": a.dateModified ?? a.datePublished ?? a.year + "-09-11",
+        "mainEntityOfPage": { "@type":"WebPage", "@id": canonicalUrl },
+        "url": canonicalUrl, "articleSection": a.category,
         "keywords": a.tags.join(", "), "inLanguage":"en-US", "isAccessibleForFree":true });
       document.getElementById("article-ld")?.remove();
       document.head.appendChild(ld);
@@ -203,7 +211,98 @@
   const ARTICLES: Record<string, {
     slug: string; title: string; subtitle: string; authors: string; year: string;
     category: string; thumbnail?: string; tags: string[]; readTime: string; content: string; pdfUrl?: string;
+    audioUrl?: string; datePublished?: string; dateModified?: string;
   }> = {
+    "faisal-orakzai-orakzaix-8b-gguf-hugging-face": {
+      slug: "faisal-orakzai-orakzaix-8b-gguf-hugging-face",
+      title: "Pakistani Technology Entrepreneur & Computer Scientist Faisal Orakzai Publishes OrakzaiX 8B GGUF Model Repository on Hugging Face",
+      subtitle: "A community-maintained Llama-architecture release for local AI inference across multiple quantization levels",
+      authors: "Faisal Orakzai",
+      year: "2026",
+      category: "ARTIFICIAL INTELLIGENCE",
+      thumbnail: "/orakzaix-8b-gguf-hugging-face-hero.png",
+      audioUrl: "/audio/orakzaix-8b-hugging-face-news.mp3",
+      datePublished: "2026-09-11",
+      dateModified: "2026-09-11",
+      readTime: "Audio report · 4 min read",
+      tags: [
+        "OrakzaiX", "Faisal Orakzai", "Artificial Intelligence", "GGUF",
+        "Hugging Face", "Local AI", "Llama", "Open Source AI",
+        "AI Research Pakistan", "Pakistan AI Technology",
+      ],
+      content: `
+Pakistani technology entrepreneur and computer science professional Faisal Orakzai has made OrakzaiX, an 8-billion-parameter-class GGUF model repository, publicly available on Hugging Face.
+
+The release is presented by its model card as a community GGUF model release maintained by FaisalOrakzai. It provides quantized model files for developers, researchers and builders who want to explore local AI inference on compatible hardware rather than relying exclusively on a hosted endpoint.
+
+## What is OrakzaiX?
+
+OrakzaiX is distributed under the FaisalOrakzai profile on Hugging Face, a major platform for machine-learning models, datasets and AI development. The repository identifies the model family as Llama architecture and describes the release as an 8B-class model in GGUF format.
+
+The distinction matters. The repository is a published and maintained GGUF model release; it is not presented here as a newly trained foundation model from scratch. The repository metadata lists the upstream model as meta-llama/Llama-3-8B-Instruct and identifies Faisal Orakzai as model creator and quantizer.
+
+## Model specifications
+
+| Specification | Verified repository detail |
+| --- | --- |
+| Model | OrakzaiX |
+| Architecture | Llama |
+| Approximate size | 8B-class |
+| Format | GGUF |
+| Primary use | Local text generation and conversational inference |
+| Quantization | Multiple IQ and Q variants |
+| Recommended starting point | Q4_K_M |
+| Repository | FaisalOrakzai/OrakzaiX on Hugging Face |
+
+The available files span smaller 3-bit and IQ variants through Q4, Q5, Q6 and Q8 options. The current model card lists Q2_K at about 3.18 GB, IQ3_XS at about 3.52 GB, IQ3_S at about 3.68 GB, Q3_K_M at about 4.02 GB, IQ4_XS at about 4.48 GB, Q4_K_M at about 4.92 GB, Q5_K_M at about 5.73 GB, Q6_K at about 6.60 GB and Q8_0 at about 8.54 GB.
+
+File sizes are a practical guide, not a complete hardware requirement. Runtime memory also depends on context length, KV cache, compute buffers, GPU offloading and the operating system. The repository recommends Q4_K_M as a general starting point for balancing quality, memory use and speed.
+
+## Local AI deployment
+
+GGUF is designed for local model runtimes and applications that support the format. Compatible tools named in the repository and its ecosystem include llama.cpp, LM Studio, Jan, Ollama, Docker Model Runner and other GGUF-compatible applications.
+
+Local execution can be useful for offline prototyping, private assistants, developer tooling and research workflows. Privacy still depends on the operator's machine, network configuration and the security controls around the selected runtime.
+
+## How to run OrakzaiX
+
+The following examples are taken from the current Hugging Face model documentation:
+
+\`\`\`bash
+llama-cli -hf FaisalOrakzai/OrakzaiX:Q4_K_M
+\`\`\`
+
+\`\`\`bash
+llama-server -hf FaisalOrakzai/OrakzaiX:Q4_K_M
+\`\`\`
+
+\`\`\`bash
+ollama run hf.co/FaisalOrakzai/OrakzaiX:Q4_K_M
+\`\`\`
+
+\`\`\`bash
+docker model run hf.co/FaisalOrakzai/OrakzaiX:Q4_K_M
+\`\`\`
+
+Users should check the installed runtime documentation before deployment because flags, supported download methods and hardware behavior can change between releases.
+
+## Responsible use
+
+Model outputs may be inaccurate, incomplete, biased or unsafe for particular use cases. Users should review outputs before relying on them and should not use OrakzaiX as the sole basis for medical, legal, financial, employment or other high-impact decisions.
+
+## Licensing and attribution
+
+The repository contains community-provided quantized files and identifies its license as other in the current model metadata. Users should review the repository, upstream model provenance and all applicable license and attribution requirements before redistribution or commercial deployment. This article does not make a separate legal determination.
+
+## Source
+
+The primary source for the release is the [OrakzaiX repository on Hugging Face](https://huggingface.co/FaisalOrakzai/OrakzaiX). The repository was checked at the time of publication, including its model card metadata, file list and current download count.
+
+## About Faisal Orakzai
+
+Faisal Orakzai is a Pakistani technology entrepreneur and computer science professional working across artificial intelligence, blockchain infrastructure, distributed systems, digital technology and emerging technology ventures. More work is available through the [Faisal Orakzai Research & Publications](https://faisalorakzai.com/research) archive.
+      `,
+    },
     "cross-chain-zenodo": {
       slug: "cross-chain-zenodo",
       title: "Cross-Chain Interoperability: Formal Verification and Recursive Zero-Knowledge Architectures",
@@ -2737,6 +2836,63 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
     "smart-contracts":                React.lazy(() => import("@/visuals/SmartContractsVisual")),
   };
 
+  function AudioNewsReport({ src }: { src: string }) {
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const [playing, setPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [volume, setVolume] = useState(1);
+
+    const formatTime = (seconds: number) =>
+      Number.isFinite(seconds)
+        ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`
+        : "0:00";
+
+    const togglePlayback = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      if (audio.paused) {
+        audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      } else {
+        audio.pause();
+        setPlaying(false);
+      }
+    };
+
+    return (
+      <section aria-label="Audio news report" style={{ margin:"0 0 2rem", padding:"1.1rem 1.15rem", border:"1px solid rgba(243,186,47,0.28)", background:"linear-gradient(135deg,rgba(243,186,47,0.1),rgba(255,255,255,0.035))", boxShadow:"0 18px 55px rgba(0,0,0,0.28)" }}>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:"12px", marginBottom:"0.9rem", flexWrap:"wrap" }}>
+          <div>
+            <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.32em", color:"#F3BA2F", textTransform:"uppercase" }}>AUDIO NEWS REPORT</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"1.1rem", color:"rgba(255,255,255,0.78)", marginTop:"3px" }}>Listen to the report</div>
+          </div>
+          <span style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.16em", color:"rgba(255,255,255,0.36)" }}>FAISAL ORAKZAI RESEARCH</span>
+        </div>
+        <audio ref={audioRef} src={src} preload="metadata" onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)} onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)} onEnded={() => setPlaying(false)} />
+        <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
+          <button type="button" onClick={togglePlayback} aria-label={playing ? "Pause audio report" : "Play audio report"} style={{ width:"42px", height:"42px", borderRadius:"50%", border:"1px solid rgba(243,186,47,0.65)", color:"#0a0a0a", background:"#F3BA2F", cursor:"pointer", fontFamily:"monospace", fontSize:"10px", flexShrink:0 }}>
+            {playing ? "Ⅱ" : "▶"}
+          </button>
+          <input type="range" min="0" max={duration || 0} step="0.01" value={Math.min(currentTime, duration || 0)} onChange={(event) => { const next = Number(event.target.value); if (audioRef.current) audioRef.current.currentTime = next; setCurrentTime(next); }} aria-label="Audio progress" style={{ flex:1, accentColor:"#F3BA2F", minWidth:0 }} />
+          <span style={{ fontFamily:"monospace", fontSize:"9px", color:"rgba(255,255,255,0.55)", minWidth:"76px", textAlign:"right" }}>{formatTime(currentTime)} / {formatTime(duration)}</span>
+        </div>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-end", gap:"8px", marginTop:"0.65rem" }}>
+          <span aria-hidden="true" style={{ color:"rgba(255,255,255,0.38)", fontSize:"11px" }}>VOL</span>
+          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(event) => { const next = Number(event.target.value); setVolume(next); if (audioRef.current) audioRef.current.volume = next; }} aria-label="Audio volume" style={{ width:"92px", accentColor:"#F3BA2F" }} />
+        </div>
+      </section>
+    );
+  }
+
+  function renderInline(text: string): React.ReactNode {
+    return text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g).map((part, index) => {
+      const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (link) return <a key={index} href={link[2]} target={link[2].startsWith("http") ? "_blank" : undefined} rel={link[2].startsWith("http") ? "noopener noreferrer" : undefined} style={{ color:"#F3BA2F", textDecoration:"underline", textUnderlineOffset:"3px" }}>{link[1]}</a>;
+      if (part.startsWith("**") && part.endsWith("**")) return <strong key={index} style={{ color:"rgba(255,255,255,0.9)", fontWeight:600 }}>{part.slice(2, -2)}</strong>;
+      return part;
+    });
+  }
+
   function ArticleBody({ content, articleTitle }: { content: string; articleTitle: string }) {
     // Strip the first line if it matches the title, and any blank lines after it
     const rawLines = content.split("\n");
@@ -2813,6 +2969,52 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
         i++; continue;
       }
 
+      /* ── Markdown code blocks ── */
+      if (line.startsWith("```")) {
+        const language = line.slice(3).trim() || "text";
+        const codeLines: string[] = [];
+        i++;
+        while (i < lines.length && !lines[i].trim().startsWith("```")) {
+          codeLines.push(lines[i]);
+          i++;
+        }
+        i++;
+        nodes.push(
+          <div key={key++} style={{ margin:"1.2rem 0 1.6rem", border:"1px solid rgba(255,255,255,0.12)", background:"#070707", overflowX:"auto" }}>
+            <div style={{ padding:"7px 12px", borderBottom:"1px solid rgba(255,255,255,0.08)", color:"rgba(243,186,47,0.65)", fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.2em", textTransform:"uppercase" }}>{language}</div>
+            <pre style={{ margin:0, padding:"1rem", color:"rgba(255,255,255,0.75)", fontFamily:"monospace", fontSize:"0.82rem", lineHeight:1.7, whiteSpace:"pre" }}><code>{codeLines.join("\n")}</code></pre>
+          </div>
+        );
+        continue;
+      }
+
+      /* ── Markdown tables ── */
+      if (line.startsWith("|") && lines[i + 1]?.trim().startsWith("|")) {
+        const tableLines: string[] = [];
+        while (i < lines.length && lines[i].trim().startsWith("|")) { tableLines.push(lines[i].trim()); i++; }
+        const rows = tableLines
+          .filter((row) => !/^\|[\s|:-]+\|$/.test(row))
+          .map((row) => row.split("|").slice(1, -1).map((cell) => cell.trim()));
+        nodes.push(
+          <div key={key++} style={{ overflowX:"auto", margin:"1.2rem 0 1.7rem", border:"1px solid rgba(243,186,47,0.14)" }}>
+            <table style={{ width:"100%", minWidth:"540px", borderCollapse:"collapse", fontFamily:"system-ui,sans-serif", fontSize:"0.83rem" }}>
+              <tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => rowIndex === 0 ? <th key={cellIndex} scope="col" style={{ textAlign:"left", padding:"11px 12px", color:"#F3BA2F", borderBottom:"1px solid rgba(243,186,47,0.25)", background:"rgba(243,186,47,0.06)" }}>{renderInline(cell)}</th> : <td key={cellIndex} style={{ padding:"10px 12px", color:"rgba(255,255,255,0.65)", borderBottom:"1px solid rgba(255,255,255,0.07)", verticalAlign:"top" }}>{renderInline(cell)}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+        );
+        continue;
+      }
+
+      /* ── Markdown headings ── */
+      if (/^#{1,3}\s/.test(line)) {
+        const heading = line.replace(/^#{1,3}\s+/, "");
+        const level = line.match(/^#+/)?.[0].length ?? 2;
+        if (level === 1 || level === 2) nodes.push(<h2 key={key++} data-section={heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")} style={h2Style}>{renderInline(heading)}</h2>);
+        else nodes.push(<h3 key={key++} style={h3Style}>{renderInline(heading)}</h3>);
+        i++;
+        continue;
+      }
+
       /* ── Dividers ── */
       if (line === "---") {
         divCount++;
@@ -2831,7 +3033,7 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
             {items.map((item, j) => (
               <li key={j} style={{ display:"flex", gap:"10px", alignItems:"flex-start", marginBottom:"7px" }}>
                 <span style={{ color:"#F3BA2F", flexShrink:0, marginTop:"0.55em", fontSize:"8px" }}>◆</span>
-                <span style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(0.95rem,2.2vw,1.05rem)", lineHeight:1.82, color:"rgba(255,255,255,0.62)" }}>{item}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(0.95rem,2.2vw,1.05rem)", lineHeight:1.82, color:"rgba(255,255,255,0.62)" }}>{renderInline(item)}</span>
               </li>
             ))}
           </ul>
@@ -2879,10 +3081,30 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
       }
 
       /* ── Default paragraph ── */
-      nodes.push(<p key={key++} style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontWeight:400, fontSize:"clamp(1rem,2.4vw,1.13rem)", lineHeight:1.92, color:"rgba(255,255,255,0.62)", marginBottom:"1rem" }}>{line}</p>);
+      nodes.push(<p key={key++} style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontWeight:400, fontSize:"clamp(1rem,2.4vw,1.13rem)", lineHeight:1.92, color:"rgba(255,255,255,0.62)", marginBottom:"1rem" }}>{renderInline(line)}</p>);
       i++;
     }
     return <>{nodes}</>;
+  }
+
+  function ResearchSourceCard() {
+    return (
+      <div style={{ margin:"0 0 2.5rem", padding:"1.4rem", border:"1px solid rgba(243,186,47,0.32)", background:"linear-gradient(120deg,rgba(243,186,47,0.11),rgba(255,255,255,0.025))" }}>
+        <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.3em", color:"rgba(243,186,47,0.72)", textTransform:"uppercase", marginBottom:"0.55rem" }}>PRIMARY SOURCE</div>
+        <h2 style={{ ...h2Style, margin:"0 0 0.5rem", fontSize:"clamp(1.2rem,3vw,1.65rem)" }}>Explore OrakzaiX on Hugging Face</h2>
+        <p style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", color:"rgba(255,255,255,0.58)", lineHeight:1.7, margin:"0 0 1rem", fontSize:"1.05rem" }}>Review the current model card, quantization files, usage notes and repository metadata from the primary source.</p>
+        <a href="https://huggingface.co/FaisalOrakzai/OrakzaiX" target="_blank" rel="noopener noreferrer" style={{ display:"inline-flex", alignItems:"center", gap:"8px", fontFamily:"monospace", fontSize:"9px", letterSpacing:"0.18em", color:"#0a0a0a", background:"#F3BA2F", padding:"11px 16px", textDecoration:"none", textTransform:"uppercase" }}>VIEW REPOSITORY ↗</a>
+      </div>
+    );
+  }
+
+  function RelatedResearchCard() {
+    return (
+      <aside aria-label="Related research" style={{ margin:"0 0 2rem", padding:"1rem 1.1rem", borderTop:"1px solid rgba(255,255,255,0.1)", borderBottom:"1px solid rgba(255,255,255,0.1)" }}>
+        <div style={{ fontFamily:"monospace", fontSize:"8px", letterSpacing:"0.25em", color:"rgba(255,255,255,0.36)", textTransform:"uppercase", marginBottom:"0.45rem" }}>RELATED RESEARCH</div>
+        <a href="/research" style={{ color:"#F3BA2F", fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", textDecoration:"none" }}>Browse the Faisal Orakzai Research &amp; Publications archive →</a>
+      </aside>
+    );
   }
 
   /* ── Shared heading styles ── */
@@ -3089,6 +3311,7 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
                   </button>
                 </div>
               </div>
+              {article.audioUrl && <AudioNewsReport src={article.audioUrl} />}
               {/* Mobile TOC — only here, inside article column */}
               <TOCMobile activeId={activeSection}/>
             </motion.div>
@@ -3102,7 +3325,13 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
                     <VisualComponent />
                   </React.Suspense>
                 );
-                return <ArticleBody content={article.content} articleTitle={article.title}/>;
+                return (
+                  <>
+                    <ArticleBody content={article.content} articleTitle={article.title}/>
+                    <ResearchSourceCard />
+                    <RelatedResearchCard />
+                  </>
+                );
               })()}
             </motion.div>
 

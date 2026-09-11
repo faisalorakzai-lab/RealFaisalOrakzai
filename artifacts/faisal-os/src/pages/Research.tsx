@@ -7,6 +7,7 @@ import { AUTHOR, Entry, Category, ENTRIES, DOCS } from "@/data/research-entries"
 
 const FILTERS = [
   "ALL INTEL",
+  "ARTIFICIAL INTELLIGENCE",
   "MARKET KNOWLEDGE",
   "BLOCKCHAIN",
   "ARTIFACTS & BLUEPRINTS",

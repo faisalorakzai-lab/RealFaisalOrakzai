@@ -107,6 +107,16 @@
     </image:image>
   </url>
 
+  <!-- OrakzaiX article -->
+  <url>
+    <loc>https://faisalorakzai.com/research/faisal-orakzai-orakzaix-8b-gguf-hugging-face</loc>
+    <image:image>
+      <image:loc>https://faisalorakzai.com/orakzaix-8b-gguf-hugging-face-hero.png</image:loc>
+      <image:title>OrakzaiX 8B GGUF Model Repository — Faisal Orakzai</image:title>
+      <image:caption>OrakzaiX 8B-class GGUF model repository published by Faisal Orakzai on Hugging Face.</image:caption>
+    </image:image>
+  </url>
+
   <!-- Press page -->
   <url>
     <loc>https://faisalorakzai.com/press</loc>

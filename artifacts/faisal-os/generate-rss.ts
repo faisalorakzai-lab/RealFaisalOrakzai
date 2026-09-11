@@ -57,7 +57,9 @@ function toRfc822(year: string): string {
 
 /** Canonical URL for a research entry (anchor-linked to the research page). */
 function entryUrl(entry: Entry): string {
-  return `${BASE_URL}/research#${entry.id}`;
+  return entry.slug
+    ? `${BASE_URL}/research/${entry.slug}`
+    : `${BASE_URL}/research#${entry.id}`;
 }
 
 /**
