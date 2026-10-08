@@ -28,6 +28,14 @@ const ROUTES = [
     ogType: "profile",
   },
   {
+    path: "education",
+    title: "Education & Professional Programs — Faisal Orakzai",
+    description:
+      "School qualifications, executive education, professional certificates and founder programs listed for Muhammad Faisal Orakzai.",
+    ogType: "profile",
+    educationSchema: true,
+  },
+  {
     path: "ecosystem",
     title: "Orakzai Ecosystem — Ventures, Blockchain & AI Infrastructure | Faisal Orakzai",
     description:
@@ -273,14 +281,78 @@ for (const route of ROUTES) {
     html = html.replace("</body>", `<noscript><article><h1>${route.articleSchema.headline}</h1><p>${route.noscript}</p></article></noscript>\n</body>`);
   }
 
-  // 12. Remove FAQ schema from non-homepage pages (keeps homepage FAQ intact)
+  // 12. Add static profile/credential data and a no-JavaScript summary for education.
+  if (route.educationSchema) {
+    const records = JSON.parse(
+      readFileSync(join(__dirname, "src/data/education-records.json"), "utf8"),
+    );
+    const escapeHtml = (value) =>
+      String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    const credentials = records
+      .filter((record) => record.schemaCredential)
+      .map((record) => ({
+        "@type": "EducationalOccupationalCredential",
+        name: record.program,
+        credentialCategory: record.schemaCredential,
+        description: record.description,
+        recognizedBy: {
+          "@type": "EducationalOrganization",
+          name: record.institution,
+        },
+      }));
+    const schema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfilePage",
+          "@id": `${BASE}/education#webpage`,
+          url: `${BASE}/education`,
+          name: route.title,
+          description: route.description,
+          mainEntity: { "@id": `${BASE}/#person` },
+        },
+        {
+          "@type": "Person",
+          "@id": `${BASE}/#person`,
+          name: "Muhammad Faisal Orakzai",
+          url: BASE,
+          hasCredential: credentials,
+        },
+      ],
+    };
+    const jsonLd = `<script id="education-profile-ld" type="application/ld+json">${JSON.stringify(schema)}</script>`;
+    html = html.replace("</head>", `${jsonLd}\n</head>`);
+
+    const entries = records
+      .map((record) => {
+        const details = [
+          record.focus && `<p>${escapeHtml(record.focus)}</p>`,
+          record.period && `<p><strong>Dates:</strong> ${escapeHtml(record.period)}</p>`,
+          record.result && `<p><strong>Result:</strong> ${escapeHtml(record.result)}</p>`,
+          record.description && `<p>${escapeHtml(record.description)}</p>`,
+        ]
+          .filter(Boolean)
+          .join("");
+        return `<article><h2>${escapeHtml(record.institution)}</h2><p><strong>${escapeHtml(record.program)}</strong></p>${details}</article>`;
+      })
+      .join("");
+    const noScriptSummary = `<noscript><main><h1>Education &amp; Professional Programs — Faisal Orakzai</h1><p>School qualifications, executive education, professional certificates and founder programs. Certificates and accelerator programs are not university degrees.</p>${entries}</main></noscript>`;
+    html = html.replace("</body>", `${noScriptSummary}\n</body>`);
+  }
+
+  // 13. Remove FAQ schema from non-homepage pages (keeps homepage FAQ intact)
   // The FAQ is only relevant on the homepage — having it on every page is schema spam
   html = html.replace(
     /\s*<!-- ══+[\s\S]*?FAQ PAGE SCHEMA[\s\S]*?<\/script>\s*(?=\s*<!-- TrustBox)/,
     "\n    <!-- FAQ schema — homepage only, removed from sub-pages -->\n    "
   );
 
-  // 13. Remove static FAQ <section> from sub-pages
+  // 14. Remove static FAQ <section> from sub-pages
   html = html.replace(
     /<section id="faq"[\s\S]*?<\/section>/,
     "<!-- FAQ section — homepage only -->"

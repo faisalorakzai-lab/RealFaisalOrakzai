@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import SEOHead from "@/components/shared/SEOHead";
+import educationRecords from "@/data/education-records.json";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -52,7 +53,7 @@ const TIMELINE = [
     events: [
       { year: "2018", title: "The Karachi Core Deployment", body: "At just 12 years old, facing heavy family challenges, Faisal executes a high-risk transition to the economic capital, Karachi. Living in PECHS, he enters the cutthroat micro-markets of local real estate." },
       { year: "2019–2021", title: "Tri-City Real Estate Nexus", body: "Through rigorous self-study and high-level local mentorship, expands real estate brokerage and arbitrage networks across a tri-city grid: Karachi, Peshawar, and Kohat. Establishes the parent umbrella corporate identity: Orakzai Group." },
-      { year: "2022–2023", title: "The Technical Pivot", body: "Recognizing that physical real estate lacks rapid scalability, Faisal pivots to global technology systems. Begins intensive research into digital asset custody, algorithmic trading, and system design — enrolling at Ziauddin Medical University (SMC) for elite structural academic paradigms." }
+      { year: "2022–2023", title: "The Technical Pivot", body: "Recognizing that physical real estate lacks rapid scalability, Faisal pivots to global technology systems. Begins intensive research into digital asset custody, algorithmic trading, and system design." }
     ]
   },
   {
@@ -262,27 +263,31 @@ export default function Founder() {
               <div className="h-px w-8 bg-[#F3BA2F]" />
               <span className="text-[#F3BA2F] font-mono text-[10px] tracking-[0.3em]">EDUCATION</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold">Foundations of Learning</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Education &amp; professional programs</h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/45">
+              School qualifications, executive certificates and founder programs are listed by
+              their actual program type.
+            </p>
           </motion.div>
           <div className="space-y-4">
-            {[
-              { org: "Y Combinator", detail: "Startup Accelerator — Entrepreneurship / Entrepreneurial Studies", period: "Jun 2026 – Present" },
-              { org: "Founder Institute", detail: "Founder Program, Karachi (South Asia 2026) — Venture Building", period: "Apr 2025 – Sep 2026" },
-              { org: "Ziauddin University", detail: "Matriculation in Sciences — Islamiat, Pakistan Studies, Civics (Board of Secondary Education)", period: "Apr 2024 – Apr 2026" },
-              { org: "Global Self-Education Platform (GSEP)", detail: "Silent Empire Building — Business Analysis, Advertising", period: "Jan 2019 – Present" },
-              { org: "Yahya Public School, Kohat", detail: "Early education", period: "" },
-              { org: "Madrassa Mahad-ul-Uleman, Kohat", detail: "Early education", period: "" }
-            ].map((e, i) => (
-              <motion.div key={e.org} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} viewport={{ once: true }}
+            {educationRecords.map((e, i) => (
+              <motion.div key={e.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.04, 0.2) }} viewport={{ once: true }}
                 className="flex items-start justify-between gap-4 p-5 border border-[#F3BA2F]/10 hover:border-[#F3BA2F]/30 transition-colors flex-wrap">
                 <div>
-                  <p className="text-white font-bold text-base">{e.org}</p>
-                  <p className="text-white/45 text-sm mt-1 leading-relaxed">{e.detail}</p>
+                  <p className="text-white font-bold text-base">{e.institution}</p>
+                  <p className="text-[#F3BA2F]/70 font-mono text-[9px] tracking-[0.15em] uppercase mt-1">{e.category}</p>
+                  <p className="text-white/45 text-sm mt-2 leading-relaxed">
+                    {e.program}{e.focus ? ` — ${e.focus}` : ""}
+                    {e.result ? ` · Result: ${e.result}` : ""}
+                  </p>
                 </div>
                 {e.period && <span className="text-[#F3BA2F] font-mono text-[10px] tracking-widest whitespace-nowrap mt-1">{e.period}</span>}
               </motion.div>
             ))}
           </div>
+          <a href="/education" className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-[#F3BA2F] hover:text-white transition-colors">
+            VIEW FULL EDUCATION &amp; PROGRAMS <ArrowRight className="h-3.5 w-3.5" />
+          </a>
         </div>
       </section>
 

@@ -13,6 +13,7 @@ import { Suspense, lazy, useState } from "react";
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/Home"));
 const Founder = lazy(() => import("@/pages/Founder"));
+const Education = lazy(() => import("@/pages/Education"));
 const Ecosystem = lazy(() => import("@/pages/Ecosystem"));
 const Projects = lazy(() => import("@/pages/Projects"));
 const Research = lazy(() => import("@/pages/Research"));
@@ -81,6 +82,7 @@ function Router() {
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="/founder" component={Founder} />
+                <Route path="/education" component={Education} />
                 <Route path="/ecosystem" component={Ecosystem} />
                 <Route path="/benchmarks" component={Projects} />
                 <Route path="/research/:slug" component={ResearchArticle} />

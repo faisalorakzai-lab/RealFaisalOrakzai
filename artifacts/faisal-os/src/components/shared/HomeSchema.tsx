@@ -163,6 +163,7 @@ export default function HomeSchema() {
       document.head.appendChild(s);
       return () => { document.getElementById(id)?.remove(); };
     }
+    return undefined;
   }, []);
   return null;
 }
