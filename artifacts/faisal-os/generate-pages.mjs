@@ -70,8 +70,21 @@ const ROUTES = [
     path: "press",
     title: "Press & Media Coverage — Faisal Orakzai | Orakzai Group",
     description:
-      "Press coverage, interviews, awards and media appearances of Faisal Orakzai and Orakzai Group — Stevie Gold Award, GMA Silicon Valley, PRLog, Hackernoon, Crunchbase Rank #28.",
+      "Faisal Orakzai press coverage, magazine interviews, book news, distributed press releases, and clearly identified third-party blockchain listings and reviews.",
     ogType: "website",
+    pressCoverage: [
+      { headline: "Meet Faisal Orakzai", publisher: "Bold Journey Magazine", sourceType: "Editorial interview", url: "https://boldjourney.com/meet-faisal-orakzai/", summary: "Bold Journey Magazine interviews Faisal Orakzai about his entrepreneurial journey and work." },
+      { headline: "Meet Faisal Orakzai", publisher: "CanvasRebel Magazine", sourceType: "Editorial interview", url: "https://canvasrebel.com/meet-faisal-orakzai/", summary: "CanvasRebel Magazine features an interview about Faisal Orakzai's work in software engineering, AI, and blockchain." },
+      { headline: "Faisal Orakzai Publishes 200-Page Book, I’m Orakzai", publisher: "Daily Justajoo", sourceType: "Book coverage", url: "https://dailyjustajoo.com/eng/2026/08/13/faisal-orakzai-publishes-200-page-book-im-orakzai/", summary: "Coverage of I’m Orakzai, a book about Orakzai identity, Pashtun heritage, history, and culture." },
+      { headline: "Faisal Orakzai Launches Blockchain Book on Amazon Kindle", publisher: "The Cow News", sourceType: "Book coverage", url: "https://www.thecownews.com/blog/faisal-orakzai-launches-blockchain-book-on-amazon-kindle/", summary: "Coverage of the Kindle release of The Sovereign Stack, a book about blockchain infrastructure." },
+      { headline: "Pakistani Technology Entrepreneur Faisal Orakzai Publishes The Sovereign Stack on Amazon Kindle", publisher: "61News", sourceType: "Book coverage", url: "https://www.61news.pk/?p=279", summary: "Coverage of The Sovereign Stack, a book introducing blockchain infrastructure, smart contracts, and Web3." },
+      { headline: "Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever", publisher: "openPR", sourceType: "Press release", url: "https://www.openpr.com/news/4560198/young-pakistani-entrepreneur-expands-global-vision-through", summary: "A distributed announcement about OKBOND, Shamim Forever, and their international ambitions." },
+      { headline: "Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever", publisher: "PRLog", sourceType: "Press release", url: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html", summary: "A PRLog-distributed announcement about blockchain, digital finance, and luxury-commerce ventures." },
+      { headline: "The Founder’s Vision: Why Shamim Forever Was Created", publisher: "Shamim Forever Journal", sourceType: "Company journal", url: "https://www.shamimforever.com/journal/founders-vision", summary: "The company journal describes the brand's founding vision and approach to curated luxury." },
+      { headline: "Polygon Token Presales: Zenox, ELON, Decahedron & More", publisher: "ICOAnnouncement.io", sourceType: "Directory roundup", url: "https://icoannouncement.io/best-polygon-token-presales-zenox-earthtones-and-more", summary: "A third-party roundup of Polygon token presales; this is a directory article, not an interview." },
+      { headline: "Orakzai Bond Presale Details", publisher: "ICOAnnouncement.io", sourceType: "Directory listing", url: "https://icoannouncement.io/crypto-presale/orakzai-bond-presale-details", summary: "A third-party directory page with project and presale information for Orakzai Bond." },
+      { headline: "Orakzai Bond Presale Review", publisher: "CoinGabbar", sourceType: "Third-party review", url: "https://www.coingabbar.com/en/crypto-presale/orakzai-bond-presale-review", summary: "A third-party review page; it is not an endorsement or investment recommendation." },
+    ],
   },
   {
     path: "benchmarks",
@@ -342,6 +355,47 @@ for (const route of ROUTES) {
       })
       .join("");
     const noScriptSummary = `<noscript><main><h1>Education &amp; Professional Programs — Faisal Orakzai</h1><p>School qualifications, executive education, professional certificates and founder programs. Certificates and accelerator programs are not university degrees.</p>${entries}</main></noscript>`;
+    html = html.replace("</body>", `${noScriptSummary}\n</body>`);
+  }
+
+  // 13. Add crawler-readable press coverage links and an ItemList without
+  // attributing external articles to the site owner or inventing publication dates.
+  if (route.pressCoverage) {
+    const escapeHtml = (value) =>
+      String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    const coverageUrl = `${BASE}/${route.path}`;
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": `${coverageUrl}#webpage`,
+      url: coverageUrl,
+      name: route.title,
+      description: route.description,
+      mainEntity: {
+        "@type": "ItemList",
+        name: "Faisal Orakzai Press and Media Coverage",
+        numberOfItems: route.pressCoverage.length,
+        itemListElement: route.pressCoverage.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: item.url,
+          name: item.headline,
+          description: `${item.publisher} — ${item.sourceType}. ${item.summary}`,
+        })),
+      },
+    };
+    const jsonLd = `<script id="press-coverage-ld" type="application/ld+json">${JSON.stringify(schema)}</script>`;
+    html = html.replace("</head>", `${jsonLd}\n</head>`);
+
+    const entries = route.pressCoverage
+      .map((item) => `<li><article><h2><a href="${escapeHtml(item.url)}">${escapeHtml(item.headline)}</a></h2><p><strong>${escapeHtml(item.publisher)}</strong> · ${escapeHtml(item.sourceType)}</p><p>${escapeHtml(item.summary)}</p></article></li>`)
+      .join("");
+    const noScriptSummary = `<noscript><main><section><h1>Press &amp; Media Coverage — Faisal Orakzai</h1><p>Interviews, book coverage, press releases, company journal entries, and third-party blockchain directory listings and reviews. Third-party listings and reviews are identified as such and are not endorsements.</p><ul>${entries}</ul></section></main></noscript>`;
     html = html.replace("</body>", `${noScriptSummary}\n</body>`);
   }
 

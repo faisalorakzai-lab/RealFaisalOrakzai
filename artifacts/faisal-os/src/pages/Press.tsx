@@ -13,9 +13,10 @@ import SEOHead from "@/components/shared/SEOHead";
     articleUrl: string;
     seeAwardUrl?: string;
     publisherLogo?: string;
-    datePublished: string;
+    datePublished?: string;
     dateModified?: string;
     category: "Featured" | "Blockchain" | "Founder" | "Awards" | "Partnerships" | "Interviews" | "Announcements";
+    sourceType?: "Editorial interview" | "Press release" | "Company journal" | "Directory listing" | "Review";
     image?: string;
     isLead?: boolean;
     authoritative?: boolean;
@@ -128,6 +129,119 @@ import SEOHead from "@/components/shared/SEOHead";
       category: "Founder",
       authoritative: true,
     },
+    {
+      id: "bold-journey-interview",
+      headline: "Meet Faisal Orakzai",
+      summary: "Bold Journey Magazine interviews Faisal Orakzai about his entrepreneurial journey, work, and perspective.",
+      publisher: "Bold Journey Magazine",
+      publisherUrl: "https://boldjourney.com",
+      articleUrl: "https://boldjourney.com/meet-faisal-orakzai/",
+      datePublished: "2026-10-22",
+      category: "Interviews",
+      sourceType: "Editorial interview",
+    },
+    {
+      id: "canvas-rebel-interview",
+      headline: "Meet Faisal Orakzai",
+      summary: "CanvasRebel Magazine features an interview with Faisal Orakzai about his work in software engineering, AI, and blockchain.",
+      publisher: "CanvasRebel Magazine",
+      publisherUrl: "https://canvasrebel.com",
+      articleUrl: "https://canvasrebel.com/meet-faisal-orakzai/",
+      category: "Interviews",
+      sourceType: "Editorial interview",
+    },
+    {
+      id: "daily-justajoo-im-orakzai",
+      headline: "Faisal Orakzai Publishes 200-Page Book, “I’m Orakzai”",
+      summary: "Daily Justajoo reports on I’m Orakzai, a book about Orakzai identity, Pashtun heritage, history, and culture.",
+      publisher: "Daily Justajoo",
+      publisherUrl: "https://dailyjustajoo.com",
+      articleUrl: "https://dailyjustajoo.com/eng/2026/08/13/faisal-orakzai-publishes-200-page-book-im-orakzai/",
+      datePublished: "2026-08-13",
+      category: "Founder",
+      sourceType: "Press release",
+    },
+    {
+      id: "cow-news-sovereign-stack",
+      headline: "Faisal Orakzai Launches Blockchain Book on Amazon Kindle",
+      summary: "The Cow News covers the Kindle release of The Sovereign Stack, Faisal Orakzai’s book about blockchain infrastructure.",
+      publisher: "The Cow News",
+      publisherUrl: "https://www.thecownews.com",
+      articleUrl: "https://www.thecownews.com/blog/faisal-orakzai-launches-blockchain-book-on-amazon-kindle/",
+      category: "Blockchain",
+      sourceType: "Press release",
+    },
+    {
+      id: "61news-sovereign-stack",
+      headline: "Pakistani Technology Entrepreneur Faisal Orakzai Publishes The Sovereign Stack on Amazon Kindle",
+      summary: "61News reports on the publication of The Sovereign Stack, a book introducing blockchain infrastructure, smart contracts, and Web3.",
+      publisher: "61News",
+      publisherUrl: "https://www.61news.pk",
+      articleUrl: "https://www.61news.pk/?p=279",
+      category: "Blockchain",
+      sourceType: "Press release",
+    },
+    {
+      id: "openpr-global-vision",
+      headline: "Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever",
+      summary: "A distributed announcement describes Faisal Orakzai’s OKBOND and Shamim Forever ventures and their international ambitions.",
+      publisher: "openPR",
+      publisherUrl: "https://www.openpr.com",
+      articleUrl: "https://www.openpr.com/news/4560198/young-pakistani-entrepreneur-expands-global-vision-through",
+      datePublished: "2026-06-25",
+      category: "Announcements",
+      sourceType: "Press release",
+    },
+    {
+      id: "prlog-global-vision",
+      headline: "Young Pakistani Entrepreneur Expands Global Vision Through OKBOND and Shamim Forever",
+      summary: "A PRLog-distributed announcement about Faisal Orakzai’s blockchain, digital finance, and luxury-commerce ventures.",
+      publisher: "PRLog",
+      publisherUrl: "https://www.prlog.org",
+      articleUrl: "https://www.prlog.org/13154317-young-pakistani-entrepreneur-expands-global-vision-through-okbond-and-shamim-forever.html",
+      category: "Announcements",
+      sourceType: "Press release",
+    },
+    {
+      id: "shamim-founders-vision",
+      headline: "The Founder’s Vision: Why Shamim Forever Was Created",
+      summary: "Shamim Forever’s company journal describes the brand’s founding vision, craftsmanship, and approach to curated luxury.",
+      publisher: "Shamim Forever Journal",
+      publisherUrl: "https://www.shamimforever.com",
+      articleUrl: "https://www.shamimforever.com/journal/founders-vision",
+      category: "Announcements",
+      sourceType: "Company journal",
+    },
+    {
+      id: "icoannouncement-polygon-presales",
+      headline: "Polygon Token Presales: Zenox, ELON, Decahedron & More",
+      summary: "A third-party roundup of Polygon token presales that includes token projects beyond Orakzai Bond; this is a directory article, not an interview.",
+      publisher: "ICOAnnouncement.io",
+      publisherUrl: "https://icoannouncement.io",
+      articleUrl: "https://icoannouncement.io/best-polygon-token-presales-zenox-earthtones-and-more",
+      category: "Blockchain",
+      sourceType: "Directory listing",
+    },
+    {
+      id: "icoannouncement-orakzai-bond",
+      headline: "Orakzai Bond Presale Details",
+      summary: "A third-party directory page with project and presale information for Orakzai Bond. Refer to the publisher for current listing details.",
+      publisher: "ICOAnnouncement.io",
+      publisherUrl: "https://icoannouncement.io",
+      articleUrl: "https://icoannouncement.io/crypto-presale/orakzai-bond-presale-details",
+      category: "Blockchain",
+      sourceType: "Directory listing",
+    },
+    {
+      id: "coingabbar-orakzai-bond-review",
+      headline: "Orakzai Bond Presale Review",
+      summary: "CoinGabbar’s third-party review page discusses Orakzai Bond and its presale; it is not an independent endorsement or investment recommendation.",
+      publisher: "CoinGabbar",
+      publisherUrl: "https://www.coingabbar.com",
+      articleUrl: "https://www.coingabbar.com/en/crypto-presale/orakzai-bond-presale-review",
+      category: "Blockchain",
+      sourceType: "Review",
+    },
   ];
 
   const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -177,44 +291,6 @@ import SEOHead from "@/components/shared/SEOHead";
             "name": a.headline,
           })),
         },
-        // Individual NewsArticle schemas
-        ...articles.map((a) => ({
-          "@type": "NewsArticle",
-          "headline": a.headline,
-          "description": a.summary,
-          "datePublished": a.datePublished,
-          "dateModified": a.dateModified || a.datePublished,
-          "url": a.articleUrl,
-          "image": a.image ? `https://faisalorakzai.com${a.image}` : "https://faisalorakzai.com/story/story-01.jpg",
-          "author": {
-            "@type": "Person",
-            "@id": "https://faisalorakzai.com/#person",
-            "name": "Muhammad Faisal Orakzai",
-            "url": "https://faisalorakzai.com/founder",
-            "sameAs": ["https://www.linkedin.com/in/faisalorakzaii", "https://www.imdb.com/name/nm18674496/", "https://orcid.org/0009-0000-0915-7272"],
-          },
-          "publisher": {
-            "@type": "Organization",
-            "@id": "https://faisalorakzai.com/#orakzai-group",
-            "name": a.publisher,
-            "url": a.publisherUrl,
-            "logo": { "@type": "ImageObject", "url": "https://faisalorakzai.com/logo.png" },
-          },
-          "about": {
-            "@type": "Person",
-            "@id": "https://faisalorakzai.com/#person",
-            "name": "Muhammad Faisal Orakzai",
-            "url": "https://faisalorakzai.com/founder",
-          },
-          "mentions": [
-            { "@type": "Person", "name": "Muhammad Faisal Orakzai", "url": "https://faisalorakzai.com/founder" },
-            { "@type": "Organization", "name": "Orakzai Group", "url": "https://faisalorakzai.com" },
-            { "@type": "Organization", "name": "Orakzai Bond", "url": "https://orakzaibond.com" },
-          ],
-          "keywords": "Faisal Orakzai, Muhammad Faisal Orakzai, Orakzai Group, OKBOND, blockchain Pakistan, Polygon, ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ",
-          "inLanguage": "en",
-          "isPartOf": { "@type": "WebPage", "url": "https://faisalorakzai.com/press" },
-        })),
       ],
     };
 
@@ -246,9 +322,9 @@ import SEOHead from "@/components/shared/SEOHead";
       <div className="min-h-screen bg-black text-white">
       <SEOHead
         title="Press & Media Coverage — Faisal Orakzai"
-        description="Press coverage, interviews, awards and media appearances of Faisal Orakzai and Orakzai Group — Stevie Gold Award, PRLog, Hackernoon, Crunchbase Rank #28."
+        description="Faisal Orakzai press coverage, magazine interviews, book news, distributed press releases, and clearly identified third-party blockchain listings and reviews."
         path="/press"
-        keywords="Faisal Orakzai press, Orakzai Group news, Stevie Award blockchain, blockchain entrepreneur Pakistan"
+        keywords="Faisal Orakzai press, Faisal Orakzai interviews, Orakzai Group news, The Sovereign Stack book, OKBOND, blockchain entrepreneur Pakistan"
       />
 
         {/* ── Hero ─────────────────────────────────────────── */}
@@ -269,7 +345,7 @@ import SEOHead from "@/components/shared/SEOHead";
                 Press <span className="gold-gradient">Room</span>
               </h1>
               <p className="text-white/40 font-mono text-sm mt-3 pb-8">
-                Media coverage · Awards · Verified mentions — Muhammad Faisal Orakzai, ÃÂÃÂÃÂµÃÂ ÃÂ§ÃÂÃÂ±ÃÂ©ÃÂ²ÃÂ¦ÃÂ
+                Media coverage · Interviews · Book news · Project listings — Muhammad Faisal Orakzai
               </p>
 
               {/* Category tabs */}
@@ -298,7 +374,7 @@ import SEOHead from "@/components/shared/SEOHead";
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#F3BA2F]/10">
               {[
-                { val: "12+", label: "Press Mentions" },
+                { val: `${PRESS_ARTICLES.length}`, label: "Press & Media Links" },
                 { val: "1", label: "Stevie Gold Award" },
                 { val: "6+", label: "Authority Profiles" },
                 { val: "IMDB", label: "IMDB Profile" },
@@ -580,6 +656,11 @@ import SEOHead from "@/components/shared/SEOHead";
                           <span className="text-xs font-mono border border-[#F3BA2F]/30 text-[#F3BA2F]/70 px-3 py-1 uppercase tracking-wider">
                             {lead.category}
                           </span>
+                          {lead.sourceType && (
+                            <span className="text-xs font-mono border border-white/10 text-white/45 px-3 py-1 uppercase tracking-wider">
+                              {lead.sourceType}
+                            </span>
+                          )}
                         </div>
                         <h2 className="text-2xl md:text-3xl font-bold text-white/95 group-hover:text-white leading-tight mb-4 tracking-tight">
                           {lead.headline}
@@ -594,7 +675,7 @@ import SEOHead from "@/components/shared/SEOHead";
                               )}
                               {lead.publisher}
                             </span>
-                          <span className="flex items-center gap-2"><Calendar className="w-3 h-3" />{new Date(lead.datePublished).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+                          {lead.datePublished && <span className="flex items-center gap-2"><Calendar className="w-3 h-3" />{new Date(`${lead.datePublished}T00:00:00`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>}
                           <a
                             href={lead.articleUrl}
                             target="_blank"
@@ -641,6 +722,7 @@ import SEOHead from "@/components/shared/SEOHead";
                           <span className="text-xs font-mono bg-[#F3BA2F]/10 text-[#F3BA2F] px-2 py-0.5 border border-[#F3BA2F]/20">★ VERIFIED</span>
                         )}
                         <span className="text-xs font-mono text-white/20 uppercase tracking-wider">{article.category}</span>
+                        {article.sourceType && <span className="text-[10px] font-mono text-white/40 border border-white/10 px-2 py-0.5">{article.sourceType}</span>}
                       </div>
 
                       {article.image && (
@@ -735,4 +817,3 @@ import SEOHead from "@/components/shared/SEOHead";
       </div>
     );
   }
-  
