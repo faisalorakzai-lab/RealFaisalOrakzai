@@ -45,12 +45,12 @@ function amazonLink(book, label = "View on Amazon") {
   return `<a class="button" href="${esc(book.amazonUrl)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
 }
 function coverFigure(book, priority = false, number = "") {
-  const loading = priority ? "eager" : "lazy";
-  const fetchPriority = priority ? ' fetchpriority="high"' : "";
-  return `<figure class="book-cover" style="max-width:300px;margin:0 auto 22px;padding:8px;border:1px solid rgba(243,186,47,.28);background:#09121e"><img src="${esc(book.cover)}" width="${book.coverWidth}" height="${book.coverHeight}" alt="Cover of ${esc(book.title)} by Faisal Orakzai" loading="${loading}"${fetchPriority} style="display:block;width:100%;height:auto;max-height:420px;object-fit:contain"><figcaption style="margin-top:10px;font:10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)">${number ? `Book ${esc(number)} · ` : ""}Author-supplied cover artwork</figcaption></figure>`;
+  const loading = "eager";
+  const fetchPriority = priority ? ' fetchpriority="high"' : ' fetchpriority="auto"';
+  return `<figure class="book-cover" style="max-width:300px;margin:0 auto 22px;padding:8px;border:1px solid rgba(243,186,47,.28);background:#09121e"><img src="${esc(book.cover)}" width="${book.coverWidth}" height="${book.coverHeight}" alt="Cover of ${esc(book.title)} by Faisal Orakzai" loading="${loading}"${fetchPriority} decoding="async" style="display:block;width:100%;height:auto;max-height:420px;object-fit:contain"><figcaption style="margin-top:10px;font:10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)">${number ? `Book ${esc(number)} · ` : ""}Author-supplied cover artwork</figcaption></figure>`;
 }
 function bookCard(book, index) {
-  return `<article class="card">${coverFigure(book, false, index)}<p class="eyebrow">${esc(book.format)} · ${esc(book.language)}</p><h2><a href="${esc(book.path)}">${esc(book.title)}</a></h2><p>${esc(book.directoryDescription)}</p><p class="note">Published ${esc(book.displayDate)} · ${esc(book.publisher)}</p><div class="actions"><a href="${esc(book.path)}">Book details →</a>${amazonLink(book)}</div></article>`;
+  return `<article class="card">${coverFigure(book, false, index)}<p class="eyebrow">${esc(book.format)} · ${esc(book.language)}</p><h2><a href="${esc(book.path)}">${esc(book.shortTitle)}</a></h2><p class="lede">${esc(book.title.slice(book.shortTitle.length).replace(/^:\s*/, ""))}</p><p>${esc(book.directoryDescription)}</p><p class="note">Published ${esc(book.displayDate)} · ${esc(book.publisher)}</p><div class="actions"><a href="${esc(book.path)}">Book details →</a>${amazonLink(book)}</div></article>`;
 }
 function detailPage(book, index) {
   const other = books.find((entry) => entry.slug !== book.slug);
@@ -68,22 +68,23 @@ function detailPage(book, index) {
     ["Amazon ASIN", esc(book.asin)],
   ];
   const topics = book.topics.map((topic) => `<li>${esc(topic)}</li>`).join("");
-  return `${shellStart(book.path, book.shortTitle, book.title)}<header class="hero">${coverFigure(book, true, index)}<p class="eyebrow">Book by <a href="${person.profileUrl}">Faisal Orakzai</a></p><h1>${esc(book.title)}</h1><p class="lede">${esc(book.description)}</p><div class="actions">${amazonLink(book)}<a href="/books">← All books</a></div></header><section><h2>About this book</h2><p>${esc(book.description)}</p><p>${esc(intro)}</p></section><section class="section"><h2>Topics covered</h2><ul class="topic-list">${topics}</ul></section><section class="section"><h2>About the author</h2><p>${esc(person.description)}</p><p><a href="${person.profileUrl}">Read Faisal Orakzai’s author profile →</a></p></section><section class="section"><h2>Related reading</h2><p>Explore technical research and publications by Faisal Orakzai, or read the companion title in this collection.</p><div class="actions"><a href="/research">Research &amp; publications →</a><a href="${other.path}">${esc(other.shortTitle)} →</a></div></section><aside class="panel section" aria-label="Publication details"><h2>Publication details</h2><dl class="facts">${facts.map(([term, value]) => `<div class="fact"><dt>${term}</dt><dd>${value}</dd></div>`).join("")}</dl><p class="note">ISBN-13 is not listed in the verified product details. Amazon is the source for current price and availability.</p><div class="actions">${amazonLink(book)}</div></aside>${shellEnd()}`;
+  return `${shellStart(book.path, book.shortTitle, book.title)}<header class="hero">${coverFigure(book, true, index)}<p class="eyebrow">Book by <a href="${person.profileUrl}">Faisal Orakzai</a></p><h1>${esc(book.shortTitle)}</h1><p class="lede">${esc(book.title.slice(book.shortTitle.length).replace(/^:\s*/, ""))}</p><p class="lede">${esc(book.description)}</p><div class="actions">${amazonLink(book)}<a href="/books">← All books</a></div></header><section><h2>About this book</h2><p>${esc(book.description)}</p><p>${esc(intro)}</p></section><section class="section"><h2>Topics covered</h2><ul class="topic-list">${topics}</ul></section><section class="section"><h2>About the author</h2><p>${esc(person.description)}</p><p><a href="${person.profileUrl}">Read Faisal Orakzai’s author profile →</a></p></section><section class="section"><h2>Related reading</h2><p>Explore technical research and publications by Faisal Orakzai, or read the companion title in this collection.</p><div class="actions"><a href="/research">Research &amp; publications →</a><a href="${other.path}">${esc(other.shortTitle)} →</a></div></section><aside class="panel section" aria-label="Publication details"><h2>Publication details</h2><dl class="facts">${facts.map(([term, value]) => `<div class="fact"><dt>${term}</dt><dd>${value}</dd></div>`).join("")}</dl><p class="note">ISBN-13 is not listed in the verified product details. Amazon is the source for current price and availability.</p><div class="actions">${amazonLink(book)}</div></aside>${shellEnd()}`;
 }
 function directoryPage() {
   return `${shellStart("/books", "Books & Publications")}<header class="hero"><p class="eyebrow">Books · Faisal Orakzai</p><h1>Books &amp; Publications</h1><p class="lede">Two books by Faisal Orakzai explore distinct but connected subjects: blockchain infrastructure and the relationship between heritage, identity and a technology-shaped future.</p><p>Author: <a href="${person.profileUrl}">Faisal Orakzai</a> · <a href="/research">Research &amp; publications</a></p></header><section class="grid" aria-label="Books by Faisal Orakzai">${books.map((book, index) => bookCard(book, String(index + 1).padStart(2, "0"))).join("")}</section><section class="section"><h2>About the author</h2><p>${esc(person.description)}</p><div class="actions"><a href="${person.profileUrl}">Read the author profile →</a><a href="/research">Browse research and publications →</a></div><p class="note">Amazon product pages are the source for current price and availability.</p></section>${shellEnd()}`;
 }
 function authorPage() {
   const cards = books.map((book, index) => `<article class="card">${coverFigure(book, false, String(index + 1).padStart(2, "0"))}<p class="eyebrow">Book ${String(index + 1).padStart(2, "0")} · ${esc(book.displayDate)}</p><h3><a href="${esc(book.path)}">${esc(book.title)}</a></h3><p>${esc(book.directoryDescription)}</p></article>`).join("");
-  return `${shellStart(person.profileUrl, "Author profile")}<section class="author-row hero"><figure><img src="${esc(person.image)}" width="1080" height="1080" alt="Portrait of Faisal Orakzai" loading="lazy"><figcaption class="note">Faisal Orakzai · Author</figcaption></figure><div><p class="eyebrow">Author profile</p><h1>Faisal Orakzai</h1><p>${esc(person.fullName)}</p><p class="lede">${esc(person.description)}</p><p>His books address both practical digital infrastructure and the cultural histories that inform identity and community. <em>The Sovereign Stack</em> focuses on blockchain systems; <em>I’m Orakzai</em> connects heritage and history with technology and the future.</p><div class="actions"><a href="/books">Browse the books →</a><a href="${esc(person.amazonAuthorUrl)}" target="_blank" rel="noopener noreferrer">Amazon author page ↗</a></div></div></section><section class="section"><h2>Books by Faisal Orakzai</h2><div class="grid">${cards}</div></section><section class="section"><h2>Research &amp; official profiles</h2><div class="actions"><a href="/research">Research &amp; publications →</a>${person.sameAs.map((url) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${new URL(url).hostname.replace(/^www\./, "")} ↗</a>`).join("")}</div></section>${shellEnd()}`;
+  return `${shellStart(person.profileUrl, "Author profile")}<section class="author-row hero"><figure><img src="${esc(person.image)}" width="1080" height="1080" alt="Portrait of Faisal Orakzai" loading="eager" fetchpriority="high" decoding="async"><figcaption class="note">Faisal Orakzai · Author</figcaption></figure><div><p class="eyebrow">Author profile</p><h1>Faisal Orakzai</h1><p>${esc(person.fullName)}</p><p class="lede">${esc(person.description)}</p><p>His books address both practical digital infrastructure and the cultural histories that inform identity and community. <em>The Sovereign Stack</em> focuses on blockchain systems; <em>I’m Orakzai</em> connects heritage and history with technology and the future.</p><div class="actions"><a href="/books">Browse the books →</a><a href="${esc(person.amazonAuthorUrl)}" target="_blank" rel="noopener noreferrer">Amazon author page ↗</a></div></div></section><section class="section"><h2>Books by Faisal Orakzai</h2><div class="grid">${cards}</div></section><section class="section"><h2>Research &amp; official profiles</h2><div class="actions"><a href="/research">Research &amp; publications →</a>${person.sameAs.map((url) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${new URL(url).hostname.replace(/^www\./, "")} ↗</a>`).join("")}</div></section>${shellEnd()}`;
 }
 
 const routes = [
   {
     path: "books",
     kind: "directory",
-    title: "Books by Faisal Orakzai | The Sovereign Stack & I’m Orakzai",
-    description: "Explore books by Faisal Orakzai: The Sovereign Stack, a blockchain infrastructure guide, and I’m Orakzai, a journey through heritage, identity and technology.",
+    title: "Books & Publications | Faisal Orakzai",
+    description: "Explore two books by Faisal Orakzai: The Sovereign Stack on blockchain infrastructure and I’m Orakzai on heritage, Pashtun identity, history and technology.",
+    keywords: "Faisal Orakzai books, The Sovereign Stack, I’m Orakzai, blockchain book, Orakzai heritage",
     content: directoryPage(),
     image: `${BASE}${books[0].cover}`,
     imageType: imageType(books[0].cover),
@@ -95,8 +96,9 @@ const routes = [
   {
     path: "author/faisal-orakzai",
     kind: "author",
-    title: "Faisal Orakzai — Author Profile | Books & Research",
-    description: "Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, researcher and author. Explore his books, research and verified author profiles.",
+    title: "Author Profile | Faisal Orakzai",
+    description: "Official author profile for Faisal Orakzai, Pakistani technology entrepreneur, researcher and author of The Sovereign Stack and I’m Orakzai.",
+    keywords: "Faisal Orakzai author, Faisal Orakzai biography, Faisal Orakzai books, Pakistani technology author",
     content: authorPage(),
     image: portrait,
     imageType: "image/jpeg",
@@ -109,8 +111,13 @@ const routes = [
     path: book.path.slice(1),
     kind: "book",
     book,
-    title: index === 0 ? "The Sovereign Stack — Blockchain Infrastructure | Faisal Orakzai" : "I’m Orakzai — Heritage, Identity & the Future | Faisal Orakzai",
-    description: book.description,
+    title: index === 0 ? "The Sovereign Stack: Blockchain | Faisal Orakzai" : "I’m Orakzai: Heritage & Identity | Faisal Orakzai",
+    description: index === 0
+      ? "The Sovereign Stack by Faisal Orakzai is a practical book on blockchain infrastructure, smart contracts, tokenization, digital identity, security and Web3."
+      : "I’m Orakzai by Faisal Orakzai explores Orakzai heritage, Pashtun identity, history and the connections between culture, technology and the future.",
+    keywords: index === 0
+      ? "The Sovereign Stack, Faisal Orakzai, blockchain infrastructure book, smart contracts, tokenization, digital identity, Web3"
+      : "I’m Orakzai, Faisal Orakzai, Orakzai heritage, Pashtun identity, Pashtun history, culture and technology",
     content: detailPage(book, String(index + 1).padStart(2, "0")),
     image: `${BASE}${book.cover}`,
     imageType: imageType(book.cover),
@@ -144,6 +151,7 @@ for (const route of routes) {
     html = html.replace("<!-- canonical is set per-page by JS (SEOHead) and by generate-pages.mjs at build time -->", canonicalLink);
   }
   html = html.replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${esc(route.description)}"`);
+  html = html.replace(/<meta name="keywords" content="[^"]*"/, `<meta name="keywords" content="${esc(route.keywords)}"`);
   html = html.replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${esc(title)}"`);
   html = html.replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${esc(route.description)}"`);
   html = html.replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${canonicalUrl}"`);
@@ -164,7 +172,7 @@ for (const route of routes) {
         "@context": "https://schema.org",
         "@graph": [
           { "@type": "WebPage", "@id": `${canonicalUrl}#webpage`, url: canonicalUrl, name: title, description: route.description, image: route.image, mainEntity: { "@id": `${canonicalUrl}#book` } },
-          { "@type": "Book", "@id": `${canonicalUrl}#book`, name: route.book.title, author: { "@id": personId, name: person.name }, url: canonicalUrl, description: route.book.description, bookFormat: "https://schema.org/EBook", inLanguage: "en", datePublished: route.book.datePublished, publisher: { "@type": "Organization", name: route.book.publisher }, sameAs: route.book.amazonUrl, identifier: { "@type": "PropertyValue", propertyID: "ASIN", value: route.book.asin }, ...(route.book.edition ? { bookEdition: route.book.edition } : {}) },
+          { "@type": "Book", "@id": `${canonicalUrl}#book`, name: route.book.title, alternateName: route.book.shortTitle, author: { "@id": personId }, url: canonicalUrl, mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` }, isPartOf: { "@id": `${BASE}/books#collection` }, description: route.book.description, keywords: route.book.topics, image: route.image, bookFormat: "https://schema.org/EBook", inLanguage: "en", datePublished: route.book.datePublished, publisher: { "@type": "Organization", name: route.book.publisher }, sameAs: route.book.amazonUrl, identifier: { "@type": "PropertyValue", propertyID: "ASIN", value: route.book.asin }, ...(route.book.edition ? { bookEdition: route.book.edition } : {}) },
         ],
       }
     : route.kind === "directory"
@@ -178,11 +186,21 @@ for (const route of routes) {
         image: route.image,
         mainEntity: {
           "@type": "ItemList",
+          numberOfItems: books.length,
           itemListElement: books.map((book, index) => ({
             "@type": "ListItem",
             position: index + 1,
-            name: book.title,
-            url: `${BASE}${book.path}`,
+            item: {
+              "@type": "Book",
+              "@id": `${BASE}${book.path}#book`,
+              name: book.title,
+              alternateName: book.shortTitle,
+              url: `${BASE}${book.path}`,
+              image: `${BASE}${book.cover}`,
+              author: { "@id": personId },
+              sameAs: book.amazonUrl,
+              identifier: { "@type": "PropertyValue", propertyID: "ASIN", value: book.asin },
+            },
           })),
         },
       }
@@ -194,7 +212,17 @@ for (const route of routes) {
         name: title,
         description: route.description,
         image: portrait,
-        mainEntity: { "@id": personId },
+        dateModified: new Date().toISOString().slice(0, 10),
+        mainEntity: {
+          "@id": personId,
+          "@type": "Person",
+          name: person.fullName,
+          alternateName: person.name,
+          url: `${BASE}${person.profileUrl}`,
+          description: person.description,
+          image: portrait,
+          sameAs: person.sameAs,
+        },
       };
   if (route.kind === "book") pageSchema["@graph"][1].image = route.image;
   const breadcrumbSchema = {
@@ -205,7 +233,7 @@ for (const route of routes) {
       ...route.crumbs.map((crumb, index) => ({ "@type": "ListItem", position: index + 2, name: crumb.name, item: crumb.url })),
     ],
   };
-  html = html.replace("</head>", `<script id="publication-page-schema" type="application/ld+json">${jsonLd(pageSchema)}</script>\n<script id="seo-breadcrumb" type="application/ld+json">${jsonLd(breadcrumbSchema)}</script>\n</head>`);
+  html = html.replace("</head>", `<link rel="preload" as="image" href="${esc(route.image)}" fetchpriority="high" />\n<script id="publication-page-schema" type="application/ld+json">${jsonLd(pageSchema)}</script>\n<script id="seo-breadcrumb" type="application/ld+json">${jsonLd(breadcrumbSchema)}</script>\n</head>`);
 
   // Replace homepage-only hidden SEO material in this route copy with useful,
   // route-specific semantic HTML. The main app hydrates into the same root.

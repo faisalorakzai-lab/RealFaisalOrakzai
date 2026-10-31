@@ -15,10 +15,19 @@
   <url><loc>https://faisalorakzai.com/benchmarks</loc><lastmod>2026-07-24</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://faisalorakzai.com/research</loc><lastmod>2026-07-24</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <!-- ── Author & Books ── -->
-  <url><loc>https://faisalorakzai.com/books</loc><lastmod>2026-10-30</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://faisalorakzai.com/author/faisal-orakzai</loc><lastmod>2026-10-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://faisalorakzai.com/books/the-sovereign-stack</loc><lastmod>2026-10-30</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://faisalorakzai.com/books/im-orakzai</loc><lastmod>2026-10-30</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://faisalorakzai.com/books</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <image:image><image:loc>https://faisalorakzai.com/books/the-sovereign-stack-cover.jpg</image:loc><image:title>The Sovereign Stack by Faisal Orakzai</image:title><image:caption>Author-supplied cover of The Sovereign Stack: Engineering Next-Generation Blockchain Infrastructure.</image:caption></image:image>
+    <image:image><image:loc>https://faisalorakzai.com/books/im-orakzai-cover.webp</image:loc><image:title>I’m Orakzai by Faisal Orakzai</image:title><image:caption>Author-supplied cover of I’m Orakzai: A Journey Through Orakzai Heritage, Pashtun Identity, History, Technology &amp; the Future.</image:caption></image:image>
+  </url>
+  <url><loc>https://faisalorakzai.com/author/faisal-orakzai</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <image:image><image:loc>https://faisalorakzai.com/faisal-profile-google.jpg</image:loc><image:title>Faisal Orakzai — author profile</image:title><image:caption>Portrait of Faisal Orakzai, author of The Sovereign Stack and I’m Orakzai.</image:caption></image:image>
+  </url>
+  <url><loc>https://faisalorakzai.com/books/the-sovereign-stack</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <image:image><image:loc>https://faisalorakzai.com/books/the-sovereign-stack-cover.jpg</image:loc><image:title>The Sovereign Stack — book cover</image:title><image:caption>Cover of The Sovereign Stack: Engineering Next-Generation Blockchain Infrastructure by Faisal Orakzai.</image:caption></image:image>
+  </url>
+  <url><loc>https://faisalorakzai.com/books/im-orakzai</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <image:image><image:loc>https://faisalorakzai.com/books/im-orakzai-cover.webp</image:loc><image:title>I’m Orakzai — book cover</image:title><image:caption>Cover of I’m Orakzai: A Journey Through Orakzai Heritage, Pashtun Identity, History, Technology &amp; the Future by Faisal Orakzai.</image:caption></image:image>
+  </url>
   <url><loc>https://faisalorakzai.com/press</loc><lastmod>2026-07-24</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
   <url><loc>https://faisalorakzai.com/learning</loc><lastmod>2026-07-24</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://faisalorakzai.com/media</loc><lastmod>2026-07-24</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>

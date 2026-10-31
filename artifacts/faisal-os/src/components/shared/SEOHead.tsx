@@ -11,6 +11,7 @@ import { useEffect } from "react";
     imageHeight?: number;
     imageAlt?: string;
     keywords?: string;
+    breadcrumbLabel?: string;
   }
 
   function setMeta(attr: "name" | "property", key: string, val: string) {
@@ -42,7 +43,7 @@ import { useEffect } from "react";
     el.setAttribute("href", url);
   }
 
-  function injectBreadcrumb(path: string) {
+  function injectBreadcrumb(path: string, finalLabel?: string) {
     document.getElementById("seo-breadcrumb")?.remove();
     const segments = path.split("/").filter(Boolean);
     if (segments.length === 0) return;
@@ -50,7 +51,7 @@ import { useEffect } from "react";
     let built = "";
     segments.forEach((seg, idx) => {
       built += "/" + seg;
-      const name = seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " ");
+      const name = idx === segments.length - 1 && finalLabel ? finalLabel : seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " ");
       items.push({ "@type": "ListItem", "position": idx + 2, "name": name, "item": "https://faisalorakzai.com" + built });
     });
     const ld = document.createElement("script");
@@ -61,11 +62,12 @@ import { useEffect } from "react";
   }
 
   export default function SEOHead({
-    title, description, path, type = "website", image, imageType, imageWidth, imageHeight, imageAlt, keywords,
+    title, description, path, type = "website", image, imageType, imageWidth, imageHeight, imageAlt, keywords, breadcrumbLabel,
   }: SEOHeadProps) {
     const url = `https://faisalorakzai.com${path}`;
     const img = image ?? "https://faisalorakzai.com/faisal-official-knowledge-panel.jpg";
-    const fullTitle = `${title} | Faisal Orakzai`;
+    const normalizedTitle = title.trim();
+    const fullTitle = normalizedTitle.toLowerCase().endsWith("| faisal orakzai") ? normalizedTitle : `${normalizedTitle} | Faisal Orakzai`;
 
     useEffect(() => {
       document.title = fullTitle;
@@ -97,12 +99,12 @@ import { useEffect } from "react";
       setMeta("name", "twitter:creator", "@faisalorakzaii");
 
       setCanonical(url);
-      injectBreadcrumb(path);
+      injectBreadcrumb(path, breadcrumbLabel);
 
       return () => {
         document.getElementById("seo-breadcrumb")?.remove();
       };
-    }, [fullTitle, description, url, img, type, imageType, imageWidth, imageHeight, imageAlt, keywords, path]);
+    }, [fullTitle, description, url, img, type, imageType, imageWidth, imageHeight, imageAlt, keywords, path, breadcrumbLabel]);
 
     return null;
   }

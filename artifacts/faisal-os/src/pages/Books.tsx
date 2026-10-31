@@ -58,11 +58,13 @@ function BookCover({ book, large = false, number }: { book: (typeof books)[numbe
   return (
     <figure className={`m-0 flex flex-col items-center justify-center gap-3 border border-[#F3BA2F]/25 bg-[#09121e] p-4 ${large ? "min-h-[320px] sm:min-h-[440px]" : "min-h-[280px]"}`}>
       <img
-        src={book.cover}
+        src={coverUrl(book.cover)}
         alt={`Cover of ${book.title} by Faisal Orakzai`}
         width={book.coverWidth}
         height={book.coverHeight}
-        loading={large ? "eager" : "lazy"}
+        loading="eager"
+        fetchPriority={large ? "high" : "auto"}
+        decoding="async"
         className={`${large ? "max-h-[520px]" : "max-h-[380px]"} h-auto w-auto max-w-full object-contain`}
       />
       <figcaption className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-white/40">
@@ -120,8 +122,9 @@ function BookCard({ book, number }: { book: (typeof books)[number]; number: stri
       <div className="flex flex-col justify-center">
         <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-[#F3BA2F]/70">{book.format} · {book.language}</p>
         <h2 className="font-serif text-2xl leading-snug text-white sm:text-3xl">
-          <Link href={book.path} className="hover:text-[#F3BA2F]">{book.title}</Link>
+          <Link href={book.path} className="hover:text-[#F3BA2F]">{book.shortTitle}</Link>
         </h2>
+        <p className="mt-2 max-w-2xl font-serif text-base leading-snug text-white/75">{book.title.slice(book.shortTitle.length).replace(/^:\s*/, "")}</p>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/60">{book.directoryDescription}</p>
         <p className="mt-4 text-xs text-white/45">Published {book.displayDate} · {book.publisher}</p>
         <div className="mt-6 flex flex-wrap items-center gap-4">
@@ -140,8 +143,8 @@ export function BooksDirectory() {
   return (
     <div className="min-h-screen bg-[#05080d] px-5 pb-24 pt-28 text-white sm:px-8">
       <SEOHead
-        title="Books by Faisal Orakzai"
-        description="Explore books by Faisal Orakzai: The Sovereign Stack, a blockchain infrastructure guide, and I’m Orakzai, a journey through heritage, identity, history and technology."
+        title="Books & Publications | Faisal Orakzai"
+        description="Explore two books by Faisal Orakzai: The Sovereign Stack on blockchain infrastructure and I’m Orakzai on heritage, Pashtun identity, history and technology."
         path="/books"
         image={coverUrl(sovereign.cover)}
         imageType={coverMimeType(sovereign.cover)}
@@ -149,6 +152,7 @@ export function BooksDirectory() {
         imageHeight={sovereign.coverHeight}
         imageAlt={`Cover of ${sovereign.title} by ${author.name}`}
         keywords="Faisal Orakzai books, The Sovereign Stack, I’m Orakzai, blockchain book, Orakzai heritage"
+        breadcrumbLabel="Books & Publications"
       />
       <div className="mx-auto max-w-6xl">
         <Breadcrumbs current="Books & Publications" />
@@ -191,8 +195,8 @@ export function AuthorProfile() {
   return (
     <div className="min-h-screen bg-[#05080d] px-5 pb-24 pt-28 text-white sm:px-8">
       <SEOHead
-        title="Faisal Orakzai — Author Profile"
-        description="Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, researcher and author. Explore his books, research and verified author profiles."
+        title="Author Profile | Faisal Orakzai"
+        description="Official author profile for Faisal Orakzai, Pakistani technology entrepreneur, researcher and author of The Sovereign Stack and I’m Orakzai."
         path={author.profileUrl}
         type="profile"
         image={portraitUrl}
@@ -200,13 +204,14 @@ export function AuthorProfile() {
         imageWidth={1080}
         imageHeight={1080}
         imageAlt={`Portrait of ${author.name}`}
-        keywords="Faisal Orakzai author, Faisal Orakzai biography, Faisal Orakzai books"
+        keywords="Faisal Orakzai author, Faisal Orakzai biography, Faisal Orakzai books, Pakistani technology author"
+        breadcrumbLabel="Author profile"
       />
       <div className="mx-auto max-w-5xl">
         <Breadcrumbs current="Author profile" />
         <div className="grid items-start gap-10 md:grid-cols-[240px_minmax(0,1fr)] md:gap-16">
           <figure className="m-0">
-            <img src={author.image} alt="Portrait of Faisal Orakzai" width="1080" height="1080" loading="lazy" className="aspect-square w-full border border-[#F3BA2F]/25 object-cover" />
+            <img src={portraitUrl} alt="Portrait of Faisal Orakzai" width="1080" height="1080" loading="eager" fetchPriority="high" decoding="async" className="aspect-square w-full border border-[#F3BA2F]/25 object-cover" />
             <figcaption className="mt-3 font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">Faisal Orakzai · Author</figcaption>
           </figure>
           <div>
@@ -253,7 +258,7 @@ export function AuthorProfile() {
   );
 }
 
-function BookDetail({ book, pageTitle, metaDescription, topicsIntro }: { book: (typeof books)[number]; pageTitle: string; metaDescription: string; topicsIntro: string }) {
+function BookDetail({ book, pageTitle, metaDescription, topicsIntro, keywords }: { book: (typeof books)[number]; pageTitle: string; metaDescription: string; topicsIntro: string; keywords: string }) {
   usePageView("book_detail", book.title);
   const isSovereign = book.slug === "the-sovereign-stack";
   const related = isSovereign ? imOrakzai : sovereign;
@@ -269,7 +274,8 @@ function BookDetail({ book, pageTitle, metaDescription, topicsIntro }: { book: (
         imageWidth={book.coverWidth}
         imageHeight={book.coverHeight}
         imageAlt={`Cover of ${book.title} by ${author.name}`}
-        keywords={`${book.shortTitle}, ${book.title}, Faisal Orakzai book, ${book.topics.slice(0, 3).join(", ")}`}
+        keywords={keywords}
+        breadcrumbLabel={book.shortTitle}
       />
       <div className="mx-auto max-w-6xl">
         <Breadcrumbs current={book.shortTitle} bookTitle={book.title} />
@@ -277,7 +283,8 @@ function BookDetail({ book, pageTitle, metaDescription, topicsIntro }: { book: (
           <BookCover book={book} number={isSovereign ? "01" : "02"} large />
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-[#F3BA2F]/75">Book by <AuthorLink className="text-[#F3BA2F] hover:text-white" /></p>
-            <h1 className="font-serif text-3xl leading-tight text-white sm:text-5xl">{book.title}</h1>
+            <h1 className="font-serif text-3xl leading-tight text-white sm:text-5xl">{book.shortTitle}</h1>
+            <p className="mt-3 max-w-3xl font-serif text-xl leading-snug text-white/80 sm:text-2xl">{book.title.slice(book.shortTitle.length).replace(/^:\s*/, "")}</p>
             <p className="mt-6 max-w-2xl text-base leading-8 text-white/65">{book.description}</p>
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-white/45">
               <span>{book.format}</span><span aria-hidden="true">·</span><span>{book.language}</span><span aria-hidden="true">·</span><span>Published {book.displayDate}</span>
@@ -343,8 +350,9 @@ export function SovereignStackPage() {
   return (
     <BookDetail
       book={sovereign}
-      pageTitle="The Sovereign Stack — Blockchain Infrastructure"
-      metaDescription="A practical guide by Faisal Orakzai to blockchain architecture, infrastructure, smart contracts, digital identity, security, tokenization and Web3."
+      pageTitle="The Sovereign Stack: Blockchain | Faisal Orakzai"
+      metaDescription="The Sovereign Stack by Faisal Orakzai is a practical book on blockchain infrastructure, smart contracts, tokenization, digital identity, security and Web3."
+      keywords="The Sovereign Stack, Faisal Orakzai, blockchain infrastructure book, smart contracts, tokenization, digital identity, Web3"
       topicsIntro="The book’s verified listing and contents describe a practical route through blockchain fundamentals and infrastructure, smart-contract engineering, tokenization, digital identity, enterprise systems, security, interoperability and Web3."
     />
   );
@@ -354,8 +362,9 @@ export function ImOrakzaiPage() {
   return (
     <BookDetail
       book={imOrakzai}
-      pageTitle="I’m Orakzai — Heritage, Identity & the Future"
-      metaDescription="I’m Orakzai by Faisal Orakzai explores Orakzai heritage, Pashtun identity, history, culture, technology, entrepreneurship and the future."
+      pageTitle="I’m Orakzai: Heritage & Identity | Faisal Orakzai"
+      metaDescription="I’m Orakzai by Faisal Orakzai explores Orakzai heritage, Pashtun identity, history and the connections between culture, technology and the future."
+      keywords="I’m Orakzai, Faisal Orakzai, Orakzai heritage, Pashtun identity, Pashtun history, culture and technology"
       topicsIntro="The verified Amazon description and the author’s publication announcement frame the book around identity, heritage, history and culture, then connect those subjects with technology, entrepreneurship and the future."
     />
   );
