@@ -749,6 +749,11 @@ export default function Research() {
               <span className="animate-pulse" style={{ width:"6px",height:"6px",borderRadius:"50%",background:"#F3BA2F",display:"inline-block" }} />
               <span style={{ fontFamily:"monospace",fontSize:"8px",letterSpacing:"0.28em",color:"rgba(243,186,47,0.4)",textTransform:"uppercase" }}>{ENTRIES.length} ENTRIES · INDEXING ACTIVE</span>
             </div>
+            <p style={{ margin:"14px 0 0",fontSize:"12px",color:"rgba(255,255,255,0.4)" }}>
+              <a href="/books" style={{ color:"#F3BA2F",textDecoration:"none" }}>Books by Faisal Orakzai</a>
+              <span aria-hidden="true"> · </span>
+              <a href="/author/faisal-orakzai" style={{ color:"#F3BA2F",textDecoration:"none" }}>Author profile</a>
+            </p>
           </div>
         </div>
       </footer>

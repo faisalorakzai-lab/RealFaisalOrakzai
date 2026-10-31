@@ -92,6 +92,22 @@
       "destination": "/papers/:paper.html"
     },
     {
+      "source": "/books",
+      "destination": "/books/index.html"
+    },
+    {
+      "source": "/books/the-sovereign-stack",
+      "destination": "/books/the-sovereign-stack/index.html"
+    },
+    {
+      "source": "/books/im-orakzai",
+      "destination": "/books/im-orakzai/index.html"
+    },
+    {
+      "source": "/author/faisal-orakzai",
+      "destination": "/author/faisal-orakzai/index.html"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
     },

@@ -38,6 +38,10 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const InnerCircle = lazy(() => import("@/pages/InnerCircle"));
 const WikiHome = lazy(() => import("@/pages/WikiHome"));
 const WikiFaisalOrakzai = lazy(() => import("@/pages/WikiFaisalOrakzai"));
+const BooksDirectory = lazy(() => import("@/pages/Books").then((module) => ({ default: module.BooksDirectory })));
+const AuthorProfile = lazy(() => import("@/pages/Books").then((module) => ({ default: module.AuthorProfile })));
+const SovereignStackPage = lazy(() => import("@/pages/Books").then((module) => ({ default: module.SovereignStackPage })));
+const ImOrakzaiPage = lazy(() => import("@/pages/Books").then((module) => ({ default: module.ImOrakzaiPage })));
 
 function RouteLoading() {
   return (
@@ -87,6 +91,10 @@ function Router() {
                 <Route path="/benchmarks" component={Projects} />
                 <Route path="/research/:slug" component={ResearchArticle} />
                 <Route path="/research" component={Research} />
+                <Route path="/books/the-sovereign-stack" component={SovereignStackPage} />
+                <Route path="/books/im-orakzai" component={ImOrakzaiPage} />
+                <Route path="/author/faisal-orakzai" component={AuthorProfile} />
+                <Route path="/books" component={BooksDirectory} />
                 <Route path="/press" component={Press} />
                 <Route path="/learning" component={Learning} />
                 <Route path="/media" component={Media} />

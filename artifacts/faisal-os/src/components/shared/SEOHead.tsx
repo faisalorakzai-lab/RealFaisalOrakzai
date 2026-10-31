@@ -4,8 +4,12 @@ import { useEffect } from "react";
     title: string;
     description: string;
     path: string;
-    type?: "website" | "profile" | "article";
+    type?: "website" | "profile" | "article" | "book";
     image?: string;
+    imageType?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageAlt?: string;
     keywords?: string;
   }
 
@@ -17,6 +21,15 @@ import { useEffect } from "react";
       document.head.appendChild(el);
     }
     el.setAttribute("content", val);
+  }
+
+  function setMetaAll(attr: "name" | "property", key: string, val: string) {
+    const elements = document.querySelectorAll(`meta[${attr}="${key}"]`);
+    if (!elements.length) {
+      setMeta(attr, key, val);
+      return;
+    }
+    elements.forEach((element) => element.setAttribute("content", val));
   }
 
   function setCanonical(url: string) {
@@ -48,7 +61,7 @@ import { useEffect } from "react";
   }
 
   export default function SEOHead({
-    title, description, path, type = "website", image, keywords,
+    title, description, path, type = "website", image, imageType, imageWidth, imageHeight, imageAlt, keywords,
   }: SEOHeadProps) {
     const url = `https://faisalorakzai.com${path}`;
     const img = image ?? "https://faisalorakzai.com/faisal-official-knowledge-panel.jpg";
@@ -66,13 +79,21 @@ import { useEffect } from "react";
       setMeta("property", "og:description", description);
       setMeta("property", "og:url", url);
       setMeta("property", "og:type", type);
-      setMeta("property", "og:image", img);
+      setMetaAll("property", "og:image", img);
+      if (imageType) {
+        setMetaAll("property", "og:image:secure_url", img);
+        setMetaAll("property", "og:image:type", imageType);
+      }
+      if (imageWidth) setMetaAll("property", "og:image:width", String(imageWidth));
+      if (imageHeight) setMetaAll("property", "og:image:height", String(imageHeight));
+      if (imageAlt) setMetaAll("property", "og:image:alt", imageAlt);
       setMeta("property", "og:site_name", "Faisal Orakzai");
 
       setMeta("name", "twitter:card", "summary_large_image");
       setMeta("name", "twitter:title", fullTitle);
       setMeta("name", "twitter:description", description);
       setMeta("name", "twitter:image", img);
+      if (imageAlt) setMeta("name", "twitter:image:alt", imageAlt);
       setMeta("name", "twitter:creator", "@faisalorakzaii");
 
       setCanonical(url);
@@ -81,8 +102,7 @@ import { useEffect } from "react";
       return () => {
         document.getElementById("seo-breadcrumb")?.remove();
       };
-    }, [fullTitle, description, url, img, type, keywords, path]);
+    }, [fullTitle, description, url, img, type, imageType, imageWidth, imageHeight, imageAlt, keywords, path]);
 
     return null;
   }
-  

@@ -357,6 +357,9 @@ export default function Home() {
             <Link href="/founder">
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-3 px-8 py-4 border border-[#F3BA2F]/30 text-[#F3BA2F] font-bold tracking-wider text-sm cursor-pointer hover:border-[#F3BA2F] hover:bg-[#F3BA2F]/5 transition-all">VIEW FOUNDER PROFILE</motion.div>
             </Link>
+            <Link href="/books">
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-3 px-8 py-4 border border-white/15 text-white/75 font-bold tracking-wider text-sm cursor-pointer hover:border-[#F3BA2F]/60 hover:text-[#F3BA2F] transition-all">BOOKS &amp; PUBLICATIONS</motion.div>
+            </Link>
           </motion.div>
         </motion.div>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#F3BA2F]/40 z-[5]">

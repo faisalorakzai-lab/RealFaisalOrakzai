@@ -11,6 +11,7 @@ const links = [
   { href: "/ecosystem", label: "Ventures" },
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/research", label: "Research" },
+  { href: "/books", label: "Books" },
   { href: "/press", label: "Press" },
   { href: "/wiki", label: "Wiki" },
   { href: "/okzbyte-hub", label: "OkzByte Hub" },

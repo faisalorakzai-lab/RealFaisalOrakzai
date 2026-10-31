@@ -1,0 +1,75 @@
+{
+  "author": {
+    "name": "Faisal Orakzai",
+    "fullName": "Muhammad Faisal Orakzai",
+    "profileUrl": "/author/faisal-orakzai",
+    "profileCanonical": "https://faisalorakzai.com/author/faisal-orakzai",
+    "description": "Faisal Orakzai is a Pakistani technology entrepreneur, systems architect, researcher, and author. He is the Founder and Chairman of Orakzai Group, where he leads initiatives in blockchain infrastructure, artificial intelligence, enterprise software, fintech, and digital commerce.",
+    "image": "/faisal-profile-google.jpg",
+    "amazonAuthorUrl": "https://www.amazon.com/Faisal-Orakzai/e/B0H86D2MQ6",
+    "sameAs": [
+      "https://www.linkedin.com/in/faisalorakzaii",
+      "https://x.com/faisalorakzaii",
+      "https://github.com/faisalorakzai-lab",
+      "https://orcid.org/0009-0000-0915-7272",
+      "https://www.amazon.com/Faisal-Orakzai/e/B0H86D2MQ6"
+    ]
+  },
+  "books": [
+    {
+      "slug": "the-sovereign-stack",
+      "path": "/books/the-sovereign-stack",
+      "shortTitle": "The Sovereign Stack",
+      "cover": "/books/the-sovereign-stack-cover.jpg",
+      "coverWidth": 756,
+      "coverHeight": 1000,
+      "title": "The Sovereign Stack: Engineering Next-Generation Blockchain Infrastructure",
+      "description": "A practical guide to blockchain infrastructure and next-generation digital technology, covering blockchain fundamentals, smart contracts, real-world asset tokenization, digital identity, enterprise blockchain, security, cross-chain infrastructure, and Web3.",
+      "directoryDescription": "A practical introduction to blockchain architecture and infrastructure, with coverage spanning smart contracts, digital identity, tokenization, security, cross-chain systems and Web3.",
+      "topics": [
+        "Blockchain fundamentals",
+        "Smart contract engineering",
+        "Real-world asset tokenization",
+        "Digital identity",
+        "Enterprise blockchain",
+        "Blockchain security",
+        "Cross-chain infrastructure",
+        "Web3"
+      ],
+      "asin": "B0H82JXTBD",
+      "amazonUrl": "https://www.amazon.com/Sovereign-Stack-Engineering-Next-Generation-Infrastructure-ebook/dp/B0H82JXTBD",
+      "publisher": "OkzByte",
+      "datePublished": "2026-07-08",
+      "displayDate": "July 8, 2026",
+      "format": "Kindle Edition",
+      "language": "English",
+      "edition": "1st"
+    },
+    {
+      "slug": "im-orakzai",
+      "path": "/books/im-orakzai",
+      "shortTitle": "I’m Orakzai",
+      "cover": "/books/im-orakzai-cover.webp",
+      "coverWidth": 452,
+      "coverHeight": 678,
+      "title": "I’m Orakzai: A Journey Through Orakzai Heritage, Pashtun Identity, History, Technology & the Future",
+      "description": "A journey through Orakzai identity and heritage, Pashtun history and culture, and the connections between technology, entrepreneurship and the future.",
+      "directoryDescription": "An exploration of Orakzai heritage and Pashtun identity, connecting history and culture with technology, entrepreneurship and the future.",
+      "topics": [
+        "Orakzai heritage and identity",
+        "Pashtun history and culture",
+        "Community and diaspora",
+        "Technology and computer science",
+        "Blockchain and digital ownership",
+        "Entrepreneurship and the future"
+      ],
+      "asin": "B0HF1DD5MJ",
+      "amazonUrl": "https://www.amazon.com/Im-Orakzai-Heritage-Identity-Technology-ebook/dp/B0HF1DD5MJ",
+      "publisher": "OkzByte",
+      "datePublished": "2026-08-12",
+      "displayDate": "August 12, 2026",
+      "format": "Kindle Edition",
+      "language": "English"
+    }
+  ]
+}
