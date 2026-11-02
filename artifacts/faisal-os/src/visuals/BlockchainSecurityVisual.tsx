@@ -14,45 +14,7 @@ export default function BlockchainSecurityVisual() {
 
   const pSt: React.CSSProperties = { fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(1rem,2.4vw,1.15rem)", lineHeight:1.85, color:"rgba(255,255,255,0.72)", margin:"0 0 1.4rem" };
 
-  React.useEffect(() => {
-    const schemas = [
-      {
-        "@context":"https://schema.org","@type":"TechArticle",
-        "headline":"Blockchain Security & Consensus Mechanisms Explained: PoW, PoS, Cryptography, Attacks & Future Security Guide",
-        "description":"Learn how blockchain security works through consensus mechanisms, cryptography, validator security, common attacks, AI-driven protection, quantum computing readiness, and enterprise best practices in this comprehensive guide.",
-        "keywords":"Blockchain Security, Consensus Mechanisms, Proof of Work, Proof of Stake, Blockchain Cryptography, Digital Signatures, Merkle Tree, Blockchain Hashing, 51% Attack, Sybil Attack, Eclipse Attack, Double Spending, Validator Security, Post Quantum Cryptography, AI in Blockchain Security, Zero Knowledge Proof",
-        "author":{"@type":"Person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii"],"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-        "publisher":{"@type":"Organization","name":"Orakzai Research Lab","url":"https://faisalorakzai.com","logo":{"@type":"ImageObject","url":"https://faisalorakzai.com/logo.png"}},
-        "datePublished":"2026-06-30","dateModified":"2026-06-30",
-        "url":"https://faisalorakzai.com/research/blockchain-security",
-        "image":{"@type":"ImageObject","url":"https://faisalorakzai.com/mk/blockchain-security-hero.png","width":1200,"height":630},
-        "inLanguage":"en-US","isAccessibleForFree":true,"proficiencyLevel":"Beginner"
-      },
-      {
-        "@context":"https://schema.org","@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://faisalorakzai.com"},
-          {"@type":"ListItem","position":2,"name":"Research","item":"https://faisalorakzai.com/research"},
-          {"@type":"ListItem","position":3,"name":"Blockchain Security & Consensus Mechanisms","item":"https://faisalorakzai.com/research/blockchain-security"}
-        ]
-      },
-      {"@context":"https://schema.org","@type":"Person","@id":"https://faisalorakzai.com#person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://www.imdb.com/name/nm18674496/"],"jobTitle":"Founder & Chairman","affiliation":{"@type":"Organization","name":"Orakzai Group"},"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-      {"@context":"https://schema.org","@type":"Organization","@id":"https://faisalorakzai.com#org","name":"Orakzai Group","url":"https://faisalorakzai.com","founder":{"@type":"Person","name":"Faisal Orakzai"}},
-      {"@context":"https://schema.org","@type":"WebPage","name":"Blockchain Security & Consensus Mechanisms Explained (2026)","url":"https://faisalorakzai.com/research/blockchain-security","description":"Learn how blockchain security works through consensus mechanisms, cryptography, validator security, common attacks, and future security trends.","author":{"@type":"Person","name":"Faisal Orakzai"},"datePublished":"2026-06-30","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com"}},
-      {"@context":"https://schema.org","@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://faisalorakzai.com/research?q={search_term_string}"},"query-input":"required name=search_term_string"}},
-      {"@context":"https://schema.org","@type":"Speakable","cssSelector":[".bsec-intro",".bsec-def"]}
-    ];
-    const existing = document.getElementById("bsec-extra-ld");
-    if (existing) existing.remove();
-    const el = document.createElement("script");
-    el.id = "bsec-extra-ld"; el.type = "application/ld+json";
-    el.text = JSON.stringify(schemas);
-    document.head.appendChild(el);
-    let canon = document.querySelector<HTMLLinkElement>("link[rel='canonical']");
-    if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
-    canon.href = "https://faisalorakzai.com/research/blockchain-security";
-    return () => { document.getElementById("bsec-extra-ld")?.remove(); };
-  }, []);
+
 
   const pillars = [
     { name:"Cryptography", icon:"🔐", desc:"Protects information using advanced mathematical algorithms — securing transactions, verifying identities, preventing unauthorized modifications, and enabling digital signatures." },

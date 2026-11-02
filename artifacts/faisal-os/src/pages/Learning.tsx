@@ -137,7 +137,7 @@ import { motion, useInView } from "framer-motion";
         "description": "Educational resources by Faisal Orakzai covering blockchain fundamentals, DeFi, AI automation, Web3 luxury commerce, and sovereign entrepreneurship.",
         "url": "https://faisalorakzai.com/learning",
         "author": { "@id": "https://faisalorakzai.com/#person" },
-        "publisher": { "@id": "https://faisalorakzai.com/#orakzai-group" },
+        "publisher": { "@id": "https://faisalorakzai.com/#organization" },
         "inLanguage": "en",
         "isPartOf": { "@id": "https://faisalorakzai.com/#website" },
       });
@@ -298,4 +298,4 @@ import { motion, useInView } from "framer-motion";
       </>
     );
   }
-  
+

@@ -13,71 +13,7 @@ export default function RWATokenizationVisual() {
 
   const pSt: React.CSSProperties = { fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(1rem,2.4vw,1.15rem)", lineHeight:1.85, color:"rgba(255,255,255,0.72)", margin:"0 0 1.4rem" };
 
-  React.useEffect(() => {
-    const schemas = [
-      {
-        "@context":"https://schema.org","@type":"TechArticle",
-        "headline":"Tokenization of Real World Assets (RWA): Complete Guide to Blockchain Asset Tokenization (2026)",
-        "description":"Learn how Real World Asset (RWA) tokenization works, including blockchain infrastructure, fractional ownership, smart contracts, compliance, benefits, risks, enterprise adoption, and future trends in digital finance.",
-        "keywords":"Real World Assets, RWA, RWA Tokenization, Asset Tokenization, Blockchain Assets, Tokenized Real Estate, Fractional Ownership, Digital Assets, Security Tokens, Blockchain Investment, Token Economy, Enterprise Blockchain, Digital Finance, Smart Contracts",
-        "author":{"@type":"Person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii"],"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-        "publisher":{"@type":"Organization","name":"Orakzai Research Lab","url":"https://faisalorakzai.com","logo":{"@type":"ImageObject","url":"https://faisalorakzai.com/logo.png"}},
-        "datePublished":"2026-06-30","dateModified":"2026-06-30",
-        "url":"https://faisalorakzai.com/research/rwa-tokenization",
-        "image":{"@type":"ImageObject","url":"https://faisalorakzai.com/mk/rwa-hero.png","width":1200,"height":630},
-        "inLanguage":"en-US","isAccessibleForFree":true,"proficiencyLevel":"Beginner"
-      },
-      {
-        "@context":"https://schema.org","@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://faisalorakzai.com"},
-          {"@type":"ListItem","position":2,"name":"Research","item":"https://faisalorakzai.com/research"},
-          {"@type":"ListItem","position":3,"name":"Tokenization of Real World Assets (RWA)","item":"https://faisalorakzai.com/research/rwa-tokenization"}
-        ]
-      },
-      {
-        "@context":"https://schema.org","@type":"Person","@id":"https://faisalorakzai.com#person",
-        "name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder",
-        "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://www.imdb.com/name/nm18674496/"],
-        "jobTitle":"Founder & Chairman","affiliation":{"@type":"Organization","name":"Orakzai Group"},
-        "identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}
-      },
-      {
-        "@context":"https://schema.org","@type":"Organization","@id":"https://faisalorakzai.com#org",
-        "name":"Orakzai Group","url":"https://faisalorakzai.com",
-        "founder":{"@type":"Person","name":"Faisal Orakzai"}
-      },
-      {
-        "@context":"https://schema.org","@type":"WebPage",
-        "name":"Tokenization of Real World Assets (RWA): Complete Guide (2026)",
-        "url":"https://faisalorakzai.com/research/rwa-tokenization",
-        "description":"Learn how Real World Asset (RWA) tokenization works, including blockchain infrastructure, fractional ownership, smart contracts, compliance, benefits, risks, and enterprise adoption.",
-        "author":{"@type":"Person","name":"Faisal Orakzai"},
-        "datePublished":"2026-06-30","inLanguage":"en-US",
-        "isPartOf":{"@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com"},
-        "breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://faisalorakzai.com"},{"@type":"ListItem","position":2,"name":"Research","item":"https://faisalorakzai.com/research"},{"@type":"ListItem","position":3,"name":"RWA Tokenization","item":"https://faisalorakzai.com/research/rwa-tokenization"}]}
-      },
-      {
-        "@context":"https://schema.org","@type":"WebSite",
-        "name":"Faisal Orakzai","url":"https://faisalorakzai.com",
-        "description":"Research, blockchain engineering, and enterprise technology by Faisal Orakzai.",
-        "potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://faisalorakzai.com/research?q={search_term_string}"},"query-input":"required name=search_term_string"}
-      },
-      {"@context":"https://schema.org","@type":"Speakable","cssSelector":[".rwa-intro",".rwa-def"]}
-    ];
-    const existing = document.getElementById("rwa-extra-ld");
-    if (existing) existing.remove();
-    const el = document.createElement("script");
-    el.id = "rwa-extra-ld"; el.type = "application/ld+json";
-    el.text = JSON.stringify(schemas);
-    document.head.appendChild(el);
 
-    let canon = document.querySelector<HTMLLinkElement>("link[rel='canonical']");
-    if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
-    canon.href = "https://faisalorakzai.com/research/rwa-tokenization";
-
-    return () => { document.getElementById("rwa-extra-ld")?.remove(); };
-  }, []);
 
   const stats = [
     { value:"$16T+",  label:"Addressable Market",  sub:"Estimated RWA tokenization potential by 2030" },

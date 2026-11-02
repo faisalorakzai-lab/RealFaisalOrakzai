@@ -143,6 +143,13 @@ for (const route of routes) {
   const canonicalUrl = `${BASE}/${route.path}`;
   const title = route.title;
   let html = base;
+  // The base file is the prerendered homepage; remove its page-specific schema
+  // and no-script bio before inserting this route's own publication content.
+  html = html.replace(/\s*<script id="route-page-ld" type="application\/ld\+json">[\s\S]*?<\/script>/i, "");
+  html = html.replace(
+    /\s*<!--\s*NOSCRIPT — content for crawlers that skip JavaScript\s*-->[\s\S]*?<\/noscript>/i,
+    "",
+  );
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
   const canonicalLink = `<link rel="canonical" href="${canonicalUrl}" />`;
   if (/<link rel="canonical"[^>]*>/i.test(html)) {
@@ -212,17 +219,7 @@ for (const route of routes) {
         name: title,
         description: route.description,
         image: portrait,
-        dateModified: new Date().toISOString().slice(0, 10),
-        mainEntity: {
-          "@id": personId,
-          "@type": "Person",
-          name: person.fullName,
-          alternateName: person.name,
-          url: `${BASE}${person.profileUrl}`,
-          description: person.description,
-          image: portrait,
-          sameAs: person.sameAs,
-        },
+        mainEntity: { "@id": personId },
       };
   if (route.kind === "book") pageSchema["@graph"][1].image = route.image;
   const breadcrumbSchema = {
@@ -235,9 +232,9 @@ for (const route of routes) {
   };
   html = html.replace("</head>", `<link rel="preload" as="image" href="${esc(route.image)}" fetchpriority="high" />\n<script id="publication-page-schema" type="application/ld+json">${jsonLd(pageSchema)}</script>\n<script id="seo-breadcrumb" type="application/ld+json">${jsonLd(breadcrumbSchema)}</script>\n</head>`);
 
-  // Replace homepage-only hidden SEO material in this route copy with useful,
-  // route-specific semantic HTML. The main app hydrates into the same root.
-  html = html.replace(/<!-- Crawler-visible H1[\s\S]*?<div id="root"><\/div>/, `<div id="root">${route.content}</div>`);
+  // Put route-specific semantic content into the initial HTML; React hydrates
+  // the same root for users, and this H1 is the real visible page heading.
+  html = html.replace('<div id="root"></div>', `<div id="root">${route.content}</div>`);
   html = html.replace(/\s*<!-- ══+[\s\S]*?FAQ PAGE SCHEMA[\s\S]*?<\/script>\s*(?=\s*<!-- TrustBox)/, "\n");
   html = html.replace(/\s*<section id="faq"[\s\S]*?<\/section>/, "");
 

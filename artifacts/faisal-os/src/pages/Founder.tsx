@@ -105,7 +105,6 @@ export default function Founder() {
       "description": `${g.caption} — Muhammad Faisal Orakzai, Founder & Chairman Orakzai Group, ${g.year}`,
       "author": { "@id": "https://faisalorakzai.com/#person" },
       "copyrightHolder": { "@id": "https://faisalorakzai.com/#person" },
-      "datePublished": `${g.year}-01-01`
     }));
     const ld = document.createElement("script");
     ld.id = id;

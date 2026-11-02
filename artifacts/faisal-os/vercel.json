@@ -51,12 +51,6 @@
       ]
     },
     {
-      "source": "/(.*\\.(webp|jpg|jpeg|png|svg|ico|woff2|woff|ttf|webm|mp4|avif|gif))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
       "source": "/sitemap(.*)\\.xml",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" },

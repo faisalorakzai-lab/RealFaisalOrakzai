@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform, AnimatePresence, useInView, type Varia
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/shared/SEOHead";
-import HomeSchema from "@/components/shared/HomeSchema";
 
 const BlockchainOrb = lazy(() => import("@/components/three/BlockchainOrb"));
 
@@ -272,8 +271,7 @@ export default function Home() {
 
   return (
     <>
-      <SEOHead title="Faisal Orakzai — Founder & Chairman, Orakzai Group" description="Official site of Muhammad Faisal Orakzai — Pakistan's blockchain entrepreneur, creator of OKBOND on Polygon L2, Shamim Forever, OkzByte Technology & OrakzaiX AI. Crunchbase Rank #28." path="/" keywords="Faisal Orakzai, Muhammad Faisal Orakzai, Orakzai Group, OKBOND blockchain Pakistan" />
-      <HomeSchema />
+      <SEOHead title="Faisal Orakzai — Founder & Chairman, Orakzai Group" description="Official website of Muhammad Faisal Orakzai, Pakistani technology entrepreneur and Founder & Chairman of Orakzai Group." path="/" keywords="Faisal Orakzai, Muhammad Faisal Orakzai, Orakzai Group, OKBOND blockchain Pakistan" />
       <div className="bg-black text-white overflow-hidden">
 
       {/* ── HERO ── */}
@@ -302,11 +300,11 @@ export default function Home() {
                 <span className="text-[#F3BA2F] font-mono text-xs tracking-[0.25em]">LIVE · FAISAL ORAKZAI</span>
               </motion.div>
               <div className="absolute bottom-32 left-0 right-0 flex flex-col items-center gap-3 z-10 px-4">
-                <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.055, delayChildren: 0.3 } } }} className="flex flex-wrap justify-center">
+                <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.055, delayChildren: 0.3 } } }} className="flex flex-wrap justify-center" aria-label="Muhammad Faisal Orakzai — Founder and Chairman, Orakzai Group">
                   {HERO_NAME.split("").map((char, i) => (
                     <motion.span key={i} variants={{ hidden: { opacity: 0, y: -15, filter: "blur(4px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)" } }} transition={{ duration: 0.25, ease: "easeOut" }} className="font-mono font-bold tracking-widest text-3xl md:text-5xl" style={{ color: char === " " ? "transparent" : "#F3BA2F", textShadow: char === " " ? "none" : "0 0 18px rgba(243,186,47,0.9), 0 0 40px rgba(243,186,47,0.4)", display: "inline-block", minWidth: char === " " ? "1rem" : undefined }}>{char}</motion.span>
                   ))}
-                </motion.div>
+                </motion.h1>
                 <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.9, duration: 0.6 }} className="h-px w-48 bg-gradient-to-r from-transparent via-[#F3BA2F]/60 to-transparent" />
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="text-white/50 font-mono text-xs tracking-[0.3em] uppercase text-center">Entrepreneur · Founder · Builder</motion.p>
               </div>
@@ -855,10 +853,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-           FAQ — VISIBLE ACCORDION (Google FAQ rich results)
-           Visible to users + bots — matches FAQPage JSON-LD
-      ══════════════════════════════════════════════════════ */}
+      {/* FAQ — visible reader help; FAQPage rich-result markup is intentionally omitted. */}
       <section id="faq-section" className="py-24 border-t border-[#F3BA2F]/10 relative overflow-hidden bg-black">
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(243,186,47,0.04) 0%, transparent 70%)" }} />
         <div className="max-w-4xl mx-auto px-6 relative z-10">

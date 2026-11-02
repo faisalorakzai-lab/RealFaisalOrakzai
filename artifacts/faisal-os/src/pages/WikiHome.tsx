@@ -32,25 +32,6 @@ export default function WikiHome() {
         path="/wiki"
       />
 
-      {/* JSON-LD for wiki portal */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "FaisalWiki",
-            description: "Free knowledge base on Muhammad Faisal Orakzai and Orakzai Group",
-            url: "https://faisalorakzai.com/wiki",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: "https://faisalorakzai.com/wiki/search?q={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
-          }),
-        }}
-      />
-
       <div
         className="min-h-screen bg-[#0d0d0d] text-white"
         style={{ fontFamily: "'Linux Libertine','Georgia','Times',serif" }}

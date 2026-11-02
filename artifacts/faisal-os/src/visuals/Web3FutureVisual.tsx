@@ -13,41 +13,7 @@ export default function Web3FutureVisual() {
 
   const pSt: React.CSSProperties = { fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(1rem,2.4vw,1.15rem)", lineHeight:1.85, color:"rgba(255,255,255,0.72)", margin:"0 0 1.4rem" };
 
-  React.useEffect(() => {
-    const schemas = [
-      { "@context":"https://schema.org","@type":"TechArticle",
-        "headline":"The Future of Web3 Infrastructure: AI, Digital Identity, Cross-Chain Networks & the Next Internet",
-        "description":"Explore the future of Web3 infrastructure, including AI integration, decentralized identity, cross-chain interoperability, tokenized economies, enterprise adoption, digital public infrastructure, and emerging technologies shaping the next generation of the internet.",
-        "keywords":"Future of Web3, Web3 Infrastructure, Decentralized Internet, AI and Web3, Digital Identity, Self-Sovereign Identity, Cross-Chain Interoperability, Chain Abstraction, Modular Blockchain, DePIN, Tokenized Economy, CBDC, Enterprise Web3, Smart Cities, DAOs, Post Quantum Cryptography",
-        "author":{"@type":"Person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii"],"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-        "publisher":{"@type":"Organization","name":"Orakzai Research Lab","url":"https://faisalorakzai.com","logo":{"@type":"ImageObject","url":"https://faisalorakzai.com/logo.png"}},
-        "datePublished":"2026-07-01","dateModified":"2026-07-01",
-        "url":"https://faisalorakzai.com/research/future-of-web3",
-        "image":{"@type":"ImageObject","url":"https://faisalorakzai.com/mk/web3-future-hero.png","width":1200,"height":630},
-        "inLanguage":"en-US","isAccessibleForFree":true,"proficiencyLevel":"Beginner" },
-      { "@context":"https://schema.org","@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://faisalorakzai.com"},
-          {"@type":"ListItem","position":2,"name":"Research","item":"https://faisalorakzai.com/research"},
-          {"@type":"ListItem","position":3,"name":"The Future of Web3 Infrastructure","item":"https://faisalorakzai.com/research/future-of-web3"}
-        ] },
-      {"@context":"https://schema.org","@type":"Person","@id":"https://faisalorakzai.com#person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://www.imdb.com/name/nm18674496/"],"jobTitle":"Founder & Chairman","affiliation":{"@type":"Organization","name":"Orakzai Group"},"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-      {"@context":"https://schema.org","@type":"Organization","@id":"https://faisalorakzai.com#org","name":"Orakzai Group","url":"https://faisalorakzai.com","founder":{"@type":"Person","name":"Faisal Orakzai"}},
-      {"@context":"https://schema.org","@type":"WebPage","name":"The Future of Web3 Infrastructure (2026)","url":"https://faisalorakzai.com/research/future-of-web3","description":"Explore the future of Web3 infrastructure, including AI, digital identity, cross-chain interoperability, tokenized economies, and emerging technologies.","author":{"@type":"Person","name":"Faisal Orakzai"},"datePublished":"2026-07-01","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com"}},
-      {"@context":"https://schema.org","@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://faisalorakzai.com/research?q={search_term_string}"},"query-input":"required name=search_term_string"}},
-      {"@context":"https://schema.org","@type":"Speakable","cssSelector":[".w3f-intro",".w3f-def"]}
-    ];
-    const existing = document.getElementById("w3f-extra-ld");
-    if (existing) existing.remove();
-    const el = document.createElement("script");
-    el.id = "w3f-extra-ld"; el.type = "application/ld+json";
-    el.text = JSON.stringify(schemas);
-    document.head.appendChild(el);
-    let canon = document.querySelector<HTMLLinkElement>("link[rel='canonical']");
-    if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
-    canon.href = "https://faisalorakzai.com/research/future-of-web3";
-    return () => { document.getElementById("w3f-extra-ld")?.remove(); };
-  }, []);
+
 
   const webEras = [
     { era:"Web1", subtitle:"Read-Only Internet", years:"1991–2004", col:"rgba(255,255,255,0.25)", items:["Static HTML pages","Centralized publishing","Basic search engines","Digital library model","No user interaction","Personal websites & directories"] },

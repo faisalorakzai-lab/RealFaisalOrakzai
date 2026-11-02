@@ -14,41 +14,7 @@ export default function DigitalIdentityVisual() {
 
   const pSt: React.CSSProperties = { fontFamily:"'Cormorant Garamond',Georgia,serif", fontSize:"clamp(1rem,2.4vw,1.15rem)", lineHeight:1.85, color:"rgba(255,255,255,0.72)", margin:"0 0 1.4rem" };
 
-  React.useEffect(() => {
-    const schemas = [
-      { "@context":"https://schema.org","@type":"TechArticle",
-        "headline":"How Digital Identity Works on Blockchain: DIDs, SSI, Verifiable Credentials & Future Guide (2026)",
-        "description":"Learn how blockchain digital identity works, including Decentralized Identifiers (DIDs), Self-Sovereign Identity (SSI), Verifiable Credentials, Zero-Knowledge Proofs, enterprise identity architecture, and the future of decentralized identity systems.",
-        "keywords":"Blockchain Digital Identity, Decentralized Identity, Self-Sovereign Identity, SSI, DID, Decentralized Identifiers, Verifiable Credentials, Blockchain Authentication, Identity on Blockchain, Web3 Identity, Enterprise Digital Identity, Zero-Knowledge Proofs, Blockchain Privacy, Future of Digital Identity",
-        "author":{"@type":"Person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii"],"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-        "publisher":{"@type":"Organization","name":"Orakzai Research Lab","url":"https://faisalorakzai.com","logo":{"@type":"ImageObject","url":"https://faisalorakzai.com/logo.png"}},
-        "datePublished":"2026-07-01","dateModified":"2026-07-01",
-        "url":"https://faisalorakzai.com/research/blockchain-digital-identity",
-        "image":{"@type":"ImageObject","url":"https://faisalorakzai.com/mk/blockchain-identity-hero.png","width":1200,"height":630},
-        "inLanguage":"en-US","isAccessibleForFree":true,"proficiencyLevel":"Intermediate" },
-      { "@context":"https://schema.org","@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://faisalorakzai.com"},
-          {"@type":"ListItem","position":2,"name":"Research","item":"https://faisalorakzai.com/research"},
-          {"@type":"ListItem","position":3,"name":"How Digital Identity Works on Blockchain","item":"https://faisalorakzai.com/research/blockchain-digital-identity"}
-        ] },
-      {"@context":"https://schema.org","@type":"Person","@id":"https://faisalorakzai.com#person","name":"Faisal Orakzai","url":"https://faisalorakzai.com/founder","sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://github.com/faisalorakzai-lab","https://www.imdb.com/name/nm18674496/"],"jobTitle":"Founder & Chairman","affiliation":{"@type":"Organization","name":"Orakzai Group"},"identifier":{"@type":"PropertyValue","propertyID":"ORCID","value":"0009-0000-0915-7272"}},
-      {"@context":"https://schema.org","@type":"Organization","@id":"https://faisalorakzai.com#org","name":"Orakzai Group","url":"https://faisalorakzai.com","founder":{"@type":"Person","name":"Faisal Orakzai"}},
-      {"@context":"https://schema.org","@type":"WebPage","name":"How Digital Identity Works on Blockchain (2026)","url":"https://faisalorakzai.com/research/blockchain-digital-identity","description":"Learn how blockchain digital identity works, including DIDs, SSI, Verifiable Credentials, Zero-Knowledge Proofs, and the future of decentralized identity.","author":{"@type":"Person","name":"Faisal Orakzai"},"datePublished":"2026-07-01","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com"}},
-      {"@context":"https://schema.org","@type":"WebSite","name":"Faisal Orakzai","url":"https://faisalorakzai.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://faisalorakzai.com/research?q={search_term_string}"},"query-input":"required name=search_term_string"}},
-      {"@context":"https://schema.org","@type":"Speakable","cssSelector":[".did-intro",".did-def"]}
-    ];
-    const existing = document.getElementById("did-extra-ld");
-    if (existing) existing.remove();
-    const el = document.createElement("script");
-    el.id = "did-extra-ld"; el.type = "application/ld+json";
-    el.text = JSON.stringify(schemas);
-    document.head.appendChild(el);
-    let canon = document.querySelector<HTMLLinkElement>("link[rel='canonical']");
-    if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
-    canon.href = "https://faisalorakzai.com/research/blockchain-digital-identity";
-    return () => { document.getElementById("did-extra-ld")?.remove(); };
-  }, []);
+
 
   const identityPhases = [
     { phase:"Phase 1", name:"Physical Identity", col:"rgba(255,255,255,0.25)", items:["Paper documents","Passports & ID cards","Birth certificates","Manual verification","Location-dependent","No digital record"] },

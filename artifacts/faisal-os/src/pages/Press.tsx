@@ -259,23 +259,20 @@ import SEOHead from "@/components/shared/SEOHead";
 
   // ── JSON-LD injection ────────────────────────────────────────
   function injectPressSchema(articles: PressArticle[]) {
+    if (document.getElementById("press-coverage-ld")) return;
     const existing = document.getElementById("press-schema");
     if (existing) existing.remove();
 
     const schema = {
       "@context": "https://schema.org",
       "@graph": [
-        // WebPage with Wikidata sameAs — for search spider institutional linking
+        // Press page and coverage list; individual publishers retain their own authorship.
           {
             "@type": "WebPage",
             "name": "Official Press Room — Muhammad Faisal Orakzai",
             "description": "Media coverage, global awards, and verified institutional profiles for Muhammad Faisal Orakzai.",
             "url": "https://faisalorakzai.com/press",
-            "about": {
-              "@type": "Person",
-              "name": "Muhammad Faisal Orakzai",
-              "sameAs": "https://www.linkedin.com/in/faisalorakzaii"
-            }
+            "about": { "@id": "https://faisalorakzai.com/#person" }
           },
           // ItemList of all articles
         {

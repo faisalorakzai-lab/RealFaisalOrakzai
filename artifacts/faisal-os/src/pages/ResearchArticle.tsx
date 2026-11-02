@@ -39,64 +39,25 @@
       sm("twitter:card", "summary_large_image"); sm("twitter:title", a.title); sm("twitter:description", a.subtitle);
       if (imageUrl) sm("twitter:image", imageUrl);
       sm("citation_title", a.title); sm("citation_author", "Orakzai, Faisal");
-      sm("citation_publication_date", a.datePublished ?? a.year + "-09-11");
+      if (a.datePublished) sm("citation_publication_date", a.datePublished);
       const ld = document.createElement("script");
       ld.id = "article-ld"; ld.type = "application/ld+json";
-      ld.text = JSON.stringify({ "@context":"https://schema.org", "@type":"NewsArticle",
+      ld.text = JSON.stringify({ "@context":"https://schema.org", "@type":"Article",
         "headline": a.title, "description": a.subtitle,
         "image": imageUrl ? [imageUrl] : undefined,
-        "author": { "@type":"Person", "@id":"https://faisalorakzai.com/#person", "name": a.authors, "url":"https://faisalorakzai.com/founder",
-          "sameAs":["https://orcid.org/0009-0000-0915-7272","https://www.linkedin.com/in/faisalorakzaii","https://www.imdb.com/name/nm18674496/"] },
-        "publisher": { "@type":"Organization", "@id":"https://faisalorakzai.com/#orakzai-group", "name":"Orakzai Research Lab", "url":"https://faisalorakzai.com" },
-        "datePublished": a.datePublished ?? a.year + "-09-11",
-        "dateModified": a.dateModified ?? a.datePublished ?? a.year + "-09-11",
+        "author": { "@id":"https://faisalorakzai.com/#person" },
+        "publisher": { "@id":"https://faisalorakzai.com/research#research-lab" },
+        ...(a.datePublished ? { "datePublished": a.datePublished } : {}),
+        ...(a.dateModified ? { "dateModified": a.dateModified } : {}),
         "mainEntityOfPage": { "@type":"WebPage", "@id": canonicalUrl },
         "url": canonicalUrl, "articleSection": a.category,
         "keywords": a.tags.join(", "), "inLanguage":"en-US", "isAccessibleForFree":true });
       document.getElementById("article-ld")?.remove();
       document.head.appendChild(ld);
 
-      // FAQPage schema — extract Q&As from article content for Google rich snippets
-      document.getElementById("faq-ld")?.remove();
-      const contentLines = (a.content || "").split("\n").map((s: string) => s.trim()).filter(Boolean);
-      const faqPairs: { q: string; a: string }[] = [];
-      let inFAQz = false;
-      let curQz = "";
-      let curAz: string[] = [];
-      for (const fl of contentLines) {
-        if (fl === "Frequently Asked Questions (FAQs)") { inFAQz = true; continue; }
-        if (fl === "Key Takeaways" || fl === "Final Conclusion" || fl === "Common Blockchain Myths") {
-          inFAQz = false;
-          if (curQz && curAz.length) { faqPairs.push({ q: curQz, a: curAz.join(" ") }); curQz = ""; curAz = []; }
-          continue;
-        }
-        if (!inFAQz) continue;
-        const qm = fl.match(/^\d+\.\s+(.+)/);
-        if (qm) {
-          if (curQz && curAz.length) faqPairs.push({ q: curQz, a: curAz.join(" ") });
-          curQz = qm[1]; curAz = [];
-        } else if (curQz) curAz.push(fl);
-      }
-      if (curQz && curAz.length) faqPairs.push({ q: curQz, a: curAz.join(" ") });
-      if (faqPairs.length > 0) {
-        const faqLd = document.createElement("script");
-        faqLd.id = "faq-ld"; faqLd.type = "application/ld+json";
-        faqLd.text = JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": faqPairs.slice(0, 10).map(({ q, a }) => ({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": { "@type": "Answer", "text": a }
-          }))
-        });
-        document.head.appendChild(faqLd);
-      }
-
       return () => {
         document.title = prev;
         document.getElementById("article-ld")?.remove();
-        document.getElementById("faq-ld")?.remove();
       };
     }, [a]);
   }
@@ -2513,7 +2474,7 @@ Layer 2 Blockchain
         tags: ["Smart Contracts","Blockchain","Ethereum","Solidity","DeFi","Web3","dApps","Blockchain Automation","Smart Contract Security","Enterprise Blockchain"],
         content: `How Smart Contracts Work\n\nSmart contracts are self-executing programs stored on a blockchain that automatically perform predefined actions when specific conditions are met.\n\nFrequently Asked Questions (FAQs)\n1. What is a smart contract?\nA smart contract is a self-executing computer program stored on a blockchain. It automatically performs predefined actions when specific conditions are met, eliminating the need for intermediaries and reducing the risk of human error.\n2. Are smart contracts legally binding?\nIt depends on the country and legal framework. Many jurisdictions recognize electronic agreements, but legal recognition of blockchain-based smart contracts is still evolving. Businesses should ensure compliance with local regulations when using smart contracts for legally enforceable agreements.\n3. Can smart contracts be changed after deployment?\nMost smart contracts are immutable, meaning they cannot be altered once deployed. However, developers can build upgradeable architectures using proxy contracts or governance mechanisms that allow future improvements while maintaining transparency.\n4. Which programming language is used for smart contracts?\nThe most widely used language is Solidity, primarily for Ethereum and EVM-compatible blockchains. Other languages include Rust, Move, Vyper, Go, and CosmWasm (Rust-based), depending on the blockchain platform.\n5. Can smart contracts access internet data?\nNo. Blockchains cannot directly access external information. Smart contracts rely on trusted oracle networks to securely bring real-world data — such as asset prices, weather information, or sports results — onto the blockchain.\n6. Are smart contracts secure?\nThey can be highly secure if properly designed, audited, and tested. However, poorly written code can contain vulnerabilities that attackers may exploit. Independent security audits, formal verification, and continuous testing are essential for production-grade smart contracts.\n7. Which industries use smart contracts?\nSmart contracts are increasingly adopted across Banking and Finance, Decentralized Finance (DeFi), Real Estate, Supply Chain Management, Healthcare, Insurance, Gaming, Government Services, Digital Identity, Intellectual Property, and Tokenized Real-World Assets (RWA).\n8. Do smart contracts eliminate lawyers?\nNo. Smart contracts automate execution, not legal interpretation. Lawyers are still important for drafting legal frameworks, ensuring regulatory compliance, resolving disputes, and managing complex contractual relationships.\n9. What happens if a smart contract contains a bug?\nA bug may cause incorrect execution, financial loss, or locked funds. Since blockchain transactions are irreversible, smart contract development requires extensive testing, peer review, and independent security audits before deployment.\n10. What is the future of smart contracts?\nThe future includes AI-assisted automation, cross-chain interoperability, privacy-preserving computation, tokenized real-world assets, decentralized identity systems, IoT integration, and enterprise-grade blockchain infrastructure powering global digital economies.\nCommon Blockchain Myths\nMyth 1:\nSmart contracts are legal contracts.\nReality: They are programmable code that can support legal agreements but are not automatically recognized as legal contracts everywhere.\nMyth 2:\nSmart contracts never fail.\nReality: Bugs, flawed logic, or compromised oracles can still create failures.\nMyth 3:\nThey only work with cryptocurrencies.\nReality: They automate many business processes beyond digital currencies.\nMyth 4:\nThey replace every intermediary.\nReality: They reduce unnecessary intermediaries but do not eliminate all regulatory or legal roles.\nMyth 5:\nBlockchain makes contracts completely risk-free.\nReality: Blockchain improves security, but secure development practices remain essential.\nKey Takeaways\nSmart contracts are self-executing programs deployed on blockchain networks.\nThey automate transactions without requiring centralized intermediaries.\nExecution is transparent, deterministic, and tamper-resistant.\nThey power DeFi, NFTs, DAOs, digital identity, tokenized assets, and enterprise automation.\nSecurity, audits, and robust architecture are critical for successful deployment.\nSmart contracts represent one of the foundational technologies of the Web3 ecosystem.\nFinal Conclusion\nSmart contracts are transforming the way digital agreements are created, executed, and enforced. As blockchain infrastructure matures and technologies such as Artificial Intelligence, Zero-Knowledge Proofs, decentralized identity, and cross-chain interoperability continue to evolve, smart contracts will become a fundamental component of the global digital economy.`,
       },
-      
+
   "enterprise-blockchain-ecosystems-guide": {
     slug: "enterprise-blockchain-ecosystems-guide",
     title: "Building Enterprise Blockchain Ecosystems",
@@ -3349,4 +3310,3 @@ Enterprise blockchain has moved from proof-of-concept to production infrastructu
       </div>
     );
   }
-  

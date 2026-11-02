@@ -102,6 +102,9 @@ function useSEO() {
         ...(e.pdfDl ? [["DC.format", "application/pdf"] as [string,string]] : []),
       ];
       pairs.forEach(([name, content]) => {
+        const duplicate = Array.from(document.querySelectorAll<HTMLMetaElement>("meta[name]"))
+          .some((meta) => meta.name === name && meta.content === content);
+        if (duplicate) return;
         const el = document.createElement("meta");
         el.setAttribute("name", name);
         el.setAttribute("content", content);
@@ -121,7 +124,7 @@ function useSEO() {
         "description": "Research hub for blockchain, AI, RWA tokenization, and cryptographic protocols by Muhammad Faisal Orakzai.",
         "url": "https://faisalorakzai.com/research",
         "author": { "@id": "https://faisalorakzai.com/#person" },
-        "publisher": { "@id": "https://faisalorakzai.com/#orakzai-group" },
+        "publisher": { "@id": "https://faisalorakzai.com/research#research-lab" },
         "inLanguage": "en",
         "isPartOf": { "@id": "https://faisalorakzai.com/#website" },
       },
@@ -133,32 +136,19 @@ function useSEO() {
           { "@type": "ListItem", "position": 2, "name": "Research", "item": "https://faisalorakzai.com/research" },
         ],
       },
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "@id": `${AUTHOR.website}#person`,
-        name: AUTHOR.name,
-        url: AUTHOR.website,
-        sameAs: [AUTHOR.orcid, AUTHOR.linkedin, AUTHOR.github, AUTHOR.scholar, AUTHOR.hackernoon, AUTHOR.imdb],
-        jobTitle: "Founder & Chairman",
-        affiliation: { "@type": "Organization", name: AUTHOR.org },
-        identifier: { "@type": "PropertyValue", propertyID: "ORCID", value: AUTHOR.orcidId },
-      },
       ...scholarly.map(e => ({
         "@context": "https://schema.org",
         "@type": "ScholarlyArticle",
         "@id": `${AUTHOR.website}/research#${e.id}`,
         headline: e.title,
         description: e.abstract,
-        datePublished: `${e.year}-01-01`,
         keywords: e.keywords,
         inLanguage: "en",
         isAccessibleForFree: true,
         url: `${AUTHOR.website}/research#${e.id}`,
         ...(e.pdfDl ? { encoding: { "@type": "MediaObject", encodingFormat: "application/pdf", contentUrl: e.pdfDl } } : {}),
-        author: { "@type": "Person", "@id": `${AUTHOR.website}#person`, name: AUTHOR.name },
-        publisher: { "@type": "Organization", name: AUTHOR.org, url: AUTHOR.website },
-        provider: { "@type": "Organization", name: "ORCID Verified Node", url: AUTHOR.orcid },
+        author: { "@id": "https://faisalorakzai.com/#person" },
+        publisher: { "@id": "https://faisalorakzai.com/research#research-lab" },
       })),
       ...repos.map(e => ({
         "@context": "https://schema.org",
@@ -168,7 +158,7 @@ function useSEO() {
         description: e.abstract,
         codeRepository: e.repoUrl,
         programmingLanguage: e.stack,
-        author: { "@type": "Person", "@id": `${AUTHOR.website}#person`, name: AUTHOR.name },
+        author: { "@id": "https://faisalorakzai.com/#person" },
         dateCreated: `${e.year}-01-01`,
       })),
     ];

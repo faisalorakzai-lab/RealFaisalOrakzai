@@ -21,6 +21,13 @@ const BASE = "https://faisalorakzai.com";
    ────────────────────────────────────────────────────────────── */
 const ROUTES = [
   {
+    path: "",
+    title: "Faisal Orakzai — Founder & Chairman, Orakzai Group",
+    description:
+      "Official website of Muhammad Faisal Orakzai, Pakistani technology entrepreneur and Founder & Chairman of Orakzai Group.",
+    ogType: "profile",
+  },
+  {
     path: "founder",
     title: "Faisal Orakzai — Founder Biography | Chairman, Orakzai Group | فیصل اورکزئی",
     description:
@@ -85,6 +92,77 @@ const ROUTES = [
       { headline: "Orakzai Bond Presale Details", publisher: "ICOAnnouncement.io", sourceType: "Directory listing", url: "https://icoannouncement.io/crypto-presale/orakzai-bond-presale-details", summary: "A third-party directory page with project and presale information for Orakzai Bond." },
       { headline: "Orakzai Bond Presale Review", publisher: "CoinGabbar", sourceType: "Third-party review", url: "https://www.coingabbar.com/en/crypto-presale/orakzai-bond-presale-review", summary: "A third-party review page; it is not an endorsement or investment recommendation." },
     ],
+  },
+  {
+    path: "books",
+    title: "Books & Publications | Faisal Orakzai",
+    description:
+      "Explore two books by Faisal Orakzai: The Sovereign Stack on blockchain infrastructure and I’m Orakzai on heritage, Pashtun identity, history and technology.",
+    ogType: "website",
+    image: "/books/the-sovereign-stack-cover.jpg",
+    imageType: "image/jpeg",
+    imageWidth: 756,
+    imageHeight: 1000,
+    imageAlt: "Cover of The Sovereign Stack by Faisal Orakzai",
+  },
+  {
+    path: "author/faisal-orakzai",
+    title: "Author Profile | Faisal Orakzai",
+    description:
+      "Official author profile for Faisal Orakzai, Pakistani technology entrepreneur, researcher and author of The Sovereign Stack and I’m Orakzai.",
+    ogType: "profile",
+    image: "/faisal-profile-google.jpg",
+    imageType: "image/jpeg",
+    imageWidth: 1080,
+    imageHeight: 1080,
+    imageAlt: "Portrait of Faisal Orakzai",
+  },
+  {
+    path: "books/the-sovereign-stack",
+    title: "The Sovereign Stack: Blockchain | Faisal Orakzai",
+    description:
+      "The Sovereign Stack by Faisal Orakzai is a practical book on blockchain infrastructure, smart contracts, tokenization, digital identity, security and Web3.",
+    ogType: "book",
+    image: "/books/the-sovereign-stack-cover.jpg",
+    imageType: "image/jpeg",
+    imageWidth: 756,
+    imageHeight: 1000,
+    imageAlt: "Cover of The Sovereign Stack by Faisal Orakzai",
+    bookSchema: {
+      name: "The Sovereign Stack: Engineering Next-Generation Blockchain Infrastructure",
+      description:
+        "A practical guide to blockchain infrastructure, smart contracts, real-world asset tokenization, digital identity, security, cross-chain systems and Web3.",
+      image: "/books/the-sovereign-stack-cover.jpg",
+      datePublished: "2026-07-08",
+      asin: "B0H82JXTBD",
+    },
+  },
+  {
+    path: "books/im-orakzai",
+    title: "I’m Orakzai: Heritage & Identity | Faisal Orakzai",
+    description:
+      "I’m Orakzai by Faisal Orakzai explores Orakzai heritage, Pashtun identity, history and the connections between culture, technology and the future.",
+    ogType: "book",
+    image: "/books/im-orakzai-cover.webp",
+    imageType: "image/webp",
+    imageWidth: 452,
+    imageHeight: 678,
+    imageAlt: "Cover of I’m Orakzai by Faisal Orakzai",
+    bookSchema: {
+      name: "I’m Orakzai: A Journey Through Orakzai Heritage, Pashtun Identity, History, Technology & the Future",
+      description:
+        "A journey through Orakzai identity and heritage, Pashtun history and culture, and the connections between technology, entrepreneurship and the future.",
+      image: "/books/im-orakzai-cover.webp",
+      datePublished: "2026-08-12",
+      asin: "B0HF1DD5MJ",
+    },
+  },
+  {
+    path: "okzbyte-hub",
+    title: "OkzByte Hub — Sovereign Membership | Faisal Orakzai",
+    description:
+      "OkzByte Hub by Faisal Orakzai — exclusive blockchain & AI sovereign community. Tiered membership: Matrix Developer, Enterprise Architect, Sovereign Founder. Premium crypto signals, AI knowledge, and direct founder sessions.",
+    ogType: "website",
   },
   {
     path: "benchmarks",
@@ -183,19 +261,38 @@ try {
   console.error("[generate-pages] dist/public/index.html not found. Did vite build succeed?");
   process.exit(1);
 }
+const scholarlyMetaPattern = /<meta\s+(?:name|property)="(?:citation_[^"]+|DC\.[^"]+)"[^>]*\/?\s*>\s*/gi;
+const researchCitationMetadata = base.match(scholarlyMetaPattern) ?? [];
+base = base.replace(scholarlyMetaPattern, "");
 
 /* ──────────────────────────────────────────────────────────────
    Generate per-route copies
    ────────────────────────────────────────────────────────────── */
 let generated = 0;
+const escapeStaticHtml = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 for (const route of ROUTES) {
-  const canonicalUrl = `${BASE}/${route.path}`;
+  const canonicalUrl = route.path ? `${BASE}/${route.path}` : `${BASE}/`;
   const fullTitle = route.title;
   const desc = route.description;
   const ogType = route.ogType ?? "website";
 
   let html = base;
+
+  // Keep the homepage's own no-script content on / only. Subpages receive
+  // their own concise fallback below instead of inheriting the homepage H1.
+  if (route.path) {
+    html = html.replace(
+      /\s*<!--\s*NOSCRIPT — content for crawlers that skip JavaScript\s*-->[\s\S]*?<\/noscript>/i,
+      "",
+    );
+  }
 
   // 1. Replace <title>
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${fullTitle}</title>`);
@@ -260,6 +357,31 @@ for (const route of ROUTES) {
       /<meta name="twitter:image" content="[^"]*"/,
       `<meta name="twitter:image" content="${imageUrl}"`
     );
+    const imageMetadata = [
+      ["og:image:secure_url", imageUrl],
+      ["og:image:type", route.imageType ?? (route.image.endsWith(".webp") ? "image/webp" : "image/jpeg")],
+      ["og:image:width", route.imageWidth],
+      ["og:image:height", route.imageHeight],
+      ["og:image:alt", route.imageAlt],
+    ];
+    for (const [property, value] of imageMetadata) {
+      if (value == null) continue;
+      html = html.replace(
+        new RegExp(`(<meta property="${property}" content=")[^"]*(")`),
+        `$1${String(value).replace(/"/g, "&quot;")}$2`,
+      );
+    }
+    if (route.imageAlt) {
+      html = html.replace(
+        /<meta name="twitter:image:alt" content="[^"]*"/,
+        `<meta name="twitter:image:alt" content="${route.imageAlt.replace(/"/g, "&quot;")}"`,
+      );
+    }
+  }
+
+  // Citation and Dublin Core metadata describes the research collection only.
+  if (route.path === "research" && researchCitationMetadata.length) {
+    html = html.replace("</head>", `${researchCitationMetadata.join("\n")}\n</head>`);
   }
 
   // 11. Add crawler-visible article schema and a no-JavaScript summary.
@@ -268,20 +390,14 @@ for (const route of ROUTES) {
     const imageUrl = route.image ? `${BASE}${route.image}` : undefined;
     const schema = {
       "@context": "https://schema.org",
-      "@type": "NewsArticle",
+      "@type": "Article",
       headline: route.articleSchema.headline,
       description: desc,
       image: imageUrl ? [imageUrl] : undefined,
       datePublished: route.articleSchema.datePublished,
       dateModified: route.articleSchema.dateModified,
-      author: {
-        "@type": "Person",
-        "@id": `${BASE}/#person`,
-        name: "Faisal Orakzai",
-        url: `${BASE}/founder`,
-        sameAs: ["https://orcid.org/0009-0000-0915-7272", "https://www.linkedin.com/in/faisalorakzaii"],
-      },
-      publisher: { "@type": "Organization", "@id": `${BASE}/#orakzai-group`, name: "Orakzai Research Lab", url: BASE },
+      author: { "@id": `${BASE}/#person` },
+      publisher: { "@id": `${BASE}/research#research-lab` },
       mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
       url: articleUrl,
       articleSection: route.articleSchema.articleSection,
@@ -397,6 +513,72 @@ for (const route of ROUTES) {
       .join("");
     const noScriptSummary = `<noscript><main><section><h1>Press &amp; Media Coverage — Faisal Orakzai</h1><p>Interviews, book coverage, press releases, company journal entries, and third-party blockchain directory listings and reviews. Third-party listings and reviews are identified as such and are not endorsements.</p><ul>${entries}</ul></section></main></noscript>`;
     html = html.replace("</body>", `${noScriptSummary}\n</body>`);
+  }
+
+  // Add one route-level page entity where a specialized page schema has not
+  // already been authored above (Person profile, education profile, or article).
+  if (!route.pressCoverage && !route.educationSchema && !route.articleSchema) {
+    const isPersonProfile = ["founder", "author/faisal-orakzai", "wiki/faisalorakzai"].includes(route.path);
+    const isWikiIndex = route.path === "wiki";
+    const pageSchema = {
+      "@context": "https://schema.org",
+      "@type": isPersonProfile ? "ProfilePage" : isWikiIndex ? "CollectionPage" : "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: fullTitle,
+      description: desc,
+      isPartOf: { "@id": `${BASE}/#website` },
+      ...(route.bookSchema
+        ? { mainEntity: { "@id": `${canonicalUrl}#book` } }
+        : isPersonProfile
+        ? { mainEntity: { "@id": `${BASE}/#person` } }
+        : isWikiIndex
+          ? { about: { "@id": `${BASE}/#person` } }
+        : route.path === ""
+          ? { about: { "@id": `${BASE}/#person` } }
+          : {}),
+    };
+    const pageLd = `<script id="route-page-ld" type="application/ld+json">${JSON.stringify(pageSchema)}</script>`;
+    html = html.replace("</head>", `${pageLd}\n</head>`);
+
+    if (route.path === "research") {
+      const researchLab = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": `${BASE}/research#research-lab`,
+        name: "Orakzai Research Lab",
+        url: `${BASE}/research`,
+        founder: { "@id": `${BASE}/#person` },
+      };
+      const researchLabLd = `<script id="research-lab-ld" type="application/ld+json">${JSON.stringify(researchLab)}</script>`;
+      html = html.replace("</head>", `${researchLabLd}\n</head>`);
+    }
+
+    if (route.bookSchema) {
+      const bookSchema = {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "@id": `${canonicalUrl}#book`,
+        name: route.bookSchema.name,
+        description: route.bookSchema.description,
+        image: `${BASE}${route.bookSchema.image}`,
+        author: { "@id": `${BASE}/#person` },
+        publisher: { "@type": "Organization", name: "OkzByte" },
+        datePublished: route.bookSchema.datePublished,
+        inLanguage: "en",
+        identifier: route.bookSchema.asin,
+        url: canonicalUrl,
+      };
+      const bookLd = `<script id="book-ld" type="application/ld+json">${JSON.stringify(bookSchema)}</script>`;
+      html = html.replace("</head>", `${bookLd}\n</head>`);
+    }
+  }
+
+  // Static hosts serve the app shell for client routes. Give non-JS clients a
+  // truthful route-specific heading and summary rather than the homepage bio.
+  if (route.path && !route.pressCoverage && !route.educationSchema && !route.articleSchema) {
+    const summary = `<noscript><main><h1>${escapeStaticHtml(fullTitle)}</h1><p>${escapeStaticHtml(desc)}</p></main></noscript>`;
+    html = html.replace("</body>", `${summary}\n</body>`);
   }
 
   // 13. Remove FAQ schema from non-homepage pages (keeps homepage FAQ intact)
