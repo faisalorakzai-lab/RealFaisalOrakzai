@@ -88,6 +88,10 @@
   ],
   "rewrites": [
     {
+      "source": "/standwithjensen",
+      "destination": "/standwithjensen.html"
+    },
+    {
       "source": "/papers/:paper",
       "destination": "/papers/:paper.html"
     },
