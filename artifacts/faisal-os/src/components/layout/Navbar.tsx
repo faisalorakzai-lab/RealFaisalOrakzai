@@ -15,6 +15,7 @@ const links = [
   { href: "/press", label: "Press" },
   { href: "/wiki", label: "Wiki" },
   { href: "/okzbyte-hub", label: "OkzByte Hub" },
+  { href: "/standwithjensen", label: "Stand with Jensen", external: true },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -55,7 +56,17 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-1">
           {links.map((link) => (
-            <NavLink key={link.href} link={link} location={location} />
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className="relative whitespace-nowrap rounded-sm border border-[#F3BA2F]/30 px-3 py-2 text-sm font-medium text-[#F3BA2F] transition-colors hover:bg-[#F3BA2F]/10 hover:text-white"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <NavLink key={link.href} link={link} location={location} />
+            )
           ))}
         </div>
 
@@ -86,18 +97,29 @@ export default function Navbar() {
             className="lg:hidden bg-black/95 border-b border-[#F3BA2F]/10"
           >
             <div className="px-6 py-4 space-y-1">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <div
+              {links.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block py-3 text-sm border-b border-white/5 ${
-                      location === link.href ? "text-[#F3BA2F]" : "text-white/60"
-                    }`}
+                    className="block py-3 text-sm border-b border-white/5 text-[#F3BA2F] font-medium"
                   >
-                    {link.label}
-                  </div>
-                </Link>
-              ))}
+                    {link.label} ↗
+                  </a>
+                ) : (
+                  <Link key={link.href} href={link.href}>
+                    <div
+                      onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-sm border-b border-white/5 ${
+                        location === link.href ? "text-[#F3BA2F]" : "text-white/60"
+                      }`}
+                    >
+                      {link.label}
+                    </div>
+                  </Link>
+                )
+              )}
               <a
                 href="/contact"
                 className="block mt-4 px-4 py-2 bg-[#F3BA2F] text-black text-xs font-bold text-center"
