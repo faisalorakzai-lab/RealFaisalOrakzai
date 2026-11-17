@@ -1,10 +1,8 @@
-import { useEffect, useRef, lazy, Suspense, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/shared/SEOHead";
-
-const BlockchainOrb = lazy(() => import("@/components/three/BlockchainOrb"));
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -115,45 +113,12 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <div ref={ref}>{count}{suffix}</div>;
 }
 
-const HERO_NAME = "FAISAL ORAKZAI";
 const MANIFESTO_LINES = [
   { text: "Build with purpose.", gold: true },
   { text: "Design for scale.", gold: false },
   { text: "Learn continuously.", gold: false },
   { text: "Improve consistently.", gold: true },
 ];
-
-function GoldMatrixRain() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    resize();
-    window.addEventListener("resize", resize);
-    const CHARS = "01アイウエカキクサシスタナニヌ⬡◈◉▲FOISALRKZ";
-    const fontSize = 11;
-    const cols = Math.floor(canvas.width / fontSize);
-    const drops: number[] = Array.from({ length: cols }, () => Math.random() * -120);
-    const draw = () => {
-      ctx.fillStyle = "rgba(0,0,0,0.04)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${fontSize}px monospace`;
-      for (let i = 0; i < drops.length; i++) {
-        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
-        ctx.fillStyle = `rgba(243,186,47,${Math.random() * 0.45 + 0.08})`;
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.974) drops[i] = 0;
-        drops[i]++;
-      }
-    };
-    const interval = setInterval(draw, 55);
-    return () => { clearInterval(interval); window.removeEventListener("resize", resize); };
-  }, []);
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.16, zIndex: 1 }} />;
-}
 
 function ConstellationBg() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -207,35 +172,11 @@ function ConstellationBg() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 }
 
-type HeroPhase = "photo" | "webm" | "old";
-
 export default function Home() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 600], [0, -120]);
-  const opacity1 = useTransform(scrollY, [0, 400], [1, 0]);
   const [activeVideo, setActiveVideo] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const cinematicSectionRef = useRef<HTMLElement>(null);
   const [cinematicInView, setCinematicInView] = useState(false);
-  const [heroPhase, setHeroPhase] = useState<HeroPhase>("photo");
-  const [glitchActive, setGlitchActive] = useState(false);
-  const webmRef = useRef<HTMLVideoElement>(null);
-  const oldVideoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const g = setTimeout(() => setGlitchActive(true), 7000);
-    const s = setTimeout(() => {
-      setHeroPhase("webm");
-      webmRef.current?.play().catch(() => {});
-    }, 8000);
-    return () => { clearTimeout(g); clearTimeout(s); };
-  }, []);
-
-  const handleWebmEnded = useCallback(() => {
-    setHeroPhase("old");
-    if (oldVideoRef.current) { oldVideoRef.current.currentTime = 0; oldVideoRef.current.play().catch(() => {}); }
-  }, []);
-
   const philosophyRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: philScroll } = useScroll({ target: philosophyRef, offset: ["start 0.9", "end 0.25"] });
 
@@ -275,94 +216,47 @@ export default function Home() {
       <div className="bg-black text-white overflow-hidden">
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <GoldMatrixRain />
-        <AnimatePresence>
-          {heroPhase === "photo" && (
-            <motion.div key="hero-photo" initial={{ opacity: 1 }} exit={{ opacity: 0, filter: "brightness(2.5) blur(8px)" }} transition={{ duration: 0.7, ease: "easeIn" }} className="absolute inset-0 z-[2]">
-              <img src="/faisal-official-knowledge-panel.jpg" alt="Faisal Orakzai — Official Portrait" className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: glitchActive ? "brightness(1.3) contrast(1.1)" : "brightness(1)" }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
-              <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 80% at 50% 40%, transparent 25%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.92) 100%)" }} />
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)" }} />
-              {glitchActive && (
-                <>
-                  <motion.div className="absolute left-0 right-0 pointer-events-none" style={{ top: "28%", height: "3px", background: "rgba(243,186,47,0.85)", mixBlendMode: "screen" }} animate={{ scaleX: [1, 0.4, 1, 0.6, 1], x: [0, 14, -6, 10, 0], opacity: [1, 0.5, 1, 0.7, 0] }} transition={{ duration: 0.5, repeat: 1 }} />
-                  <motion.div className="absolute left-0 right-0 pointer-events-none" style={{ top: "62%", height: "2px", background: "rgba(0,200,255,0.6)", mixBlendMode: "screen" }} animate={{ scaleX: [1, 0.7, 1, 0.3, 1], x: [0, -10, 14, -5, 0], opacity: [1, 0.6, 1, 0.8, 0] }} transition={{ duration: 0.4, repeat: 1, delay: 0.1 }} />
-                </>
-              )}
-              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/50 to-transparent" />
-              <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/60" />
-              <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/60" />
-              <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/60" />
-              <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/60" />
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="absolute top-20 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 border border-[#F3BA2F]/40" style={{ zIndex: 10 }}>
-                <motion.span className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F]" animate={{ opacity: [1, 0.2, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} />
-                <span className="text-[#F3BA2F] font-mono text-xs tracking-[0.25em]">LIVE · FAISAL ORAKZAI</span>
-              </motion.div>
-              <div className="absolute bottom-32 left-0 right-0 flex flex-col items-center gap-3 z-10 px-4">
-                <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.055, delayChildren: 0.3 } } }} className="flex flex-wrap justify-center" aria-label="Muhammad Faisal Orakzai — Founder and Chairman, Orakzai Group">
-                  {HERO_NAME.split("").map((char, i) => (
-                    <motion.span key={i} variants={{ hidden: { opacity: 0, y: -15, filter: "blur(4px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)" } }} transition={{ duration: 0.25, ease: "easeOut" }} className="font-mono font-bold tracking-widest text-3xl md:text-5xl" style={{ color: char === " " ? "transparent" : "#F3BA2F", textShadow: char === " " ? "none" : "0 0 18px rgba(243,186,47,0.9), 0 0 40px rgba(243,186,47,0.4)", display: "inline-block", minWidth: char === " " ? "1rem" : undefined }}>{char}</motion.span>
-                  ))}
-                </motion.h1>
-                <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.9, duration: 0.6 }} className="h-px w-48 bg-gradient-to-r from-transparent via-[#F3BA2F]/60 to-transparent" />
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="text-white/50 font-mono text-xs tracking-[0.3em] uppercase text-center">Entrepreneur · Founder · Builder</motion.p>
-              </div>
-              <motion.div className="absolute bottom-0 left-0 h-[3px] bg-[#F3BA2F]" initial={{ width: "100%" }} animate={{ width: "0%" }} transition={{ duration: 8, ease: "linear" }} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <section className="fo-hero relative isolate min-h-[100svh] overflow-hidden" aria-labelledby="home-hero-title">
+        <div className="fo-hero-grain absolute inset-0 pointer-events-none" aria-hidden="true" />
+        <div className="fo-hero-monogram absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+          <span>FO</span>
+        </div>
 
-        <motion.video ref={webmRef} src={heroPhase === "webm" || heroPhase === "old" ? "/hero-new.webm" : undefined} poster="/hero-new-poster.webp" muted playsInline preload="metadata" onEnded={handleWebmEnded} className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "webm" ? 1 : 0 }} transition={{ duration: 0.8 }} />
-        <motion.video ref={oldVideoRef} src={heroPhase === "old" ? "/hero-bg.webm" : undefined} poster="/hero-bg-poster.webp" loop muted playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[2]" initial={{ opacity: 0 }} animate={{ opacity: heroPhase === "old" ? 1 : 0 }} transition={{ duration: 0.8 }} />
+        <motion.div
+          className="fo-hero-person absolute inset-x-0 bottom-0 flex items-end justify-center pointer-events-none"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img
+            src="/hero-user.png"
+            alt="Faisal Orakzai standing beside a chair"
+            className="h-[82svh] max-h-[900px] w-auto max-w-[92vw] object-contain object-bottom"
+            fetchPriority="high"
+          />
+        </motion.div>
 
-        <div className="absolute inset-0 bg-black/65 pointer-events-none z-[3]" />
-        <div className="absolute inset-0 pointer-events-none z-[3]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px)" }} />
-        <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none z-[3]" />
-        <div className="absolute inset-0 pointer-events-none z-[3]" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%,transparent 30%,rgba(0,0,0,0.5) 70%,rgba(0,0,0,0.9) 100%)" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#F3BA2F]/5 rounded-full blur-[130px] pointer-events-none z-[3]" />
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/40 to-transparent pointer-events-none z-[4]" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F3BA2F]/20 to-transparent pointer-events-none z-[4]" />
-        <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none z-[4]" />
-        <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none z-[4]" />
-        <div className="absolute bottom-20 left-6 w-10 h-10 border-b-2 border-l-2 border-[#F3BA2F]/35 pointer-events-none z-[4]" />
-        <div className="absolute bottom-20 right-6 w-10 h-10 border-b-2 border-r-2 border-[#F3BA2F]/35 pointer-events-none z-[4]" />
-        <motion.div style={{ y: y1 }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[4]">
-          <div className="w-[600px] h-[600px] opacity-30">
-            <Suspense fallback={<div className="w-full h-full" />}><BlockchainOrb /></Suspense>
-          </div>
+        <motion.div
+          className="fo-hero-copy absolute z-20"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.18 }}
+        >
+          <p className="fo-hero-eyebrow">Founder · Builder · Computer Scientist</p>
+          <h1 id="home-hero-title">
+            Faisal<br />
+            <span>Orakzai</span>
+          </h1>
+          <p className="fo-hero-description">Building practical systems across technology, AI, blockchain, and digital infrastructure.</p>
+          <Link href="/founder">
+            <span className="fo-hero-link">Explore my story <ArrowRight className="h-4 w-4" /></span>
+          </Link>
         </motion.div>
-        <motion.div className="absolute inset-x-0 h-[2px] pointer-events-none z-[4]" style={{ background: "linear-gradient(90deg,transparent,rgba(243,186,47,0.45),transparent)" }} animate={{ top: ["0%", "100%"] }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} />
 
-        <motion.div style={{ opacity: opacity1 }} className="relative z-[5] text-center px-6 max-w-5xl mx-auto">
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#F3BA2F]/30 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F3BA2F] animate-pulse" />
-            <span className="text-[#F3BA2F] font-mono text-xs tracking-[0.25em]">SYSTEM ACTIVE — FAISAL ORAKZAI</span>
-          </motion.div>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-tighter leading-none mb-6">
-            <span className="text-white">FAISAL</span><br />
-            <span className="gold-gradient text-glow">ORAKZAI</span>
-          </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/50 font-mono text-sm tracking-[0.3em] uppercase mb-8">Technology Entrepreneur & Computer Scientist</motion.p>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3} className="text-white/70 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
-            Redefining Asset Ownership<br />
-            <span className="text-[#F3BA2F]">Through Blockchain Architecture.</span>
-          </motion.p>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/ecosystem">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-3 px-8 py-4 bg-[#F3BA2F] text-black font-bold tracking-wider text-sm cursor-pointer glow-gold hover:bg-[#ffd666] transition-colors">ENTER THE ECOSYSTEM <ArrowRight className="h-4 w-4" /></motion.div>
-            </Link>
-            <Link href="/founder">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-3 px-8 py-4 border border-[#F3BA2F]/30 text-[#F3BA2F] font-bold tracking-wider text-sm cursor-pointer hover:border-[#F3BA2F] hover:bg-[#F3BA2F]/5 transition-all">VIEW FOUNDER PROFILE</motion.div>
-            </Link>
-            <Link href="/books">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-3 px-8 py-4 border border-white/15 text-white/75 font-bold tracking-wider text-sm cursor-pointer hover:border-[#F3BA2F]/60 hover:text-[#F3BA2F] transition-all">BOOKS &amp; PUBLICATIONS</motion.div>
-            </Link>
-          </motion.div>
-        </motion.div>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#F3BA2F]/40 z-[5]">
-          <ChevronDown className="h-6 w-6" />
-        </motion.div>
+        <div className="fo-hero-footer absolute z-20 flex items-center justify-between">
+          <span>Founder &amp; Chairman <i /> Orakzai Group</span>
+          <span className="fo-hero-scroll">Scroll to explore <ChevronDown className="h-4 w-4" /></span>
+        </div>
       </section>
 
 

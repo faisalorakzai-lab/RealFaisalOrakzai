@@ -23,6 +23,7 @@ export default function Navbar() {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lightHero = location === "/" && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -37,7 +38,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-black/90 backdrop-blur-xl border-b border-[#F3BA2F]/10" : "bg-transparent"
+        scrolled ? "bg-black/90 backdrop-blur-xl border-b border-[#F3BA2F]/10" : lightHero ? "bg-[#dedede]/85 text-[#171717]" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -65,7 +66,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ) : (
-              <NavLink key={link.href} link={link} location={location} />
+              <NavLink key={link.href} link={link} location={location} lightHero={lightHero} />
             )
           ))}
         </div>
@@ -79,7 +80,7 @@ export default function Navbar() {
             CONNECT
           </a>
           <button
-            className="lg:hidden text-white/60 hover:text-white"
+            className={`lg:hidden transition-colors ${lightHero ? "text-black/60 hover:text-black" : "text-white/60 hover:text-white"}`}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -135,13 +136,13 @@ export default function Navbar() {
 }
 
 /* ─── Reusable desktop nav link ─── */
-function NavLink({ link, location }: { link: { href: string; label: string }; location: string }) {
+function NavLink({ link, location, lightHero }: { link: { href: string; label: string }; location: string; lightHero: boolean }) {
   const isActive = location === link.href;
   return (
     <Link href={link.href}>
       <div
         className={`relative px-4 py-2 text-sm transition-all cursor-pointer font-medium ${
-          isActive ? "text-[#F3BA2F]" : "text-white/60 hover:text-white"
+          isActive ? "text-[#a97700]" : lightHero ? "text-black/65 hover:text-black" : "text-white/60 hover:text-white"
         }`}
       >
         {link.label}
